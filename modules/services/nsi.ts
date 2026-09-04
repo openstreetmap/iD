@@ -1,5 +1,6 @@
-import { Matcher, buildIDPresets } from 'name-suggestion-index';
+import { Matcher, buildIDPresets, type NsiData, type NsiDissolved, type NsiItem, type NsiReplacementsJSON, type NsiTree, type NsiTreesJSON } from 'name-suggestion-index';
 import { fileFetcher, locationManager } from '../core';
+import type { Vec2 } from '../geo/vector';
 import { presetManager } from '../presets';
 
 import { nsiCdnUrl } from '../../config/id.js';
@@ -8,19 +9,56 @@ import { nsiCdnUrl } from '../../config/id.js';
 // If you mess up the `../`s, the resolver may import another random package.json from somewhere else.
 import packageJSON from '../../package.json';
 
+declare module 'name-suggestion-index' {
+    // these properties are added by iD:
+    export interface NsiItem {
+        tkv: string;
+        mainTag: string;
+    }
+}
+
 
 // This service contains all the code related to the **name-suggestion-index** (aka NSI)
 // NSI contains the most correct tagging for many commonly mapped features.
 // See https://github.com/osmlab/name-suggestion-index  and  https://nsi.guide
 
+interface NSI {
+    /** the raw name-suggestion-index data */
+    data: NsiData;
+    /** list of dissolved items */
+    dissolved: NsiDissolved['dissolved'];
+    /** trivial old->new qid replacements */
+    replacements: NsiReplacementsJSON['replacements'];
+    /** metadata about trees, main tags */
+    trees: NsiTreesJSON['trees'];
+    /** Map (k -> Map (v -> t) ) */
+    kvt: Map<string, Map<string, string>>;
+    /** Map (wd/wp tag values -> qids) */
+    qids: Map<string, string>;
+    /** Map (id -> NSI item) */
+    ids: Map<string, NsiItem>;
+
+    matcher?: Matcher;
+}
+
+interface KVN {
+    k: string;
+    v: string;
+    n: string;
+}
+
+const WHICH = <const>['primary', 'alternate'];
+type Which = (typeof WHICH)[number];
+
+type KVs = Record<Which, Set<string>>;
 
 // DATA
 
 let _nsiStatus = 'loading';  // 'loading', 'ok', 'failed'
-let _nsi = {};
+let _nsi = {} as NSI;
 
 // Sometimes we can upgrade a feature tagged like `building=yes` to a better tag.
-const buildingPreset = {
+const buildingPreset: Record<string, true> = {
   'building/commercial': true,
   'building/government': true,
   'building/hotel': true,
@@ -45,7 +83,7 @@ const notBranches = /(coop|express|wireless|factory|outlet)/i;
 // Adds the sources to iD's filemap so we can start downloading data.
 //
 function setNsiSources() {
-  const nsiVersion = packageJSON.dependencies['name-suggestion-index'] || packageJSON.devDependencies['name-suggestion-index'];
+  const nsiVersion = packageJSON.devDependencies['name-suggestion-index'];
   const cdn = nsiCdnUrl.replace('{version}', nsiVersion);
   const sources = {
     'nsi_data': cdn + 'dist/json/nsi.min.json',
@@ -58,9 +96,7 @@ function setNsiSources() {
   };
 
   let fileMap = fileFetcher.fileMap();
-  for (const k in sources) {
-    if (!fileMap[k]) fileMap[k] = sources[k];
-  }
+  Object.assign(fileMap, sources);
 }
 
 
@@ -89,6 +125,7 @@ function loadNsiPresets() {
 
       for (const preset of Object.values(nsiPresets)) {
         // Add `suggestion=true` to all the nsi presets
+        // @ts-expect-error:
         // The preset json schema doesn't include it, but the iD code still uses it
         preset.suggestion = true;
       }
@@ -152,7 +189,7 @@ function loadNsiData() {
       Object.keys(_nsi.data).forEach(tkv => {
         const category = _nsi.data[tkv];
         const parts = tkv.split('/', 3);     // tkv = "tree/key/value"
-        const t = parts[0];
+        const t = parts[0] as NsiTree;
         const k = parts[1];
         const v = parts[2];
 
@@ -210,9 +247,9 @@ function loadNsiData() {
 //     'alternate': Set()
 //   }
 //
-function gatherKVs(tags) {
-  let primary = new Set();
-  let alternate = new Set();
+function gatherKVs(tags: Tags) {
+  let primary = new Set<string>();
+  let alternate = new Set<string>();
 
   Object.keys(tags).forEach(osmkey => {
     const osmvalue = tags[osmkey];
@@ -235,7 +272,7 @@ function gatherKVs(tags) {
   // Only try this if we do a preset match and find nothing else remarkable about that building.
   // For example, a way with `building=yes` + `name=Westfield` may be a Westfield department store.
   // But a way with `building=yes` + `name=Westfield` + `public_transport=station` is a train station for a town named "Westfield"
-  const preset = presetManager.matchTags(tags, 'area');
+  const preset = presetManager.matchTags(tags, 'area')!;
   if (buildingPreset[preset.id]) {
     alternate.add('building/yes');
   }
@@ -256,9 +293,9 @@ function gatherKVs(tags) {
 //   or 'unknown' if it could match several trees (e.g. amenity/yes)
 //   or null if no match
 //
-function identifyTree(tags) {
+function identifyTree(tags: Tags) {
   let unknown;
-  let t;
+  let t: string | undefined;
 
   // Check all tags
   Object.keys(tags).forEach(osmkey => {
@@ -298,13 +335,13 @@ function identifyTree(tags) {
 //     'fallbacks': Set()
 //   }
 //
-function gatherNames(tags) {
-  const empty = { primary: new Set(), alternate: new Set() };
-  let primary = new Set();
-  let alternate = new Set();
+function gatherNames(tags: Tags): KVs {
+  const empty = { primary: new Set<string>(), alternate: new Set<string>() };
+  let primary = new Set<string>();
+  let alternate = new Set<string>();
   let foundSemi = false;
   let testNameFragments = false;
-  let patterns;
+  let patterns: Record<Which, RegExp>;
 
   // Patterns for matching OSM keys that might contain namelike values.
   // These roughly correspond to the "trees" concept in name-suggestion-index,
@@ -390,7 +427,7 @@ function gatherNames(tags) {
     return { primary: primary, alternate: alternate };
   }
 
-  function isNamelike(osmkey, which) {
+  function isNamelike(osmkey: TagKey, which: Which) {
     if (osmkey === 'old_name') return false;
     return patterns[which].test(osmkey) && !notNames.test(osmkey);
   }
@@ -407,13 +444,13 @@ function gatherNames(tags) {
 // Returns
 //   `Array`: tuple objects ordered by priority
 //
-function gatherTuples(tryKVs, tryNames) {
-  let tuples = [];
-  ['primary', 'alternate'].forEach(whichName => {
+function gatherTuples(tryKVs: KVs, tryNames: KVs) {
+  let tuples: KVN[] = [];
+  WHICH.forEach(whichName => {
     // test names longest to shortest
     const arr = Array.from(tryNames[whichName]).sort((a, b) => b.length - a.length);
     arr.forEach(n => {
-      ['primary', 'alternate'].forEach(whichKV => {
+      WHICH.forEach(whichKV => {
         tryKVs[whichKV].forEach(kv => {
           const parts = kv.split('/', 2);
           const k = parts[0];
@@ -441,7 +478,7 @@ function gatherTuples(tryKVs, tryNames) {
 //     'matched': `Object` - The matched item
 //   }
 //
-function _upgradeTags(tags, loc) {
+function _upgradeTags(tags: Tags, loc: Vec2) {
   let newTags = Object.assign({}, tags);  // shallow copy
   let changed = false;
 
@@ -449,7 +486,6 @@ function _upgradeTags(tags, loc) {
   Object.keys(newTags).forEach(osmkey => {
     const matchTag = osmkey.match(/^(\w+:)?wikidata$/);
     if (matchTag) {                         // Look at '*:wikidata' tags
-      const prefix = (matchTag[1] || '');
       const wd = newTags[osmkey];
       const replace = _nsi.replacements[wd];    // If it matches a QID in the replacement list...
 
@@ -459,15 +495,6 @@ function _upgradeTags(tags, loc) {
           newTags[osmkey] = replace.wikidata;
         } else {
           delete newTags[osmkey];
-        }
-      }
-      if (replace && replace.wikipedia !== undefined) {  // replace or delete `*:wikipedia` tag
-        changed = true;
-        const wpkey = `${prefix}wikipedia`;
-        if (replace.wikipedia) {
-          newTags[wpkey] = replace.wikipedia;
-        } else {
-          delete newTags[wpkey];
         }
       }
     }
@@ -499,17 +526,18 @@ function _upgradeTags(tags, loc) {
 
   for (let i = 0; i < tuples.length; i++) {
     const tuple = tuples[i];
-    const hits = _nsi.matcher.match(tuple.k, tuple.v, tuple.n, loc);   // Attempt to match an item in NSI
+    const hits = _nsi.matcher!.match(tuple.k, tuple.v, tuple.n, loc);   // Attempt to match an item in NSI
 
     if (!hits || !hits.length) continue;  // no match, try next tuple
     if (hits[0].match !== 'primary' && hits[0].match !== 'alternate') break;  // a generic match, stop looking
 
     // A match may contain multiple results, the first one is likely the best one for this location
     // e.g. `['pfk-a54c14', 'kfc-1ff19c', 'kfc-658eea']`
-    let itemID, item;
+    let itemID: string;
+    let item: NsiItem | undefined | null;
     for (let j = 0; j < hits.length; j++) {
       const hit = hits[j];
-      itemID = hit.itemID;
+      itemID = hit.itemID!;
       if (_nsi.dissolved[itemID]) continue;       // Don't upgrade to a dissolved item
 
       item = _nsi.ids.get(itemID);
@@ -534,6 +562,8 @@ function _upgradeTags(tags, loc) {
 
     // At this point we have matched a canonical item and can suggest tag upgrades..
     item = JSON.parse(JSON.stringify(item));   // deep copy
+    if (!item) continue; // this should be impossible
+
     const tkv = item.tkv;
     const parts = tkv.split('/', 3);     // tkv = "tree/key/value"
     const k = parts[1];
@@ -552,7 +582,7 @@ function _upgradeTags(tags, loc) {
 
     const regexes = preserveTags.map(s => new RegExp(s, 'i'));
 
-    let keepTags = {};
+    let keepTags: Tags = {};
     Object.keys(newTags).forEach(osmkey => {
       if (regexes.some(regex => regex.test(osmkey))) {
         keepTags[osmkey] = newTags[osmkey];
@@ -600,7 +630,7 @@ function _upgradeTags(tags, loc) {
         for (let split = nameParts.length; split > 0; split--) {
           const name = nameParts.slice(0, split).join(' ');  // e.g. "TUI ReiseCenter"
           const branch = nameParts.slice(split).join(' ');   // e.g. "Neuss Innenstadt"
-          const nameHits = _nsi.matcher.match(k, v, name, loc);
+          const nameHits = _nsi.matcher!.match(k, v, name, loc);
           if (!nameHits || !nameHits.length) continue;    // no match, try next name fragment
 
           if (nameHits.some(hit => hit.itemID === itemID)) {   // matched the name fragment to the same itemID above
@@ -608,7 +638,7 @@ function _upgradeTags(tags, loc) {
               if (notBranches.test(branch)) {   // "branch" was detected but is noise ("factory outlet", etc)
                 newTags.name = origName;        // Leave `name` alone, this part of the name may be significant..
               } else {
-                const branchHits = _nsi.matcher.match(k, v, branch, loc);
+                const branchHits = _nsi.matcher!.match(k, v, branch, loc);
                 if (branchHits && branchHits.length) {                                             // if "branch" matched something else in NSI..
                   if (branchHits[0].match === 'primary' || branchHits[0].match === 'alternate') {  // if another brand! (e.g. "KFC - Taco Bell"?)
                     return null;                                                                   //   bail out - can't suggest tags in this case
@@ -639,12 +669,12 @@ function _upgradeTags(tags, loc) {
 // Returns
 //   `true` if it is generic, `false` if not
 //
-function _isGenericName(tags) {
+function _isGenericName(tags: Tags) {
   const n = tags.name;
   if (!n) return false;
 
   // tryNames just contains the `name` tag value and nothing else
-  const tryNames = { primary: new Set([n]), alternate: new Set() };
+  const tryNames = { primary: new Set([n]), alternate: new Set<string>() };
 
   // Gather key/value tag pairs to try to match
   const tryKVs = gatherKVs(tags);
@@ -655,7 +685,7 @@ function _isGenericName(tags) {
 
   for (let i = 0; i < tuples.length; i++) {
     const tuple = tuples[i];
-    const hits = _nsi.matcher.match(tuple.k, tuple.v, tuple.n);   // Attempt to match an item in NSI
+    const hits = _nsi.matcher!.match(tuple.k, tuple.v, tuple.n);   // Attempt to match an item in NSI
 
     // If we get a `excludeGeneric` hit, this is a generic name.
     if (hits && hits.length && hits[0].match === 'excludeGeneric') return true;
@@ -708,7 +738,7 @@ export default {
   // Returns
   //   `true` if it is generic, `false` if not
   //
-  isGenericName: (tags) => _isGenericName(tags),
+  isGenericName: (tags: Tags) => _isGenericName(tags),
 
 
   // `upgradeTags()`
@@ -725,7 +755,7 @@ export default {
   //     'matched': `Object` - The matched item
   //   }
   //
-  upgradeTags: (tags, loc) => _upgradeTags(tags, loc),
+  upgradeTags: (tags: Tags, loc: Vec2) => _upgradeTags(tags, loc),
 
 
   // `cache()`
