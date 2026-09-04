@@ -480,8 +480,8 @@ export function utilStringQs(str: string): {[k: string]: string} {
 }
 
 
-export function utilQsString(obj: {[k: string]: string}, softEncode: boolean) {
-    let str = new URLSearchParams(obj).toString();
+export function utilQsString(obj: { [k: string]: string | number | boolean }, softEncode?: boolean) {
+    let str = new URLSearchParams(obj as Record<string, string>).toString();
     if (softEncode) {
         // for better readability of URL hashes: optionally
         // leave some special characters unescaped
