@@ -102,4 +102,12 @@ describe('iD.validations.incompatible_source', function () {
         var issues = validate();
         expect(issues).toHaveLength(0);
     });
+
+    it('does not flag a Google Sites page', function() {
+        // Google Sites pages are user-generated; Google holds no copyright
+        // interest in the content, so they are a legitimate source.
+        createWay({ amenity: 'cafe', building: 'yes', name: 'Key Largo Café', source: 'https://sites.google.com/view/key-largo-cafe'});
+        var issues = validate();
+        expect(issues).toHaveLength(0);
+    });
 });

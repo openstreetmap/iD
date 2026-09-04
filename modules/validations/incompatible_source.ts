@@ -19,7 +19,7 @@ const incompatibleRules = [
     // to create links on it since 2019, while Google products still generate
     // them (`maps.app.goo.gl`), so a shortlink in a source is a Google source.
     regex: /(google|\bgoo\.gl\b)/i,
-    exceptRegex: /((books|drive)\.google|google\s?(books|drive|plus))|(esri\/Google_(Africa|Open)_Buildings)/i
+    exceptRegex: /((books|drive|sites)\.(google|goo\.gl)|google\s?(books|drive|plus))|(esri\/Google_(Africa|Open)_Buildings)/i
   }
 ];
 
