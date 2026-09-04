@@ -37,6 +37,8 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 
 # Unreleased (2.43.0-dev)
 
+#### :mega: Release Highlights
+* Fix the merge-conflict resolution UI getting stuck in an infinite loop ([#12814], thanks [@k-yle])
 #### :sparkles: Usability & Accessibility
 * Render diameter and radius tags when a node is selected ([#9732], thanks [@k-yle])
 #### :scissors: Operations
@@ -69,6 +71,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#12734]: https://github.com/openstreetmap/iD/pull/12734
 [#12735]: https://github.com/openstreetmap/iD/pull/12735
 [#12736]: https://github.com/openstreetmap/iD/pull/12736
+[#12814]: https://github.com/openstreetmap/iD/pull/12814
 
 
 # 2.42.0
