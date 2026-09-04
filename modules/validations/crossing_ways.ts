@@ -1,6 +1,6 @@
 import { deepEqual } from 'fast-equals';
 
-import { actionAddMidpoint } from '../actions/add_midpoint';
+import { actionAddMidpoint, type Edge } from '../actions/add_midpoint';
 import { actionChangeTags } from '../actions/change_tags';
 import { actionMergeNodes } from '../actions/merge_nodes';
 import { actionSplit } from '../actions/split';
@@ -12,13 +12,36 @@ import { osmFlowingWaterwayTagValues, osmPathHighwayTagValues, osmRailwayTrackTa
 import { t } from '../core/localizer';
 import { utilDisplayLabel } from '../util/utilDisplayLabel';
 import { validationIssue, validationIssueFix } from '../core/validation';
+import type { CreateValidator, Validator } from '../core/validation/models';
+import type { OsmEntity, osmWay, WayId } from '../osm';
+import type { coreGraph, coreTree } from '../core';
+import type { Vec2 } from '../geo/vector';
+import type { Action } from '../core/history';
 
+type FeatureType = `${'high' | 'water' | 'aero' | 'rail'}way` | 'building';
 
-export function validationCrossingWays(context) {
+type FeatureTypePair = `${FeatureType | null}-${FeatureType | null}`;
+
+interface Crossing {
+    wayInfos: {
+        way: osmWay;
+        featureType: FeatureType;
+        edge: Edge;
+    }[];
+    crossPoint: Vec2;
+}
+
+interface Data {
+    edges: Edge[];
+    featureTypes: FeatureType[];
+    connectionTags: Tags | null;
+}
+
+export const validationCrossingWays: CreateValidator = (context) => {
     var type = 'crossing_ways';
 
     // returns the way or its parent relation, whichever has a useful feature type
-    function getFeatureWithFeatureTypeTagsForWay(way, graph) {
+    function getFeatureWithFeatureTypeTagsForWay(way: osmWay, graph: coreGraph) {
         if (getFeatureType(way, graph) === null) {
             // if the way doesn't match a feature type, check its parent relations
             var parentRels = graph.parentRelations(way);
@@ -33,30 +56,30 @@ export function validationCrossingWays(context) {
     }
 
 
-    function hasTag(tags, key) {
+    function hasTag(tags: Tags, key: TagKey) {
         return tags[key] !== undefined && tags[key] !== 'no';
     }
 
-    function taggedAsIndoor(tags) {
+    function taggedAsIndoor(tags: Tags) {
         return hasTag(tags, 'indoor') ||
             hasTag(tags, 'level') ||
             tags.highway === 'corridor';
     }
 
-    function allowsBridge(featureType) {
+    function allowsBridge(featureType: FeatureType) {
         return featureType === 'highway' || featureType === 'railway' || featureType === 'waterway' || featureType === 'aeroway';
     }
-    function allowsTunnel(featureType) {
+    function allowsTunnel(featureType: FeatureType) {
         return featureType === 'highway' || featureType === 'railway' || featureType === 'waterway';
     }
 
     // discard
-    var ignoredBuildings = {
+    var ignoredBuildings: Record<string, true> = {
         demolished: true, dismantled: true, proposed: true, razed: true
     };
 
 
-    function getFeatureType(entity, graph) {
+    function getFeatureType(entity: OsmEntity, graph: coreGraph): FeatureType | null {
 
         var geometry = entity.geometry(graph);
         if (geometry !== 'line' && geometry !== 'area') return null;
@@ -78,7 +101,7 @@ export function validationCrossingWays(context) {
     }
 
 
-    function isLegitCrossing(tags1, featureType1, tags2, featureType2) {
+    function isLegitCrossing(tags1: Tags, featureType1: FeatureType, tags2: Tags, featureType2: FeatureType) {
 
         // assume 0 by default
         var level1 = tags1.level || '0';
@@ -108,15 +131,15 @@ export function validationCrossingWays(context) {
 
 
     // highway values for which we shouldn't recommend connecting to waterways
-    var highwaysDisallowingFords = {
+    var highwaysDisallowingFords: Record<TagValue, true> = {
         motorway: true, motorway_link: true, trunk: true, trunk_link: true,
         primary: true, primary_link: true, secondary: true, secondary_link: true
     };
 
     /**
-     * @returns {object | null} the tags for the connecting node, or null if the entities should not be joined
+     * @returns the tags for the connecting node, or null if the entities should not be joined
      */
-    function tagsForConnectionNodeIfAllowed(entity1, entity2, graph, lessLikelyTags) {
+    function tagsForConnectionNodeIfAllowed(entity1: OsmEntity, entity2: OsmEntity, graph: coreGraph, lessLikelyTags?: boolean): Tags | null {
         var featureType1 = getFeatureType(entity1, graph);
         var featureType2 = getFeatureType(entity2, graph);
 
@@ -124,11 +147,7 @@ export function validationCrossingWays(context) {
         var geometry2 = entity2.geometry(graph);
         var bothLines = geometry1 === 'line' && geometry2 === 'line';
 
-        /**
-         * @typedef {NonNullable<ReturnType<getFeatureType>>} FeatureType
-         * @type {`${FeatureType}-${FeatureType}`}
-         */
-        const featureTypes = [featureType1, featureType2].sort().join('-');
+        const featureTypes = [featureType1, featureType2].sort().join('-') as FeatureTypePair;
 
         if (featureTypes === 'aeroway-aeroway') return {};
 
@@ -169,7 +188,7 @@ export function validationCrossingWays(context) {
                     }
                     if (['marked', 'unmarked', 'traffic_signals', 'uncontrolled'].indexOf(pathFeature.tags.crossing) !== -1) {
                         // if the path is a crossing, match the crossing type and markings
-                        var tags = { highway: 'crossing', crossing: pathFeature.tags.crossing };
+                        var tags: Tags = { highway: 'crossing', crossing: pathFeature.tags.crossing };
                         if ('crossing:markings' in pathFeature.tags) {
                             tags['crossing:markings'] = pathFeature.tags['crossing:markings'];
                         }
@@ -227,15 +246,15 @@ export function validationCrossingWays(context) {
     }
 
 
-    function findCrossingsByWay(way1, graph, tree) {
-        var edgeCrossInfos = [];
+    function findCrossingsByWay(way1: osmWay, graph: coreGraph, tree: coreTree): Crossing[] {
+        var edgeCrossInfos: Crossing[] = [];
         if (way1.type !== 'way') return edgeCrossInfos;
 
         var taggedFeature1 = getFeatureWithFeatureTypeTagsForWay(way1, graph);
         var way1FeatureType = getFeatureType(taggedFeature1, graph);
         if (way1FeatureType === null) return edgeCrossInfos;
 
-        var checkedSingleCrossingWays = {};
+        var checkedSingleCrossingWays: Record<WayId, boolean> = {};
 
         // declare vars ahead of time to reduce garbage collection
         var i, j;
@@ -245,7 +264,7 @@ export function validationCrossingWays(context) {
         var oneOnly;
         var segmentInfos, segment2Info, way2, taggedFeature2, way2FeatureType;
         var way1Nodes = graph.childNodes(way1);
-        var comparedWays = {};
+        var comparedWays: Record<WayId, true> = {};
         for (i = 0; i < way1Nodes.length - 1; i++) {
             n1 = way1Nodes[i];
             n2 = way1Nodes[i + 1];
@@ -332,20 +351,20 @@ export function validationCrossingWays(context) {
     }
 
 
-    function waysToCheck(entity, graph) {
+    function waysToCheck(entity: OsmEntity, graph: coreGraph): osmWay[] {
         var featureType = getFeatureType(entity, graph);
         if (!featureType) return [];
 
         if (entity.type === 'way') {
             return [entity];
         } else if (entity.type === 'relation') {
-            return entity.members.reduce(function(array, member) {
+            return entity.members.reduce<osmWay[]>(function(array, member) {
                 if (member.type === 'way' &&
                     // only look at geometry ways
                     (!member.role || member.role === 'outer' || member.role === 'inner')) {
                     var entity = graph.hasEntity(member.id);
                     // don't add duplicates
-                    if (entity && array.indexOf(entity) === -1) {
+                    if (entity?.type === 'way' && array.indexOf(entity) === -1) {
                         array.push(entity);
                     }
                 }
@@ -356,7 +375,7 @@ export function validationCrossingWays(context) {
     }
 
 
-    var validation = function checkCrossingWays(entity, graph) {
+    const validation: Validator = function checkCrossingWays(entity, graph) {
 
         var tree = context.history().tree();
 
@@ -375,7 +394,7 @@ export function validationCrossingWays(context) {
     };
 
 
-    function createIssue(crossing, graph) {
+    function createIssue(crossing: Crossing, graph: coreGraph) {
         var entities = crossing.wayInfos.map(function(wayInfo) {
             return getFeatureWithFeatureTypeTagsForWay(wayInfo.way, graph);
         });
@@ -411,7 +430,7 @@ export function validationCrossingWays(context) {
         // Differentiate based on the loc rounded to 4 digits, since two ways can cross multiple times.
         var uniqueID = crossing.crossPoint[0].toFixed(4) + ',' + crossing.crossPoint[1].toFixed(4);
 
-        return new validationIssue({
+        return new validationIssue<Data>({
             type: type,
             subtype: subtype,
             severity: 'warning',
@@ -437,16 +456,16 @@ export function validationCrossingWays(context) {
             loc: crossing.crossPoint,
             dynamicFixes: function(context) {
                 var mode = context.mode();
-                if (!mode || mode.id !== 'select' || mode.selectedIDs().length !== 1) return [];
+                if (!mode || mode.id !== 'select' || mode.selectedIDs!().length !== 1) return [];
 
-                var selectedIndex = this.entityIds[0] === mode.selectedIDs()[0] ? 0 : 1;
-                var selectedFeatureType = this.data.featureTypes[selectedIndex];
-                var otherFeatureType = this.data.featureTypes[selectedIndex === 0 ? 1 : 0];
+                var selectedIndex = this.entityIds[0] === mode.selectedIDs!()[0] ? 0 : 1;
+                var selectedFeatureType = this.data!.featureTypes[selectedIndex];
+                var otherFeatureType = this.data!.featureTypes[selectedIndex === 0 ? 1 : 0];
 
-                var fixes = [];
+                var fixes: validationIssueFix<Data>[] = [];
 
                 if (connectionTags) {
-                    fixes.push(makeConnectWaysFix(this.data.connectionTags));
+                    fixes.push(makeConnectWaysFix(this.data!.connectionTags!));
                     let lessLikelyConnectionTags = tagsForConnectionNodeIfAllowed(entities[0], entities[1], graph, true);
                     if (lessLikelyConnectionTags && !deepEqual(connectionTags, lessLikelyConnectionTags)) {
                         fixes.push(makeConnectWaysFix(lessLikelyConnectionTags));
@@ -497,14 +516,14 @@ export function validationCrossingWays(context) {
                     // if the validation is about overlapping buildings:
                     // show "reposition features" suggestion first, as that is most often
                     // most sensible fix for those errors, see #11329
-                    fixes.unshift(fixes.pop());
+                    fixes.unshift(fixes.pop()!);
                 }
 
                 return fixes;
             }
         });
 
-        function showReference(selection) {
+        function showReference(selection: d3.Selection) {
             selection.selectAll('.issue-reference')
                 .data([0])
                 .enter()
@@ -514,50 +533,50 @@ export function validationCrossingWays(context) {
         }
     }
 
-    function makeAddBridgeOrTunnelFix(fixTitleID, iconName, bridgeOrTunnel){
-        return new validationIssueFix({
+    function makeAddBridgeOrTunnelFix(fixTitleID: string, iconName: string, bridgeOrTunnel: 'bridge' | 'tunnel') {
+        return new validationIssueFix<Data>({
             icon: iconName,
             title: t.append('issues.fix.' + fixTitleID + '.title'),
             onClick: function(context) {
                 var mode = context.mode();
                 if (!mode || mode.id !== 'select') return;
 
-                var selectedIDs = mode.selectedIDs();
+                var selectedIDs = mode.selectedIDs!();
                 if (selectedIDs.length !== 1) return;
 
-                var selectedWayID = selectedIDs[0];
+                var selectedWayID = selectedIDs[0] as WayId;
                 if (!context.hasEntity(selectedWayID)) return;
 
                 var resultWayIDs = [selectedWayID];
 
-                var edge, crossedEdge, crossedWayID;
-                if (this.issue.entityIds[0] === selectedWayID) {
-                    edge = this.issue.data.edges[0];
-                    crossedEdge = this.issue.data.edges[1];
-                    crossedWayID = this.issue.entityIds[1];
+                var edge: Edge, crossedEdge: Edge, crossedWayID: WayId;
+                if (this.issue!.entityIds[0] === selectedWayID) {
+                    edge = this.issue!.data!.edges[0];
+                    crossedEdge = this.issue!.data!.edges[1];
+                    crossedWayID = this.issue!.entityIds[1] as WayId;
                 } else {
-                    edge = this.issue.data.edges[1];
-                    crossedEdge = this.issue.data.edges[0];
-                    crossedWayID = this.issue.entityIds[0];
+                    edge = this.issue!.data!.edges[1];
+                    crossedEdge = this.issue!.data!.edges[0];
+                    crossedWayID = this.issue!.entityIds[0] as WayId;
                 }
 
-                var crossingLoc = this.issue.loc;
+                var crossingLoc = this.issue!.loc!;
 
                 var projection = context.projection;
 
-                var action = function actionAddStructure(graph) {
+                var action: Action = function actionAddStructure(graph) {
 
                     var edgeNodes = [graph.entity(edge[0]), graph.entity(edge[1])];
 
                     var crossedWay = graph.hasEntity(crossedWayID);
                     // use the explicit width of the crossed feature as the structure length, if available
-                    var structLengthMeters = crossedWay && isFinite(crossedWay.tags.width) && Number(crossedWay.tags.width);
+                    var structLengthMeters = crossedWay && isFinite(+crossedWay.tags.width) ? +crossedWay.tags.width : 0;
                     if (!structLengthMeters) {
                         // if no explicit width is set, approximate the width based on the tags
-                        structLengthMeters = crossedWay && crossedWay.impliedLineWidthMeters();
+                        structLengthMeters = crossedWay?.impliedLineWidthMeters() || 0;
                     }
                     if (structLengthMeters) {
-                        if (getFeatureType(crossedWay, graph) === 'railway') {
+                        if (crossedWay && getFeatureType(crossedWay, graph) === 'railway') {
                             // bridges over railways are generally much longer than the rail bed itself, compensate
                             structLengthMeters *= 2;
                         }
@@ -579,13 +598,13 @@ export function validationCrossingWays(context) {
                     // clamp the length to a reasonable range
                     structLengthMeters = Math.min(Math.max(structLengthMeters, 4), 50);
 
-                    function geomToProj(geoPoint) {
+                    function geomToProj(geoPoint: Vec2): Vec2 {
                         return [
                             geoLonToMeters(geoPoint[0], geoPoint[1]),
                             geoLatToMeters(geoPoint[1])
                         ];
                     }
-                    function projToGeom(projPoint) {
+                    function projToGeom(projPoint: Vec2): Vec2 {
                         var lat = geoMetersToLat(projPoint[1]);
                         return [
                             geoMetersToLon(projPoint[0], lat),
@@ -602,7 +621,7 @@ export function validationCrossingWays(context) {
                     var linearToSphericalMetersRatio = geoVecLength(projEdgeNode1, projEdgeNode2) /
                         geoSphericalDistance(edgeNodes[0].loc, edgeNodes[1].loc);
 
-                    function locSphericalDistanceFromCrossingLoc(angle, distanceMeters) {
+                    function locSphericalDistanceFromCrossingLoc(angle: number, distanceMeters: number) {
                         var lengthSphericalMeters = distanceMeters * linearToSphericalMetersRatio;
                         return projToGeom([
                             projectedCrossingLoc[0] + Math.cos(angle) * lengthSphericalMeters,
@@ -610,10 +629,10 @@ export function validationCrossingWays(context) {
                         ]);
                     }
 
-                    var endpointLocGetter1 = function(lengthMeters) {
+                    var endpointLocGetter1 = function(lengthMeters: number) {
                         return locSphericalDistanceFromCrossingLoc(projectedAngle, lengthMeters);
                     };
-                    var endpointLocGetter2 = function(lengthMeters) {
+                    var endpointLocGetter2 = function(lengthMeters: number) {
                         return locSphericalDistanceFromCrossingLoc(projectedAngle + Math.PI, lengthMeters);
                     };
 
@@ -621,7 +640,7 @@ export function validationCrossingWays(context) {
                     var minEdgeLengthMeters = 0.55;
 
                     // decide where to bound the structure along the way, splitting as necessary
-                    function determineEndpoint(edge, endNode, locGetter) {
+                    function determineEndpoint(edge: Edge, endNode: osmNode, locGetter: (idealLengthMeters: number) => Vec2) {
                         var newNode;
 
                         var idealLengthMeters = structLengthMeters / 2;
@@ -676,8 +695,8 @@ export function validationCrossingWays(context) {
 
                         // do the split
                         graph = splitAction(graph);
-                        if (splitAction.getCreatedWayIDs().length) {
-                            resultWayIDs.push(splitAction.getCreatedWayIDs()[0]);
+                        if (splitAction.getCreatedWayIDs!().length) {
+                            resultWayIDs.push(splitAction.getCreatedWayIDs!()[0]);
                         }
 
                         return newNode;
@@ -691,9 +710,9 @@ export function validationCrossingWays(context) {
                     }).find(function(way) {
                         return way.nodes.indexOf(structEndNode1.id) !== -1 &&
                             way.nodes.indexOf(structEndNode2.id) !== -1;
-                    });
+                    })!;
 
-                    var tags = Object.assign({}, structureWay.tags); // copy tags
+                    var tags = { ...structureWay.tags }; // copy tags
                     if (bridgeOrTunnel === 'bridge'){
                         tags.bridge = 'yes';
                         tags.layer = '1';
@@ -717,7 +736,7 @@ export function validationCrossingWays(context) {
         });
     }
 
-    function makeConnectWaysFix(connectionTags) {
+    function makeConnectWaysFix(connectionTags: Tags) {
 
         var fixTitleID = 'connect_features';
         var fixIcon = 'iD-icon-crossing';
@@ -730,15 +749,15 @@ export function validationCrossingWays(context) {
             fixIcon = 'roentgen-ford';
         }
 
-        const fix = new validationIssueFix({
+        const fix = new validationIssueFix<Data>({
             icon: fixIcon,
             title: t.append('issues.fix.' + fixTitleID + '.title'),
             onClick: function(context) {
-                var loc = this.issue.loc;
-                var edges = this.issue.data.edges;
+                var loc = this.issue!.loc!;
+                var edges = this.issue!.data!.edges;
 
                 context.perform(
-                    function actionConnectCrossingWays(graph) {
+                    function actionConnectCrossingWays(graph: coreGraph) {
                         // create the new node for the points
                         var node = new osmNode({ loc: loc, tags: connectionTags });
                         graph = graph.replace(node);
@@ -748,7 +767,7 @@ export function validationCrossingWays(context) {
 
                         edges.forEach(function(edge) {
                             var edgeNodes = [graph.entity(edge[0]), graph.entity(edge[1])];
-                            var nearby = geoSphericalClosestNode(edgeNodes, loc);
+                            var nearby = geoSphericalClosestNode(edgeNodes, loc)!;
                             // if there is already a suitable node nearby, use that
                             // use the node if node has no interesting tags or if it is a crossing node #8326
                             if ((!nearby.node.hasInterestingTags() || nearby.node.isCrossing()) && nearby.distance < mergeThresholdInMeters) {
@@ -774,12 +793,11 @@ export function validationCrossingWays(context) {
         return fix;
     }
 
-    /** @returns {iD.OsmEntity | undefined} */
     function getSelectedFeature() {
         const mode = context.mode();
         if (!mode || mode.id !== 'select') return undefined;
 
-        const selectedIDs = mode.selectedIDs();
+        const selectedIDs = mode.selectedIDs!();
         if (selectedIDs.length !== 1) return undefined;
 
         const selectedID = selectedIDs[0];
@@ -788,13 +806,9 @@ export function validationCrossingWays(context) {
         return entity;
     }
 
-    /**
-     * @param {"higher" | "lower"} higherOrLower
-     * @returns {validationIssueFix | undefined}
-     */
-    function makeChangeLayerFix(higherOrLower) {
-        const selectedFeature = getSelectedFeature();
-        return new validationIssueFix({
+    function makeChangeLayerFix(higherOrLower: 'higher' | 'lower') {
+        const selectedFeature = getSelectedFeature()!;
+        return new validationIssueFix<Data>({
             id: selectedFeature.id,
             icon: 'iD-icon-' + (higherOrLower === 'higher' ? 'up' : 'down'),
             title: selectedFeature
@@ -807,15 +821,15 @@ export function validationCrossingWays(context) {
 
             onClick: function(context) {
                 const entity = getSelectedFeature();
-                const selectedID = entity.id;
                 if (!entity) return;
+                const selectedID = entity.id;
 
 
-                if (!this.issue.entityIds.some(function(entityId) {
+                if (!this.issue!.entityIds.some(function(entityId) {
                     return entityId === selectedID;
                 })) return;
 
-                var tags = Object.assign({}, entity.tags);   // shallow copy
+                var tags = { ...entity.tags };   // shallow copy
                 var layer = tags.layer && Number(tags.layer);
                 if (layer && !isNaN(layer)) {
                     if (higherOrLower === 'higher') {
@@ -842,4 +856,4 @@ export function validationCrossingWays(context) {
     validation.type = type;
 
     return validation;
-}
+};
