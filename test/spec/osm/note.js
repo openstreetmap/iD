@@ -1,12 +1,12 @@
 describe('iD.osmNote', function () {
     it('returns a note', function () {
-        expect(iD.osmNote()).toBeInstanceOf(iD.osmNote);
-        expect(iD.osmNote().type).toEqual('note');
+        expect(new iD.osmNote()).toBeInstanceOf(iD.osmNote);
+        expect(new iD.osmNote().type).toEqual('note');
     });
 
     describe('#extent', function() {
         it('returns a note extent', function() {
-            expect(iD.osmNote({loc: [5, 10]}).extent().equals([[5, 10], [5, 10]])).toBeTruthy();
+            expect(new iD.osmNote({loc: [5, 10]}).extent().equals([[5, 10], [5, 10]])).toBeTruthy();
         });
     });
 
@@ -16,14 +16,14 @@ describe('iD.osmNote', function () {
 
     describe('#isNew', function() {
         it('returns true if a note is new', function() {
-            var note = iD.osmNote({
+            var note = new iD.osmNote({
                 id: -1,
                 loc: [5, 10]
             });
             expect(note.isNew()).toBe(true);
         });
         it('returns false if a note is not new', function() {
-            var note = iD.osmNote({
+            var note = new iD.osmNote({
                 id: 1,
                 loc: [5, 10]
             });
@@ -33,7 +33,7 @@ describe('iD.osmNote', function () {
 
     describe('#move', function() {
         it('returns an moved note', function() {
-            var note = iD.osmNote({
+            var note = new iD.osmNote({
                 id: 1,
                 loc: [5, 5]
             });
