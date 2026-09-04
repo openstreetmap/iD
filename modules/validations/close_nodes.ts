@@ -5,13 +5,15 @@ import { validationIssue, validationIssueFix } from '../core/validation';
 import { osmPathHighwayTagValues } from '../osm/tags';
 import { geoMetersToLat, geoMetersToLon, geoSphericalDistance } from '../geo/geo';
 import { geoExtent } from '../geo/extent';
+import type { CreateValidator, Validator } from '../core/validation/models';
+import type { NodeId, osmNode, osmWay } from '../osm';
 
-export function validationCloseNodes(context) {
+export const validationCloseNodes: CreateValidator = (context) => {
     var type = 'close_nodes';
 
     var pointThresholdMeters = 0.2;
 
-    var validation = function(entity, graph) {
+    const validation: Validator = function(entity, graph) {
         if (entity.type === 'node') {
             return getIssuesForNode(entity);
         } else if (entity.type === 'way') {
@@ -19,7 +21,7 @@ export function validationCloseNodes(context) {
         }
         return [];
 
-        function getIssuesForNode(node) {
+        function getIssuesForNode(node: osmNode) {
             var parentWays = graph.parentWays(node);
             if (parentWays.length) {
                 return getIssuesForVertex(node, parentWays);
@@ -28,7 +30,7 @@ export function validationCloseNodes(context) {
             }
         }
 
-        function wayTypeFor(way) {
+        function wayTypeFor(way: osmWay) {
 
             if (way.tags.boundary && way.tags.boundary !== 'no') return 'boundary';
             if (way.tags.indoor && way.tags.indoor !== 'no') return 'indoor';
@@ -52,7 +54,7 @@ export function validationCloseNodes(context) {
             return 'other';
         }
 
-        function shouldCheckWay(way) {
+        function shouldCheckWay(way: osmWay) {
 
             // don't flag issues where merging would create degenerate ways
             if (way.nodes.length <= 2 ||
@@ -66,7 +68,7 @@ export function validationCloseNodes(context) {
             return true;
         }
 
-        function getIssuesForWay(way) {
+        function getIssuesForWay(way: osmWay) {
             if (!shouldCheckWay(way)) return [];
 
             var issues = [],
@@ -81,10 +83,10 @@ export function validationCloseNodes(context) {
             return issues;
         }
 
-        function getIssuesForVertex(node, parentWays) {
-            var issues = [];
+        function getIssuesForVertex(node: osmNode, parentWays: osmWay[]) {
+            var issues: validationIssue[] = [];
 
-            function checkForCloseness(node1, node2, way) {
+            function checkForCloseness(node1: osmNode, node2: osmNode, way: osmWay) {
                 var issue = getWayIssueIfAny(node1, node2, way);
                 if (issue) issues.push(issue);
             }
@@ -111,7 +113,7 @@ export function validationCloseNodes(context) {
             return issues;
         }
 
-        function thresholdMetersForWay(way) {
+        function thresholdMetersForWay(way: osmWay) {
             if (!shouldCheckWay(way)) return 0;
 
             var wayType = wayTypeFor(way);
@@ -125,7 +127,7 @@ export function validationCloseNodes(context) {
             return 0.2;
         }
 
-        function getIssuesForDetachedPoint(node) {
+        function getIssuesForDetachedPoint(node: osmNode) {
 
             var issues = [];
 
@@ -197,7 +199,7 @@ export function validationCloseNodes(context) {
 
             return issues;
 
-            function showReference(selection) {
+            function showReference(selection: d3.Selection) {
                 var referenceText = t('issues.close_nodes.detached.reference');
                 selection.selectAll('.issue-reference')
                     .data([0])
@@ -208,7 +210,7 @@ export function validationCloseNodes(context) {
             }
         }
 
-        function getWayIssueIfAny(node1, node2, way) {
+        function getWayIssueIfAny(node1: osmNode, node2: osmNode, way: osmWay) {
             if (node1.id === node2.id ||
                 (node1.hasInterestingTags() && node2.hasInterestingTags())) {
                 return null;
@@ -248,7 +250,7 @@ export function validationCloseNodes(context) {
                             icon: 'iD-icon-plus',
                             title: t.append('issues.fix.merge_points.title'),
                             onClick: function(context) {
-                                var entityIds = this.issue.entityIds;
+                                var entityIds = this.issue!.entityIds as NodeId[];
                                 var action = actionMergeNodes([entityIds[1], entityIds[2]]);
                                 context.perform(action, t('issues.fix.merge_close_vertices.annotation'));
                             }
@@ -261,7 +263,7 @@ export function validationCloseNodes(context) {
                 }
             });
 
-            function showReference(selection) {
+            function showReference(selection: d3.Selection) {
                 var referenceText = t('issues.close_nodes.reference');
                 selection.selectAll('.issue-reference')
                     .data([0])
@@ -278,4 +280,4 @@ export function validationCloseNodes(context) {
     validation.type = type;
 
     return validation;
-}
+};
