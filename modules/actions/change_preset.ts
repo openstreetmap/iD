@@ -1,6 +1,9 @@
+import type { Action } from '../core/history';
+import type { EntityId } from '../osm';
+import type { presetPreset } from '../presets';
 import { utilArrayDifference, utilObjectOmit } from '../util';
 
-export function actionChangePreset(entityID, oldPreset, newPreset, skipFieldDefaults) {
+export function actionChangePreset(entityID: EntityId, oldPreset: presetPreset | undefined, newPreset: presetPreset | undefined, skipFieldDefaults?: boolean): Action {
     return function action(graph) {
         const entity = graph.entity(entityID);
         const geometry = entity.geometry(graph);
@@ -8,7 +11,7 @@ export function actionChangePreset(entityID, oldPreset, newPreset, skipFieldDefa
         const loc = entity.extent(graph).center();
 
         // preserve tags that the new preset might care about, if any
-        let preserveKeys;
+        let preserveKeys: TagKey[] | undefined;
         if (newPreset) {
             preserveKeys = [];
             if (newPreset.addTags) {
@@ -33,7 +36,7 @@ export function actionChangePreset(entityID, oldPreset, newPreset, skipFieldDefa
                         return true;
                     })
                     .filter(Boolean)
-                    .forEach(key => preserveKeys.push(key));
+                    .forEach(key => preserveKeys!.push(key));
 
                 if (oldPreset.id !== newPreset.id) {
                     // 'field-keys' are keys used by fields (different to the keys used by preset itself)

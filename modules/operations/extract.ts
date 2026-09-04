@@ -25,7 +25,6 @@ export const operationExtract: CreateOperation = (context, selectedIDs) => {
         if (entity.type === 'node' && graph.parentWays(entity).length === 0) return null;
 
         if (entity.type !== 'node') {
-            // @ts-expect-error -- will be fixed in a different PR
             var preset = presetManager.match(entity, graph);
             // only allow extraction from ways/relations if the preset supports points
             if (preset.geometry.indexOf('point') === -1) return null;
