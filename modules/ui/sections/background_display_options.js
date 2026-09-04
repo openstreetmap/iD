@@ -16,22 +16,25 @@ export function uiSectionBackgroundDisplayOptions(context) {
         .disclosureContent(renderDisclosureContent);
 
     var _storedOpacity = prefs('background-opacity');
-    var _minVal = 0;
-    var _maxVal = 3;
-
-    var _sliders = ['brightness', 'contrast', 'saturation', 'sharpness'];
+    var _sliders = ['brightness', 'contrast', 'saturation', 'sharpness', 'invert'];
 
     var _options = {
-        brightness: (_storedOpacity !== null ? (+_storedOpacity) : 1),
-        contrast: 1,
-        saturation: 1,
-        sharpness: 1
+        brightness: {
+            def: 1,
+            val: _storedOpacity !== null ? +_storedOpacity : 1,
+            min: 0,
+            max: 3
+        },
+        contrast: { def: 1, val: 1, min: 0, max: 3 },
+        saturation: { def: 1, val: 1, min: 0, max: 3 },
+        sharpness: { def: 1, val: 1, min: 0, max: 3 },
+        invert: { def: 0, val: 0, min: 0, max: 1 }
     };
 
     function updateValue(d, val) {
-        val = clamp(val, _minVal, _maxVal);
+        val = clamp(+val, _options[d].min, _options[d].max);
 
-        _options[d] = val;
+        _options[d].val = val;
         context.background()[d](val);
 
         if (d === 'brightness') {
@@ -71,8 +74,8 @@ export function uiSectionBackgroundDisplayOptions(context) {
             .append('input')
             .attr('class', function(d) { return 'display-option-input display-option-input-' + d; })
             .attr('type', 'range')
-            .attr('min', _minVal)
-            .attr('max', _maxVal)
+            .attr('min', function(d) { return _options[d].min; })
+            .attr('max', function(d) { return _options[d].max; })
             .attr('step', '0.01')
             .on('input', function(d3_event, d) {
                 var val = d3_select(this).property('value');
@@ -88,7 +91,7 @@ export function uiSectionBackgroundDisplayOptions(context) {
             .attr('class', function(d) { return 'display-option-reset display-option-reset-' + d; })
             .on('click', function(d3_event, d) {
                 if (d3_event.button !== 0) return;
-                updateValue(d, 1);
+                updateValue(d, _options[d].def);
             })
             .call(svgIcon('#iD-icon-' + (localizer.textDirection() === 'rtl' ? 'redo' : 'undo')));
 
@@ -102,7 +105,8 @@ export function uiSectionBackgroundDisplayOptions(context) {
             .on('click', function(d3_event) {
                 d3_event.preventDefault();
                 for (var i = 0; i < _sliders.length; i++) {
-                    updateValue(_sliders[i], 1);
+                    var slider = _sliders[i];
+                    updateValue(slider, _options[slider].def);
                 }
             });
 
@@ -111,17 +115,17 @@ export function uiSectionBackgroundDisplayOptions(context) {
             .merge(container);
 
         container.selectAll('.display-option-input')
-            .property('value', function(d) { return _options[d]; });
+            .property('value', function(d) { return _options[d].val; });
 
         container.selectAll('.display-option-value')
-            .text(function(d) { return Math.floor(_options[d] * 100) + '%'; });
+            .text(function(d) { return Math.floor(_options[d].val * 100) + '%'; });
 
         container.selectAll('.display-option-reset')
-            .classed('disabled', function(d) { return _options[d] === 1; });
+            .classed('disabled', function(d) { return _options[d].val === _options[d].def; });
 
         // first time only, set brightness if needed
-        if (containerEnter.size() && _options.brightness !== 1) {
-            context.background().brightness(_options.brightness);
+        if (containerEnter.size() && _options.brightness.val !== 1) {
+            context.background().brightness(_options.brightness.val);
         }
     }
 
