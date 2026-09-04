@@ -1,31 +1,34 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
-import { zoom as d3_zoom, zoomIdentity as d3_zoomIdentity } from 'd3-zoom';
+import { zoom as d3_zoom, zoomIdentity as d3_zoomIdentity, type D3ZoomEvent } from 'd3-zoom';
 import { utilSetTransform, utilRebind } from '../util';
+import type { PhotoFrame } from './pannellum_photo';
+import type { Vec2 } from '../geo/vector';
+import type { coreContext } from '../core';
 
 
-export async function planePhotoFrame(context, selection) {
+export async function planePhotoFrame(context: coreContext, selection: d3.Selection<HTMLDivElement>) {
     const dispatch = d3_dispatch('viewerChanged');
 
-    const module = {};
+    const module: PhotoFrame = function() {};
     module.event = utilRebind(module, dispatch, 'on');
 
     let _photo;
-    let _imageWrapper;
-    let _planeWrapper;
-    let _viewerDimensions = [];
-    let _photoDimensions = [];
-    const _imgZoom = d3_zoom()
+    let _imageWrapper: d3.Selection<HTMLDivElement>;
+    let _planeWrapper: d3.Selection<HTMLDivElement>;
+    let _viewerDimensions: Vec2 = [] as any;
+    let _photoDimensions: Vec2 = [] as any;
+    const _imgZoom = d3_zoom<HTMLDivElement, unknown>()
         .on('zoom', zoomPan)
         .on('start', () => _imageWrapper.classed('grabbing', true))
         .on('end', () => _imageWrapper.classed('grabbing', false));
 
-    function zoomPan(d3_event) {
+    function zoomPan(d3_event: D3ZoomEvent<HTMLDivElement, unknown>) {
         let t = d3_event.transform;
         _imageWrapper.call(utilSetTransform, t.x, t.y, t.k);
     }
 
-    function loadImage(selection, path) {
-        return new Promise((resolve) => {
+    function loadImage(selection: d3.Selection<HTMLImageElement>, path: string) {
+        return new Promise<d3.Selection<HTMLImageElement>>((resolve) => {
             selection.attr('src', path);
             selection.on('load', () => {
                 resolve(selection);
@@ -66,7 +69,7 @@ export async function planePhotoFrame(context, selection) {
       .append('img')
       .attr('class', 'plane-photo');
 
-    context.ui().photoviewer.on('resize.plane', function(dimensions) {
+    context.ui().photoviewer.on('resize.plane', function(dimensions: Vec2) {
       _viewerDimensions = dimensions;
       updateTransform();
     });
@@ -75,7 +78,7 @@ export async function planePhotoFrame(context, selection) {
 
     /**
      * Shows the photo frame if hidden
-     * @param {*} selection the HTML wrap of the frame
+     * @param selection the HTML wrap of the frame
      */
     module.showPhotoFrame = function(selection) {
         const isHidden = selection.selectAll('.photo-frame.plane-frame.hide').size();
@@ -99,10 +102,10 @@ export async function planePhotoFrame(context, selection) {
 
     /**
      * Hides the photo frame if shown
-     * @param {*} context the HTML wrap of the frame
+     * @param selection the HTML wrap of the frame
      */
-    module.hidePhotoFrame = function(context) {
-        context
+    module.hidePhotoFrame = function(selection) {
+        selection
             .select('photo-frame.plane-frame')
             .classed('hide', false);
 
@@ -111,7 +114,7 @@ export async function planePhotoFrame(context, selection) {
 
     /**
      * Renders an image inside the frame
-     * @param {*} data the image data, it should contain an image_path attribute, a link to the actual image.
+     * @param data the image data, it should contain an image_path attribute, a link to the actual image.
      */
     module.selectPhoto = function(data) {
         dispatch.call('viewerChanged');
@@ -121,7 +124,7 @@ export async function planePhotoFrame(context, selection) {
         loadImage(_photo, data.image_path)
             .then(selection => {
                 _planeWrapper.classed('show-loader', false);
-                const { naturalWidth, naturalHeight } = selection.node();
+                const { naturalWidth, naturalHeight } = selection.node()!;
                 _photoDimensions = [naturalWidth, naturalHeight];
                 updateTransform();
             });
