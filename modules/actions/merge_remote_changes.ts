@@ -1,6 +1,6 @@
 import { deepEqual } from 'fast-equals';
 import { diff3Merge } from 'node-diff3';
-
+import type { Discarded } from '@openstreetmap/id-tagging-schema';
 import { t } from '../core/localizer';
 import { actionDeleteMultiple } from './delete_multiple';
 import { createEntity, type osmNode, type EntityId, type NodeId, type OsmEntity, type osmRelation, type osmWay } from '../osm';
@@ -18,11 +18,11 @@ export interface MergeUpdates {
 }
 
 export interface ActionMergeRemoteChanges extends Action {
-    withOption?(val?: MergeStrategy): MergeStrategy | this;
+    withOption(val?: MergeStrategy): this;
     conflicts(): d3.Selector[];
 }
 
-export function actionMergeRemoteChanges(id: EntityId, localGraph: coreGraph, remoteGraph: coreGraph, discardTags: Record<string, true> = {}, formatUser?: any): ActionMergeRemoteChanges {
+export function actionMergeRemoteChanges(id: EntityId, localGraph: coreGraph, remoteGraph: coreGraph, discardTags: Discarded = {}, formatUser?: any): ActionMergeRemoteChanges {
     var _option: MergeStrategy = 'safe';  // 'safe', 'force_local', 'force_remote'
     var _conflicts: d3.Selector[] = [];
 
