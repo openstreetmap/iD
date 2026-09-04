@@ -18,6 +18,52 @@ import { patchHash } from '../behavior';
 
 let _imageryIndex = null;
 
+
+/**
+ * Choose the best default background for the current view.
+ * More-specific sources are preferred when they cover more than half the view.
+ * If equally specific sources all have dates, prefer the most recent one.
+ * Otherwise preserve the existing source order.
+ */
+export function rendererDefaultBackground(sources, extent) {
+  const viewArea = extent.area();
+  const candidates = [];
+
+  for (const source of sources) {
+    if (!source.best() || source.overlay) continue;
+
+    const bbox = turf_bbox(turf_bboxClip(
+      { type: 'MultiPolygon', coordinates: [ source.polygon || [extent.polygon()] ] },
+      extent.rectangle()
+    ));
+    const area = geoExtent(bbox.slice(0, 2), bbox.slice(2, 4)).area();
+    if (area / viewArea > 0.5) {
+      candidates.push({ source, area });
+    }
+  }
+
+  if (!candidates.length) return null;
+
+  const minArea = Math.min(...candidates.map(candidate => candidate.area));
+  const mostSpecific = candidates.filter(candidate => candidate.area === minArea);
+  if (mostSpecific.length === 1) return mostSpecific[0].source;
+
+  const dated = mostSpecific.map(candidate => {
+    const value = candidate.source.endDate || candidate.source.startDate;
+    const timestamp = value ? new Date(value).getTime() : NaN;
+    return { ...candidate, timestamp };
+  });
+
+  if (dated.every(candidate => Number.isFinite(candidate.timestamp))) {
+    return dated.reduce((newest, candidate) =>
+      candidate.timestamp > newest.timestamp ? candidate : newest
+    ).source;
+  }
+
+  // Source names are not reliable chronology, so don't guess when dates are incomplete.
+  return mostSpecific[0].source;
+}
+
 export function rendererBackground(context) {
   const dispatch = d3_dispatch('change');
   const baseLayer = rendererTileLayer(context).projection(context.projection);
@@ -457,15 +503,7 @@ export function rendererBackground(context) {
 
       let best;
       if (!requestedBackground && extent) {
-        const viewArea = extent.area();
-        best = validBackgrounds.find(s => {
-          if (!s.best() || s.overlay) return false;
-          let bbox = turf_bbox(turf_bboxClip(
-                { type: 'MultiPolygon', coordinates: [ s.polygon || [extent.polygon()] ] },
-                extent.rectangle()));
-          let area = geoExtent(bbox.slice(0,2), bbox.slice(2,4)).area();
-          return area / viewArea > 0.5; // min visible size: 50% of viewport area
-        });
+        best = rendererDefaultBackground(validBackgrounds, extent);
       }
 
       // Decide which background layer to display
