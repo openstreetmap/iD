@@ -40,6 +40,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :sparkles: Usability & Accessibility
 * Render diameter and radius tags when a node is selected ([#9732], thanks [@k-yle])
 #### :scissors: Operations
+* Create a 'distribute' operation ([#12728], thanks [@k-yle])
 #### :camera: Street-Level
 #### :white_check_mark: Validation
 #### :bug: Bugfixes
@@ -52,6 +53,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 
 [#9732]: https://github.com/openstreetmap/iD/pull/9732
 [#12679]: https://github.com/openstreetmap/iD/pull/12679
+[#12728]: https://github.com/openstreetmap/iD/pull/12728
 
 
 # 2.42.1
