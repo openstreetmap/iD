@@ -11,6 +11,10 @@ import type { osmNode as OsmNode } from '../osm/node';
 import type { EntityId as EntityID } from '../osm';
 
 
+export function utilSplitAtSemicolon(s: TagValue | undefined | null) {
+    return (s || '').split(';').map(s => s.trim()).filter(Boolean);
+}
+
 export function utilTagText(entity: iD.OsmEntity): string {
     const obj = (entity && entity.tags) || {};
     return Object.keys(obj)
