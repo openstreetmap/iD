@@ -3,13 +3,16 @@ import { t } from '../core/localizer';
 import { utilTagDiff } from '../util';
 import { utilDisplayLabel } from '../util/utilDisplayLabel';
 import { validationIssue, validationIssueFix } from '../core/validation';
+import type { coreGraph } from '../core/graph';
+import type { CreateValidator, Validator } from '../core/validation/models';
+import type { coreContext } from '../core';
 
 
-export function validationPrivateData() {
+export const validationPrivateData: CreateValidator = () => {
     var type = 'private_data';
 
     // assume that some buildings are private
-    var privateBuildingValues = {
+    const privateBuildingValues: Record<string, true> = {
         detached: true,
         farm: true,
         house: true,
@@ -20,7 +23,7 @@ export function validationPrivateData() {
     };
 
     // but they might be public if they have one of these other tags
-    var publicKeys = {
+    const publicKeys: Record<string, true> = {
         amenity: true,
         craft: true,
         historic: true,
@@ -31,7 +34,7 @@ export function validationPrivateData() {
     };
 
     // these tags may contain personally identifying info
-    var personalTags = {
+    const personalTags: Record<string, true> = {
         'contact:email': true,
         'contact:fax': true,
         'contact:phone': true,
@@ -41,11 +44,11 @@ export function validationPrivateData() {
     };
 
 
-    var validation = function checkPrivateData(entity) {
+    const validation: Validator = function checkPrivateData(entity) {
         var tags = entity.tags;
         if (!tags.building || !privateBuildingValues[tags.building]) return [];
 
-        var keepTags = {};
+        var keepTags: Tags = {};
         for (var k in tags) {
             if (publicKeys[k]) return [];  // probably a public feature
             if (!personalTags[k]) {
@@ -78,11 +81,11 @@ export function validationPrivateData() {
         })];
 
 
-        function doUpgrade(graph) {
+        function doUpgrade(graph: coreGraph) {
             var currEntity = graph.hasEntity(entity.id);
             if (!currEntity) return graph;
 
-            var newTags = Object.assign({}, currEntity.tags);  // shallow copy
+            var newTags = { ...currEntity.tags };  // shallow copy
             tagDiff.forEach(function(diff) {
                 if (diff.type === '-') {
                     delete newTags[diff.key];
@@ -95,7 +98,7 @@ export function validationPrivateData() {
         }
 
 
-        function showMessage(context) {
+        function showMessage(this: validationIssue, context: coreContext) {
             var currEntity = context.hasEntity(this.entityIds[0]);
             if (!currEntity) return '';
 
@@ -105,7 +108,7 @@ export function validationPrivateData() {
         }
 
 
-        function showReference(selection) {
+        function showReference(selection: d3.Selection) {
             var enter = selection.selectAll('.issue-reference')
                 .data([0])
                 .enter();
@@ -140,4 +143,4 @@ export function validationPrivateData() {
     validation.type = type;
 
     return validation;
-}
+};
