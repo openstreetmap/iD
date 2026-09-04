@@ -18,6 +18,45 @@ import { validationIssue, validationIssueFix } from '../core/validation';
 export function validationMismatchedGeometry() {
     var type = 'mismatched_geometry';
 
+    function multipolygonTypeOnNonRelationIssue(entity) {
+        if (entity.type === 'relation' || entity.tags.type !== 'multipolygon') return null;
+
+        return new validationIssue({
+            type: type,
+            subtype: 'multipolygon_type_on_non_relation',
+            severity: 'warning',
+            message: function(context) {
+                var entity = context.hasEntity(this.entityIds[0]);
+                return entity ? t.append('issues.multipolygon_type_on_non_relation.message', {
+                    feature: utilDisplayLabel(entity, context.graph(), true /* verbose */)
+                }) : '';
+            },
+            reference: function showReference(selection) {
+                selection.selectAll('.issue-reference')
+                    .data([0])
+                    .enter()
+                    .append('div')
+                    .attr('class', 'issue-reference')
+                    .call(t.append('issues.multipolygon_type_on_non_relation.reference'));
+            },
+            entityIds: [entity.id],
+            dynamicFixes: () => [new validationIssueFix({
+                icon: 'iD-operation-delete',
+                title: t.append('issues.fix.remove_named_tag.title', { tag: 'type' }),
+                onClick: function(context) {
+                    var entityId = this.issue.entityIds[0];
+                    var entity = context.entity(entityId);
+                    var tags = Object.assign({}, entity.tags);
+                    delete tags.type;
+                    context.perform(
+                        actionChangeTags(entityId, tags),
+                        t('issues.fix.remove_named_tag.annotation', { tag: 'type' })
+                    );
+                }
+            })]
+        });
+    }
+
     function tagSuggestingLineIsArea(entity) {
         if (entity.type !== 'way' || entity.isClosed()) return null;
 
@@ -470,6 +509,9 @@ export function validationMismatchedGeometry() {
     }
 
     var validation = function checkMismatchedGeometry(entity, graph) {
+        var multipolygonTypeOnNonRelation = multipolygonTypeOnNonRelationIssue(entity);
+        if (multipolygonTypeOnNonRelation) return [multipolygonTypeOnNonRelation];
+
         var vertexPoint = vertexPointIssue(entity, graph);
         if (vertexPoint) return [vertexPoint];
 
