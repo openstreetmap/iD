@@ -457,6 +457,16 @@ describe('iD.geo - geometry', function() {
             expect(ssr.angle).toEqual(0);
         });
 
+        it('returns undefined when given less than 3 points', () => {
+            expect(iD.geoGetSmallestSurroundingRectangle([])).toBeUndefined();
+            expect(iD.geoGetSmallestSurroundingRectangle([[1, 1]])).toBeUndefined();
+            expect(iD.geoGetSmallestSurroundingRectangle([[1, 1], [2, 2]])).toBeUndefined();
+        });
+
+        it('returns undefined when all points are collinear', () => {
+            expect(iD.geoGetSmallestSurroundingRectangle([[0, 1], [0, 2], [0, 4]])).toBeUndefined();
+            expect(iD.geoGetSmallestSurroundingRectangle([[1, 1], [2, 2], [3, 3]])).toBeUndefined();
+        });
     });
 
     describe('geoPathLength', function() {
@@ -507,4 +517,54 @@ describe('iD.geo - geometry', function() {
         });
     });
 
+
+    describe('iD.geoGetAxis', () => {
+        it('can calculate the diameter of a set', () => {
+            // https://desmos.com/calculator/rstdsrvfkb
+            const points = [
+                [-1, 2],
+                [-3, 5],
+                [-2, -2],
+                [1, 1],
+                [4, -2],
+                [3, 0],
+            ];
+            expect(iD.geoGetAxis(points)).toStrictEqual([
+                [-4.516393442622951, 3.1803278688524594],
+                [3.057377049180328, -3.1311475409836067],
+            ]);
+        });
+
+        it('can calculate the short axis of a set', () => {
+            const points = [
+                [-1, 2],
+                [-3, 5],
+                [-2, -2],
+                [1, 1],
+                [4, -2],
+                [3, 0],
+            ];
+            expect(iD.geoGetAxis(points, false)).toStrictEqual([
+                [-2.245901639344262, -1.7950819672131142],
+                [0.78688524590164, 1.844262295081967],
+            ]);
+        });
+
+        it('returns undefined if only 1 or 0 points are selected', () => {
+            expect(iD.geoGetAxis([])).toBeUndefined();
+            expect(iD.geoGetAxis([[1, 1]])).toBeUndefined();
+        });
+
+        it('returns the input set if there are exactly two points', () => {
+            const points = [[-1, 2], [-3, 5]];
+            expect(iD.geoGetAxis(points)).toStrictEqual(points);
+            expect(iD.geoGetAxis(points, false)).toStrictEqual(points);
+        });
+
+        it('returns the two extremities if all points are collinear', () => {
+            const points = [[0, 1], [0, 2], [0, 4], [0, 6], [0, 10]];
+            expect(iD.geoGetAxis(points)).toStrictEqual([[0, 10], [0, 1]]);
+            expect(iD.geoGetAxis(points, false)).toStrictEqual([[0, 10], [0, 1]]);
+        });
+    });
 });
