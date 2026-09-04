@@ -80,6 +80,11 @@
             "text": "shortcuts.browsing.enable.streetlevel"
           },
           {
+            "modifiers": ["⇧"],
+            "shortcuts": ["O"],
+            "text": "shortcuts.browsing.display_options.overlays"
+          },
+          {
             "shortcuts": ["background.minimap.key"],
             "text": "shortcuts.browsing.display_options.minimap"
           },
