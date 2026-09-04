@@ -9,6 +9,7 @@ import {
 
 import { t } from '../core/localizer';
 import { actionRotate } from '../actions/rotate';
+import { actionRotatePointDirection } from '../actions/rotate_point_direction';
 import { actionNoop } from '../actions/noop';
 import { behaviorEdit } from '../behavior/edit';
 import { geoVecInterp, geoVecLength } from '../geo/vector';
@@ -21,7 +22,9 @@ import { operationMove } from '../operations/move';
 import { operationOrthogonalize } from '../operations/orthogonalize';
 import { operationReflectLong, operationReflectShort } from '../operations/reflect';
 
+import { utilSelectedRotatePointDirectionKey } from '../util/direction_field';
 import { utilKeybinding } from '../util/keybinding';
+import { utilWrap } from '../util';
 import { utilFastMouse, utilGetAllNodes } from '../util/util';
 
 
@@ -52,6 +55,7 @@ export function modeRotate(context, entityIDs) {
     var _prevAngle;
     var _prevTransform;
     var _pivot;
+    let _pointDirectionKey = false;
 
     // use pointer events on supported platforms; fallback to mouse events
     var _pointerPrefix = 'PointerEvent' in window ? 'pointer' : 'mouse';
@@ -68,11 +72,11 @@ export function modeRotate(context, entityIDs) {
         // projection changed, recalculate _pivot
         var projection = context.projection;
         var currTransform = projection.transform();
-        if (!_prevTransform ||
+        const transformChanged = !_prevTransform ||
             currTransform.k !== _prevTransform.k ||
             currTransform.x !== _prevTransform.x ||
-            currTransform.y !== _prevTransform.y) {
-
+            currTransform.y !== _prevTransform.y;
+        if (transformChanged) {
             var nodes = utilGetAllNodes(entityIDs, context.graph());
             var points = nodes.map(function(n) { return projection(n.loc); });
             _pivot = getPivot(points);
@@ -81,15 +85,26 @@ export function modeRotate(context, entityIDs) {
 
 
         var currMouse = context.map().mouse(d3_event);
-        var currAngle = Math.atan2(currMouse[1] - _pivot[1], currMouse[0] - _pivot[0]);
 
-        if (typeof _prevAngle === 'undefined') _prevAngle = currAngle;
-        var delta = currAngle - _prevAngle;
-
-        fn(actionRotate(entityIDs, _pivot, delta, projection));
+        if (_pointDirectionKey) {
+            // Skip the first move after pan/zoom so the direction does not jump
+            // (geometry rotate does the same via a zero delta).
+            if (!transformChanged) {
+                // Point the direction at the mouse: OSM azimuth 0 = north, clockwise.
+                const dx = currMouse[0] - _pivot[0];
+                const dy = currMouse[1] - _pivot[1];
+                const absoluteDegrees = utilWrap(Math.atan2(dx, -dy) * (180 / Math.PI), 360);
+                fn(actionRotatePointDirection(entityIDs[0], absoluteDegrees, _pointDirectionKey));
+            }
+        } else {
+            const currAngle = Math.atan2(currMouse[1] - _pivot[1], currMouse[0] - _pivot[0]);
+            if (typeof _prevAngle === 'undefined') _prevAngle = currAngle;
+            const delta = currAngle - _prevAngle;
+            fn(actionRotate(entityIDs, _pivot, delta, projection));
+            _prevAngle = currAngle;
+        }
 
         _prevTransform = currTransform;
-        _prevAngle = currAngle;
         _prevGraph = context.graph();
     }
 
@@ -131,6 +146,7 @@ export function modeRotate(context, entityIDs) {
 
     mode.enter = function() {
         _prevGraph = null;
+        _pointDirectionKey = utilSelectedRotatePointDirectionKey(entityIDs, context.graph());
         context.features().forceVisible(entityIDs);
 
         behaviors.forEach(context.install);
@@ -168,7 +184,7 @@ export function modeRotate(context, entityIDs) {
     };
 
 
-    mode.exit = function() {
+    mode.exit = function(nextMode) {
         behaviors.forEach(context.uninstall);
 
         context.surface()
@@ -184,6 +200,11 @@ export function modeRotate(context, entityIDs) {
         d3_select(document)
             .call(keybinding.unbind);
 
+        // select.enter will refresh the editor; hide only when leaving selection
+        // entirely (e.g. undo → browse).
+        if (!nextMode || nextMode.id !== 'select') {
+            context.ui().sidebar.hide();
+        }
         context.features().forceVisible([]);
     };
 

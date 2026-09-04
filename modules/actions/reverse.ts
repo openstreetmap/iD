@@ -1,7 +1,7 @@
 import type { coreGraph } from '../core';
 import type { Action } from '../core/history';
-import type { EntityId, OsmEntity, osmWay } from '../osm';
-import { presetManager } from '../presets';
+import type { EntityId, osmWay } from '../osm';
+import { utilDirectionFieldKey } from '../util/direction_field';
 
 export interface ActionReverse extends Action {
     entityID(): EntityId;
@@ -160,31 +160,6 @@ export function actionReverse(entityID: EntityId, options?: ReverseOptions): Act
         return valueReplacements[value] || value;
     }
 
-    /** @returns false or the name of the direction key */
-    function supportsDirectionField(node: OsmEntity, graph: coreGraph): false | TagKey {
-        // @ts-expect-error -- will be fixed in a different PR
-        const preset = presetManager.match(node, graph);
-        const loc = node.extent(graph).center();
-        const geometry = node.geometry(graph);
-
-        const fields = [...preset.fields(loc), ...preset.moreFields(loc)];
-
-        const maybeDirectionField = fields.find(field => {
-            const isDirectionField = field.key && (field.key === 'direction' || field.key.endsWith(':direction'));
-            // some direction fields are for angles, so ensure that the
-            // direction field on this preset is not a numeric field.
-            const isRelativeDirection = field.type !== 'number';
-
-            // the field's geometry might be restricted to a subset of the preset's geometry
-            const isGeometryValid = !field.geometry || field.geometry.includes(geometry);
-
-            return isDirectionField && isRelativeDirection && isGeometryValid;
-        });
-
-        return maybeDirectionField?.key || false;
-    }
-
-
     // Reverse the direction of tags attached to the nodes - #3076
     function reverseNodeTags(graph: coreGraph, nodeIDs: EntityId[]) {
         for (var i = 0; i < nodeIDs.length; i++) {
@@ -206,7 +181,7 @@ export function actionReverse(entityID: EntityId, options?: ReverseOptions): Act
 
             // for features whose presets have a direction field,
             // the first flip just adds the direction tag.
-            const directionKey = supportsDirectionField(node, graph);
+            const directionKey = utilDirectionFieldKey(node, graph, false);
             if (node.id === entityID && !anyChanges && directionKey) {
                 tags[directionKey] = 'forward';
             }
@@ -265,7 +240,7 @@ export function actionReverse(entityID: EntityId, options?: ReverseOptions): Act
         // exception for features whose presets have a direction
         // field - they're flipable even if they don't have a
         // direction tag.
-        if (supportsDirectionField(entity, graph)) return false;
+        if (utilDirectionFieldKey(entity, graph, false)) return false;
 
         return 'nondirectional_node';
     };

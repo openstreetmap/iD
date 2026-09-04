@@ -406,10 +406,13 @@ en:
     rotate:
       title: Rotate
       description:
+        point: Adjust this point's numeric direction tag.
         single: Rotate this feature around its center point.
         multiple: Rotate these features around their center point.
       key: R
       annotation:
+        point: Rotated a point.
+        vertex: Rotated a node in a way.
         line: Rotated a line.
         area: Rotated an area.
         relation: Rotated a relation.
@@ -732,6 +735,7 @@ en:
     edit_reference: "edit/translate documentation"
     wiki_reference: View documentation
     wiki_en_reference: View documentation in English
+    direction_rotate_help: "Press {key} to adjust this value on the map."
     key_value: "key=value"
     empty: (empty)
     multiple_values: Multiple Values
@@ -1403,7 +1407,7 @@ en:
       orthogonalize: "{orthogonalize_icon} **{orthogonalize}** snaps the corners of areas and lines to 90°. You can square individual corners or entire features."
       circularize: "{circularize_icon} **{circularize}** turns areas and closed lines into circles."
       move: "{move_icon} **{move}** lets you drag features around the map."
-      rotate: "{rotate_icon} **{rotate}** lets you swivel features around their center points."
+      rotate: "{rotate_icon} **{rotate}** lets you swivel features around their center points. For a point with a numeric direction tag, it adjusts that direction instead."
       reflect: "{reflect_short_icon} **{reflect_short}** and {reflect_long_icon} **{reflect_long}** reflect features over their short and long axes."
       continue: "{continue_icon} **{continue}** lets you extend existing lines from their endpoints."
       reverse: "{reverse_icon} **{reverse}** changes the direction of features. The direction matters for things like one-way roads, traffic signs, waterways, and cliffs."
@@ -2253,7 +2257,7 @@ en:
         nudge_more: "Nudge selected features by a lot"
         scale: "Scale selected features"
         scale_more: "Scale selected features by a lot"
-        rotate: "Rotate selected features"
+        rotate: "Rotate selected features, or adjust a point's numeric direction"
         orthogonalize: "Square corners of a line or area"
         straighten: "Straighten a line or points"
         circularize: "Circularize a closed line or area"

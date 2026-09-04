@@ -1,14 +1,16 @@
 import { t } from '../core/localizer';
 import { behaviorOperation } from '../behavior/operation';
 import { modeRotate } from '../modes/rotate';
+import { utilSelectedRotatePointDirectionKey } from '../util/direction_field';
 import { utilGetAllNodes, utilTotalExtent } from '../util/util';
 
 
 export function operationRotate(context, selectedIDs) {
     var multi = (selectedIDs.length === 1 ? 'single' : 'multiple');
-    var nodes = utilGetAllNodes(selectedIDs, context.graph());
+    const graph = context.graph();
+    const nodes = utilGetAllNodes(selectedIDs, graph);
     var coords = nodes.map(function(n) { return n.loc; });
-    var extent = utilTotalExtent(selectedIDs, context.graph());
+    const extent = utilTotalExtent(selectedIDs, graph);
 
 
     var operation = function() {
@@ -17,7 +19,7 @@ export function operationRotate(context, selectedIDs) {
 
 
     operation.available = function() {
-        return nodes.length >= 2;
+        return nodes.length >= 2 || !!utilSelectedRotatePointDirectionKey(selectedIDs, graph);
     };
 
 
@@ -51,16 +53,20 @@ export function operationRotate(context, selectedIDs) {
 
         function incompleteRelation(id) {
             var entity = context.entity(id);
-            return entity.type === 'relation' && !entity.isComplete(context.graph());
+            return entity.type === 'relation' && !entity.isComplete(graph);
         }
     };
 
 
     operation.tooltip = function() {
-        var disable = operation.disabled();
-        return disable ?
-            t.append('operations.rotate.' + disable + '.' + multi) :
-            t.append('operations.rotate.description.' + multi);
+        const disable = operation.disabled();
+        if (disable) {
+            return t.append('operations.rotate.' + disable + '.' + multi);
+        }
+        if (utilSelectedRotatePointDirectionKey(selectedIDs, graph)) {
+            return t.append('operations.rotate.description.point');
+        }
+        return t.append('operations.rotate.description.' + multi);
     };
 
 
