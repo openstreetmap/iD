@@ -309,7 +309,7 @@ export function uiSectionRawTagEditor(id, context) {
     }
 
     function stringify(s) {
-        const stringified = JSON.stringify(s).slice(1, -1);   // without leading/trailing "
+        const stringified = JSON.stringify(s).slice(1, -1).replace(/\\"/g, '"');   // without leading/trailing "
         if (stringified !== s) {
             return `"${stringified}"`;
         } else {
