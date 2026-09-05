@@ -1,4 +1,5 @@
 import { t } from '../core/localizer';
+import { locationManager } from '../core/location_manager';
 import { utilDisplayLabel } from '../util/utilDisplayLabel';
 import { validationIssue, validationIssueFix } from '../core/validation';
 import { actionChangeTags } from '../actions/change_tags';
@@ -10,7 +11,7 @@ import { presetManager } from '../presets';
 export function validationFormatting(context) {
     var type = 'invalid_format';
 
-    var validation = function(entity) {
+    var validation = function(entity, graph) {
         var issues = [];
 
         function isValidEmail(email) {
@@ -22,6 +23,10 @@ export function validationFormatting(context) {
             return (!email || valid_email.test(email));
         }
 
+        function isIntegerValue(value) {
+            return value.split(';').every(part => /^[+-]?\d+$/.test(part.trim()));
+        }
+
         function showReferenceEmail(selection) {
             selection.selectAll('.issue-reference')
                 .data([0])
@@ -29,6 +34,15 @@ export function validationFormatting(context) {
                 .append('div')
                 .attr('class', 'issue-reference')
                 .call(t.append('issues.invalid_format.email.reference'));
+        }
+
+        function showReferenceInteger(selection) {
+            selection.selectAll('.issue-reference')
+                .data([0])
+                .enter()
+                .append('div')
+                .attr('class', 'issue-reference')
+                .call(t.append('issues.invalid_format.integer.reference'));
         }
 
         function isFixableURL(url) {
@@ -245,6 +259,47 @@ export function validationFormatting(context) {
                 }
             }
         }
+
+        const entityGeometry = entity.geometry(graph);
+        const entityExtent = entity.extent(graph);
+        const entityLocation = entityExtent.center();
+        const preset = presetManager.match(entity, graph);
+        const validHere = locationManager.locationSetsAt(entityLocation);
+        const integerFields = [
+            ...preset.fields(entityLocation),
+            ...preset.moreFields(entityLocation),
+            ...presetManager.universal().filter(field => {
+                return !field.locationSetID || validHere.has(field.locationSetID);
+            })
+        ].filter(field => field.type === 'integer' && field.matchGeometry(entityGeometry));
+
+        const checkedIntegerKeys = new Set();
+        integerFields.forEach(field => {
+            field.allKeys(entity.tags).forEach(key => {
+                if (checkedIntegerKeys.has(key)) return;
+                checkedIntegerKeys.add(key);
+
+                const value = entity.tags[key];
+                if (!value || isIntegerValue(value)) return;
+
+                issues.push(new validationIssue({
+                    type: type,
+                    subtype: 'integer',
+                    severity: 'warning',
+                    message: function(context) {
+                        const entity = context.hasEntity(this.entityIds[0]);
+                        return entity ? t.append('issues.invalid_format.integer.message', {
+                            feature: utilDisplayLabel(entity, context.graph()),
+                            key: selection => selection.append('code').text(this.data.key)
+                        }) : '';
+                    },
+                    reference: showReferenceInteger,
+                    entityIds: [entity.id],
+                    hash: `${key}=${value}`,
+                    data: { key, value }
+                }));
+            });
+        });
 
         if (entity.tags.email) {
             // Multiple emails are possible

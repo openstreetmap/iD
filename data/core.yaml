@@ -1636,6 +1636,9 @@ en:
         message: '{feature} has an invalid email address'
         message_multi: '{feature} has multiple invalid email addresses'
         reference: 'Email addresses must look like "user@example.com".'
+      integer:
+        message: '{feature} has a non-integer value in {key}'
+        reference: 'This value must be an integer.'
       website:
         message: '{feature} has an invalid URL in {where}'
         message_multi: '{feature} has multiple invalid URLs in {where}'
