@@ -52,7 +52,9 @@ export function uiSettingsLocalPhotos(context) {
                         .select('ul')
                         .append('li')
                         .classed('placeholder', true)
-                        .append('div');
+                        .append('svg')
+                        .append('use')
+                        .attr('href', '#iD-loader');
                     dispatch.call('change', this, files);
                 }
                 d3_event.target.value = null;

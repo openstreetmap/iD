@@ -4,9 +4,9 @@ export function uiSpinner(context) {
 
     return function(selection) {
         var img = selection
-            .append('img')
-            .attr('src', context.imagePath('loader-black.gif'))
+            .append('svg')
             .style('opacity', 0);
+        img.append('use').attr('href', '#iD-loader');
 
         if (osm) {
             osm
