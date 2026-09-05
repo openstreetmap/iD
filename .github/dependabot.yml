@@ -9,6 +9,7 @@ updates:
       interval: "daily"
     open-pull-requests-limit: 20
     cooldown:
+      semver-major-days: 7
       semver-minor-days: 7
       semver-patch-days: 7
     groups:
