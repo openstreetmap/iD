@@ -7,6 +7,7 @@ import { nsiCdnUrl } from '../../config/id.js';
 // Make very sure this resolves to iD's `package.json`
 // If you mess up the `../`s, the resolver may import another random package.json from somewhere else.
 import packageJSON from '../../package.json';
+import { utilSplitAtSemicolon } from '../util/util';
 
 
 // This service contains all the code related to the **name-suggestion-index** (aka NSI)
@@ -516,10 +517,10 @@ function _upgradeTags(tags, loc) {
       if (!item) continue;
       const mainTag = item.mainTag;               // e.g. `brand:wikidata`
       const itemQID = item.tags[mainTag];         // e.g. `brand:wikidata` qid
-      const notQID = newTags[`not:${mainTag}`];   // e.g. `not:brand:wikidata` qid
+      const notQIDs = utilSplitAtSemicolon(newTags[`not:${mainTag}`]); // e.g. `not:brand:wikidata` qid
 
       if (                                        // Exceptions, skip this hit
-        (!itemQID || itemQID === notQID) ||       // No `*:wikidata` or matched a `not:*:wikidata`
+        (!itemQID || notQIDs?.includes(itemQID)) ||// No `*:wikidata` or matched a `not:*:wikidata`
         (newTags.office && !item.tags.office)     // feature may be a corporate office for a brand? - #6416
       ) {
         item = null;
