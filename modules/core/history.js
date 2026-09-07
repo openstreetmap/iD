@@ -28,8 +28,6 @@ import { osmIdManager } from '../osm';
     transitionable?: boolean;
 
     copies?(): Record<string, OsmEntity>;
-    useLongAxis?: GetSet<this, boolean>;
-    getReflectAxis?(graph: coreGraph): Vec2[];
  }} Action */
 
 /** @typedef {{
