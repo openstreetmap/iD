@@ -42,6 +42,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :scissors: Operations
 #### :camera: Street-Level
 #### :white_check_mark: Validation
+* Only suggest deleting `wikidata`/`wikipedia` tags if they have the same value as the suggested `*:wikidata` tags from NSI ([#12758], thanks [@k-yle])
 #### :bug: Bugfixes
 #### :earth_asia: Localization
 #### :hourglass: Performance
@@ -52,6 +53,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 
 [#9732]: https://github.com/openstreetmap/iD/pull/9732
 [#12679]: https://github.com/openstreetmap/iD/pull/12679
+[#12758]: https://github.com/openstreetmap/iD/pull/12758
 
 
 # 2.42.1
