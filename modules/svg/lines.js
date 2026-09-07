@@ -9,6 +9,7 @@ import { svgTagClasses } from './tag_classes';
 import { osmIdManager } from '../osm';
 import { utilArrayFlatten, utilArrayGroupBy } from '../util';
 import { utilDetect } from '../util/detect';
+import { utilIsDrawing } from '../util/util';
 
 /** @param {{ [key: string ]: string }} tags */
 function onewayArrowColour(tags) {
@@ -130,7 +131,7 @@ export function svgLines(projection, context) {
         function drawLineGroup(selection, klass, isSelected) {
             // Note: Don't add `.selected` class in draw modes
             var mode = context.mode();
-            var isDrawing = mode && /^draw/.test(mode.id);
+            var isDrawing = mode && utilIsDrawing(mode.id);
             var selectedClass = (!isDrawing && isSelected) ? 'selected ' : '';
 
             var lines = selection

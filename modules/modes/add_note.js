@@ -4,6 +4,7 @@ import { modeBrowse } from './browse';
 import { modeSelectNote } from './select_note';
 import { osmNote } from '../osm';
 import { services } from '../services';
+import { utilIsDrawing } from '../util/util';
 
 
 export function modeAddNote(context) {
@@ -40,6 +41,7 @@ export function modeAddNote(context) {
         context.enter(modeBrowse(context));
     }
 
+    mode.disabled = () => utilIsDrawing(context.mode().id);
 
     mode.enter = function() {
         context.install(behavior);

@@ -13,6 +13,7 @@ import { presetManager } from '../../presets';
 import { t } from '../../core/localizer';
 import { svgIcon } from '../../svg';
 import { uiTooltip } from '../tooltip';
+import { utilIsDrawing } from '../../util';
 
 export function uiToolDrawModes(context) {
 
@@ -60,6 +61,7 @@ export function uiToolDrawModes(context) {
     modes.forEach(function(mode) {
         context.keybinding().on(mode.key, function(d3_event) {
             if (!enabled(mode)) return;
+            if (mode.disabled?.()) return;
 
             d3_event.preventDefault();
 
@@ -108,7 +110,7 @@ export function uiToolDrawModes(context) {
 
                     // When drawing, ignore accidental clicks on mode buttons - #4042
                     var currMode = context.mode().id;
-                    if (/^draw/.test(currMode)) return;
+                    if (utilIsDrawing(currMode)) return;
 
                     if (d.id === currMode) {
                         context.enter(modeBrowse(context));

@@ -47,6 +47,7 @@ import { uiPaneHelp } from './panes/help';
 import { uiPaneIssues } from './panes/issues';
 import { uiPaneMapData } from './panes/map_data';
 import { uiPanePreferences } from './panes/preferences';
+import { utilIsDrawing } from '../util';
 
 export function uiInit(context) {
     var _initCounter = 0;
@@ -411,7 +412,7 @@ export function uiInit(context) {
 
                 // Don't allow layer changes while drawing - #6584
                 var mode = context.mode();
-                if (mode && /^draw/.test(mode.id)) return;
+                if (mode && utilIsDrawing(mode.id)) return;
 
                 var layer = context.layers().layer('osm');
                 if (layer) {
