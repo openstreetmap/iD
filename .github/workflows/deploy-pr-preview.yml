@@ -37,8 +37,8 @@ jobs:
 
       - name: Deploy to Netlify
         env:
-          NETLIFY_AUTH_TOKEN: ${{secrets.NETLIFY_AUTH_TOKEN}}
-          NETLIFY_SITE_ID: ${{secrets.NETLIFY_SITE_ID}}
+          NETLIFY_AUTH_TOKEN: ${{secrets.NETLIFY_AUTH_TOKEN_PRS}}
+          NETLIFY_SITE_ID: ${{secrets.NETLIFY_SITE_ID_PRS}}
         run: npx netlify-cli deploy --no-build --dir=. --alias=pr-${{steps.pr_metadata.outputs.pr}}
 
       - name: Run afterDeploy script
