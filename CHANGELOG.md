@@ -43,7 +43,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :camera: Street-Level
 #### :white_check_mark: Validation
 #### :bug: Bugfixes
-* Fix crash when resizing the browser tab ([#12800])
+* Fix exceptions when resizing the browser tab when nothing is selected ([#12800], thanks [@k-yle])
 #### :earth_asia: Localization
 #### :hourglass: Performance
 #### :mortar_board: Walkthrough / Help
