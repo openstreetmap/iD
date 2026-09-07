@@ -106,7 +106,7 @@ function wrap(x: number, min: number, max: number) {
     return ((x - min) % d + d) % d + min;
 }
 
-function roundToDecimal (target: number, decimalPlace: number) {
+export function roundToDecimal (target: number, decimalPlace: number) {
     target = Number(target);
     decimalPlace = Number(decimalPlace);
     const factor = Math.pow(10, decimalPlace);

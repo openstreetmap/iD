@@ -12,8 +12,7 @@ import { t, localizer } from '../core/localizer';
 import { svgIcon } from '../svg/icon';
 import { uiDisclosure } from '../ui/disclosure';
 import { utilRebind } from '../util/rebind';
-import { geoSphericalDistance } from '../geo/geo.js';
-import { escape } from 'es-toolkit';
+import { getOsmCalEvents } from '../services/osmcal.js';
 
 
 let _oci = null;
@@ -21,7 +20,7 @@ let _oci = null;
 let _osmCalEvents = null;
 
 export function uiSuccess(context) {
-  const MAXEVENTS = 4;
+  const MAX_EVENTS = 4;
   const dispatch = d3_dispatch('cancel');
   let _changeset;
   let _location;
@@ -245,48 +244,23 @@ export function uiSuccess(context) {
             languageCodes: resource.languageCodes,
           }));
       });
-    const fetchEventsData = ensureOSMCal()
-      .then(osmCalData => {
-        const nearbyEvents = [];
-        for (const event of osmCalData) {
-          if (event.cancelled) {
-            // cancelled event
-            continue;
-          }
-          const eventLoc = event.location?.coords;
-          if (!eventLoc) {
-            // global event
-            continue;
-          }
-          const loc = context.map().center();
-          const distance = geoSphericalDistance(eventLoc, loc);
-          if (distance > 100_000) {
-            // more than 100km away
-            continue;
-          }
-          const date = new Date(event.date.start);
-          const now = new Date();
-          if (date - now > 1000 * 60 * 60 * 24 * 30) {
-            // more than 30 days in the future
-            continue;
-          }
-          nearbyEvents.push(event);
-        }
-
+    const loc = context.map().center();
+    const fetchEventsData = getOsmCalEvents(loc)
+      .then(nearbyEvents => {
         nearbyEvents.sort((a, b) => {
           // sort by date ascending
           return a.date.start < b.date.start ? -1 : a.date.start > b.date.start ? 1 : 0;
         });
 
         return nearbyEvents
-          .slice(0, MAXEVENTS) // limit number of events shown
+          .slice(0, MAX_EVENTS) // limit number of events shown
           .map((event, idx) => ({
             id: `osmcal-${idx}`,
             url: event.url,
             icon: '#pinhead-calendar',
             name: selection => selection.text(event.name),
-            description: selection => selection.text(`${escape(event.date.human_short)}, ${escape(event.location.short)}`),
-            extendedDescription: selection => selection.text(`${escape(event.date.human)}, ${escape(event.location.venue)}`),
+            description: selection => selection.text(`${event.date.human_short}, ${event.location.short}`),
+            extendedDescription: selection => selection.text(`${event.date.human}, ${event.location.venue}`),
           }));
       });
 
@@ -406,7 +380,7 @@ export function uiSuccess(context) {
         moreEnter
           .append('div')
           .attr('class', 'community-extended-description')
-          .each(function(d) {
+          .each(function() {
             if (typeof d.extendedDescription === 'string') {
               d3_select(this).html(d.extendedDescription);
             } else {
