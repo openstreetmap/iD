@@ -168,10 +168,13 @@ export function validationCrossingWays(context) {
                         return {};
                     }
                     if (['marked', 'unmarked', 'traffic_signals', 'uncontrolled'].indexOf(pathFeature.tags.crossing) !== -1) {
-                        // if the path is a crossing, match the crossing type and markings
+                        // if the path is a crossing, match the crossing type and details
                         var tags = { highway: 'crossing', crossing: pathFeature.tags.crossing };
                         if ('crossing:markings' in pathFeature.tags) {
                             tags['crossing:markings'] = pathFeature.tags['crossing:markings'];
+                        }
+                        if ('crossing:island' in pathFeature.tags) {
+                            tags['crossing:island'] = pathFeature.tags['crossing:island'];
                         }
                         return tags;
                     }
