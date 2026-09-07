@@ -22,7 +22,7 @@ export function afterDeploy({ core, github, context }) {
         core.info('Marking deployment as complete…');
         await github.rest.repos.createDeploymentStatus({
             state: 'success',
-            environment_url: `https://pr-${pr}--ideditor.netlify.app`,
+            environment_url: `https://pr-${pr}--id-preview.netlify.app`,
             owner: context.repo.owner,
             repo: context.repo.repo,
             deployment_id: /** @type {{ id: number }} */ (deployment.data).id,
