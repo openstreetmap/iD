@@ -138,6 +138,42 @@ describe('iD.osmWay', function() {
         });
     });
 
+    describe('#segments', () => {
+        it('returns each way segment', () => {
+            const n1 = new iD.osmNode({ id: 'n1', loc: [1, 1] });
+            const n2 = new iD.osmNode({ id: 'n2', loc: [2, 2] });
+            const n3 = new iD.osmNode({ id: 'n3', loc: [3, 3] });
+            const w1 = new iD.osmWay({ id: 'w1', nodes: ['n1', 'n2', 'n3'] });
+            const graph = new iD.coreGraph([n1, n2, n3, w1]);
+
+            expect(w1.segments(graph)).toStrictEqual([
+                {
+                    id: 'w1-0',
+                    wayId: 'w1',
+                    index: 0,
+                    nodes: ['n1', 'n2'],
+                    extent: expect.any(Function),
+                },
+                {
+                    id: 'w1-1',
+                    wayId: 'w1',
+                    index: 1,
+                    nodes: ['n2', 'n3'],
+                    extent: expect.any(Function),
+                },
+            ]);
+
+            const extents = w1.segments(graph)
+                .map(segment => segment.extent(graph))
+                .map(extent => extent.toParam());
+
+            expect(extents).toStrictEqual([
+                '1,1,2,2', // segment w1-0
+                '2,2,3,3', // segment w1-1
+            ]);
+        });
+    });
+
     describe('#isClosed', function() {
         it('returns false when the way contains no nodes', function() {
             expect(new iD.osmWay().isClosed()).toBe(false);

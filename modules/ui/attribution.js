@@ -29,11 +29,6 @@ export function uiAttribution(context) {
       .each((d, i, nodes) => {
         let attribution = d3_select(nodes[i]);
 
-        if (d.terms_html) {
-          attribution.html(d.terms_html);
-          return;
-        }
-
         if (d.terms_url) {
           attribution = attribution
             .append('a')
@@ -46,7 +41,7 @@ export function uiAttribution(context) {
           { default: d.terms_text || (d.terms_url && d.name()) }
         );
 
-        if (d.icon && !d.overlay) {
+        if (d.icon) {
           attribution
             .append('img')
             .attr('class', 'source-image')

@@ -102,7 +102,7 @@ export function validationOutdatedTags() {
     let issues = [];
     issues.provisional = (_waitingForDeprecated || waitingForNsi);
 
-    if (deprecationDiff.length) {
+    if (deprecationDiff.some(d => d.type !== '~')) {
       const isOnlyAddingTags = !deprecationDiff.some(d => d.type === '-');
       const prefix = isOnlyAddingTags ? 'incomplete.' : '';
 

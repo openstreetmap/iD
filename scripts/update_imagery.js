@@ -171,9 +171,6 @@ sources.features.forEach(feature => {
   if (attribution.text) {
     im.terms_text = attribution.text;
   }
-  if (attribution.html) {
-    im.terms_html = attribution.html;
-  }
 
   ['best', 'default', 'description', 'encrypted', 'icon', 'overlay', 'tileSize'].forEach(prop => {
     if (source[prop]) {

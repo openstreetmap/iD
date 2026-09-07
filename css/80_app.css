@@ -4963,6 +4963,7 @@ img.tile-debug {
     border-radius: 4px;
     margin: 0 3px;
     padding: 3px 6px;
+    vertical-align: middle;
 }
 
 
