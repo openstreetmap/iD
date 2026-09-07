@@ -164,9 +164,6 @@ function getCLDROverrides() {
       nativeName: 'Bân-lâm-gú (Tâi-lô)'
     },
     nys: { nativeName: 'Nyungar' },
-    'oc': {
-      nativeName: 'Occitan'
-    },
     pih: { nativeName: 'Pitkern–Norfuk', names: { en: 'Pitcairn-Norfolk', ty: 'Pitcairnais' } },
     piu: { nativeName: 'Pintupi' },
     pjt: { nativeName: 'Pitjantjatjara' },
@@ -181,14 +178,8 @@ function getCLDROverrides() {
     'shg': {
       nativeName: 'хуг̌ну̊н зив'
     },
-    'skr': {
-      nativeName: 'سرائیکی'
-    },
     tcs: { nativeName: 'Yumplatok', names: { en: 'Torres Strait Creole' } },
     tiw: { nativeName: 'Tiwi' },
-    'trw': {
-      nativeName: 'توروالی'
-    },
     ulk: { nativeName: 'Meriam Mir' },
     'wbl': {
       nativeName: 'وخی'
@@ -214,16 +205,6 @@ function getCLDROverrides() {
     xni: { nativeName: 'Ngarigo' },
     xph: { nativeName: 'Tyerrernotepanner', names: { en: 'North Midlands Tasmanian' } },
     xrd: { nativeName: 'Gundungurra' },
-    'yue-Hans': {
-      base: 'yue',
-      script: 'Hans',
-      nativeName: '粵语（简体）'
-    },
-    'yue-Hant': {
-      base: 'yue',
-      script: 'Hant',
-      nativeName: '粵語（繁體）'
-    },
     'zh-Latn-pinyin': {
       base: 'zh',
       script: 'Latn',
