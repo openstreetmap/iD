@@ -10,6 +10,7 @@ import type { coreGraph } from '../core/graph';
 import type { Vec2 } from '../geo/vector';
 
 export interface RelationMember { type: OsmType; id: EntityId; role: string };
+export interface RelationMemberWithIndex extends RelationMember { index: number }
 
 export class osmRelation extends OsmAbstractEntity {
     declare readonly type: 'relation';
@@ -79,7 +80,7 @@ export class osmRelation extends OsmAbstractEntity {
     // Return an array of members, each extended with an 'index' property whose value
     // is the member index.
     indexedMembers() {
-        var result = new Array(this.members.length);
+        const result: RelationMemberWithIndex[] = [];
         for (var i = 0; i < this.members.length; i++) {
             result[i] = Object.assign({}, this.members[i], {index: i});
         }
