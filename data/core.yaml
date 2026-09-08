@@ -1838,6 +1838,8 @@ en:
         title: Move the point onto a line
       reposition_features:
         title: Reposition the features
+      restore_road_type:
+        title: Restore previous road type
       reverse_feature:
         title: Reverse this feature
       select_preset:
