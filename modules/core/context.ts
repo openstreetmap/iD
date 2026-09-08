@@ -32,7 +32,7 @@ type EventMap = {
 export interface Mode {
     id: string;
     enter(): void;
-    exit(): void;
+    exit(nextMode?: Mode): void;
     selectedIDs?(): EntityId[];
     activeID?(): EntityId;
 }
@@ -467,7 +467,7 @@ export function coreContext(this: object): coreContext {
   context.mode = () => _mode;
   context.enter = (newMode) => {
     if (_mode) {
-      _mode.exit();
+      _mode.exit(newMode);
       dispatch.call('exit', this, _mode);
     }
 

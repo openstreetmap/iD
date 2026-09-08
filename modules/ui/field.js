@@ -232,10 +232,11 @@ export function uiField(context, presetField, entityIDs, options) {
                         referenceKey = referenceKey.replace(/:$/, ':*');
                     }
 
-                    var referenceOptions = d.reference || {
+                    const referenceOptions = d.reference ? Object.assign({}, d.reference) : {
                         key: referenceKey,
                         value: _tags[referenceKey]
                     };
+                    referenceOptions.fieldType = d.type;
                     reference = uiTagReference(referenceOptions, context);
                     if (_state === 'hover') {
                         reference.showing(false);

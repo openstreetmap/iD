@@ -5,6 +5,8 @@ import {
 import { t } from '../core/localizer';
 import { services } from '../services';
 import { svgIcon } from '../svg/icon';
+import { utilShowsDirectionRotateHint } from '../util/direction_field';
+import { uiCmd } from './cmd';
 
 
 // Pass `what` object of the form:
@@ -91,6 +93,16 @@ export function uiTagReference(what) {
               .call(svgIcon('#iD-icon-out-link', 'inline'))
               .append('span')
               .call(t.append(docs.wiki.text));
+        }
+
+        // Rotate (R) adjusts numeric direction / *:direction on the map.
+        if (utilShowsDirectionRotateHint(what)) {
+            _body
+                .append('p')
+                .attr('class', 'tag-reference-shortcut-hint')
+                .call(t.append('inspector.direction_rotate_help', {
+                    key: uiCmd.display(t('operations.rotate.key'))
+                }));
         }
 
         // Add link to info about "good changeset comments" - #2923
