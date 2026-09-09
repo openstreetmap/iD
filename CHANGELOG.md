@@ -43,6 +43,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :scissors: Operations
 #### :camera: Street-Level
 #### :white_check_mark: Validation
+* Warn about `goo.gl` shortlinks as sources, alongside full Google URLs ([#12740])
 * Allow (address) points at the same coordinate if they have different `addr:floor` ([#8424])
 #### :bug: Bugfixes
 * Fix exceptions when resizing the browser tab when nothing is selected ([#12800], thanks [@k-yle])
@@ -58,6 +59,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#9732]: https://github.com/openstreetmap/iD/pull/9732
 [#12679]: https://github.com/openstreetmap/iD/pull/12679
 [#12736]: https://github.com/openstreetmap/iD/pull/12736
+[#12740]: https://github.com/openstreetmap/iD/issues/12740
 [#12800]: https://github.com/openstreetmap/iD/pull/12800
 [#12830]: https://github.com/openstreetmap/iD/pull/12830
 [@Geo-2695]: https://github.com/Geo-2695
