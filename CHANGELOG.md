@@ -39,6 +39,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 
 #### :sparkles: Usability & Accessibility
 * Render diameter and radius tags when a node is selected ([#9732], thanks [@k-yle])
+* Dedicated rendering for road sections tagged with `ford=yes` ([#12830], thansk [@Geo-2695])
 #### :scissors: Operations
 #### :camera: Street-Level
 #### :white_check_mark: Validation
@@ -58,6 +59,8 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#12679]: https://github.com/openstreetmap/iD/pull/12679
 [#12736]: https://github.com/openstreetmap/iD/pull/12736
 [#12800]: https://github.com/openstreetmap/iD/pull/12800
+[#12830]: https://github.com/openstreetmap/iD/pull/12830
+[@Geo-2695]: https://github.com/Geo-2695
 
 
 # 2.42.1
