@@ -1,19 +1,22 @@
-import { t, localizer } from '../core/localizer';
+import { t, localizer, type TextDirection } from '../core/localizer';
 import { modeDrawLine } from '../modes/draw_line';
 import { operationDelete } from '../operations/delete';
 import { utilDisplayLabel } from '../util/utilDisplayLabel';
 import { osmRoutableHighwayTagValues } from '../osm/tags';
 import { validationIssue, validationIssueFix } from '../core/validation';
 import { services } from '../services';
+import type { CreateValidator, Validator } from '../core/validation/models';
+import type { NodeId, osmRelation, osmWay, WayId, OsmEntity, osmNode } from '../osm';
+import type { coreContext } from '../core';
 
-export function validationDisconnectedWay() {
+export const validationDisconnectedWay: CreateValidator = () => {
     var type = 'disconnected_way';
 
-    function isTaggedAsHighway(entity) {
+    function isTaggedAsHighway(entity: OsmEntity) {
         return osmRoutableHighwayTagValues[entity.tags.highway];
     }
 
-    var validation = function checkDisconnectedWay(entity, graph) {
+    const validation: Validator = function checkDisconnectedWay(entity, graph) {
 
         var routingIslandWays = routingIslandForEntity(entity);
         if (!routingIslandWays) return [];
@@ -33,7 +36,7 @@ export function validationDisconnectedWay() {
         })];
 
 
-        function makeFixes(context) {
+        function makeFixes(this: validationIssue, context: coreContext) {
 
             var fixes = [];
 
@@ -62,7 +65,7 @@ export function validationDisconnectedWay() {
                     title: t.append('issues.fix.delete_feature.title'),
                     entityIds: [singleEntity.id],
                     onClick: function(context) {
-                        var id = this.issue.entityIds[0];
+                        var id = this.issue!.entityIds[0];
                         var operation = operationDelete(context, [id]);
                         if (!operation.disabled()) {
                             operation();
@@ -79,7 +82,7 @@ export function validationDisconnectedWay() {
         }
 
 
-        function showReference(selection) {
+        function showReference(selection: d3.Selection) {
             selection.selectAll('.issue-reference')
                 .data([0])
                 .enter()
@@ -88,11 +91,11 @@ export function validationDisconnectedWay() {
                 .call(t.append('issues.disconnected_way.routable.reference'));
         }
 
-        function routingIslandForEntity(entity) {
-            const routingIsland = new Set();  // the interconnected routable features
+        function routingIslandForEntity(entity: OsmEntity) {
+            const routingIsland = new Set<OsmEntity>();  // the interconnected routable features
             const entitiesToCheck = [];       // the queue of remaining routable ways to traverse
 
-            function queueParents(node) {
+            function queueParents(node: osmNode) {
                 graph.parentWays(node).forEach((parentWay) => {
                     if (!routingIsland.has(parentWay) &&    // only check each feature once
                         isRoutableWay(parentWay)            // only check routable features
@@ -129,14 +132,14 @@ export function validationDisconnectedWay() {
             }
 
             while (entitiesToCheck.length) {
-                const entityToCheck = entitiesToCheck.pop();
-                let childNodes;
+                const entityToCheck = entitiesToCheck.pop()!;
+                let childNodes!: osmNode[];
                 if (entityToCheck.type === 'way') {
                     childNodes = graph.childNodes(entityToCheck);
                 } else if (entityToCheck.type === 'relation') {
                     childNodes = entityToCheck.members
                         .filter(member => member.role === 'outer' && member.type === 'way')
-                        .map(m => graph.hasEntity(m.id))
+                        .map(m => graph.hasEntity<osmWay>(m.id))
                         .filter(Boolean)
                         .flatMap(way => graph.childNodes(way));
                 }
@@ -158,7 +161,7 @@ export function validationDisconnectedWay() {
             return routingIsland;
         }
 
-        function isConnectedVertex(vertex) {
+        function isConnectedVertex(vertex: osmNode) {
             // assume ways overlapping unloaded tiles are connected to the wider road network  - #5938
             var osm = services.osm;
             if (osm && !osm.isDataLoaded(vertex.loc)) return true;
@@ -171,13 +174,13 @@ export function validationDisconnectedWay() {
             return false;
         }
 
-        function isRoutableNode(node) {
+        function isRoutableNode(node: osmNode) {
             // treat elevators as distinct features in the highway network
             if (node.tags.highway === 'elevator') return true;
             return false;
         }
 
-        function isRoutableWay(way) {
+        function isRoutableWay(way: osmWay) {
             if (isTaggedAsHighway(way)) return true;
             if (way.tags.route === 'ferry') return true;
             if (way.tags.aerialway && way.tags.aerialway !== 'no' && way.tags.aerialway !== 'goods') {
@@ -196,7 +199,7 @@ export function validationDisconnectedWay() {
             });
         }
 
-        function shouldSkipRoutableWay(way) {
+        function shouldSkipRoutableWay(way: osmWay) {
             if (way.tags.golf === 'path' || way.tags.golf === 'cartpath') {
                 // skip golf paths #11863
                 return true;
@@ -208,11 +211,11 @@ export function validationDisconnectedWay() {
             return false;
         }
 
-        function isRoutableRelation(relation) {
+        function isRoutableRelation(relation: osmRelation) {
             return relation.isMultipolygon() && isTaggedAsHighway(relation);
         }
 
-        function makeContinueDrawingFixIfAllowed(textDirection, vertexID, whichEnd) {
+        function makeContinueDrawingFixIfAllowed(textDirection: TextDirection, vertexID: NodeId, whichEnd: 'start' | 'end') {
             var vertex = graph.hasEntity(vertexID);
             if (!vertex || vertex.tags.noexit === 'yes') return null;
 
@@ -224,9 +227,9 @@ export function validationDisconnectedWay() {
                 title: t.append('issues.fix.continue_from_' + whichEnd + '.title'),
                 entityIds: [vertexID],
                 onClick: function(context) {
-                    var wayId = this.issue.entityIds[0];
+                    var wayId = this.issue!.entityIds[0] as WayId;
                     var way = context.hasEntity(wayId);
-                    var vertexId = this.entityIds[0];
+                    var vertexId = this.entityIds![0] as NodeId;
                     var vertex = context.hasEntity(vertexId);
 
                     if (!way || !vertex) return;
@@ -249,4 +252,4 @@ export function validationDisconnectedWay() {
     validation.type = type;
 
     return validation;
-}
+};

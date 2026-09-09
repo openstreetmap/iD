@@ -39,11 +39,15 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 
 #### :sparkles: Usability & Accessibility
 * Render diameter and radius tags when a node is selected ([#9732], thanks [@k-yle])
+* Dedicated rendering for road sections tagged with `ford=yes` ([#12830], thansk [@Geo-2695])
 #### :scissors: Operations
 #### :camera: Street-Level
 #### :white_check_mark: Validation
 * Warn about `goo.gl` shortlinks as sources, alongside full Google URLs ([#12740])
+* Allow (address) points at the same coordinate if they have different `addr:floor` ([#8424])
 #### :bug: Bugfixes
+* Fix exceptions when resizing the browser tab when nothing is selected ([#12800], thanks [@k-yle])
+* Allow tags like `not:*:wikidata` to have multiple values ([#12736], thanks [@k-yle])
 #### :earth_asia: Localization
 #### :hourglass: Performance
 #### :mortar_board: Walkthrough / Help
@@ -51,9 +55,14 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :hammer: Development
 * Drop code previously responsible for _maprules_ integration (which has been defunct for a while now) ([#12679])
 
+[#8424]: https://github.com/openstreetmap/iD/issues/8424
 [#9732]: https://github.com/openstreetmap/iD/pull/9732
-[#12740]: https://github.com/openstreetmap/iD/issues/12740
 [#12679]: https://github.com/openstreetmap/iD/pull/12679
+[#12736]: https://github.com/openstreetmap/iD/pull/12736
+[#12740]: https://github.com/openstreetmap/iD/issues/12740
+[#12800]: https://github.com/openstreetmap/iD/pull/12800
+[#12830]: https://github.com/openstreetmap/iD/pull/12830
+[@Geo-2695]: https://github.com/Geo-2695
 
 
 # 2.42.1
@@ -111,6 +120,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * For radio fields: show "unknown" values (that don't match one of the specified radio options) as a temporary placeholder raw value option ([#12082])
 * Show tooltips with tag values (and descriptions if available) for options of `radio` and `check` fields (thanks [@bhavyaKhatri2703])
 #### :hammer: Development
+* Ongoing work to migrate the codebase from JavaScript to TypeScript ([view progress](https://github.com/openstreetmap/iD/milestone/47?closed=1))
 * Fix unit tests failing with nodejs v26 ([#12401], thanks [@brianstrauch])
 * Remove the unused lane parsing code, which was left over from an unfinished lane editor and was not reachable from any preset ([#12664], thanks [@wantaekchoi])
 * Converted a number of source code files from javascript to typescript (thanks [@k-yle])

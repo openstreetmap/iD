@@ -1,14 +1,18 @@
 import { throttle } from 'es-toolkit';
+import type { Dispatch } from 'd3-dispatch';
 import { select as d3_select } from 'd3-selection';
 import { svgPointTransform } from './helpers';
 import { services } from '../services';
+import type { Projection } from '../geo/raw_mercator';
+import type { MlyImage } from '../services/mapillary';
+import type { coreContext } from '../core';
 
 
-export function svgMapillarySigns(projection, context, dispatch) {
+export function svgMapillarySigns(projection: Projection, context: coreContext, dispatch: Dispatch<object>) {
     const throttledRedraw = throttle(function () { dispatch.call('change'); }, 1000);
     const minZoom = 12;
-    let layer = d3_select(null);
-    let _mapillary;
+    let layer: d3.Selection<SVGGElement> = d3_select(null!);
+    let _mapillary: typeof services.mapillary | null;
 
 
     function init() {
@@ -55,7 +59,7 @@ export function svgMapillarySigns(projection, context, dispatch) {
     }
 
 
-    function click(d3_event, d) {
+    function click(d3_event: MouseEvent, d: MlyImage) {
         const service = getService();
         if (!service) return;
 
@@ -84,20 +88,20 @@ export function svgMapillarySigns(projection, context, dispatch) {
     }
 
 
-    function filterData(detectedFeatures) {
+    function filterData(detectedFeatures: MlyImage[]) {
         var fromDate = context.photos().fromDate();
         var toDate = context.photos().toDate();
 
         if (fromDate) {
             var fromTimestamp = new Date(fromDate).getTime();
             detectedFeatures = detectedFeatures.filter(function(feature) {
-                return new Date(feature.last_seen_at).getTime() >= fromTimestamp;
+                return new Date(feature.last_seen_at!).getTime() >= fromTimestamp;
             });
         }
         if (toDate) {
             var toTimestamp = new Date(toDate).getTime();
             detectedFeatures = detectedFeatures.filter(function(feature) {
-                return new Date(feature.first_seen_at).getTime() <= toTimestamp;
+                return new Date(feature.first_seen_at!).getTime() <= toTimestamp;
             });
         }
 
@@ -112,7 +116,7 @@ export function svgMapillarySigns(projection, context, dispatch) {
 
         const transform = svgPointTransform(projection);
 
-        const signs = layer.selectAll('.icon-sign')
+        const signs = layer.selectAll<SVGGElement, MlyImage>('.icon-sign')
             .data(data, function(d) { return d.id; });
 
         // exit
@@ -147,11 +151,11 @@ export function svgMapillarySigns(projection, context, dispatch) {
     }
 
 
-    function drawSigns(selection) {
+    function drawSigns(selection: d3.Selection<SVGGElement>) {
         const enabled = svgMapillarySigns.enabled;
         const service = getService();
 
-        layer = selection.selectAll('.layer-mapillary-signs')
+        layer = selection.selectAll<SVGGElement, 0>('.layer-mapillary-signs')
             .data(service ? [0] : []);
 
         layer.exit()
@@ -178,7 +182,7 @@ export function svgMapillarySigns(projection, context, dispatch) {
     }
 
 
-    drawSigns.enabled = function(_) {
+    drawSigns.enabled = function(_: boolean) {
         if (!arguments.length) return svgMapillarySigns.enabled;
         svgMapillarySigns.enabled = _;
         if (svgMapillarySigns.enabled) {
@@ -197,7 +201,7 @@ export function svgMapillarySigns(projection, context, dispatch) {
         return !!getService();
     };
 
-    drawSigns.rendered = function(zoom) {
+    drawSigns.rendered = function(zoom: number) {
       return zoom >= minZoom;
     };
 
@@ -205,3 +209,5 @@ export function svgMapillarySigns(projection, context, dispatch) {
     init();
     return drawSigns;
 }
+svgMapillarySigns.initialized = false;
+svgMapillarySigns.enabled = false;

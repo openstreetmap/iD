@@ -3,12 +3,15 @@ import { osmIsInterestingTag } from '../osm/tags';
 import { t } from '../core/localizer';
 import { utilDisplayLabel } from '../util/utilDisplayLabel';
 import { validationIssue, validationIssueFix } from '../core/validation';
+import type { OsmEntity } from '../osm';
+import type { CreateValidator, Validator } from '../core/validation/models';
+import type { coreContext } from '../core';
 
 
-export function validationMissingTag(context) {
+export const validationMissingTag: CreateValidator = (context) => {
     var type = 'missing_tag';
 
-    function hasDescriptiveTags(entity) {
+    function hasDescriptiveTags(entity: OsmEntity) {
         var onlyAttributeKeys = ['description', 'name', 'start_date', 'oneway'];
         var entityDescriptiveKeys = Object.keys(entity.tags)
             .filter(function(k) {
@@ -30,17 +33,17 @@ export function validationMissingTag(context) {
         return entityDescriptiveKeys.length > 0;
     }
 
-    function isUnknownRoad(entity) {
+    function isUnknownRoad(entity: OsmEntity) {
         return entity.type === 'way' && entity.tags.highway === 'road';
     }
 
-    function isUntypedRelation(entity) {
+    function isUntypedRelation(entity: OsmEntity) {
         return entity.type === 'relation' && !entity.tags.type;
     }
 
-    var validation = function checkMissingTag(entity, graph) {
+    const validation: Validator = function checkMissingTag(entity, graph) {
 
-        var subtype;
+        var subtype: string | undefined;
 
         var osm = context.connection();
         var isUnloadedNode = entity.type === 'node' && osm && !osm.isDataLoaded(entity.loc);
@@ -73,12 +76,11 @@ export function validationMissingTag(context) {
 
         // can always delete if the user created it in the first place..
         var canDelete = (entity.version === undefined || entity.v !== undefined);
-        var severity = (canDelete && subtype !== 'highway_classification') ? 'error' : 'warning';
 
         return [new validationIssue({
             type: type,
             subtype: subtype,
-            severity: severity,
+            severity: (canDelete && subtype !== 'highway_classification') ? 'error' : 'warning',
             message: function(context) {
                 var entity = context.hasEntity(this.entityIds[0]);
                 return entity ? t.append('issues.' + messageID + '.message', {
@@ -107,8 +109,8 @@ export function validationMissingTag(context) {
                 var operation = operationDelete(context, [id]);
                 var disabledReasonID = operation.disabled();
                 if (!disabledReasonID) {
-                    deleteOnClick = function(context) {
-                        var id = this.issue.entityIds[0];
+                    deleteOnClick = function(this: validationIssueFix, context: coreContext) {
+                        var id = this.issue!.entityIds[0];
                         var operation = operationDelete(context, [id]);
                         if (!operation.disabled()) {
                             operation();
@@ -129,7 +131,7 @@ export function validationMissingTag(context) {
             }
         })];
 
-        function showReference(selection) {
+        function showReference(selection: d3.Selection) {
             selection.selectAll('.issue-reference')
                 .data([0])
                 .enter()
@@ -142,4 +144,4 @@ export function validationMissingTag(context) {
     validation.type = type;
 
     return validation;
-}
+};
