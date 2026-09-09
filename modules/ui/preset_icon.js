@@ -345,7 +345,7 @@ export function uiPresetIcon() {
   //    / \ /
   //   o   o
   // This dataset defines the styles that are used to draw the zigzag segments.
-  // create relation with tags type=route route=bus and see its icon to see it in action
+  // create a relation with the tags `type=route` + `route=bus` to see this icon in action
   const routeSegments = {
     bicycle: ['highway/cycleway', 'highway/cycleway', 'highway/cycleway'],
     bus: ['highway/unclassified', 'highway/secondary', 'highway/primary'],
