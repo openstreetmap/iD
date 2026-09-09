@@ -75,6 +75,7 @@ export function coreHistory(context) {
     var _pausedGraph;
     var _stack;
     var _index;
+    /** @type {coreTree} */
     var _tree;
 
 

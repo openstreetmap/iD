@@ -2,7 +2,7 @@
 import fs from 'node:fs';
 
 const cldrMainDir = 'node_modules/cldr-localenames-full/main/';
-const rematchCodes = {
+const rematchCodes: Record<string, string> = {
   'ar-AA': 'ar',
   'pt-BR': 'pt',
   'pt': 'pt-PT',
@@ -13,19 +13,19 @@ const rematchCodes = {
 
 const codesToSkip = ['ase', 'mis', 'mul', 'und', 'zxx'];
 
-let referencedScripts = [];
+let referencedScripts: string[] = [];
 
-/**
- * @returns {{
- *  [code: string]: {
- *    base?: string;
- *    script?: string;
- *    nativeName?: string;
- *    names?: { [code: string]: string };
- *  }
- * }}
- */
-function getCLDROverrides() {
+export interface CLDROverride {
+    base?: string;
+    script?: string;
+    nativeName?: string;
+    names?: { [code: string]: string };
+}
+export interface CLDROverrides {
+    [code: string]: CLDROverride;
+}
+
+function getCLDROverrides(): CLDROverrides {
   // manually add languages we want that aren't in CLDR
   // see for example https://github.com/openstreetmap/iD/pull/9241/
   return {
@@ -164,9 +164,6 @@ function getCLDROverrides() {
       nativeName: 'Bân-lâm-gú (Tâi-lô)'
     },
     nys: { nativeName: 'Nyungar' },
-    'oc': {
-      nativeName: 'Occitan'
-    },
     pih: { nativeName: 'Pitkern–Norfuk', names: { en: 'Pitcairn-Norfolk', ty: 'Pitcairnais' } },
     piu: { nativeName: 'Pintupi' },
     pjt: { nativeName: 'Pitjantjatjara' },
@@ -181,19 +178,12 @@ function getCLDROverrides() {
     'shg': {
       nativeName: 'хуг̌ну̊н зив'
     },
-    'skr': {
-      nativeName: 'سرائیکی'
-    },
     tcs: { nativeName: 'Yumplatok', names: { en: 'Torres Strait Creole' } },
     tiw: { nativeName: 'Tiwi' },
-    'trw': {
-      nativeName: 'توروالی'
-    },
     ulk: { nativeName: 'Meriam Mir' },
     'wbl': {
       nativeName: 'وخی'
     },
-    wlp: { nativeName: 'Warlpiri' },
     wrh: { nativeName: 'Wiradjuri' },
     wth: { nativeName: 'Wathawurrung' },
     'wuu': {
@@ -214,16 +204,6 @@ function getCLDROverrides() {
     xni: { nativeName: 'Ngarigo' },
     xph: { nativeName: 'Tyerrernotepanner', names: { en: 'North Midlands Tasmanian' } },
     xrd: { nativeName: 'Gundungurra' },
-    'yue-Hans': {
-      base: 'yue',
-      script: 'Hans',
-      nativeName: '粵语（简体）'
-    },
-    'yue-Hant': {
-      base: 'yue',
-      script: 'Hant',
-      nativeName: '粵語（繁體）'
-    },
     'zh-Latn-pinyin': {
       base: 'zh',
       script: 'Latn',
@@ -249,7 +229,7 @@ function getLangNamesInNativeLang() {
     // skip locale-specific languages
     if (identity.letiant || identity.territory) return;
 
-    let info = {};
+    let info: CLDROverride = {};
     const script = identity.script;
     if (script) {
       referencedScripts.push(script);
@@ -279,14 +259,14 @@ function getLangNamesInNativeLang() {
   delete unordered['pa-Arab']; // https://github.com/openstreetmap/iD/pull/9241/
   delete unordered['pa-Guru']; // - " -
 
-  let ordered = {};
+  let ordered: CLDROverrides = {};
   Object.keys(unordered).sort().forEach(key => ordered[key] = unordered[key]);
   return ordered;
 }
 
 export const langNamesInNativeLang = getLangNamesInNativeLang();
 
-export function languageNamesInLanguageOf(code) {
+export function languageNamesInLanguageOf(code: string) {
   if (rematchCodes[code]) code = rematchCodes[code];
 
   const { language } = new Intl.Locale(code);
@@ -325,7 +305,7 @@ export function languageNamesInLanguageOf(code) {
   return translatedLangsByCode;
 };
 
-export function scriptNamesInLanguageOf(code) {
+export function scriptNamesInLanguageOf(code: string) {
   if (rematchCodes[code]) code = rematchCodes[code];
 
   let languageFilePath = `${cldrMainDir}${code}/scripts.json`;
@@ -333,7 +313,7 @@ export function scriptNamesInLanguageOf(code) {
 
   let allTranslatedScriptsByCode = JSON.parse(fs.readFileSync(languageFilePath, 'utf8')).main[code].localeDisplayNames.scripts;
 
-  let translatedScripts = {};
+  let translatedScripts: Record<string, string> = {};
   referencedScripts.forEach(script => {
     if (!allTranslatedScriptsByCode[script] || script === allTranslatedScriptsByCode[script]) return;
     translatedScripts[script] = allTranslatedScriptsByCode[script];
