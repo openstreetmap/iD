@@ -39,6 +39,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 
 #### :sparkles: Usability & Accessibility
 * Render diameter and radius tags when a node is selected ([#9732], thanks [@k-yle])
+* Include event from osmcal.org in post-upload dialog ([#12678])
 #### :scissors: Operations
 #### :camera: Street-Level
 #### :white_check_mark: Validation
@@ -55,6 +56,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 
 [#8424]: https://github.com/openstreetmap/iD/issues/8424
 [#9732]: https://github.com/openstreetmap/iD/pull/9732
+[#12678]: https://github.com/openstreetmap/iD/pull/12678
 [#12679]: https://github.com/openstreetmap/iD/pull/12679
 [#12736]: https://github.com/openstreetmap/iD/pull/12736
 [#12800]: https://github.com/openstreetmap/iD/pull/12800
