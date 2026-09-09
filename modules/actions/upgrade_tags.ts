@@ -1,7 +1,7 @@
 import type { Action } from '../core/history';
 import type { EntityId } from '../osm';
 
-export function actionUpgradeTags(entityId: EntityId, oldTags: Tags, replaceTags: Tags): Action {
+export function actionUpgradeTags(entityId: EntityId, oldTags: Tags, replaceTags: Tags | undefined): Action {
 
     return function(graph) {
         var entity = graph.entity(entityId);
