@@ -22,7 +22,11 @@ export interface OsmCalEvent {
 
 const apibase = 'https://osmcal.org/api/v2/events/';
 
+const _cache: Record<string, OsmCalEvent[]> = {};
+
 export async function getOsmCalEvents(center: Vec2): Promise<OsmCalEvent[]> {
+    const cacheIdx = `${center[0]},${center[1]}`;
+    if (_cache[cacheIdx]) return _cache[cacheIdx];
     const url = new URL(apibase);
     const lon = roundToDecimal(center[0], 2);
     const lat = roundToDecimal(center[1], 2);
@@ -37,5 +41,6 @@ export async function getOsmCalEvents(center: Vec2): Promise<OsmCalEvent[]> {
             return [];
         }) as OsmCalEvent[])
         .filter(event => !event.cancelled);
+    _cache[cacheIdx] = events; // eslint-disable-line require-atomic-updates
     return events;
 }
