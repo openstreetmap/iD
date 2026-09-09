@@ -27,6 +27,7 @@ import type { OsmEntity } from '../osm/abstract-entity.js';
 import packageJSON from '../../package.json';
 
 
+
 interface Definitions {
   address_formats: AddressFormatsJSON;
   imagery: unknown;
