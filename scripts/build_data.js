@@ -79,7 +79,7 @@ async function buildData() {
   let territoryLanguages = generateTerritoryLanguages();
   fs.writeFileSync('dist/data/territory_languages.min.json', JSON.stringify(territoryLanguages) );
 
-  writeEnJson();
+  await writeEnJson();
 
   const languageInfo = await languageNames.getLangNamesInNativeLang();
   fs.writeFileSync('dist/data/languages.min.json', JSON.stringify(languageInfo));
