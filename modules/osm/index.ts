@@ -18,21 +18,4 @@ export {
     osmJoinWays
 } from './multipolygon';
 
-export {
-    osmAreaKeys,
-    osmSetAreaKeys,
-    osmTagSuggestingArea,
-    osmPointTags,
-    osmSetPointTags,
-    osmVertexTags,
-    osmSetVertexTags,
-    osmNodeGeometriesForTags,
-    osmPavedTags,
-    osmIsInterestingTag,
-    osmLifecyclePrefixes,
-    osmRemoveLifecyclePrefix,
-    osmRoutableHighwayTagValues,
-    osmFlowingWaterwayTagValues,
-    osmRailwayTrackTagValues,
-    osmWayOnlyTags
-} from './tags';
+export * from './tags';

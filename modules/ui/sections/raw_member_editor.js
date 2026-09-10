@@ -11,7 +11,7 @@ import { actionMoveMember } from '../../actions/move_member';
 import { modeBrowse } from '../../modes/browse';
 import { modeSelect } from '../../modes/select';
 import { osmIdManager } from '../../osm';
-import { getRelationColor } from '../../osm/tags';
+import { getRelationColor, osmMatchTags } from '../../osm/tags';
 import { svgIcon } from '../../svg/icon';
 import { services } from '../../services';
 import { uiCombobox } from '../combobox';
@@ -19,6 +19,38 @@ import { uiSection } from '../section';
 import { utilDisplayName, utilDisplayType, utilHighlightEntities, utilNoAuto, utilUniqueDomId } from '../../util';
 import { prefs } from '../../core';
 
+/** @type {WeakMap<import('../../osm').OsmEntity, import('../../presets/preset').PresetRoleDefinitions>} */
+const relationRoleLabelsCache = new WeakMap();
+
+/**
+ * @param {iD.Context} context
+ * @param {import('../../osm').OsmEntity} relation
+ * @param {import('@openstreetmap/id-tagging-schema').Geometry} [memberGeom]
+ * @param {Tags} [memberTags]
+ */
+export function getRelationRoleLabels(context, relation, memberGeom, memberTags) {
+    if (!relationRoleLabelsCache.has(relation)) {
+        const preset = presetManager.match(relation, context.graph());
+        const basePreset = presetManager.matchTags({ type: relation.tags.type }, 'relation');
+        const result = preset.relationSchema() || basePreset.relationSchema() || {};
+        relationRoleLabelsCache.set(relation, result);
+    }
+    const cached = relationRoleLabelsCache.get(relation);
+    if (!cached) return {};
+
+    /** @type {Record<string, import('../../core/localizer').LocalizedTextRenderer>} */
+    const labels = {};
+    for (const role in cached) {
+        const def = cached[role];
+        // if there's a geometry filter, check that it passes
+        if (memberGeom && def.member.geometry && !def.member.geometry.includes(memberGeom)) continue;
+        // if there's a tags filter, check that it passes
+        if (memberTags && def.member.matchTags && !osmMatchTags(def.member.matchTags, memberTags)) continue;
+
+        labels[role] = def.label;
+    }
+    return labels;
+}
 
 export function uiSectionRawMemberEditor(context) {
 
@@ -81,9 +113,27 @@ export function uiSectionRawMemberEditor(context) {
     }
 
 
+    /** @param {import('../../osm').OsmEntity} relation */
+    function displayRole(relation, role) {
+        return getRelationRoleLabels(context, relation)[role] || role;
+    }
+
     function changeRole(d3_event, d) {
+        const input = d3_select(this);
+        // this could be the raw role, or the label
+        let rawValue = input.property('value');
+
+        for (const [role, label] of Object.entries(getRelationRoleLabels(context, d.relation))) {
+            if (rawValue === label) {
+                rawValue = role;
+            }
+        }
+
         var oldRole = d.role;
-        var newRole = context.cleanRelationRole(d3_select(this).property('value'));
+        var newRole = context.cleanRelationRole(rawValue);
+
+        // if the raw role was typed in, replace it with the label
+        input.property('value', displayRole(d.relation, newRole));
 
         if (oldRole !== newRole) {
             var member = { id: d.id, type: d.type, role: newRole };
@@ -301,7 +351,8 @@ export function uiSectionRawMemberEditor(context) {
             .order();
 
         items.select('input.member-role')
-            .property('value', function(d) { return d.role; })
+            // use the label from the schema if possible
+            .property('value', (d) => displayRole(d.relation, d.role))
             .on('blur', changeRole)
             .on('change', changeRole);
 
@@ -382,6 +433,14 @@ export function uiSectionRawMemberEditor(context) {
             var role = row.selectAll('input.member-role');
             var origValue = role.property('value');
 
+            const graph = context.graph();
+            const memberGeometry = d.member?.geometry(graph);
+            const rolesFromSchema = getRelationRoleLabels(context, d.relation, memberGeometry);
+
+            const suggestionsFromSchema = Object.entries(rolesFromSchema)
+                .filter(([, label]) => label) // skip roles with no labels
+                .map(([role, label]) => ({ key: role, value: label, title: role }));
+
             function sort(value, data) {
                 var sameletter = [];
                 var other = [];
@@ -395,8 +454,20 @@ export function uiSectionRawMemberEditor(context) {
                 return sameletter.concat(other);
             }
 
-            role.call(uiCombobox(context, 'member-role')
+            const isKnown = value => (
+                Object.values(rolesFromSchema).includes(value)
+                || Object.keys(rolesFromSchema).includes(value)
+            );
+
+            const combo = uiCombobox(context, 'member-role')
+                .minItems(1)
+                .on('render', () => {
+                    role.classed('known-value', isKnown(role.node().value));
+                    role.classed('raw-value', role.node().value && !isKnown(role.node().value));
+                })
+                .data(suggestionsFromSchema)
                 .fetcher(function(role, callback) {
+                    callback(suggestionsFromSchema);
                     // The `geometry` param is used in the `taginfo.js` interface for
                     // filtering results, as a key into the `tag_members_fractions`
                     // object.  If we don't know the geometry because the member is
@@ -418,14 +489,25 @@ export function uiSectionRawMemberEditor(context) {
                         rtype: rtype || '',
                         geometry: geometry,
                         query: role
-                    }, function(err, data) {
+                    }, (err, suggestionsFromTaginfo) => {
+                        const data = [
+                            ...suggestionsFromSchema,
+                            ...suggestionsFromTaginfo
+                                .filter(item => !rolesFromSchema[item.value]) // skip known values
+                                .map(item => ({...item, klass: 'raw-option'}))
+                        ];
+
                         if (!err) callback(sort(role, data));
                     });
                 })
                 .on('cancel', function() {
                     role.property('value', origValue);
-                })
-            );
+                });
+
+            role
+                .classed('known-value', d => isKnown(d.role))
+                .classed('raw-value', d => d.role && !isKnown(d.role))
+                .call(combo);
         }
 
 

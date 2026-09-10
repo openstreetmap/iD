@@ -21,3 +21,28 @@ describe('osmTagSuggestingArea', function () {
         expect(iD.osmTagSuggestingArea({ 'ex:leisure': 'stadium' })).toBeNull();
     });
 });
+
+describe('osmMatchTags', () => {
+  it.each`
+    matcher                             | tags                    | isMatching
+    ${[{ a: '*' }]}                     | ${{}}                   | ${false}
+    ${[{ a: '*' }]}                     | ${{ a: '' }}            | ${false}
+    ${[{ a: '*' }]}                     | ${{ a: '1' }}           | ${true}
+    ${[{ a: '1' }]}                     | ${{}}                   | ${false}
+    ${[{ a: '1' }]}                     | ${{ a: '' }}            | ${false}
+    ${[{ a: '1' }]}                     | ${{ a: '1' }}           | ${true}
+    ${[{ a: '1' }]}                     | ${{ a: '2' }}           | ${false}
+    ${[{ a: '1' }, { a: '2' }]}         | ${{ a: '1' }}           | ${true}
+    ${[{ a: '1' }, { a: '2' }]}         | ${{ a: '2' }}           | ${true}
+    ${[{ a: '1' }, { a: '2' }]}         | ${{ a: '3' }}           | ${false}
+    ${[] /* this means none */}         | ${{ a: '1' }}           | ${false}
+    ${[] /* this means none */}         | ${{}}                   | ${false}
+    ${[{}] /* this means any */}        | ${{}}                   | ${true}
+    ${[{ a: '1', b: '1' }, { b: '2' }]} | ${{ a: '1' }}           | ${false}
+    ${[{ a: '1', b: '1' }, { b: '2' }]} | ${{ a: '1', b: '1' }}   | ${true}
+    ${[{ a: '1', b: '1' }, { b: '2' }]} | ${{ b: '2' }}           | ${true}
+    ${[{ a: '1', b: '1' }, { b: '2' }]} | ${{ b: '1' }}           | ${false}
+  `('returns $isMatching when comparing $tags against $matcher', ({ matcher, tags, isMatching }) => {
+    expect(iD.osmMatchTags(matcher, tags)).toBe(isMatching);
+  });
+});

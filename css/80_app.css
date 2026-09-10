@@ -1701,12 +1701,14 @@ input.date-selector {
 
 .form-field-input-combo input.raw-value,
 .form-field-input-semicombo input.raw-value,
-.form-field-input-multicombo input.raw-value {
+.form-field-input-multicombo input.raw-value,
+input.member-role.raw-value {
     font-family: monospace;
 }
 .form-field-input-combo input.known-value,
 .form-field-input-semicombo input.known-value,
-.form-field-input-multicombo input.known-value {
+.form-field-input-multicombo input.known-value,
+input.member-role.known-value {
     color: var(--link-color);
 }
 
