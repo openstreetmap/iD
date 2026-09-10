@@ -1,35 +1,50 @@
 import { select as d3_select } from 'd3-selection';
+import type { Dispatch } from 'd3-dispatch';
 import exifr from 'exifr';
 import { isArray, isNumber } from 'es-toolkit/compat';
-
+import type { coreContext } from '../core';
 import { localizer } from '../core/localizer';
 import { utilDetect } from '../util/detect';
 import { geoExtent, geoPolygonIntersectsPolygon } from '../geo';
 import { planePhotoFrame } from '../services/plane_photo';
 import { services } from '../services';
+import type { Projection } from '../geo/raw_mercator';
+import type { PhotoFrame } from '../services/pannellum_photo';
+import type { Vec2 } from '../geo/vector';
 
 var _initialized = false;
 var _enabled = false;
 const minViewfieldZoom = 16;
 
-export function svgLocalPhotos(projection, context, dispatch) {
+interface LocalPhoto {
+    service: 'photo',
+    id: number;
+    name: string;
+    getSrc: () => Promise<string>;
+    file: File;
+    loc: Vec2;
+    direction?: number;
+    date?: Date;
+}
+
+export function svgLocalPhotos(projection: Projection, context: coreContext, dispatch: Dispatch<object>) {
     const detected = utilDetect();
-    let layer = d3_select(null);
-    let _fileList;
-    let _photos = [];
+    let layer: d3.Selection<SVGGElement> = d3_select(null!);
+    let _fileList: FileList | undefined;
+    let _photos: LocalPhoto[] = [];
     let _idAutoinc = 0;
-    let _photoFrame;
-    let _activePhotoIdx;
+    let _photoFrame: PhotoFrame;
+    let _activePhotoIdx: number;
 
     function init() {
         if (_initialized) return;  // run once
 
         _enabled = true;
 
-        function over(d3_event) {
+        function over(d3_event: DragEvent) {
             d3_event.stopPropagation();
             d3_event.preventDefault();
-            d3_event.dataTransfer.dropEffect = 'copy';
+            d3_event.dataTransfer!.dropEffect = 'copy';
         }
 
         context.container()
@@ -51,7 +66,7 @@ export function svgLocalPhotos(projection, context, dispatch) {
         _initialized = true;
     }
 
-   function ensureViewerLoaded(context) {
+   function ensureViewerLoaded(context: coreContext) {
         if (_photoFrame) {
             return Promise.resolve(_photoFrame);
         }
@@ -91,7 +106,7 @@ export function svgLocalPhotos(projection, context, dispatch) {
             .then(planePhotoFrame => _photoFrame = planePhotoFrame);
     }
 
-    function stepPhotos(stepBy){
+    function stepPhotos(stepBy: number) {
         if (!_photos || _photos.length === 0) return;
         if (_activePhotoIdx === undefined) _activePhotoIdx = 0;
 
@@ -102,17 +117,17 @@ export function svgLocalPhotos(projection, context, dispatch) {
     }
 
     // opens the image at bottom left
-    function click(d3_event, image, zoomTo) {
+    function click(d3_event: MouseEvent | null, image: LocalPhoto, zoomTo?: boolean) {
         _activePhotoIdx = _photos.indexOf(image);
         ensureViewerLoaded(context).then(() => {
             const viewer = context.container().select('.photoviewer')
                 .datum(image);
 
-            const viewerWrap = viewer.select('.local-photos-wrapper');
+            const viewerWrap = viewer.select<HTMLElement>('.local-photos-wrapper');
             const isHidden = viewerWrap.classed('hide');
             if (isHidden) {
                 for (const service of Object.values(services)) {
-                    if (typeof service.hideViewer === 'function') {
+                    if (service && 'hideViewer' in service && typeof service.hideViewer === 'function') {
                         service.hideViewer(context);
                     }
                 }
@@ -158,26 +173,26 @@ export function svgLocalPhotos(projection, context, dispatch) {
     }
 
 
-    function transform(d) {
+    function transform(d: LocalPhoto) {
         // projection expects [long, lat]
         var svgpoint = projection(d.loc);
         return 'translate(' + svgpoint[0] + ',' + svgpoint[1] + ')';
     }
 
-    function setStyles(hovered) {
+    function setStyles(hovered?: LocalPhoto | null) {
         const viewer = context.container().select('.photoviewer');
         const selected = viewer.empty() ? undefined : viewer.datum();
 
-        context.container().selectAll('.layer-local-photos .viewfield-group')
+        context.container().selectAll<SVGGElement, LocalPhoto>('.layer-local-photos .viewfield-group')
             .classed('hovered', d => d.id === hovered?.id)
             .classed('highlighted', d => d.id === hovered?.id || d.id === selected?.id)
             .classed('currentView', d => d.id === selected?.id);
     }
 
     // puts the image markers on the map
-    function display_markers(imageList) {
+    function display_markers(imageList: LocalPhoto[]) {
         imageList = imageList.filter(image => isArray(image.loc) && isNumber(image.loc[0]) && isNumber(image.loc[1]));
-        const groups = layer.selectAll('.markers').selectAll('.viewfield-group')
+        const groups = layer.selectAll('.markers').selectAll<SVGGElement, LocalPhoto>('.viewfield-group')
             .data(imageList, function(d) { return d.id; });
 
         // exit
@@ -225,18 +240,18 @@ export function svgLocalPhotos(projection, context, dispatch) {
             .insert('path', 'circle')
             .attr('class', 'viewfield')
             .attr('transform', function() {
-                const d = this.parentNode.__data__;
+                const d: LocalPhoto = this.parentNode!.__data__;
                 return `rotate(${Math.round(d.direction ?? 0)},0,0),scale(1.5,1.5),translate(-8,-13)`;
             })
             .attr('d', 'M 6,9 C 8,8.4 8,8.4 10,9 L 16,-2 C 12,-5 4,-5 0,-2 z')
             .style('visibility', function() {
-                const d = this.parentNode.__data__;
+                const d: LocalPhoto = this.parentNode!.__data__;
                 return isNumber(d.direction) ? 'visible' : 'hidden';
             });
     }
 
-    function drawPhotos(selection) {
-        layer = selection.selectAll('.layer-local-photos')
+    function drawPhotos(selection: d3.Selection<SVGGElement>) {
+        layer = selection.selectAll<SVGGElement, 0>('.layer-local-photos')
             .data(_photos ? [0] : []);
 
         layer.exit()
@@ -259,10 +274,10 @@ export function svgLocalPhotos(projection, context, dispatch) {
     }
 
 
-    function readFileAsDataURL(file) {
-        return new Promise((resolve, reject) => {
+    function readFileAsDataURL(file: Blob) {
+        return new Promise<string>((resolve, reject) => {
             const reader = new FileReader();
-            reader.onload = () => resolve(reader.result);
+            reader.onload = () => resolve(reader.result as string);
             reader.onerror = error => reject(error);
             reader.readAsDataURL(file);
         });
@@ -271,13 +286,13 @@ export function svgLocalPhotos(projection, context, dispatch) {
      * Reads and parses files
      * @param {Array<object>} files - Holds array of file - [file_1, file_2, ...]
      */
-    async function readmultifiles(files, callback) {
-        const loaded = [];
+    async function readmultifiles(files: File[], callback?: (photos: LocalPhoto[]) => void) {
+        const loaded: LocalPhoto[] = [];
 
         for (const file of files) {
             try {
                 const exifData = await exifr.parse(file);
-                const photo = {
+                const photo: LocalPhoto = {
                     service: 'photo',
                     id: _idAutoinc++,
                     name: file.name,
@@ -294,7 +309,7 @@ export function svgLocalPhotos(projection, context, dispatch) {
                 } else {
                     const thisContent = await photo.getSrc();
                     const sameNameContent = await Promise.allSettled(sameName.map(i => i.getSrc()));
-                    if (!sameNameContent.some(i => i.value === thisContent)) {
+                    if (!sameNameContent.some(i => 'value' in i && i.value === thisContent)) {
                         _photos.push(photo);
                     }
                 }
@@ -307,7 +322,7 @@ export function svgLocalPhotos(projection, context, dispatch) {
         dispatch.call('change');
     }
 
-    drawPhotos.setFiles = function(fileList, callback) {
+    drawPhotos.setFiles = function(fileList: FileList, callback?: (photos: LocalPhoto[]) => void) {
         // read and parse asynchronously
         readmultifiles(Array.from(fileList), callback);
         return this;
@@ -320,7 +335,7 @@ export function svgLocalPhotos(projection, context, dispatch) {
      * @param {Object} fileList.0 - A File - {name: "Das.png", lastModified: 1625064498536, lastModifiedDate: Wed Jun 30 2021 20:18:18 GMT+0530 (India Standard Time), webkitRelativePath: "", size: 859658, …}
      * @param {Function} callback - A callback to be called after the photos have been loaded and parsed
      */
-    drawPhotos.fileList = function(fileList, callback) {
+    drawPhotos.fileList = function(fileList: FileList, callback: (photos: LocalPhoto[]) => void) {
         if (!arguments.length) return _fileList;
 
         _fileList = fileList;
@@ -336,7 +351,7 @@ export function svgLocalPhotos(projection, context, dispatch) {
         return _photos;
     };
 
-    drawPhotos.removePhoto = function(id) {
+    drawPhotos.removePhoto = function(id: number) {
         _photos = _photos.filter(i => i.id !== id);
         dispatch.call('change');
         return _photos;
@@ -344,7 +359,7 @@ export function svgLocalPhotos(projection, context, dispatch) {
 
     drawPhotos.openPhoto = click;
 
-    drawPhotos.fitZoom = function(force) {
+    drawPhotos.fitZoom = function(force?: boolean) {
         const coords = _photos
             .map(image => image.loc)
             .filter(l => isArray(l) && isNumber(l[0]) && isNumber(l[1]));
@@ -384,7 +399,7 @@ export function svgLocalPhotos(projection, context, dispatch) {
             });
     }
 
-    drawPhotos.enabled = function(val) {
+    drawPhotos.enabled = function(val: boolean) {
         if (!arguments.length) return _enabled;
 
         _enabled = val;
