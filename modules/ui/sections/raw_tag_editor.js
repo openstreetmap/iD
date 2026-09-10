@@ -182,17 +182,17 @@ export function uiSectionRawTagEditor(id, context) {
             .property('type', 'text')
             .attr('class', 'key')
             .call(utilNoAuto)
-            .on('focus', interacted)
             .on('keydown', function(d3_event) {
-                    if (d3_event.key === '=') {
+                    if ((d3_event.key === '=' || d3_event.keyCode === 13 /* Enter */) && this.selectionEnd === this.value.length) {
                         d3_event.preventDefault();
-                        var row = d3_select(this.parentNode.parentNode);
-                        var value = row.select('input.value').node();
+                        const row = d3_select(this.parentNode.parentNode);
+                        const value = row.select('input.value').node();
                         if (value) {
                             value.focus();
                         }
                     }
                 })
+            .on('focus', interacted)
             .on('blur', keyChange)
             .on('change', keyChange);
 
@@ -204,6 +204,16 @@ export function uiSectionRawTagEditor(id, context) {
             .attr('dir', 'auto')
             .attr('class', 'value')
             .call(utilNoAuto)
+            .on('keydown', function(d3_event) {
+                    if (d3_event.keyCode === 13 /* Enter */ && this.selectionEnd === this.value.length) {
+                        d3_event.preventDefault();
+                        const nextRow = d3_select(this.parentNode.parentNode.parentNode.nextSibling);
+                        const nextKey = nextRow.select('input.key').node();
+                        if (nextKey) {
+                            nextKey.focus();
+                        }
+                    }
+                })
             .on('focus', interacted)
             .on('blur', valueChange)
             .on('change', valueChange);
