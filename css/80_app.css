@@ -6216,3 +6216,17 @@ textarea:focus:dir(rtl)::-webkit-resizer {
     width: 100px;
     color: var(--link-color);
 }
+/* Enhanced Attribution Styles */
+.enhanced-attribution {
+    display: inline-block;
+    background: rgba(0, 0, 0, 0.45);
+    color: #fff !important;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    margin-right: 4px;
+}
+
+.enhanced-attribution a {
+    color: #fff !important;
+}
