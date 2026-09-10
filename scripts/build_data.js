@@ -1,7 +1,6 @@
 /* eslint-disable no-console */
 import fs from 'node:fs';
 import { styleText } from 'node:util';
-import prettyStringify from 'json-stringify-pretty-compact';
 import shell from 'shelljs';
 import { load as loadYaml } from 'js-yaml';
 import { pull } from 'es-toolkit/compat';
