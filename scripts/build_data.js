@@ -57,7 +57,6 @@ async function buildData() {
 
   // Start clean
   shell.rm('-f', [
-    'data/territory_languages.json',
     'dist/locales/en.json',
     'dist/data/*',
     'svg/fontawesome/*.svg',
@@ -78,12 +77,11 @@ async function buildData() {
   readQAIssueIcons(faIcons);
 
   let territoryLanguages = generateTerritoryLanguages();
-  fs.writeFileSync('data/territory_languages.json', prettyStringify(territoryLanguages, { maxLength: 9999 }) );
+  fs.writeFileSync('dist/data/territory_languages.min.json', JSON.stringify(territoryLanguages) );
 
   writeEnJson();
 
   const languageInfo = await languageNames.getLangNamesInNativeLang();
-  fs.writeFileSync('data/languages.json', prettyStringify(languageInfo, { maxLength: 200 }));
   fs.writeFileSync('dist/data/languages.min.json', JSON.stringify(languageInfo));
 
   // Save individual data files
@@ -91,11 +89,9 @@ async function buildData() {
     minifyJSON('data/address_formats.json', 'dist/data/address_formats.min.json'),
     minifyJSON('data/imagery.json', 'dist/data/imagery.min.json'),
     minifyJSON('data/intro_graph.json', 'dist/data/intro_graph.min.json'),
-    minifyJSON('data/languages.json', 'dist/data/languages.min.json'),
     minifyJSON('data/phone_formats.json', 'dist/data/phone_formats.min.json'),
     minifyJSON('data/qa_data.json', 'dist/data/qa_data.min.json'),
     minifyJSON('data/shortcuts.json', 'dist/data/shortcuts.min.json'),
-    minifyJSON('data/territory_languages.json', 'dist/data/territory_languages.min.json'),
     Promise.all([
       // Fetch the icons that are needed by the expected tagging schema version
       fetchOrRequire(`${presetsUrl}/dist/presets.min.json`),
