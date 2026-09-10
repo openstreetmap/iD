@@ -115,7 +115,7 @@ function gotResource(err, results) {
     en: { rtl: false, pct: 1 }
   };
   asyncMap(Object.keys(allStrings),
-    (rawCode, done) => {
+    async (rawCode, done) => {
       const code = normaliseLocaleCode(rawCode);
 
       if (code === 'en') {
@@ -123,7 +123,7 @@ function gotResource(err, results) {
       } else {
         let obj = {};
         obj[code] = allStrings[rawCode] || {};
-        let lNames = languageNames.languageNamesInLanguageOf(code) || {};
+        let lNames = await languageNames.languageNamesInLanguageOf(code) || {};
         if (Object.keys(lNames).length) {
           obj[code].languageNames = lNames;
         }
