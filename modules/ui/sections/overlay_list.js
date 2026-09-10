@@ -40,11 +40,16 @@ export function uiSectionOverlayList(context) {
             return context.background().showsLayer(d);
         }
 
+        function disabled(d) {
+            return d.isLocatorOverlay() && context.background().isLocatorOverlayDisabled();
+        }
+
         selection.selectAll('li')
             .classed('active', active)
             .call(setTooltips)
             .selectAll('input')
-            .property('checked', active);
+            .property('checked', active)
+            .property('disabled', disabled);
     }
 
 
@@ -111,6 +116,13 @@ export function uiSectionOverlayList(context) {
         _overlayList
             .call(drawListItems, 'checkbox', chooseOverlay, function(d) { return !d.isHidden() && d.overlay; });
     }
+
+    context.background()
+        .on('change.overlay_list', () => {
+            // if the overlays change due to a keyboard shortcut or
+            // automatic update, then rerender.
+            _overlayList.call(updateLayerSelections);
+        });
 
     context.map()
         .on('move.overlay_list',
