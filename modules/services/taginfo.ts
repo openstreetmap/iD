@@ -9,15 +9,67 @@ import { allowUpperCaseTagValues } from '../osm/tags';
 import { taginfoApiUrl } from '../../config/id.js';
 
 var apibase = taginfoApiUrl;
-var _inflight = {};
-var _popularKeys = {};
+let _inflight: { [url: string]: AbortController } = {};
+let _popularKeys: { [key: TagKey]: boolean } = {};
+
 // manually exclude some additional keys – #5377, #7485, #10287, #11733
 // these will be returned by keys(), but taginfo will not be queried for values() requests
 var _extraExcludedKeys = /^(addr:.+|postal_code|via|((int_|loc_|nat_|official_|old_|ref_|reg_|short_|full_|sorting_|alt_|artist_|long_|bridge:|tunnel:)?name(:left|:right)?(:[a-z]+)?))$/;
 
 var _extraExcludedKeyNames = /^(hashtags?|created_by)$/;
 
-var _taginfoCache = {};
+let _taginfoCache: { [url: string]: unknown[] } = {};
+
+export interface TaginfoKey {
+    key: TagKey;
+    description?: string;
+
+    count_all: number;
+    count_all_fraction: number;
+    count_nodes: number;
+    count_nodes_fraction: number;
+    count_ways: number;
+    count_ways_fraction: number;
+    count_relations: number;
+    count_relations_fraction: number;
+
+    values_all: number;
+    users_all: number;
+    in_wiki: boolean,
+    projects: number;
+}
+export interface TaginfoTag {
+    value: TagValue,
+    count: number,
+    fraction: number;
+    in_wiki: boolean;
+    description?: string;
+    desclang?: string;
+    descdir?: string;
+}
+export interface TaginfoRole {
+    role: string;
+    count_node_members_fraction: number;
+    count_way_members_fraction: number;
+    count_relation_members_fraction: number;
+}
+
+export type Params = {
+    debounce?: boolean;
+    rp?: number;
+    query?: string;
+    geometry?: Geometry
+    filter?: Filter;
+    sortname?: string;
+    sortorder?: 'asc' | 'desc';
+    page?: number;
+    lang?: string;
+}
+
+interface ValueTitle {
+    value: string;
+    title: string;
+}
 
 var tag_sorts = {
     point: 'count_nodes',
@@ -37,54 +89,57 @@ var tag_filters = {
     vertex: 'nodes',
     area: 'ways',
     line: 'ways'
-};
+} as const;
+type Filter = typeof tag_filters[keyof typeof tag_filters];
+
 var tag_members_fractions = {
     point: 'count_node_members_fraction',
     vertex: 'count_node_members_fraction',
     area: 'count_way_members_fraction',
     line: 'count_way_members_fraction',
     relation: 'count_relation_members_fraction'
-};
+} as const;
+type Geometry = keyof typeof tag_members_fractions;
 
 
-function sets(params, n, o) {
+function sets<T extends Params>(params: T, n: keyof T, o: Partial<Record<Geometry, string>>): T {
     if (params.geometry && o[params.geometry]) {
-        params[n] = o[params.geometry];
+        params[n] = o[params.geometry] as never;
     }
     return params;
 }
 
 
-function setFilter(params) {
+function setFilter<T extends Params>(params: T): T {
     return sets(params, 'filter', tag_filters);
 }
 
 
-function setSort(params) {
+function setSort<T extends Params>(params: T): T {
     return sets(params, 'sortname', tag_sorts);
 }
 
 
-function setSortMembers(params) {
+function setSortMembers<T extends Params>(params: T): T {
     return sets(params, 'sortname', tag_sort_members);
 }
 
 
-function clean(params) {
-    return utilObjectOmit(params, ['geometry', 'debounce']);
+function clean<T extends Params>(params: T): T {
+    return utilObjectOmit(params, ['geometry', 'debounce']) as T;
 }
 
 
-function filterKeys(type) {
-    var count_type = type ? 'count_' + type : 'count_all';
-    return function(d) {
+function filterKeys(type: Filter | undefined) {
+    const count_type = type ? `count_${type}` as const : 'count_all';
+    return function(d: TaginfoKey) {
         return Number(d[count_type]) > 2500 || d.in_wiki;
     };
 }
 
 
-function filterMultikeys(prefix) {
-    return function(d) {
+function filterMultikeys(prefix: string) {
+    return function(d: TaginfoKey) {
         // d.key begins with prefix, and d.key contains no additional ':'s
         var re = new RegExp('^' + prefix + '(.*)$', 'i');
         var matches = d.key.match(re) || [];
@@ -93,8 +148,8 @@ function filterMultikeys(prefix) {
 }
 
 
-function filterValues(allowUpperCase, key) {
-    return function(d) {
+function filterValues(allowUpperCase: boolean, key: TagKey) {
+    return function(d: TaginfoTag) {
         if (d.value.match(/[;,]/) !== null) return false;  // exclude some punctuation
         if (!allowUpperCase &&
             !(key === 'type' && d.value === 'associatedStreet') &&
@@ -104,16 +159,15 @@ function filterValues(allowUpperCase, key) {
 }
 
 
-function filterRoles(geometry) {
-    return function(d) {
+function filterRoles(geometry: Geometry) {
+    return function(d: TaginfoRole) {
         if (d.role === '') return false; // exclude empty role
         if (d.role.match(/[A-Z*;,]/) !== null) return false;  // exclude uppercase letters and some punctuation
         return Number(d[tag_members_fractions[geometry]]) > 0.0;
     };
 }
 
-
-function valKey(d) {
+function valKey(d: TaginfoKey): ValueTitle {
     return {
         value: d.key,
         title: d.key
@@ -121,7 +175,7 @@ function valKey(d) {
 }
 
 
-function valKeyDescription(d) {
+function valKeyDescription(d: TaginfoTag): ValueTitle {
     var obj = {
         value: d.value,
         title: d.description || d.value
@@ -130,7 +184,7 @@ function valKeyDescription(d) {
 }
 
 
-function roleKey(d) {
+function roleKey(d: TaginfoRole): ValueTitle {
     return {
         value: d.role,
         title: d.role
@@ -139,16 +193,16 @@ function roleKey(d) {
 
 
 // sort keys with ':' lower than keys without ':'
-function sortKeys(a, b) {
+function sortKeys(a: TaginfoKey, b: TaginfoKey) {
     return (a.key.indexOf(':') === -1 && b.key.indexOf(':') !== -1) ? -1
         : (a.key.indexOf(':') !== -1 && b.key.indexOf(':') === -1) ? 1
         : 0;
 }
 
 
-var debouncedRequest = debounce(request, 300, { edges: ['trailing'] });
+var debouncedRequest = debounce(request, 300, { edges: ['trailing'] }) as typeof request;
 
-function request(url, params, exactMatch, callback, loaded) {
+function request<T, C>(url: string, params: Params, exactMatch: boolean, callback: Callback<C>, loaded?: Callback<T>) {
     if (_inflight[url]) return;
 
     if (checkCache(url, params, exactMatch, callback)) return;
@@ -159,17 +213,16 @@ function request(url, params, exactMatch, callback, loaded) {
     d3_json(url, { signal: controller.signal })
         .then(function(result) {
             delete _inflight[url];
-            if (loaded) loaded(null, result);
+            if (loaded) loaded(null, result as T);
         })
         .catch(function(err) {
             delete _inflight[url];
             if (err.name === 'AbortError') return;
-            if (loaded) loaded(err.message);
+            if (loaded) loaded(err);
         });
 }
 
-
-function checkCache(url, params, exactMatch, callback) {
+function checkCache(url: string, params: Params, exactMatch: boolean, callback: Callback<any>) {
     var rp = params.rp || 25;
     var testQuery = params.query || '';
     var testUrl = url;
@@ -201,12 +254,12 @@ export default {
     init: function() {
         _inflight = {};
         _taginfoCache = {};
-        _popularKeys = [];
+        _popularKeys = {};
 
         // Fetch popular keys.  We'll exclude these from `values`
         // lookups because they stress taginfo, and they aren't likely
         // to yield meaningful autocomplete results.. see #3955
-        var params = {
+        var params: Params = {
             rp: 100,
             sortname: 'values_all',
             sortorder: 'desc',
@@ -216,7 +269,7 @@ export default {
         };
         this.keys(params, function(err, data) {
             if (err) return;
-            data.forEach(function(d) {
+            data!.forEach(function(d) {
                 if (d.value === 'opening_hours') return;  // exception
                 _popularKeys[d.value] = true;
             });
@@ -230,7 +283,7 @@ export default {
     },
 
 
-    keys: function(params, callback) {
+    keys: function(params: Params, callback: Callback<ValueTitle[]>) {
         var doRequest = params.debounce ? debouncedRequest : request;
         params = clean(setSort(params));
         params = Object.assign({
@@ -242,12 +295,12 @@ export default {
         }, params);
 
         var url = apibase + 'keys/all?' + utilQsString(params);
-        doRequest(url, params, false, callback, function(err, d) {
+        doRequest<{ data: TaginfoKey[] }, ValueTitle[]>(url, params, false, callback, function(err, d) {
             if (err) {
                 callback(err);
             } else {
                 var f = filterKeys(params.filter);
-                var result = d.data.filter(f).filter(d => !_extraExcludedKeyNames.test(d.key)).sort(sortKeys).map(valKey);
+                var result = d!.data.filter(f).filter(d => !_extraExcludedKeyNames.test(d.key)).sort(sortKeys).map(valKey);
                 _taginfoCache[url] = result;
                 callback(null, result);
             }
@@ -255,7 +308,7 @@ export default {
     },
 
 
-    multikeys: function(params, callback) {
+    multikeys: function(params: Params & { query: string; key?: TagKey }, callback: Callback<ValueTitle[]>) {
         var doRequest = params.debounce ? debouncedRequest : request;
         params = clean(setSort(params));
         params = Object.assign({
@@ -268,12 +321,12 @@ export default {
 
         var prefix = params.query;
         var url = apibase + 'keys/all?' + utilQsString(params);
-        doRequest(url, params, true, callback, function(err, d) {
+        doRequest<{ data: TaginfoKey[] }, ValueTitle[]>(url, params, true, callback, function(err, d) {
             if (err) {
                 callback(err);
             } else {
                 var f = filterMultikeys(prefix);
-                var result = d.data.filter(f).map(valKey);
+                var result = d!.data.filter(f).map(valKey);
                 _taginfoCache[url] = result;
                 callback(null, result);
             }
@@ -281,7 +334,7 @@ export default {
     },
 
 
-    values: function(params, callback) {
+    values: function(params: Params & { key: TagKey }, callback: Callback<ValueTitle[]>) {
         // Exclude popular keys from values lookups.. see #3955
         var key = params.key;
         if (key && _popularKeys[key] === true || _extraExcludedKeys.test(key)) {
@@ -300,7 +353,7 @@ export default {
         }, params);
 
         var url = apibase + 'key/values?' + utilQsString(params);
-        doRequest(url, params, false, callback, function(err, d) {
+        doRequest<{ data: TaginfoTag[] }, ValueTitle[]>(url, params, false, callback, function(err, d) {
             if (err) {
                 callback(err);
             } else {
@@ -311,7 +364,7 @@ export default {
                 var allowUpperCase = allowUpperCaseTagValues.test(params.key);
                 var f = filterValues(allowUpperCase, params.key);
 
-                var result = d.data.filter(f).map(valKeyDescription);
+                var result = d!.data.filter(f).map(valKeyDescription);
                 _taginfoCache[url] = result;
                 callback(null, result);
             }
@@ -319,9 +372,9 @@ export default {
     },
 
 
-    roles: function(params, callback) {
+    roles: function(params: Params & { geometry: Geometry; rtype?: string }, callback: Callback<ValueTitle[]>) {
         var doRequest = params.debounce ? debouncedRequest : request;
-        var geometry = params.geometry;
+        var geometry = params.geometry!;
         params = clean(setSortMembers(params));
         params = Object.assign({
             rp: 25,
@@ -332,12 +385,12 @@ export default {
         }, params);
 
         var url = apibase + 'relation/roles?' + utilQsString(params);
-        doRequest(url, params, true, callback, function(err, d) {
+        doRequest<{ data: TaginfoRole[] }, ValueTitle[]>(url, params, true, callback, function(err, d) {
             if (err) {
                 callback(err);
             } else {
                 var f = filterRoles(geometry);
-                var result = d.data.filter(f).map(roleKey);
+                var result = d!.data.filter(f).map(roleKey);
                 _taginfoCache[url] = result;
                 callback(null, result);
             }
@@ -345,7 +398,7 @@ export default {
     },
 
 
-    docs: function(params, callback) {
+    docs: function(params: Params & { key?: TagKey; value?: string; rtype?: string }, callback: Callback<unknown[]>) {
         var doRequest = params.debounce ? debouncedRequest : request;
         params = clean(setSort(params));
 
@@ -357,21 +410,13 @@ export default {
         }
 
         var url = apibase + path + utilQsString(params);
-        doRequest(url, params, true, callback, function(err, d) {
+        doRequest<{ data: unknown[] }, unknown[]>(url, params, true, callback, function(err, d) {
             if (err) {
                 callback(err);
             } else {
-                _taginfoCache[url] = d.data;
-                callback(null, d.data);
+                _taginfoCache[url] = d!.data;
+                callback(null, d!.data);
             }
         });
     },
-
-
-    apibase: function(_) {
-        if (!arguments.length) return apibase;
-        apibase = _;
-        return this;
-    }
-
 };
