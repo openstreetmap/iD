@@ -6,11 +6,26 @@ import { utilQsString } from '../util';
 import { localizer } from '../core';
 
 import { nominatimApiUrl } from '../../config/id.js';
+import type { Vec2 } from '../geo/vector';
+import type { WithBbox } from '../util/partition';
+
+interface NominatimResult {
+    osm_type?: 'node' | 'way' | 'relation';
+    osm_id?: number;
+    address?: {
+        country_code?: string;
+        // there are other properties, they can
+        // be defined in the future, if required.
+    };
+}
+
+type NominatimReverseResult = NominatimResult & { error?: string };
+type NominatimSearchResult = NominatimResult[] & { error?: string };
 
 
 var apibase = nominatimApiUrl;
-var _inflight = {};
-var _nominatimCache;
+let _inflight: { [key: string]: AbortController } = {};
+let _nominatimCache: RBush<WithBbox<NominatimResult>>;
 
 
 export default {
@@ -27,11 +42,11 @@ export default {
     },
 
 
-    countryCode: function (location, callback) {
+    countryCode: function (location: Vec2, callback: Callback<string | undefined>) {
         this.reverse(location, function(err, result) {
             if (err) {
                 return callback(err);
-            } else if (result.address) {
+            } else if (result?.address) {
                 return callback(null, result.address.country_code);
             } else {
                 return callback(new Error('Unable to geocode'));
@@ -40,7 +55,7 @@ export default {
     },
 
 
-    reverse: function (loc, callback) {
+    reverse: function (loc: Vec2, callback: Callback<NominatimResult>) {
         var cached = _nominatimCache.search(
             { minX: loc[0], minY: loc[1], maxX: loc[0], maxY: loc[1] }
         );
@@ -63,7 +78,8 @@ export default {
                 'Accept-Language': localizer.localeCodes().join(',')
             }
         })
-            .then(function(result) {
+            .then(function(_result) {
+                const result = _result as NominatimReverseResult;
                 delete _inflight[url];
                 if (result && result.error) {
                     throw new Error(result.error);
@@ -80,7 +96,7 @@ export default {
     },
 
 
-    search: function (val, callback) {
+    search: function (val: string, callback: Callback<NominatimResult[]>) {
         const params = {
             q: val,
             limit:10,
@@ -98,7 +114,8 @@ export default {
                 'Accept-Language': localizer.localeCodes().join(',')
             }
         })
-            .then(function(result) {
+            .then(function(_result) {
+                const result = _result as NominatimSearchResult;
                 delete _inflight[url];
                 if (result && result.error) {
                     throw new Error(result.error);
