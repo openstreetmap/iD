@@ -360,6 +360,18 @@ path.line.casing.tag-location-underwater {
 }
 
 
+/* fords */
+path.line.stroke.tag-highway.tag-ford {
+    stroke-opacity: 0.7;
+}
+path.line.casing.tag-highway.tag-ford {
+    stroke: rgba(119, 221, 221, 0.6);
+    stroke-opacity: 0.5;
+    stroke-linecap: butt;
+    stroke-dasharray: none;
+}
+
+
 /* embankments / cuttings */
 /* see also #ideditor-sided-marker-embankment */
 path.line.stroke.tag-man_made-embankment {

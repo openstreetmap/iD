@@ -74,4 +74,40 @@ describe('iD.validations.incompatible_source', function () {
         var issues = validate();
         expect(issues).toHaveLength(0);
     });
+
+    it('flags way with a goo.gl shortlink as source', function() {
+        createWay({ amenity: 'cafe', building: 'yes', name: 'Key Largo Café', source: 'https://maps.app.goo.gl/UX2Kv2GVQR9bkWwv5'});
+        var issues = validate();
+        expect(issues).toHaveLength(1);
+        var issue = issues[0];
+        expect(issue.type).toEqual('incompatible_source');
+        expect(issue.entityIds).toHaveLength(1);
+        expect(issue.entityIds[0]).toEqual('w-1');
+    });
+
+    it('flags way with a bare goo.gl source', function() {
+        createWay({ amenity: 'cafe', building: 'yes', name: 'Key Largo Café', source: 'goo.gl/abc123'});
+        var issues = validate();
+        expect(issues).toHaveLength(1);
+    });
+
+    it('does not flag a source that merely ends in goo.gl', function() {
+        createWay({ amenity: 'cafe', building: 'yes', name: 'Key Largo Café', source: 'kangoo.gl'});
+        var issues = validate();
+        expect(issues).toHaveLength(0);
+    });
+
+    it('does not flag a .glass domain', function() {
+        createWay({ amenity: 'cafe', building: 'yes', name: 'Key Largo Café', source: 'goo.glass'});
+        var issues = validate();
+        expect(issues).toHaveLength(0);
+    });
+
+    it('does not flag a Google Sites page', function() {
+        // Google Sites pages are user-generated; Google holds no copyright
+        // interest in the content, so they are a legitimate source.
+        createWay({ amenity: 'cafe', building: 'yes', name: 'Key Largo Café', source: 'https://sites.google.com/view/key-largo-cafe'});
+        var issues = validate();
+        expect(issues).toHaveLength(0);
+    });
 });

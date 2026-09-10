@@ -15,6 +15,7 @@ import { uiLengthIndicator } from '../length_indicator';
 import { deprecatedTagValuesByKey } from '../../osm/deprecated';
 import { osmIsoCountryKeys } from '../../osm/tags';
 import { formatTag } from './tag_title';
+import { utilSplitAtSemicolon as splitAtSemicolon } from '../../util/util';
 
 export {
     uiFieldCombo as uiFieldManyCombo,
@@ -63,9 +64,6 @@ export function uiFieldCombo(field, context) {
         return s.replace(/\s+/g, '_');
     }
 
-    function splitAtSemicolon(s) {
-        return (s || '').split(';').map(s => s.trim()).filter(Boolean);
-    }
     function clean(s) {
         return splitAtSemicolon(s).join(';');
     }

@@ -156,7 +156,7 @@ fetchMock.sticky({
               request: 'GetCapabilities'
             }
           }, vegbilderOwsCapabilities, {sticky: true});
-fetchMock.config.fallbackToNetwork = true;
+fetchMock.config.fallbackToNetwork = false;
 fetchMock.config.overwriteRoutes = false;
 
 beforeAll(async () => {
