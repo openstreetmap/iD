@@ -39,6 +39,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 
 #### :sparkles: Usability & Accessibility
 * Render diameter and radius tags when a node is selected ([#9732], thanks [@k-yle])
+* Allow to press `=` key to switch between _key_ and _value_ part of tag in the raw tag editor ([#12828], thanks [@hemaksh2007jain-bit])
 #### :scissors: Operations
 #### :camera: Street-Level
 #### :white_check_mark: Validation
@@ -52,7 +53,8 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 
 [#9732]: https://github.com/openstreetmap/iD/pull/9732
 [#12679]: https://github.com/openstreetmap/iD/pull/12679
-
+[#12828]: https://github.com/openstreetmap/iD/pull/12828
+[@hemaksh2007jain-bit]: https://github.com/hemaksh2007jain-bit
 
 # 2.42.1
 ##### 2026-Aug-18
