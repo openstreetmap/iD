@@ -330,7 +330,7 @@ export function uiSectionRawTagEditor(id, context) {
 
     function stringify(s) {
         const stringified = JSON.stringify(s).slice(1, -1);   // without leading/trailing "
-        if (stringified !== s) {
+        if (stringified !== s || s.includes('=')) {
             return `"${stringified}"`;
         } else {
             return s;
