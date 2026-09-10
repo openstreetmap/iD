@@ -1,28 +1,41 @@
+/* eslint-disable @typescript-eslint/no-this-alias */
 import { debounce } from 'es-toolkit';
-
+import type { Claim, Item, PropertyId, ItemId, MonolingualTextSnakDataValue, Site, SnakWithValue, WikibaseItemSnakDataValue } from 'wikibase-sdk';
 import { json as d3_json } from 'd3-fetch';
-
+import type { WikibaseApiResponse, WikibaseResult } from './wikidata';
 import { localizer } from '../core/localizer';
 import { utilQsString } from '../util';
 
 
 var apibase = 'https://wiki.openstreetmap.org/w/api.php';
-var _inflight = {};
-var _wikibaseCache = {};
-var _localeIDs = { en: false };
+var _inflight: { [url: string]: AbortController } = {};
+var _wikibaseCache: { [sitelink: string]: Item } = {};
+var _localeIDs: { [locale: string]: false | ItemId } = { en: false };
 
+interface ItemResult {
+    rtype?: Item;
+    key?: Item;
+    tag?: Item;
+}
 
-var debouncedRequest = debounce(request, 500, { edges: [ 'trailing' ] });
+interface Params {
+    key: string;
+    value?: string;
+    langCodes: string[];
+    debounce?: boolean;
+}
 
-function request(url, callback) {
+var debouncedRequest = debounce(request, 500, { edges: [ 'trailing' ] }) as typeof request;
+
+function request<T>(url: string, callback: Callback<T>) {
     if (_inflight[url]) return;
     var controller = new AbortController();
     _inflight[url] = controller;
 
-    d3_json(url, { signal: controller.signal })
+    d3_json<T>(url, { signal: controller.signal })
         .then(function(result) {
             delete _inflight[url];
-            if (callback) callback(null, result);
+            if (callback) callback(null, result!);
         })
         .catch(function(err) {
             delete _inflight[url];
@@ -53,10 +66,11 @@ export default {
      * @param property string e.g. 'P4' for image
      * @param langCode string e.g. 'fr' for French
      */
-    claimToValue: function(entity, property, langCode) {
-        if (!entity.claims[property]) return undefined;
+    claimToValue: function(entity: Item, property: PropertyId, langCode: string) {
+        if (!entity.claims?.[property]) return undefined;
         var locale = _localeIDs[langCode];
-        var preferredPick, localePick;
+        let preferredPick: Claim | undefined;
+        let localePick: Claim | undefined;
 
         entity.claims[property].forEach(function(stmt) {
             // If exists, use value limited to the needed language (has a qualifier P26 = locale)
@@ -65,7 +79,7 @@ export default {
                 preferredPick = stmt;
             }
             if (locale && stmt.qualifiers && stmt.qualifiers.P26 &&
-                stmt.qualifiers.P26[0].datavalue.value.id === locale
+                (<WikibaseItemSnakDataValue>(<SnakWithValue>stmt.qualifiers.P26[0]).datavalue).value.id === locale
             ) {
                 localePick = stmt;
             }
@@ -73,7 +87,7 @@ export default {
 
         var result = localePick || preferredPick;
         if (result) {
-            var datavalue = result.mainsnak.datavalue;
+            var datavalue = (<SnakWithValue>result.mainsnak).datavalue;
             return datavalue.type === 'wikibase-entityid' ? datavalue.value.id : datavalue.value;
         } else {
             return undefined;
@@ -86,18 +100,18 @@ export default {
      * @param entity object from wikibase
      * @param property string e.g. 'P31' for monolingual wiki page title
      */
-    monolingualClaimToValueObj: function(entity, property) {
-        if (!entity || !entity.claims[property]) return undefined;
+    monolingualClaimToValueObj: function(entity: Item | undefined, property: PropertyId) {
+        if (!entity || !entity.claims?.[property]) return undefined;
 
-        return entity.claims[property].reduce(function(acc, obj) {
-            var value = obj.mainsnak.datavalue.value;
+        return entity.claims[property].reduce<{ [lang: string]: string }>(function(acc, obj) {
+            var value = (<MonolingualTextSnakDataValue>(<SnakWithValue>obj.mainsnak).datavalue).value;
             acc[value.language] = value.text;
             return acc;
         }, {});
     },
 
 
-    toSitelink: function(key, value) {
+    toSitelink: function(key: string, value?: string) {
         var result = value ? ('Tag:' + key + '=' + value) : 'Key:' + key;
         return result.replace(/_/g, ' ').trim();
     },
@@ -105,10 +119,9 @@ export default {
     /**
      * Converts text like `tag:...=...` into clickable links
      *
-     * @param {string} unsafeText - unsanitized text
+     * @param unsafeText - unsanitized text
      */
-    linkifyWikiText(unsafeText) {
-        /** @param {import('d3').Selection} selection */
+    linkifyWikiText(unsafeText: string): d3.Selector {
         return (selection) => {
             const segments = unsafeText.split(/(key|tag):([\w-]+)(=([\w-]+))?/g);
 
@@ -143,11 +156,11 @@ export default {
     //   langCode: 'string'
     // }
     //
-    getEntity: function(params, callback) {
+    getEntity: function(params: Params, callback: Callback<ItemResult>) {
         var doRequest = params.debounce ? debouncedRequest : request;
         var that = this;
         var titles = [];
-        var result = {};
+        var result: ItemResult = {};
         var rtypeSitelink = (params.key === 'type' && params.value) ? ('Relation:' + params.value).replace(/_/g, ' ').trim() : false;
         var keySitelink = params.key ? this.toSitelink(params.key) : false;
         var tagSitelink = (params.key && params.value) ? this.toSitelink(params.key, params.value) : false;
@@ -216,17 +229,18 @@ export default {
         };
 
         var url = apibase + '?' + utilQsString(obj);
-        doRequest(url, function(err, d) {
-            if (err) {
-                callback(err);
+        doRequest<WikibaseApiResponse>(url, function(err, d) {
+            if (err || !d) {
+                callback(err || new Error('no result'));
             } else if (!d.success || d.error) {
-                const errorMessage = d.error?.messages.map(v => v.html['*']).join('<br />') || 'Unknown Error';
+                const errorMessage = d.error?.info || 'Unknown Error';
                 callback(new Error(errorMessage));
             } else {
                 Object.values(d.entities).forEach(function(res) {
+                    // @ts-expect-error -- this should be impossible, keep it just in case
                     if (res.missing !== '') {
 
-                        var title = res.sitelinks.wiki.title;
+                        var title = res.sitelinks?.[<Site>'wiki']?.title;
                         if (title === rtypeSitelink) {
                             _wikibaseCache[rtypeSitelink] = res;
                             result.rtype = res;
@@ -236,7 +250,7 @@ export default {
                         } else if (title === tagSitelink) {
                             _wikibaseCache[tagSitelink] = res;
                             result.tag = res;
-                        } else if (title.startsWith('Locale:')) {
+                        } else if (title?.startsWith('Locale:')) {
                             const langCode = title.replace(/ /g, '_').replace(/^Locale:/, '');
                             that.addLocale(langCode, res.id);
                         } else {
@@ -251,13 +265,6 @@ export default {
     },
 
 
-    //
-    // Pass params object of the form:
-    // {
-    //   key: 'string',     // required
-    //   value: 'string'    // optional
-    // }
-    //
     // Get an result object used to display tag documentation
     // {
     //   title:        'string',
@@ -267,7 +274,7 @@ export default {
     //   wiki:         { title: 'string', text: 'string', url: 'string' }
     // }
     //
-    getDocs: function(params, callback) {
+    getDocs: function(params: Params, callback: Callback<WikibaseResult>) {
         var that = this;
         var langCodes = localizer.localeCodes().map(function(code) {
             return code.toLowerCase();
@@ -280,8 +287,8 @@ export default {
                 return;
             }
 
-            var entity = data.rtype || data.tag || data.key;
-            if (!entity) {
+            var entity = data?.rtype || data?.tag || data?.key;
+            if (!entity || !data) {
                 callback(new Error('No entity'));
                 return;
             }
@@ -290,16 +297,16 @@ export default {
             var description;
             for (i in langCodes) {
                 let code = langCodes[i];
-                if (entity.descriptions[code] && entity.descriptions[code].language === code) {
+                if (entity.descriptions?.[code]?.language === code) {
                     description = entity.descriptions[code];
                     break;
                 }
             }
-            if (!description && Object.values(entity.descriptions).length) description = Object.values(entity.descriptions)[0];
+            if (!description && entity.descriptions && Object.values(entity.descriptions).length) description = Object.values(entity.descriptions)[0];
 
             // prepare result
-            var result = {
-                title: entity.title,
+            var result: WikibaseResult = {
+                title: entity.title!,
                 description: that.linkifyWikiText(description?.value || ''),
                 descriptionLocaleCode: description ? description.language : '',
                 editURL: 'https://wiki.openstreetmap.org/wiki/' + entity.title
@@ -351,7 +358,7 @@ export default {
 
 
             // Helper method to get wiki info if a given language exists
-            function getWikiInfo(wiki, langCode, tKey) {
+            function getWikiInfo(wiki: Record<string, string> | undefined, langCode: string, tKey: string) {
                 if (wiki && wiki[langCode]) {
                     return {
                         title: wiki[langCode],
@@ -366,13 +373,13 @@ export default {
     getLocaleIDs: () => _localeIDs,
 
 
-    addLocale: function(langCode, qid) {
+    addLocale: function(langCode: string, qid: ItemId | false) {
         // Makes it easier to unit test
         _localeIDs[langCode] = qid;
     },
 
 
-    apibase: function(val) {
+    apibase: function(val: string) {
         if (!arguments.length) return apibase;
         apibase = val;
         return this;
