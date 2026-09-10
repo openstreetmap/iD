@@ -681,6 +681,13 @@ export function uiSectionRawMembershipEditor(context) {
 
             var role = context.cleanRelationRole(list.selectAll('.member-row-new .member-role').property('value'));
             addMembership(d, role);
+
+            // Focus the role input of the newly added membership row so the user
+            // can immediately type the member role after selecting a relation. #9112
+            if (!role) {
+                var newRoleInput = list.selectAll('.member-row-normal:last-child input.member-role').node();
+                if (newRoleInput) newRoleInput.focus();
+            }
         }
 
 
