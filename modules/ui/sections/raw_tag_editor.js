@@ -188,7 +188,7 @@ export function uiSectionRawTagEditor(id, context) {
                         d3_event.preventDefault();
                         var row = d3_select(this.parentNode.parentNode);
                         var value = row.select('input.value').node();
-                        if (value){
+                        if (value) {
                             value.focus();
                         }
                     }
