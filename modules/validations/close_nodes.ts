@@ -155,7 +155,13 @@ export const validationCloseNodes: CreateValidator = (context) => {
                     if ('memorial' in node.tags && 'memorial' in nearby.tags && node.tags.memorial==='stolperstein' && nearby.tags.memorial === 'stolperstein') continue;
 
                     // allow very close points if tags indicate the z-axis might vary
-                    var zAxisKeys = { layer: true, level: true, 'addr:housenumber': true, 'addr:unit': true };
+                    var zAxisKeys = {
+                        layer: true,
+                        level: true,
+                        'addr:housenumber': true,
+                        'addr:unit': true,
+                        'addr:floor': true,
+                    };
                     var zAxisDifferentiates = false;
                     for (var key in zAxisKeys) {
                         var nodeValue = node.tags[key] || '0';

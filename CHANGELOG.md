@@ -39,9 +39,13 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 
 #### :sparkles: Usability & Accessibility
 * Render diameter and radius tags when a node is selected ([#9732], thanks [@k-yle])
+* Dedicated rendering for road sections tagged with `ford=yes` ([#12830], thanks [@Geo-2695])
+* Allow to press `=` key to switch between _key_ and _value_ part of tags in the raw tag editor ([#12828], thanks [@hemaksh2007jain-bit]) and allow to press _Enter_ key to switch between tag parts or next tag in the raw tag editor
 #### :scissors: Operations
 #### :camera: Street-Level
 #### :white_check_mark: Validation
+* Warn about `goo.gl` shortlinks as sources, alongside full Google URLs ([#12740])
+* Allow (address) points at the same coordinate if they have different `addr:floor` ([#8424])
 #### :bug: Bugfixes
 * Fix exceptions when resizing the browser tab when nothing is selected ([#12800], thanks [@k-yle])
 * Allow tags like `not:*:wikidata` to have multiple values ([#12736], thanks [@k-yle])
@@ -53,11 +57,17 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :hammer: Development
 * Drop code previously responsible for _maprules_ integration (which has been defunct for a while now) ([#12679])
 
+[#8424]: https://github.com/openstreetmap/iD/issues/8424
 [#9732]: https://github.com/openstreetmap/iD/pull/9732
 [#12679]: https://github.com/openstreetmap/iD/pull/12679
 [#12736]: https://github.com/openstreetmap/iD/pull/12736
+[#12740]: https://github.com/openstreetmap/iD/issues/12740
 [#12800]: https://github.com/openstreetmap/iD/pull/12800
 [#12802]: https://github.com/openstreetmap/iD/pull/12802
+[#12828]: https://github.com/openstreetmap/iD/pull/12828
+[#12830]: https://github.com/openstreetmap/iD/pull/12830
+[@Geo-2695]: https://github.com/Geo-2695
+[@hemaksh2007jain-bit]: https://github.com/hemaksh2007jain-bit
 
 
 # 2.42.1
