@@ -1,8 +1,10 @@
 import { t } from '../core/localizer';
 import { uiConfirm } from './confirm';
 
+
 export function uiAsyncModal(context: iD.Context) {
-    let _modal: d3.Selection<HTMLElement>;
+    let _modal: d3.Selection<HTMLElement> | undefined;
+    let _resolve: (result: boolean) => void;
 
     /**
      * Open a model, and returns a promise. The promise
@@ -11,6 +13,7 @@ export function uiAsyncModal(context: iD.Context) {
      */
     function open(title: d3.Selector, subtitle: d3.Selector) {
         return new Promise<boolean>((resolve) => {
+            _resolve = resolve;
             context.container().call(selection => {
                 _modal = uiConfirm(selection).okButton();
 
@@ -33,7 +36,7 @@ export function uiAsyncModal(context: iD.Context) {
 
                 buttonSection.select('.cancel-button')
                     .on('click.cancel', () => {
-                        _modal.remove();
+                        _modal!.remove();
                         resolve(false);
                     });
 
@@ -43,10 +46,17 @@ export function uiAsyncModal(context: iD.Context) {
         });
     }
 
-    function close() {
-        _modal.remove();
+    function close(result = false) {
+        _modal!.remove();
+        _modal = undefined;
+        _resolve?.(result);
     }
 
+    function setIsDisabled(isDisabled: boolean) {
+        _modal!.select('.ok-button').property('disabled', isDisabled);
+    }
 
-    return { open, close };
+    return { open, close, setIsDisabled };
 }
+
+export interface uiAsyncModal extends ReturnType<typeof uiAsyncModal> {}

@@ -334,6 +334,10 @@
             "text": "shortcuts.editing.operations.circularize"
           },
           {
+            "shortcuts": ["operations.divide.key"],
+            "text": "shortcuts.editing.operations.divide"
+          },
+          {
             "shortcuts": ["operations.reflect.key.long"],
             "text": "shortcuts.editing.operations.reflect_long"
           },

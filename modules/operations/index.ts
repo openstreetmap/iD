@@ -3,6 +3,7 @@ export { operationContinue } from './continue';
 export { operationCopy } from './copy';
 export { operationDelete } from './delete';
 export { operationDisconnect } from './disconnect';
+export { operationDivide } from './divide';
 export { operationDowngrade } from './downgrade';
 export { operationExtract } from './extract';
 export { operationMerge } from './merge';

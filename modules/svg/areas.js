@@ -158,7 +158,11 @@ export function svgAreas(projection, context) {
             .remove();
 
 
-        var fillpaths = selection.selectAll('.area-fill path.area').nodes();
+        var fillpaths = selection.selectAll('.area-fill path.area').nodes()
+            .filter((node) => {
+                const entity = node.__data__; // why does this work??
+                return entity && graph.entities[entity.id] === entity;
+            });
         var bisect = d3_bisector(function(node) { return -node.__data__.area(graph); }).left;
 
         function sortedByArea(entity) {
