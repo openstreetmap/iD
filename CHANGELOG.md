@@ -39,7 +39,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 
 #### :sparkles: Usability & Accessibility
 * Render diameter and radius tags when a node is selected ([#9732], thanks [@k-yle])
-* Dedicated rendering for road sections tagged with `ford=yes` ([#12830], thansk [@Geo-2695])
+* Dedicated rendering for road sections tagged with `ford=yes` ([#12830], thanks [@Geo-2695])
 #### :scissors: Operations
 #### :camera: Street-Level
 #### :white_check_mark: Validation
