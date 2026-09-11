@@ -10,6 +10,11 @@ import { prefs } from '../core/preferences';
 import { fileFetcher } from '../core/file_fetcher';
 import { geoMetersToOffset, geoOffsetToMeters, geoExtent } from '../geo';
 import { rendererBackgroundSource } from './background_source';
+import {
+  parseWaybackId,
+  createWaybackSource,
+  ESRI_WAYBACK_ID
+} from './background_source_wayback.js';
 import { rendererTileLayer } from './tile_layer';
 import { utilAesDecrypt, utilStringQs } from '../util';
 import { utilRebind } from '../util/rebind';
@@ -78,6 +83,14 @@ export function rendererBackground(context) {
             }
           })
         };
+
+        // Only add EsriWayback if 'EsriWorldImagery' exists, inserting it right after it
+        const esriWorldImageryIndex = _imageryIndex.backgrounds.findIndex(s => s.id === 'EsriWorldImagery');
+        if (esriWorldImageryIndex >= 0) {
+          const esriWorldImagerySource = _imageryIndex.backgrounds[esriWorldImageryIndex];
+          const waybackSource = createWaybackSource(esriWorldImagerySource, context, dispatch);
+          _imageryIndex.backgrounds.splice(esriWorldImageryIndex + 1, 0, waybackSource);
+        }
 
         // Add 'None'
         _imageryIndex.backgrounds.unshift(rendererBackgroundSource.None());
@@ -207,9 +220,13 @@ export function rendererBackground(context) {
     const y = +meters[1].toFixed(2);
     const notableOffset = Math.abs(x) > EPSILON || Math.abs(y) > EPSILON;
 
+    /** @type {string|null} */
     let id = currSource.id;
     if (id === 'custom') {
       id = `custom:${currSource.template()}`;
+    } else if (id === ESRI_WAYBACK_ID) {
+      // Wayback sources include the date in their key (e.g., 'EsriWayback_2024-01-01')
+      id = currSource.key();
     }
 
     patchHash({
@@ -468,52 +485,74 @@ export function rendererBackground(context) {
         });
       }
 
+      // Helper function to get fallback background source
+      function getFallbackSource(preferredSource) {
+        return preferredSource ||
+          best ||
+          (isLastUsedValid && background.findSource(lastUsedBackground)) ||
+          background.findSource('Bing') ||
+          first ||
+          background.findSource('none');
+      }
+
+      // Helper to apply locator, overlays, gpx, offset after background is set
+      function applyRestOfInit() {
+        const locator = imageryIndex.backgrounds.find(d => d.overlay && d.default);
+        if (locator) {
+          background.toggleOverlayLayer(locator);
+        }
+
+        const overlays = (hash.overlays || '').split(',');
+        overlays.forEach(overlay => {
+          overlay = background.findSource(overlay);
+          if (overlay) {
+            background.toggleOverlayLayer(overlay);
+          }
+        });
+
+        if (hash.gpx) {
+          const gpx = context.layers().layer('data');
+          if (gpx) {
+            gpx.url(hash.gpx, '.gpx');
+          }
+        }
+
+        if (hash.offset) {
+          const offset = hash.offset
+            .replace(/;/g, ',')
+            .split(',')
+            .map(n => !isNaN(n) && n);
+
+          if (offset.length === 2) {
+            background.offset(geoMetersToOffset(offset));
+          }
+        }
+      }
+
       // Decide which background layer to display
+      const waybackInfo = requestedBackground && parseWaybackId(requestedBackground);
+      const waybackSource = background.findSource(ESRI_WAYBACK_ID);
+      const requestedWayback = waybackInfo && waybackInfo.isWayback && waybackSource;
+
       if (requestedBackground && requestedBackground.indexOf('custom:') === 0) {
         const template = requestedBackground.replace(/^custom:/, '');
         const custom = background.findSource('custom');
         background.baseLayerSource(custom.template(template));
         prefs('background-custom-template', template);
+        applyRestOfInit();
+      } else if (requestedWayback) {
+        return waybackSource.initWaybackAsync()
+          .then(() => {
+            waybackSource.date(waybackInfo.date);
+            background.baseLayerSource(waybackSource);
+            applyRestOfInit();
+          });
+      } else if (requestedBackground) {
+        background.baseLayerSource(getFallbackSource(background.findSource(requestedBackground)));
+        applyRestOfInit();
       } else {
-        background.baseLayerSource(
-          background.findSource(requestedBackground) ||
-          best ||
-          isLastUsedValid && background.findSource(lastUsedBackground) ||
-          background.findSource('Bing') ||
-          first ||
-          background.findSource('none')
-        );
-      }
-
-      const locator = imageryIndex.backgrounds.find(d => d.overlay && d.default);
-      if (locator) {
-        background.toggleOverlayLayer(locator);
-      }
-
-      const overlays = (hash.overlays || '').split(',');
-      overlays.forEach(overlay => {
-        overlay = background.findSource(overlay);
-        if (overlay) {
-          background.toggleOverlayLayer(overlay);
-        }
-      });
-
-      if (hash.gpx) {
-        const gpx = context.layers().layer('data');
-        if (gpx) {
-          gpx.url(hash.gpx, '.gpx');
-        }
-      }
-
-      if (hash.offset) {
-        const offset = hash.offset
-          .replace(/;/g, ',')
-          .split(',')
-          .map(n => !isNaN(n) && n);
-
-        if (offset.length === 2) {
-          background.offset(geoMetersToOffset(offset));
-        }
+        background.baseLayerSource(getFallbackSource());
+        applyRestOfInit();
       }
     })
     .catch(err => {
