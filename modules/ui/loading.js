@@ -45,6 +45,7 @@ export function uiLoading(context) {
   };
 
 
+  /** @type {GetSet<typeof loading, boolean>} */
   loading.blocking = function(val) {
     if (!arguments.length) return _blocking;
     _blocking = val;
