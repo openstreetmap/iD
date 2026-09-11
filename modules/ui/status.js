@@ -1,6 +1,6 @@
 import { throttle } from 'es-toolkit';
 
-import { t } from '../core/localizer';
+import { localizer, t } from '../core/localizer';
 import { svgIcon } from '../svg/icon';
 
 
@@ -48,10 +48,13 @@ export function uiStatus(context) {
                         osm.reloadApiStatus();
                     }, 2000);
 
-                    // eslint-disable-next-line no-warning-comments
-                    // TODO: nice messages for different error types
+                    let msgKey = 'osm_api_status.message.error';
+                    if (err && err.status && localizer.hasTextForStringId('osm_api_status.message.error_' + err.status)) {
+                        msgKey = 'osm_api_status.message.error_' + err.status;
+                    }
+
                     selection
-                        .call(t.append('osm_api_status.message.error', { suffix: ' ' }))
+                        .call(t.append(msgKey, { suffix: ' ' }))
                         .append('a')
                         .attr('href', '#')
                         // let the user manually retry their connection directly
