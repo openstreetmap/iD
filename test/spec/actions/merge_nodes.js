@@ -47,6 +47,34 @@ describe('iD.actionMergeNodes', function () {
             expect(iD.actionMergeNodes(['b', 'c']).disabled(graph)).toBeFalsy();
         });
 
+        it('allows merging adjacent nodes across the closing node of an area', function() {
+            var graph = new iD.coreGraph([
+                new iD.osmNode({ id: 'a', loc: [0, 0] }),
+                new iD.osmNode({ id: 'b', loc: [2, 0] }),
+                new iD.osmNode({ id: 'c', loc: [2, 2] }),
+                new iD.osmNode({ id: 'd', loc: [0, 2] }),
+                new iD.osmWay({ id: '-', nodes: ['a', 'b', 'c', 'd', 'a'], tags: { area: 'yes' } })
+            ]);
+            var action = iD.actionMergeNodes(['d', 'a']);
+
+            expect(action.disabled(graph)).toBeFalsy();
+            var way = action(graph).entity('-');
+            expect(way.isClosed()).toBe(true);
+            expect(way.nodes).toEqual(['a', 'b', 'c', 'a']);
+        });
+
+        it('blocks a new interior repetition of the closing node of an area', function() {
+            var graph = new iD.coreGraph([
+                new iD.osmNode({ id: 'a', loc: [0, 0] }),
+                new iD.osmNode({ id: 'b', loc: [2, 0] }),
+                new iD.osmNode({ id: 'c', loc: [2, 2] }),
+                new iD.osmNode({ id: 'd', loc: [0, 2] }),
+                new iD.osmWay({ id: '-', nodes: ['a', 'b', 'c', 'd', 'a'], tags: { area: 'yes' } })
+            ]);
+
+            expect(iD.actionMergeNodes(['c', 'a']).disabled(graph)).toEqual('paths_intersect');
+        });
+
         it('allows merging three consecutive nodes of an area', function() {
             var graph = new iD.coreGraph([
                 new iD.osmNode({ id: 'a', loc: [0, 0] }),

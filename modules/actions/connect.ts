@@ -6,7 +6,8 @@ import type { EntityId, osmNode, osmRelation, osmWay, NodeId } from '../osm';
 import type { RelationMember } from '../osm/relation';
 
 
-function wouldIntroduceRepeatedAreaNode(way: osmWay, nodeIDs: NodeId[], survivorID: NodeId) {
+// Count each ring without its closing node: the first/last node repetition is valid.
+function wouldIntroduceRepeatedInteriorAreaNode(way: osmWay, nodeIDs: NodeId[], survivorID: NodeId) {
     if (!way.isArea()) return false;
 
     var result = way;
@@ -130,7 +131,7 @@ export function actionConnect(nodeIDs: NodeId[]): Action {
         }
         for (const parentWayID of parentWayIDs) {
             way = graph.entity<osmWay>(parentWayID);
-            if (wouldIntroduceRepeatedAreaNode(way, nodeIDs, survivor.id)) {
+            if (wouldIntroduceRepeatedInteriorAreaNode(way, nodeIDs, survivor.id)) {
                 return 'paths_intersect';
             }
         }
