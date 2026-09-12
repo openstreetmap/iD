@@ -418,6 +418,10 @@ Building crossings are flagged per-feature. Other subtypes are flagged per-cross
 * `railway-waterway`
 * `waterway-waterway`
 
+##### `overlapping_ways`
+
+Two ways share two or more consecutive connected nodes (a shared line segment).
+
 ##### `disconnected_way`
 
 One or more interconnected, routable feature are not connected to the rest of the routable network (i.e. they form a routing island). A way is considered connected to the network if any of its nodes are on an unloaded tile, meaning large routing islands may not always be detected.
