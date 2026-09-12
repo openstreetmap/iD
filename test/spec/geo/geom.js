@@ -231,6 +231,45 @@ describe('iD.geo - geometry', function() {
             expect(iD.geoHasLineIntersections(outer, inner, 'g')).toBe(true);
             expect(iD.geoHasLineIntersections(outer, inner, 'h')).toBe(false);
         });
+
+        it('returns false when the rings only touch at a shared node', function() {
+            //  b           f
+            //  | \       / |
+            //  |   \   /   |
+            //  |     x     |
+            //  |   /   \   |
+            //  | /       \ |
+            //  a           e
+            var a = new iD.osmNode({id: 'a', loc: [0, 0]});
+            var x = new iD.osmNode({id: 'x', loc: [4, 4]});
+            var b = new iD.osmNode({id: 'b', loc: [0, 8]});
+            var e = new iD.osmNode({id: 'e', loc: [8, 0]});
+            var f = new iD.osmNode({id: 'f', loc: [8, 8]});
+            var ring1 = [a, x, b, a];
+            var ring2 = [x, e, f, x];
+            expect(iD.geoHasLineIntersections(ring1, ring2, 'a')).toBe(false);
+            expect(iD.geoHasLineIntersections(ring1, ring2, 'b')).toBe(false);
+            expect(iD.geoHasLineIntersections(ring2, ring1, 'e')).toBe(false);
+            expect(iD.geoHasLineIntersections(ring2, ring1, 'f')).toBe(false);
+        });
+
+        it('returns true if a node of one ring lies on an edge of the other', function() {
+            //        c
+            //       / \
+            //  d --x-- e
+            //     /   \
+            //    a --- b
+            var a = new iD.osmNode({id: 'a', loc: [2, 2]});
+            var b = new iD.osmNode({id: 'b', loc: [6, 2]});
+            var c = new iD.osmNode({id: 'c', loc: [4, 6]});
+            var d = new iD.osmNode({id: 'd', loc: [0, 4]});
+            var e = new iD.osmNode({id: 'e', loc: [8, 4]});
+            var f = new iD.osmNode({id: 'f', loc: [8, 8]});
+            var ring1 = [a, b, c, a];
+            var ring2 = [d, e, f, d];
+            expect(iD.geoHasLineIntersections(ring1, ring2, 'a')).toBe(true);
+            expect(iD.geoHasLineIntersections(ring1, ring2, 'b')).toBe(true);
+        });
     });
 
     describe('geoHasSelfIntersections', function() {
