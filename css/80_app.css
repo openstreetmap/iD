@@ -4880,9 +4880,9 @@ img.tile-debug {
 .map-footer-bar {
     pointer-events: all;
     display: block;
-    height: 2.5em;
+    min-height: 2.5em;
+    height: auto;
     position: relative;
-    overflow: hidden;
 }
 
 .main-footer-wrap,
