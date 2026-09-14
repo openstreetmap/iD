@@ -39,7 +39,7 @@ export function uiFeatureInfo(context) {
                     tooltipBehavior.hide();
                     d3_event.preventDefault();
                     // open the Map Data pane and scroll to Map Features section
-                    var pane = context.container().select('.map-panes .map-data-pane');
+                    const pane = context.container().select('.map-panes .map-data-pane');
                     context.ui().togglePanes(pane);
                     var section = pane.select('.section-map-features');
                     if (!section.empty()) {
