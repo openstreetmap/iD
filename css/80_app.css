@@ -4882,6 +4882,7 @@ img.tile-debug {
     display: block;
     height: 2.5em;
     position: relative;
+    overflow: hidden;
 }
 
 .main-footer-wrap,
