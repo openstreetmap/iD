@@ -1004,7 +1004,7 @@ en:
             scale_factor: "`{@2x}` or `{r}`: resolution scale factor"
         example: "Example:"
       template:
-        placeholder: Enter a url template
+        placeholder: Enter a URL template
     custom_data:
       tooltip: Edit custom data layer
       header: Custom Map Data Settings
@@ -1014,7 +1014,7 @@ en:
       or: "Or"
       url:
         instructions: "Enter a data file URL or vector tile URL template. Valid tokens are:\n   {zoom} or {z}, {x}, {y} for Z/X/Y tile scheme"
-        placeholder: Enter a url
+        placeholder: Enter a URL
   preferences:
     title: Preferences
     description: Preferences
