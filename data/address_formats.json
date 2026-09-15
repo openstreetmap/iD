@@ -175,8 +175,7 @@
     "countryCodes": ["tr"],
     "format": [
       ["neighbourhood"],
-      ["street+place", "housenumber"],
-      ["postcode", "district", "city"]
+      ["street+place", "housenumber"]
     ]
   },
   {
