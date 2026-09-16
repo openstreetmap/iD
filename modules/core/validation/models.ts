@@ -126,6 +126,7 @@ export class validationIssue<T = unknown> {
 
 export class validationIssueFix<T = unknown> {
     title: LocalizedTextRenderer;
+    tooltip?: LocalizedTextRenderer;
     id?: string;
     onClick?(this: validationIssueFix<T>, context: iD.Context, completionHandler: ()=> void): void;
     disabledReason?: string;
@@ -139,6 +140,7 @@ export class validationIssueFix<T = unknown> {
 
     constructor(attrs: Omit<validationIssueFix<T>, 'issue'>) {
         this.title = attrs.title;                   // Required
+        this.tooltip = attrs.tooltip;               // Optional
         this.id = attrs.id;                         // Optional
         this.onClick = attrs.onClick;               // Optional - the function to run to apply the fix
         this.disabledReason = attrs.disabledReason; // Optional - a string explaining why the fix is unavailable, if any

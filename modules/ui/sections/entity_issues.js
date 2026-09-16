@@ -7,6 +7,7 @@ import { t } from '../../core/localizer';
 import { utilHighlightEntities } from '../../util';
 import { uiSection } from '../section';
 import { validationIssue } from '../../core/validation';
+import { uiTooltip } from '../tooltip';
 
 
 export function uiSectionEntityIssues(context) {
@@ -256,6 +257,13 @@ export function uiSectionEntityIssues(context) {
                     return d.disabledReason;
                 }
                 return null;
+            })
+            .each(function(d) {
+                if (d.tooltip) {
+                    d3_select(this).call(
+                        uiTooltip().title(() => d.tooltip)
+                    );
+                }
             });
     }
 
