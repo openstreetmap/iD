@@ -74,7 +74,8 @@ export const validationDisconnectedWay: CreateValidator = () => {
                 }));
             } else {
                 fixes.push(new validationIssueFix({
-                    title: t.append('issues.fix.connect_features.title')
+                    title: t.append('issues.fix.connect_features_manually.title'),
+                    tooltip: t.append('issues.fix.connect_features_manually.tooltip'),
                 }));
             }
 
