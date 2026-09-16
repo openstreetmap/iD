@@ -145,7 +145,7 @@ export function svgMapillaryImages(projection: Projection, context: coreContext,
 
         if (!showsPano || !showsFlat) {
             sequences = sequences.filter(function(sequence) {
-                if (Object.hasOwnProperty.call(sequence.properties, 'is_pano')) {
+                if (Object.hasOwn(sequence.properties, 'is_pano')) {
                     if (sequence.properties.is_pano) return showsPano;
                     return showsFlat;
                 }
