@@ -48,6 +48,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Allow (address) points at the same coordinate if they have different `addr:floor` ([#8424])
 * Implement functionality to show tooltips for individual validation fixes.
 * Improve wording for "connect the features (manually)" fix for routing-islands validator, and show tooltip with further instructions ([#8402])
+* Reduce false positives in _disconnected ways_ validator: Consider cases where locations are accessible via a `man_made=pier/quay`, `waterway=access_point` or `aeroway=airstrip/helipad` ([#12880])
 #### :bug: Bugfixes
 * Fix exceptions when resizing the browser tab when nothing is selected ([#12800], thanks [@k-yle])
 * Allow tags like `not:*:wikidata` to have multiple values ([#12736], thanks [@k-yle])
@@ -67,6 +68,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#12800]: https://github.com/openstreetmap/iD/pull/12800
 [#12828]: https://github.com/openstreetmap/iD/pull/12828
 [#12830]: https://github.com/openstreetmap/iD/pull/12830
+[#12880]: https://github.com/openstreetmap/iD/pull/12880
 [@Geo-2695]: https://github.com/Geo-2695
 [@hemaksh2007jain-bit]: https://github.com/hemaksh2007jain-bit
 
