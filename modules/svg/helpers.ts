@@ -166,7 +166,7 @@ export function svgPath(projection: Projection, graph?: coreGraph, isArea?: bool
     const path = d3_geoPath()
         .projection({stream: function(output) { return project(clip(output)); }});
 
-    const svgpath = function(entity: osmWay) {
+    const svgpath = function(entity: OsmEntity) {
         if (entity.id in cache) {
             return cache[entity.id];
         } else {
