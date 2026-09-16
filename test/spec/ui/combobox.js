@@ -290,7 +290,9 @@ describe('uiCombobox', function() {
         simulateKeypress('b');
         expect(body.selectAll('.combobox-option').size()).toEqual(3);
 
-        await new Promise(resolve => setTimeout(resolve, 300));
+        await new Promise(resolve => {
+            setTimeout(resolve, 300);
+        });
         expect(body.selectAll('.combobox-option').size()).toEqual(3);
     });
 
@@ -300,7 +302,9 @@ describe('uiCombobox', function() {
         input.node().dispatchEvent(new MouseEvent('mousedown', { button: 0, bubbles: true }));
         input.node().dispatchEvent(new MouseEvent('mouseup', { button: 0, bubbles: true }));
 
-        await new Promise(resolve => setTimeout(resolve, 300));
+        await new Promise(resolve => {
+            setTimeout(resolve, 300);
+        });
         expect(body.selectAll('.combobox-option').size()).toEqual(1);
         expect(body.selectAll('.combobox-option').text()).toEqual('test');
     });
