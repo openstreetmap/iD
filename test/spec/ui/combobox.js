@@ -273,4 +273,35 @@ describe('uiCombobox', function() {
         simulateKeypress('↩');
         expect(body.selectAll('.combobox').size()).toEqual(0);
     });
+
+    it('filters entries when activating if fetchValueOnOpen is true', function() {
+        input.property('value', 'test').call(combobox.data(data).fetchValueOnOpen(true));
+        focusTypeahead(input);
+        simulateKeypress('↓');
+        expect(body.selectAll('.combobox-option').size()).toEqual(1);
+        expect(body.selectAll('.combobox-option').text()).toEqual('test');
+    });
+
+    it('does not overwrite typed text when mouseup delay fires', async () => {
+        input.call(combobox.data(data));
+        input.node().focus();
+        input.node().dispatchEvent(new MouseEvent('mousedown', { button: 0, bubbles: true }));
+        input.node().dispatchEvent(new MouseEvent('mouseup', { button: 0, bubbles: true }));
+        simulateKeypress('b');
+        expect(body.selectAll('.combobox-option').size()).toEqual(3);
+
+        await new Promise(resolve => setTimeout(resolve, 300));
+        expect(body.selectAll('.combobox-option').size()).toEqual(3);
+    });
+
+    it('fetches matching value on mouseup when fetchValueOnOpen is true', async () => {
+        input.property('value', 'test').call(combobox.data(data).fetchValueOnOpen(true));
+        input.node().focus();
+        input.node().dispatchEvent(new MouseEvent('mousedown', { button: 0, bubbles: true }));
+        input.node().dispatchEvent(new MouseEvent('mouseup', { button: 0, bubbles: true }));
+
+        await new Promise(resolve => setTimeout(resolve, 300));
+        expect(body.selectAll('.combobox-option').size()).toEqual(1);
+        expect(body.selectAll('.combobox-option').text()).toEqual('test');
+    });
 });

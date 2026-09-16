@@ -436,6 +436,7 @@ export function uiSectionRawTagEditor(id, context) {
         var geometry = context.graph().geometry(_entityIDs[0]);
 
         key.call(uiCombobox(context, 'tag-key')
+            .fetchValueOnOpen(true)
             .fetcher(function(value, callback) {
                 taginfo.keys({
                     debounce: true,
@@ -454,6 +455,7 @@ export function uiSectionRawTagEditor(id, context) {
             }));
 
         value.call(uiCombobox(context, 'tag-value')
+            .fetchValueOnOpen(true)
             .fetcher(function(value, callback) {
                 taginfo.values({
                     debounce: true,
