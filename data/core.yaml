@@ -1783,7 +1783,7 @@ en:
         title: Connect the features
       connect_features_manually:
         title: Connect the features manually
-        tooltip:  For example by mapping missing sections of roads or paths, or fixing disconnected road intersections.
+        tooltip: For example by mapping missing sections of roads or paths, or fixing disconnected road intersections.
       connect_using_crossing:
         title: Connect using a crossing
       connect_using_ford:
