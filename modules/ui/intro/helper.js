@@ -180,7 +180,7 @@ function slugify(text) {
 export var missingStrings = {};
 function checkKey(key, text) {
     if (t(key, { default: undefined}) === undefined) {
-        if (missingStrings.hasOwnProperty(key)) return;  // warn once
+        if (Object.prototype.hasOwnProperty.call(missingStrings, key)) return;  // warn once
         missingStrings[key] = text;
         var missing = key + ': ' + text;
         if (typeof console !== 'undefined') console.log(missing); // eslint-disable-line

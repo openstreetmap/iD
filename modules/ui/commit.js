@@ -478,13 +478,13 @@ export function uiCommit(context) {
 
 
     function changeTags(_, changed, onInput) {
-        if (changed.hasOwnProperty('comment')) {
+        if (Object.prototype.hasOwnProperty.call(changed, 'comment')) {
             if (!onInput) {
                 prefs('comment', changed.comment);
                 prefs('commentDate', Date.now());
             }
         }
-        if (changed.hasOwnProperty('source')) {
+        if (Object.prototype.hasOwnProperty.call(changed, 'source')) {
             if (changed.source === undefined) {
                 prefs('source', null);
             } else if (!onInput) {
@@ -574,7 +574,7 @@ export function uiCommit(context) {
 
         if (!onInput) {
             // when changing the comment, override hashtags with any found in comment.
-            var commentOnly = changed.hasOwnProperty('comment') && (changed.comment !== '');
+            var commentOnly = Object.prototype.hasOwnProperty.call(changed, 'comment') && (changed.comment !== '');
             var arr = findHashtags(tags, commentOnly);
             if (arr.length) {
                 tags.hashtags = context.cleanTagValue(arr.join(';'));

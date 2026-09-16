@@ -197,7 +197,7 @@ export function coreValidator(context) {
         // In the head cache, only count features that the user is responsible for - #8632
         // For example, a user can undo some work and an issue will still present in the
         // head graph, but we don't want to credit the user for causing that issue.
-        const userModified = (issue.entityIds || []).some(id => _completeDiff.hasOwnProperty(id));
+        const userModified = (issue.entityIds || []).some(id => Object.prototype.hasOwnProperty.call(_completeDiff, id));
         if (opts.what === 'edited' && !userModified) return;   // present in head but user didn't touch it
 
         if (!filter(issue)) return;
@@ -677,7 +677,7 @@ export function coreValidator(context) {
         // Check if the user did something to one of the entities involved in this issue.
         // (This issue could involve multiple entities, e.g. disconnected routable features)
         const issue = _baseCache.issuesByIssueID[issueID];
-        const userModified = (issue.entityIds || []).some(id => _completeDiff.hasOwnProperty(id));
+        const userModified = (issue.entityIds || []).some(id => Object.prototype.hasOwnProperty.call(_completeDiff, id));
 
         if (userModified && !_headCache.issuesByIssueID[issueID]) {  // issue seems fixed
           _resolvedIssueIDs.add(issueID);

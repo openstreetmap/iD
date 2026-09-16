@@ -159,7 +159,7 @@ export class coreGraph {
                     id = entity.nodes[j];
                     for (k = 1; k < stack.length; k++) {
                         var ents = stack[k].entities;
-                        if (ents.hasOwnProperty(id) && ents[id] === undefined) {
+                        if (Object.prototype.hasOwnProperty.call(ents, id) && ents[id] === undefined) {
                             delete ents[id];
                         }
                     }
@@ -178,7 +178,7 @@ export class coreGraph {
         Object.keys(this._parentWays).forEach((child) => {
             if (base.parentWays[child]) {
                 base.parentWays[child].forEach((id) => {
-                    if (!this.entities.hasOwnProperty(id)) {
+                    if (!Object.prototype.hasOwnProperty.call(this.entities, id)) {
                         this._parentWays[child].add(id);
                     }
                 });
@@ -188,7 +188,7 @@ export class coreGraph {
         Object.keys(this._parentRels).forEach((child) => {
             if (base.parentRels[child]) {
                 base.parentRels[child].forEach((id) => {
-                    if (!this.entities.hasOwnProperty(id)) {
+                    if (!Object.prototype.hasOwnProperty.call(this.entities, id)) {
                         this._parentRels[child].add(id);
                     }
                 });

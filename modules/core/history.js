@@ -395,7 +395,7 @@ export function coreHistory(context) {
 
         // restore history state to a given checkpoint or reset completely
         reset: function(key) {
-            if (key !== undefined && _checkpoints.hasOwnProperty(key)) {
+            if (key !== undefined && Object.prototype.hasOwnProperty.call(_checkpoints, key)) {
                 _stack = _checkpoints[key].stack;
                 _index = _checkpoints[key].index;
             } else {
@@ -480,7 +480,7 @@ export function coreHistory(context) {
                     var nrw = match[1];
                     var permID;
                     do { permID = nrw + (++nextID[nrw]); }
-                    while (baseEntities.hasOwnProperty(permID));
+                    while (Object.prototype.hasOwnProperty.call(baseEntities, permID));
 
                     copy.id = permID;
                     permIDs[source.id] = permID;
