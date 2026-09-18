@@ -78,6 +78,11 @@ export function uiSectionRawTagEditor(id, context) {
         // append blank row last
         rowData.push({ index: rowData.length, key: '', value: '' });
 
+        // How wide the key column needs to be, in characters, to show every key
+        // in full. The stylesheet uses this to keep the key column from taking
+        // up space that the values could use - #12859
+        const keyColumnSize = Math.max(...rowData.map(d => d.key.length)) + 1;
+
 
         // View Options
         var options = wrap.selectAll('.raw-tag-options')
@@ -265,6 +270,7 @@ export function uiSectionRawTagEditor(id, context) {
             });
 
         items.selectAll('input.key')
+            .attr('size', keyColumnSize)
             .attr('title', function(d) { return d.key; })
             .attr('placeholder', function(d) {
                 return d.key === '' ? t('inspector.add_tag') : null;
