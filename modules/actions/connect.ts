@@ -119,6 +119,17 @@ export function actionConnect(nodeIDs: NodeId[]): Action {
             var parents = graph.parentWays(node);
             for (j = 0; j < parents.length; j++) {
                 var parent = parents[j];
+
+                var commonNodes: NodeId[] = [];
+                for (k = 0; k < nodeIDs.length; k++) {
+                    if (parent.nodes.indexOf(nodeIDs[k]) !== -1) {
+                        commonNodes.push(nodeIDs[k]);
+                    }
+                }
+                if (commonNodes.length > 1 && parent.isClosed() && !parent.areAdjacent(commonNodes[0], commonNodes[1])) {
+                    return 'paths_intersect';
+                }
+
                 relations = graph.parentRelations(parent);
 
                 for (k = 0; k < relations.length; k++) {
