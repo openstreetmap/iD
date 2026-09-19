@@ -1,7 +1,6 @@
 /* eslint-disable no-console */
 import fs from 'node:fs';
 import { styleText } from 'node:util';
-import prettyStringify from 'json-stringify-pretty-compact';
 import shell from 'shelljs';
 import { load as loadYaml } from 'js-yaml';
 import { pull } from 'es-toolkit/compat';
@@ -29,11 +28,11 @@ let _currBuild = null;
 
 // if called directly, do the thing.
 if (process.argv[1].indexOf('build_data.js') > -1) {
-  buildData();
+  await buildData();
 }
 
 
-function buildData() {
+async function buildData() {
   if (_currBuild) return _currBuild;
 
   const START = '🏗   ' + styleText('yellow', 'Building data...');
@@ -57,7 +56,6 @@ function buildData() {
 
   // Start clean
   shell.rm('-f', [
-    'data/territory_languages.json',
     'dist/locales/en.json',
     'dist/data/*',
     'svg/fontawesome/*.svg',
@@ -78,12 +76,11 @@ function buildData() {
   readQAIssueIcons(faIcons);
 
   let territoryLanguages = generateTerritoryLanguages();
-  fs.writeFileSync('data/territory_languages.json', prettyStringify(territoryLanguages, { maxLength: 9999 }) );
+  fs.writeFileSync('dist/data/territory_languages.min.json', JSON.stringify(territoryLanguages) );
 
-  writeEnJson();
+  await writeEnJson();
 
-  const languageInfo = languageNames.langNamesInNativeLang;
-  fs.writeFileSync('data/languages.json', prettyStringify(languageInfo, { maxLength: 200 }));
+  const languageInfo = await languageNames.getLangNamesInNativeLang();
   fs.writeFileSync('dist/data/languages.min.json', JSON.stringify(languageInfo));
 
   // Save individual data files
@@ -91,11 +88,9 @@ function buildData() {
     minifyJSON('data/address_formats.json', 'dist/data/address_formats.min.json'),
     minifyJSON('data/imagery.json', 'dist/data/imagery.min.json'),
     minifyJSON('data/intro_graph.json', 'dist/data/intro_graph.min.json'),
-    minifyJSON('data/languages.json', 'dist/data/languages.min.json'),
     minifyJSON('data/phone_formats.json', 'dist/data/phone_formats.min.json'),
     minifyJSON('data/qa_data.json', 'dist/data/qa_data.min.json'),
     minifyJSON('data/shortcuts.json', 'dist/data/shortcuts.min.json'),
-    minifyJSON('data/territory_languages.json', 'dist/data/territory_languages.min.json'),
     Promise.all([
       // Fetch the icons that are needed by the expected tagging schema version
       fetchOrRequire(`${presetsUrl}/dist/presets.min.json`),
@@ -132,6 +127,7 @@ function buildData() {
     })
   ];
 
+  // eslint-disable-next-line require-atomic-updates -- false positive
   return _currBuild =
     Promise.all(tasks)
     .then(() => {
@@ -204,7 +200,7 @@ function writeEnJson() {
   const readManualImagery = fs.readFileSync('data/manual_imagery.json', 'utf8');
 
   return Promise.all([readCoreYaml, readImagery, readCommunity, readManualImagery])
-    .then(data => {
+    .then(async data => {
       let core = loadYaml(data[0]);
       let imagery = loadYaml(data[1]);
       let community = loadYaml(data[2]);
@@ -239,7 +235,7 @@ function writeEnJson() {
 
       enjson.en.imagery = imagery.en.imagery;
       enjson.en.community = community.en;
-      enjson.en.languageNames = languageNames.languageNamesInLanguageOf('en');
+      enjson.en.languageNames = await languageNames.languageNamesInLanguageOf('en');
       enjson.en.scriptNames = languageNames.scriptNamesInLanguageOf('en');
 
       fs.writeFileSync('dist/locales/en.min.json', JSON.stringify(enjson));
