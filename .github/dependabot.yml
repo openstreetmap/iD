@@ -15,6 +15,7 @@ updates:
       exclude:
         - "@waysidemapping/pinhead"
         - "@enzet/roentgen"
+        - "@openstreetmap/id-tagging-schema"
     groups:
       fontawesome:
         patterns:
