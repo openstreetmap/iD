@@ -23,7 +23,7 @@ export function uiFieldAddress(field, context) {
 
     var _entityIDs = [];
     var _tags;
-    var _countryCode;
+    var _countryCodes = []; // sometimes we want to check multiple address hints (e.g. HK vs CN, and CK vs NZ)
     var _addressFormats = [{
         format: [
             ['housenumber', 'street'],
@@ -196,17 +196,18 @@ export function uiFieldAddress(field, context) {
     }
 
 
-    function updateForCountryCode() {
+    function updateForCountryCodes() {
 
-        if (!_countryCode) return;
+        if (!(_countryCodes?.length)) return;
 
-        var addressFormat;
-        for (var i = 0; i < _addressFormats.length; i++) {
-            var format = _addressFormats[i];
-            if (!format.countryCodes) {
-                addressFormat = format;   // choose the default format, keep going
-            } else if (format.countryCodes.indexOf(_countryCode) !== -1) {
-                addressFormat = format;   // choose the country format, stop here
+        // find the country with a usable format
+        const defaultAddressFormat = _addressFormats.find((item) => !item.countryCodes);
+        console.assert(defaultAddressFormat !== undefined); // if undefined, then the config files are wrong.
+        let addressFormat = defaultAddressFormat;
+        for (const currentCountryCode of _countryCodes) {
+            const foundFormat = _addressFormats.find(format => (format.countryCodes?.includes(currentCountryCode)));
+            if (foundFormat) {
+                addressFormat = foundFormat;
                 break;
             }
         }
@@ -365,17 +366,24 @@ export function uiFieldAddress(field, context) {
         var extent = combinedEntityExtent();
 
         if (extent) {
-            var countryCode;
+            var countryCodes = [];
             if (context.inIntro()) {
                 // localize the address format for the walkthrough
-                countryCode = t('intro.graph.countrycode');
+                countryCodes = [t('intro.graph.countrycode')];
             } else {
                 var center = extent.center();
-                countryCode = countryCoder.iso1A2Code(center);
+                // we try to find the territory-level address format
+                // if we dn't have that, we fall back to (sovereign) country-level address format
+                countryCodes = [
+                    countryCoder.iso1A2Code(center, { level: 'territory' }),
+                    countryCoder.iso1A2Code(center),
+                ];
             }
-            if (countryCode) {
-                _countryCode = countryCode.toLowerCase();
-                updateForCountryCode();
+            // country codes can be null/undefined (e.g. unclaimed ocean); we don't want that.
+            countryCodes = countryCodes.filter((item) => !!item);
+            if (countryCodes?.length) {
+                _countryCodes = countryCodes.map((x) => x.toLowerCase());
+                updateForCountryCodes();
             }
         }
     }
@@ -428,8 +436,9 @@ export function uiFieldAddress(field, context) {
 
 
     function getLocalPlaceholder(key) {
-        if (_countryCode) {
-            var localkey = key + '!' + _countryCode;
+        if (_countryCodes) {
+            var firstCountryCode = _countryCodes[0];
+            var localkey = key + '!' + firstCountryCode;
             var tkey = addrField.hasTextForStringId('placeholders.' + localkey) ? localkey : key;
             return addrField.t('placeholders.' + tkey);
         }
