@@ -1011,7 +1011,6 @@ export default {
         if (!note.loc[0] || !note.loc[1] || !note.newComment) return; // location & description required
 
         var comment = note.newComment;
-        if (note.newCategory && note.newCategory !== 'None') { comment += ' #' + note.newCategory; }
 
         var path = '/api/0.6/notes.json?' + utilQsString({ lon: note.loc[0], lat: note.loc[1], text: comment });
 
@@ -1152,7 +1151,7 @@ export default {
                 } else if (k === 'note') {
                     target.note = {};
                     Object.keys(source.note).forEach(function(id) {
-                        target.note[id] = osmNote(source.note[id]);   // copy notes
+                        target.note[id] = new osmNote(source.note[id]);   // copy notes
                     });
                 } else {
                     target[k] = JSON.parse(JSON.stringify(source[k]));   // clone deep
