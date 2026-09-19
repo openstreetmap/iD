@@ -466,6 +466,10 @@ export function coreContext(this: object): coreContext {
   let _mode: Mode;
   context.mode = () => _mode;
   context.enter = (newMode) => {
+    if (document.activeElement && (document.activeElement as HTMLElement).blur) {
+      (document.activeElement as HTMLElement).blur();
+    }
+
     if (_mode) {
       _mode.exit();
       dispatch.call('exit', this, _mode);
