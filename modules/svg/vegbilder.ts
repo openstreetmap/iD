@@ -2,16 +2,21 @@ import { throttle } from 'es-toolkit';
 import { select as d3_select } from 'd3-selection';
 import { svgPath, svgPointTransform } from './helpers';
 import { services } from '../services';
+import type { Projection } from '../geo/raw_mercator';
+import type { Dispatch } from 'd3-dispatch';
+import type { VegbilderImage, VegbilderLineString } from '../services/vegbilder';
+import type { geoExtent } from '../geo';
+import type { coreContext } from '../core';
 
 
-export function svgVegbilder(projection, context, dispatch) {
+export function svgVegbilder(projection: Projection, context: coreContext, dispatch: Dispatch<object>) {
   const throttledRedraw = throttle(() => dispatch.call('change'), 1000);
   const minZoom = 14;
   const minMarkerZoom = 16;
   const minViewfieldZoom = 18;
-  let layer = d3_select(null);
+  let layer: d3.Selection<SVGGElement> = d3_select(null!);
   let _viewerYaw = 0;
-  let _vegbilder;
+  let _vegbilder: typeof services.vegbilder | null;
 
   /**
    * init().
@@ -83,7 +88,7 @@ export function svgVegbilder(projection, context, dispatch) {
     layer.style('display', 'none');
   }
 
-  function click(d3_event, d) {
+  function click(d3_event: MouseEvent, d: VegbilderImage) {
     const service = getService();
     if (!service) return;
 
@@ -101,7 +106,7 @@ export function svgVegbilder(projection, context, dispatch) {
   /**
    * mouseover().
    */
-  function mouseover(d3_event, d) {
+  function mouseover(d3_event: MouseEvent, d: VegbilderImage) {
     const service = getService();
     if (service) service.setStyles(context, d);
   }
@@ -117,9 +122,9 @@ export function svgVegbilder(projection, context, dispatch) {
   /**
    * transform().
    */
-  function transform(d, selected) {
+  function transform(d: VegbilderImage, selected: VegbilderImage) {
     let t = svgPointTransform(projection)(d);
-    let rot = d.ca;
+    let rot = d.ca!;
     if (d === selected) {
       rot += _viewerYaw;
     }
@@ -144,11 +149,11 @@ export function svgVegbilder(projection, context, dispatch) {
     // e.g. during drags or easing.
     if (context.map().isTransformed()) return;
 
-    layer.selectAll('.viewfield-group.currentView')
+    layer.selectAll<SVGGElement, VegbilderImage>('.viewfield-group.currentView')
       .attr('transform', (d) => transform(d, d));
   }
 
-  function filterImages(images, skipDateFilter) {
+  function filterImages(images: VegbilderImage[], skipDateFilter?: boolean) {
     const photoContext = context.photos();
     const fromDateString = photoContext.fromDate();
     const toDateString = photoContext.toDate();
@@ -176,7 +181,7 @@ export function svgVegbilder(projection, context, dispatch) {
     return images;
   }
 
-  function filterSequences(sequences, skipDateFilter) {
+  function filterSequences(sequences: VegbilderLineString[], skipDateFilter?: boolean) {
     const photoContext = context.photos();
     const fromDateString = photoContext.fromDate();
     const toDateString = photoContext.toDate();
@@ -207,15 +212,15 @@ export function svgVegbilder(projection, context, dispatch) {
   /**
    * update().
    */
-  function update() {
+  function update(this: any) {
     const viewer = context.container().select('.photoviewer');
     const selected = viewer.empty() ? undefined : viewer.datum();
     const z = ~~context.map().zoom();
     const showMarkers = (z >= minMarkerZoom);
     const showViewfields = (z >= minViewfieldZoom);
     const service = getService();
-    let sequences = [];
-    let images = [];
+    let sequences: VegbilderLineString[] = [];
+    let images: VegbilderImage[] = [];
 
     if (service) {
       // The WFS-layer for that year or image type may not be loaded after a filter is changed
@@ -232,7 +237,7 @@ export function svgVegbilder(projection, context, dispatch) {
       sequences = filterSequences(sequences);
     }
 
-    let traces = layer.selectAll('.sequences').selectAll('.sequence')
+    let traces = layer.selectAll('.sequences').selectAll<SVGPathElement, VegbilderLineString>('.sequence')
       .data(sequences, d => d.key);
 
     // exit
@@ -247,7 +252,7 @@ export function svgVegbilder(projection, context, dispatch) {
       .attr('d', svgPath(projection).geojson);
 
 
-    const groups = layer.selectAll('.markers').selectAll('.viewfield-group')
+    const groups = layer.selectAll('.markers').selectAll<SVGGElement, VegbilderImage>('.viewfield-group')
       .data(images, (d) => d.key);
 
     // exit
@@ -300,8 +305,8 @@ export function svgVegbilder(projection, context, dispatch) {
       .attr('transform', 'scale(1.5,1.5),translate(-8, -13)')
       .attr('d', viewfieldPath);
 
-    function viewfieldPath() {
-      const d = this.parentNode.__data__;
+    function viewfieldPath(this: SVGPathElement) {
+      const d = this.parentNode!.__data__;
       if (d.is_sphere) {
         return 'M 8,13 m -10,0 a 10,10 0 1,0 20,0 a 10,10 0 1,0 -20,0';
       } else {
@@ -315,11 +320,11 @@ export function svgVegbilder(projection, context, dispatch) {
    * drawImages is the method that is returned (and that runs) every time 'svgStreetside()' is called.
    * 'svgStreetside()' is called from index.js
    */
-  function drawImages(selection) {
+  function drawImages(this: any, selection: d3.Selection<SVGGElement>) {
     const enabled = svgVegbilder.enabled;
     const service = getService();
 
-    layer = selection.selectAll('.layer-vegbilder')
+    layer = selection.selectAll<SVGGElement, 0>('.layer-vegbilder')
       .data(service ? [0] : []);
 
     layer.exit()
@@ -359,7 +364,7 @@ export function svgVegbilder(projection, context, dispatch) {
   /**
    * drawImages.enabled().
    */
-  drawImages.enabled = function (_) {
+  drawImages.enabled = function (_: boolean) {
     if (!arguments.length) return svgVegbilder.enabled;
     svgVegbilder.enabled = _;
     if (svgVegbilder.enabled) {
@@ -380,16 +385,18 @@ export function svgVegbilder(projection, context, dispatch) {
     return !!getService();
   };
 
-  drawImages.rendered = function(zoom) {
+  drawImages.rendered = function(zoom: number) {
     return zoom >= minZoom;
   };
 
-  drawImages.validHere = function(extent, zoom) {
+  drawImages.validHere = function(extent: geoExtent, zoom: number) {
     return zoom >= (minZoom - 2)
-        && getService().validHere(extent);
+        && getService()!.validHere(extent);
   };
 
   init();
 
   return drawImages;
 }
+svgVegbilder.enabled = false;
+svgVegbilder.initialized = false;
