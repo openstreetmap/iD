@@ -3,6 +3,7 @@ import { diff3Merge } from 'node-diff3';
 import type { Discarded } from '@openstreetmap/id-tagging-schema';
 import { t } from '../core/localizer';
 import { actionDeleteMultiple } from './delete_multiple';
+import { actionRevert } from './revert';
 import { createEntity, type osmNode, type EntityId, type NodeId, type OsmEntity, type osmRelation, type osmWay } from '../osm';
 import { utilArrayUnion, utilArrayUniq } from '../util';
 import type { coreGraph } from '../core';
@@ -118,6 +119,8 @@ export function actionMergeRemoteChanges(id: EntityId, localGraph: coreGraph, re
             var target;
 
             if (_option === 'force_remote' && remote && remote.visible) {
+                // skip if this feature didn't actually change
+                if (local && local.version === remote.version) continue;
                 updates.replacements.push(remote);
 
             } else if (_option === 'force_local' && local) {
@@ -220,8 +223,29 @@ export function actionMergeRemoteChanges(id: EntityId, localGraph: coreGraph, re
     const action: ActionMergeRemoteChanges = function(graph) {
         var updates = { replacements: [], removeIds: [] };
         var base = graph.base().entities[id]!;
-        var local = localGraph.entity(id);
+        var local = localGraph.hasEntity(id);
         var remote = remoteGraph.entity(id);
+
+        // if it was deleted locally
+        if (!local) {
+            if (!remote.visible) {
+                // both us and them deleted it. So revert our deletion.
+                return actionRevert(id)(graph);
+            }
+
+            if (_option === 'force_local') {
+                // keep our deletion
+                return actionDeleteMultiple([id])(graph);
+            } else if (_option === 'force_remote') {
+                // revert the graph back the base version
+                // (which uploader.ts rebased into the graph)
+                return actionRevert(id)(graph);
+            } else {
+                _conflicts.push(t.append('merge_remote_changes.conflict.deleted_locally', { user: user(remote.user) }));
+                return graph; // do nothing
+            }
+        }
+
         var target = createEntity(local, { version: remote.version }) as OsmEntity;
 
         // delete/undelete

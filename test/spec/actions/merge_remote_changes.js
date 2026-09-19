@@ -542,4 +542,80 @@ describe('iD.actionMergeRemoteChanges', function () {
         });
     });
 
+    describe('local deletions', () => {
+        it('local_delete + remote_edit -> graph unchanged, conflict generated', () => {
+            const remote = base.entity('a').update({ tags: { foo: 'foo_remote' }, version: '2' });
+            const localGraph = new iD.coreGraph(base).remove(base.entity('a'));
+            const remoteGraph = makeGraph([remote]);
+            const action = iD.actionMergeRemoteChanges('a', localGraph, remoteGraph, discardTags);
+
+            expect(action(localGraph)).toStrictEqual(localGraph); // no change
+            expect(action.conflicts()).toHaveLength(1);
+        });
+
+        it('local_delete + remote_delete -> revert local deletion', () => {
+            const remote = base.entity('a').update({ visible: false, version: '2' });
+            const localGraph = new iD.coreGraph(base).remove(base.entity('a'));
+            const remoteGraph = makeGraph([remote]);
+            const action = iD.actionMergeRemoteChanges('a', localGraph, remoteGraph, discardTags);
+            const result = action(localGraph);
+
+            expect(result.entity('a')).toStrictEqual(base.entity('a'));
+            expect(action.conflicts()).toHaveLength(0);
+        });
+
+        it('local_delete + remote_edit (with force_local) -> delete', () => {
+            const remote = base.entity('a').update({ tags: { foo: 'foo_remote' }, version: '2' });
+            const localGraph = new iD.coreGraph(base).remove(base.entity('a'));
+            const remoteGraph = makeGraph([remote]);
+            const action = iD.actionMergeRemoteChanges('a', localGraph, remoteGraph, discardTags)
+                .withOption('force_local');
+            const result = action(localGraph);
+
+            expect(result.hasEntity('a')).toBeUndefined();
+            expect(action.conflicts()).toHaveLength(0);
+        });
+
+        it('local_delete of a relation (with force_remote) -> restores its members too', () => {
+            const remote = base.entity('r').update({ tags: { type: 'multipolygon', foo: 'foo_remote' }, version: '2' });
+            const deleted = ['r', 'w1', 'w2', 'p1', 'p2', 'p3', 'p4', 'q1', 'q2', 'q3', 'q4'];
+            const localGraph = deleted.reduce((graph, id) => graph.remove(base.entity(id)), new iD.coreGraph(base));
+            const remoteGraph = makeGraph([remote]);
+            const action = iD.actionMergeRemoteChanges('r', localGraph, remoteGraph, discardTags)
+                .withOption('force_remote');
+            const result = action(localGraph);
+
+            for (const id of deleted) {
+                expect(result.entity(id)).toStrictEqual(base.entity(id));
+            }
+            expect(action.conflicts()).toHaveLength(0);
+        });
+
+        it('local_delete of a relation + remote_delete -> restores its members too', () => {
+            const remote = base.entity('r').update({ visible: false, version: '2' });
+            const deleted = ['r', 'w1', 'w2', 'p1', 'p2', 'p3', 'p4', 'q1', 'q2', 'q3', 'q4'];
+            const localGraph = deleted.reduce((graph, id) => graph.remove(base.entity(id)), new iD.coreGraph(base));
+            const remoteGraph = makeGraph([remote]);
+            const action = iD.actionMergeRemoteChanges('r', localGraph, remoteGraph, discardTags);
+            const result = action(localGraph);
+
+            for (const id of deleted) {
+                expect(result.entity(id)).toStrictEqual(base.entity(id));
+            }
+            expect(action.conflicts()).toHaveLength(0);
+        });
+
+        it('local_delete + remote_edit (with force_remote) -> revert local deletion', () => {
+            const remote = base.entity('a').update({ tags: { foo: 'foo_remote' }, version: '2' });
+            const localGraph = new iD.coreGraph(base).remove(base.entity('a'));
+            const remoteGraph = makeGraph([remote]);
+            const action = iD.actionMergeRemoteChanges('a', localGraph, remoteGraph, discardTags)
+                .withOption('force_remote');
+            const result = action(localGraph);
+
+            expect(result.hasEntity('a')).toStrictEqual(base.hasEntity('a'));
+            expect(action.conflicts()).toHaveLength(0);
+        });
+    });
+
 });

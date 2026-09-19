@@ -248,7 +248,7 @@ export function uiConflicts(context) {
             .attr('name', function(d) { return d.id; })
             .on('change', function(d3_event, d) {
                 var ul = this.parentNode.parentNode.parentNode;
-                ul.__data__.chosen = d.id;
+                ul.__data__.chosen = d.choiceType;
                 choose(d3_event, ul, d);
             });
 
@@ -261,7 +261,7 @@ export function uiConflicts(context) {
             .merge(choices)
             .each(function(d) {
                 var ul = this.parentNode;
-                if (ul.__data__.chosen === d.id) {
+                if (ul.__data__.chosen === d.choiceType) {
                     choose(null, ul, d);
                 }
             });
@@ -314,10 +314,10 @@ export function uiConflicts(context) {
     //     id: id,
     //     name: entityName(local),
     //     details: merge.conflicts(),
-    //     chosen: 1,
+    //     chosen: ConflictChoiceType.KEEP_LOCAL,
     //     choices: [
-    //         choice(id, keepMine, forceLocal),
-    //         choice(id, keepTheirs, forceRemote)
+    //         choice(ConflictChoiceType.KEEP_LOCAL, id, keepMine, forceLocal),
+    //         choice(ConflictChoiceType.KEEP_REMOTE, id, keepTheirs, forceRemote)
     //     ]
     // }
     conflicts.conflictList = function(_) {

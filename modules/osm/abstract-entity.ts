@@ -75,6 +75,8 @@ export abstract class OsmAbstractEntity implements OsmEntityProps {
 
     abstract isDegenerate(): boolean;
 
+    abstract children(): EntityId[];
+
     abstract asGeoJSON(resolver: coreGraph): GeoJSON;
 
     abstract asJXON(changesetId: EntityId): unknown;
