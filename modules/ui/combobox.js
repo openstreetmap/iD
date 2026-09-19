@@ -33,6 +33,7 @@ export function uiCombobox(context, klass) {
     var _canAutocomplete = true;
     var _caseSensitive = false;
     var _cancelFetch = false;
+    var _fetchValueOnOpen = false;
     var _minItems = 1;
     var _tDown = 0;
     var _mouseEnterHandler, _mouseLeaveHandler;
@@ -122,9 +123,14 @@ export function uiCombobox(context, klass) {
             var combo = container.selectAll('.combobox');
             if (combo.empty() || combo.datum() !== input.node()) {
                 var tOrig = _tDown;
+                var valOrig = utilGetSetValue(input);
                 window.setTimeout(function() {
                     if (tOrig !== _tDown) return;   // exit if user double clicked
-                    fetchComboData('', function() {
+                    if (input.node() !== document.activeElement) return;   // exit if input blurred
+                    if (utilGetSetValue(input) !== valOrig) return;   // exit if user typed during delay
+
+                    var q = _fetchValueOnOpen ? utilGetSetValue(input) : '';
+                    fetchComboData(q, function() {
                         show();
                         render();
                     });
@@ -137,7 +143,8 @@ export function uiCombobox(context, klass) {
 
 
         function focus() {
-            fetchComboData('');   // prefetch values (may warm taginfo cache)
+            var q = _fetchValueOnOpen ? utilGetSetValue(input) : '';
+            fetchComboData(q);   // prefetch values (may warm taginfo cache)
         }
 
 
@@ -513,6 +520,12 @@ export function uiCombobox(context, klass) {
     combobox.fetcher = function(val) {
         if (!arguments.length) return _fetcher;
         _fetcher = val;
+        return combobox;
+    };
+
+    combobox.fetchValueOnOpen = function(val) {
+        if (!arguments.length) return _fetchValueOnOpen;
+        _fetchValueOnOpen = val;
         return combobox;
     };
 
