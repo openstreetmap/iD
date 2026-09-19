@@ -74,6 +74,7 @@ export const osmAreaKeysExceptions: TagDictionary<boolean> = {
         platform: true
     },
     railway: {
+        halt: true,
         platform: true,
         roundhouse: true,
         station: true,
