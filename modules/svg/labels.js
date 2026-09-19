@@ -166,7 +166,7 @@ export function svgLabels(projection, context) {
         drawPointLabels(selection, labels, filter, classes);
 
         function hasText(d) {
-            return d.position.hasOwnProperty('x') && d.position.hasOwnProperty('y');
+            return Object.prototype.hasOwnProperty.call(d.position, 'x') && Object.prototype.hasOwnProperty.call(d.position, 'y');
         }
     }
 

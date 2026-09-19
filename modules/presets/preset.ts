@@ -229,7 +229,7 @@ export function presetPreset(
 
   _this.isFallback = () => {
     const tagCount = Object.keys(_this.tags).length;
-    return tagCount === 0 || (tagCount === 1 && _this.tags.hasOwnProperty('area'));
+    return tagCount === 0 || (tagCount === 1 && Object.prototype.hasOwnProperty.call(_this.tags, 'area'));
   };
 
 
@@ -305,7 +305,7 @@ export function presetPreset(
     // 1. chosen preset could be either an area or a line (`barrier=city_wall`)
     // 2. chosen preset doesn't have a key in osmAreaKeys (`railway=station`),
     //    and is not an "exceptional area" tag (e.g. `waterway=dam`)
-    if (!addTags.hasOwnProperty('area')) {
+    if (!Object.prototype.hasOwnProperty.call(addTags, 'area')) {
       delete tags.area;
       if (geometry === 'area') {
         let needsAreaTag = true;

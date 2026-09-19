@@ -123,7 +123,7 @@ describe('iD.coreGraph', function() {
             graph.rebase([w2], [graph]);
 
             expect(graph.parentWays(n)).toEqual([w1, w2]);
-            expect(graph._parentWays.hasOwnProperty('n')).toBe(false);
+            expect(Object.prototype.hasOwnProperty.call(graph._parentWays, 'n')).toBe(false);
         });
 
         it('avoids adding duplicate parentWays', function () {
@@ -194,7 +194,7 @@ describe('iD.coreGraph', function() {
             graph.rebase([r2], [graph]);
 
             expect(graph.parentRelations(n)).toEqual([r1, r2]);
-            expect(graph._parentRels.hasOwnProperty('n')).toBe(false);
+            expect(Object.prototype.hasOwnProperty.call(graph._parentRels, 'n')).toBe(false);
         });
 
         it('avoids re-adding a modified relation as a parent relation', function() {

@@ -501,7 +501,7 @@ export function uiSectionRawTagEditor(id, context) {
         var kOld = d.key;
 
         // exit if we are currently about to delete this row anyway - #6366
-        if (_pendingChange && _pendingChange.hasOwnProperty(kOld) && _pendingChange[kOld] === undefined) return;
+        if (_pendingChange && Object.prototype.hasOwnProperty.call(_pendingChange, kOld) && _pendingChange[kOld] === undefined) return;
 
         var kNew = context.cleanTagKey(this.value.trim());
 
@@ -566,7 +566,7 @@ export function uiSectionRawTagEditor(id, context) {
         if (Array.isArray(d.value) && !this.value) return;
 
         // exit if we are currently about to delete this row anyway - #6366
-        if (_pendingChange && _pendingChange.hasOwnProperty(d.key) && _pendingChange[d.key] === undefined) return;
+        if (_pendingChange && Object.prototype.hasOwnProperty.call(_pendingChange, d.key) && _pendingChange[d.key] === undefined) return;
 
         _pendingChange = _pendingChange || {};
 

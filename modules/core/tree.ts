@@ -102,7 +102,7 @@ export function coreTree(head: coreGraph) {
             var entity = entities[i];
             if (!entity.visible) continue;
 
-            if (head.entities.hasOwnProperty(entity.id) || _bboxes[entity.id]) {
+            if (Object.prototype.hasOwnProperty.call(head.entities, entity.id) || _bboxes[entity.id]) {
                 if (!force) {
                     continue;
                 } else if (_bboxes[entity.id]) {

@@ -296,7 +296,7 @@ export class osmNode extends OsmAbstractEntity {
     isOnAddressLine(resolver: coreGraph) {
         return resolver.transient(this, 'isOnAddressLine', () => {
             return resolver.parentWays(this).filter(function(parent) {
-                return parent.tags.hasOwnProperty('addr:interpolation') &&
+                return Object.prototype.hasOwnProperty.call(parent.tags, 'addr:interpolation') &&
                     parent.geometry(resolver) === 'line';
             }).length > 0;
         });

@@ -175,7 +175,7 @@ export function uiEntityEditor(context) {
                     if (typeof v === 'object') {
                         // a "key only" tag change
                         tags[k] = tags[v.oldKey];
-                    } else if (v !== undefined || tags.hasOwnProperty(k)) {
+                    } else if (v !== undefined || Object.prototype.hasOwnProperty.call(tags, k)) {
                         tags[k] = v;
                     }
                 }
@@ -233,7 +233,7 @@ export function uiEntityEditor(context) {
             for (var k in changed) {
                 if (!k) continue;
                 var v = changed[k];
-                if (v !== undefined || tags.hasOwnProperty(k)) {
+                if (v !== undefined || Object.prototype.hasOwnProperty.call(tags, k)) {
                     tags[k] = v;
                 }
             }

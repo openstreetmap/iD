@@ -51,9 +51,9 @@ describe('iD.uiFieldWikipedia', function() {
         var didChange = false;
 
         for (var k in changed) {
-            if (changed.hasOwnProperty(k)) {
+            if (Object.prototype.hasOwnProperty.call(changed, k)) {
                 var v = changed[k];
-                if (tags[k] !== v && (v !== undefined || tags.hasOwnProperty(k))) {
+                if (tags[k] !== v && (v !== undefined || Object.prototype.hasOwnProperty.call(tags, k))) {
                     tags[k] = v;
                     didChange = true;
                 }
