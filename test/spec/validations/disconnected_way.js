@@ -95,8 +95,12 @@ describe('iD.validations.disconnected_way', function() {
         expect(issue.entityIds[0]).toEqual('r-1');
     });
 
-    it('ignores highway with connected entrance vertex', function() {
-        var n1 = new iD.osmNode({ id: 'n-1', loc: [4, 4], tags: { 'entrance': 'yes' } });
+    it.for([
+        { key: 'entrance', value: 'yes' },
+        { key: 'aeroway', value: 'airstrip' },
+        { key: 'aeroway', value: 'helipad' },
+    ])('ignores highway with connected entrance (or similar) vertex', ({key, value}) => {
+        var n1 = new iD.osmNode({ id: 'n-1', loc: [4, 4], tags: { [key]: value } });
         var n2 = new iD.osmNode({ id: 'n-2', loc: [4, 5] });
         var n3 = new iD.osmNode({ id: 'n-3', loc: [5, 5] });
         var w = new iD.osmWay({ id: 'w-1', nodes: ['n-1', 'n-2'], tags: { 'highway': 'unclassified' } });
@@ -144,8 +148,14 @@ describe('iD.validations.disconnected_way', function() {
         expect(validate()).toHaveLength(0);
     });
 
-    it('ignores disconnected aerialway', function () {
-        createWay({ 'aerialway': 'gondola' });
+    it.for([
+        { key: 'aerialway', value: 'gondola' },
+        { key: 'man_made', value: 'pier' },
+        { key: 'man_made', value: 'quay' },
+        { key: 'aeroway', value: 'airstrip' },
+        { key: 'aeroway', value: 'helipad' },
+    ])('ignores disconnected aerialway/pier/airstrip', ({key, value}) => {
+        createWay({ [key]: value });
         expect(validate()).toHaveLength(0);
     });
 
@@ -155,8 +165,33 @@ describe('iD.validations.disconnected_way', function() {
         const n1 = new iD.osmNode({ id: 'n-1', loc: [4, 4], tags: { 'entrance': 'yes' } });
         const n2 = new iD.osmNode({ id: 'n-2', loc: [4, 5] });
         const n3 = new iD.osmNode({ id: 'n-3', loc: [5, 5] });
-        const w = new iD.osmWay({ id: 'w-1', nodes: ['n-1', 'n-2'], tags: { 'aerialway': ' 	gondola' } });
+        const w = new iD.osmWay({ id: 'w-1', nodes: ['n-1', 'n-2'], tags: { 'aerialway': 'gondola' } });
         const w2 = new iD.osmWay({ id: 'w-2', nodes: ['n-2', 'n-3'], tags: { 'highway': 'corridor' } });
+
+        context.perform(
+            iD.actionAddEntity(n1),
+            iD.actionAddEntity(n2),
+            iD.actionAddEntity(n3),
+            iD.actionAddEntity(w),
+            iD.actionAddEntity(w2)
+        );
+
+        expect(validate()).toHaveLength(0);
+    });
+
+    it.for([
+        { key: 'man_made', value: 'pier' },
+        { key: 'man_made', value: 'quay' },
+        { key: 'aeroway', value: 'airstrip' },
+        { key: 'aeroway', value: 'helipad' },
+    ])('ignores path connected to a pier', ({key, value }) => {
+        createWay();
+
+        const n1 = new iD.osmNode({ id: 'n-1', loc: [4, 4] });
+        const n2 = new iD.osmNode({ id: 'n-2', loc: [4, 5] });
+        const n3 = new iD.osmNode({ id: 'n-3', loc: [5, 5] });
+        const w = new iD.osmWay({ id: 'w-1', nodes: ['n-1', 'n-2'], tags: { [key]: value } });
+        const w2 = new iD.osmWay({ id: 'w-2', nodes: ['n-2', 'n-3'], tags: { 'highway': 'path' } });
 
         context.perform(
             iD.actionAddEntity(n1),
