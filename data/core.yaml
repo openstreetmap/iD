@@ -19,6 +19,7 @@ en:
     expand: expand
     collapse: collapse
     plus: add
+    unlock: unlock
   toolbar:
     inspect: Inspect
     undo_redo: Undo / Redo
@@ -768,7 +769,7 @@ en:
     location: Location
     add_fields: "Add field:"
     lock:
-      suggestion: 'The "{label}" field is locked because there is a Wikidata tag. You can delete it or edit the tags in the "Tags" section.'
+      suggestion: 'The "{label}" field is locked because there is a Wikidata tag. Click the lock icon to unlock it for editing.'
     display_name_addr: "{housenumber} {streetOrPlace}"
     display_name_addr_with_unit: "{unit}, {housenumber} {streetOrPlace}"
     display_name:
