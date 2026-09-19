@@ -5,15 +5,29 @@ import { actionChangeTags } from '../actions/change_tags';
 import { osmUrlKeys } from '../osm/tags';
 import { showTagDiffReference } from './outdated_tags';
 import { utilTagDiff, utilIsValidURL as isValidURL } from '../util/util';
-import { presetManager } from '../presets';
+import { presetManager, type presetField } from '../presets';
+import type { CreateValidator, Validator } from '../core/validation/models';
 
-export function validationFormatting(context) {
+interface WebsiteIssueData {
+    key: TagKey;
+    value?: string;
+    count: number;
+    isFixable: boolean;
+    fix: string;
+}
+
+interface WikimediaCommonsIssueData {
+    key: TagKey;
+    fix: string;
+}
+
+export const validationFormatting: CreateValidator = (context) => {
     var type = 'invalid_format';
 
-    var validation = function(entity) {
-        var issues = [];
+    const validation: Validator = function(entity) {
+        const issues: validationIssue<any>[] = [];
 
-        function isValidEmail(email) {
+        function isValidEmail(email: string) {
             // Emails in OSM are going to be official so they should be pretty simple
             // Using negated lists to better support all possible unicode characters (#6494)
             var valid_email = /^[^\(\)\\,":;<>@\[\]]+@[^\(\)\\,":;<>@\[\]\.]+(?:\.[a-z0-9-]+)*$/i;
@@ -22,7 +36,7 @@ export function validationFormatting(context) {
             return (!email || valid_email.test(email));
         }
 
-        function showReferenceEmail(selection) {
+        function showReferenceEmail<T extends HTMLElement>(selection: d3.Selection<T>) {
             selection.selectAll('.issue-reference')
                 .data([0])
                 .enter()
@@ -31,7 +45,7 @@ export function validationFormatting(context) {
                 .call(t.append('issues.invalid_format.email.reference'));
         }
 
-        function isFixableURL(url) {
+        function isFixableURL(url: string) {
             try {
                 // must be a valid URL after adding a protocol
                 const link = new URL(`https://${url}`);
@@ -42,7 +56,7 @@ export function validationFormatting(context) {
             }
         }
 
-        function cleanWikimediaCommonsReference(value, allTags) {
+        function cleanWikimediaCommonsReference(value: string, allTags: Tags) {
             if (!value) return null;
             if (allTags.wikimedia_commons) return null;
             for (const prefix of ['file', 'datei', 'fichier', 'plik']) {
@@ -55,7 +69,7 @@ export function validationFormatting(context) {
             return null;
         }
 
-        function showReferenceWebsite(selection) {
+        function showReferenceWebsite<T extends HTMLElement>(selection: d3.Selection<T>) {
             selection.selectAll('.issue-reference')
                 .data([0])
                 .enter()
@@ -64,34 +78,34 @@ export function validationFormatting(context) {
                 .call(t.append('issues.invalid_format.website.reference'));
         }
 
-        const createWebsiteValidationIssueBase = keyOrField => ({
+        const createWebsiteValidationIssueBase = (keyOrField: string | presetField) => ({
             type: type,
             subtype: 'website',
             severity: 'warning',
             message: function(context) {
-                const entity = context.hasEntity(this.entityIds[0]);
-                return entity ? t.append('issues.invalid_format.website.message' + (this.data?.count > 1 ? '_multi' : ''), {
-                    feature: utilDisplayLabel(entity, context.graph()), site: this.data?.value,
+                const entity = context.hasEntity(this.entityIds![0]);
+                return entity ? t.append('issues.invalid_format.website.message' + (this.data!.count > 1 ? '_multi' : ''), {
+                    feature: utilDisplayLabel(entity, context.graph()),
                     where: typeof keyOrField === 'string'
                         ? selection => selection.append('code').text(keyOrField)
                         : keyOrField.label()
                 }) : '';
             },
             dynamicFixes: function(context) {
-                if (this.data?.count > 1) return [];
-                if (!this.data?.isFixable) return [];
+                if (this.data!.count > 1) return [];
+                if (!this.data!.isFixable) return [];
                 return [{ protocol: 'https', icon: 'temaki-lock' }, { protocol: 'http' }]
                     .filter(fix => isValidURL(fix.protocol + '://' + this.data?.value, true))
                     .map(fix => new validationIssueFix({
                         icon: fix.icon,
                         title: t.append('issues.fix.add_protocol_'+ fix.protocol +'.title'),
                         onClick: function() {
-                            const entityID = this.issue.entityIds[0];
+                            const entityID = this.issue!.entityIds[0];
                             const entity = context.entity(entityID);
                             if (!entity) return;
-                            const key = this.issue.data.key;
-                            const tags = Object.assign({}, entity.tags);
-                            tags[key] = this.issue.data.fix.replace('{protocol}', fix.protocol);
+                            const key = this.issue!.data!.key;
+                            const tags = { ...entity.tags };
+                            tags[key] = this.issue!.data!.fix.replace('{protocol}', fix.protocol);
 
                             context.perform(
                                 actionChangeTags(entityID, tags),
@@ -101,10 +115,10 @@ export function validationFormatting(context) {
                     }));
             },
             entityIds: [entity.id]
-        });
+        }) satisfies Partial<validationIssue<WebsiteIssueData>>;
 
-        function websiteReferenceWithDiff(oldTags, newTags) {
-            return selection => showTagDiffReference(
+        function websiteReferenceWithDiff(oldTags: Tags, newTags: Tags) {
+            return (selection: d3.Selection) => showTagDiffReference(
                 selection,
                 showReferenceWebsite,
                 utilTagDiff(oldTags, newTags)
@@ -149,40 +163,40 @@ export function validationFormatting(context) {
                 reference: isFixable
                     ? websiteReferenceWithDiff(entity.tags, {...entity.tags, [key]: fix.replace('{protocol}', 'https') })
                     : showReferenceWebsite
-            };
+            } satisfies Partial<validationIssue<WebsiteIssueData>>;
         }).filter(Boolean)
-        .forEach(issueData => issues.push(new validationIssue(issueData)));
+        .forEach(issueData => issues.push(new validationIssue<WebsiteIssueData>(issueData)));
 
         const wikimediaCommonsValidationIssueBase = {
             type: type,
             subtype: 'wikimedia_commons',
             message: function(context) {
-                const entity = context.hasEntity(this.entityIds[0]);
+                const entity = context.hasEntity(this.entityIds![0]);
                 return entity ? t.append('issues.invalid_format.wikimedia_commons.message',
-                    { feature: utilDisplayLabel(entity, context.graph()), site: this.data?.value }) : '';
+                    { feature: utilDisplayLabel(entity, context.graph()) }) : '';
             },
             entityIds: [entity.id]
-        };
+        } satisfies Partial<validationIssue<WikimediaCommonsIssueData>>;
 
         if (entity.tags.image) {
             const value = entity.tags.image;
             const fix = cleanWikimediaCommonsReference(value, entity.tags);
             if (fix) {
-                issues.push(new validationIssue({
+                issues.push(new validationIssue<WikimediaCommonsIssueData>({
                     ...wikimediaCommonsValidationIssueBase,
                     severity: 'suggestion',
                     data: { key: 'image', fix },
                     hash: 'image=' + value,
                     dynamicFixes: function(context) {
-                        const wikimedia_commons_reference = this.data?.fix;
+                        const wikimedia_commons_reference = this.data!.fix;
                         return [new validationIssueFix({
                             title: t.append('issues.fix.move_value_to_wikimedia_commons.title'),
                             onClick: function() {
-                                const entityID = this.issue.entityIds[0];
+                                const entityID = this.issue!.entityIds[0];
                                 const entity = context.entity(entityID);
                                 if (!entity) return;
-                                const key = this.issue.data.key;
-                                const tags = Object.assign({}, entity.tags);
+                                const key = this.issue!.data!.key;
+                                const tags = { ...entity.tags };
                                 tags.wikimedia_commons = wikimedia_commons_reference;
                                 delete tags[key];
 
@@ -211,7 +225,7 @@ export function validationFormatting(context) {
                 const url = new URL(value);
                 const path = url.pathname;
                 if (url.host === 'commons.wikimedia.org' && regex.test(path)) {
-                    const parts = path.match(regex);
+                    const parts = path.match(regex)!;
                     const newValue = decodeURIComponent(`${parts[1]}:${parts[3]}`).replace(/_/g, ' ');
                     const previewDiff = utilTagDiff({ wikimedia_commons: value }, { wikimedia_commons: newValue });
                     issues.push(new validationIssue({
@@ -223,10 +237,10 @@ export function validationFormatting(context) {
                             return [new validationIssueFix({
                                 title: t.append('issues.fix.upgrade_tags.title'),
                                 onClick: function() {
-                                    const entityID = this.issue.entityIds[0];
+                                    const entityID = this.issue!.entityIds[0];
                                     const entity = context.entity(entityID);
                                     if (!entity) return;
-                                    const tags = Object.assign({}, entity.tags);
+                                    const tags = { ...entity.tags };
                                     tags.wikimedia_commons = newValue;
 
                                     context.perform(
@@ -254,7 +268,7 @@ export function validationFormatting(context) {
                 .filter(function(x) { return !isValidEmail(x); });
 
             if (emails.length) {
-                issues.push(new validationIssue({
+                issues.push(new validationIssue<string>({
                     type: type,
                     subtype: 'email',
                     severity: 'warning',
@@ -278,4 +292,4 @@ export function validationFormatting(context) {
     validation.type = type;
 
     return validation;
-}
+};
