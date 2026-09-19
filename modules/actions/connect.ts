@@ -126,7 +126,7 @@ export function actionConnect(nodeIDs: NodeId[]): Action {
                         commonNodes.push(nodeIDs[k]);
                     }
                 }
-                if (commonNodes.length > 1 && parent.isClosed() && !parent.areAdjacent(commonNodes[0], commonNodes[1])) {
+                if (commonNodes.length > 1 && parent.isArea() && !parent.areAdjacent(commonNodes[0], commonNodes[1])) {
                     return 'paths_intersect';
                 }
 
