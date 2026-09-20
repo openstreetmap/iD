@@ -43,6 +43,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :camera: Street-Level
 #### :white_check_mark: Validation
 #### :bug: Bugfixes
+* Fix the undo tooltip showing a missing-translation string after using a mismatched-geometry fix ([#12902], thanks [@wantaekchoi])
 #### :earth_asia: Localization
 #### :hourglass: Performance
 #### :mortar_board: Walkthrough / Help
@@ -52,6 +53,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 
 [#9732]: https://github.com/openstreetmap/iD/pull/9732
 [#12679]: https://github.com/openstreetmap/iD/pull/12679
+[#12902]: https://github.com/openstreetmap/iD/pull/12902
 
 
 # 2.42.1
