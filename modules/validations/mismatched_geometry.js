@@ -379,7 +379,7 @@ export function validationMismatchedGeometry() {
                 };
                 context.perform(
                     actionChangeTags(entityId, newTags),
-                    t('issues.fix.convert_to_line.annotation')
+                    t('issues.fix.convert_to_area.annotation')
                 );
             },
         });
