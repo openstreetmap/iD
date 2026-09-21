@@ -78,9 +78,7 @@ export function uiSectionRawTagEditor(id, context) {
         // append blank row last
         rowData.push({ index: rowData.length, key: '', value: '' });
 
-        // How wide the key column needs to be, in characters, to show every key
-        // in full. The stylesheet uses this to keep the key column from taking
-        // up space that the values could use - #12859
+        // width of the longest key, in characters
         const keyColumnSize = Math.max(...rowData.map(d => d.key.length)) + 1;
 
 
