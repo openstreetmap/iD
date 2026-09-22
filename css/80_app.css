@@ -2793,9 +2793,15 @@ button.raw-tag-option svg.icon {
     width: 100%;
     position: relative;
 }
-.tag-row .key-wrap,
+/* key column shrinks to fit its longest key, leaving the rest for values */
+.tag-row .key-wrap {
+    flex: 0 1 50%;
+    min-width: 25%;
+    max-width: max-content;
+}
 .tag-row .value-wrap {
     flex: 1 1 50%;
+    min-width: 0;
 }
 
 .tag-text.readonly,

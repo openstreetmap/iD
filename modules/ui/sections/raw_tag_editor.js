@@ -78,6 +78,9 @@ export function uiSectionRawTagEditor(id, context) {
         // append blank row last
         rowData.push({ index: rowData.length, key: '', value: '' });
 
+        // width of the longest key, in characters
+        const keyColumnSize = Math.max(...rowData.map(d => d.key.length)) + 1;
+
 
         // View Options
         var options = wrap.selectAll('.raw-tag-options')
@@ -265,6 +268,7 @@ export function uiSectionRawTagEditor(id, context) {
             });
 
         items.selectAll('input.key')
+            .attr('size', keyColumnSize)
             .attr('title', function(d) { return d.key; })
             .attr('placeholder', function(d) {
                 return d.key === '' ? t('inspector.add_tag') : null;
