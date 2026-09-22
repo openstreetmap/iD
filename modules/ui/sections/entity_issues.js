@@ -181,7 +181,9 @@ export function uiSectionEntityIssues(context) {
         containers.selectAll('.issue-message')
             .text('')
             .each(function(d) {
-                return d.message(context)(d3_select(this));
+                const selector = d.message(context);
+                if (typeof selector === 'string') return;
+                return selector(d3_select(this));
             });
 
         // fixes
