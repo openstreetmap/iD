@@ -136,6 +136,10 @@ export const validationDisconnectedWay: CreateValidator = () => {
                 const entityToCheck = entitiesToCheck.pop()!;
                 let childNodes!: osmNode[];
                 if (entityToCheck.type === 'way') {
+                    if (isConnectedWay(entityToCheck)) {
+                        // found a link to the wider network -> not a rounding island
+                        return null;
+                    }
                     childNodes = graph.childNodes(entityToCheck);
                 } else if (entityToCheck.type === 'relation') {
                     childNodes = entityToCheck.members
@@ -146,7 +150,7 @@ export const validationDisconnectedWay: CreateValidator = () => {
                 }
                 for (const vertex of childNodes) {
                     if (isConnectedVertex(vertex)) {
-                        // found a link to the wider network, not a routing island
+                        // found a link to the wider network -> not a routing island
                         return null;
                     }
 
@@ -162,15 +166,34 @@ export const validationDisconnectedWay: CreateValidator = () => {
             return routingIsland;
         }
 
+        function isConnectedWay(entity: osmWay) {
+            if (entity.tags.man_made === 'pier' ||
+                entity.tags.man_made === 'quay') {
+                // consider piers and quays as sources of traffic
+                return true;
+            }
+            if (entity.tags.aeroway === 'airstrip' ||
+                entity.tags.aeroway === 'helipad' ||
+                entity.tags.aeroway === 'runway') {
+                return true;
+            }
+            return false;
+        }
+
         function isConnectedVertex(vertex: osmNode) {
             // assume ways overlapping unloaded tiles are connected to the wider road network  - #5938
             var osm = services.osm;
             if (osm && !osm.isDataLoaded(vertex.loc)) return true;
 
-            // entrances are considered connected - #3906
+            // entrances - #3906
             if (vertex.tags.entrance &&
                 vertex.tags.entrance !== 'no') return true;
             if (vertex.tags.amenity === 'parking_entrance') return true;
+            // aeroway features
+            if (vertex.tags.aeroway === 'airstrip' ||
+                vertex.tags.aeroway === 'helipad') return true;
+            // waterway features
+            if (vertex.tags.waterway === 'access_point') return true;
 
             return false;
         }
@@ -188,6 +211,10 @@ export const validationDisconnectedWay: CreateValidator = () => {
                 // treat most aerialways as routable for checking connectivity of other ways - #9406
                 return true;
             }
+            if (way.tags.man_made === 'pier' ||
+                way.tags.man_made === 'quay') return true;
+            if (way.tags.aeroway === 'airstrip' ||
+                way.tags.aeroway === 'helipad') return true;
 
             return graph.parentRelations(way).some(function(parentRelation) {
                 if (parentRelation.tags.type === 'route' &&
@@ -205,8 +232,8 @@ export const validationDisconnectedWay: CreateValidator = () => {
                 // skip golf paths #11863
                 return true;
             }
-            if (way.tags.aerialway) {
-                // aerialways should not be validated by themselves - #9406
+            if (way.tags.aerialway || way.tags.aeroway || way.tags.man_made) {
+                // aerialways/piers/helipads/etc. should not be validated by themselves - #9406
                 return true;
             }
             return false;
