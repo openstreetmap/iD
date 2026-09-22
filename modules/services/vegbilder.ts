@@ -3,15 +3,87 @@ import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { pairs as d3_pairs } from 'd3-array';
 import RBush from 'rbush';
 import { iso1A2Codes } from '@rapideditor/country-coder';
+import type { BBox } from 'which-polygon';
+import type { FeatureCollection, LineString, Point } from 'geojson';
 import { t } from '../core/localizer';
 import { utilQsString, utilTiler, utilRebind, utilArrayUnion } from '../util';
-import { searchLimited } from '../util/partition';
+import { searchLimited, type WithBbox } from '../util/partition';
 import { localeTimestamp } from '../util/date';
 import { geoExtent, geoVecAngle, geoVecEqual } from '../geo';
-import { pannellumPhotoFrame } from './pannellum_photo';
+import { pannellumPhotoFrame, type PhotoFrame, type PhotoFramePhoto } from './pannellum_photo';
 import { planePhotoFrame } from './plane_photo';
 import { services } from './';
 import { patchHash } from '../behavior';
+import type { Projection } from '../geo/raw_mercator';
+import type { Tile } from '../util/tiler';
+import type { Vec2 } from '../geo/vector';
+import type { coreContext } from '../core';
+
+interface VegbilderProperties {
+    RETNING: number;
+    TIDSPUNKT: string;
+    URL: string;
+    URLPREVIEW : string;
+    BILDETYPE: string;
+    METER: number;
+    FELTKODE: string;
+    FYLKENUMMER: string;
+    VEGKATEGORI: string;
+    VEGSTATUS: string;
+    VEGNUMMER: string;
+    STREKNING: string;
+    DELSTREKNING: string;
+    HP: string;
+    KRYSSDEL: string;
+    SIDEANLEGGSDEL: string;
+    ANKERPUNKT: string;
+    AAR: number;
+}
+
+export interface VegbilderImage extends PhotoFramePhoto {
+    service: 'photo';
+    loc: Vec2;
+    key: string;
+    road_reference: string;
+    metering: number;
+    lane_code: string;
+    direction: symbol;
+    captured_at: Date;
+    is_sphere: boolean;
+}
+
+export interface VegbilderSequence {
+    geometry: LineString;
+    key: string;
+    images: VegbilderImage[];
+}
+
+/** @deprecated this should be unified with {@link VegbilderSequence} */
+export interface VegbilderLineString extends LineString {
+    key: string;
+    images: VegbilderImage[];
+}
+
+interface LayerInfo {
+    is_sphere: boolean;
+    year: number;
+    name: string;
+}
+
+interface WfsLayer {
+    inflight: Map<string, AbortController>;
+    loaded: Map<string, boolean>;
+    points: Map<string, VegbilderImage>;
+    sequences: VegbilderSequence[];
+    layerInfo: LayerInfo;
+}
+
+
+interface Cache {
+    rtree: RBush<WithBbox<VegbilderImage>>;
+    image2sequence_map: Map<string, VegbilderSequence>;
+    wfslayers: Map<string, WfsLayer>;
+}
 
 
 const owsEndpoint = 'https://www.vegvesen.no/kart/ogc/vegbilder_1_0/ows?';
@@ -23,13 +95,13 @@ const directionEnum = Object.freeze({
   backward: Symbol(1)
 });
 
-let _planeFrame;
-let _pannellumFrame;
-let _currentFrame;
-let _loadViewerPromise;
-let _vegbilderCache;
+let _planeFrame: PhotoFrame;
+let _pannellumFrame: PhotoFrame;
+let _currentFrame: PhotoFrame;
+let _loadViewerPromise: Promise<void>;
+let _vegbilderCache: Cache;
 
-async function fetchAvailableLayers() {
+async function fetchAvailableLayers(): Promise<LayerInfo[]> {
   const params = {
     service: 'WFS',
     request: 'GetCapabilities',
@@ -46,14 +118,14 @@ async function fetchAvailableLayers() {
       availableLayers.push({
         name: match[0],
         is_sphere: !!match.groups?.image_type,
-        year: parseInt(match.groups?.year, 10)
+        year: parseInt(match.groups?.year || '', 10)
       });
     }
   }
   return availableLayers;
 }
 
-function filterAvailableLayers(photoContex) {
+function filterAvailableLayers(photoContex: ReturnType<iD.Context['photos']>) {
   const fromDateString = photoContex.fromDate();
   const toDateString = photoContex.toDate();
   const fromYear = fromDateString ? new Date(fromDateString).getFullYear() : 2016;
@@ -67,14 +139,14 @@ function filterAvailableLayers(photoContex) {
   ));
 }
 
-function loadWFSLayers(projection, margin, wfslayers) {
+function loadWFSLayers(projection: Projection, margin: number, wfslayers: WfsLayer[]) {
   const tiles = tiler.margin(margin).getTiles(projection);
   for (const cache of wfslayers) {
     loadWFSLayer(projection, cache, tiles);
   }
 }
 
-function loadWFSLayer(projection, cache, tiles) {
+function loadWFSLayer(projection: Projection, cache: WfsLayer, tiles:Tile[]) {
   // abort inflight requests that are no longer needed
   for (const [key, controller] of cache.inflight.entries()) {
     const wanted = tiles.some(tile => key === tile.id);
@@ -92,7 +164,7 @@ function loadWFSLayer(projection, cache, tiles) {
 /**
 * loadNextTilePage() load data for the next tile page in line.
 */
-async function loadTile(cache, typename, tile) {
+async function loadTile(cache: WfsLayer, typename: string, tile: Tile) {
   const bbox = tile.extent.bbox();
   const tileid = tile.id;
   if ((cache.loaded.get(tileid) === true) || cache.inflight.has(tileid)) return;
@@ -116,9 +188,9 @@ async function loadTile(cache, typename, tile) {
 
   const urlForRequest = owsEndpoint + utilQsString(params);
 
-  let featureCollection;
+  let featureCollection: FeatureCollection<Point, VegbilderProperties>;
   try {
-    featureCollection = await d3_json(urlForRequest, options);
+    featureCollection = (await d3_json(urlForRequest, options))!;
   } catch {
     cache.loaded.set(tileid, false);
     return;
@@ -131,8 +203,8 @@ async function loadTile(cache, typename, tile) {
   if (featureCollection.features.length === 0) { return; }
 
   const features = featureCollection.features.map(feature => {
-    const loc = feature.geometry.coordinates;
-    const key = feature.id;
+    const loc = feature.geometry.coordinates as Vec2;
+    const key = feature.id as string;
     const properties = feature.properties;
     const {
       RETNING: ca,
@@ -143,9 +215,9 @@ async function loadTile(cache, typename, tile) {
       METER: metering,
       FELTKODE: lane_code
     } = properties;
-    const lane_number = parseInt((lane_code.match(/^[0-9]+/) || [])[0], 10);
+    const lane_number = parseInt((lane_code.match(/^[0-9]+/) || [])[0]!, 10);
     const direction = lane_number % 2 === 0 ? directionEnum.backward : directionEnum.forward;
-    const data = {
+    const data: VegbilderImage = {
       service: 'photo',
       loc,
       key,
@@ -171,20 +243,20 @@ async function loadTile(cache, typename, tile) {
   dispatch.call('loadedImages');
 }
 
-function orderSequences(projection, cache) {
+function orderSequences(projection: Projection, cache: WfsLayer) {
   const {points} = cache;
 
-  const grouped = Array.from(points.values()).reduce((grouped, image) => {
+  const grouped = Array.from(points.values()).reduce<Map<string, VegbilderImage[]>>((grouped, image) => {
     const key = image.road_reference;
     if (grouped.has(key)) {
-      grouped.get(key).push(image);
+      grouped.get(key)!.push(image);
     } else {
       grouped.set(key, [image]);
     }
     return grouped;
   }, new Map());
 
-  const imageSequences = Array.from(grouped.values()).reduce((imageSequences, imageGroup) => {
+  const imageSequences = Array.from(grouped.values()).reduce<VegbilderImage[][]>((imageSequences, imageGroup) => {
     imageGroup.sort((a, b) => {
       if (a.captured_at.valueOf() > b.captured_at.valueOf()) {
         return 1;
@@ -200,9 +272,9 @@ function orderSequences(projection, cache) {
       }
     });
     let imageSequence = [imageGroup[0]];
-    let angle = null;
+    let angle: number | undefined;
     for (const [lastImage, image] of d3_pairs(imageGroup)) {
-      if (lastImage.ca === null) {
+      if (lastImage.ca === null || lastImage.ca === undefined) {
         const b = projection(lastImage.loc);
         const a = projection(image.loc);
         if (!geoVecEqual(a, b)) {
@@ -228,7 +300,7 @@ function orderSequences(projection, cache) {
   }, []);
 
   cache.sequences = imageSequences.map(images => {
-    const sequence = {
+    const sequence: VegbilderSequence = {
       images,
       key: images[0].key,
       geometry : {
@@ -243,7 +315,7 @@ function orderSequences(projection, cache) {
   });
 }
 
-function roadReference(properties) {
+function roadReference(properties: VegbilderProperties) {
   const {
     FYLKENUMMER: county_number,
     VEGKATEGORI: road_class,
@@ -274,13 +346,14 @@ function roadReference(properties) {
   return reference;
 }
 
-export default {
+export default new class {
+  event!: Pick<typeof dispatch, 'on'>;
 
-  init: function () {
+  init() {
     this.event = utilRebind(this, dispatch, 'on');
-  },
+  }
 
-  reset: async function () {
+  async reset() {
     if (_vegbilderCache) {
       for (const layer of _vegbilderCache.wfslayers.values()) {
         for (const controller of layer.inflight.values()) {
@@ -308,21 +381,21 @@ export default {
       };
       wfslayers.set(layerInfo.name, cache);
     }
-  },
+  }
 
-  images: function (projection) {
+  images(projection: Projection) {
     const limit = 5;
     return searchLimited(limit, projection, _vegbilderCache.rtree);
-  },
+  }
 
 
-  sequences: function (projection) {
+  sequences(projection: Projection) {
     const viewport = projection.clipExtent();
-    const min = [viewport[0][0], viewport[1][1]];
-    const max = [viewport[1][0], viewport[0][1]];
+    const min: Vec2 = [viewport[0][0], viewport[1][1]];
+    const max: Vec2 = [viewport[1][0], viewport[0][1]];
     const bbox = geoExtent(projection.invert(min), projection.invert(max)).bbox();
     const seen = new Set();
-    const line_strings = [];
+    const line_strings: VegbilderLineString[] = [];
 
     for (const {data} of _vegbilderCache.rtree.search(bbox)) {
       const sequence = _vegbilderCache.image2sequence_map.get(data.key);
@@ -330,7 +403,7 @@ export default {
       const {key, geometry, images} = sequence;
       if (seen.has(key)) continue;
       seen.add(key);
-      const line = {
+      const line: VegbilderLineString = {
         type: 'LineString',
         coordinates: geometry.coordinates,
         key,
@@ -339,41 +412,41 @@ export default {
       line_strings.push(line);
   }
     return line_strings;
-  },
+  }
 
-  cachedImage: function (key) {
+  cachedImage(key: string) {
     for (const {points} of _vegbilderCache.wfslayers.values()) {
       if (points.has(key)) return points.get(key);
     }
-  },
+  }
 
-  getSequenceForImage: function (image) {
-    return _vegbilderCache?.image2sequence_map.get(image?.key);
-  },
+  getSequenceForImage(image: VegbilderImage | null) {
+    return image ? _vegbilderCache?.image2sequence_map.get(image?.key) : undefined;
+  }
 
-  loadImages: async function (context, margin) {
+  async loadImages(context: coreContext, margin?: number) {
     if (!_vegbilderCache) {
       await this.reset();
     }
     margin ??= 1;
     const wfslayers = filterAvailableLayers(context.photos());
     loadWFSLayers(context.projection, margin, wfslayers);
-  },
+  }
 
-  photoFrame: function() {
+  photoFrame() {
     return _currentFrame;
-  },
+  }
 
-  ensureViewerLoaded: function(context) {
+  ensureViewerLoaded(context: coreContext) {
 
     if (_loadViewerPromise) return _loadViewerPromise;
 
-    const step = (stepBy) => () => {
+    const step = (stepBy: number) => () => {
       const viewer = context.container().select('.photoviewer');
       const selected = viewer.empty() ? undefined : viewer.datum();
       if (!selected) return;
 
-      const sequence = this.getSequenceForImage(selected);
+      const sequence = this.getSequenceForImage(selected)!;
       const nextIndex = sequence.images.indexOf(selected) + stepBy;
       const nextImage = sequence.images[nextIndex];
 
@@ -423,9 +496,9 @@ export default {
     });
 
     return _loadViewerPromise;
-  },
+  }
 
-  selectImage: function(context, key, keepOrientation) {
+  selectImage(context: coreContext, key: string, keepOrientation?: boolean) {
     const d = this.cachedImage(key);
     patchHash({ photo: 'vegbilder/' + key });
 
@@ -436,7 +509,7 @@ export default {
 
     if (!d) return this;
 
-    const wrap = context.container().select('.photoviewer .vegbilder-wrapper');
+    const wrap = context.container().select<HTMLElement>('.photoviewer .vegbilder-wrapper');
     const attribution = wrap.selectAll('.photo-attribution').text('');
 
     if (d.captured_at) {
@@ -465,16 +538,16 @@ export default {
       .selectPhoto(d, keepOrientation);
 
     return this;
-  },
+  }
 
-  showViewer: function (context) {
+  showViewer(context: coreContext) {
     const viewer = context.container().select('.photoviewer');
     const isHidden = viewer.selectAll('.photo-wrapper.vegbilder-wrapper.hide').size();
 
     if (isHidden) {
       for (const service of Object.values(services)) {
         if (service === this) continue;
-        if (typeof service.hideViewer === 'function') {
+        if (service && 'hideViewer' in service && typeof service.hideViewer === 'function') {
           service.hideViewer(context);
         }
       }
@@ -484,9 +557,9 @@ export default {
         .classed('hide', false);
     }
     return this;
-  },
+  }
 
-  hideViewer: function(context) {
+  hideViewer(context: coreContext) {
     patchHash({ photo: null });
 
     const viewer = context.container().select('.photoviewer');
@@ -501,13 +574,13 @@ export default {
         .classed('currentView', false);
 
     return this.setStyles(context, null, true);
-  },
+  }
 
 
   // Updates the currently highlighted sequence and selected bubble.
   // Reset is only necessary when interacting with the viewport because
   // this implicitly changes the currently selected bubble/sequence
-  setStyles: function (context, hovered, reset) {
+  setStyles(context: coreContext, hovered: VegbilderImage | null, reset?: boolean) {
     if (reset) {  // reset all layers
       context.container().selectAll('.viewfield-group')
         .classed('highlighted', false)
@@ -534,21 +607,21 @@ export default {
     // highlight sibling viewfields on either the selected or the hovered sequences
     const highlightedImageKeys = utilArrayUnion(hoveredImageKeys, selectedImageKeys);
 
-    context.container().selectAll('.layer-vegbilder .viewfield-group')
+    context.container().selectAll<HTMLElement, VegbilderImage>('.layer-vegbilder .viewfield-group')
       .classed('highlighted', d => highlightedImageKeys.indexOf(d.key) !== -1)
       .classed('hovered', d => d.key === hoveredImageKey)
       .classed('currentView', d => d.key === selectedImageKey);
 
-    context.container().selectAll('.layer-vegbilder .sequence')
+    context.container().selectAll<HTMLElement, VegbilderImage>('.layer-vegbilder .sequence')
       .classed('highlighted', d => d.key === hoveredSequenceKey)
       .classed('currentView', d => d.key === selectedSequenceKey);
 
     // update viewfields if needed
-    context.container().selectAll('.layer-vegbilder .viewfield-group .viewfield')
+    context.container().selectAll<SVGPathElement, unknown>('.layer-vegbilder .viewfield-group .viewfield')
       .attr('d', viewfieldPath);
 
-    function viewfieldPath() {
-      const d = this.parentNode.__data__;
+    function viewfieldPath(this: SVGPathElement) {
+      const d = this.parentNode!.__data__;
       if (d.is_sphere && d.key !== selectedImageKey) {
         return 'M 8,13 m -10,0 a 10,10 0 1,0 20,0 a 10,10 0 1,0 -20,0';
       } else {
@@ -557,15 +630,15 @@ export default {
     }
 
     return this;
-  },
+  }
 
-  validHere: function(extent) {
-    const bbox = Object.values(extent.bbox());
+  validHere(extent: geoExtent) {
+    const bbox = Object.values(extent.bbox()) as BBox;
     return iso1A2Codes(bbox).includes('NO');
-  },
+  }
 
 
-  cache: function () {
+  cache() {
     return _vegbilderCache;
   }
 
