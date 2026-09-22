@@ -451,6 +451,9 @@ export function actionSplit(nodeIds: NodeId[], newWayIds?: WayId[]): ActionSplit
     };
 
     function waysForNodes(nodeIds: NodeId[], graph: coreGraph) {
+        // Not a seeded reduce: `[]` intersects to `[]`, disabling every split.
+        if (!nodeIds.length) return [];
+
         const splittableWays = nodeIds
             .map(nodeId => waysForNode(nodeId, graph))
             .reduce((cur, acc) => utilArrayIntersection(cur, acc));

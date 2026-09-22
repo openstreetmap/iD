@@ -76,6 +76,21 @@ describe('iD.actionSplit', function () {
             expect(iD.actionSplit('a').disabled(graph)).toBeFalsy();
         });
 
+        it('returns \'not_eligible\' when no nodes are given', function () {
+            //
+            //  a ---> b                split at nothing disabled - 'not eligible'
+            //
+            // `behaviorOperation` asks for the disabled reason before checking
+            // `available()`, so this runs whenever no vertex is selected.
+            var graph = new iD.coreGraph([
+                new iD.osmNode({ id: 'a', loc: [0, 0] }),
+                new iD.osmNode({ id: 'b', loc: [1, 0] }),
+                new iD.osmWay({ id: '-', nodes: ['a', 'b'] })
+            ]);
+
+            expect(iD.actionSplit([]).disabled(graph)).toEqual('not_eligible');
+        });
+
         it('returns \'not_eligible\' for the first node of a single way', function () {
             //
             //  a ---> b                split at 'a' disabled - 'not eligible'
