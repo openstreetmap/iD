@@ -16,7 +16,7 @@ export interface PhotoFramePhoto {
 export interface PhotoFrame {
     event: Pick<Dispatch<object, { viewerChanged: [] }>, 'on'>;
 
-    loadPannellum?(context: coreContext): Promise<[void, void]>;
+    loadPannellum?(context: coreContext): Promise<[Event, Event]>;
     showPhotoFrame(selection: d3.Selection): PhotoFrame;
     hidePhotoFrame(selection: d3.Selection): PhotoFrame;
     selectPhoto(photo: PhotoFramePhoto, keepOrientation?: boolean): PhotoFrame;
@@ -34,7 +34,7 @@ export async function pannellumPhotoFrame(context: coreContext, selection: d3.Se
         const head = d3_select('head');
 
         return Promise.all([
-            new Promise<void>((resolve, reject) => {
+            new Promise<Event>((resolve, reject) => {
                 // load pannellum viewer css
                 head
                     .selectAll('#ideditor-pannellum-viewercss')
@@ -48,7 +48,7 @@ export async function pannellumPhotoFrame(context: coreContext, selection: d3.Se
                     .on('load.pannellum', resolve)
                     .on('error.pannellum', reject);
             }),
-            new Promise<void>((resolve, reject) => {
+            new Promise<Event>((resolve, reject) => {
                 // load pannellum viewer js
                 head
                     .selectAll('#ideditor-pannellum-viewerjs')
