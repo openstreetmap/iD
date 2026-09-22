@@ -238,7 +238,8 @@ export function uiSectionRawTagEditor(id, context) {
                 var key = row.select('input.key');      // propagate bound data
                 var value = row.select('input.value');  // propagate bound data
 
-                if (_entityIDs && taginfo && _state !== 'hover') {
+                // `.length` because an empty array is truthy
+                if (_entityIDs && _entityIDs.length && taginfo && _state !== 'hover') {
                     bindTypeahead(key, value);
                 }
 
@@ -433,7 +434,11 @@ export function uiSectionRawTagEditor(id, context) {
             return;
         }
 
-        var geometry = context.graph().geometry(_entityIDs[0]);
+        // The redraw here is throttled, so the entity may already be gone
+        var entity = context.hasEntity(_entityIDs[0]);
+        if (!entity) return;
+
+        var geometry = entity.geometry(context.graph());
 
         key.call(uiCombobox(context, 'tag-key')
             .fetcher(function(value, callback) {
