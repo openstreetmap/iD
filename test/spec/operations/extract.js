@@ -58,6 +58,23 @@ describe('iD.operationExtract', function () {
             expect(result).toBeFalsy();
         });
 
+        it('is available for address-only building areas', function () {
+            graph = new iD.coreGraph([
+                new iD.osmNode({ id: 'a', loc: [0, 0] }),
+                new iD.osmNode({ id: 'b', loc: [1, 0] }),
+                new iD.osmNode({ id: 'c', loc: [1, 1] }),
+                new iD.osmNode({ id: 'd', loc: [0, 1] }),
+                new iD.osmWay({
+                    id: 'x',
+                    nodes: ['a', 'b', 'c', 'd', 'a'],
+                    tags: { building: 'yes', 'addr:housenumber': '123', 'addr:street': 'Main Street' }
+                })
+            ]);
+
+            var result = iD.operationExtract(fakeContext, ['x']).available();
+            expect(result).toBeTruthy();
+        });
+
         it('is not available for selected node with tags, no parent way', function () {
             var result = iD.operationExtract(fakeContext, ['e']).available();
             expect(result).toBeFalsy();

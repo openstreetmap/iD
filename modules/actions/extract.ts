@@ -10,6 +10,44 @@ export interface ActionExtract extends Action<boolean> {
     getExtractedNodeID(): NodeId;
 }
 
+const keysToCopyAndRetain = ['source', 'wheelchair'];
+const keysToRetain = ['area'];
+const buildingKeysToRetain = ['architect', 'building', 'height', 'layer', 'nycdoitt:bin', 'ref:GB:uprn', 'ref:linz:building_id'];
+
+function isAddressKey(key: string) {
+    return /^addr:.{1,}/.test(key);
+}
+
+function isBuildingKey(key: string) {
+    return buildingKeysToRetain.indexOf(key) !== -1 ||
+        /^building:.{1,}/.test(key) ||
+        /^roof:.{1,}/.test(key);
+}
+
+export function actionExtractMovesAddressTags(entity: OsmEntity) {
+    var isBuilding = (entity.tags.building && entity.tags.building !== 'no') ||
+        (entity.tags['building:part'] && entity.tags['building:part'] !== 'no');
+
+    if (!isBuilding) return false;
+
+    var hasAddressTags = false;
+    for (var key in entity.tags) {
+        if (entity.type === 'relation' && key === 'type') continue;
+        if (keysToRetain.indexOf(key) !== -1) continue;
+        if (keysToCopyAndRetain.indexOf(key) !== -1) continue;
+        if (isBuildingKey(key)) continue;
+
+        if (isAddressKey(key)) {
+            hasAddressTags = true;
+            continue;
+        }
+
+        return false;
+    }
+
+    return hasAddressTags;
+}
+
 export function actionExtract(entityID: NodeId, projection: Projection): ActionExtract {
 
     var extractedNodeID: NodeId;
@@ -52,10 +90,6 @@ export function actionExtract(entityID: NodeId, projection: Projection): ActionE
 
         var fromGeometry = entity.geometry(graph);
 
-        var keysToCopyAndRetain = ['source', 'wheelchair'];
-        var keysToRetain = ['area'];
-        var buildingKeysToRetain = ['architect', 'building', 'height', 'layer', 'nycdoitt:bin', 'ref:GB:uprn', 'ref:linz:building_id'];
-
         var extractedLoc = d3_geoPath(projection).centroid(entity.asGeoJSON(graph));
         extractedLoc = extractedLoc && projection.invert(extractedLoc);
         if (!extractedLoc  || !isFinite(extractedLoc[0]) || !isFinite(extractedLoc[1])) {
@@ -74,6 +108,7 @@ export function actionExtract(entityID: NodeId, projection: Projection): ActionE
             (entity.tags['building:part'] && entity.tags['building:part'] !== 'no');
 
         var isIndoorArea = fromGeometry === 'area' && entity.tags.indoor && indoorAreaValues[entity.tags.indoor];
+        var moveAddressTags = actionExtractMovesAddressTags(entity);
 
         var entityTags = { ...entity.tags };  // shallow copy
         var pointTags: Tags = {};
@@ -90,9 +125,7 @@ export function actionExtract(entityID: NodeId, projection: Projection): ActionE
 
             if (isBuilding) {
                 // don't transfer building-related tags
-                if (buildingKeysToRetain.indexOf(key) !== -1 ||
-                    key.match(/^building:.{1,}/) ||
-                    key.match(/^roof:.{1,}/)) continue;
+                if (isBuildingKey(key)) continue;
             }
             // leave `indoor` tag on the area
             if (isIndoorArea && key === 'indoor') {
@@ -104,7 +137,7 @@ export function actionExtract(entityID: NodeId, projection: Projection): ActionE
 
             // leave addresses and some other tags so they're on both features
             if (keysToCopyAndRetain.indexOf(key) !== -1 ||
-                key.match(/^addr:.{1,}/)) {
+                (isAddressKey(key) && !moveAddressTags)) {
                 continue;
             } else if (isIndoorArea && key === 'level') {
                 // leave `level` on both features
