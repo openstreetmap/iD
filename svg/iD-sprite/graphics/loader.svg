@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+  <g stroke-linecap="round" stroke-width="3">
+    <path stroke="inherit" d="M5 5h10M5 10h10M5 15h10"/>
+    <g stroke="currentColor">
+      <path d="M5 5h10"><animate attributeName="opacity" dur="0.6s" repeatCount="indefinite" values="1;0.5;0;0;0;1;1"/></path>
+      <path d="M5 10h10"><animate attributeName="opacity" dur="0.6s" repeatCount="indefinite" values="0;1;0.5;0;1;0.5;0"/></path>
+      <path d="M5 15h10"><animate attributeName="opacity" dur="0.6s" repeatCount="indefinite" values="0;0;1;1;0.5;0;0"/></path>
+    </g>
+  </g>
+</svg>
