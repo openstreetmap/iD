@@ -193,7 +193,7 @@ export function actionMergeRemoteChanges(id: EntityId, localGraph: coreGraph, re
                     _conflicts.push(t.append('merge_remote_changes.conflict.tags',
                         { tag: k, local: a[k], remote: b[k], user: user(remote.user) }));
                 } else {                  // unchanged locally, accept remote change..
-                    if (b.hasOwnProperty(k)) {
+                    if (Object.prototype.hasOwnProperty.call(b, k)) {
                         tags[k] = b[k];
                     } else {
                         delete tags[k];

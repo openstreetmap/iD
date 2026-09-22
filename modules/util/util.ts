@@ -434,7 +434,7 @@ export function utilCombinedTags(entityIDs: EntityID[], graph: coreGraph): TagsM
         for (const key of allKeys) {
             const value = entity.tags[key]; // purposely allow `undefined`
 
-            if (!tags.hasOwnProperty(key)) {
+            if (!Object.prototype.hasOwnProperty.call(tags, key)) {
                 // first value, set as raw
                 tags[key] = value;
             } else {

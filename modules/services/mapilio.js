@@ -408,10 +408,10 @@ export default {
 
         wrap
             .selectAll('button.back')
-            .classed('hide', !_cache.images.forImageId.hasOwnProperty(+id - 1));
+            .classed('hide', !Object.prototype.hasOwnProperty.call(_cache.images.forImageId, +id - 1));
         wrap
             .selectAll('button.forward')
-            .classed('hide', !_cache.images.forImageId.hasOwnProperty(+id + 1));
+            .classed('hide', !Object.prototype.hasOwnProperty.call(_cache.images.forImageId, +id + 1));
 
 
         function loadTheImage(){

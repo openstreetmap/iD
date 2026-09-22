@@ -101,7 +101,7 @@ export abstract class OsmAbstractEntity implements OsmEntityProps {
         let changed = false;
 
         for (const k in tags) {
-            if (setTags.hasOwnProperty(k)) continue;
+            if (Object.prototype.hasOwnProperty.call(setTags, k)) continue;
             const t1 = this.tags[k];
             const t2 = tags[k];
             if (!t1) {

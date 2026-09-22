@@ -51,7 +51,7 @@ export var JXON = new (function () {
     for (var nElId = nLevelStart; nElId < nLevelEnd; nElId++) {
       sProp = aCache[nElId].nodeName.toLowerCase();
       vContent = createObjTree(aCache[nElId], nVerb, bFreeze, bNesteAttr);
-      if (vResult.hasOwnProperty(sProp)) {
+      if (Object.prototype.hasOwnProperty.call(vResult, sProp)) {
         if (vResult[sProp].constructor !== Array) { vResult[sProp] = [vResult[sProp]]; }
         vResult[sProp].push(vContent);
       } else {
