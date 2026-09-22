@@ -2,9 +2,8 @@ import { dispatch as d3_dispatch } from 'd3-dispatch';
 
 import { prefs } from '../core/preferences';
 import { osmEntity } from '../osm';
-import { osmIsInterestingTag, osmLanduseTags, osmLifecyclePrefixes } from '../osm/tags.js';
 import { osmIdManager } from '../osm';
-import { osmLanduseTags, osmLifecyclePrefixes } from '../osm/tags.js';
+import { osmIsInterestingTag, osmLanduseTags, osmLifecyclePrefixes } from '../osm/tags.js';
 import { utilRebind } from '../util/rebind';
 import { utilArrayGroupBy, utilArrayUnion, utilStringQs } from '../util';
 import { isAddressPoint } from '../svg/labels';
