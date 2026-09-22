@@ -20,6 +20,7 @@ import { utilArrayGroupBy, utilArrayIntersection } from '../../util/array';
 import { utilDisplayName, utilNoAuto, utilHighlightEntities, utilUniqueDomId } from '../../util';
 import { prefs } from '../../core';
 import { idMatch } from '../feature_list';
+import { getRelationRoleLabels } from './raw_member_editor';
 
 
 export function uiSectionRawMembershipEditor(context) {
@@ -198,14 +199,31 @@ export function uiSectionRawMembershipEditor(context) {
         utilHighlightEntities([d.relation.id], true, context);
     }
 
+    /** @param {import('../../osm').OsmEntity} relation */
+    function displayRole(relation, role) {
+        return getRelationRoleLabels(context, relation)[role] || role;
+    }
 
     function changeRole(d3_event, d) {
         if (d === 0) return;    // called on newrow (shouldn't happen)
         if (_inChange) return;  // avoid accidental recursive call #5731
 
-        var newRole = context.cleanRelationRole(d3_select(this).property('value'));
+        const input = d3_select(this);
+        // this could be the raw role, or the label
+        let rawValue = input.property('value');
+
+        for (const [role, label] of Object.entries(getRelationRoleLabels(context, d.relation))) {
+            if (rawValue === label) {
+                rawValue = role;
+            }
+        }
+
+        var newRole = context.cleanRelationRole(rawValue);
 
         if (!newRole.trim() && typeof d.role !== 'string') return;
+
+        // if the raw role was typed in, replace it with the label.
+        input.property('value', displayRole(d.relation, newRole));
 
         var membersToUpdate = d.members.filter(function(member) {
             return member.role !== newRole;
@@ -552,7 +570,10 @@ export function uiSectionRawMembershipEditor(context) {
             })
             .property('type', 'text')
             .property('value', function(d) {
-                return typeof d.role === 'string' ? d.role : '';
+                // use the label from the schema if possible
+                return typeof d.role === 'string'
+                    ? displayRole(d.relation, d.role)
+                    : '';
             })
             .attr('title', function(d) {
                 return Array.isArray(d.role) ? d.role.filter(Boolean).join('\n') : d.role;
@@ -699,6 +720,18 @@ export function uiSectionRawMembershipEditor(context) {
             var role = row.selectAll('input.member-role');
             var origValue = role.property('value');
 
+            const graph = context.graph();
+            // when multiple features are selected, they may have different
+            // geometries, so we can't filter the roles by geometry.
+            const memberGeometry = _entityIDs.length === 1 ? graph.geometry(_entityIDs[0]) : undefined;
+            const rolesFromSchema = getRelationRoleLabels(context, d.relation, memberGeometry);
+
+            // like the combo field, `key` is the raw role and `value` is the label,
+            // so that typing either one autocompletes to the label.
+            const suggestionsFromSchema = Object.entries(rolesFromSchema)
+                .filter(([, label]) => label) // skip roles with no labels
+                .map(([role, label]) => ({ key: role, value: label, title: role }));
+
             function sort(value, data) {
                 var sameletter = [];
                 var other = [];
@@ -712,22 +745,45 @@ export function uiSectionRawMembershipEditor(context) {
                 return sameletter.concat(other);
             }
 
-            role.call(uiCombobox(context, 'member-role')
+            const isKnown = value => (
+                Object.values(rolesFromSchema).includes(value)
+                || Object.keys(rolesFromSchema).includes(value)
+            );
+
+            const combo = uiCombobox(context, 'member-role')
+                .minItems(1)
+                .on('render', () => {
+                    role.classed('known-value', isKnown(role.node().value));
+                    role.classed('raw-value', role.node().value && !isKnown(role.node().value));
+                })
+                .data(suggestionsFromSchema)
                 .fetcher(function(role, callback) {
+                    callback(suggestionsFromSchema);
                     var rtype = d.relation.tags.type;
                     taginfo.roles({
                         debounce: true,
                         rtype: rtype || '',
                         geometry: context.graph().geometry(_entityIDs[0]),
                         query: role
-                    }, function(err, data) {
+                    }, (err, suggestionsFromTaginfo) => {
+                        const data = [
+                            ...suggestionsFromSchema,
+                            ...suggestionsFromTaginfo
+                                .filter(item => !rolesFromSchema[item.value]) // skip known values
+                                .map(item => ({...item, klass: 'raw-option'}))
+                        ];
+
                         if (!err) callback(sort(role, data));
                     });
                 })
                 .on('cancel', function() {
                     role.property('value', origValue);
-                })
-            );
+                });
+
+            role
+                .classed('known-value', d => isKnown(d.role))
+                .classed('raw-value', d => d.role && !isKnown(d.role))
+                .call(combo);
         }
 
 

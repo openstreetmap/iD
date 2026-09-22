@@ -1,4 +1,5 @@
 import type { Deprecated as DataDeprecated } from '@openstreetmap/id-tagging-schema';
+import { osmMatchTags } from './tags';
 
 export function getDeprecatedTags(tags: Tags, dataDeprecated: DataDeprecated): DataDeprecated {
   // if there are no tags, none can be deprecated
@@ -21,31 +22,7 @@ export function getDeprecatedTags(tags: Tags, dataDeprecated: DataDeprecated): D
       if (hasExistingValues) return;
     }
 
-    var matchesDeprecatedTags = oldKeys.every((oldKey) => {
-      if (!tags[oldKey]) return false;
-      if (d.old[oldKey] === '*') return true;
-      if (d.old[oldKey] === tags[oldKey]) return true;
-
-      var vals = tags[oldKey].split(';').filter(Boolean);
-      if (vals.length === 0) {
-        return false;
-      } else if (vals.length > 1) {
-        return vals.indexOf(d.old[oldKey]) !== -1;
-      } else {
-        if (tags[oldKey] === d.old[oldKey]) {
-          if (d.replace && d.old[oldKey] === d.replace[oldKey]) {
-            var replaceKeys = Object.keys(d.replace);
-            return !replaceKeys.every((replaceKey) => {
-              return tags[replaceKey] === d.replace![replaceKey];
-            });
-          } else {
-            return true;
-          }
-        }
-      }
-
-      return false;
-    });
+    const matchesDeprecatedTags = osmMatchTags([d.old], tags);
 
     if (matchesDeprecatedTags) {
       deprecated.push(d);
