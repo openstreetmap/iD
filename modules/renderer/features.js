@@ -1,7 +1,6 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 
 import { prefs } from '../core/preferences';
-import { osmEntity } from '../osm';
 import { osmIdManager } from '../osm';
 import { osmIsInterestingTag, osmLanduseTags, osmLifecyclePrefixes } from '../osm/tags.js';
 import { utilRebind } from '../util/rebind';
