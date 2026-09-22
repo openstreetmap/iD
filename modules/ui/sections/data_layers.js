@@ -58,7 +58,14 @@ export function uiSectionDataLayers(context) {
             layer.enabled(enabled);
 
             if (!enabled && (which === 'osm' || which === 'notes')) {
-                context.enter(modeBrowse(context));
+                var modeId = mode && mode.id;
+                var isNoteMode = modeId === 'add-note' || modeId === 'select-note' || modeId === 'drag-note';
+
+                if (which === 'osm' && !isNoteMode) {
+                    context.enter(modeBrowse(context));
+                } else if (which === 'notes' && isNoteMode) {
+                    context.enter(modeBrowse(context));
+                }
             }
         }
     }
