@@ -107,7 +107,7 @@ export function coreUploader(context) {
         var history = context.history();
 
         var localGraph = context.graph();
-        var remoteGraph = coreGraph(history.base(), true);
+        var remoteGraph = new coreGraph(history.base(), true);
 
         var summary = history.difference().summary();
         var _toCheck = [];

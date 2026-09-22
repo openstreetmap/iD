@@ -1,4 +1,4 @@
-import { debounce } from 'es-toolkit/compat';
+import { debounce } from 'es-toolkit';
 
 import { t } from '../core/localizer';
 import { svgIcon } from '../svg/index';

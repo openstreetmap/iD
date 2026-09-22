@@ -98,7 +98,6 @@ export function utilDetect(refresh?: boolean) {
     // @ts-expect-error -- this attribute is so old that there are no definitions in @types/web
     !window.MSStream;
 
-
   /* Locale */
   // An array of locales requested by the browser in priority order.
   _detected.browserLocales = Array.from(new Set( // remove duplicates

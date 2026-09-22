@@ -3,12 +3,12 @@ import fs from 'node:fs';
 import { styleText } from 'node:util';
 import prettyStringify from 'json-stringify-pretty-compact';
 import shell from 'shelljs';
-import YAML from 'js-yaml';
+import { load as loadYaml } from 'js-yaml';
 import { pull } from 'es-toolkit/compat';
 import dotenv from 'dotenv';
 import cldrTerritoryInfo from 'cldr-core/supplemental/territoryInfo.json' with { type: 'json' };
 import packageJson from '../package.json' with { type: 'json' };
-import * as languageNames from './language_names.js';
+import * as languageNames from './language_names.ts';
 
 // fontawesome icons
 import * as fontawesome from '@fortawesome/fontawesome-svg-core';
@@ -205,9 +205,9 @@ function writeEnJson() {
 
   return Promise.all([readCoreYaml, readImagery, readCommunity, readManualImagery])
     .then(data => {
-      let core = YAML.load(data[0]);
-      let imagery = YAML.load(data[1]);
-      let community = YAML.load(data[2]);
+      let core = loadYaml(data[0]);
+      let imagery = loadYaml(data[1]);
+      let community = loadYaml(data[2]);
       let manualImagery = JSON.parse(data[3]);
 
       for (let i in manualImagery) {

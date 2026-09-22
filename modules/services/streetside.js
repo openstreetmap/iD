@@ -13,11 +13,12 @@ import {
   geoRotate, geoVecLength
 } from '../geo';
 
-import { utilAesDecrypt, utilArrayUnion, utilQsString, utilRebind, utilStringQs, utilTiler, utilUniqueDomId } from '../util';
+import { utilAesDecrypt, utilArrayUnion, utilRebind, utilTiler, utilUniqueDomId } from '../util';
 
 import { services } from './';
 import { searchLimited } from '../util/partition';
 import { localeTimestamp } from '../util/date';
+import { patchHash } from '../behavior';
 
 
 const streetsideApi = 'https://dev.virtualearth.net/REST/v1/Imagery/MetaData/Streetside?mapArea={bbox}&key={key}&count={count}&uriScheme=https';
@@ -145,13 +146,15 @@ function loadNextTilePage(which, url, tile) {
  */
 function getBubbles(url, tile, callback) {
   let rect = tile.extent.rectangle();
-  let urlForRequest = url
-    .replace('{key}', bubbleAppKey)
-    .replace('{bbox}', [rect[1], rect[0], rect[3], rect[2]].join(','))
-    .replace('{count}', maxResults);
-
     const controller = new AbortController();
-    fetch(urlForRequest, { signal: controller.signal })
+
+    bubbleAppKey
+      .then(key => url
+        .replace('{key}', key)
+        .replace('{bbox}', [rect[1], rect[0], rect[3], rect[2]].join(','))
+        .replace('{count}', maxResults)
+      )
+      .then(url => fetch(url, { signal: controller.signal }))
       .then(function(response) {
         if (!response.ok) {
           throw new Error(response.status + ' ' + response.statusText);
@@ -644,7 +647,7 @@ export default {
     context.container().selectAll('.viewfield-group, .sequence, .icon-sign')
       .classed('currentView', false);
 
-    this.updateUrlImage(null);
+    patchHash({ photo: null });
 
     return this.setStyles(context, null, true);
   },
@@ -671,7 +674,7 @@ export default {
 
     if (!d) return this;
 
-    this.updateUrlImage(key);
+    patchHash({ photo: 'streetside/' + key });
 
     _sceneOptions.northOffset = d.ca;
 
@@ -746,14 +749,6 @@ export default {
     let line2 = attribution
       .append('div')
       .attr('class', 'attribution-row');
-
-    line2
-      .append('a')
-      .attr('class', 'image-view-link')
-      .attr('target', '_blank')
-      .attr('href', 'https://www.bing.com/maps?cp=' + d.loc[1] + '~' + d.loc[0] +
-        '&lvl=17&dir=' + d.ca + '&style=x&v=2&sV=1')
-      .call(t.append('streetside.view_on_bing'));
 
     line2
       .append('a')
@@ -866,17 +861,6 @@ export default {
     }
 
     return this;
-  },
-
-
-  updateUrlImage: function(imageKey) {
-      const hash = utilStringQs(window.location.hash);
-      if (imageKey) {
-          hash.photo = 'streetside/' + imageKey;
-      } else {
-          delete hash.photo;
-      }
-      window.history.replaceState(null, '', '#' + utilQsString(hash, true));
   },
 
 

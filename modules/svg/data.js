@@ -1,4 +1,4 @@
-import { throttle } from 'es-toolkit/compat';
+import { throttle } from 'es-toolkit';
 
 import { geoBounds as d3_geoBounds, geoPath as d3_geoPath } from 'd3-geo';
 import { text as d3_text } from 'd3-fetch';

@@ -54,8 +54,8 @@ export function uiFieldHelp(context, fieldName) {
     var fieldHelpHeadings = {};
 
     var replacements = {
-        distField: { html: t.html('restriction.controls.distance') },
-        viaField: { html: t.html('restriction.controls.via') },
+        distField: { html: localizer.t_html('restriction.controls.distance') },
+        viaField: { html: localizer.t_html('restriction.controls.via') },
         fromShadow: { html: icon('#iD-turn-shadow', 'inline shadow from') },
         allowShadow: { html: icon('#iD-turn-shadow', 'inline shadow allow') },
         restrictShadow: { html: icon('#iD-turn-shadow', 'inline shadow restrict') },
@@ -73,12 +73,12 @@ export function uiFieldHelp(context, fieldName) {
             var subkey = helpkey + '.' + part;
             var depth = fieldHelpHeadings[subkey];                     // is this subkey a heading?
             var hhh = depth ? Array(depth + 1).join('#') + ' ' : '';   // if so, prepend with some ##'s
-            return all + hhh + t.html(subkey, replacements) + '\n\n';
+            return all + hhh + localizer.t_html(subkey, replacements) + '\n\n';
         }, '');
 
         return {
             key: helpkey,
-            title: t.html(helpkey + '.title'),
+            title: localizer.t_html(helpkey + '.title'),
             html: marked(text.trim())
         };
     });

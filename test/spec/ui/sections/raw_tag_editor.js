@@ -1,3 +1,5 @@
+import { select as d3_select, selectAll as d3_selectAll } from 'd3-selection';
+
 describe('iD.uiSectionRawTagEditor', function() {
     var taglist, element, entity, context;
 
@@ -8,42 +10,51 @@ describe('iD.uiSectionRawTagEditor', function() {
             .tags(tags)
             .expandedByDefault(true);
 
-        element = d3.select('body')
+        element = d3_select('body')
             .append('div')
             .attr('class', 'ui-wrap')
             .call(taglist.render);
     }
 
     beforeEach(function () {
-        entity = iD.osmNode({id: 'n12345'});
+        entity = new iD.osmNode({id: 'n12345'});
         context = iD.coreContext().assetPath('../dist/').init();
         context.history().merge([entity]);
         render({highway: 'residential'});
     });
 
     afterEach(function () {
-        d3.selectAll('.ui-wrap')
+        d3_selectAll('.ui-wrap')
             .remove();
     });
 
 
     it('creates input elements for each key-value pair', function () {
-        expect(element.selectAll('input[value=highway]')).not.to.be.empty;
-        expect(element.selectAll('input[value=residential]')).not.to.be.empty;
+        expect(element.selectAll('input[title=highway]').size()).toBeGreaterThan(0);
+        expect(element.selectAll('input[title=residential]').size()).toBeGreaterThan(0);
     });
 
     it('creates a pair of empty input elements if the entity has no tags', function () {
         element.remove();
         render({});
-        expect(element.selectAll('.tag-list li').nodes().length).to.eql(1);
-        expect(element.select('.tag-list').selectAll('input.value').property('value')).to.be.empty;
-        expect(element.select('.tag-list').selectAll('input.key').property('value')).to.be.empty;
+        expect(element.selectAll('.tag-list li').nodes().length).toEqual(1);
+        expect(element.select('.tag-list').selectAll('input.value').property('value')).toBe('');
+        expect(element.select('.tag-list').selectAll('input.key').property('value')).toBe('');
     });
 
     it('adds pair of empty input elements at end of list', () => {
-        expect(element.selectAll('.tag-list li').nodes().length).to.eql(2);
-        expect(element.select('.tag-list').selectAll('input').nodes()[2].value).to.be.empty;
-        expect(element.select('.tag-list').selectAll('input').nodes()[3].value).to.be.empty;
+        expect(element.selectAll('.tag-list li').nodes().length).toEqual(2);
+        expect(element.select('.tag-list').selectAll('input').nodes()[2].value).toBe('');
+        expect(element.select('.tag-list').selectAll('input').nodes()[3].value).toBe('');
+    });
+
+    it('moves focus to the value input when pressing equals in the key input', function() {
+        element.remove();
+        render({});
+        var key = element.select('.tag-list input.key');
+        var value = element.select('.tag-list input.value');
+        iD.utilTriggerEvent(key,'keydown', { key: '=' });
+        expect(document.activeElement).toBe(value.node());
     });
 
     it('removes tags when clicking the remove button', async () => {
@@ -51,6 +62,6 @@ describe('iD.uiSectionRawTagEditor', function() {
             taglist.on('change', (_, tags) => cb(tags));
         });
         iD.utilTriggerEvent(element.selectAll('button.remove'), 'mousedown', { button: 0 });
-        expect(await tags).to.eql({highway: undefined});
+        expect(await tags).toEqual({highway: undefined});
     });
 });

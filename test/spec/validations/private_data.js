@@ -6,10 +6,10 @@ describe('iD.validations.private_data', function () {
     });
 
     function createWay(tags) {
-        var n1 = iD.osmNode({id: 'n-1', loc: [4,4]});
-        var n2 = iD.osmNode({id: 'n-2', loc: [4,5]});
-        var n3 = iD.osmNode({id: 'n-3', loc: [5,5]});
-        var w = iD.osmWay({id: 'w-1', nodes: ['n-1', 'n-2', 'n-3'], tags: tags});
+        var n1 = new iD.osmNode({id: 'n-1', loc: [4,4]});
+        var n2 = new iD.osmNode({id: 'n-2', loc: [4,5]});
+        var n3 = new iD.osmNode({id: 'n-3', loc: [5,5]});
+        var w = new iD.osmWay({id: 'w-1', nodes: ['n-1', 'n-2', 'n-3'], tags: tags});
 
         context.perform(
             iD.actionAddEntity(n1),
@@ -32,41 +32,41 @@ describe('iD.validations.private_data', function () {
 
     it('has no errors on init', function() {
         var issues = validate();
-        expect(issues).to.have.lengthOf(0);
+        expect(issues).toHaveLength(0);
     });
 
     it('ignores way with no tags', function() {
         createWay({});
         var issues = validate();
-        expect(issues).to.have.lengthOf(0);
+        expect(issues).toHaveLength(0);
     });
 
     it('ignores way with phone tag', function() {
         createWay({ phone: '123-456-7890' });
         var issues = validate();
-        expect(issues).to.have.lengthOf(0);
+        expect(issues).toHaveLength(0);
     });
 
     it('ignores generic building with phone tag', function() {
         createWay({ building: 'yes', phone: '123-456-7890' });
         var issues = validate();
-        expect(issues).to.have.lengthOf(0);
+        expect(issues).toHaveLength(0);
     });
 
     it('ignores guest house with phone tag', function() {
         createWay({ building: 'house', phone: '123-456-7890', tourism: 'guest_house' });
         var issues = validate();
-        expect(issues).to.have.lengthOf(0);
+        expect(issues).toHaveLength(0);
     });
 
     it('flags house with phone tag', function() {
         createWay({ building: 'house', phone: '123-456-7890' });
         var issues = validate();
-        expect(issues).to.have.lengthOf(1);
+        expect(issues).toHaveLength(1);
         var issue = issues[0];
-        expect(issue.type).to.eql('private_data');
-        expect(issue.entityIds).to.have.lengthOf(1);
-        expect(issue.entityIds[0]).to.eql('w-1');
+        expect(issue.type).toEqual('private_data');
+        expect(issue.entityIds).toHaveLength(1);
+        expect(issue.entityIds[0]).toEqual('w-1');
     });
 
 });

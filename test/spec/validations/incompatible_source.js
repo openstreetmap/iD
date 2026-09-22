@@ -6,10 +6,10 @@ describe('iD.validations.incompatible_source', function () {
     });
 
     function createWay(tags) {
-        var n1 = iD.osmNode({id: 'n-1', loc: [4,4]});
-        var n2 = iD.osmNode({id: 'n-2', loc: [4,5]});
-        var n3 = iD.osmNode({id: 'n-3', loc: [5,5]});
-        var w = iD.osmWay({id: 'w-1', nodes: ['n-1', 'n-2', 'n-3'], tags: tags});
+        var n1 = new iD.osmNode({id: 'n-1', loc: [4,4]});
+        var n2 = new iD.osmNode({id: 'n-2', loc: [4,5]});
+        var n3 = new iD.osmNode({id: 'n-3', loc: [5,5]});
+        var w = new iD.osmWay({id: 'w-1', nodes: ['n-1', 'n-2', 'n-3'], tags: tags});
 
         context.perform(
             iD.actionAddEntity(n1),
@@ -32,46 +32,82 @@ describe('iD.validations.incompatible_source', function () {
 
     it('has no errors on init', function() {
         var issues = validate();
-        expect(issues).to.have.lengthOf(0);
+        expect(issues).toHaveLength(0);
     });
 
     it('ignores way with no source tag', function() {
         createWay({ amenity: 'cafe', building: 'yes', name: 'Key Largo Café'});
         var issues = validate();
-        expect(issues).to.have.lengthOf(0);
+        expect(issues).toHaveLength(0);
     });
 
     it('ignores way with okay source tag', function() {
         createWay({ amenity: 'cafe', building: 'yes', name: 'Key Largo Café', source: 'survey'});
         var issues = validate();
-        expect(issues).to.have.lengthOf(0);
+        expect(issues).toHaveLength(0);
     });
 
     it('ignores way with excepted source tag', function() {
         createWay({ amenity: 'cafe', building: 'yes', name: 'Key Largo Café', source: 'Google drive'});
         var issues = validate();
-        expect(issues).to.have.lengthOf(0);
+        expect(issues).toHaveLength(0);
     });
 
     it('flags way with incompatible source tag', function() {
         createWay({ amenity: 'cafe', building: 'yes', name: 'Key Largo Café', source: 'Google Maps'});
         var issues = validate();
-        expect(issues).to.have.lengthOf(1);
+        expect(issues).toHaveLength(1);
         var issue = issues[0];
-        expect(issue.type).to.eql('incompatible_source');
-        expect(issue.entityIds).to.have.lengthOf(1);
-        expect(issue.entityIds[0]).to.eql('w-1');
+        expect(issue.type).toEqual('incompatible_source');
+        expect(issue.entityIds).toHaveLength(1);
+        expect(issue.entityIds[0]).toEqual('w-1');
     });
 
     it('does not flag buildings in the google-africa-buildings dataset', function() {
         createWay({ building: 'yes', source: 'esri/Google_Africa_Buildings' });
         var issues = validate();
-        expect(issues).to.have.lengthOf(0);
+        expect(issues).toHaveLength(0);
     });
 
     it('does not flag buildings in the google-open-buildings dataset', function() {
         createWay({ building: 'yes', source: 'esri/Google_Open_Buildings' });
         var issues = validate();
-        expect(issues).to.have.lengthOf(0);
+        expect(issues).toHaveLength(0);
+    });
+
+    it('flags way with a goo.gl shortlink as source', function() {
+        createWay({ amenity: 'cafe', building: 'yes', name: 'Key Largo Café', source: 'https://maps.app.goo.gl/UX2Kv2GVQR9bkWwv5'});
+        var issues = validate();
+        expect(issues).toHaveLength(1);
+        var issue = issues[0];
+        expect(issue.type).toEqual('incompatible_source');
+        expect(issue.entityIds).toHaveLength(1);
+        expect(issue.entityIds[0]).toEqual('w-1');
+    });
+
+    it('flags way with a bare goo.gl source', function() {
+        createWay({ amenity: 'cafe', building: 'yes', name: 'Key Largo Café', source: 'goo.gl/abc123'});
+        var issues = validate();
+        expect(issues).toHaveLength(1);
+    });
+
+    it('does not flag a source that merely ends in goo.gl', function() {
+        createWay({ amenity: 'cafe', building: 'yes', name: 'Key Largo Café', source: 'kangoo.gl'});
+        var issues = validate();
+        expect(issues).toHaveLength(0);
+    });
+
+    it('does not flag a .glass domain', function() {
+        createWay({ amenity: 'cafe', building: 'yes', name: 'Key Largo Café', source: 'goo.glass'});
+        var issues = validate();
+        expect(issues).toHaveLength(0);
+    });
+
+    it('does not flag a Google Sites page', function() {
+        // Google Sites pages are user-generated; Google holds no copyright
+        // interest in the content, so they are a legitimate source.
+        createWay({ amenity: 'cafe', building: 'yes', name: 'Key Largo Café', source: 'https://sites.google.com/view/key-largo-cafe'});
+        var issues = validate();
+        expect(issues).toHaveLength(0);
     });
 });

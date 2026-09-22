@@ -1,4 +1,4 @@
-import { debounce } from 'es-toolkit/compat';
+import { debounce } from 'es-toolkit';
 
 import { decimalCoordinatePair, dmsCoordinatePair } from '../../util/units';
 import { t } from '../../core/localizer';

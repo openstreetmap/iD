@@ -295,6 +295,10 @@ export function uiPhotoviewer(context) {
         }
     };
 
+    /**
+     * @param {import('../geo/vector').Vec2} dimensions
+     * @returns {import('../geo/vector').Vec2}
+     */
     function subtractPadding(dimensions, selection) {
         return [
             dimensions[0] - parseFloat(selection.style('padding-left')) - parseFloat(selection.style('padding-right')),

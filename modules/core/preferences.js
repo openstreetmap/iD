@@ -7,7 +7,7 @@ try { _storage = localStorage; } catch {}  // eslint-disable-line no-empty
 _storage = _storage || (() => {
   let s = {};
   return {
-    getItem: (k) => s[k],
+    getItem: (k) => k in s ? s[k] : null,
     setItem: (k, v) => s[k] = v,
     removeItem: (k) => delete s[k]
   };
@@ -20,8 +20,15 @@ const _listeners = {};
 // within and between iD sessions on the same site.
 //
 /**
+ * @overload getter
  * @param {string} k
- * @param {string?} [v]
+ * @param {undefined} [v]
+ * @returns {string | null} the value
+ */
+/**
+ * @overload setter
+ * @param {string} k
+ * @param {string | number | boolean | null} v
  * @returns {boolean} true if the action succeeded
  */
 function corePreferences(k, v) {

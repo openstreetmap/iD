@@ -10,7 +10,6 @@ busway
 childs
 chipseal
 colour
-crossreferenced
 datavalue
 disconnectable
 dotp
@@ -33,7 +32,6 @@ linkify
 mapbox
 mapilio
 mapillary
-maprules
 maxspeed
 multipolygon
 Multipolygons

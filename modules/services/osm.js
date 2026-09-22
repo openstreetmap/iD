@@ -1,4 +1,4 @@
-import { throttle } from 'es-toolkit/compat';
+import { throttle } from 'es-toolkit';
 
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { json as d3_json } from 'd3-fetch';
@@ -7,10 +7,11 @@ import RBush from 'rbush';
 
 import { JXON } from '../util/jxon';
 import { geoExtent, geoRawMercator, geoVecAdd, geoZoomToScale } from '../geo';
-import { osmEntity, osmNode, osmNote, osmRelation, osmWay } from '../osm';
+import { osmIdManager, osmNode, osmNote, osmRelation, osmWay } from '../osm';
 import { utilArrayChunk, utilArrayGroupBy, utilArrayUniq, utilObjectOmit, utilRebind, utilTiler, utilQsString } from '../util';
 import { localizer } from '../core/localizer.js';
 import { utilGzip } from '../util/util';
+import { ApiError } from '../util/error';
 import { osmApiConnections } from '../../config/id.js';
 
 
@@ -178,13 +179,18 @@ var jsonparsers = {
 function parseJSON(payload, callback, options) {
     options = Object.assign({ skipSeen: true }, options);
     if (!payload)  {
-        return callback({ message: 'No JSON', status: -1 });
+        return callback(new ApiError('No JSON', -1));
     }
 
     var json = payload;
     if (typeof json !== 'object') json = JSON.parse(payload);
 
-    if (!json.elements) return callback({ message: 'No JSON', status: -1 });
+    if (!json.elements) return callback(new ApiError('No JSON', -1));
+
+    if (typeof json.elements.at(-1)?.error === 'string') {
+        const errorMessage = payload.elements.at(-1).error;
+        return callback(new ApiError(errorMessage, -1));
+    }
 
     var children = json.elements;
 
@@ -206,7 +212,7 @@ function parseJSON(payload, callback, options) {
 
         var uid;
 
-        uid = osmEntity.id.fromOSM(child.type, child.id);
+        uid = osmIdManager.fromOSM(child.type, child.id);
         if (options.skipSeen) {
             if (_tileCache.seen[uid]) return null;  // avoid reparsing a "seen" entity
             _tileCache.seen[uid] = true;
@@ -219,13 +225,13 @@ function parseJSON(payload, callback, options) {
 function parseUserJSON(payload, callback, options) {
     options = Object.assign({ skipSeen: true }, options);
     if (!payload)  {
-        return callback({ message: 'No JSON', status: -1 });
+        return callback(new ApiError('No JSON', -1));
     }
 
     var json = payload;
     if (typeof json !== 'object') json = JSON.parse(payload);
 
-    if (!json.users && !json.user) return callback({ message: 'No JSON', status: -1 });
+    if (!json.users && !json.user) return callback(new ApiError('No JSON', -1));
 
     var objs = json.users || [json];
 
@@ -257,7 +263,7 @@ function parseUserJSON(payload, callback, options) {
 function parseNoteJSON(payload, callback, _options) {
     const options = { skipSeen: true, ..._options };
     if (!payload)  {
-        return callback({ message: 'No JSON', status: -1 });
+        return callback(new ApiError('No JSON', -1));
     }
 
     const features = payload.type === 'FeatureCollection' ? payload.features : [payload];
@@ -316,7 +322,7 @@ function wrapcb(thisArg, callback, cid) {
             return callback.call(thisArg, err);
 
         } else if (thisArg.getConnectionId() !== cid) {
-            return callback.call(thisArg, { message: 'Connection Switched', status: -1 });
+            return callback.call(thisArg, new ApiError('Connection Switched', -1));
 
         } else {
             return callback.call(thisArg, err, result);
@@ -421,7 +427,7 @@ export default {
 
         function done(err, payloadString) {
             if (that.getConnectionId() !== cid) {
-                if (callback) callback({ message: 'Connection Switched', status: -1 });
+                if (callback) callback(new ApiError('Connection Switched', -1));
                 return;
             }
 
@@ -469,7 +475,7 @@ export default {
                     // https://github.com/d3/d3-fetch/issues/27
                     var match = err.message.match(/^\d{3}/);
                     if (match) {
-                        done({ status: +match[0], statusText: err.message });
+                        done(new ApiError(err.message, +match[0], { cause: err }));
                     } else {
                         done(err.message);
                     }
@@ -484,8 +490,8 @@ export default {
     // GET /api/0.6/node/#id
     // GET /api/0.6/[way|relation]/#id/full
     loadEntity: function(id, callback) {
-        var type = osmEntity.id.type(id);
-        var osmID = osmEntity.id.toOSM(id);
+        var type = osmIdManager.type(id);
+        var osmID = osmIdManager.toOSM(id);
         var options = { skipSeen: false };
 
         this.loadFromAPI(
@@ -514,8 +520,8 @@ export default {
     // Load a single entity with a specific version
     // GET /api/0.6/[node|way|relation]/#id/#version
     loadEntityVersion: function(id, version, callback) {
-        var type = osmEntity.id.type(id);
-        var osmID = osmEntity.id.toOSM(id);
+        var type = osmIdManager.type(id);
+        var osmID = osmIdManager.toOSM(id);
         var options = { skipSeen: false };
 
         this.loadFromAPI(
@@ -531,8 +537,8 @@ export default {
     // Load the relations of a single entity with the given.
     // GET /api/0.6/[node|way|relation]/#id/relations
     loadEntityRelations: function(id, callback) {
-        var type = osmEntity.id.type(id);
-        var osmID = osmEntity.id.toOSM(id);
+        var type = osmIdManager.type(id);
+        var osmID = osmIdManager.toOSM(id);
         var options = { skipSeen: false };
 
         this.loadFromAPI(
@@ -551,11 +557,11 @@ export default {
     // GET /api/0.6/[nodes|ways|relations]?#parameters
     loadMultiple: function(ids, callback) {
         var that = this;
-        var groups = utilArrayGroupBy(utilArrayUniq(ids), osmEntity.id.type);
+        var groups = utilArrayGroupBy(utilArrayUniq(ids), osmIdManager.type);
 
         Object.keys(groups).forEach(function(k) {
             var type = k + 's';   // nodes, ways, relations
-            var osmIDs = groups[k].map(function(id) { return osmEntity.id.toOSM(id); });
+            var osmIDs = groups[k].map(function(id) { return osmIdManager.toOSM(id); });
             var options = { skipSeen: false };
 
             utilArrayChunk(osmIDs, 150).forEach(function(arr) {
@@ -579,7 +585,7 @@ export default {
         var cid = _connectionID;
 
         if (_changeset.inflight) {
-            return callback({ message: 'Changeset already inflight', status: -2 }, changeset);
+            return callback(new ApiError('Changeset already inflight', -2), changeset);
 
         } else if (_changeset.open) {   // reuse existing open changeset..
             return createdChangeset.call(this, null, _changeset.open);
@@ -996,10 +1002,10 @@ export default {
     // POST /api/0.6/notes?params
     postNoteCreate: function(note, callback) {
         if (!this.authenticated()) {
-            return callback({ message: 'Not Authenticated', status: -3 }, note);
+            return callback(new ApiError('Not Authenticated', -3), note);
         }
         if (_noteCache.inflightPost[note.id]) {
-            return callback({ message: 'Note update already inflight', status: -2 }, note);
+            return callback(new ApiError('Note update already inflight', -2), note);
         }
 
         if (!note.loc[0] || !note.loc[1] || !note.newComment) return; // location & description required
@@ -1040,10 +1046,10 @@ export default {
     // POST /api/0.6/notes/#id/reopen?text=comment
     postNoteUpdate: function(note, newStatus, callback) {
         if (!this.authenticated()) {
-            return callback({ message: 'Not Authenticated', status: -3 }, note);
+            return callback(new ApiError('Not Authenticated', -3), note);
         }
         if (_noteCache.inflightPost[note.id]) {
-            return callback({ message: 'Note update already inflight', status: -2 }, note);
+            return callback(new ApiError('Note update already inflight', -2), note);
         }
 
         var action;
@@ -1216,7 +1222,7 @@ export default {
                 return;
             }
             if (that.getConnectionId() !== cid) {
-                if (callback) callback({ message: 'Connection Switched', status: -1 });
+                if (callback) callback(new ApiError('Connection Switched', -1));
                 return;
             }
             _rateLimitError = undefined;

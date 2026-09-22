@@ -7,5 +7,8 @@ export default defineConfig({
     globals: true,
     include: ['test/spec/**/*.{js,ts}'],
     setupFiles: ['./test/spec_helpers.ts'],
+    execArgv: [
+        '--no-experimental-webstorage'
+    ],
   },
 });

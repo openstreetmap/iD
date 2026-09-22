@@ -74,6 +74,7 @@ export function uiTooltip(klass) {
             textSelect.enter()
                 .append('div')
                 .attr('class', 'tooltip-text')
+                .attr('dir', 'auto')
                 .merge(textSelect)
                 .text('')
                 .call(textCallback);

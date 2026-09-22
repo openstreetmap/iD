@@ -3,8 +3,9 @@ import { select as d3_select } from 'd3-selection';
 
 import { presetManager } from '../presets';
 import { geoScaleToZoom } from '../geo';
-import { osmEntity } from '../osm';
+import { osmIdManager } from '../osm';
 import { svgPassiveVertex, svgPointTransform } from './helpers';
+import { getRadiiInPixels } from '../core';
 import { svgTagClasses } from './tag_classes';
 
 export function svgVertices(projection, context) {
@@ -33,7 +34,7 @@ export function svgVertices(projection, context) {
     function fastEntityKey(d) {
         var mode = context.mode();
         var isMoving = mode && /^(add|draw|drag|move|rotate)/.test(mode.id);
-        return isMoving ? d.id : osmEntity.key(d);
+        return isMoving ? d.id : osmIdManager.key(d);
     }
 
 
@@ -165,6 +166,20 @@ export function svgVertices(projection, context) {
                 return picon ? '#' + picon : '';
             });
 
+        // Highlighted vertices with a radius/diameter get a circle
+        const circles = groups
+            .selectAll('.radius')
+            .data((d) => context.selectedIDs().includes(d.id) ? getRadiiInPixels(d, projection) : []);
+
+        circles.exit()
+            .remove();
+
+        circles.enter()
+            .insert('circle', '.shadow')
+            .attr('class', 'radius')
+            .merge(circles)
+            .attr('r', d => d);
+
 
         // Vertices with directions get viewfields
         var dgroups = groups
@@ -182,7 +197,7 @@ export function svgVertices(projection, context) {
             .merge(dgroups);
 
         var viewfields = dgroups.selectAll('.viewfield')
-            .data(getDirections, function key(d) { return osmEntity.key(d); });
+            .data(getDirections, function key(d) { return osmIdManager.key(d); });
 
         // exit
         viewfields.exit()
@@ -455,6 +470,11 @@ export function svgVertices(projection, context) {
         // note that drawVertices will add `_currSelected` automatically if needed..
         var filter = function(d) { return d.id in _prevSelected; };
         drawVertices(selection, graph, Object.values(_prevSelected), filter, extent, false);
+    };
+
+
+    drawVertices.clearSelected = (selection) => {
+        selection.selectAll('.radius').remove();
     };
 
 

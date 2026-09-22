@@ -38,7 +38,7 @@
     --valid-border-color: #2f2;
     --valid-text-color: #0b0;
     --valid-highlight-text-color: #080;
-    --valid-icon-color: #0f0;
+    --valid-icon-color: #0a0;
 
     --suggestion-bg-color: #cef;
     --suggestion-label-color: #adf;
@@ -105,6 +105,7 @@
         --valid-border-color: #080;
         --valid-text-color: #3e3;
         --valid-highlight-text-color: #6e6;
+        --valid-icon-color: #4e4;
 
         --suggestion-bg-color: #023;
         --suggestion-label-color: #047;
