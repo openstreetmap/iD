@@ -31,7 +31,9 @@ export function uiTagReference(what) {
         if (!wikibase) return;
 
         _button
-            .classed('tag-reference-loading', true);
+          .select('svg')
+          .insert('use', 'use')
+          .attr('href', '#iD-loader');
 
         wikibase.getDocs(what, gotDocs);
     }
@@ -111,7 +113,8 @@ export function uiTagReference(what) {
         _loaded = true;
 
         _button
-            .classed('tag-reference-loading', false);
+          .select('svg use[href="#iD-loader"]')
+          .remove();
 
         _body
             .classed('expanded', true)
