@@ -518,12 +518,6 @@ button.disabled .icon.operation use,
     vertical-align: baseline;
 }
 
-button.loading .icon {
-    background-image: url(img/mini-loader.gif);
-    background-position: 0 0;
-    background-size: auto;
-}
-
 
 /* Toolbar / Persistent UI Elements
 ------------------------------------------------------- */
@@ -2901,14 +2895,6 @@ button.raw-tag-option svg.icon {
 }
 
 /* Tag reference */
-.tag-reference-loading {
-    background-color: var(--bg-color-2);
-}
-.tag-reference-loading .icon {
-    background-image: url(img/mini-loader.gif);
-    background-position: 0 0;
-}
-
 .tag-reference-body {
     flex: 1 1 auto;
     width: 100%;
