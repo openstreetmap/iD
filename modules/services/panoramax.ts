@@ -1,17 +1,21 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
-
+import type { Feature, LineString, Point } from 'geojson';
 import { PbfReader } from 'pbf';
 import RBush from 'rbush';
 import { VectorTile } from '@mapbox/vector-tile';
 import { utilRebind, utilTiler, utilUniqueDomId } from '../util';
 import { geoExtent } from '../geo';
 import { t } from '../core/localizer';
-import { pannellumPhotoFrame } from './pannellum_photo';
+import { pannellumPhotoFrame, type PhotoFrame, type PhotoFramePhoto } from './pannellum_photo';
 import { planePhotoFrame } from './plane_photo';
 import { services } from './';
-import { partitionViewport } from '../util/partition';
+import { partitionViewport, type WithBbox } from '../util/partition';
 import { localeDateString } from '../util/date';
 import { patchHash } from '../behavior';
+import type { Projection } from '../geo/raw_mercator';
+import type { Tile } from '../util/tiler';
+import type { coreContext } from '../core';
+import type { Vec2 } from '../geo/vector';
 
 
 const apiUrl = 'https://api.panoramax.xyz/';
@@ -33,22 +37,106 @@ const imageMinZoom = 15;
 const lineMinZoom = 10;
 const dispatch = d3_dispatch('loadedImages', 'loadedLines', 'viewerChanged');
 
-let _cache;
-let _loadViewerPromise;
+interface PanoramaxUser {
+    id: string;
+    name: string;
+}
+
+type RawPanoramaxImage = Feature<Point, {
+    id: string;
+    ts: string;
+    type: 'equirectangular' | 'flat';
+    model: string;
+    first_sequence: string;
+    account_id: string;
+    heading: string;
+}>
+export type RawPanoramaxSequence = Feature<LineString, {
+    type: 'equirectangular' | 'flat';
+    id: string;
+    date: string;
+    account_id: string;
+}>;
+
+export interface PanoramaxImage extends PhotoFramePhoto {
+    service: 'photo';
+    loc: Vec2;
+    capture_time: string;
+    capture_time_parsed: Date;
+    id: string;
+    account_id: string;
+    sequence_id: string;
+    heading: number;
+    image_path: string;
+    isPano: boolean;
+    model: string;
+}
+
+interface Link {
+    id: string;
+    rel: 'prev' | 'next';
+    href: string;
+}
+
+interface PanoramaxImageData {
+    id: string;
+    links: Link[];
+    assets: {
+        [id: string]: Link;
+    }
+}
+
+
+interface Cache {
+    users: {
+        [userId: string]: PanoramaxUser;
+    };
+    images: {
+        rtree: RBush<WithBbox<PanoramaxImage>>;
+        forImageId: {
+            [imageId: string]: PanoramaxImage;
+        };
+    };
+    sequences: {
+        rtree: RBush<unknown>;
+        lineString: {
+            [id: string]: RawPanoramaxSequence[];
+        };
+        items: {
+            [collectionId: string]: PanoramaxImageData[];
+        };
+    };
+    mockSequences: Omit<Cache['sequences'], 'items'>;
+    requests: {
+        loaded: {
+            [tileId: string]: boolean;
+        };
+        inflight: {
+            [tileId: string]: AbortController;
+        }
+    };
+}
+
+let _cache: Cache;
+let _loadViewerPromise: Promise<void>;
 let _definition = standardDefinition;
 let _isHD = false;
 
-let _planeFrame;
-let _pannellumFrame;
-let _currentFrame;
+let _planeFrame: PhotoFrame;
+let _pannellumFrame: PhotoFrame;
+let _currentFrame: PhotoFrame;
 
-let _currentScene = {
+let _currentScene: {
+    currentImage: Link | null;
+    nextImage: Link | null;
+    prevImage: Link | null;
+} = {
     currentImage : null,
     nextImage : null,
     prevImage : null
 };
 
-let _activeImage;
+let _activeImage: Pick<PanoramaxImage, 'id' | 'sequence_id' | 'loc'> | undefined | null;
 let _isViewerOpen = false;
 
 
@@ -59,14 +147,14 @@ let _isViewerOpen = false;
  * @param {*} rtree The cache
  * @returns Data found
  */
-function searchLimited(limit, projection, rtree) {
+function searchLimited(limit: number, projection: Projection, rtree: RBush<WithBbox<PanoramaxImage>>): PanoramaxImage[] {
     limit = limit || 5;
 
     return partitionViewport(projection)
-        .reduce(function(result, extent) {
+        .reduce<PanoramaxImage[]>(function(result, extent) {
             let found = rtree.search(extent.bbox());
             const spacing = Math.max(1, Math.floor(found.length / limit));
-            found = found
+            const matching = found
                 .filter((d, idx) => idx % spacing === 0 ||
                                     d.data.id === _activeImage?.id)
                 .sort((a, b) => {
@@ -77,7 +165,7 @@ function searchLimited(limit, projection, rtree) {
                 .slice(0, limit)
                 .map(d => d.data);
 
-            return (found.length ? result.concat(found) : result);
+            return (matching.length ? result.concat(matching) : result);
         }, []);
 }
 
@@ -89,7 +177,7 @@ function searchLimited(limit, projection, rtree) {
  * @param {*} projection Current projection
  * @param {number} zoom current zoom
  */
-function loadTiles(which, url, maxZoom, projection, zoom) {
+function loadTiles(which: 'images' | 'line', url: string, maxZoom: number, projection: Projection, zoom?: number) {
     const tiler = utilTiler().zoomExtent([minZoom, maxZoom]).skipNullIsland(true);
     const tiles = tiler.getTiles(projection);
 
@@ -105,15 +193,16 @@ function loadTiles(which, url, maxZoom, projection, zoom) {
  * @param {*} tile Current tile
  * @param {*} zoom Current zoom
  */
-function loadTile(which, url, tile, zoom) {
+function loadTile(which: string, url: string, tile: Tile, zoom?: number) {
     const cache = _cache.requests;
     const tileId = `${tile.id}-${which}`;
     if (cache.loaded[tileId] || cache.inflight[tileId]) return;
     const controller = new AbortController();
     cache.inflight[tileId] = controller;
-    const requestUrl = url.replace('{x}', tile.xyz[0])
-        .replace('{y}', tile.xyz[1])
-        .replace('{z}', tile.xyz[2]);
+    const requestUrl = url
+        .replace('{x}', String(tile.xyz[0]))
+        .replace('{y}', String(tile.xyz[1]))
+        .replace('{z}', String(tile.xyz[2]));
 
     fetch(requestUrl, { signal: controller.signal })
         .then(function(response) {
@@ -152,27 +241,19 @@ function loadTile(which, url, tile, zoom) {
  * @param {*} tile Current tile
  * @param {*} zoom Current zoom
  */
-function loadTileDataToCache(data, tile, zoom) {
+function loadTileDataToCache(data: ArrayBuffer, tile: Tile, zoom?: number) {
     const vectorTile = new VectorTile(new PbfReader(data));
 
-    let features,
-        cache,
-        layer,
-        i,
-        feature,
-        loc,
-        d;
-
     if (Object.hasOwnProperty.call(vectorTile.layers, pictureLayer)) {
-        features = [];
-        cache = _cache.images;
-        layer = vectorTile.layers[pictureLayer];
+        const features: WithBbox<PanoramaxImage>[] = [];
+        const cache = _cache.images;
+        const layer = vectorTile.layers[pictureLayer];
 
-        for (i = 0; i < layer.length; i++) {
-            feature = layer.feature(i).toGeoJSON(tile.xyz[0], tile.xyz[1], tile.xyz[2]);
-            loc = feature.geometry.coordinates;
+        for (let i = 0; i < layer.length; i++) {
+            const feature = layer.feature(i).toGeoJSON(tile.xyz[0], tile.xyz[1], tile.xyz[2]) as RawPanoramaxImage;
+            const loc = feature.geometry.coordinates as Vec2;
 
-            d = {
+            const d: PanoramaxImage = {
                 service: 'photo',
                 loc: loc,
                 capture_time: feature.properties.ts,
@@ -197,14 +278,14 @@ function loadTileDataToCache(data, tile, zoom) {
 
     if (Object.hasOwnProperty.call(vectorTile.layers, sequenceLayer)) {
 
-        cache = _cache.sequences;
+        let cache: typeof _cache.mockSequences = _cache.sequences;
 
-        if (zoom >= lineMinZoom && zoom < imageMinZoom) cache = _cache.mockSequences;
+        if (typeof zoom === 'number' && zoom >= lineMinZoom && zoom < imageMinZoom) cache = _cache.mockSequences;
 
-        layer = vectorTile.layers[sequenceLayer];
+        const layer = vectorTile.layers[sequenceLayer];
 
-        for (i = 0; i < layer.length; i++) {
-            feature = layer.feature(i).toGeoJSON(tile.xyz[0], tile.xyz[1], tile.xyz[2]);
+        for (let i = 0; i < layer.length; i++) {
+            const feature = layer.feature(i).toGeoJSON(tile.xyz[0], tile.xyz[1], tile.xyz[2]) as RawPanoramaxSequence;
             if (cache.lineString[feature.properties.id]) {
                 cache.lineString[feature.properties.id].push(feature);
             } else {
@@ -219,7 +300,7 @@ function loadTileDataToCache(data, tile, zoom) {
  * @param {string} userId
  * @returns the username
  */
-async function getUsername(userId) {
+async function getUsername(userId: string) {
     const cache = _cache.users;
     if (cache[userId]) return cache[userId].name;
 
@@ -235,16 +316,18 @@ async function getUsername(userId) {
     return data.name;
 }
 
-export default {
-    init: function() {
+export default new class {
+    event!: Pick<typeof dispatch, 'on'>;
+
+    init() {
         if (!_cache) {
             this.reset();
         }
 
         this.event = utilRebind(this, dispatch, 'on');
-    },
+    }
 
-    reset: function() {
+    reset() {
         if (_cache) {
             Object.values(_cache.requests.inflight).forEach(function(request) { request.abort(); });
         }
@@ -256,63 +339,62 @@ export default {
             mockSequences: { rtree: new RBush(), lineString: {} },
             requests: { loaded: {}, inflight: {} }
         };
-    },
+    }
 
     /**
      * Get visible images from cache
      * @param {*} projection Current Projection
      * @returns images data for the current projection
      */
-    images: function(projection) {
+    images(projection: Projection) {
         const limit = 5;
         return searchLimited(limit, projection, _cache.images.rtree);
-    },
+    }
 
     /**
      * Get a specific image from cache
      * @param {*} imageKey the image id
-     * @returns
      */
-    cachedImage: function(imageKey) {
+    cachedImage(imageKey: string) {
         return _cache.images.forImageId[imageKey];
-    },
+    }
 
     /**
      * Fetches images data for the visible area
      * @param {*} projection Current Projection
      */
-    loadImages: function(projection) {
+    loadImages(projection: Projection) {
         loadTiles('images', tileUrl, imageMinZoom, projection);
-    },
+    }
 
     /**
      * Fetches sequences data for the visible area
      * @param {*} projection Current Projection
      */
-    loadLines: function(projection, zoom) {
+    loadLines(projection: Projection, zoom: number) {
         loadTiles('line', tileUrl, lineMinZoom, projection, zoom);
-    },
+    }
 
     /**
      * Fetches all possible userIDs from Panoramax
      * @param {string} usernames one or multiple usernames
      * @returns userIDs
      */
-    getUserIds: async function(usernames) {
+    async getUserIds(usernames: string[]) {
         const requestUrls = usernames.map(username =>
             userIdUrl.replace('{username}', username));
 
         const responses = await Promise.all(requestUrls.map(requestUrl =>
             fetch(requestUrl, { method: 'GET' })));
         if (responses.some(response => !response.ok)) {
-            const response = responses.find(response => !response.ok);
+            const response = responses.find(response => !response.ok)!;
             throw new Error(response.status + ' ' + response.statusText);
         }
-        const data = await Promise.all(responses.map(response => response.json()));
+        const data = await Promise.all(responses.map(response => response.json() as Promise<{ features: PanoramaxUser[] }>));
         // in panoramax, a username can have multiple ids, when the same name is
         // used on different servers
         return data.flatMap((d, i) => d.features.filter(f => f.name === usernames[i]).map(f => f.id));
-    },
+    }
 
     /**
      * Get visible sequences from cache
@@ -320,13 +402,13 @@ export default {
      * @param {number} zoom Current zoom (if zoom < `lineMinZoom` less accurate lines will be drawn)
      * @returns sequences data for the current projection
      */
-    sequences: function(projection, zoom) {
+    sequences(projection: Projection, zoom: number) {
         const viewport = projection.clipExtent();
-        const min = [viewport[0][0], viewport[1][1]];
-        const max = [viewport[1][0], viewport[0][1]];
+        const min: Vec2 = [viewport[0][0], viewport[1][1]];
+        const max: Vec2 = [viewport[1][0], viewport[0][1]];
         const bbox = geoExtent(projection.invert(min), projection.invert(max)).bbox();
-        const sequenceIds = {};
-        let lineStrings = [];
+        const sequenceIds: { [sequenceId: string]: true } = {};
+        let lineStrings: RawPanoramaxSequence[] = [];
 
         if (zoom >= imageMinZoom){
             _cache.images.rtree.search(bbox).forEach(function(d) {
@@ -347,13 +429,12 @@ export default {
             });
         }
         return lineStrings;
-    },
+    }
 
     /**
      * Updates the data for the currently visible image
-     * @param {*} image Image data
      */
-    setActiveImage: function(image) {
+    setActiveImage(image: PanoramaxImage | null) {
         if (image && image.id && image.sequence_id) {
             _activeImage = {
                 id: image.id,
@@ -363,25 +444,25 @@ export default {
         } else {
             _activeImage = null;
         }
-    },
+    }
 
-    getActiveImage: function(){
+    getActiveImage() {
         return _activeImage;
-    },
+    }
 
     /**
      * Update the currently highlighted sequence and selected bubble
      * @param {*} context Current HTML context
      * @param {*} [hovered] The hovered bubble image
      */
-    setStyles: function(context, hovered) {
+    setStyles(context: coreContext, hovered: PanoramaxImage | null) {
         const hoveredImageId =  hovered && hovered.id;
         const hoveredSequenceId = hovered && hovered.sequence_id;
         const selectedSequenceId = _activeImage && _activeImage.sequence_id;
         const selectedImageId = _activeImage && _activeImage.id;
 
-        const markers = context.container().selectAll('.layer-panoramax .viewfield-group');
-        const sequences = context.container().selectAll('.layer-panoramax .sequence');
+        const markers = context.container().selectAll<HTMLElement, PanoramaxImage>('.layer-panoramax .viewfield-group');
+        const sequences = context.container().selectAll<HTMLElement, RawPanoramaxSequence>('.layer-panoramax .sequence');
 
         markers
             .classed('highlighted', function(d) { return d.sequence_id === selectedSequenceId || d.id === hoveredImageId; })
@@ -393,11 +474,11 @@ export default {
             .classed('currentView', function(d) { return d.properties.id === selectedSequenceId; });
 
         // update viewfields if needed
-        context.container().selectAll('.layer-panoramax .viewfield-group .viewfield')
+        context.container().selectAll<SVGPathElement, unknown>('.layer-panoramax .viewfield-group .viewfield')
             .attr('d', viewfieldPath);
 
-        function viewfieldPath() {
-            let d = this.parentNode.__data__;
+        function viewfieldPath(this: SVGPathElement) {
+            let d = this.parentNode!.__data__;
             if (d.isPano && d.id !== selectedImageId) {
                 return 'M 8,13 m -10,0 a 10,10 0 1,0 20,0 a 10,10 0 1,0 -20,0';
             } else {
@@ -405,12 +486,12 @@ export default {
             }
         }
         return this;
-    },
+    }
 
     // Get viewer status
-    isViewerOpen: function() {
+    isViewerOpen() {
         return _isViewerOpen;
-    },
+    }
 
     /**
      * Loads the selected image in the frame
@@ -418,7 +499,8 @@ export default {
      * @param {*} id of the selected image
      * @returns
      */
-    selectImage: function (context, id) {
+    selectImage(context: coreContext, id: string) {
+        // eslint-disable-next-line @typescript-eslint/no-this-alias
         let that = this;
 
         let d = that.cachedImage(id);
@@ -437,7 +519,7 @@ export default {
         if (!d) return this;
 
         let wrap = context.container()
-            .select('.photoviewer .panoramax-wrapper');
+            .select<HTMLElement>('.photoviewer .panoramax-wrapper');
 
         let attribution = wrap.selectAll('.photo-attribution').text('');
 
@@ -514,7 +596,7 @@ export default {
                 _currentScene.prevImage = data.links[prevIndex];
             }
 
-            d.image_path = _currentScene.currentImage.href;
+            d.image_path = _currentScene.currentImage!.href;
 
             wrap
                 .selectAll('button.back')
@@ -548,11 +630,11 @@ export default {
         }
 
         return this;
-    },
+    }
 
-    photoFrame: function() {
+    photoFrame() {
         return _currentFrame;
-    },
+    }
 
     /**
      * Fetches the data for a specific image
@@ -560,7 +642,7 @@ export default {
      * @param {*} imageId
      * @returns The fetched image data
      */
-    getImageData: async function(collectionId, imageId) {
+    async getImageData(collectionId: string, imageId: string) {
         const cache = _cache.sequences.items;
         if (cache[collectionId]) {
             const cached = cache[collectionId]
@@ -594,13 +676,14 @@ export default {
         if (!itemResponse.ok) {
             throw new Error(itemResponse.status + ' ' + itemResponse.statusText);
         }
-        const itemData = await itemResponse.json();
+        const itemData: PanoramaxImageData = await itemResponse.json();
         cache[collectionId].push(itemData);
         return itemData;
-    },
+    }
 
-    ensureViewerLoaded: function(context) {
+    ensureViewerLoaded(context: coreContext) {
 
+        // eslint-disable-next-line @typescript-eslint/no-this-alias
         let that = this;
 
         let imgWrap = context.container()
@@ -661,13 +744,13 @@ export default {
          * @param {number} stepBy '-1' if backwards or '1' if forward
          * @returns
          */
-        function step(stepBy) {
+        function step(stepBy: number) {
             return function () {
                 if (!_currentScene.currentImage) return;
 
-                let nextId;
-                if (stepBy === 1) nextId = _currentScene.nextImage.id;
-                else nextId = _currentScene.prevImage.id;
+                let nextId: string | undefined;
+                if (stepBy === 1) nextId = _currentScene.nextImage?.id;
+                else nextId = _currentScene.prevImage?.id;
 
                 if (!nextId) return;
 
@@ -681,19 +764,18 @@ export default {
         }
 
         return _loadViewerPromise;
-    },
+    }
 
     /**
      * Shows the current viewer if hidden
-     * @param {*} context
      */
-    showViewer: function (context) {
+    showViewer(context: coreContext) {
         const wrap = context.container().select('.photoviewer');
         const isHidden = wrap.selectAll('.photo-wrapper.panoramax-wrapper.hide').size();
         if (isHidden) {
             for (const service of Object.values(services)) {
                 if (service === this) continue;
-                if (typeof service.hideViewer === 'function') {
+                if (service && 'hideViewer' in service && typeof service.hideViewer === 'function') {
                     service.hideViewer(context);
                 }
             }
@@ -704,13 +786,12 @@ export default {
 
         _isViewerOpen = true;
         return this;
-    },
+    }
 
     /**
      * Hides the current viewer if shown, resets the active image and sequence
-     * @param {*} context
      */
-    hideViewer: function (context) {
+    hideViewer(context: coreContext) {
         let viewer = context.container().select('.photoviewer');
         if (!viewer.empty()) viewer.datum(null);
         patchHash({ photo: null });
@@ -725,9 +806,9 @@ export default {
         _isViewerOpen = false;
 
         return this.setStyles(context, null);
-    },
+    }
 
-    cache: function() {
+    cache() {
         return _cache;
     }
 };
