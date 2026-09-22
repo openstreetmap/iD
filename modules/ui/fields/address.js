@@ -201,16 +201,15 @@ export function uiFieldAddress(field, context) {
         if (!(_countryCodes?.length)) return;
 
         // find the country with a usable format
-        const defaultAddressFormat = _addressFormats.find((item) => !item.countryCodes);
-        console.assert(defaultAddressFormat !== undefined); // if undefined, then the config files are wrong.
-        let addressFormat = defaultAddressFormat;
+        let addressFormat = undefined;
         for (const currentCountryCode of _countryCodes) {
-            const foundFormat = _addressFormats.find(format => (format.countryCodes?.includes(currentCountryCode)));
-            if (foundFormat) {
-                addressFormat = foundFormat;
+            addressFormat = _addressFormats.find(format => (format.countryCodes?.includes(currentCountryCode)));
+            if (addressFormat) {
                 break;
             }
         }
+        // fallback in case there is no found format, using the default one (has no countries)
+        addressFormat ||= _addressFormats.find((item) => !item.countryCodes);
 
         const maybeDropdowns = new Set([
             'housenumber',
