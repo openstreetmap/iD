@@ -7,6 +7,7 @@ import { utilGetAllNodes, utilTotalExtent } from '../util/util';
 
 export function operationDisconnect(context, selectedIDs) {
     var _vertexIDs = [];
+    var _pointIDs = [];
     var _wayIDs = [];
     var _otherIDs = [];
     var _actions = [];
@@ -15,10 +16,12 @@ export function operationDisconnect(context, selectedIDs) {
         var entity = context.entity(id);
         if (entity.type === 'way'){
             _wayIDs.push(id);
+        } else if (entity.type !== 'node') {
+            _otherIDs.push(id);
         } else if (entity.geometry(context.graph()) === 'vertex') {
             _vertexIDs.push(id);
         } else {
-            _otherIDs.push(id);
+            _pointIDs.push(id);
         }
     });
 
@@ -31,7 +34,9 @@ export function operationDisconnect(context, selectedIDs) {
         // At the selected vertices, disconnect the selected ways, if any, else
         // disconnect all connected ways
 
-        _disconnectingVertexIds = _vertexIDs;
+        var nodeOnlyMultiselection = _wayIDs.length === 0 &&
+            _otherIDs.length === 0 &&
+            _vertexIDs.length + _pointIDs.length > 1;
 
         _vertexIDs.forEach(function(vertexID) {
             var action = actionDisconnect(vertexID);
@@ -43,7 +48,13 @@ export function operationDisconnect(context, selectedIDs) {
                 });
                 action.limitWays(waysIDsForVertex);
             }
+
+            if (nodeOnlyMultiselection && action.disabled(context.graph()) === 'not_connected') {
+                return;
+            }
+
             _actions.push(action);
+            _disconnectingVertexIds.push(vertexID);
             _disconnectingWayIds = _disconnectingWayIds
                 .concat(context.graph().parentWays(context.graph().entity(vertexID)).map(d => d.id));
         });
@@ -51,7 +62,7 @@ export function operationDisconnect(context, selectedIDs) {
             return _wayIDs.indexOf(id) === -1;
         });
 
-        _descriptionID += _actions.length === 1 ? 'single_point.' : 'multiple_points.';
+        _descriptionID += _vertexIDs.length + _pointIDs.length === 1 ? 'single_point.' : 'multiple_points.';
         if (_wayIDs.length === 1) {
             _descriptionID += 'single_way.' + context.graph().geometry(_wayIDs[0]);
         } else {
@@ -142,6 +153,7 @@ export function operationDisconnect(context, selectedIDs) {
     operation.available = function() {
         if (_actions.length === 0) return false;
         if (_otherIDs.length !== 0) return false;
+        if (_pointIDs.length !== 0 && _wayIDs.length !== 0) return false;
 
         if (_vertexIDs.length !== 0 && _wayIDs.length !== 0 && !_wayIDs.every(function(wayID) {
             return _vertexIDs.some(function(vertexID) {
