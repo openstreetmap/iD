@@ -245,6 +245,13 @@ export function uiEditMenu(context) {
             }
         }
 
+        // Keep the menu above the walkthrough navigation.
+        var introNav = context.container().select('.intro-nav-wrap');
+        if (!introNav.empty()) {
+            var introNavTop = introNav.node().getBoundingClientRect().top - viewport.top;
+            offset[1] = Math.min(offset[1], introNavTop - anchorLoc[1] - _menuHeight);
+        }
+
         var origin = geoVecAdd(anchorLoc, offset);
         // repositioning the menu to account for the top menu height
         var _verticalOffset = parseFloat(utilGetDimensions(d3_select('.top-toolbar-wrap'))[1]);
