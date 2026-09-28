@@ -42,6 +42,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Render diameter and radius tags when a node is selected ([#9732], thanks [@k-yle])
 * Dedicated rendering for road sections tagged with `ford=yes` ([#12830], thanks [@Geo-2695])
 * Allow to press `=` key to switch between _key_ and _value_ part of tags in the raw tag editor ([#12828], thanks [@hemaksh2007jain-bit]) and allow to press _Enter_ key to switch between tag parts or next tag in the raw tag editor
+* Include all imagery layers from the editor-layer-index, even those older than 20 years ([#12878], thanks [@andrewharvey])
 #### :scissors: Operations
 #### :camera: Street-Level
 #### :white_check_mark: Validation
@@ -52,25 +53,33 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :bug: Bugfixes
 * Fix exceptions when resizing the browser tab when nothing is selected ([#12800], thanks [@k-yle])
 * Allow tags like `not:*:wikidata` to have multiple values ([#12736], thanks [@k-yle])
+* Fix the icon of the GPS Overlay layer not working ([#12760], thanks [@hlfan])
 #### :earth_asia: Localization
 * Support 835 new languages in the dropdown when adding a `name:*` tag ([#12802])
+* Support territory-level address hints ([#12704], thanks [@Vectorial1024])
+* Add Hong Kong and Macao address formats ([#12704], thanks [@Vectorial1024])
 #### :hourglass: Performance
 #### :mortar_board: Walkthrough / Help
 #### :rocket: Presets
 #### :hammer: Development
+* Ongoing work to migrate the codebase from JavaScript to TypeScript ([view progress](https://github.com/openstreetmap/iD/milestone/47?closed=1))
 * Drop code previously responsible for _maprules_ integration (which has been defunct for a while now) ([#12679])
 
 [#8402]: https://github.com/openstreetmap/iD/issues/8402
 [#8424]: https://github.com/openstreetmap/iD/issues/8424
 [#9732]: https://github.com/openstreetmap/iD/pull/9732
 [#12679]: https://github.com/openstreetmap/iD/pull/12679
+[#12704]: https://github.com/openstreetmap/iD/pull/12704
 [#12724]: https://github.com/openstreetmap/iD/pull/12724
 [#12736]: https://github.com/openstreetmap/iD/pull/12736
 [#12740]: https://github.com/openstreetmap/iD/issues/12740
+[#12760]: https://github.com/openstreetmap/iD/pull/12760
 [#12800]: https://github.com/openstreetmap/iD/pull/12800
 [#12802]: https://github.com/openstreetmap/iD/pull/12802
 [#12828]: https://github.com/openstreetmap/iD/pull/12828
 [#12830]: https://github.com/openstreetmap/iD/pull/12830
+[#12878]: https://github.com/openstreetmap/iD/pull/12878
+[#12910]: https://github.com/openstreetmap/iD/pull/12910
 [@Geo-2695]: https://github.com/Geo-2695
 [@hemaksh2007jain-bit]: https://github.com/hemaksh2007jain-bit
 
@@ -219,6 +228,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :earth_asia: Localization
 * Change the example phone format for Türkiye ([#12446], thanks [@w2r4])
 #### :hammer: Development
+* Ongoing work to migrate the codebase from JavaScript to TypeScript ([view progress](https://github.com/openstreetmap/iD/milestone/47?closed=1))
 * Remove redundant software dependencies to reduce the amount of the code that is bundled with iD ([#11634], [#12307], thanks [@k-yle])
 * Update name-suggestion-index to v7.2 ([#12337], thanks [@bjornstar])
 * Introduce location hash `change` events ([#12429])
