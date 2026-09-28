@@ -414,7 +414,7 @@ export function coreContext(this: object): coreContext {
   } as coreContext['inIntro'];
 
   // Immediately save the user's history to localstorage, if possible
-  // This is called someteimes, but also on the `window.onbeforeunload` handler
+  // This is called sometimes, but also on the `window.onbeforeunload` handler
   context.save = () => {
     // no history save, no message onbeforeunload
     if (_inIntro || context.container().select('.modal').size()) return;
