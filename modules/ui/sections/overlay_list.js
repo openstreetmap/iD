@@ -10,6 +10,9 @@ import { uiSection } from '../section';
 
 export function uiSectionOverlayList(context) {
 
+    let _overlaysHidden = false;
+    let _savedOverlays = [];
+
     var section = uiSection('overlay-list', context)
         .label(() => t.append('background.overlays'))
         .disclosureContent(renderDisclosureContent);
@@ -37,6 +40,10 @@ export function uiSectionOverlayList(context) {
 
     function updateLayerSelections(selection) {
         function active(d) {
+            if (_overlaysHidden) {
+                // If overlays are hidden, ensure checkboxes remain checked on rerender
+                return _savedOverlays.includes(d);
+            }
             return context.background().showsLayer(d);
         }
 
@@ -111,6 +118,33 @@ export function uiSectionOverlayList(context) {
         _overlayList
             .call(drawListItems, 'checkbox', chooseOverlay, function(d) { return !d.isHidden() && d.overlay; });
     }
+
+    /**
+     * Toggles overlays on/off
+     */
+    function toggleAllOverlays(){
+        let overlays = context.background().overlayLayerSources();
+        let overlayContainer = d3_select('.disclosure-wrap-overlay_list');
+
+        if (!_overlaysHidden){
+            overlays.forEach(d => {
+                if (context.background().showsLayer(d)) {
+                    _savedOverlays.push(d);
+                    context.background().toggleOverlayLayer(d);
+                }
+            });
+            overlayContainer.classed('disabled-panel', true);
+        } else {
+            _savedOverlays.forEach(d => {
+                context.background().toggleOverlayLayer(d);
+            });
+            _savedOverlays = [];
+            overlayContainer.classed('disabled-panel', false);
+        }
+        _overlaysHidden = !_overlaysHidden;
+    };
+
+    context.keybinding().on('⇧O', toggleAllOverlays);
 
     context.map()
         .on('move.overlay_list',
