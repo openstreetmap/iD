@@ -315,7 +315,7 @@ export class coreGraph {
     }
 
     // Obliterates any existing entities
-    load(entities: { [key: EntityId | number]: iD.OsmEntity }) {
+    load(entities: { [key: EntityId | number]: iD.OsmEntity | undefined }) {
         var base = this.base();
         this.entities = Object.create(base.entities);
 
