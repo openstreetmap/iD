@@ -506,8 +506,15 @@ export function svgLabels(projection, context) {
             }
 
             function reverse(p) {
-                var angle = Math.atan2(p[1][1] - p[0][1], p[1][0] - p[0][0]);
-                return !(p[0][0] < p[p.length - 1][0] && angle < Math.PI/2 && angle > -Math.PI/2);
+                const first = p[0];
+                const last = p[p.length - 1];
+
+                const dx = last[0] - first[0];
+                const dy = last[1] - first[1];
+
+                const angle = Math.atan2(dy, dx);
+
+                return !(angle < Math.PI / 2 && angle > -Math.PI / 2);
             }
 
             function lineString(points) {
