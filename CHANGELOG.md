@@ -42,6 +42,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Render diameter and radius tags when a node is selected ([#9732], thanks [@k-yle])
 * Dedicated rendering for road sections tagged with `ford=yes` ([#12830], thanks [@Geo-2695])
 * Allow to press `=` key to switch between _key_ and _value_ part of tags in the raw tag editor ([#12828], thanks [@hemaksh2007jain-bit]) and allow to press _Enter_ key to switch between tag parts or next tag in the raw tag editor
+* Prevent the browser tab from accidentally being closed while uploading a changeset ([#12928], thanks [@k-yle])
 * Include all imagery layers from the editor-layer-index, even those older than 20 years ([#12878], thanks [@andrewharvey])
 #### :scissors: Operations
 #### :camera: Street-Level
@@ -80,6 +81,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#12830]: https://github.com/openstreetmap/iD/pull/12830
 [#12878]: https://github.com/openstreetmap/iD/pull/12878
 [#12910]: https://github.com/openstreetmap/iD/pull/12910
+[#12928]: https://github.com/openstreetmap/iD/pull/12928
 [@Geo-2695]: https://github.com/Geo-2695
 [@hemaksh2007jain-bit]: https://github.com/hemaksh2007jain-bit
 

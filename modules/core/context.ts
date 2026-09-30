@@ -416,6 +416,11 @@ export function coreContext(this: object): coreContext {
   // Immediately save the user's history to localstorage, if possible
   // This is called sometimes, but also on the `window.onbeforeunload` handler
   context.save = () => {
+    // prevent the tab from being closed while a changeset is being uploaded
+    if (context.uploader().isSaving()) {
+      return t('save.unsaved_changes');
+    }
+
     // no history save, no message onbeforeunload
     if (_inIntro || context.container().select('.modal').size()) return;
 
