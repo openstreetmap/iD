@@ -155,3 +155,6 @@ export function utilArrayUniqBy<T, K>(a: T[], key: keyof T | ((item: T) => K)): 
         return acc;
     }, []);
 }
+
+/** Function composition, like lodash's `pipeline` */
+export const pipe = <T>(...functions: ((value: T) => T)[]): ((value: T) => T) => x0 => functions.reduce((x, f) => f(x), x0);
