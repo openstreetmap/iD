@@ -165,7 +165,7 @@ export interface coreContext extends Pick<Dispatch<object, EventMap>, 'on'> {
     graph(): coreGraph;
     pauseChangeDispatch(): void;
     resumeChangeDispatch(): void;
-    perform: any;
+    perform: coreHistory['perform'];
     replace: coreHistory['replace'];
     pop: coreHistory['pop'];
     undo: coreHistory['undo'];
@@ -414,7 +414,7 @@ export function coreContext(this: object): coreContext {
   } as coreContext['inIntro'];
 
   // Immediately save the user's history to localstorage, if possible
-  // This is called someteimes, but also on the `window.onbeforeunload` handler
+  // This is called sometimes, but also on the `window.onbeforeunload` handler
   context.save = () => {
     // prevent the tab from being closed while a changeset is being uploaded
     if (context.uploader().isSaving()) {
@@ -697,10 +697,10 @@ export function coreContext(this: object): coreContext {
     // of instantiation shouldn't matter.
     function instantiateInternal() {
 
-      _history = coreHistory(context);
-      context.graph = _history.graph;
-      context.pauseChangeDispatch = _history.pauseChangeDispatch;
-      context.resumeChangeDispatch = _history.resumeChangeDispatch;
+      _history = new coreHistory(context);
+      context.graph = () => _history.graph();
+      context.pauseChangeDispatch = () => _history.pauseChangeDispatch();
+      context.resumeChangeDispatch = () => _history.resumeChangeDispatch();
       context.perform = withDebouncedSave(_history.perform);
       context.replace = withDebouncedSave(_history.replace);
       context.pop = withDebouncedSave(_history.pop);
