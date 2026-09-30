@@ -562,8 +562,8 @@ describe('iD.serviceOsm', function () {
             });
 
             it('sets/gets a note', function () {
-                var note = iD.osmNote({ id: 1, loc: [0, 0] });
-                var note2 = iD.osmNote({ id: 2, loc: [0, 0] });
+                var note = new iD.osmNote({ id: 1, loc: [0, 0] });
+                var note2 = new iD.osmNote({ id: 2, loc: [0, 0] });
                 var obj = {
                     note: { note: { 1: note, 2: note2 } }
                 };
@@ -669,7 +669,7 @@ describe('iD.serviceOsm', function () {
 
     describe('#getNote', function() {
         it('returns a note', function () {
-            var note = iD.osmNote({ id: 1, loc: [0, 0], });
+            var note = new iD.osmNote({ id: 1, loc: [0, 0], });
             var obj = {
                 note: { note: { 1: note } }
             };
@@ -681,7 +681,7 @@ describe('iD.serviceOsm', function () {
 
     describe('#removeNote', function() {
         it('removes a note that is new', function() {
-            var note = iD.osmNote({ id: -1, loc: [0, 0], });
+            var note = new iD.osmNote({ id: -1, loc: [0, 0], });
             connection.replaceNote(note);
             connection.removeNote(note);
             var result = connection.getNote(-1);
@@ -692,7 +692,7 @@ describe('iD.serviceOsm', function () {
 
     describe('#replaceNote', function() {
         it('returns a new note', function () {
-            var note = iD.osmNote({ id: 2, loc: [0, 0], });
+            var note = new iD.osmNote({ id: 2, loc: [0, 0], });
             var result = connection.replaceNote(note);
             expect(result.id).toEqual(2);
             expect(connection.caches().note.note[2]).toEqual(note);
@@ -703,7 +703,7 @@ describe('iD.serviceOsm', function () {
         });
 
         it('replaces a note', function () {
-            var note = iD.osmNote({ id: 2, loc: [0, 0], });
+            var note = new iD.osmNote({ id: 2, loc: [0, 0], });
             connection.replaceNote(note);
             note.status = 'closed';
             var result = connection.replaceNote(note);
