@@ -2,7 +2,7 @@ import { select as d3_select } from 'd3-selection';
 import { uiModal } from './modal';
 
 
-export function uiLoading(context) {
+export function uiLoading() {
   let _modalSelection = d3_select(null);
   let _message = '';
   let _blocking = false;
@@ -17,9 +17,10 @@ export function uiLoading(context) {
       .attr('class', 'modal-section fillL');
 
     loadertext
-      .append('img')
-      .attr('class', 'loader')
-      .attr('src', context.imagePath('loader-white.gif'));
+      .append('svg')
+      .attr('class', 'spinner')
+      .append('use')
+      .attr('href', '#iD-spinner');
 
     if (typeof _message === 'string') {
       loadertext
