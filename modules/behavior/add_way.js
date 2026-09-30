@@ -25,14 +25,11 @@ export function behaviorAddWay(context) {
 
     behavior.off = function(surface) {
         surface.call(draw.off);
+        context.map().dblclickZoomEnable(true);
     };
 
 
     behavior.cancel = function() {
-        window.setTimeout(function() {
-            context.map().dblclickZoomEnable(true);
-        }, 1000);
-
         context.enter(modeBrowse(context));
     };
 
