@@ -51,6 +51,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :bug: Bugfixes
 * Fix exceptions when resizing the browser tab when nothing is selected ([#12800], thanks [@k-yle])
 * Allow tags like `not:*:wikidata` to have multiple values ([#12736], thanks [@k-yle])
+* Fix crash when merging close nodes ([#12910], thanks [@k-yle])
 #### :earth_asia: Localization
 * Support 835 new languages in the dropdown when adding a `name:*` tag ([#12802])
 #### :hourglass: Performance
@@ -69,6 +70,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#12802]: https://github.com/openstreetmap/iD/pull/12802
 [#12828]: https://github.com/openstreetmap/iD/pull/12828
 [#12830]: https://github.com/openstreetmap/iD/pull/12830
+[#12910]: https://github.com/openstreetmap/iD/pull/12910
 [@Geo-2695]: https://github.com/Geo-2695
 [@hemaksh2007jain-bit]: https://github.com/hemaksh2007jain-bit
 

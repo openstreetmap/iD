@@ -84,7 +84,9 @@ export function uiCommitWarnings(context) {
                 .append('strong')
                 .attr('class', 'issue-message')
                 .each(function(d) {
-                    return d.message(context)(d3_select(this));
+                    const selector = d.message(context);
+                    if (typeof selector === 'string') return;
+                    return selector(d3_select(this));
                 });
 
             buttons.filter(function(d) { return d.tooltip; })

@@ -15,7 +15,7 @@ export class validationIssue<T = unknown> {
     type: string;
     subtype?: string | null;
     severity?: 'suggestion' | 'warning' | 'error';
-    message?(context: iD.Context): d3.Selector | string;
+    message?(context: iD.Context): d3.Selector | '';
     reference?(selection: d3.Selection): void;
     entityIds: EntityId[];
     loc?: Vec2;
