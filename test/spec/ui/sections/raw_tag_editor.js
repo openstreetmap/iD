@@ -57,6 +57,15 @@ describe('iD.uiSectionRawTagEditor', function() {
         expect(document.activeElement).toBe(value.node());
     });
 
+    it('sizes the key column to fit the longest key', function () {
+        element.remove();
+        render({ highway: 'residential', 'addr:housenumber': '12' });
+        const sizes = element.selectAll('.tag-list input.key').nodes()
+            .map(node => node.getAttribute('size'));
+        // 'addr:housenumber' is 16 characters long
+        expect(sizes).toEqual(['17', '17', '17']);
+    });
+
     it('removes tags when clicking the remove button', async () => {
         const tags = new Promise(cb => {
             taglist.on('change', (_, tags) => cb(tags));
