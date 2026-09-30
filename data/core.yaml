@@ -836,6 +836,7 @@ en:
     contrast: Contrast
     saturation: Saturation
     sharpness: Sharpness
+    invert: Invert
     minimap:
       description: Show Minimap
       tooltip: Show a zoomed out map to help locate the area currently displayed.
