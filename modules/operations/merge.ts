@@ -60,7 +60,7 @@ export const operationMerge: CreateOperation = (context, selectedIDs) => {
     };
 
     operation.disabled = function() {
-        var actionDisabled = _action.disabled?.(context.graph());
+        var actionDisabled = _action.disabled!(context.graph());
         if (actionDisabled) return actionDisabled;
 
         var osm = context.connection();
@@ -81,7 +81,7 @@ export const operationMerge: CreateOperation = (context, selectedIDs) => {
             }
             if (disabled === 'restriction' || disabled === 'connectivity') {
                 return t.append('operations.merge.damage_relation',
-                    { relation: presetManager.item('type/' + disabled)?.name() });
+                    { relation: presetManager.item('type/' + disabled)!.name() });
             }
             return t.append('operations.merge.' + disabled);
         }
