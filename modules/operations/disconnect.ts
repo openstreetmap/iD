@@ -3,28 +3,33 @@ import { actionDisconnect } from '../actions/disconnect';
 import { behaviorOperation } from '../behavior/operation';
 import { utilArrayUniq } from '../util/array';
 import { utilGetAllNodes, utilTotalExtent } from '../util/util';
+import type { Action, CreateOperation, Operation } from '../core/history';
+import type { EntityId, NodeId, osmNode, WayId } from '../osm';
+import type { Vec2 } from '../geo/vector';
 
 
-export function operationDisconnect(context, selectedIDs) {
-    var _vertexIDs = [];
-    var _wayIDs = [];
-    var _otherIDs = [];
-    var _actions = [];
+export const operationDisconnect: CreateOperation = (context, selectedIDs) => {
+    var _vertexIDs: NodeId[] = [];
+    var _wayIDs: WayId[] = [];
+    var _otherIDs: EntityId[] = [];
+    var _actions: Action[] = [];
 
     selectedIDs.forEach(function(id) {
         var entity = context.entity(id);
         if (entity.type === 'way'){
-            _wayIDs.push(id);
-        } else if (entity.geometry(context.graph()) === 'vertex') {
-            _vertexIDs.push(id);
+            _wayIDs.push(entity.id);
+        } else if (entity.type === 'node' && entity.geometry(context.graph()) === 'vertex') {
+            _vertexIDs.push(entity.id);
         } else {
             _otherIDs.push(id);
         }
     });
 
-    var _coords, _descriptionID = '', _annotationID = 'features';
-    var _disconnectingVertexIds = [];
-    var _disconnectingWayIds = [];
+    let _coords: Vec2[];
+    let _descriptionID = '';
+    let _annotationID = 'features';
+    let _disconnectingVertexIds: NodeId[] = [];
+    let _disconnectingWayIds: WayId[] = [];
 
 
     if (_vertexIDs.length > 0) {
@@ -69,15 +74,16 @@ export function operationDisconnect(context, selectedIDs) {
         _coords = nodes.map(function(n) { return n.loc; });
 
         // actions for connected nodes shared by at least two selected ways
-        var sharedActions = [];
-        var sharedNodes = [];
+        var sharedActions: Action[] = [];
+        var sharedNodes: osmNode[] = [];
         // actions for connected nodes
-        var unsharedActions = [];
-        var unsharedNodes = [];
+        var unsharedActions: Action[] = [];
+        var unsharedNodes: osmNode[] = [];
 
         nodes.forEach(function(node) {
-            var action = actionDisconnect(node.id).limitWays(_wayIDs);
-            if (action.disabled(context.graph()) !== 'not_connected') {
+            const action = actionDisconnect(node.id);
+            action.limitWays(_wayIDs);
+            if (action.disabled!(context.graph()) !== 'not_connected') {
 
                 var count = 0;
                 for (var i in ways) {
@@ -122,7 +128,7 @@ export function operationDisconnect(context, selectedIDs) {
     var _extent = utilTotalExtent(_disconnectingVertexIds, context.graph());
 
 
-    var operation = function() {
+    const operation: Operation = function() {
         context.perform(function(graph) {
             return _actions.reduce(function(graph, action) { return action(graph); }, graph);
         }, operation.annotation());
@@ -157,7 +163,7 @@ export function operationDisconnect(context, selectedIDs) {
     operation.disabled = function() {
         var reason;
         for (var actionIndex in _actions) {
-            reason = _actions[actionIndex].disabled(context.graph());
+            reason = _actions[actionIndex].disabled!(context.graph());
             if (reason) return reason;
         }
 
@@ -206,4 +212,4 @@ export function operationDisconnect(context, selectedIDs) {
     operation.behavior = behaviorOperation(context).which(operation);
 
     return operation;
-}
+};
