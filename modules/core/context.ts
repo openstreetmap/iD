@@ -48,6 +48,10 @@ interface HashParams {
     comment?: string;
     source?: string;
     hashtags?: string;
+    validationError?: string;
+    validationWarning?: string;
+    validationSuggestion?: string;
+    validationDisable?: string;
 }
 
 type DebugFlags =
