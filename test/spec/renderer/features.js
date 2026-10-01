@@ -556,6 +556,40 @@ describe('iD.rendererFeatures', function() {
             expect(features.isHidden(b, graph, geometry)).toBe(true);
         });
 
+        it('hides new child vertices on a hidden way', function() {
+            var a = new iD.osmNode({id: 'a', version: 1});
+            var b = new iD.osmNode({id: 'b'});
+            var w = new iD.osmWay({id: 'w', nodes: [a.id, b.id], tags: {highway: 'path'}, version: 1});
+            var graph = new iD.coreGraph([a, b, w]);
+            var geometry = b.geometry(graph);
+            var all = Object.values(graph.base().entities);
+
+            features.disable('paths');
+            features.gatherStats(all, graph, dimensions);
+
+            expect(features.isHiddenChild(b, graph, geometry)).toBe(true);   // #7864
+            expect(features.isHidden(b, graph, geometry)).toBe(true);        // #7864
+        });
+
+        it('does not hide new child vertices on a new or visible way', function() {
+            var a = new iD.osmNode({id: 'a', version: 1});
+            var b = new iD.osmNode({id: 'b'});
+            var c = new iD.osmNode({id: 'c'});
+            var d = new iD.osmNode({id: 'd', version: 1});
+            var path = new iD.osmWay({id: 'path', nodes: [a.id, b.id], tags: {highway: 'path'}});
+            var hiddenPath = new iD.osmWay({id: 'hiddenPath', nodes: [c.id, d.id], tags: {highway: 'path'}, version: 1});
+            var road = new iD.osmWay({id: 'road', nodes: [c.id, d.id], tags: {highway: 'residential'}, version: 1});
+            var graph = new iD.coreGraph([a, b, c, d, path, hiddenPath, road]);
+            var all = Object.values(graph.base().entities);
+
+            features.disable('paths');
+            features.gatherStats(all, graph, dimensions);
+
+            expect(features.isHidden(a, graph, a.geometry(graph))).toBe(false);
+            expect(features.isHidden(b, graph, b.geometry(graph))).toBe(false);
+            expect(features.isHidden(c, graph, c.geometry(graph))).toBe(false);
+        });
+
         it('hides uninteresting (e.g. untagged or "other") member ways on a hidden multipolygon relation', function() {
             var outer = new iD.osmWay({id: 'outer', tags: {}, version: 1});
             var inner1 = new iD.osmWay({id: 'inner1', tags: {barrier: 'fence'}, version: 1});
