@@ -23,13 +23,8 @@ import type { LocalizedTextRenderer } from './localizer';
 export interface Action<T = never> {
     (graph: coreGraph, t?: number | null, extraData?: T): coreGraph
     id?: string;
-    getWayId?(): WayId;
     disabled?(graph: coreGraph): string | false | undefined;
     transitionable?: boolean;
-
-    copies?(): Record<string, OsmEntity>;
-    useLongAxis?: GetSet<this, boolean>;
-    getReflectAxis?(graph: coreGraph): Vec2[];
 }
 
 export interface Operation {
