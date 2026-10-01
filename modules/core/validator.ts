@@ -6,25 +6,35 @@ import { geoExtent } from '../geo/extent';
 import { modeSelect } from '../modes/select';
 import { utilArrayChunk, utilArrayDifference, utilArrayGroupBy, utilArrayIntersection, utilArrayUnion, utilEntityAndDeepMemberIDs, utilRebind } from '../util';
 import * as Validations from '../validations/index';
+import type { coreContext } from './context';
+import type { validationIssue, Validator } from './validation/models';
+import type { coreGraph } from './graph';
+import type { osmWay, WayId, EntityId, OsmEntity } from '../osm';
 
+export interface ValidationOptions {
+  what?: 'all' | 'edited';
+  where?: 'all' | 'visible';
+  includeIgnored?: boolean | 'only';
+  includeDisabledRules?: boolean | 'only';
+}
 
-export function coreValidator(context) {
+export function coreValidator(this: any, context: coreContext) {
   let dispatch = d3_dispatch('validated', 'focusedIssue');
-  const validator = {};
+  const validator = function() {};
 
-  let _rules = {};
-  let _disabledRules = {};
+  let _rules: { [ruleId: string]: Validator } = {};
+  let _disabledRules: { [ruleId: string]: boolean } = {};
 
-  let _ignoredIssueIDs = new Set();
-  let _resolvedIssueIDs = new Set();
+  let _ignoredIssueIDs = new Set<string>();
+  let _resolvedIssueIDs = new Set<string>();
   let _baseCache = validationCache('base');   // issues before any user edits
   let _headCache = validationCache('head');   // issues after all user edits
-  let _completeDiff = {};                     // complete diff base -> head of what the user changed
+  let _completeDiff: { [id: EntityId]: OsmEntity | undefined } = {};                     // complete diff base -> head of what the user changed
   let _headIsCurrent = false;
 
-  let _deferredRIC = {};          // Object( RequestIdleCallback handle : rejectPromise method )
-  let _deferredST = new Set();    // Set( SetTimeout handles )
-  let _headPromise;               // Promise fulfilled when validation is performed up to headGraph snapshot
+  let _deferredRIC: Record<string, () => void> = {}; // Object( RequestIdleCallback handle : rejectPromise method )
+  let _deferredST = new Set<number>(); // Set( SetTimeout handles )
+  let _headPromise: Promise<void> | null; // Promise fulfilled when validation is performed up to headGraph snapshot
 
   const RETRY = 5000;             // wait 5sec before revalidating provisional entities
 
@@ -52,8 +62,8 @@ export function coreValidator(context) {
   // Returns
   //   Array of Objects like { type: RegExp, subtype: RegExp }
   //
-  function parseHashParam(param) {
-    let result = [];
+  function parseHashParam(param: string | undefined) {
+    let result: { type: RegExp; subtype: RegExp }[] = [];
     let rules = (param || '').split(',');
     rules.forEach(rule => {
       rule = rule.trim();
@@ -65,7 +75,7 @@ export function coreValidator(context) {
     });
     return result;
 
-    function makeRegExp(str) {
+    function makeRegExp(str: string) {
       const escaped = str
         .replace(/[-\/\\^$+?.()|[\]{}]/g, '\\$&')   // escape all reserved chars except for the '*'
         .replace(/\*/g, '.*');                      // treat a '*' like '.*'
@@ -98,14 +108,14 @@ export function coreValidator(context) {
   // Arguments
   //   `resetIgnored` - `true` to clear the list of user-ignored issues
   //
-  function reset(resetIgnored) {
+  function reset(resetIgnored?: boolean) {
     // empty queues
     _baseCache.queue = [];
     _headCache.queue = [];
 
     // cancel deferred work and reject any pending promise
     Object.keys(_deferredRIC).forEach(key => {
-      window.cancelIdleCallback(key);
+      window.cancelIdleCallback(+key);
       _deferredRIC[key]();
     });
     _deferredRIC = {};
@@ -150,7 +160,7 @@ export function coreValidator(context) {
     dispatch.call('validated');
   };
 
-  function revalidateUnsquare(cache) {
+  function revalidateUnsquare(cache: Cache) {
     const checkUnsquareWay = _rules.unsquare_way;
     if (!cache.graph || typeof checkUnsquareWay !== 'function') return;
 
@@ -162,7 +172,7 @@ export function coreValidator(context) {
 
     // rerun for all buildings
     buildings.forEach(entity => {
-      const detected = checkUnsquareWay(entity, cache.graph);
+      const detected = checkUnsquareWay(entity, cache.graph!);
       if (!detected.length) return;
       cache.cacheIssues(detected);
     });
@@ -185,11 +195,11 @@ export function coreValidator(context) {
   // Returns
   //   An Array containing the issues
   //
-  validator.getIssues = (options) => {
-    const opts = Object.assign({ what: 'all', where: 'all', includeIgnored: false, includeDisabledRules: false }, options);
+  validator.getIssues = (options?: ValidationOptions) => {
+    const opts: ValidationOptions = Object.assign({ what: 'all', where: 'all', includeIgnored: false, includeDisabledRules: false }, options);
     const view = context.map().extent();
     let seen = new Set();
-    let results = [];
+    let results: validationIssue[] = [];
 
     // collect head issues - present in the user edits
     if (_headCache.graph && _headCache.graph !== _baseCache.graph) {
@@ -221,7 +231,7 @@ export function coreValidator(context) {
     // Filter the issue set to include only what the calling code wants to see.
     // Note that we use `context.graph()`/`context.hasEntity()` here, not `cache.graph`,
     // because that is the graph that the calling code will be using.
-    function filter(issue) {
+    function filter(issue: validationIssue) {
       if (!issue) return false;
       if (seen.has(issue.id)) return false;
       if (_resolvedIssueIDs.has(issue.id)) return false;
@@ -236,7 +246,7 @@ export function coreValidator(context) {
       if ((issue.entityIds || []).some(id => !context.hasEntity(id))) return false;
 
       if (opts.where === 'visible') {
-        const extent = issue.extent(context.graph());
+        const extent = issue.extent!(context.graph())!;
         if (!view.intersects(extent)) return false;
       }
 
@@ -268,14 +278,14 @@ export function coreValidator(context) {
   // Arguments
   //   `issue` - the issue to focus on
   //
-  validator.focusIssue = (issue) => {
+  validator.focusIssue = (issue: validationIssue) => {
     // Note that we use `context.graph()`/`context.hasEntity()` here, not `cache.graph`,
     // because that is the graph that the calling code will be using.
     const graph = context.graph();
     let selectID;
 
     // Try to focus the map at the center of the issue..
-    let issueExtent = issue.extent(graph);
+    let issueExtent = issue.extent!(graph);
 
     // Try to select the first entity in the issue..
     if (issue.entityIds && issue.entityIds.length) {
@@ -288,7 +298,7 @@ export function coreValidator(context) {
         let nodeID = ids.find(id => id.charAt(0) === 'n' && graph.hasEntity(id));
 
         if (!nodeID) {  // relation has no downloaded nodes to focus on
-          const wayID = ids.find(id => id.charAt(0) === 'w' && graph.hasEntity(id));
+          const wayID = ids.find((id): id is WayId => id.charAt(0) === 'w' && !!graph.hasEntity(id));
           if (wayID) {
             nodeID = graph.entity(wayID).first();   // focus on the first node of this way
           }
@@ -326,7 +336,7 @@ export function coreValidator(context) {
   //     suggestion:  Array of suggestions,
   //   }
   //
-  validator.getIssuesBySeverity = (options) => {
+  validator.getIssuesBySeverity = (options?: ValidationOptions) => {
     let groups = utilArrayGroupBy(validator.getIssues(options), 'severity');
     groups.error = groups.error || [];
     groups.warning = groups.warning || [];
@@ -346,7 +356,7 @@ export function coreValidator(context) {
   // Returns
   //   An Array containing the issues
   //
-  validator.getSharedEntityIssues = (entityIDs, options) => {
+  validator.getSharedEntityIssues = (entityIDs: EntityId[], options?: ValidationOptions) => {
     const orderedIssueTypes = [                 // Show some issue types in a particular order:
       'missing_tag', 'missing_role',            // - missing data first
       'outdated_tags', 'mismatched_geometry',   // - identity issues
@@ -386,7 +396,7 @@ export function coreValidator(context) {
   // Returns
   //   An Array containing the issues
   //
-  validator.getEntityIssues = (entityID, options) => {
+  validator.getEntityIssues = (entityID: EntityId, options?: ValidationOptions) => {
     return validator.getSharedEntityIssues([entityID], options);
   };
 
@@ -408,7 +418,7 @@ export function coreValidator(context) {
   // Returns
   //   `true`/`false`
   //
-  validator.isRuleEnabled = (key) => {
+  validator.isRuleEnabled = (key: string) => {
     return !_disabledRules[key];
   };
 
@@ -420,7 +430,7 @@ export function coreValidator(context) {
   // Arguments
   //   `key` - the rule to toggle (e.g. 'crossing_ways')
   //
-  validator.toggleRule = (key) => {
+  validator.toggleRule = (key: string) => {
     if (_disabledRules[key]) {
       delete _disabledRules[key];
     } else {
@@ -439,7 +449,7 @@ export function coreValidator(context) {
   // Arguments
   //   `keys` - Array or Set containing rule keys to disable
   //
-  validator.disableRules = (keys) => {
+  validator.disableRules = (keys: string[]) => {
     _disabledRules = {};
     keys.forEach(k => _disabledRules[k] = true);
 
@@ -454,7 +464,7 @@ export function coreValidator(context) {
   // Arguments
   //   `issueID` - the issueID
   //
-  validator.ignoreIssue = (issueID) => {
+  validator.ignoreIssue = (issueID: string) => {
     _ignoredIssueIDs.add(issueID);
   };
 
@@ -502,9 +512,9 @@ export function coreValidator(context) {
 
     // revalidate also connected (or previously connected) entities to the current way
     // https://github.com/openstreetmap/iD/issues/8758
-    const addConnectedWays = graph => diff
+    const addConnectedWays = (graph: coreGraph) => diff
       .filter(entityID => graph.hasEntity(entityID))
-      .map(entityID    => graph.entity(entityID))
+      .map(entityID    => graph.entity<osmWay>(entityID))
       .flatMap(entity  => graph.childNodes(entity))
       .flatMap(vertex  => graph.parentWays(vertex))
       .forEach(way => entityIDs.add(way.id));
@@ -513,7 +523,7 @@ export function coreValidator(context) {
 
     // revalidate entities with changed relation memberships
     // https://github.com/openstreetmap/iD/issues/10786
-    Object.values({...incrementalDiff.created(), ...incrementalDiff.deleted()})
+    [...incrementalDiff.created(), ...incrementalDiff.deleted()]
       .filter(e => e.type === 'relation')
       .flatMap(r => r.members)
       .forEach(m => entityIDs.add(m.id));
@@ -571,8 +581,7 @@ export function coreValidator(context) {
       if (!_headCache.graph) _headCache.graph = baseGraph;
       if (!_baseCache.graph) _baseCache.graph = baseGraph;
 
-      let entityIDs = entities.map(entity => entity.id);
-      entityIDs = _baseCache.withAllRelatedEntities(entityIDs);  // expand set
+      const entityIDs = _baseCache.withAllRelatedEntities(entities.map(entity => entity.id));
       validateEntitiesAsync(entityIDs, _baseCache);
     });
 
@@ -598,14 +607,17 @@ export function coreValidator(context) {
   //     provisional:  `true` if provisional result, `false` if final result
   //   }
   //
-  function validateEntity(entity, graph) {
-    let result = { issues: [], provisional: false };
+  function validateEntity(entity: OsmEntity, graph: coreGraph) {
+    let result: {
+      issues: validationIssue[];
+      provisional: boolean;
+    } = { issues: [], provisional: false };
     Object.keys(_rules).forEach(runValidation);   // run all rules
     return result;
 
 
     // runs validation and appends resulting issues
-    function runValidation(key) {
+    function runValidation(key: string) {
       const fn = _rules[key];
       if (typeof fn !== 'function') {
         console.error('no such validation rule = ' + key);  // eslint-disable-line no-console
@@ -622,7 +634,7 @@ export function coreValidator(context) {
 
       // If there are any override rules that match the issue type/subtype,
       // adjust severity (or disable it) and keep/discard as quickly as possible.
-      function applySeverityOverrides(issue) {
+      function applySeverityOverrides(issue: validationIssue) {
         const type = issue.type;
         const subtype = issue.subtype || '';
         let i;
@@ -668,7 +680,7 @@ export function coreValidator(context) {
   // Arguments
   //   `entityIDs` - Array or Set containing entity IDs.
   //
-  function updateResolvedIssues(entityIDs) {
+  function updateResolvedIssues(entityIDs: EntityId[] | Set<EntityId>) {
     entityIDs.forEach(entityID => {
       const baseIssues = _baseCache.issuesByEntityID[entityID];
       if (!baseIssues) return;
@@ -701,7 +713,7 @@ export function coreValidator(context) {
   //   A Promise fulfilled when the validation has completed.
   //   This may take time but happen in the background during browser idle time.
   //
-  function validateEntitiesAsync(entityIDs, cache) {
+  function validateEntitiesAsync(entityIDs: Iterable<EntityId>, cache: Cache) {
     // Enqueue the work
     const jobs = Array.from(entityIDs).map(entityID => {
       if (cache.queuedEntityIDs.has(entityID)) return null;  // queued already
@@ -756,7 +768,7 @@ export function coreValidator(context) {
   // Arguments
   //   `cache` - The cache (_headCache or _baseCache)
   //
-  function revalidateProvisionalEntities(cache) {
+  function revalidateProvisionalEntities(cache: Cache) {
     if (!cache.provisionalEntityIDs.size) return;  // nothing to do
 
     const handle = window.setTimeout(() => {
@@ -779,13 +791,13 @@ export function coreValidator(context) {
   //   A Promise fulfilled when the validation has completed.
   //   This may take time but happen in the background during browser idle time.
   //
-  function processQueue(cache) {
+  function processQueue(cache: Cache): Promise<void> {
     // console.log(`${cache.which} queue length ${cache.queue.length}`);
 
     if (!cache.queue.length) return Promise.resolve();  // we're done
-    const chunk = cache.queue.pop();
+    const chunk = cache.queue.pop()!;
 
-    return new Promise((resolvePromise, rejectPromise) => {
+    return new Promise<void>((resolvePromise, rejectPromise) => {
         const handle = window.requestIdleCallback(() => {
           delete (_deferredRIC[handle]);
           // const t0 = performance.now();
@@ -806,6 +818,27 @@ export function coreValidator(context) {
   return utilRebind(validator, dispatch, 'on');
 }
 
+interface Cache {
+  which: 'base' | 'head';
+  graph: coreGraph | null;
+  queue: (() => void)[][];
+  queuePromise: Promise<void> | null;
+  queuedEntityIDs: Set<EntityId>;
+  provisionalEntityIDs: Set<EntityId>;
+  issuesByIssueID: {
+    [issueId: string]: validationIssue;
+  };
+  issuesByEntityID: {
+    [entityId: EntityId]: Set<string>;
+  };
+  cacheIssue(issue: validationIssue): void;
+  uncacheIssue(issue: validationIssue): void;
+  cacheIssues(issues: validationIssue[]): void;
+  uncacheIssues(issues: validationIssue[]): void;
+  uncacheIssuesOfType(type: string): void;
+  uncacheEntityID(entityId: EntityId): void;
+  withAllRelatedEntities(entityIDs: EntityId[]): Set<EntityId>;
+}
 
 // `validationCache()`   (private)
 // Creates a cache to store validation state
@@ -816,17 +849,16 @@ export function coreValidator(context) {
 // Arguments
 //   `which` - just a String 'base' or 'head' to keep track of it
 //
-function validationCache(which) {
-  let cache = {
-    which: which,
-    graph: null,
-    queue: [],
-    queuePromise: null,
-    queuedEntityIDs: new Set(),
-    provisionalEntityIDs: new Set(),
-    issuesByIssueID: {},  // issue.id -> issue
-    issuesByEntityID: {}  // entity.id -> Set(issue.id)
-  };
+function validationCache(which: Cache['which']) {
+  const cache: Cache = function() {};
+  cache.which = which;
+  cache.graph = null;
+  cache.queue = [];
+  cache.queuePromise = null;
+  cache.queuedEntityIDs = new Set();
+  cache.provisionalEntityIDs = new Set();
+  cache.issuesByIssueID = {};
+  cache.issuesByEntityID = {};
 
 
   cache.cacheIssue = (issue) => {
@@ -892,7 +924,7 @@ function validationCache(which) {
   //   `entityIDs` - Array or Set containing entityIDs.
   //
   cache.withAllRelatedEntities = (entityIDs) => {
-    let result = new Set();
+    let result = new Set<EntityId>();
     (entityIDs || []).forEach(entityID => {
       result.add(entityID);  // include self
 
