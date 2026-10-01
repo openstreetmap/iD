@@ -6,13 +6,17 @@ import type { Projection } from '../geo/raw_mercator';
 import { utilGetAllNodes } from '../util';
 import type { EntityId } from '../osm';
 
+export interface ActionReflect extends Action {
+    useLongAxis: GetSet<this, boolean>;
+    getReflectAxis(graph: coreGraph): Vec2[];
+}
 
 /* Reflect the given area around its axis of symmetry */
 export function actionReflect(reflectIds: EntityId[], projection: Projection) {
     var _useLongAxis = true;
 
 
-    var action: Action = function(graph, t) {
+    const action: ActionReflect = function(graph, t) {
         if (t === null || t === undefined || !isFinite(t)) t = 1;
         t = Math.min(Math.max(+t, 0), 1);
 
@@ -44,7 +48,7 @@ export function actionReflect(reflectIds: EntityId[], projection: Projection) {
         if (!arguments.length) return _useLongAxis;
         _useLongAxis = val;
         return action;
-    } as GetSet<Action, boolean>;
+    } as GetSet<ActionReflect, boolean>;
 
 
     function getReflectAxis(graph: coreGraph) {

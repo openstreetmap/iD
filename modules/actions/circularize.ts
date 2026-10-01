@@ -21,9 +21,13 @@ const MAX_SEGMENT_LENGTH = 4;
 export const MIN_VERTICES = 12;
 export const MAX_VERTICES = 32;
 
+export interface ActionCircularize extends Action {
+    getWayId(): WayId;
+}
+
 export function actionCircularize(wayId: WayId, projection: Projection) {
 
-    const action: Action = function(graph, t) {
+    const action: ActionCircularize = function(graph, t) {
         if (t === null || t === undefined || !isFinite(t)) t = 1;
         t = Math.min(Math.max(+t, 0), 1);
 
