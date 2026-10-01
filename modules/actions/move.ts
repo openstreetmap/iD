@@ -38,7 +38,9 @@ export interface ActionMove extends Action {
 
 // https://github.com/openstreetmap/josm/blob/mirror/src/org/openstreetmap/josm/command/MoveCommand.java
 // https://github.com/openstreetmap/potlatch2/blob/master/net/systemeD/halcyon/connection/actions/MoveNodeAction.as
-export function actionMove(moveIDs: EntityId[], tryDelta: Vec2, projection: Projection, cache: Cache): ActionMove {
+export function actionMove(moveIDs: EntityId[], tryDelta: Vec2, projection: Projection, _cache?: Cache): ActionMove {
+    const cache = _cache || <Cache>{};
+
     var _delta = tryDelta;
 
     function setupCache(graph: coreGraph) {
@@ -122,9 +124,6 @@ export function actionMove(moveIDs: EntityId[], tryDelta: Vec2, projection: Proj
         }
 
 
-        if (!cache) {
-            cache = {} as Cache;
-        }
         if (!cache.ok) {
             cache.moving = {};
             cache.intersections = [];
