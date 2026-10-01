@@ -50,7 +50,7 @@ type TInfo = {
 };
 
 export type Replacements = {
-    [key: string]: number | string | d3.Selector | undefined
+    [key: string]: number | string | d3.Selector | undefined | null;
 } & {
     default?: string,
     prefix?: string,
