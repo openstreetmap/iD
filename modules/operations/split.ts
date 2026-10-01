@@ -1,23 +1,27 @@
+import type { Geometry } from '@openstreetmap/id-tagging-schema';
 import { t } from '../core/localizer';
 import { actionSplit } from '../actions/split';
 import { behaviorOperation } from '../behavior/operation';
 import { modeSelect } from '../modes/select';
 import { uiAsyncModal } from '../ui/modal_async';
 import { uiLoading } from '../ui';
+import type { EntityId, NodeId, osmWay, WayId } from '../osm';
+import type { coreDifference } from '../core';
+import type { CreateOperation, Operation } from '../core/history';
 
 
-export function operationSplit(context, selectedIDs) {
-    var _vertexIds = selectedIDs.filter(function(id) {
+export const operationSplit: CreateOperation = (context, selectedIDs) => {
+    var _vertexIds = selectedIDs.filter(function(id): id is NodeId {
         return context.graph().geometry(id) === 'vertex';
     });
-    var _selectedWayIds = selectedIDs.filter(function(id) {
+    var _selectedWayIds = selectedIDs.filter(function(id): id is WayId {
         var entity = context.graph().hasEntity(id);
-        return entity && entity.type === 'way';
+        return !!entity && entity.type === 'way';
     });
     var _isAvailable = _vertexIds.length > 0 &&
         _vertexIds.length + _selectedWayIds.length === selectedIDs.length;
     var _action = actionSplit(_vertexIds);
-    var _ways = [];
+    var _ways: osmWay[] = [];
     var _geometry = 'feature';
     var _waysAmount = 'single';
     var _nodesAmount = _vertexIds.length === 1 ? 'single' : 'multiple';
@@ -25,7 +29,7 @@ export function operationSplit(context, selectedIDs) {
     if (_isAvailable) {
         if (_selectedWayIds.length) _action.limitWays(_selectedWayIds);
         _ways = _action.ways(context.graph());
-        var geometries = {};
+        var geometries: Partial<Record<Geometry, boolean>> = {};
         _ways.forEach(function(way) {
             geometries[way.geometry(context.graph())] = true;
         });
@@ -36,13 +40,13 @@ export function operationSplit(context, selectedIDs) {
     }
 
 
-    var operation = function() {
-        var difference = context.perform(_action, operation.annotation());
+    const operation: Operation = function() {
+        var difference = context.perform(_action, operation.annotation()) as coreDifference;
         // select both the nodes and the ways so the mapper can immediately disconnect them if desired
-        var idsToSelect = _vertexIds.concat(difference.extantIDs().filter(function(id) {
+        var idsToSelect = [..._vertexIds, ...difference.extantIDs().filter(function(id) {
             // filter out relations that may have had member additions
             return context.entity(id).type === 'way';
-        }));
+        })];
         context.enter(modeSelect(context, idsToSelect));
     };
 
@@ -58,7 +62,7 @@ export function operationSplit(context, selectedIDs) {
 
 
     operation.disabled = function() {
-        var reason = _action.disabled(context.graph());
+        var reason = _action.disabled!(context.graph());
         if (reason) {
             return reason;
         } else if (selectedIDs.some(context.hasHiddenConnections)) {
@@ -82,8 +86,7 @@ export function operationSplit(context, selectedIDs) {
             const loading = uiLoading(context).blocking(true);
             context.container().call(loading);
 
-            /** @type {Set<string>} */
-            const requiredWayIds = new Set();
+            const requiredWayIds = new Set<EntityId>();
 
             // find vertex->ways->relations, then find the adjacent way for
             // each relation.
@@ -148,4 +151,4 @@ export function operationSplit(context, selectedIDs) {
     operation.behavior = behaviorOperation(context).which(operation);
 
     return operation;
-}
+};
