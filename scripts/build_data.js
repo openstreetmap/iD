@@ -75,13 +75,13 @@ async function buildData() {
   // add icons for QA integrations
   readQAIssueIcons(faIcons);
 
-  let territoryLanguages = generateTerritoryLanguages();
+  const languageInfo = await languageNames.getLangNamesInNativeLang();
+  fs.writeFileSync('dist/data/languages.min.json', JSON.stringify(languageInfo));
+
+  let territoryLanguages = generateTerritoryLanguages(languageInfo);
   fs.writeFileSync('dist/data/territory_languages.min.json', JSON.stringify(territoryLanguages) );
 
   await writeEnJson();
-
-  const languageInfo = await languageNames.getLangNamesInNativeLang();
-  fs.writeFileSync('dist/data/languages.min.json', JSON.stringify(languageInfo));
 
   // Save individual data files
   let tasks = [
@@ -160,8 +160,10 @@ function readQAIssueIcons(faIcons) {
 }
 
 
-function generateTerritoryLanguages() {
+/** @param {import('./language_names.ts').CLDROverrides} languageInfo */
+function generateTerritoryLanguages(languageInfo) {
   const allRawInfo = cldrTerritoryInfo.supplemental.territoryInfo;
+  /** @type {Record<string, string[]>} */
   let territoryLanguages = {};
 
   Object.keys(allRawInfo).forEach(territoryCode => {
@@ -179,15 +181,23 @@ function generateTerritoryLanguages() {
     }).map(langCode => langCode.replace('_', '-'));
   });
 
+  // also use CLDR's likely subtags as a source
+  for (const locale in languageInfo) {
+    const likelyRegion = new Intl.Locale(locale).maximize().region?.toLowerCase();
+    if (!likelyRegion) continue;
+    if (!territoryLanguages[likelyRegion]) continue;
+    if (territoryLanguages[likelyRegion].includes(locale)) continue;
+
+    territoryLanguages[likelyRegion].push(locale);
+  }
+
   // override/adjust some territory languages which are not included in CLDR data
-  territoryLanguages.pk.push('pnb', 'scl', 'trw', 'kls'); // https://github.com/openstreetmap/iD/pull/9242
+
+  // https://github.com/openstreetmap/iD/pull/9242
   pull(territoryLanguages.pk, 'pa-Arab', 'lah', 'tg-Arab'); // - " -
-  territoryLanguages.au = [
-     'en', 'aus', 'aer', 'aoi', 'bdy', 'coa', 'dgw', 'gjm', 'gjr', 'gup',
-    'jay', 'mwf', 'mwp', 'nys', 'pih', 'piu', 'pjt', 'rop', 'tcs', 'tiw',
-    'ulk', 'wbp', 'wrh', 'wth', 'wyi', 'xdk', 'xni', 'xph', 'xrd', 'zku'
-  ]; // https://github.com/openstreetmap/iD/pull/10684
-  territoryLanguages.nz.push('rrm'); // https://github.com/openstreetmap/iD/pull/10684
+
+  pull(territoryLanguages.au, 'zh-Hant', 'hnj', 'it', 'en'); // https://unicode-org.atlassian.net/browse/CLDR-18114 was fixed for MY but not AU
+  territoryLanguages.au.unshift('en', 'aus'); // https://github.com/openstreetmap/iD/pull/10684
 
   return territoryLanguages;
 }
