@@ -368,6 +368,10 @@ export function uiSectionRawTagEditor(id, context) {
     }
 
     function textChanged() {
+        // the window lost focus (e.g. switching browser tabs), but the textarea is still focused:
+        // don't apply the text yet, as it would discard incomplete lines - #11446
+        if (document.activeElement === this) return;
+
         var newText = this.value.trim();
         var newTags = {};
         newText.split('\n').forEach(function(row) {
