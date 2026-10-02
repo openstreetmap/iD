@@ -64,4 +64,30 @@ describe('iD.uiSectionRawTagEditor', function() {
         iD.utilTriggerEvent(element.selectAll('button.remove'), 'mousedown', { button: 0 });
         expect(await tags).toEqual({highway: undefined});
     });
+
+    describe('text view', function() {
+        it('keeps an incomplete line when the window loses focus', function() {
+            var textarea = element.select('textarea.tag-text').node();
+            textarea.focus();
+            textarea.value = 'highway=residential\ncontact:instagram';
+
+            // switching to another browser tab blurs the textarea, but it stays the active element
+            textarea.dispatchEvent(new FocusEvent('blur'));
+
+            expect(document.activeElement).toBe(textarea);
+            expect(element.select('textarea.tag-text').property('value')).toBe('highway=residential\ncontact:instagram');
+        });
+
+        it('applies changes when focus moves elsewhere', async () => {
+            const tags = new Promise(cb => {
+                taglist.on('change', (_, tags) => cb(tags));
+            });
+            var textarea = element.select('textarea.tag-text').node();
+            textarea.focus();
+            textarea.value = 'highway=residential\nname=Main Street';
+            textarea.blur();
+
+            expect(await tags).toEqual({name: 'Main Street'});
+        });
+    });
 });
