@@ -104,14 +104,71 @@ describe('iD.uiFieldLocalized', function() {
         selection.call(localized);
         localized.tags({'name:de': 'Value'});
 
-        localized.on('change', function(tags) {
-            expect(tags).toEqual({
-                'name:de': undefined,
-                'name:en': 'Value'});
-        });
+        var changed;
+        localized.on('change', function(tags) { changed = tags; });
 
         iD.utilGetSetValue(selection.selectAll('.localized-lang'), 'English');
         selection.selectAll('.localized-lang').node().dispatchEvent(new Event('change'));
+
+        // the tag is moved to the new key, so that each selected feature keeps its own value
+        expect(changed).toEqual({
+            'name:de': undefined,
+            'name:en': { oldKey: 'name:de' }});
+        // the new key must come first, so the value is copied before the old key is cleared
+        expect(Object.keys(changed)).toEqual(['name:en', 'name:de']);
+    });
+
+    it('changes an existing language of a multiselection with different values', async () => {
+        var localized = iD.uiFieldLocalized(field, context);
+        await setTimeout(20);
+        selection.call(localized);
+        localized.tags({'name:de': ['Value 1', 'Value 2']});
+
+        var changed;
+        localized.on('change', function(tags) { changed = tags; });
+
+        iD.utilGetSetValue(selection.selectAll('.localized-lang'), 'English');
+        selection.selectAll('.localized-lang').node().dispatchEvent(new Event('change'));
+
+        expect(changed).toEqual({
+            'name:de': undefined,
+            'name:en': { oldKey: 'name:de' }});
+        expect(Object.keys(changed)).toEqual(['name:en', 'name:de']);
+    });
+
+    it('changes an existing language of a multiselection where only some features have the tag', async () => {
+        var localized = iD.uiFieldLocalized(field, context);
+        await setTimeout(20);
+        selection.call(localized);
+        localized.tags({'name:de': ['Value', undefined]});
+
+        var changed;
+        localized.on('change', function(tags) { changed = tags; });
+
+        iD.utilGetSetValue(selection.selectAll('.localized-lang'), 'English');
+        selection.selectAll('.localized-lang').node().dispatchEvent(new Event('change'));
+
+        expect(changed).toEqual({
+            'name:de': undefined,
+            'name:en': { oldKey: 'name:de' }});
+    });
+
+    it('removes the tag when the language is changed after the value was emptied', async () => {
+        var localized = iD.uiFieldLocalized(field, context);
+        await setTimeout(20);
+        selection.call(localized);
+        localized.tags({'name:de': 'Value'});
+
+        var changed;
+        localized.on('change', function(tags) { changed = tags; });
+
+        iD.utilGetSetValue(selection.selectAll('.localized-value'), '');
+        selection.selectAll('.localized-value').node().dispatchEvent(new Event('change'));
+        expect(changed).toEqual({'name:de': undefined});
+
+        iD.utilGetSetValue(selection.selectAll('.localized-lang'), 'English');
+        selection.selectAll('.localized-lang').node().dispatchEvent(new Event('change'));
+        expect(changed).toEqual({'name:de': undefined});
     });
 
     it('ignores similar keys like `old_name`', async () => {

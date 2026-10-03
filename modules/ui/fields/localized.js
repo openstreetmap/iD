@@ -284,16 +284,26 @@ export function uiFieldLocalized(field, context) {
         });
         if (language) lang = language.code;
 
-        if (d.lang && d.lang !== lang) {
-            tags[key(d.lang)] = undefined;
-        }
-
+        var oldKey = d.lang && key(d.lang);
         var newKey = lang && context.cleanTagKey(key(lang));
 
-        var value = utilGetSetValue(d3_select(this.parentNode).selectAll('.localized-value'));
+        if (oldKey && oldKey !== newKey) {
+            if (newKey && d.value) {
+                // the row already holds a tag: move it to the new key rather
+                // than writing a single value, because in a multiselection the
+                // selected features may each have a different value - #11337
+                // (the `oldKey` reference must be added before the old key is
+                // cleared, see the `changeTags` function in the entity editor)
+                tags[newKey] = { oldKey: oldKey };
+            }
+            tags[oldKey] = undefined;
+        }
 
-        if (newKey && value) {
-            tags[newKey] = value;
+        if (newKey && !tags[newKey]) {
+            var value = utilGetSetValue(d3_select(this.parentNode).selectAll('.localized-value'));
+            if (value) {
+                tags[newKey] = value;
+            }
         }
 
         d.lang = lang;

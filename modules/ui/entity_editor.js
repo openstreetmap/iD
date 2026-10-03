@@ -173,8 +173,13 @@ export function uiEntityEditor(context) {
                     if (!k) continue;
                     var v = changed[k];
                     if (typeof v === 'object') {
-                        // a "key only" tag change
-                        tags[k] = tags[v.oldKey];
+                        // a "key only" tag change: only features which have the
+                        // old key are affected, so that an existing tag with the
+                        // new key is not cleared on the other features of a
+                        // multiselection - #11337
+                        if (Object.hasOwn(tags, v.oldKey)) {
+                            tags[k] = tags[v.oldKey];
+                        }
                     } else if (v !== undefined || tags.hasOwnProperty(k)) {
                         tags[k] = v;
                     }
