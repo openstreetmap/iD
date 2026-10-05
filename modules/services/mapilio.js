@@ -122,6 +122,7 @@ function loadTileDataToCache(data, tile) {
                 service: 'photo',
                 loc: loc,
                 capture_time: feature.properties.capture_time,
+                capture_time_parsed: new Date(feature.properties.capture_time),
                 created_by_id: feature.properties.created_by_id,
                 id: feature.properties.id,
                 sequence_id: feature.properties.sequence_uuid,
@@ -278,6 +279,11 @@ export default {
         }
     },
 
+    // Get the currently visible image
+    getActiveImage: function() {
+        return _activeImage;
+    },
+
 
     // Update the currently highlighted sequence and selected bubble.
     setStyles: function(context, hovered) {
@@ -322,14 +328,14 @@ export default {
 
         this.setActiveImage(d);
 
-        patchHash({ photo: 'mapilio/' + d.id });
-
         let viewer = context.container().select('.photoviewer');
         if (!viewer.empty()) viewer.datum(d);
 
         this.setStyles(context, null);
 
         if (!d) return this;
+
+        patchHash({ photo: 'mapilio/' + d.id });
 
         let wrap = context.container().select('.photoviewer .mapilio-wrapper');
         let attribution = wrap.selectAll('.photo-attribution').text('\u00A0');
@@ -575,9 +581,8 @@ export default {
                 const imageId = _activeImage.id;
 
                 const nextIndex = imageId + stepBy;
-                if (!nextIndex) return;
-
                 const nextImage = _cache.images.forImageId[nextIndex];
+                if (!nextImage) return;
 
                 context.map().centerEase(nextImage.loc);
 
