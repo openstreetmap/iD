@@ -13,7 +13,7 @@ export function uiAttribution(context) {
 
     div = div.enter()
       .append('div')
-      .attr('class', klass)
+      .attr('class', `${klass} enhanced-attribution`)
       .merge(div);
 
 
