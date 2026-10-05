@@ -9,7 +9,9 @@ import { utilRebind } from '../../util';
 import { uiPresetIcon } from '../preset_icon';
 import { uiSection } from '../section';
 import { uiTagReference } from '../tag_reference';
-
+import { svgIcon } from '../../svg';
+import { uiModal } from '../modal';
+import { uiShortcutEditor } from '../shortcut_editor';
 
 export function uiSectionFeatureType(context) {
 
@@ -67,15 +69,42 @@ export function uiSectionFeatureType(context) {
             .merge(tagReferenceBodyWrap);
 
         // update header
+        var accessoryButtons = selection.selectAll('.preset-list-button-wrap .accessory-buttons')
+            .style('display', _presets.length === 1 ? null : 'none');
+
+        // Add shortcut editor button (only for single preset)
+        if (_presets.length === 1) {
+            var shortcutButton = accessoryButtons.selectAll('.shortcut-edit-button')
+                .data([0]);
+
+            var shortcutButtonEnter = shortcutButton.enter()
+                .append('button')
+                .attr('class', 'shortcut-edit-button')
+                .attr('title', t('preset_shortcut.edit_tooltip'))
+                .call(svgIcon('#iD-icon-out-link'));
+
+            shortcutButton = shortcutButtonEnter.merge(shortcutButton);
+
+            shortcutButton.on('click', function(d3_event) {
+                d3_event.preventDefault();
+                d3_event.stopPropagation();
+                // Show the shortcut editor modal
+                showShortcutModal(_presets[0], context);
+            });
+        } else {
+            // Remove shortcut button if multiple presets
+            accessoryButtons.selectAll('.shortcut-edit-button').remove();
+        }
+
         if (_tagReference) {
-            selection.selectAll('.preset-list-button-wrap .accessory-buttons')
-                .style('display', _presets.length === 1 ? null : 'none')
-                .call(_tagReference.button);
+            accessoryButtons.call(_tagReference.button);
 
             tagReferenceBodyWrap
                 .style('display', _presets.length === 1 ? null : 'none')
                 .call(_tagReference.body);
         }
+
+
 
         selection.selectAll('.preset-reset')
             .on('click', function() {
@@ -111,6 +140,70 @@ export function uiSectionFeatureType(context) {
             .attr('class', 'namepart')
             .text('')
             .each(function(d) { d(d3_select(this)); });
+
+        // Shortcut editor is now triggered by the button in the header
+        // Remove any existing shortcut editors
+        selection.selectAll('.shortcut-editor').remove();
+    }
+
+
+    function showShortcutModal(preset, context) {
+        const modalSelection = uiModal(context.container());
+
+        const modal = modalSelection.select('.content');
+
+        // Header section with title
+        const headerSection = modal
+            .append('div')
+            .attr('class', 'modal-section');
+
+        headerSection
+            .append('h3')
+            .text(t('preset_shortcut.modal_title'));
+
+        // Content section with preset info and form
+        const contentSection = modal
+            .append('div')
+            .attr('class', 'modal-section');
+
+        // Show preset name and icon
+        const presetRow = contentSection
+            .append('div')
+            .style('display', 'flex')
+            .style('align-items', 'center')
+            .style('margin-bottom', '15px');
+
+        presetRow
+            .append('div')
+            .style('margin-right', '10px')
+            .call(uiPresetIcon()
+                .geometry(preset.geometry[0])
+                .preset(preset)
+            );
+
+        presetRow
+            .append('div')
+            .style('font-weight', 'bold')
+            .call(function(selection) {
+                const presetName = preset.nameLabel();
+                presetName(selection);
+            });
+
+        // Use the reusable shortcut editor component
+        contentSection.call(uiShortcutEditor(context)
+            .preset(preset)
+            .onSave(function() {
+                modalSelection.close();
+            })
+            .onCancel(function() {
+                modalSelection.close();
+            })
+            .onRemove(function() {
+                modalSelection.close();
+            })
+        );
+
+
     }
 
     section.entityIDs = function(val) {
