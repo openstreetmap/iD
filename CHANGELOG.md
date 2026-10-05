@@ -358,6 +358,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 
 * Fix regression where some strings (like some section headings) are not rendered correctly ([#12083])
 
+[#12083]: https://github.com/openstreetmap/iD/issues/12083
 
 # 2.39.4
 ##### 2026-03-23
