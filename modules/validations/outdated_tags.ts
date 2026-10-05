@@ -5,22 +5,22 @@ import { t } from '../core/localizer';
 import { actionChangePreset } from '../actions/change_preset';
 import { actionChangeTags } from '../actions/change_tags';
 import { actionUpgradeTags } from '../actions/upgrade_tags';
-import { fileFetcher } from '../core';
+import { fileFetcher, type coreGraph } from '../core';
 import { presetManager } from '../presets';
 import { services } from '../services';
 import { utilArrayUniq, utilHashcode, utilTagDiff } from '../util';
-import { utilSplitAtSemicolon } from '../util/util';
+import { utilSplitAtSemicolon, type TagDiff } from '../util/util';
 import { utilDisplayLabel } from '../util/utilDisplayLabel';
 import { validationIssue, validationIssueFix } from '../core/validation';
 import { getDeprecatedTags } from '../osm/deprecated';
+import type { Deprecated } from '@openstreetmap/id-tagging-schema';
+import type { CreateValidator, validationIssueList, Validator } from '../core/validation/models';
 
-/** @import { TagDiff } from '../util/util'. */
 
-
-export function validationOutdatedTags() {
+export const validationOutdatedTags: CreateValidator = () => {
   const type = 'outdated_tags';
   let _waitingForDeprecated = true;
-  let _dataDeprecated;
+  let _dataDeprecated: Deprecated;
 
   // fetch deprecated tags
   fileFetcher.get('deprecated')
@@ -29,7 +29,7 @@ export function validationOutdatedTags() {
     .finally(() => _waitingForDeprecated = false);
 
 
-  function oldTagIssues(entity, graph) {
+  const validation: Validator = (entity, graph) => {
     if (!entity.hasInterestingTags()) return [];
 
     let preset = presetManager.match(entity, graph);
@@ -39,7 +39,7 @@ export function validationOutdatedTags() {
 
     // Upgrade preset, if a replacement is available..
     if (preset.replacement) {
-      const newPreset = presetManager.item(preset.replacement);
+      const newPreset = presetManager.item(preset.replacement)!;
       graph = actionChangePreset(entity.id, preset, newPreset, true /* skip field defaults */)(graph);
       entity = graph.entity(entity.id);
       preset = newPreset;
@@ -48,7 +48,7 @@ export function validationOutdatedTags() {
     // Attempt to match a canonical record in the name-suggestion-index.
     const nsi = services.nsi;
     let waitingForNsi = false;
-    let nsiResult;
+    let nsiResult: ReturnType<typeof nsi.upgradeTags> | undefined;
     if (nsi) {
       waitingForNsi = (nsi.status() === 'loading');
       if (!waitingForNsi) {
@@ -59,7 +59,7 @@ export function validationOutdatedTags() {
     const nsiDiff = nsiResult ? utilTagDiff(oldTags, nsiResult.newTags) : [];
 
     // Upgrade deprecated tags
-    let deprecatedTags;
+    let deprecatedTags: Deprecated | undefined;
     if (_dataDeprecated) {
       deprecatedTags = getDeprecatedTags(entity.tags, _dataDeprecated);
       if (entity.type === 'way' && entity.isClosed() &&
@@ -79,7 +79,7 @@ export function validationOutdatedTags() {
     }
 
     // Add missing addTags from the detected preset
-    let newTags = Object.assign({}, entity.tags);  // shallow copy
+    let newTags = { ...entity.tags };  // shallow copy
     if (preset.tags !== preset.addTags) {
       Object.keys(preset.addTags).filter(k => {
         // if nsi suggestion already includes this tag: don't repeat it in "incomplete tags"
@@ -99,7 +99,7 @@ export function validationOutdatedTags() {
         .filter(key => newTags[key] === oldTags[key]);
     const deprecationDiff = utilTagDiff(oldTags, newTags, deprecationDiffContext);
 
-    let issues = [];
+    let issues: validationIssueList = [];
     issues.provisional = (_waitingForDeprecated || waitingForNsi);
 
     if (deprecationDiff.some(d => d.type !== '~')) {
@@ -172,7 +172,7 @@ export function validationOutdatedTags() {
               }
             }),
             new validationIssueFix({
-              title: t.append('issues.fix.tag_as_not.title', { name: nsiResult.matched.displayName }),
+              title: t.append('issues.fix.tag_as_not.title', { name: nsiResult!.matched!.displayName }),
               onClick: (context) => {
                 context.perform(addNotTag, t('issues.fix.tag_as_not.annotation'));
               }
@@ -186,12 +186,11 @@ export function validationOutdatedTags() {
     return issues;
 
 
-    /** @param {iD.Graph} graph @param {TagDiff[]} diff */
-    function doUpgrade(graph, diff) {
+    function doUpgrade(graph: coreGraph, diff: TagDiff[]) {
       const currEntity = graph.hasEntity(entity.id);
       if (!currEntity) return graph;
 
-      let newTags = Object.assign({}, currEntity.tags);  // shallow copy
+      let newTags = { ...currEntity.tags };  // shallow copy
       diff.forEach(diff => {
         if (diff.type === '-') {
           delete newTags[diff.key];
@@ -204,14 +203,14 @@ export function validationOutdatedTags() {
     }
 
 
-    function addNotTag(graph) {
+    function addNotTag(graph: coreGraph) {
       const currEntity = graph.hasEntity(entity.id);
       if (!currEntity) return graph;
 
       const item = nsiResult && nsiResult.matched;
       if (!item) return graph;
 
-      let newTags = Object.assign({}, currEntity.tags);  // shallow copy
+      let newTags = { ...currEntity.tags };  // shallow copy
       const wd = item.mainTag;     // e.g. `brand:wikidata`
       const notwd = `not:${wd}`;   // e.g. `not:brand:wikidata`
       const qid = item.tags[wd];
@@ -232,16 +231,13 @@ export function validationOutdatedTags() {
 
       return actionChangeTags(currEntity.id, newTags)(graph);
     }
-  }
-
-  let validation = oldTagIssues;
-
+  };
   validation.type = type;
 
   return validation;
-}
+};
 
-export function showTagDiffReference(selection, reference, tagDiff) {
+export function showTagDiffReference(selection: d3.Selection, reference: d3.Selector, tagDiff: TagDiff[]) {
     let enter = selection.selectAll('.issue-reference')
     .data([0])
     .enter();
@@ -276,6 +272,6 @@ export function showTagDiffReference(selection, reference, tagDiff) {
         }
     })
     .each(function(d) {
-        d3_select(this).call(d.render);
+        d3_select<HTMLElement, unknown>(this).call(d.render);
     });
 }

@@ -1,11 +1,13 @@
 import { actionChangeTags } from '../actions/change_tags';
-import { presetManager } from '../presets';
+import { presetManager, type presetPreset } from '../presets';
 import { services } from '../services';
 import { t, localizer } from '../core/localizer';
 import { validationIssue, validationIssueFix } from '../core/validation';
+import type { CreateValidator, validationIssueList, Validator } from '../core/validation/models';
+import type { EntityId } from '../osm';
 
 
-export function validationSuspiciousName(context) {
+export const validationSuspiciousName: CreateValidator = (context) => {
   const type = 'suspicious_name';
   const keysToTestForGenericValues = [
     'aerialway', 'aeroway', 'amenity', 'building', 'craft', 'highway',
@@ -19,7 +21,7 @@ export function validationSuspiciousName(context) {
 
 
   // Attempt to match a generic record in the name-suggestion-index.
-  function isGenericMatchInNsi(tags) {
+  function isGenericMatchInNsi(tags: Tags) {
     const nsi = services.nsi;
     if (nsi) {
       _waitingForNsi = (nsi.status() === 'loading');
@@ -32,7 +34,7 @@ export function validationSuspiciousName(context) {
 
 
   // Test if the name is just the key or tag value (e.g. "park")
-  function nameMatchesRawTag(lowercaseName, tags) {
+  function nameMatchesRawTag(lowercaseName: string, tags: Tags) {
     for (let i = 0; i < keysToTestForGenericValues.length; i++) {
       let key = keysToTestForGenericValues[i];
       let val = tags[key];
@@ -49,8 +51,7 @@ export function validationSuspiciousName(context) {
     return false;
   }
 
-  /** @param {string} name */
-  function nameMatchesPresetName(name, preset) {
+  function nameMatchesPresetName(name: string, preset: presetPreset) {
     if (!preset) return false;
     if (ignoredPresets.has(preset.id)) return false;
 
@@ -58,13 +59,12 @@ export function validationSuspiciousName(context) {
     return name === preset.name().toLowerCase() || preset.aliases().some(alias => name === alias.toLowerCase());
   }
 
-  /** @param {string} name */
-  function isGenericName(name, tags, preset) {
+  function isGenericName(name: string, tags: Tags, preset: presetPreset) {
     name = name.toLowerCase();
     return nameMatchesRawTag(name, tags) || nameMatchesPresetName(name, preset) || isGenericMatchInNsi(tags);
   }
 
-  function makeGenericNameIssue(entityId, nameKey, genericName, langCode) {
+  function makeGenericNameIssue(entityId: EntityId, nameKey: TagKey, genericName: string, langCode: string | undefined | null) {
     return new validationIssue({
       type: type,
       subtype: 'generic_name',
@@ -87,9 +87,9 @@ export function validationSuspiciousName(context) {
             icon: 'iD-operation-delete',
             title: t.append('issues.fix.remove_the_name.title'),
             onClick: function(context) {
-              let entityId = this.issue.entityIds[0];
+              let entityId = this.issue!.entityIds[0];
               let entity = context.entity(entityId);
-              let tags = Object.assign({}, entity.tags);   // shallow copy
+              let tags = { ...entity.tags };   // shallow copy
               delete tags[nameKey];
               context.perform(
                 actionChangeTags(entityId, tags), t('issues.fix.remove_generic_name.annotation')
@@ -100,7 +100,7 @@ export function validationSuspiciousName(context) {
       }
     });
 
-    function showReference(selection) {
+    function showReference(selection: d3.Selection) {
       selection.selectAll('.issue-reference')
         .data([0])
         .enter()
@@ -110,14 +110,14 @@ export function validationSuspiciousName(context) {
     }
   }
 
-  let validation = function checkGenericName(entity) {
+  const validation: Validator = function checkGenericName(entity) {
     const tags = entity.tags;
 
     // a generic name is allowed if it's a known brand or entity
     const hasWikidata = (!!tags.wikidata || !!tags['brand:wikidata'] || !!tags['operator:wikidata']);
     if (hasWikidata) return [];
 
-    let issues = [];
+    let issues: validationIssueList = [];
 
     const preset = presetManager.match(entity, context.graph());
 
@@ -141,4 +141,4 @@ export function validationSuspiciousName(context) {
   validation.type = type;
 
   return validation;
-}
+};
