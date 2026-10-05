@@ -3945,6 +3945,17 @@ input.square-degrees-input {
     color: currentColor;
 }
 
+form.divide-modal {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    justify-content: center;
+    margin: 8px;
+}
+form.divide-modal input {
+    width: 4em;
+}
+
 
 /* Entity Issues List */
 .section-entity-issues .issue-container .issue {
