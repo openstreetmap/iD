@@ -120,10 +120,14 @@ export async function planePhotoFrame(context: coreContext, selection: d3.Select
         dispatch.call('viewerChanged');
 
         loadImage(_photo, '');
-        _planeWrapper.classed('show-loader', true);
+        _planeWrapper
+            .insert('svg', '.plane-frame')
+            .attr('class', 'photo-spinner')
+            .append('use')
+            .attr('href', '#iD-spinner');
         loadImage(_photo, data.image_path)
             .then(selection => {
-                _planeWrapper.classed('show-loader', false);
+                _planeWrapper.select('svg.photo-spinner').remove();
                 const { naturalWidth, naturalHeight } = selection.node()!;
                 _photoDimensions = [naturalWidth, naturalHeight];
                 updateTransform();
