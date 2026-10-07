@@ -14,6 +14,7 @@ import { getRelationColor, isColorValid } from '../../osm/tags';
 import { services } from '../../services';
 import { svgIcon } from '../../svg/icon';
 import { uiCombobox } from '../combobox';
+import { uiSetInlineLoading } from '../inline_loading';
 import { uiSection } from '../section';
 import { uiTooltip } from '../tooltip';
 import { utilArrayGroupBy, utilArrayIntersection } from '../../util/array';
@@ -273,7 +274,7 @@ export function uiSectionRawMembershipEditor(context) {
         const button = d3_select(this);
 
         // display the loading indicator
-        button.classed('loading', true);
+        uiSetInlineLoading(button, true);
         context.loadEntity(d.relation.id, function() {
             section.reRender();
         });

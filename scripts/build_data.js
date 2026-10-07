@@ -84,9 +84,11 @@ async function buildData() {
   fs.writeFileSync('dist/data/languages.min.json', JSON.stringify(languageInfo));
 
   // Save individual data files
+  // Note: data/imagery.json and data/imagery_esri_wayback.json should be generated first via 'npm run imagery'
   let tasks = [
     minifyJSON('data/address_formats.json', 'dist/data/address_formats.min.json'),
     minifyJSON('data/imagery.json', 'dist/data/imagery.min.json'),
+    minifyJSON('data/imagery_esri_wayback.json', 'dist/data/imagery_esri_wayback.min.json'),
     minifyJSON('data/intro_graph.json', 'dist/data/intro_graph.min.json'),
     minifyJSON('data/phone_formats.json', 'dist/data/phone_formats.min.json'),
     minifyJSON('data/qa_data.json', 'dist/data/qa_data.min.json'),
