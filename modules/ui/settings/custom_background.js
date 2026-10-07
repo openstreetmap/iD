@@ -55,12 +55,27 @@ ${localizer.t_html('settings.custom_background.instructions.license_disclaimer')
     ${example}
 `;
 
-        textSection
-            .append('div')
-            .attr('class', 'instructions-template')
-            .html(marked(instructions))
-            .selectAll('p')
-            .attr('dir', 'auto');
+
+textSection
+    .append('div')
+    .attr('class', 'instructions-template')
+    .html(marked(instructions))
+    .selectAll('a')
+    .filter(function() {
+        var href = this.getAttribute('href') || '';
+        return /^https?:\/\//i.test(href);
+    })
+    .attr('target', '_blank')
+    .attr('rel', function() {
+        var rel = (this.getAttribute('rel') || '').split(/\s+/).filter(Boolean);
+        if (!rel.includes('noopener')) rel.push('noopener');
+        if (!rel.includes('noreferrer')) rel.push('noreferrer');
+        return rel.join(' ');
+    });
+
+textSection.select('.instructions-template')
+    .selectAll('p')
+    .attr('dir', 'auto');
 
         textSection
             .append('textarea')
