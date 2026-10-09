@@ -277,7 +277,7 @@ export function uiFieldAccess(field, context) {
             stile: {
                 bicycle: 'no',
                 foot: 'yes',
-                horse: 'yes',
+                horse: 'no',
                 motor_vehicle: 'no'
             }
         }
