@@ -1,6 +1,5 @@
 import serviceOsmose from './osmose';
 import serviceMapillary from './mapillary';
-import serviceMapRules from './maprules';
 import serviceNominatim from './nominatim';
 import serviceNsi from './nsi';
 import serviceKartaview from './kartaview';
@@ -25,7 +24,6 @@ export let services = {
   vegbilder: serviceVegbilder,
   osm: serviceOsm,
   osmWikibase: serviceOsmWikibase,
-  maprules: serviceMapRules,
   streetside: serviceStreetside,
   taginfo: serviceTaginfo,
   vectorTile: serviceVectorTile,
@@ -38,7 +36,6 @@ export let services = {
 export {
   serviceOsmose,
   serviceMapillary,
-  serviceMapRules,
   serviceNominatim,
   serviceNsi,
   serviceKartaview,

@@ -13,7 +13,7 @@ export default {
 
     search: function(lang, query, callback) {
         if (!query) {
-            if (callback) callback('No Query', []);
+            if (callback) callback(new Error('No Query'));
             return;
         }
 
@@ -42,14 +42,14 @@ export default {
                 }
             })
             .catch(function(err) {
-                if (callback) callback(err, []);
+                if (callback) callback(err);
             });
     },
 
 
     suggestions: function(lang, query, callback) {
         if (!query) {
-            if (callback) callback('', []);
+            if (callback) callback(new Error('No Query'));
             return;
         }
 
@@ -74,7 +74,7 @@ export default {
                 if (callback) callback(null, result[1] || []);
             })
             .catch(function(err) {
-                if (callback) callback(err.message, []);
+                if (callback) callback(err);
             });
     },
 

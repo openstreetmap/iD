@@ -114,7 +114,7 @@ describe('iD.servicePanoramax', function() {
 
         it('handle API error response', async ({ expect }) => {
             fetchMock.reset();
-            fetchMock.mock('/api\.panoramax\.xyz/', 500);
+            fetchMock.mock(/api\.panoramax\.xyz/, 500);
             const promise = panoramax.getImageData('collection1', 'image1');
             await expect(promise).rejects.toThrowError();
         });

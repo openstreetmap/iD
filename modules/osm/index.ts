@@ -15,10 +15,6 @@ export {
 } from './intersection';
 
 export {
-    osmLanes
-} from './lanes';
-
-export {
     osmJoinWays
 } from './multipolygon';
 

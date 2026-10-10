@@ -15,6 +15,7 @@ import { uiLengthIndicator } from '../length_indicator';
 import { deprecatedTagValuesByKey } from '../../osm/deprecated';
 import { osmIsoCountryKeys } from '../../osm/tags';
 import { formatTag } from './tag_title';
+import { utilSplitAtSemicolon as splitAtSemicolon } from '../../util/util';
 
 export {
     uiFieldCombo as uiFieldManyCombo,
@@ -63,9 +64,6 @@ export function uiFieldCombo(field, context) {
         return s.replace(/\s+/g, '_');
     }
 
-    function splitAtSemicolon(s) {
-        return (s || '').split(';').map(s => s.trim()).filter(Boolean);
-    }
     function clean(s) {
         return splitAtSemicolon(s).join(';');
     }
@@ -106,7 +104,7 @@ export function uiFieldCombo(field, context) {
         const code = feature.properties.iso1A2;
         let flag = feature.properties.emojiFlag;
         // if the flag is not present like for 'FX' code, we will look for the corresponding country flag for that code
-        if (!flag && features?.properties?.country) {
+        if (!flag && feature.properties?.country) {
           flag = countryCoder.feature(feature.properties.country).properties.emojiFlag;
         }
         if (!code) continue;
@@ -145,7 +143,7 @@ export function uiFieldCombo(field, context) {
         dval = clean(dval || '');
 
         var found = getOptions(true).find(function(o) {
-            return o.key && clean(o.value) === dval;
+            return o.key && clean(o.value).toLowerCase() === dval.toLowerCase();
         });
         if (found) return found.key;
 

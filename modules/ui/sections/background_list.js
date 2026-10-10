@@ -184,20 +184,16 @@ export function uiSectionBackgroundList(context) {
                         s.prefix === prefix && s.suffix === suffix);
                     if (main) {
                         main.variants.push({ variant, source });
+                        return;
                     } else {
-                        sources.push({
-                            ...source,
-                            prefix,
-                            suffix,
-                            variants: [{ variant, source }]
-                        });
+                        source.prefix = prefix;
+                        source.suffix = suffix;
+                        source.variants = [{ variant, source }];
                     }
                 } else {
-                    sources.push({
-                        ...source,
-                        variants: [{ source }]
-                    });
+                    source.variants = [{ source }];
                 }
+                sources.push(source);
             });
         sources.forEach(source => {
                 source.variants = sortBy(source.variants, [

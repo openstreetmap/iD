@@ -5,6 +5,7 @@ import { presetManager } from '../presets';
 import { geoScaleToZoom } from '../geo';
 import { osmIdManager } from '../osm';
 import { svgPassiveVertex, svgPointTransform } from './helpers';
+import { getRadiiInPixels } from '../core';
 import { svgTagClasses } from './tag_classes';
 
 export function svgVertices(projection, context) {
@@ -164,6 +165,20 @@ export function svgVertices(projection, context) {
                 var picon = getIcon(d);
                 return picon ? '#' + picon : '';
             });
+
+        // Highlighted vertices with a radius/diameter get a circle
+        const circles = groups
+            .selectAll('.radius')
+            .data((d) => context.selectedIDs().includes(d.id) ? getRadiiInPixels(d, projection) : []);
+
+        circles.exit()
+            .remove();
+
+        circles.enter()
+            .insert('circle', '.shadow')
+            .attr('class', 'radius')
+            .merge(circles)
+            .attr('r', d => d);
 
 
         // Vertices with directions get viewfields
@@ -455,6 +470,11 @@ export function svgVertices(projection, context) {
         // note that drawVertices will add `_currSelected` automatically if needed..
         var filter = function(d) { return d.id in _prevSelected; };
         drawVertices(selection, graph, Object.values(_prevSelected), filter, extent, false);
+    };
+
+
+    drawVertices.clearSelected = (selection) => {
+        selection.selectAll('.radius').remove();
     };
 
 

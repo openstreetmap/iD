@@ -12,6 +12,7 @@ import {
 } from './vector.js';
 import type { osmNode as OsmNode } from '../osm/node.js';
 import type { Projection } from './raw_mercator.js';
+import type { EntityId } from '../osm/id_manager.js';
 
 
 // Return the counterclockwise angle in the range (-pi, pi)
@@ -43,7 +44,7 @@ export function geoRotate(points: Vec2[], angle: number, around: Vec2): Vec2[] {
 // projection onto that edge, if such a projection exists, or the distance to
 // the closest vertex on that edge. Returns an object with the `index` of the
 // chosen edge, the chosen `loc` on that edge, and the `distance` to to it.
-export function geoChooseEdge(nodes: OsmNode[], point: Vec2, projection: Projection, activeID: string) {
+export function geoChooseEdge(nodes: OsmNode[], point: Vec2, projection: Projection, activeID?: EntityId) {
     var dist = geoVecLength;
     var points = nodes.map(function(n) { return projection(n.loc); });
     var ids = nodes.map(function(n) { return n.id; });

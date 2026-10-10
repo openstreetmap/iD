@@ -30,10 +30,9 @@ import {
 
 
 export function modeSelect(context, selectedIDs) {
-    var mode = {
-        id: 'select',
-        button: 'browse'
-    };
+    var mode = {};
+    mode.id = 'select';
+    mode.button = 'browse';
 
     var keybinding = utilKeybinding('select');
 

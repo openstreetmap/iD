@@ -13,7 +13,7 @@ export interface ActionSplit extends Action {
     getCreatedWayIDs?(): WayId[];
     waysForNode(nodeId: NodeId, graph: coreGraph): osmWay[];
     ways(graph: coreGraph): osmWay[];
-    limitWays(wayIds?: WayId[]): WayId[] | this;
+    limitWays: GetSet<ActionSplit, WayId[]>;
     keepHistoryOn(val?: HistoryStrategy): HistoryStrategy | this;
 }
 
@@ -532,11 +532,14 @@ export function actionSplit(nodeIds: NodeId[], newWayIds?: WayId[]): ActionSplit
     };
 
 
-    action.limitWays = function(val) {
-        if (!arguments.length) return _wayIDs;
-        _wayIDs = val!;
+    function limitWays(): WayId[];
+    function limitWays(value: WayId[]): ActionSplit;
+    function limitWays(...args: [] | [WayId[]]) {
+        if (!args.length) return _wayIDs;
+        _wayIDs = args[0];
         return action;
     };
+    action.limitWays = limitWays;
 
 
     action.keepHistoryOn = function(val) {

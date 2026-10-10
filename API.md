@@ -36,8 +36,6 @@ of iD (e.g. `https://ideditor-release.netlify.app`), the following parameters ar
   _Available values:_ Any of the [supported locales](https://github.com/openstreetmap/iD/tree/develop/dist/locales).
 * __`map`__ - A slash-separated `zoom/latitude/longitude`.<br/>
   _Example:_ `map=20.00/38.90085/-77.02271`
-* __`maprules`__ - A path to a [MapRules](https://github.com/radiant-maxar/maprules) service endpoint for enhanced tag validation.<br/>
-  _Example:_ `maprules=https://path/to/file.json`
 * __`notes`__ - Enables the notes layer by default.<br/>
   _Example:_ `notes=true`
 * __`offset`__ - Background imagery alignment offset in meters, formatted as `east,north`.<br/>
@@ -84,7 +82,6 @@ _Example:_ `https://www.openstreetmap.org/edit?editor=id#gpx=https://gist.github
 * __`disable_features`__
 * __`hashtags`__
 * __`locale`__
-* __`maprules`__
 * __`notes`__
 * __`offset`__
 * __`photo`__
@@ -288,7 +285,6 @@ Optional properties:
 * `polygon` - Array of coordinate rings within which imagery is valid.  If omitted, imagery is assumed to be valid worldwide
 * `overzoom` - Can this imagery be scaled up when zooming in beyond the max zoom?  Defaults to `true`
 * `terms_url` - Url to link to when displaying the imagery terms
-* `terms_html` - HTML content to display in the imagery terms
 * `terms_text` - Text content to display in the imagery terms
 * `best` - If set to `true`, this imagery is considered "better than Bing" and may be chosen by default when iD starts.  Will display with a star in the background imagery list.  Defaults to `false`
 

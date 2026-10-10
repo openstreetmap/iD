@@ -6,7 +6,6 @@ export { validationFormatting } from './invalid_format';
 export { validationHelpRequest } from './help_request';
 export { validationImpossibleOneway } from './impossible_oneway';
 export { validationIncompatibleSource } from './incompatible_source';
-export { validationMaprules } from './maprules';
 export { validationMismatchedGeometry } from './mismatched_geometry';
 export { validationMissingRole } from './missing_role';
 export { validationMissingTag } from './missing_tag';

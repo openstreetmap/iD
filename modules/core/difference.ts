@@ -169,10 +169,13 @@ export function coreDifference(base: coreGraph, head: coreGraph) {
 
             if (change.head && change.head.geometry(head) !== 'vertex') {
                 addEntity(change.head, head, change.base ? 'modified' : 'created');
-
             } else if (change.base && change.base.geometry(base) !== 'vertex') {
-                addEntity(change.base, base, 'deleted');
-
+                if (change.head) {
+                    // converted point to vertex
+                    addEntity(change.head, head, 'modified');
+                } else {
+                    addEntity(change.base, base, 'deleted');
+                }
             } else if (change.base && change.head) { // modified vertex
                 var moved    = !deepEqual((change.base as osmNode).loc,  (change.head as osmNode).loc);
                 var retagged = !deepEqual(change.base.tags, change.head.tags);

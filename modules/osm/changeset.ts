@@ -38,9 +38,7 @@ export class osmChangeset extends OsmAbstractEntity {
         return {
             osm: {
                 changeset: {
-                    tag: Object.keys(this.tags).map(function(k) {
-                        return { '@k': k, '@v': this.tags[k] };
-                    }, this),
+                    tag: Object.keys(this.tags).map(k => ({ '@k': k, '@v': this.tags[k] })),
                     '@version': 0.6,
                     '@generator': 'iD'
                 }

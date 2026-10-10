@@ -4,7 +4,7 @@ import fs from 'node:fs';
 import { styleText } from 'node:util';
 import { load as loadYaml } from 'js-yaml';
 import { transifexApi } from '@transifex/api';
-import * as languageNames from './language_names.js';
+import * as languageNames from './language_names.ts';
 
 const resourceIds = ['core', 'imagery', 'community'];
 const reviewedOnlyLangs = ['vi'];
@@ -115,7 +115,7 @@ function gotResource(err, results) {
     en: { rtl: false, pct: 1 }
   };
   asyncMap(Object.keys(allStrings),
-    (rawCode, done) => {
+    async (rawCode, done) => {
       const code = normaliseLocaleCode(rawCode);
 
       if (code === 'en') {
@@ -123,7 +123,7 @@ function gotResource(err, results) {
       } else {
         let obj = {};
         obj[code] = allStrings[rawCode] || {};
-        let lNames = languageNames.languageNamesInLanguageOf(code) || {};
+        let lNames = await languageNames.languageNamesInLanguageOf(code) || {};
         if (Object.keys(lNames).length) {
           obj[code].languageNames = lNames;
         }

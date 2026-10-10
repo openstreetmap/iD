@@ -1,6 +1,5 @@
 import {
     select as d3_select,
-    type BaseType
 } from 'd3-selection';
 
 import { utilArrayUniq } from './array';
@@ -121,17 +120,17 @@ export function utilKeybinding(namespace: string) {
     }
 
 
-    function keybinding(selection?: d3.Selection<BaseType>) {
-        selection = selection || d3_select<BaseType, any>(document);
+    function keybinding(selection?: d3.Selection<Document>) {
+        selection = selection || d3_select<Document, unknown>(document);
         selection.on('keydown.capture.' + namespace, capture, true);
         selection.on('keydown.bubble.' + namespace, bubble, false);
         return keybinding;
     }
 
     // was: keybinding.off()
-    keybinding.unbind = function(selection?: d3.Selection<BaseType>) {
+    keybinding.unbind = function(selection?: d3.Selection<Document>) {
         _keybindings = {};
-        selection = selection || d3_select<BaseType, any>(document);
+        selection = selection || d3_select<Document, unknown>(document);
         selection.on('keydown.capture.' + namespace, null);
         selection.on('keydown.bubble.' + namespace, null);
         return keybinding;

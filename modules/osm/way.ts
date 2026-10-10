@@ -2,7 +2,6 @@ import { geoArea as d3_geoArea } from 'd3-geo';
 import type { LineString, Polygon } from 'geojson';
 
 import { geoExtent, geoVecCross } from '../geo';
-import { osmLanes } from './lanes';
 import { osmTagSuggestingArea, osmSidednessTags, osmRemoveLifecyclePrefix, osmOneWayBiDirectionalTags, osmOneWayBackwardTags, osmOneWayForwardTags, osmOneWayTags } from './tags';
 import { utilArrayUniq, utilCheckTagDictionary } from '../util';
 import { OsmAbstractEntity, type OsmEntityProps } from './abstract-entity';
@@ -19,7 +18,7 @@ export interface Segment {
     wayId: WayId;
     index: number;
     nodes: NodeId[];
-    extent(graph: coreGraph): geoExtent | undefined;
+    extent(this: Segment, graph: coreGraph): geoExtent | undefined;
 }
 
 export class osmWay extends OsmAbstractEntity {
@@ -205,10 +204,6 @@ export class osmWay extends OsmAbstractEntity {
         return this.sidednessIdentifier() !== null;
     }
 
-    lanes() {
-        return osmLanes(this);
-    }
-
     isClosed() {
         return this.nodes.length > 1 && this.first() === this.last();
     }
@@ -270,7 +265,7 @@ export class osmWay extends OsmAbstractEntity {
 
     // returns an array of objects representing the segments between the nodes in this way
     segments(graph: coreGraph) {
-        const segmentExtent = (graph: coreGraph) => {
+        function segmentExtent(this: Segment, graph: coreGraph) {
             var n1 = graph.hasEntity<osmNode>(this.nodes[0]);
             var n2 = graph.hasEntity<osmNode>(this.nodes[1]);
             return n1 && n2 && geoExtent([

@@ -84,7 +84,7 @@ export abstract class OsmAbstractEntity implements OsmEntityProps {
     }
 
     isNew() {
-        var osmId = osmIdManager.toOSM(this.id);
+        const osmId = osmIdManager.toOSM(this.id);
         return osmId.length === 0 || osmId[0] === '-';
     }
 
@@ -131,7 +131,7 @@ export abstract class OsmAbstractEntity implements OsmEntityProps {
     }
 
     hasNonGeometryTags() {
-        return Object.keys(this.tags).some(function(k) { return k !== 'area'; });
+        return Object.keys(this.tags).some(k => k !== 'area');
     }
 
     hasParentRelations(resolver: coreGraph) {

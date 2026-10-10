@@ -149,7 +149,7 @@ export function uiFieldWikidata(field, context) {
 
         wikidata.itemsForSearchQuery(q, function(err, data) {
             if (err) {
-                if (err !== 'No query') console.error(err); // eslint-disable-line
+                if (err.message !== 'No query') console.error(err); // eslint-disable-line no-console
                 return;
             }
 

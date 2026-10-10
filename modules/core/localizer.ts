@@ -32,6 +32,8 @@ export type Translations = {
     scriptNames?: Record<string, string>
 };
 
+export type TextDirection = 'ltr' | 'rtl';
+
 export type LocaleIndexKey = `locales_index_${string}`; // e.g. 'locales_index_genera'
 export type LocaleDataKey = `locale_${string}_${string}`; // e.g. 'locales_genera_es'
 
@@ -47,20 +49,20 @@ type TInfo = {
     texts: (string | d3.Selector)[]
 };
 
-type Replacements = {
+export type Replacements = {
     [key: string]: number | string | d3.Selector | undefined
 } & {
     default?: string,
     prefix?: string,
     suffix?: string
 };
-type ReplacementsSimple = {
+export type ReplacementsSimple = {
     [key: string]: number | string | undefined
 } & {
     default?: string
 };
 type ReplacementsSimpleMulti = {
-    [key: string]: number | string | undefined
+    [key: string]: number | string | string[] | undefined
 } & {
     default?: string[]
 };
@@ -103,7 +105,7 @@ export class coreLocalizer {
     private _localeCodes = ['en-US', 'en'];
     private _expandedLocaleCodes = utilExpandLocaleCode(this._localeCode);
     private _languageCode = 'en';
-    private _textDirection: 'ltr' | 'rtl' = 'ltr';
+    private _textDirection: TextDirection = 'ltr';
     private _usesMetric = false;
     private _languageNames: Record<string, string> = {};
     private _scriptNames: Record<string, string> = {};

@@ -18,6 +18,11 @@ declare global {
     (): T;
   }
 
+  declare type Callback<T> = {
+    (error: Error, data?: undefined): void;
+    (error: null, data: T): void;
+  };
+
   declare namespace iD {
     export type Context = ReturnType<typeof iD.coreContext>;
 
@@ -59,6 +64,11 @@ declare global {
         /** used internally by d3 to store the values passed to `.data()` */
         __data__: any;
     }
+
+    interface Window {
+        mapillary: typeof import('mapillary-js');
+    }
+    declare const mapillary: Window['mapillary'];
 }
 
 export {};
