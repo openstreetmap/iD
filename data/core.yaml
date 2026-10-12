@@ -1602,6 +1602,18 @@ en:
         reference: "Crossing indoor features should use different levels."
       indoor-indoor_connectable:
         reference: "Crossing indoor features should be connected or use different levels."
+    coastline:
+      title: Coastline Issues
+      tip: "Find coastlines that are the wrong way round, or not connected"
+      orientation:
+        message: "The coastline {feature} is drawn in the wrong direction"
+        reference: "Coastlines should be drawn so that the land is on the left side and the water is on the right side, when viewing in the direction of the way. If you regard this as tracing around an area of land, e.g. an island, then the coastline way should be running counterclockwise."
+      direction:
+        message: "The coastline {feature} is drawn in the opposite direction to the adjacent coastline {feature2}"
+        reference: "Adjacent coastline ways should be drawn in the same direction, so that the coast forms one continuous line with the land always on the same side."
+      disconnect:
+        message: "The coastline {feature} is not connected to another coastline way"
+        reference: "Coastline ways should connect to each other to form long continuous lines. A coastline that simply ends may be incomplete, or drawn too far into the sea."
     disconnected_way:
       title: Disconnected Ways
       tip: "Find unroutable roads, paths, and ferry routes"
@@ -1843,6 +1855,7 @@ en:
         title: Reposition the features
       reverse_feature:
         title: Reverse this feature
+        informative_title: Reverse {feature}
       select_preset:
         title: Select a feature type
       select_road_type:
