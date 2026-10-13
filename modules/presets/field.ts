@@ -19,7 +19,9 @@ export interface presetField extends Omit<Field, 'label' | 'terms' | 'placeholde
   placeholder(): string;
   originalTerms: string[];
   terms(): string[];
-  allKeys(tags: Tags): TagKey[];
+  allKeys(tags: Tags | TagsMulti): TagKey[];
+  tagsContainFieldKey(tags: Tags | TagsMulti): boolean;
+  evaluatePrerequisiteTags(tags: Tags): boolean;
   overrideLabel?: string;
   locationSetID?: string;
 }
@@ -87,6 +89,57 @@ export function presetField(fieldID: string, field: Field) {
             .forEach(key => allKeys.add(key));
     }
     return [...allKeys];
+  };
+
+
+  _this.tagsContainFieldKey = (_tags) => {
+    return _this.allKeys(_tags).some((key) => {
+      if (field.type === 'multiCombo') {
+        for (const tagKey in _tags) {
+          if (tagKey.indexOf(key) === 0) {
+            return true;
+          }
+        }
+        return false;
+      }
+      if (field.type === 'localized') {
+        for (const tagKey in _tags) {
+          // matches for field:<code>, where <code> is a BCP 47 locale code
+          const match = tagKey.match(LANGUAGE_SUFFIX_REGEX);
+          if (match && match[1] === field.key && match[2]) {
+            return true;
+          }
+        }
+      }
+      return _tags[key] !== undefined;
+    });
+  };
+
+  /** returns true if this field should be shown, given an entity's tags */
+  _this.evaluatePrerequisiteTags = (tags) => {
+    const prerequisiteTag = field.prerequisiteTag;
+    if (!prerequisiteTag) return true;
+
+    if ('key' in prerequisiteTag) {
+      const value = tags[prerequisiteTag.key] || '';
+
+      if ('valuesNot' in prerequisiteTag) {
+        return !prerequisiteTag.valuesNot.includes(value);
+      }
+      if ('valueNot' in prerequisiteTag) {
+        return prerequisiteTag.valueNot !== value;
+      }
+      if ('values' in prerequisiteTag) {
+        return prerequisiteTag.values.includes(value);
+      }
+      if ('value' in prerequisiteTag) {
+        return prerequisiteTag.value === value;
+      }
+      if (!value) return false;
+    } else if ('keyNot' in prerequisiteTag) {
+      if (tags[prerequisiteTag.keyNot]) return false;
+    }
+    return true;
   };
 
   return _this;

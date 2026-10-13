@@ -8,11 +8,16 @@ import { uiTooltip } from './tooltip';
 import { geoExtent } from '../geo/extent';
 import { uiFieldHelp } from './field_help';
 import { uiFields } from './fields';
-import { LANGUAGE_SUFFIX_REGEX } from './fields/localized';
 import { uiTagReference } from './tag_reference';
 import { utilRebind, utilUniqueDomId } from '../util';
 
 
+/**
+ * @param {iD.Context} context
+ * @param {import('../presets').presetField} presetField
+ * @param {import('../osm').EntityId[]} entityIDs
+ * @returns {any}
+ */
 export function uiField(context, presetField, entityIDs, options) {
     options = Object.assign({
         show: true,
@@ -86,30 +91,6 @@ export function uiField(context, presetField, entityIDs, options) {
                     return !!latest.tags[key];
                 });
             }
-        });
-    }
-
-
-    function tagsContainFieldKey() {
-        return allKeys(_tags).some(function(key) {
-            if (field.type === 'multiCombo') {
-                for (var tagKey in _tags) {
-                    if (tagKey.indexOf(key) === 0) {
-                        return true;
-                    }
-                }
-                return false;
-            }
-            if (field.type === 'localized') {
-                for (let tagKey in _tags) {
-                    // matches for field:<code>, where <code> is a BCP 47 locale code
-                    let match = tagKey.match(LANGUAGE_SUFFIX_REGEX);
-                    if (match && match[1] === field.key && match[2]) {
-                        return true;
-                    }
-                }
-            }
-            return _tags[key] !== undefined;
         });
     }
 
@@ -268,7 +249,7 @@ export function uiField(context, presetField, entityIDs, options) {
             container
                 .classed('locked', _locked)
                 .classed('modified', isModified())
-                .classed('present', tagsContainFieldKey());
+                .classed('present', field.tagsContainFieldKey(_tags));
 
 
             // show a tip and lock icon if the field is locked
@@ -300,7 +281,7 @@ export function uiField(context, presetField, entityIDs, options) {
         if (!arguments.length) return _tags;
         _tags = val;
 
-        if (tagsContainFieldKey() && !_show) {
+        if (field.tagsContainFieldKey(_tags) && !_show) {
             // always show a field if it has a value to display
             _show = true;
             if (!field.impl) {
@@ -354,35 +335,11 @@ export function uiField(context, presetField, entityIDs, options) {
             if (!validHere.has(field.locationSetID)) return false;
         }
 
-        var prerequisiteTag = field.prerequisiteTag;
-
         if (entityIDs &&
-            !tagsContainFieldKey() && // ignore tagging prerequisites if a value is already present
-            prerequisiteTag) {
-
-            if (!entityIDs.every(function(entityID) {
-                var entity = context.graph().entity(entityID);
-                if (prerequisiteTag.key) {
-                    var value = entity.tags[prerequisiteTag.key] || '';
-
-                    if (prerequisiteTag.valuesNot) {
-                        return !prerequisiteTag.valuesNot.includes(value);
-                    }
-                    if (prerequisiteTag.valueNot) {
-                        return prerequisiteTag.valueNot !== value;
-                    }
-                    if (prerequisiteTag.values) {
-                        return prerequisiteTag.values.includes(value);
-                    }
-                    if (prerequisiteTag.value) {
-                        return prerequisiteTag.value === value;
-                    }
-                    if (!value) return false;
-                } else if (prerequisiteTag.keyNot) {
-                    if (entity.tags[prerequisiteTag.keyNot]) return false;
-                }
-                return true;
-            })) return false;
+            field.prerequisiteTag &&
+            !field.tagsContainFieldKey(_tags) && // ignore tagging prerequisites if a value is already present
+            !entityIDs.every(entityID => field.evaluatePrerequisiteTags(context.graph().entity(entityID).tags))) {
+            return false;
         }
 
         return true;
