@@ -19,8 +19,9 @@ export function actionChangePreset(entityID: EntityId, oldPreset: presetPreset |
             }
             if (oldPreset) {
                 const wasSubPreset = oldPreset.id.startsWith(newPreset.id);
-                newPreset.fields(loc).concat(newPreset.moreFields(loc))
-                    .filter(f => f.matchGeometry(geometry))
+                const newPresetFields = newPreset.fields(loc).concat(newPreset.moreFields(loc))
+                    .filter(f => f.matchGeometry(geometry));
+                newPresetFields
                     .flatMap(f => f.allKeys(tags))
                     .filter(key => {
                         if (wasSubPreset) {
@@ -47,9 +48,17 @@ export function actionChangePreset(entityID: EntityId, oldPreset: presetPreset |
 
                     // field-keys used by the old preset but not the new preset
                     const fieldKeysToRemove = utilArrayDifference(oldPresetFieldKeys, preserveKeys);
-                    let reducedTags = utilObjectOmit(tags, fieldKeysToRemove);
+                    let reducedTags: Tags = utilObjectOmit(tags, fieldKeysToRemove);
                     reducedTags = oldPreset.unsetTags(reducedTags, geometry, preserveKeys, false, loc);
                     reducedTags = newPreset.setTags(reducedTags, geometry, skipFieldDefaults, loc);
+
+                    // keys where the new preset has a prerequisiteTag which does not match. Therefore
+                    // the field will not be shown in the UI, and should be removed.
+                    const prerequisiteFailedKeys = newPresetFields
+                        .filter(f => f.evaluatePrerequisiteTags(tags) && !f.evaluatePrerequisiteTags(reducedTags))
+                        .flatMap(f => f.allKeys(tags))
+                        .filter(key => oldPresetFieldKeys.includes(key));
+                    reducedTags = utilObjectOmit(reducedTags, prerequisiteFailedKeys);
 
                     if (oldPreset.matchScore(reducedTags) === -1 /* -1 means, the preset does not match */) {
                         // only actually remove tags if the old preset is fully orthogonal

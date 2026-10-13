@@ -331,4 +331,42 @@ describe('iD.actionChangePreset', function() {
         const action = iD.actionChangePreset(entity.id, oldPreset, newPreset);
         expect(action(graph).entity(entity.id).tags).toEqual({highway: 'service', name: 'foo bar'});
     });
+
+    describe('prerequisiteTag', () => {
+        const fields = {
+            second_hand: iD.presetField('second_hand', {
+                key: 'second_hand',
+                prerequisiteTag: { key: 'shop', values: ['car', 'truck'] },
+            }),
+        };
+
+        // second_hand is expected:
+        const carShop = iD.presetPreset('shop/car', { tags: { shop: 'car' }, fields: ['second_hand'] }, undefined, fields);
+        const truckShop = iD.presetPreset('shop/truck', { tags: { shop: 'truck' }, fields: ['second_hand'] }, undefined, fields);
+        // second_hand is not expected:
+        const cheeseShop = iD.presetPreset('shop/cheese', { tags: { shop: 'cheese' }, fields: ['second_hand'] }, undefined, fields);
+        const paintShop = iD.presetPreset('shop/paint', { tags: { shop: 'paint' }, fields: ['second_hand'] }, undefined, fields);
+
+        it('does not preserve tags which don\'t match the new preset\'s prerequisiteTag', () => {
+            const entity = new iD.osmNode({ tags: { shop: 'car', second_hand: 'yes' } });
+            const graph = new iD.coreGraph([entity]);
+
+            const action = iD.actionChangePreset(entity.id, carShop, cheeseShop);
+            expect(action(graph).entity(entity.id).tags).toStrictEqual({ shop: 'cheese' }); // second_hand is removed
+        });
+
+        it('preserves tags which match the new preset- and old preset\'s prerequisiteTag', () => {
+            const entity = new iD.osmNode({ tags: { shop: 'car', second_hand: 'yes' } });
+            const graph = new iD.coreGraph([entity]);
+            const action = iD.actionChangePreset(entity.id, carShop, truckShop);
+            expect(action(graph).entity(entity.id).tags).toStrictEqual({ shop: 'truck', second_hand: 'yes' });
+        });
+
+        it('preserves tags if the prerequisiteTag was already failing on the oldPreset, and is still failing on the newPreset', () => {
+            const entity = new iD.osmNode({ tags: { shop: 'cheese', second_hand: 'yes' } });
+            const graph = new iD.coreGraph([entity]);
+            const action = iD.actionChangePreset(entity.id, cheeseShop, paintShop);
+            expect(action(graph).entity(entity.id).tags).toStrictEqual({ shop: 'paint', second_hand: 'yes' });
+        });
+    });
 });
