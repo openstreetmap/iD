@@ -166,7 +166,7 @@ export function uiSectionBackgroundList(context) {
 
     function drawListItems(layerList, type, change, filter) {
         const sources = [];
-        const dateLikeRegex = /(.+?\s\(?)((?:(?:\d{2,}|[-\/, ])+|DTM|DSM|DOM|DEM)+\s*)(\)?(?:\s|$).*)/;
+        const dateLikeRegex = /(.+?\s\(?)((?:(?:(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec))?(?:\d{2,}|[-\/, ])+|DTM|DSM|DOM|DEM)+\s*)(\)?(?:\s|$).*)/;
         context.background()
             .sources(context.map().extent(), context.map().zoom(), true)
             .filter(filter)
