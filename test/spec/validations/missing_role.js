@@ -1,8 +1,29 @@
+import { select as d3_select } from 'd3-selection';
+
 describe('iD.validations.missing_role', function () {
     var context;
+    let _savedPresets;
 
-    beforeEach(function() {
+    beforeEach(async () => {
         context = iD.coreContext().assetPath('../dist/').init();
+        _savedPresets = iD.fileFetcher.cache().preset_presets;
+        iD.fileFetcher.cache().preset_presets = {
+            'type/multipolygon': {
+                geometry: ['relation'],
+                tags: { type: 'multipolygon' },
+                relation: {
+                    members: [
+                        { role: 'inner', geometry: ['line', 'area'] },
+                        { role: 'outer', geometry: ['line', 'area'] },
+                    ],
+                },
+            },
+        };
+        await iD.presetManager.ensureLoaded(true);
+    });
+
+    afterEach(function() {
+        iD.fileFetcher.cache().preset_presets = _savedPresets;
     });
 
     function createWay(tags) {
