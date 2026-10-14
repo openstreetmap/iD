@@ -41,6 +41,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Use translated labels for relation roles ([#12768], thanks [@k-yle])
 * Do not allow duplicate relation members to be added to some relation types ([#12991], thanks [@k-yle])
 * Do not allow invalid relation members to be added to some relation types ([#12992], thanks [@k-yle])
+* Automatically choose the correct relation role when adding a member to a relation, if there is exactly one correct choice ([#12993], thanks [@k-yle])
 * Increase the colour contrast of the blue text used for links and preset fields ([#12724], thanks [@k-yle])
 * Render diameter and radius tags when a node is selected ([#9732], thanks [@k-yle])
 * Dedicated rendering for road sections tagged with `ford=yes` ([#12830], thanks [@Geo-2695])
@@ -90,6 +91,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#12990]: https://github.com/openstreetmap/iD/pull/12990
 [#12991]: https://github.com/openstreetmap/iD/pull/12991
 [#12992]: https://github.com/openstreetmap/iD/pull/12992
+[#12993]: https://github.com/openstreetmap/iD/pull/12993
 [@Geo-2695]: https://github.com/Geo-2695
 [@hemaksh2007jain-bit]: https://github.com/hemaksh2007jain-bit
 

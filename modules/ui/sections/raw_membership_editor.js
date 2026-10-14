@@ -278,8 +278,16 @@ export function uiSectionRawMembershipEditor(context) {
 
         function actionAddMembers(relationId, ids, role) {
             return function(graph) {
+                const schema = utilGetRelationSchema(graph.entity(relationId), graph);
                 for (var i in ids) {
-                    var member = { id: ids[i], type: graph.entity(ids[i]).type, role: role };
+                    const entity = graph.entity(ids[i]);
+                    let memberRole = role;
+                    if (!memberRole) {
+                        // if the schema only allows a single role for this feature, use it
+                        const validRoles = Object.keys(utilGetValidRelationRoles(schema, entity.geometry(graph), entity.tags));
+                        if (validRoles.length === 1) memberRole = validRoles[0];
+                    }
+                    var member = { id: ids[i], type: entity.type, role: memberRole };
                     graph = actionAddMember(relationId, member)(graph);
                 }
                 return graph;
