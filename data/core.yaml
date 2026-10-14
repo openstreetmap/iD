@@ -723,6 +723,7 @@ en:
     new_relation: New relation...
     choose_relation: Choose a parent relation
     duplicate_role: Already a member
+    invalid_member: Not allowed in this type of relation
     role: Role
     multiple_roles: Multiple Roles
     choose: Select feature type
