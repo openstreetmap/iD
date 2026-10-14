@@ -20,7 +20,7 @@ import { utilArrayGroupBy, utilArrayIntersection } from '../../util/array';
 import { utilDisplayName, utilNoAuto, utilHighlightEntities, utilUniqueDomId } from '../../util';
 import { prefs } from '../../core';
 import { idMatch } from '../feature_list';
-import { utilGetValidRelationRoles, utilGetRelationSchema } from '../../util/relation_schema';
+import { utilGetValidRelationRoles, utilGetRelationSchema, utilRelationAllowsDuplicateMembers } from '../../util/relation_schema';
 
 
 export function uiSectionRawMembershipEditor(context) {
@@ -250,7 +250,15 @@ export function uiSectionRawMembershipEditor(context) {
     }
 
 
+    /** @param {import('../../osm').osmRelation} relation */
+    function isDuplicateMembership(relation) {
+        if (!relation.members.some(member => _entityIDs.includes(member.id))) return false;
+        return !utilRelationAllowsDuplicateMembers(relation, context.graph());
+    }
+
     function addMembership(d, role) {
+        if (d.relation && isDuplicateMembership(d.relation)) return;
+
         _showBlank = false;
 
         function actionAddMembers(relationId, ids, role) {
@@ -399,6 +407,10 @@ export function uiSectionRawMembershipEditor(context) {
 
         result.forEach(function(obj) {
             obj.title = obj.value;
+            if (isDuplicateMembership(obj.relation)) {
+                obj.disabled = true;
+                obj.description = t('inspector.duplicate_role');
+            }
         });
 
         result.unshift(newRelation);

@@ -39,6 +39,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 
 #### :sparkles: Usability & Accessibility
 * Use translated labels for relation roles ([#12768], thanks [@k-yle])
+* Do not allow duplicate relation members to be added to some relation types ([#12991], thanks [@k-yle])
 * Increase the colour contrast of the blue text used for links and preset fields ([#12724], thanks [@k-yle])
 * Render diameter and radius tags when a node is selected ([#9732], thanks [@k-yle])
 * Dedicated rendering for road sections tagged with `ford=yes` ([#12830], thanks [@Geo-2695])
@@ -86,6 +87,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#12910]: https://github.com/openstreetmap/iD/pull/12910
 [#12928]: https://github.com/openstreetmap/iD/pull/12928
 [#12990]: https://github.com/openstreetmap/iD/pull/12990
+[#12991]: https://github.com/openstreetmap/iD/pull/12991
 [@Geo-2695]: https://github.com/Geo-2695
 [@hemaksh2007jain-bit]: https://github.com/hemaksh2007jain-bit
 

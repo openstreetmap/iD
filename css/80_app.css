@@ -2493,6 +2493,11 @@ div.combobox:has(.has-description) {
     break: all;
 }
 
+.combobox a.disabled {
+    cursor: not-allowed;
+    color: var(--muted-text-color);
+}
+
 .combobox a.selected,
 .combobox a:active,
 .combobox a:focus {
