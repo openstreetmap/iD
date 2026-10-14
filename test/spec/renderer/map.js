@@ -2,6 +2,7 @@ import { fn } from '@vitest/spy';
 import { setTimeout } from 'node:timers/promises';
 import { select as d3_select } from 'd3-selection';
 import { timerFlush as d3_timerFlush } from 'd3-timer';
+import { prefs } from '../../../modules/core/preferences';
 import css from '../../../css/55_cursors.css?raw';
 
 describe('iD.Map', function() {
@@ -18,6 +19,7 @@ describe('iD.Map', function() {
     });
 
     afterEach(function() {
+        prefs('preferences.navigation.scroll_to_pan', null);
         content.remove();
     });
 
@@ -73,6 +75,29 @@ describe('iD.Map', function() {
     describe('#minzoom', function() {
         it('is zero by default', function() {
             expect(map.minzoom()).toEqual(0);
+        });
+    });
+
+    describe('scroll navigation preference', function() {
+        it('pans pixel wheel gestures without changing zoom when enabled', async () => {
+            map.zoom(4);
+            const startCenter = map.center();
+            const startZoom = map.zoom();
+            prefs('preferences.navigation.scroll_to_pan', 'true');
+
+            content.node().dispatchEvent(new WheelEvent('wheel', {
+                bubbles: true,
+                cancelable: true,
+                deltaMode: 0,
+                deltaX: 100,
+                deltaY: 50
+            }));
+
+            await setTimeout(0);
+            d3_timerFlush();
+
+            expect(map.zoom()).toBeCloseTo(startZoom, 6);
+            expect(map.center()).not.toEqual(startCenter);
         });
     });
 

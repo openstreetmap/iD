@@ -1019,6 +1019,11 @@ en:
     title: Preferences
     description: Preferences
     key: P
+    navigation:
+      title: Navigation
+      scroll_to_pan:
+        description: Scroll gestures pan the map
+        tooltip: Enable this on a trackpad if two-finger scrolling zooms the map when you expect it to pan.
     privacy:
       title: Privacy
       privacy_link: View the iD privacy policy

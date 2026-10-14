@@ -480,6 +480,7 @@ export function rendererMap(context) {
             var detected = utilDetect();
             var dX = source.deltaX;
             var dY = source.deltaY;
+            var scrollToPan = prefs('preferences.navigation.scroll_to_pan') === 'true';
             var x2 = x;
             var y2 = y;
             var k2 = k;
@@ -550,6 +551,15 @@ export function rendererMap(context) {
                 k2 = clamp(k2, kMin, kMax);
                 x2 = p0[0] - p1[0] * k2;
                 y2 = p0[1] - p1[1] * k2;
+
+            // Some browsers cannot distinguish a trackpad swipe from a mouse wheel.
+            // Let people who use a trackpad choose panning for these pixel-based gestures.
+            } else if (scrollToPan && !source.ctrlKey && isInteger(dX) && isInteger(dY)) {
+                p1 = projection.translate();
+                x2 = p1[0] - dX;
+                y2 = p1[1] - dY;
+                k2 = projection.scale();
+                k2 = clamp(k2, kMin, kMax);
 
             // 2 finger map panning (Mac only, all browsers except Firefox #8595) - #5492, #5512
             // Panning via the `wheel` event will always have:
