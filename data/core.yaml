@@ -1657,8 +1657,7 @@ en:
       title: Missing Roles
       message: "{member} has no role within {relation}"
       tip: "Find relations with missing or incorrect member roles"
-      multipolygon:
-        reference: "Multipolygon members must have an inner or outer role."
+      reference: "Every member of this relation must have a role."
     missing_tag:
       title: Missing Tags
       tip: "Find features that are missing descriptive tags"
@@ -1847,10 +1846,8 @@ en:
         title: Select a feature type
       select_road_type:
         title: Select a road type
-      set_as_inner:
-        title: Set as inner
-      set_as_outer:
-        title: Set as outer
+      set_as_role:
+        title: "Set as \"{role}\""
       split_way:
         title: Split the way into smaller pieces.
       square_feature:
