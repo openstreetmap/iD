@@ -52,6 +52,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :camera: Street-Level
 #### :white_check_mark: Validation
 * Validate missing inner/outer roles for `type=boundary` ([#12990], thanks [@k-yle])
+* Create a validator for duplicate relation members ([#12994], thanks [@k-yle])
 * Warn about `goo.gl` shortlinks as sources, alongside full Google URLs ([#12740])
 * Allow (address) points at the same coordinate if they have different `addr:floor` ([#8424])
 * Implement functionality to show tooltips for individual validation fixes.
@@ -92,6 +93,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#12991]: https://github.com/openstreetmap/iD/pull/12991
 [#12992]: https://github.com/openstreetmap/iD/pull/12992
 [#12993]: https://github.com/openstreetmap/iD/pull/12993
+[#12994]: https://github.com/openstreetmap/iD/pull/12994
 [@Geo-2695]: https://github.com/Geo-2695
 [@hemaksh2007jain-bit]: https://github.com/hemaksh2007jain-bit
 

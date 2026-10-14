@@ -13,5 +13,6 @@ export { validationMutuallyExclusiveTags } from './mutually_exclusive_tags';
 export { validationOsmApiLimits } from './osm_api_limits';
 export { validationOutdatedTags } from './outdated_tags';
 export { validationPrivateData } from './private_data';
+export { validationRelationMembers } from './relation_members';
 export { validationSuspiciousName } from './suspicious_name';
 export { validationUnsquareWay } from './unsquare_way';
