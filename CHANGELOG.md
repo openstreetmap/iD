@@ -38,6 +38,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 # Unreleased (2.43.0-dev)
 
 #### :sparkles: Usability & Accessibility
+* Use translated labels for relation roles ([#12768], thanks [@k-yle])
 * Include upcoming events from [OpenStreetMap Calendar](osmcal.org) in post-upload dialog ([#12678])
 * Increase the colour contrast of the blue text used for links and preset fields ([#12724], thanks [@k-yle])
 * Render diameter and radius tags when a node is selected ([#9732], thanks [@k-yle])
@@ -128,6 +129,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#12740]: https://github.com/openstreetmap/iD/issues/12740
 [#12758]: https://github.com/openstreetmap/iD/pull/12758
 [#12760]: https://github.com/openstreetmap/iD/pull/12760
+[#12768]: https://github.com/openstreetmap/iD/pull/12768
 [#12800]: https://github.com/openstreetmap/iD/pull/12800
 [#12802]: https://github.com/openstreetmap/iD/pull/12802
 [#12858]: https://github.com/openstreetmap/iD/issues/12858
