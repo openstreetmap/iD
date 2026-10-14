@@ -1707,6 +1707,13 @@ en:
       reference: "Sensitive data like personal phone numbers should not be tagged."
       contact:
         message: '{feature} might be tagged with private contact information'
+    relation_members:
+      title: Invalid Relations
+      tip: "Find relations with too many members, too few members, invalid members, or duplicate members"
+      messages:
+        duplicate_member:
+          message: "{memberPreset} {member} is included multiple times in {relation}"
+          reference: "{relationPreset} must not contain duplicate members"
     suspicious_name:
       title: Suspicious Names
       tip: "Find features with generic or suspicious names"
@@ -1820,6 +1827,10 @@ en:
         annotation: Set image as from Wikimedia Commons.
       remove_from_relation:
         title: Remove from relation
+      remove_from_relation_with_role:
+        title:
+          one: "Remove the \"{role}\" member."
+          other: "Remove the \"{role}\" members."
       remove_generic_name:
         annotation: Removed a generic name.
       remove_mistaken_name:
