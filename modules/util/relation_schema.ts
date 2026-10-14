@@ -18,6 +18,15 @@ export function utilGetRelationSchema(relation: osmRelation, resolver: coreGraph
     return match;
 }
 
+/** extracts `allowDuplicateMembers` from id-tagging-schema */
+export function utilRelationAllowsDuplicateMembers(relation: osmRelation, resolver: coreGraph) {
+    const preset = presetManager.match(relation, resolver);
+    const basePreset = presetManager.matchTags({ type: relation.tags.type }, 'relation');
+    const schema = preset.relation || basePreset.relation;
+
+    return schema?.allowDuplicateMembers !== false;
+}
+
 /** only returns the roles which are valid for a member, given its geometry and tags */
 export function utilGetValidRelationRoles(
     schema: PresetRelationDefinitions,
