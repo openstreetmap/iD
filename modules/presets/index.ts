@@ -59,7 +59,7 @@ export interface presetIndex extends presetCollection {
     getRawPresets(): { [presetId: string]: Preset };
     addablePresetIDs: GetSet<presetIndex, Set<string> | null>;
 
-    recent(): presetCollection;
+    recent(): presetCollection<presetPreset>;
     getRecents(): RibbonItem[];
     recentMatching(preset: presetPreset): RibbonItem | null;
     setMostRecent(preset: presetPreset): void;
@@ -85,7 +85,7 @@ export function presetIndex() {
   let _presets: { [presetId: string]: presetPreset } = { point: POINT, line: LINE, area: AREA, relation: RELATION };
   const _rawPresets: { [presetId: string]: Preset } = {};
 
-  let _defaults = {
+  let _defaults: Record<Geometry, presetCollection> = {
     point: presetCollection([POINT]),
     vertex: presetCollection([POINT]),
     line: presetCollection([LINE]),
@@ -210,7 +210,7 @@ export function presetIndex() {
 
     // Rebuild geometry index
     _geometryIndex = { point: {}, vertex: {}, line: {}, area: {}, relation: {} };
-    _this.collection.forEach(preset => {
+    Object.values(_presets).forEach(preset => {
       (preset.geometry || []).forEach(geometry => {
         let g = _geometryIndex[geometry];
         for (let key in preset.tags) {
@@ -308,7 +308,7 @@ export function presetIndex() {
       }
     }
 
-    return bestMatch || _this.fallback(geometry)!;
+    return bestMatch || <presetPreset>_this.fallback(geometry);
   };
 
   _this.allowsVertex = (entity, resolver) => {
@@ -352,7 +352,7 @@ export function presetIndex() {
     let areaKeys: TagDictionary<true> = {};
 
     // ignore name-suggestion-index and deprecated presets
-    const presets = _this.collection.filter(p => !p.suggestion && !p.replacement);
+    const presets = Object.values(_presets).filter(p => !p.suggestion && !p.replacement);
 
     // keeplist
     presets.forEach(p => {
@@ -432,7 +432,7 @@ export function presetIndex() {
   _this.defaults = (geometry, n, startWithRecents, loc, extraPresets) => {
     const validHere = Array.isArray(loc) ? locationManager.locationSetsAt(loc) : null;
 
-    let recents: presetPreset[] = [];
+    let recents: (presetPreset | presetCategory)[] = [];
     if (startWithRecents) {
         // filtering before slicing to prevent unused slots in the recent preset list, issue #11405
         recents = _this.recent().matchGeometry(geometry).collection
@@ -440,7 +440,7 @@ export function presetIndex() {
         .slice(0, MAX_RECENTS_TO_SHOW);
     }
 
-    let defaults: presetPreset[];
+    let defaults: (presetPreset | presetCategory)[];
     if (_addablePresetIDs) {
       defaults = Array.from(_addablePresetIDs).map(function(id) {
         var preset = _this.item(id);
@@ -501,7 +501,7 @@ export function presetIndex() {
 
   function ribbonItemForMinified(d: MinifiedRibbonItem) {
     if (d && d.pID) {
-      const preset = _this.item(d.pID);
+      const preset = _presets[d.pID];
       if (!preset) return null;
       return new RibbonItem(preset);
     }

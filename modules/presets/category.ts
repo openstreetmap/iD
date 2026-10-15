@@ -6,7 +6,7 @@ import type { presetPreset } from './preset';
 
 export type presetCategory = Omit<PresetCategory, 'members' | 'name'> & {
   id: string;
-  members: presetCollection;
+  members: presetCollection<presetPreset>;
   geometry: Geometry[];
   matchGeometry(geometry: Geometry): boolean;
   matchAllGeometry(geometries: Geometry[]): boolean;
@@ -19,6 +19,13 @@ export type presetCategory = Omit<PresetCategory, 'members' | 'name'> & {
   searchAliases(): string[];
   searchAliasesStripped(): string[];
   suggestion?: undefined;
+  tags?: undefined;
+  addTags?: undefined;
+  originalScore?: undefined;
+  locationSetID?: undefined;
+  searchable?: undefined;
+  replacement?: undefined;
+  addable?: undefined;
   /** @deprecated - appears to be unused */
   originalName?: string;
 }

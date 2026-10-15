@@ -2,6 +2,7 @@ import { locationManager } from '../core/location_manager';
 import { utilArrayUniq } from '../util/array';
 import { utilEditDistance } from '../util';
 import type { presetPreset } from './preset';
+import type { presetCategory } from './category';
 import type { Geometry } from '@openstreetmap/id-tagging-schema';
 import type { Vec2 } from '../geo/vector';
 
@@ -10,10 +11,10 @@ import type { Vec2 } from '../geo/vector';
 // `presetCollection` is a wrapper around an `Array` of presets `collection`,
 // and decorated with some extra methods for searching and matching geometry
 //
-export function presetCollection(collection: presetPreset[]) {
+export function presetCollection<T extends presetPreset | presetCategory = presetPreset | presetCategory>(collection: T[]) {
   const MAXRESULTS = 50;
   const _this = function() {};
-  let _memo: { [id: string]: presetPreset } = {};
+  let _memo: { [id: string]: T } = {};
 
   _this.collection = collection;
 
@@ -77,7 +78,7 @@ export function presetCollection(collection: presetPreset[]) {
     }
 
     function sortPresets(nameProp: 'searchName' | 'searchNameStripped', aliasesProp?: 'searchAliases' | 'searchAliasesStripped') {
-      return function sortNames(a: presetPreset, b: presetPreset) {
+      return function sortNames(a: T, b: T) {
         let aCompare = a[nameProp]();
         let bCompare = b[nameProp]();
         if (aliasesProp) {
@@ -98,7 +99,7 @@ export function presetCollection(collection: presetPreset[]) {
         if (value === bCompare) return 1;
 
         // priority for higher matchScore
-        let i = b.originalScore - a.originalScore;
+        let i = b.originalScore! - a.originalScore!;
         if (i !== 0) return i;
 
         // priority if search string appears earlier in preset name
@@ -171,7 +172,7 @@ export function presetCollection(collection: presetPreset[]) {
       });
 
     // matches key=value to preset.tags
-    let leadingTagKeyValues: presetPreset[] = [];
+    let leadingTagKeyValues: T[] = [];
     if (value.includes('=')) {
       leadingTagKeyValues = searchable.filter(a => a.tags &&
           Object.keys(a.tags).some(key => key + '=' + a.tags[key] === value))
@@ -220,4 +221,5 @@ export function presetCollection(collection: presetPreset[]) {
   return _this;
 }
 
-export interface presetCollection extends ReturnType<typeof presetCollection> {}
+export interface presetCollection<T extends presetPreset | presetCategory = presetPreset | presetCategory>
+  extends ReturnType<typeof presetCollection<T>> {}
