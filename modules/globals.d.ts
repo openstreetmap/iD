@@ -1,4 +1,11 @@
+import type { BaseType } from 'd3-selection';
+
 declare global {
+  /** opposite transformation of {@link Readonly} */
+  type UnReadonly<T> = {
+    -readonly [P in keyof T]: T[P] extends object ? UnReadonly<T[P]> : T[P];
+  };
+
   declare var iD: typeof import('.');
   declare var VITEST: true;
 
@@ -8,6 +15,7 @@ declare global {
   declare type Tags = { [key: TagKey]: TagValue };
   declare type TagsMulti = { [key: TagKey]: TagValue | TagValue[] };
   declare type TagsUpdate = { [key: TagKey]: TagValueUpdate };
+  declare interface WithSymbol extends Partial<Record<symbol, Tags[]>> {};
 
   /**
    * A class method that acts as both a getter and a
@@ -16,6 +24,12 @@ declare global {
   declare type GetSet<This, T> = {
     (value: T): This;
     (): T;
+  }
+
+  /** Like {@link GetSet}, but for use with `utilFunctor`. */
+  declare type GetSetFunctor<This, T, Functor extends (...args: any[]) => unknown = (...args: unknown[]) => T> = {
+    (value: T | Functor): This;
+    (): Functor;
   }
 
   declare type Callback<T> = {
@@ -38,14 +52,15 @@ declare global {
   }
 
   declare namespace d3 {
-    export type Selection<T = HTMLElement> = import('d3-selection').Selection<
+    export type Selection<T extends BaseType = HTMLElement> = import('d3-selection').Selection<
       T,
       any,
       any,
-      unknown
+      any
     >;
 
-    export type Selector = <T extends HTMLElement>(selection: Selection<T>) => void;
+    export type Selector = <T extends Element>(selection: Selection<T>) => void;
+    export type SelectorExact<T extends Element> = (selection: Selection<T>) => void;
   }
 
     interface ObjectConstructor {
@@ -64,8 +79,33 @@ declare global {
         /** used internally by d3 to store the values passed to `.data()` */
         __data__: any;
     }
+    interface HTMLLabelElement {
+        /** @deprecated hack, added by iD */
+        _originalStyle?: any;
+    }
+
+    /** safari-specific, so it's not in @types/web */
+    interface GestureEvent extends UIEvent, WheelEvent {
+        readonly scale: number;
+        readonly rotation: number;
+    }
+    /** safari-specific, so it's not in @types/web */
+    interface HTMLElementEventMap {
+        'gesturestart': GestureEvent;
+        'gesturechange': GestureEvent;
+        'gestureend': GestureEvent;
+    }
+    interface WheelEvent {
+        /** @deprecated hack, added by iD */
+        _scale?: number;
+        /** @deprecated hack, added by iD */
+        _rotation?: number;
+    }
 
     interface Window {
+        /** @deprecated used internally by d3 to store event listeners */
+        __on: { name: unknown; type: unknown }[];
+
         mapillary: typeof import('mapillary-js');
     }
     declare const mapillary: Window['mapillary'];

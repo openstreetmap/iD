@@ -9,6 +9,7 @@ import { geoExtent } from '../geo/extent';
 import type { coreGraph } from '../core';
 import type { osmNode as OsmNode } from '../osm/node';
 import type { EntityId as EntityID } from '../osm';
+import type { Vec2 } from '../geo/vector';
 
 
 export function utilSplitAtSemicolon(s: TagValue | undefined | null) {
@@ -248,7 +249,7 @@ export function utilGetAllNodes(ids: EntityID[], graph: coreGraph): OsmNode[] {
  *             - isMapLabel:  If true, this name is for a label on the map.
  *                            If falsy, it's for a label elsewhere in the UI.
  */
-export function utilDisplayName(entity: iD.OsmEntity, flags: {
+export function utilDisplayName(entity: iD.OsmEntity, flags?: {
     hideNetwork?: boolean,
     hideRef?: boolean,
     isMapLabel?: boolean
@@ -409,7 +410,7 @@ export function utilEntityRoot(entityType: 'node' | 'way' | 'relation'): 'n' | '
 //   service: [ 'driveway', 'parking_aisle' ],
 //   width: [ '3', undefined ]
 // }
-export function utilCombinedTags(entityIDs: EntityID[], graph: coreGraph): TagsMulti {
+export function utilCombinedTags(entityIDs: EntityID[], graph: coreGraph): TagsMulti & WithSymbol {
     const tags: TagsMulti = {};
     const tagCounts: { [key: TagKey]: number } = {};
     const allKeys: Set<TagKey> = new Set();
@@ -538,7 +539,7 @@ export function utilPrefixCSSProperty(property: string): string | false {
 
 
 let transformProperty;
-export function utilSetTransform<T extends d3.Selection<any>>(el: T, x: number, y: number, scale: number): T {
+export function utilSetTransform<T extends d3.Selection<any>>(el: T, x: number, y: number, scale?: number): T {
     transformProperty ||= utilPrefixCSSProperty('Transform');
     const prop = transformProperty;
     const translate = utilDetect().opera ? 'translate('   + x + 'px,' + y + 'px)'
@@ -594,7 +595,7 @@ export function utilFastMouse(container: HTMLElement) {
     const rectTop = rect.top;
     const clientLeft = +container.clientLeft;
     const clientTop = +container.clientTop;
-    return function(e: MouseEvent) {
+    return function(e: MouseEvent): Vec2 {
         return [
             e.clientX - rectLeft - clientLeft,
             e.clientY - rectTop - clientTop
@@ -618,13 +619,13 @@ export function utilWrap(index: number, length: number): number {
  * @param value any value
  * @returns a function that returns that value or the value if it's a function
  */
-export function utilFunctor<T>(value: T | (() => T)): () => T {
+export function utilFunctor<T, U extends unknown[]>(value: T | ((...args: U) => T)): (...args: U) => T {
     if (typeof value === 'function') return value as (() => T);
     return () => value;
 }
 
 
-export function utilNoAuto(selection: d3.Selection): d3.Selection {
+export function utilNoAuto<T extends HTMLElement>(selection: d3.Selection<T>): d3.Selection<T> {
     const isText = (selection.size() && selection.node()!.tagName.toLowerCase() === 'textarea');
 
     return selection

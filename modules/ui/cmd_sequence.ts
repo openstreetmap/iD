@@ -27,8 +27,8 @@ interface Flattened {
  * consist of multiple `<kbd>` separated by `+` or `-or-`.
  * Also handles mouse-click operations.
  */
-export function uiCmdSequence(shortcut: CmdSequence) {
-    return (selection: d3.Selection) => {
+export function uiCmdSequence(shortcut: CmdSequence): d3.Selector {
+    return (selection) => {
         const shortcutKeys = selection
             .selectAll('div')
             .data([shortcut])

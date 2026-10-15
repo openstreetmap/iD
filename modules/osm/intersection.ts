@@ -18,10 +18,13 @@ interface Restriction {
     end: boolean;
 }
 
+export type RestrictionType = `${'no' | 'only'}_${'left_turn' | 'right_turn' | 'u_turn' | 'straight_on'}`
+
 export class osmTurn implements Turn {
     declare key: string;
     declare path: EntityId[];
     declare restrictionID?: RelationId;
+    declare restrictionType?: RestrictionType;
     declare from: {
         node: NodeId;
         vertex: NodeId;
@@ -372,7 +375,7 @@ export function osmIntersection(graph: coreGraph, startVertexId: NodeId, maxDist
     //
     // For each path found, generate and return a `osmTurn` datastructure.
     //
-    intersection.turns = function(fromWayId: WayId, maxViaWay: number) {
+    intersection.turns = function(fromWayId: WayId | null, maxViaWay: number) {
         if (!fromWayId) return [];
         if (!maxViaWay) maxViaWay = 0;
 
@@ -641,9 +644,10 @@ export function osmIntersection(graph: coreGraph, startVertexId: NodeId, maxDist
 
     return intersection;
 }
+export interface osmIntersection extends ReturnType<typeof osmIntersection> {}
 
 
-export function osmInferRestriction(graph: coreGraph, turn: osmTurn, projection: Projection) {
+export function osmInferRestriction(graph: coreGraph, turn: osmTurn, projection: Projection): RestrictionType {
     var fromWay = graph.entity(turn.from.way);
     var fromNode = graph.entity(turn.from.node);
     var fromVertex = graph.entity(turn.from.vertex);

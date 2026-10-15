@@ -11,6 +11,7 @@ import { utilKeybinding } from '../util';
 
 
 export function modeSave(context) {
+    /** @type {import('../core/context').Mode} */
     var mode = { id: 'save' };
     var keybinding = utilKeybinding('modeSave');
 

@@ -1,0 +1,103 @@
+import { throttle } from 'es-toolkit';
+import { select as d3_select } from 'd3-selection';
+import { t } from '../core/localizer';
+import type { coreContext } from '../core';
+import type { TileSource } from '../renderer/background_source';
+
+
+export function uiAttribution(context: coreContext) {
+  let _selection = d3_select<HTMLDivElement, unknown>(null!);
+
+
+  function render(selection: d3.Selection<HTMLDivElement>, data: TileSource[], klass: string) {
+    let div = selection.selectAll<HTMLDivElement, 0>(`.${klass}`)
+      .data([0]);
+
+    div = div.enter()
+      .append('div')
+      .attr('class', klass)
+      .merge(div);
+
+
+    let attributions = div.selectAll<HTMLAnchorElement, TileSource>('.attribution')
+      .data(data, d => d.id);
+
+    attributions.exit()
+      .remove();
+
+    attributions = attributions.enter()
+      .append('a')
+      .attr('class', 'attribution')
+      .each((d, i, nodes) => {
+        let attribution = d3_select(nodes[i]);
+
+        if (d.terms_url) {
+          attribution = attribution
+            .append('a')
+            .attr('href', d.terms_url)
+            .attr('target', '_blank');
+        }
+
+        const sourceID = d.id.replace(/\./g, '<TX_DOT>');
+        const terms_text = t(`imagery.${sourceID}.attribution.text`,
+          { default: d.terms_text || (d.terms_url && d.name()) }
+        );
+
+        if (d.icon) {
+          attribution
+            .append('img')
+            .attr('class', 'source-image')
+            .attr('src', d.icon);
+        }
+
+        attribution
+          .append('span')
+          .attr('class', 'attribution-text')
+          .text(terms_text);
+      })
+      .merge(attributions);
+
+
+    let copyright = attributions.selectAll<HTMLSpanElement, string>('.copyright-notice')
+      .data(d => {
+        let notice = d.copyrightNotices(context.map().zoom(), context.map().extent());
+        return notice ? [notice] : [];
+      });
+
+    copyright.exit()
+      .remove();
+
+    copyright = copyright.enter()
+      .append('span')
+      .attr('class', 'copyright-notice')
+      .merge(copyright);
+
+    copyright
+      .text(String);
+  }
+
+
+  function update() {
+    let baselayer = context.background().baseLayerSource();
+    _selection
+      .call(render, (baselayer ? [baselayer] : []), 'base-layer-attribution');
+
+    const z = context.map().zoom();
+    let overlays = context.background().overlayLayerSources() || [];
+    _selection
+      .call(render, overlays.filter(s => s.validZoom(z)), 'overlay-layer-attribution');
+  }
+
+
+  return function(selection: d3.Selection<HTMLDivElement>) {
+    _selection = selection;
+
+    context.background()
+      .on('change.attribution', update);
+
+    context.map()
+      .on('move.attribution', throttle(update, 400, { edges: ['trailing'] }));
+
+    update();
+  };
+}

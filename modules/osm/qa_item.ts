@@ -6,9 +6,12 @@ export class QAItem {
   static nextId: number;
   loc: Vec2;
   service: any;
+  item?: any;
   itemType: string;
   id: string;
   icon?: unknown;
+  status?: number;
+  newStatus?: 'done' | 'false';
 
   constructor(loc: Vec2, service: any, itemType: string, id: string, props: Props) {
     // Store required properties

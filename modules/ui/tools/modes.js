@@ -16,6 +16,7 @@ import { uiTooltip } from '../tooltip';
 
 export function uiToolDrawModes(context) {
 
+    /** @type {import('./types.def').UiTool} */
     var tool = {
         id: 'old_modes',
         label: t.append('toolbar.add_feature')

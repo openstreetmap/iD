@@ -14,6 +14,12 @@ interface Change {
 
 type ChangeType = 'created' | 'modified' | 'deleted';
 
+export interface Summary {
+    entity: OsmEntity;
+    graph: coreGraph;
+    changeType: ChangeType;
+}
+
 
 /**
     iD.coreDifference represents the difference between two graphs.
@@ -156,11 +162,7 @@ export function coreDifference(base: coreGraph, head: coreGraph) {
 
     function summary() {
         var relevant: {
-            [id: EntityId]: {
-                entity: OsmEntity;
-                graph: coreGraph;
-                changeType: ChangeType;
-            };
+            [id: EntityId]: Summary;
         } = {};
 
         var keys = Object.keys(_changes);

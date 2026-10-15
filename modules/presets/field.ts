@@ -9,7 +9,7 @@ export interface presetField extends Omit<Field, 'label' | 'terms' | 'placeholde
   matchGeometry(geom: Geometry): boolean;
   matchAllGeometry(geometries: Geometry[]): boolean;
   t: {
-    (scope: string, options: ReplacementsSimple): string;
+    (scope: string, options?: ReplacementsSimple): string;
     append: typeof t.append;
   };
   t_all: typeof localizer.t_all;
@@ -19,7 +19,7 @@ export interface presetField extends Omit<Field, 'label' | 'terms' | 'placeholde
   placeholder(): string;
   originalTerms: string[];
   terms(): string[];
-  allKeys(tags: Tags): TagKey[];
+  allKeys(tags: TagsMulti): TagKey[];
   overrideLabel?: string;
   locationSetID?: string;
 }

@@ -29,7 +29,7 @@ export function getRelativeDate(date: Date) {
     return new Intl.RelativeTimeFormat(preferredLanguage).format(-number, units);
 }
 
-export function localeDateString(date: Date | string) {
+export function localeDateString(date: Date | string | undefined) {
     if (!date) return null;
     const options: Intl.DateTimeFormatOptions = {
         day: 'numeric',

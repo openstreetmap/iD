@@ -3,7 +3,7 @@ import { svgTagClasses } from './tag_classes';
 import { geoAngle, geoLineIntersection, geoVecInterp, geoVecLength, type geoExtent } from '../geo';
 import type { Projection } from '../geo/raw_mercator';
 import type { coreGraph } from '../core';
-import type { NodeId, osmWay } from '../osm';
+import type { NodeId, OsmEntity, osmWay } from '../osm';
 import type { Feature } from 'geojson';
 import type { Vec2 } from '../geo/vector';
 
@@ -55,7 +55,7 @@ export function svgMidpoints(projection: Projection, context: iD.Context) {
     }
 
 
-    function drawMidpoints(selection: d3.Selection, graph: coreGraph, entities: osmWay[], filter: (way: osmWay) => boolean, extent: geoExtent) {
+    function drawMidpoints(selection: d3.Selection, graph: coreGraph, entities: OsmEntity[], filter: (way: osmWay) => boolean, extent: geoExtent) {
         var drawLayer = selection.selectAll('.layer-osm.points .points-group.midpoints');
         var touchLayer = selection.selectAll<HTMLElement, any>('.layer-touch.points');
 

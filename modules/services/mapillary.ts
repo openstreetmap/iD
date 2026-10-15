@@ -659,7 +659,7 @@ export default new class {
             const image = photo.image;
             this.setActiveImage(image);
             this.setStyles(context, null);
-            const loc = [image.originalLngLat.lng, image.originalLngLat.lat];
+            const loc: Vec2 = [image.originalLngLat.lng, image.originalLngLat.lat];
             context.map().centerEase(loc);
             patchHash({ photo: 'mapillary/' + image.id });
 

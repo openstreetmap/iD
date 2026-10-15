@@ -1,0 +1,43 @@
+import { debounce } from 'es-toolkit';
+
+import { t } from '../core/localizer';
+import { svgIcon } from '../svg/index';
+import type { coreContext } from '../core';
+
+
+export function uiNotice(context: coreContext) {
+
+    return function(selection: d3.Selection) {
+        var div = selection
+            .append('div')
+            .attr('class', 'notice');
+
+        var button = div
+            .append('button')
+            .attr('class', 'zoom-to notice fillD')
+            .on('click', function() {
+                context.map().zoomEase(context.minEditableZoom());
+            })
+            .on('wheel', function(d3_event) {   // let wheel events pass through #4482
+                var e2 = new WheelEvent(d3_event.type, d3_event);
+                context.surface().node()!.dispatchEvent(e2);
+            });
+
+        button
+            .call(svgIcon('#iD-icon-plus', 'pre-text'))
+            .append('span')
+            .attr('class', 'label')
+            .call(t.append('zoom_in_edit'));
+
+
+        function disableTooHigh() {
+            var canEdit = context.map().zoom() >= context.minEditableZoom();
+            div.style('display', canEdit ? 'none' : 'block');
+        }
+
+        context.map()
+            .on('move.notice', debounce(disableTooHigh, 500));
+
+        disableTooHigh();
+    };
+}

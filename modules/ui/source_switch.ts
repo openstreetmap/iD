@@ -1,0 +1,63 @@
+import {
+    select as d3_select
+} from 'd3-selection';
+
+import { t } from '../core/localizer';
+import { modeBrowse } from '../modes/browse';
+import type { coreContext } from '../core';
+
+export interface uiSourceSwitch extends d3.Selector {
+    keys: GetSet<this, string[]>;
+}
+
+export function uiSourceSwitch(context: coreContext) {
+    var keys: string[];
+
+
+    function click(this: HTMLElement, d3_event: MouseEvent) {
+        d3_event.preventDefault();
+
+        var osm = context.connection();
+        if (!osm) return;
+
+        if (context.inIntro()) return;
+
+        if (context.history().hasChanges() &&
+            !window.confirm(t('source_switch.lose_changes'))) return;
+
+        var isLive = d3_select(this)
+            .classed('live');
+
+        isLive = !isLive;
+        context.enter(modeBrowse(context));
+        context.history().clearSaved();          // remove saved history
+        context.flush();                         // remove stored data
+
+        d3_select(this)
+            .classed('live', isLive)
+            .classed('chip', isLive)
+            .text('')
+            .call(isLive ? t.append('source_switch.live') : t.append('source_switch.dev'));
+
+        osm.switch(isLive ? keys[0] : keys[1]);  // switch connection (warning: dispatches 'change' event)
+    }
+
+    const sourceSwitch: uiSourceSwitch = function(selection) {
+        selection
+            .append('a')
+            .attr('href', '#')
+            .call(t.append('source_switch.live'))
+            .attr('class', 'live chip')
+            .on('click', click);
+    };
+
+
+    sourceSwitch.keys = function(_) {
+        if (!arguments.length) return keys;
+        keys = _;
+        return sourceSwitch;
+    } as uiSourceSwitch['keys'];
+
+
+    return sourceSwitch;
+}

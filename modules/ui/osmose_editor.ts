@@ -1,0 +1,157 @@
+import { dispatch as d3_dispatch } from 'd3-dispatch';
+
+import { t } from '../core/localizer';
+import { services } from '../services';
+import { modeBrowse } from '../modes/browse';
+import { svgIcon } from '../svg/icon';
+
+import { uiOsmoseDetails } from './osmose_details';
+import { uiOsmoseHeader } from './osmose_header';
+import { uiViewOnOsmose } from './view_on_osmose';
+
+import { utilRebind } from '../util';
+import type { QAItem } from '../osm';
+
+export interface uiOsmoseEditor {
+    (selection: d3.Selection<HTMLDivElement>): void;
+    error: GetSet<this, QAItem>;
+}
+
+export function uiOsmoseEditor(context: iD.Context) {
+  const dispatch = d3_dispatch('change');
+  const qaDetails = uiOsmoseDetails(context);
+  const qaHeader = uiOsmoseHeader();
+
+  let _qaItem: QAItem;
+
+  const osmoseEditor: uiOsmoseEditor = (selection) => {
+
+    const header = selection.selectAll('.header')
+      .data([0]);
+
+    const headerEnter = header.enter()
+      .append('div')
+        .attr('class', 'header fillL');
+
+    headerEnter
+      .append('button')
+        .attr('class', 'close')
+        .attr('title', t('icons.close'))
+        .on('click', () => context.enter(modeBrowse(context)))
+        .call(svgIcon('#iD-icon-close'));
+
+    headerEnter
+      .append('h2')
+        .call(t.append('QA.osmose.title'));
+
+    let body = selection.selectAll<HTMLDivElement, 0>('.body')
+      .data([0]);
+
+    body = body.enter()
+        .append('div')
+        .attr('class', 'body')
+      .merge(body);
+
+    let editor = body.selectAll<HTMLDivElement, 0>('.qa-editor')
+      .data([0]);
+
+    editor.enter()
+      .append('div')
+        .attr('class', 'modal-section qa-editor')
+      .merge(editor)
+        .call(qaHeader.issue(_qaItem))
+        .call(qaDetails.issue(_qaItem))
+        .call(osmoseSaveSection);
+
+    const footer = selection.selectAll<HTMLDivElement, 0>('.footer')
+      .data([0]);
+
+    footer.enter()
+      .append('div')
+      .attr('class', 'footer')
+      .merge(footer)
+      .call(uiViewOnOsmose().what(_qaItem));
+  };
+
+  function osmoseSaveSection(selection: d3.Selection<HTMLDivElement>) {
+    const isSelected = (_qaItem && _qaItem.id === context.selectedErrorID());
+    const isShown = (_qaItem && isSelected);
+    let saveSection = selection.selectAll<HTMLDivElement, QAItem>('.qa-save')
+      .data(
+        (isShown ? [_qaItem] : []),
+        d => `${d.id}-${d.status || 0}`
+      );
+
+    // exit
+    saveSection.exit()
+      .remove();
+
+    // enter
+    const saveSectionEnter = saveSection.enter()
+      .append('div')
+        .attr('class', 'qa-save save-section cf');
+
+    // update
+    saveSectionEnter
+      .merge(saveSection)
+        .call(qaSaveButtons);
+  }
+
+  function qaSaveButtons(selection: d3.Selection<HTMLDivElement>) {
+    const isSelected = (_qaItem && _qaItem.id === context.selectedErrorID());
+    let buttonSection = selection.selectAll<HTMLDivElement, QAItem>('.buttons')
+      .data((isSelected ? [_qaItem] : []), d => d.status + d.id);
+
+    // exit
+    buttonSection.exit()
+      .remove();
+
+    // enter
+    const buttonEnter = buttonSection.enter()
+      .append('div')
+        .attr('class', 'buttons');
+
+    buttonEnter
+      .append('button')
+        .attr('class', 'button close-button action');
+
+    buttonEnter
+      .append('button')
+        .attr('class', 'button ignore-button action');
+
+    // update
+    buttonSection = buttonSection
+      .merge(buttonEnter);
+
+    buttonSection.select<HTMLButtonElement>('.close-button')
+      .call(t.append('QA.keepRight.close'))
+      .on('click.close', function(d3_event, d) {
+        this.blur();    // avoid keeping focus on the button - #4641
+        const qaService = services.osmose;
+        if (qaService) {
+          d.newStatus = 'done';
+          qaService.postUpdate(d, (err, item) => dispatch.call('change', item));
+        }
+      });
+
+    buttonSection.select<HTMLButtonElement>('.ignore-button')
+      .call(t.append('QA.keepRight.ignore'))
+      .on('click.ignore', function(d3_event, d) {
+        this.blur();    // avoid keeping focus on the button - #4641
+        const qaService = services.osmose;
+        if (qaService) {
+          d.newStatus = 'false';
+          qaService.postUpdate(d, (err, item) => dispatch.call('change', item));
+        }
+      });
+  }
+
+  // NOTE: Don't change method name until UI v3 is merged
+  osmoseEditor.error = function(val) {
+    if (!arguments.length) return _qaItem;
+    _qaItem = val;
+    return osmoseEditor;
+  } as uiOsmoseEditor['error'];
+
+  return utilRebind(osmoseEditor, dispatch, 'on');
+}

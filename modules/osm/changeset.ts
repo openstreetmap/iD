@@ -31,7 +31,7 @@ export class osmChangeset extends OsmAbstractEntity {
     }
 
     geometry() {
-        return 'changeset';
+        return 'changeset' as never;
     }
 
     asJXON() {

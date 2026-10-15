@@ -1,5 +1,5 @@
 import type { Geometry, Preset } from '@openstreetmap/id-tagging-schema';
-import { localizer, t } from '../core/localizer';
+import { localizer, t, type LocalizedTextRenderer } from '../core/localizer';
 import { osmAreaKeys, osmAreaKeysExceptions } from '../osm/tags';
 import { utilObjectOmit } from '../util';
 import { utilSafeClassName, utilStripDiacritics } from '../util/util';
@@ -40,9 +40,9 @@ export interface presetPreset extends Omit<Preset,
   addTags: Tags;
   removeTags: Tags;
   name(): string;
-  nameLabel(): d3.Selector;
+  nameLabel(): LocalizedTextRenderer;
   subtitle(): string | undefined | null;
-  subtitleLabel(): d3.Selector | null;
+  subtitleLabel(): LocalizedTextRenderer | null;
   suggestion?: boolean;
   aliases(): string[];
   terms(): string[];

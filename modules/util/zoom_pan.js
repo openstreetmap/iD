@@ -346,6 +346,7 @@ export function utilZoomPan() {
     return arguments.length ? (extent = utilFunctor([[+_[0][0], +_[0][1]], [+_[1][0], +_[1][1]]]), zoom) : extent;
   };
 
+  /** @type {GetSet<typeof zoom, import('../geo/vector.js').Vec2>} */
   zoom.scaleExtent = function(_) {
     return arguments.length ? (scaleExtent[0] = +_[0], scaleExtent[1] = +_[1], zoom) : [scaleExtent[0], scaleExtent[1]];
   };
@@ -358,6 +359,7 @@ export function utilZoomPan() {
     return arguments.length ? (constrain = _, zoom) : constrain;
   };
 
+  /** @type {GetSet<typeof zoom, (a: import('d3-interpolate').ZoomView, b: import('d3-interpolate').ZoomView) => (t: number) => import('d3-interpolate').ZoomView>} */
   zoom.interpolate = function(_) {
     return arguments.length ? (interpolate = _, zoom) : interpolate;
   };

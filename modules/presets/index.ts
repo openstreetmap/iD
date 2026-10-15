@@ -54,7 +54,7 @@ export interface presetIndex extends presetCollection {
     matchTags(tags: Tags, geometry: Geometry, loc?: Vec2): presetPreset;
     allowsVertex(entity: OsmEntity, resolver: coreGraph): boolean;
     universal(): presetField[];
-    defaults(geometry: Geometry, n: number, startWithRecents: boolean, loc: Vec2, extraPresets: presetPreset[]): presetCollection;
+    defaults(geometry: Geometry, n: number, startWithRecents: boolean, loc: Vec2 | null, extraPresets: presetPreset[]): presetCollection;
     getPresets(): { [presetId: string]: presetPreset };
     getRawPresets(): { [presetId: string]: Preset };
     addablePresetIDs: GetSet<presetIndex, Set<string> | null>;

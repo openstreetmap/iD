@@ -16,7 +16,7 @@ export interface Binding {
             metaKey: boolean;
         };
     };
-    capture: boolean;
+    capture: boolean | undefined;
     callback(event: KeyboardEvent): void;
 }
 
@@ -144,7 +144,7 @@ export function utilKeybinding(namespace: string) {
 
 
     // Remove one or more keycode bindings.
-    keybinding.off = function(codes: string | string[], capture: boolean) {
+    keybinding.off = function(codes: string | string[], capture?: boolean) {
         var arr = utilArrayUniq(typeof codes === 'string' ? [codes] : codes);
 
         for (var i = 0; i < arr.length; i++) {
@@ -156,7 +156,7 @@ export function utilKeybinding(namespace: string) {
 
 
     // Add one or more keycode bindings.
-    keybinding.on = function(codes: string | string[], callback: Binding['callback'], capture: boolean) {
+    keybinding.on = function(codes: string | string[], callback: Binding['callback'], capture?: boolean) {
         if (typeof callback !== 'function') {
             return keybinding.off(codes, capture);
         }

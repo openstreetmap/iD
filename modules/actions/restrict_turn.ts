@@ -1,5 +1,6 @@
 import type { Action } from '../core/history';
 import type { osmTurn, RelationId } from '../osm';
+import type { RestrictionType } from '../osm/intersection';
 import { osmRelation, type RelationMember } from '../osm/relation';
 
 // `actionRestrictTurn` creates a turn restriction relation.
@@ -18,7 +19,7 @@ import { osmRelation, type RelationMember } from '../osm/relation';
 // relation. Normally, this will be undefined and the relation will
 // automatically be assigned a new ID.
 //
-export function actionRestrictTurn(turn: osmTurn, restrictionType: string, restrictionID?: RelationId): Action {
+export function actionRestrictTurn(turn: osmTurn, restrictionType: RestrictionType, restrictionID?: RelationId): Action {
 
     return function(graph) {
         var fromWay = graph.entity(turn.from.way);

@@ -11,13 +11,14 @@ import { svgIcon } from '../../svg/icon';
 import { utilCheckTagDictionary } from '../../util';
 import { osmOneWayTags } from '../../osm/tags';
 import type { EntityId } from '../../osm';
+import type { CreateUiField, FieldImpl } from '../field';
 import { formatTag } from './tag_title';
 
 export { uiFieldCheck as uiFieldDefaultCheck };
 export { uiFieldCheck as uiFieldOnewayCheck };
 
 
-export function uiFieldCheck(field: any, context: iD.Context) {
+export const uiFieldCheck: CreateUiField = (field, context) => {
     const dispatch = d3_dispatch('change');
     let options = field.options;
     let values: TagValueUpdate[] = [];
@@ -98,7 +99,7 @@ export function uiFieldCheck(field: any, context: iD.Context) {
     }
 
 
-    const check = function(selection: d3.Selection) {
+    const check: FieldImpl = function(selection) {
         checkImpliedYes();
 
         label = selection.selectAll<HTMLLabelElement, any>('.form-field-input-wrap')
@@ -136,6 +137,7 @@ export function uiFieldCheck(field: any, context: iD.Context) {
                 d3_event.stopPropagation();
                 var t: TagsUpdate = {};
 
+                field.key = field.key!; // just to tell TS
                 if (Array.isArray(_tags[field.key])) {
                     if (values.includes('yes')) {
                         t[field.key] = 'yes';
@@ -183,14 +185,14 @@ export function uiFieldCheck(field: any, context: iD.Context) {
     };
 
 
-    check.entityIDs = function(val?: EntityId[]) {
+    check.entityIDs = function(val) {
         if (!arguments.length) return _entityIDs;
         _entityIDs = val!;
         return check;
-    };
+    } as FieldImpl['entityIDs'];
 
 
-    check.tags = function(tags: TagsMulti) {
+    check.tags = function(tags) {
 
         _tags = tags;
 
@@ -206,7 +208,7 @@ export function uiFieldCheck(field: any, context: iD.Context) {
 
         checkImpliedYes();
 
-        const tag = tags[field.key];
+        const tag = tags[field.key!];
         const isMixed = Array.isArray(tag);
         _value = !isMixed && tag ? tag.toLowerCase() : undefined;
 
@@ -232,7 +234,7 @@ export function uiFieldCheck(field: any, context: iD.Context) {
                 if (!_value) return null;
                 const desc = localizer.hasTextForStringId(`options.${_value}.description`)
                     ? t(`options.${_value}.description`) : undefined;
-                const tag = formatTag(field.key, _value);
+                const tag = formatTag(field.key!, _value);
                 return desc ? `${desc}\n${tag}` : tag;
             });
 
@@ -244,12 +246,13 @@ export function uiFieldCheck(field: any, context: iD.Context) {
                 .classed('hide', reverserHidden())
                 .call(reverserSetText);
         }
-    };
+    } as FieldImpl['tags'];
 
 
     check.focus = function() {
         input.node()?.focus();
     };
 
+    check.on = dispatch.on;
     return utilRebind(check, dispatch, 'on');
-}
+};

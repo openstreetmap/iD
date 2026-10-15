@@ -51,7 +51,7 @@ export function presetCollection<T extends presetPreset | presetCategory = prese
     return _this.item(id);
   };
 
-  _this.search = (value: string, geometry?: Geometry | Geometry[], loc?: Vec2) => {
+  _this.search = (value: string, geometry?: Geometry | Geometry[], loc?: Vec2 | null) => {
     if (!value) return _this;
 
     // don't remove diacritical characters since we're assuming the user is being intentional

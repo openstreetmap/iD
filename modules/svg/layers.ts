@@ -63,7 +63,7 @@ export function svgLayers(projection: Projection, context: iD.Context) {
     ];
 
 
-    function drawLayers(selection: d3.Selection) {
+    function drawLayers(selection: d3.Selection<HTMLDivElement>) {
         svg = selection.selectAll<SVGSVGElement, 0>('.surface')
             .data([0]);
 

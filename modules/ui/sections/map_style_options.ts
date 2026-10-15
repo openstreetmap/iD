@@ -3,18 +3,18 @@ import { select as d3_select } from 'd3-selection';
 import { t } from '../../core/localizer';
 import { uiTooltip } from '../tooltip';
 import { uiSection } from '../section';
+import type { FillStyle, MapStyle } from '../../renderer/map';
 
-export type MapStyle = 'wireframe' | 'area_fill' | 'highlight_edits';
 
 export function uiSectionMapStyleOptions(context: iD.Context) {
 
-    const section = (uiSection('fill-area', context) as any)
+    const section = uiSection('fill-area', context)
         .label(() => t.append('map_data.style_options'))
         .disclosureContent(renderDisclosureContent)
         .expandedByDefault(false);
 
-    function renderDisclosureContent(selection: d3.Selection) {
-        const container = selection.selectAll<HTMLUListElement, any>('ul.layer-fill-list')
+    function renderDisclosureContent(selection: d3.Selection<HTMLDivElement>) {
+        const container = selection.selectAll<HTMLUListElement, 0>('ul.layer-fill-list')
             .data([0]);
 
         container.enter()
@@ -23,7 +23,7 @@ export function uiSectionMapStyleOptions(context: iD.Context) {
             .merge(container)
             .call(drawListItems, context.map().areaFillOptions, 'radio', 'area_fill', setFill, isActiveFill);
 
-        const container2 = selection.selectAll<HTMLUListElement, any>('ul.layer-visual-diff-list')
+        const container2 = selection.selectAll<HTMLUListElement, 0>('ul.layer-visual-diff-list')
             .data([0]);
 
         container2.enter()
@@ -53,9 +53,9 @@ export function uiSectionMapStyleOptions(context: iD.Context) {
         // Enter
         const enter = items.enter()
             .append('li')
-            .call((uiTooltip() as any)
-                .title((d: MapStyle) => t.append(`${name}.${d}.tooltip`))
-                .keys((d: MapStyle) => {
+            .call(uiTooltip<HTMLLIElement, MapStyle>()
+                .title((d) => t.append(`${name}.${d}.tooltip`))
+                .keys((d) => {
                     let key = (d === 'wireframe' ? t('area_fill.wireframe.key') : null);
                     if (d === 'highlight_edits') key = t('map_data.highlight_edits.key');
                     return key ? [key] : null;
@@ -74,7 +74,7 @@ export function uiSectionMapStyleOptions(context: iD.Context) {
 
         label
             .append('span')
-            .each(function(d: string) {
+            .each(function(d) {
                 d3_select(this).call(t.append(`${name}.${d}.description`));
             });
 
@@ -98,7 +98,7 @@ export function uiSectionMapStyleOptions(context: iD.Context) {
         context.map().toggleHighlightEdited();
     }
 
-    function setFill(ignored: Event, d: string) {
+    function setFill(ignored: Event, d: FillStyle) {
         context.map().activeAreaFill(d);
     }
 

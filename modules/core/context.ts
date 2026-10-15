@@ -23,7 +23,7 @@ import type { Vec2 } from '../geo/vector';
 
 type Theme = 'light' | 'dark';
 
-type EventMap = {
+export type EventMap = {
     enter: [];
     exit: [];
     change: [];
@@ -35,6 +35,8 @@ export interface Mode {
     exit(): void;
     selectedIDs?(): EntityId[];
     activeID?(): EntityId;
+    zoomToSelected?(): void;
+    button?: string;
 }
 
 export interface Behaviour extends d3.Selector {
@@ -146,8 +148,8 @@ export interface coreContext extends Pick<Dispatch<object, EventMap>, 'on'> {
     setDebug(flag: DebugFlags): coreContext;
     setDebug(flag: DebugFlags, val: boolean): coreContext;
 
-    container: GetSet<coreContext, d3.Selection>;
-    containerNode: GetSet<coreContext, HTMLElement>;
+    container: GetSet<coreContext, d3.Selection<HTMLDivElement>>;
+    containerNode: GetSet<coreContext, HTMLDivElement>;
 
 
     theme: GetSet<coreContext, Theme>;
@@ -551,7 +553,7 @@ export function coreContext(this: object): coreContext {
   context.layers = () => _map.layers();
   context.surface = () => _map.surface;
   context.editableDataEnabled = () => _map.editableDataEnabled();
-  context.surfaceRect = () => _map.surface.node().getBoundingClientRect();
+  context.surfaceRect = () => _map.surface.node()!.getBoundingClientRect();
   context.editable = () => {
     // don't allow editing during save
     const mode = context.mode();
@@ -579,7 +581,7 @@ export function coreContext(this: object): coreContext {
 
 
   /* Container */
-  let _container = d3_select<HTMLElement, void>(null!);
+  let _container = d3_select<HTMLDivElement, void>(null!);
   let _theme: Theme;
 
   context.container = function(val) {
