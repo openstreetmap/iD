@@ -7,10 +7,12 @@ import { select as d3_select } from 'd3-selection';
 import { zoom as d3_zoom, zoomIdentity as d3_zoomIdentity } from 'd3-zoom';
 
 import { prefs } from '../core/preferences';
+import { patchHash } from '../behavior/hash';
 import { geoExtent, geoPointInPolygon, geoRawMercator, geoScaleToZoom, geoZoomToScale } from '../geo';
 import { modeBrowse } from '../modes/browse';
 import { svgAreas, svgLabels, svgLayers, svgLines, svgMidpoints, svgPoints, svgVertices } from '../svg';
 import { utilFastMouse, utilFunctor, utilSetTransform, utilEntityAndDeepMemberIDs } from '../util/util';
+import { utilStringQs } from '../util';
 import { utilBindOnce } from '../util/bind_once';
 import { utilDetect } from '../util/detect';
 import { utilGetDimensions } from '../util/dimensions';
@@ -30,7 +32,7 @@ export function rendererMap(context) {
     var dispatch = d3_dispatch(
         'move', 'drawn',
         'crossEditableZoom', 'hitMinZoom',
-        'changeHighlighting', 'changeAreaFill'
+        'changeHighlighting', 'changeAreaFill', 'changeIndoorFocus'
     );
     var projection = context.projection;
     var curtainProjection = context.curtainProjection;
@@ -58,7 +60,8 @@ export function rendererMap(context) {
     var _getMouseCoords;
     var _lastPointerEvent;
     var _lastWithinEditableZoom;
-    var _indoorFocusActive = false;
+    var _indoorFocusEnabled = false;
+    var _indoorFocusStatus = { active: false, levels: [], layers: [] };
 
     // whether a pointerdown event started the zoom
     var _pointerDown = false;
@@ -406,10 +409,14 @@ export function rendererMap(context) {
         dispatch.call('drawn', this, {full: true});
     }
 
+    /**
+     * Dims all features which are not on the same `level` (or `layer`) as the
+     * currently selected indoor feature(s), see #12605.
+     */
     function updateIndoorFocus(data, graph) {
-        const selected = context.selectedIDs()
+        const selected = _indoorFocusEnabled ? context.selectedIDs()
             .map(id => graph.hasEntity(id))
-            .filter(Boolean);
+            .filter(Boolean) : [];
 
         const focusValues = { level: new Set(), layer: new Set() };
         const focusEntities = new Set();
@@ -419,10 +426,11 @@ export function rendererMap(context) {
             if (!entity || focusEntities.has(entity.id)) return;
             focusEntities.add(entity.id);
             const tags = entity.tags || {};
+            // only `indoor`/`indoormark` features and features with an explicit `level`
+            // trigger the focus mode: a `layer` tag on its own (e.g. on a bridge) does not.
             isIndoorSelection ||= Boolean(tags.indoor && tags.indoor !== 'no') ||
                 Boolean(tags.indoormark && tags.indoormark !== 'no') ||
-                tags.level !== undefined ||
-                tags.layer !== undefined;
+                tags.level !== undefined;
 
             for (const key of ['level', 'layer']) {
                 String(tags[key] || '').split(/[;,]/)
@@ -461,8 +469,18 @@ export function rendererMap(context) {
 
         const hasFocusValue = focusValues.level.size || focusValues.layer.size;
         const active = Boolean(selected.length && isIndoorSelection && hasFocusValue);
-        const wasActive = _indoorFocusActive;
-        _indoorFocusActive = active;
+        const wasActive = _indoorFocusStatus.active;
+        const status = {
+            active,
+            levels: active ? Array.from(focusValues.level) : [],
+            layers: active ? Array.from(focusValues.layer) : []
+        };
+        if (status.active !== wasActive ||
+            status.levels.join(';') !== _indoorFocusStatus.levels.join(';') ||
+            status.layers.join(';') !== _indoorFocusStatus.layers.join(';')) {
+            _indoorFocusStatus = status;
+            dispatch.call('changeIndoorFocus', this, status);
+        }
         _selection.classed('indoor-focus', active);
         context.container().classed('indoor-focus', active);
         if (!active) {
@@ -524,6 +542,13 @@ export function rendererMap(context) {
     }
 
     map.init = function() {
+        const hash = utilStringQs(window.location.hash);
+        if (hash.indoor_focus !== undefined) {
+            _indoorFocusEnabled = hash.indoor_focus === 'true';
+        } else {
+            _indoorFocusEnabled = prefs('indoor-focus') === 'true';
+        }
+
         drawLayers = svgLayers(projection, context);
         drawPoints = svgPoints(projection, context);
         drawVertices = svgVertices(projection, context);
@@ -1213,6 +1238,35 @@ export function rendererMap(context) {
         surface.classed('highlight-edited', !surface.classed('highlight-edited'));
         map.pan([0,0]);  // trigger a redraw
         dispatch.call('changeHighlighting', this);
+    };
+
+
+    /**
+     * Whether features on other levels should be dimmed while an indoor feature is selected.
+     * This setting is persisted in the URL (`indoor_focus=true`) and in the local storage.
+     * @param {boolean} [val]
+     */
+    map.indoorFocus = function(val) {
+        if (!arguments.length) return _indoorFocusEnabled;
+
+        _indoorFocusEnabled = Boolean(val);
+        prefs('indoor-focus', _indoorFocusEnabled ? 'true' : null);
+        patchHash({ indoor_focus: _indoorFocusEnabled ? 'true' : null });
+        map.pan([0,0]);  // trigger a redraw
+        dispatch.call('changeIndoorFocus', this, _indoorFocusStatus);
+        return map;
+    };
+
+    map.toggleIndoorFocus = function() {
+        map.indoorFocus(!_indoorFocusEnabled);
+    };
+
+    /**
+     * @returns {{ active: boolean, levels: string[], layers: string[] }} the levels and
+     *   layers which are currently focused (empty when indoor focus is not active)
+     */
+    map.indoorFocusStatus = function() {
+        return _indoorFocusStatus;
     };
 
 
