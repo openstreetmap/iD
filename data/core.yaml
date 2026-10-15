@@ -889,6 +889,17 @@ en:
     highlight_edits:
       description: Highlight Changes
       tooltip: Outline edited features
+    indoor_focus:
+      description: Focus Indoor Level
+      tooltip: "While an indoor feature is selected, dim all features which are on other levels."
+  indoor_focus:
+    status: "Focused on {target}"
+    level:
+      one: "level {levels}"
+      other: "levels {levels}"
+    layer:
+      one: "layer {layers}"
+      other: "layers {layers}"
   photo_overlays:
     title: Photo Overlays
     traffic_signs:

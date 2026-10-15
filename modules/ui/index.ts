@@ -29,6 +29,7 @@ export { uiIssuesInfo } from './issues_info';
 export { uiLengthIndicator } from './length_indicator';
 export { uiLasso } from './lasso';
 export { uiLoading } from './loading';
+export { uiIndoorFocusStatus } from './indoor_focus_status';
 export { uiMapInMap } from './map_in_map';
 export { uiModal } from './modal';
 export { uiNotice } from './notice';
