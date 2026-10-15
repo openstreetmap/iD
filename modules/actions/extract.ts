@@ -1,6 +1,7 @@
 import { geoPath as d3_geoPath } from 'd3-geo';
 
 import { osmNode } from '../osm/node';
+import { osmIsAddressKey, osmIsAddressPoint } from '../osm/tags';
 import type { Action } from '../core/history';
 import type { NodeId, OsmEntity } from '../osm';
 import type { Projection } from '../geo/raw_mercator';
@@ -14,38 +15,32 @@ const keysToCopyAndRetain = ['source', 'wheelchair'];
 const keysToRetain = ['area'];
 const buildingKeysToRetain = ['architect', 'building', 'height', 'layer', 'nycdoitt:bin', 'ref:GB:uprn', 'ref:linz:building_id'];
 
-function isAddressKey(key: string) {
-    return /^addr:.{1,}/.test(key);
+function isBuilding(entity: OsmEntity) {
+    return (entity.tags.building && entity.tags.building !== 'no') ||
+        (entity.tags['building:part'] && entity.tags['building:part'] !== 'no');
 }
 
-function isBuildingKey(key: string) {
+function isBuildingKey(key: TagKey) {
     return buildingKeysToRetain.indexOf(key) !== -1 ||
         /^building:.{1,}/.test(key) ||
         /^roof:.{1,}/.test(key);
 }
 
-export function actionExtractMovesAddressTags(entity: OsmEntity) {
-    var isBuilding = (entity.tags.building && entity.tags.building !== 'no') ||
-        (entity.tags['building:part'] && entity.tags['building:part'] !== 'no');
+/**
+ * Returns whether extracting from the given entity would _move_ its address tags
+ * onto the new node (instead of copying them): This is the case for buildings which
+ * are tagged with an address, but have no other (POI) tags. See #12447
+ */
+export function actionExtractMovesAddressTags(entity: OsmEntity): boolean {
+    if (!isBuilding(entity)) return false;
 
-    if (!isBuilding) return false;
-
-    var hasAddressTags = false;
-    for (var key in entity.tags) {
-        if (entity.type === 'relation' && key === 'type') continue;
-        if (keysToRetain.indexOf(key) !== -1) continue;
-        if (keysToCopyAndRetain.indexOf(key) !== -1) continue;
-        if (isBuildingKey(key)) continue;
-
-        if (isAddressKey(key)) {
-            hasAddressTags = true;
-            continue;
-        }
-
-        return false;
-    }
-
-    return hasAddressTags;
+    // apart from building-related tags, the building must look like an address point
+    return osmIsAddressPoint(entity.tags, key =>
+        isBuildingKey(key) ||
+        keysToRetain.indexOf(key) !== -1 ||
+        keysToCopyAndRetain.indexOf(key) !== -1 ||
+        (entity.type === 'relation' && key === 'type')
+    );
 }
 
 export function actionExtract(entityID: NodeId, projection: Projection): ActionExtract {
@@ -104,9 +99,7 @@ export function actionExtract(entityID: NodeId, projection: Projection): ActionE
             room: true
         };
 
-        var isBuilding = (entity.tags.building && entity.tags.building !== 'no') ||
-            (entity.tags['building:part'] && entity.tags['building:part'] !== 'no');
-
+        var isBuildingEntity = isBuilding(entity);
         var isIndoorArea = fromGeometry === 'area' && entity.tags.indoor && indoorAreaValues[entity.tags.indoor];
         var moveAddressTags = actionExtractMovesAddressTags(entity);
 
@@ -123,7 +116,7 @@ export function actionExtract(entityID: NodeId, projection: Projection): ActionE
                 continue;
             }
 
-            if (isBuilding) {
+            if (isBuildingEntity) {
                 // don't transfer building-related tags
                 if (isBuildingKey(key)) continue;
             }
@@ -132,12 +125,20 @@ export function actionExtract(entityID: NodeId, projection: Projection): ActionE
                 continue;
             }
 
+            if (moveAddressTags &&
+                !osmIsAddressKey(key) &&
+                keysToCopyAndRetain.indexOf(key) === -1) {
+                // when moving the address off of an address-only building, leave
+                // all remaining tags (e.g. `start_date` or `fixme`) on the building
+                continue;
+            }
+
             // copy the tag from the entity to the point
             pointTags[key] = entityTags[key];
 
             // leave addresses and some other tags so they're on both features
             if (keysToCopyAndRetain.indexOf(key) !== -1 ||
-                (isAddressKey(key) && !moveAddressTags)) {
+                (osmIsAddressKey(key) && !moveAddressTags)) {
                 continue;
             } else if (isIndoorArea && key === 'level') {
                 // leave `level` on both features
@@ -148,7 +149,7 @@ export function actionExtract(entityID: NodeId, projection: Projection): ActionE
             delete entityTags[key];
         }
 
-        if (!isBuilding && !isIndoorArea && fromGeometry === 'area') {
+        if (!isBuildingEntity && !isIndoorArea && fromGeometry === 'area') {
             // ensure that areas keep area geometry
             entityTags.area = 'yes';
         }

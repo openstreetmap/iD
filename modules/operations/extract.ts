@@ -26,7 +26,8 @@ export const operationExtract: CreateOperation = (context, selectedIDs) => {
 
         if (entity.type !== 'node') {
             var preset = presetManager.match(entity, graph);
-            // only allow extraction from ways/relations if the preset supports points
+            // only allow extraction from ways/relations if the preset supports points,
+            // or if the address can be moved off an address-only building
             if (preset.geometry.indexOf('point') === -1 && !actionExtractMovesAddressTags(entity)) return null;
         }
 

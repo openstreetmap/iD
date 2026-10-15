@@ -562,38 +562,126 @@ describe('iD.actionExtract', function () {
             new iD.osmNode({ id: 'd', loc: [0, 1] })
         ];
 
-        it('moves address tags from address-only buildings to the extracted node', function () {
+        function extractBuilding(tags) {
             var graph = new iD.coreGraph(nodes.concat([
-                new iD.osmWay({
-                    id: '-',
-                    nodes: ['a', 'b', 'c', 'd', 'a'],
-                    tags: { building: 'yes', 'addr:housenumber': '123', 'addr:street': 'Main Street' }
-                })
+                new iD.osmWay({ id: '-', nodes: ['a', 'b', 'c', 'd', 'a'], tags: tags })
             ]));
             var action = iD.actionExtract('-', projection);
-            var assertionGraph = action(graph);
-            var building = assertionGraph.entity('-');
-            var extractedNode = assertionGraph.entity(action.getExtractedNodeID());
+            var result = action(graph);
+            return {
+                building: result.entity('-'),
+                extractedNode: result.entity(action.getExtractedNodeID())
+            };
+        }
 
-            expect(building.tags).toEqual({ building: 'yes' });
-            expect(extractedNode.tags).toEqual({ 'addr:housenumber': '123', 'addr:street': 'Main Street' });
+        it('moves address tags from address-only buildings to the extracted node', function () {
+            var result = extractBuilding({ building: 'yes', 'addr:housenumber': '123', 'addr:street': 'Main Street' });
+
+            expect(result.building.tags).toEqual({ building: 'yes' });
+            expect(result.extractedNode.tags).toEqual({ 'addr:housenumber': '123', 'addr:street': 'Main Street' });
         });
 
-        it('keeps address tags on buildings with point tags', function () {
-            var graph = new iD.coreGraph(nodes.concat([
-                new iD.osmWay({
-                    id: '-',
-                    nodes: ['a', 'b', 'c', 'd', 'a'],
-                    tags: { building: 'yes', amenity: 'restaurant', 'addr:housenumber': '123', 'addr:street': 'Main Street' }
-                })
-            ]));
-            var action = iD.actionExtract('-', projection);
-            var assertionGraph = action(graph);
-            var building = assertionGraph.entity('-');
-            var extractedNode = assertionGraph.entity(action.getExtractedNodeID());
+        it('moves address tags from address-only building parts to the extracted node', function () {
+            var result = extractBuilding({ 'building:part': 'yes', 'addr:housenumber': '123', 'addr:unit': '4' });
 
-            expect(building.tags).toEqual({ building: 'yes', 'addr:housenumber': '123', 'addr:street': 'Main Street' });
-            expect(extractedNode.tags).toEqual({ amenity: 'restaurant', 'addr:housenumber': '123', 'addr:street': 'Main Street' });
+            expect(result.building.tags).toEqual({ 'building:part': 'yes' });
+            expect(result.extractedNode.tags).toEqual({ 'addr:housenumber': '123', 'addr:unit': '4' });
+        });
+
+        it('moves address identifiers along with the address tags', function () {
+            var result = extractBuilding({
+                building: 'yes',
+                'addr:housenumber': '123',
+                'addr:street': 'Main Street',
+                'source:addr': 'survey',
+                'ref:ruian:addr': '12345678',
+                'nysgissam:nysaddresspointid': 'NYC9876',
+                'osak:identifier': '0a3f50a0-1234-32b8-e044-0003ba298018'
+            });
+
+            expect(result.building.tags).toEqual({ building: 'yes' });
+            expect(result.extractedNode.tags).toEqual({
+                'addr:housenumber': '123',
+                'addr:street': 'Main Street',
+                'source:addr': 'survey',
+                'ref:ruian:addr': '12345678',
+                'nysgissam:nysaddresspointid': 'NYC9876',
+                'osak:identifier': '0a3f50a0-1234-32b8-e044-0003ba298018'
+            });
+        });
+
+        it('leaves building tags and other secondary tags on the building', function () {
+            var result = extractBuilding({
+                building: 'house',
+                'building:levels': '2',
+                'roof:shape': 'gabled',
+                height: '8',
+                'ref:GB:uprn': '100023336956',
+                start_date: '1920',
+                fixme: 'check housenumber',
+                source: 'survey',
+                'addr:housenumber': '123',
+                'addr:street': 'Main Street'
+            });
+
+            expect(result.building.tags).toEqual({
+                building: 'house',
+                'building:levels': '2',
+                'roof:shape': 'gabled',
+                height: '8',
+                'ref:GB:uprn': '100023336956',
+                start_date: '1920',
+                fixme: 'check housenumber',
+                source: 'survey'
+            });
+            expect(result.extractedNode.tags).toEqual({
+                source: 'survey',
+                'addr:housenumber': '123',
+                'addr:street': 'Main Street'
+            });
+        });
+
+        it('copies address tags to the extracted node for buildings with POI tags', function () {
+            var result = extractBuilding({ building: 'yes', amenity: 'restaurant', name: 'Foo', 'addr:housenumber': '123', 'addr:street': 'Main Street', 'source:addr': 'survey' });
+
+            expect(result.building.tags).toEqual({ building: 'yes', 'addr:housenumber': '123', 'addr:street': 'Main Street', 'source:addr': 'survey' });
+            expect(result.extractedNode.tags).toEqual({ amenity: 'restaurant', name: 'Foo', 'addr:housenumber': '123', 'addr:street': 'Main Street', 'source:addr': 'survey' });
+        });
+    });
+
+
+    describe('actionExtractMovesAddressTags', function () {
+        function way(tags) {
+            return new iD.osmWay({ tags: tags });
+        }
+
+        it('is true for buildings with only address tags', function () {
+            expect(iD.actionExtractMovesAddressTags(way({ building: 'yes', 'addr:housenumber': '1' }))).toBe(true);
+            expect(iD.actionExtractMovesAddressTags(way({ 'building:part': 'yes', 'addr:housenumber': '1' }))).toBe(true);
+            expect(iD.actionExtractMovesAddressTags(way({ building: 'yes', 'addr:housenumber': '1', 'building:levels': '3', 'roof:shape': 'flat', height: '10', layer: '1', source: 'survey' }))).toBe(true);
+        });
+
+        it('disregards non-primary tags and address identifiers', function () {
+            expect(iD.actionExtractMovesAddressTags(way({ building: 'yes', 'addr:housenumber': '1', fixme: 'check', start_date: '1900', check_date: '2024-01-01', note: 'foo' }))).toBe(true);
+            expect(iD.actionExtractMovesAddressTags(way({ building: 'yes', 'addr:housenumber': '1', 'source:addr': 'survey', 'ref:ruian:addr': '1', 'ref:linz:address_id': '1', 'ref:RS:kucni_broj': '1' }))).toBe(true);
+            expect(iD.actionExtractMovesAddressTags(way({ building: 'yes', 'addr:housenumber': '1', 'nysgissam:nysaddresspointid': '1', 'osak:identifier': '1' }))).toBe(true);
+        });
+
+        it('is false for non-buildings', function () {
+            expect(iD.actionExtractMovesAddressTags(way({ 'addr:housenumber': '1' }))).toBe(false);
+            expect(iD.actionExtractMovesAddressTags(way({ building: 'no', 'addr:housenumber': '1' }))).toBe(false);
+            expect(iD.actionExtractMovesAddressTags(way({ landuse: 'residential', 'addr:housenumber': '1' }))).toBe(false);
+        });
+
+        it('is false for buildings without address tags', function () {
+            expect(iD.actionExtractMovesAddressTags(way({ building: 'yes' }))).toBe(false);
+            expect(iD.actionExtractMovesAddressTags(way({ building: 'yes', source: 'survey', 'source:addr': 'survey' }))).toBe(false);
+        });
+
+        it('is false for buildings with POI tags', function () {
+            expect(iD.actionExtractMovesAddressTags(way({ building: 'yes', 'addr:housenumber': '1', amenity: 'cafe' }))).toBe(false);
+            expect(iD.actionExtractMovesAddressTags(way({ building: 'yes', 'addr:housenumber': '1', name: 'Foo' }))).toBe(false);
+            expect(iD.actionExtractMovesAddressTags(way({ building: 'yes', 'addr:housenumber': '1', shop: 'bakery', 'opening_hours': '24/7' }))).toBe(false);
         });
     });
 

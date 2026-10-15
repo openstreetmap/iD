@@ -1,11 +1,10 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 
 import { prefs } from '../core/preferences';
-import { osmIdManager } from '../osm';
+import { osmIdManager, osmIsAddressPoint } from '../osm';
 import { osmLanduseTags, osmLifecyclePrefixes } from '../osm/tags.js';
 import { utilRebind } from '../util/rebind';
 import { utilArrayGroupBy, utilArrayUnion, utilStringQs } from '../util';
-import { isAddressPoint } from '../svg/labels';
 import { patchHash } from '../behavior';
 
 
@@ -99,11 +98,11 @@ export function rendererFeatures(context) {
     }
 
     defineRule('address_points', (tags, geometry) =>
-        geometry === 'point' && isAddressPoint(tags),
+        geometry === 'point' && osmIsAddressPoint(tags),
         100);
 
     defineRule('points', (tags, geometry) =>
-        geometry === 'point' && !isAddressPoint(tags, geometry),
+        geometry === 'point' && !osmIsAddressPoint(tags),
         200);
 
     defineRule('traffic_roads', function isTrafficRoad(tags) {
