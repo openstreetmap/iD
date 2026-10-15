@@ -9,7 +9,7 @@ import {
     geoScaleToZoom, geoVecInterp, geoVecLength
 } from '../geo';
 import { presetManager } from '../presets';
-import { osmIdManager, osmIsInterestingTag } from '../osm';
+import { osmIdManager, osmIsAddressPoint } from '../osm';
 import { utilDetect } from '../util/detect';
 import {
     utilArrayDifference, utilArrayUniq, utilDisplayName, utilDisplayNameForPath, utilEntitySelector,
@@ -266,7 +266,7 @@ export function svgLabels(projection, context) {
 
             // Insert collision boxes around interesting points/vertices
             if (geometry === 'point' || (geometry === 'vertex' && isInterestingVertex(entity))) {
-                const isAddr = isAddressPoint(entity.tags);
+                const isAddr = osmIsAddressPoint(entity.tags);
                 var hasDirections = entity.directions(graph, projection).length;
                 var markerPadding = 0;
 
@@ -812,24 +812,3 @@ export function textWidth(text, size, container) {
 }
 
 
-const nonPrimaryKeys = new Set([
-    'building:flats',
-    'check_date',
-    'fixme',
-    'layer',
-    'level',
-    'note',
-    'start_date',
-    'ele'
-]);
-const nonPrimaryKeysRegex = /^(ref|survey|note|([^:]+:|old_|alt_)addr):/;
-export function isAddressPoint(tags) {
-    const keys = Object.keys(tags).filter(key =>
-        osmIsInterestingTag(key) &&
-        !nonPrimaryKeys.has(key) &&
-        !nonPrimaryKeysRegex.test(key)
-    );
-    return keys.length > 0 && keys.every(key =>
-        key.startsWith('addr:')
-    );
-}

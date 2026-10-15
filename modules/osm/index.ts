@@ -28,6 +28,8 @@ export {
     osmSetVertexTags,
     osmNodeGeometriesForTags,
     osmPavedTags,
+    osmIsAddressKey,
+    osmIsAddressPoint,
     osmIsInterestingTag,
     osmLifecyclePrefixes,
     osmRemoveLifecyclePrefix,
