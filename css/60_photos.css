@@ -350,6 +350,20 @@ li.list-item-photos.list-item-mapilio.active:after {
     overflow: hidden;
 }
 
+/* commons Image Layer */
+li.list-item-photos.list-item-commons.active:after {
+    background-color: #069;
+}
+.layer-commons {
+    pointer-events: none;
+}
+.layer-commons .viewfield-group * {
+    fill: #069;
+    stroke: #ffffff;
+    stroke-opacity: .6;
+    fill-opacity: .6;
+}
+
 /* panoramax Image Layer */
 li.list-item-photos.list-item-panoramax.active:after {
     background-color: #ff6f00;
@@ -536,6 +550,7 @@ label.streetside-hires {
     transform-origin: 0 0;
 }
 
+/* Panoramax viewer */
 .panoramax-wrapper .photo-attribution a:active {
     color: #ff6f00;
 }
@@ -546,6 +561,22 @@ label.streetside-hires {
     }
 }
 
+/* Wikimedia Commons viewer */
+.commons-wrapper .photo-attribution .attribution-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.commons-wrapper .photo-attribution a:active {
+    color: var(--link-color);
+}
+@media (hover: hover) {
+    .commons-wrapper .photo-attribution a:hover {
+        color: var(--link-color);
+    }
+}
+
+/* generic */
 .photo-wrapper {
     position: relative;
     background-color: #000;

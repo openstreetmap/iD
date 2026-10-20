@@ -6,7 +6,7 @@ import type { Vec2 } from '../geo/vector';
 import type { coreContext } from '../core';
 
 
-export async function planePhotoFrame(context: coreContext, selection: d3.Selection<HTMLDivElement>) {
+export function planePhotoFrame(context: coreContext, selection: d3.Selection<HTMLDivElement>) {
     const dispatch = d3_dispatch('viewerChanged');
 
     const module: PhotoFrame = function() {};
@@ -73,8 +73,6 @@ export async function planePhotoFrame(context: coreContext, selection: d3.Select
       _viewerDimensions = dimensions;
       updateTransform();
     });
-
-    await Promise.resolve();
 
     /**
      * Shows the photo frame if hidden
