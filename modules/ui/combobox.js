@@ -272,6 +272,7 @@ export function uiCombobox(context, klass) {
 
 
         // Called when the user presses up/down arrows to navigate the list
+        /** @param {+1 | -1} dir */
         function nav(dir) {
             if (_suggestions.length) {
                 // try to determine previously selected index..
@@ -285,6 +286,16 @@ export function uiCombobox(context, klass) {
 
                 // pick new _selected
                 index = Math.max(Math.min(index + dir, _suggestions.length - 1), 0);
+                if (_suggestions[index]?.disabled) {
+                    // we need to skip the indices of invalid members
+                    index = dir === 1
+                        ? index + _suggestions.slice(index).findIndex(item => !item.disabled)
+                        : _suggestions.slice(0, index + 1).findLastIndex(item => !item.disabled);
+                    if (!_suggestions[index]) {
+                        render();
+                        return; // abort if are no valid options in this direction
+                    }
+                }
                 _selected = _suggestions[index].value;
                 utilGetSetValue(input, _selected);
                 dispatch.call('update');
@@ -358,6 +369,7 @@ export function uiCombobox(context, klass) {
 
             const suggestionValues = [];
             _suggestions.forEach(s => {
+                if (s.disabled) return;
                 suggestionValues.push(s.value);
                 if (s.key && s.key !== s.value) {
                     suggestionValues.push(s.key);
@@ -438,6 +450,7 @@ export function uiCombobox(context, klass) {
                 .on('mouseenter', _mouseEnterHandler)
                 .on('mouseleave', _mouseLeaveHandler)
                 .merge(options)
+                .classed('disabled', (d) => !!d.disabled)
                 .classed('selected', function(d) { return d.value === _selected || d.key === _selected; })
                 .on('click.combo-option', accept)
                 .order();
@@ -458,6 +471,11 @@ export function uiCombobox(context, klass) {
         // Dispatches an 'accept' event
         // Then hides the combobox.
         function accept(d3_event, d) {
+            if (d?.disabled) {
+                d3_event.preventDefault();
+                return;
+            }
+
             _cancelFetch = true;
             var thiz = input.node();
 
@@ -474,7 +492,7 @@ export function uiCombobox(context, klass) {
                 d = _fetched[val];
             }
 
-            if (val !== '') {
+            if (val !== '' && !d?.disabled) {
                 // skipped if nothing was selected
                 dispatch.call('accept', thiz, d, val);
             }
