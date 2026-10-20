@@ -256,8 +256,23 @@ export function uiSectionRawMembershipEditor(context) {
         return !utilRelationAllowsDuplicateMembers(relation, context.graph());
     }
 
+    /** @param {import('../../osm').osmRelation} relation */
+    function isInvalidMembership(relation) {
+        const graph = context.graph();
+        const schema = utilGetRelationSchema(relation, graph);
+        if (!Object.keys(schema).length) return false;
+
+        return _entityIDs.some(entityID => {
+            const entity = graph.hasEntity(entityID);
+            if (!entity) return false;
+            const validRoles = utilGetValidRelationRoles(schema, entity.geometry(graph), entity.tags);
+            return !Object.keys(validRoles).length;
+        });
+    }
+
     function addMembership(d, role) {
         if (d.relation && isDuplicateMembership(d.relation)) return;
+        if (d.relation && isInvalidMembership(d.relation)) return;
 
         _showBlank = false;
 
@@ -410,6 +425,9 @@ export function uiSectionRawMembershipEditor(context) {
             if (isDuplicateMembership(obj.relation)) {
                 obj.disabled = true;
                 obj.description = t('inspector.duplicate_role');
+            } else if (isInvalidMembership(obj.relation)) {
+                obj.disabled = true;
+                obj.description = t('inspector.invalid_member');
             }
         });
 
