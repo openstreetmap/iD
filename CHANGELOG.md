@@ -45,6 +45,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Prevent the browser tab from accidentally being closed while uploading a changeset ([#12928], thanks [@k-yle])
 * Include all imagery layers from the editor-layer-index, even those older than 20 years ([#12878], thanks [@andrewharvey])
 #### :scissors: Operations
+* Add shortcut tooltip to reverse direction button ([#12961], thanks [@SaifuddinM23])
 #### :camera: Street-Level
 #### :white_check_mark: Validation
 * Warn about `goo.gl` shortlinks as sources, alongside full Google URLs ([#12740])
@@ -84,6 +85,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#12928]: https://github.com/openstreetmap/iD/pull/12928
 [@Geo-2695]: https://github.com/Geo-2695
 [@hemaksh2007jain-bit]: https://github.com/hemaksh2007jain-bit
+[@SaifuddinM23]: https://github.com/SaifuddinM23
 
 
 # 2.42.1
