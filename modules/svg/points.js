@@ -3,12 +3,12 @@ import { clamp } from 'es-toolkit/compat';
 import { select as d3_select } from 'd3';
 
 import { geoScaleToZoom } from '../geo';
-import { osmIdManager } from '../osm';
+import { osmIdManager, osmIsAddressPoint } from '../osm';
 import { svgPointTransform } from './helpers';
 import { svgTagClasses } from './tag_classes';
 import { presetManager } from '../presets';
 import { getRadiiInPixels } from '../core';
-import { textWidth, isAddressPoint } from './labels';
+import { textWidth } from './labels';
 
 export function svgPoints(projection, context) {
     var _currSelected = new Set();
@@ -17,11 +17,11 @@ export function svgPoints(projection, context) {
     function markerPath(selection, klass) {
         selection
             .attr('class', klass)
-            .attr('transform', d => isAddressPoint(d.tags)
+            .attr('transform', d => osmIsAddressPoint(d.tags)
                 ? `translate(-${addressShieldWidth(d, selection)/2}, -8)`
                 : 'translate(-8, -23)')
             .attr('d', d => {
-                if (!isAddressPoint(d.tags)) {
+                if (!osmIsAddressPoint(d.tags)) {
                     return 'M 17,8 C 17,13 11,21 8.5,23.5 C 6,21 0,13 0,8 C 0,4 4,-0.5 8.5,-0.5 C 13,-0.5 17,4 17,8 z';
                 }
                 const w = addressShieldWidth(d, selection);
@@ -62,7 +62,7 @@ export function svgPoints(projection, context) {
                 properties: {
                     target: true,
                     entity: node,
-                    isAddr: isAddressPoint(node.tags)
+                    isAddr: osmIsAddressPoint(node.tags)
                 },
                 geometry: node.asGeoJSON()
             });
@@ -127,7 +127,7 @@ export function svgPoints(projection, context) {
             .call(markerPath, 'shadow');
 
         enter.each(function(d) {
-            if (isAddressPoint(d.tags)) return;
+            if (osmIsAddressPoint(d.tags)) return;
             d3_select(this)
             .append('ellipse')
             .attr('cx', 0.5)

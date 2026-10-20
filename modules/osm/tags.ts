@@ -28,6 +28,63 @@ export function osmIsInterestingTag(key: string): boolean {
     return true;
 }
 
+// Keys which are not "primary" tags, i.e. which do not by themselves describe
+// what kind of feature something is, but only add information to it.
+const nonPrimaryKeys = new Set([
+    'building:flats',
+    'check_date',
+    'fixme',
+    'layer',
+    'level',
+    'note',
+    'start_date',
+    'ele'
+]);
+const nonPrimaryKeysRegex = /^(ref|survey|note|([^:]+:|old_|alt_)addr):/;
+
+/**
+ * Returns whether the given tags describe an address point, i.e. a feature which
+ * has at least one `addr:*` tag and no other interesting "primary" tags
+ * (such as `amenity`, `shop` or `name`).
+ * @param ignoreKey - optional predicate for additional keys to disregard (e.g. `building`)
+ */
+export function osmIsAddressPoint(tags: Tags, ignoreKey?: (key: TagKey) => boolean): boolean {
+    const keys = Object.keys(tags).filter(key =>
+        osmIsInterestingTag(key) &&
+        !nonPrimaryKeys.has(key) &&
+        !nonPrimaryKeysRegex.test(key) &&
+        !ignoreKey?.(key)
+    );
+    return keys.length > 0 && keys.every(key =>
+        key.startsWith('addr:')
+    );
+}
+
+// Identifiers of (imported) address data, which belong to the address rather than
+// to the building or POI the address is attached to.
+// see https://taginfo.openstreetmap.org/keys/addr%3Ahousenumber#combinations
+const addressKeys = new Set([
+    'at_bev:addr_date',            // AT
+    'nysgissam:nysaddresspointid', // US-NY
+    'nysgissam:review',            // US-NY
+    'osak:identifier',             // DK
+    'ref:AGESIC',                  // UY
+    'ref:linz:address_id',         // NZ
+    'ref:minvskaddress',           // LT
+    'ref:RS:kucni_broj',           // RS
+    'ref:ruian:addr'               // CZ
+]);
+const addressKeyRegex = /^addr:|^(source|not):addr(:|$)|^(old|alt)_addr:/;
+
+/**
+ * Returns whether the given key is part of an address: `addr:*` tags as well as
+ * variations like `source:addr`, `old_addr:*` or `ref:ruian:addr`, and identifiers
+ * assigned to the address by some data import.
+ */
+export function osmIsAddressKey(key: TagKey): boolean {
+    return addressKeys.has(key) || addressKeyRegex.test(key);
+}
+
 export const osmLifecyclePrefixes = {
     // nonexistent, might be built
     proposed: true, planned: true,
