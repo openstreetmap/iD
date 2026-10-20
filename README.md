@@ -30,7 +30,7 @@ Come on in, the water's lovely. More help?
 
 Follow the steps in the [how to get started guide](https://github.com/openstreetmap/iD/wiki/How-to-get-started#build-and-test-instructions) on how to install, build and run iD locally.
 
-iD is also published as a [npm package](https://www.npmjs.com/package/@openstreetmap/id).
+iD is also published as an [npm package](https://www.npmjs.com/package/@openstreetmap/id).
 
 ## License
 
