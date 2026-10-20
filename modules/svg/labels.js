@@ -449,7 +449,7 @@ export function svgLabels(projection, context) {
 
             // % along the line to attempt to place the label
             var lineOffsets = [50, 45, 55, 40, 60, 35, 65, 30, 70,
-                               25, 75, 20, 80, 15, 95, 10, 90, 5, 95];
+                               25, 75, 20, 80, 15, 85, 10, 90, 5, 95];
             var padding = 3;
 
             for (var i = 0; i < lineOffsets.length; i++) {
