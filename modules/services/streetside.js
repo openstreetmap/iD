@@ -667,7 +667,7 @@ export default {
     this.setStyles(context, null, true);
 
     let wrap = context.container().select('.photoviewer .ms-wrapper');
-    let attribution = wrap.selectAll('.photo-attribution').html('');
+    let attribution = wrap.selectAll('.photo-attribution').text('');
 
     wrap.selectAll('.pnlm-load-box')   // display "loading.."
       .style('display', 'block');

@@ -198,13 +198,13 @@ export function validationCloseNodes(context) {
             return issues;
 
             function showReference(selection) {
-                var referenceText = t('issues.close_nodes.detached.reference');
+                var referenceText = t.addOrUpdate('issues.close_nodes.detached.reference');
                 selection.selectAll('.issue-reference')
                     .data([0])
                     .enter()
                     .append('div')
                     .attr('class', 'issue-reference')
-                    .html(referenceText);
+                    .call(referenceText);
             }
         }
 
@@ -262,13 +262,13 @@ export function validationCloseNodes(context) {
             });
 
             function showReference(selection) {
-                var referenceText = t('issues.close_nodes.reference');
+                var referenceText = t.addOrUpdate('issues.close_nodes.reference');
                 selection.selectAll('.issue-reference')
                     .data([0])
                     .enter()
                     .append('div')
                     .attr('class', 'issue-reference')
-                    .html(referenceText);
+                    .call(referenceText);
             }
         }
 

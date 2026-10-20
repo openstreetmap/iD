@@ -6,6 +6,7 @@ import { utilDetect } from '../util/detect';
 import { utilExpandLocaleCode, utilStringQs } from '../util';
 import { utilArrayUniq } from '../util/array';
 import { presetsCdnUrl } from '../../config/id.js';
+import { utilSanitizeHTML } from '../util/sanitize';
 
 export type LanguagesJSON = {
     [localeCode: string]: {
@@ -519,7 +520,7 @@ export class coreLocalizer {
         // text may be empty or undefined if `replacements.default` is
         const text = info.texts.join('');
         if (text) {
-            return `<span class="localized-text" lang="${info.locale || 'und'}">${text}</span>`;
+            return utilSanitizeHTML(`<span class="localized-text" lang="${info.locale || 'und'}">${text}</span>`);
         } else {
             return '';
         }
