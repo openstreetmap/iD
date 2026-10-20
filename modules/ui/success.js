@@ -12,6 +12,7 @@ import { t, localizer } from '../core/localizer';
 import { svgIcon } from '../svg/icon';
 import { uiDisclosure } from '../ui/disclosure';
 import { utilRebind } from '../util/rebind';
+import { utilSanitizeHTML } from '../util/sanitize.js';
 
 
 let _oci = null;
@@ -300,12 +301,12 @@ export function uiSuccess(context) {
     selection
       .append('div')
       .attr('class', 'community-name')
-      .html(d.resolved.nameHTML);
+      .html(utilSanitizeHTML(d.resolved.nameHTML));
 
     selection
       .append('div')
       .attr('class', 'community-description')
-      .html(d.resolved.descriptionHTML);
+      .html(utilSanitizeHTML(d.resolved.descriptionHTML));
 
     // Create an expanding section if any of these are present..
     if (d.resolved.extendedDescriptionHTML || (d.languageCodes && d.languageCodes.length)) {
@@ -362,7 +363,7 @@ export function uiSuccess(context) {
         moreEnter
           .append('div')
           .attr('class', 'community-extended-description')
-          .html(d.resolved.extendedDescriptionHTML);
+          .html(utilSanitizeHTML(d.resolved.extendedDescriptionHTML));
       }
 
       if (d.languageCodes && d.languageCodes.length) {
