@@ -170,13 +170,14 @@ export function uiFieldCheck(field: any, context: iD.Context) {
                     d3_event.preventDefault();
                     d3_event.stopPropagation();
                     context.perform(
+
                         function(graph: iD.Graph) {
                             for (var i in _entityIDs) {
                                 graph = actionReverse(_entityIDs[i])(graph);
                             }
                             return graph;
                         },
-                        t('operations.reverse.annotation.line', { n: '1' })
+                        t('operations.reverse.annotation.line', { n: _entityIDs.length })
                     );
 
                     // must manually revalidate since no 'change' event was called
