@@ -220,6 +220,10 @@ of iD, it's risky to do so. Your edits could be lost or garbled at any time. Pre
 the ![live](http://labl.es/svg?text=live&bgcolor=d32232) button in the bottom bar to
 switch to the development database.
 
+To save edits on test server with locally run development version of iD you need to
+[pass OAuth2 connection info](API.md#environment-variables), after you registered 
+[a new application](https://master.apis.dev.openstreetmap.org/oauth2/applications/new).
+
 
 ## Contributing Documentation
 
