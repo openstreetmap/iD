@@ -5,7 +5,7 @@ describe('iD.actionUpgradeTags', function () {
             newTags = { leisure: 'swimming_pool' },
             entity = new iD.osmNode({ tags: { amenity: 'swimming_pool', name: 'Foo' }}),
             graph  = iD.actionUpgradeTags(entity.id, oldTags, newTags)(new iD.coreGraph([entity]));
-        expect(graph.entity(entity.id).tags).to.eql({ leisure: 'swimming_pool', name: 'Foo' });
+        expect(graph.entity(entity.id).tags).toEqual({ leisure: 'swimming_pool', name: 'Foo' });
     });
 
     it('upgrades a tag combination', function () {
@@ -13,7 +13,7 @@ describe('iD.actionUpgradeTags', function () {
             newTags = { amenity: 'vending_machine', vending: 'newspapers' },
             entity = new iD.osmNode({ tags: { amenity: 'vending_machine', vending: 'news_papers', name: 'Foo' }}),
             graph  = iD.actionUpgradeTags(entity.id, oldTags, newTags)(new iD.coreGraph([entity]));
-        expect(graph.entity(entity.id).tags).to.eql({ amenity: 'vending_machine', vending: 'newspapers', name: 'Foo' });
+        expect(graph.entity(entity.id).tags).toEqual({ amenity: 'vending_machine', vending: 'newspapers', name: 'Foo' });
     });
 
     it('upgrades a tag with multiple replacement tags', function () {
@@ -21,7 +21,7 @@ describe('iD.actionUpgradeTags', function () {
             newTags = { natural: 'wetland', wetland: 'marsh' },
             entity = new iD.osmNode({ tags: { natural: 'marsh', name: 'Foo' }}),
             graph  = iD.actionUpgradeTags(entity.id, oldTags, newTags)(new iD.coreGraph([entity]));
-        expect(graph.entity(entity.id).tags).to.eql({ natural: 'wetland', wetland: 'marsh', name: 'Foo' });
+        expect(graph.entity(entity.id).tags).toEqual({ natural: 'wetland', wetland: 'marsh', name: 'Foo' });
     });
 
     it('upgrades a tag and overrides an existing value', function () {
@@ -29,7 +29,7 @@ describe('iD.actionUpgradeTags', function () {
             newTags = { natural: 'wood' },
             entity = new iD.osmNode({ tags: { landuse: 'wood', natural: 'wetland', name: 'Foo' }}),
             graph  = iD.actionUpgradeTags(entity.id, oldTags, newTags)(new iD.coreGraph([entity]));
-        expect(graph.entity(entity.id).tags).to.eql({ natural: 'wood', name: 'Foo' });
+        expect(graph.entity(entity.id).tags).toEqual({ natural: 'wood', name: 'Foo' });
     });
 
     it('upgrades a tag with no replacement tags', function () {
@@ -37,7 +37,7 @@ describe('iD.actionUpgradeTags', function () {
             newTags = undefined, // eslint-disable-line no-undef-init
             entity = new iD.osmNode({ tags: { highway: 'no', name: 'Foo' }}),
             graph  = iD.actionUpgradeTags(entity.id, oldTags, newTags)(new iD.coreGraph([entity]));
-        expect(graph.entity(entity.id).tags).to.eql({ name: 'Foo' });
+        expect(graph.entity(entity.id).tags).toEqual({ name: 'Foo' });
     });
 
     it('upgrades a wildcard tag and moves the value', function () {
@@ -45,7 +45,7 @@ describe('iD.actionUpgradeTags', function () {
             newTags = { colour: '$1' },
             entity = new iD.osmNode({ tags: { color: 'red', name: 'Foo' }}),
             graph  = iD.actionUpgradeTags(entity.id, oldTags, newTags)(new iD.coreGraph([entity]));
-        expect(graph.entity(entity.id).tags).to.eql({ colour: 'red', name: 'Foo' });
+        expect(graph.entity(entity.id).tags).toEqual({ colour: 'red', name: 'Foo' });
     });
 
     it('upgrades a tag with a wildcard replacement and adds a default value', function () {
@@ -53,7 +53,7 @@ describe('iD.actionUpgradeTags', function () {
             newTags = { shop: '*' },
             entity = new iD.osmNode({ tags: { amenity: 'shop', name: 'Foo' }}),
             graph  = iD.actionUpgradeTags(entity.id, oldTags, newTags)(new iD.coreGraph([entity]));
-        expect(graph.entity(entity.id).tags).to.eql({ shop: 'yes', name: 'Foo' });
+        expect(graph.entity(entity.id).tags).toEqual({ shop: 'yes', name: 'Foo' });
     });
 
     it('upgrades a tag with a wildcard replacement and maintains the existing value', function () {
@@ -61,7 +61,7 @@ describe('iD.actionUpgradeTags', function () {
             newTags = { shop: '*' },
             entity = new iD.osmNode({ tags: { amenity: 'shop', shop: 'supermarket', name: 'Foo' }}),
             graph  = iD.actionUpgradeTags(entity.id, oldTags, newTags)(new iD.coreGraph([entity]));
-        expect(graph.entity(entity.id).tags).to.eql({ shop: 'supermarket', name: 'Foo' });
+        expect(graph.entity(entity.id).tags).toEqual({ shop: 'supermarket', name: 'Foo' });
     });
 
     it('upgrades a tag with a wildcard replacement and replaces the existing "no" value', function () {
@@ -69,7 +69,7 @@ describe('iD.actionUpgradeTags', function () {
             newTags = { shop: '*' },
             entity = new iD.osmNode({ tags: { amenity: 'shop', shop: 'no', name: 'Foo' }}),
             graph  = iD.actionUpgradeTags(entity.id, oldTags, newTags)(new iD.coreGraph([entity]));
-        expect(graph.entity(entity.id).tags).to.eql({ shop: 'yes', name: 'Foo' });
+        expect(graph.entity(entity.id).tags).toEqual({ shop: 'yes', name: 'Foo' });
     });
 
     it('upgrades a tag from a semicolon-delimited list that has one other value', function () {
@@ -77,7 +77,7 @@ describe('iD.actionUpgradeTags', function () {
             newTags = { 'diet:vegan': 'yes' },
             entity = new iD.osmNode({ tags: { cuisine: 'italian;vegan', name: 'Foo' }}),
             graph  = iD.actionUpgradeTags(entity.id, oldTags, newTags)(new iD.coreGraph([entity]));
-        expect(graph.entity(entity.id).tags).to.eql({ cuisine: 'italian', 'diet:vegan': 'yes', name: 'Foo' });
+        expect(graph.entity(entity.id).tags).toEqual({ cuisine: 'italian', 'diet:vegan': 'yes', name: 'Foo' });
     });
 
     it('upgrades a tag from a semicolon-delimited list that has many other values', function () {
@@ -85,7 +85,7 @@ describe('iD.actionUpgradeTags', function () {
             newTags = { 'diet:vegan': 'yes' },
             entity = new iD.osmNode({ tags: { cuisine: 'italian;vegan;regional;american', name: 'Foo' }}),
             graph  = iD.actionUpgradeTags(entity.id, oldTags, newTags)(new iD.coreGraph([entity]));
-        expect(graph.entity(entity.id).tags).to.eql({ cuisine: 'italian;regional;american', 'diet:vegan': 'yes', name: 'Foo' });
+        expect(graph.entity(entity.id).tags).toEqual({ cuisine: 'italian;regional;american', 'diet:vegan': 'yes', name: 'Foo' });
     });
 
     it('upgrades a tag within a semicolon-delimited list without changing other values', function () {
@@ -93,7 +93,7 @@ describe('iD.actionUpgradeTags', function () {
             newTags = { leisure: 'ice_rink', sport: 'ice_hockey' },
             entity = new iD.osmNode({ tags: { leisure: 'ice_rink', sport: 'curling;hockey;multi', name: 'Foo' }}),
             graph  = iD.actionUpgradeTags(entity.id, oldTags, newTags)(new iD.coreGraph([entity]));
-        expect(graph.entity(entity.id).tags).to.eql({ leisure: 'ice_rink', sport: 'curling;ice_hockey;multi', name: 'Foo' });
+        expect(graph.entity(entity.id).tags).toEqual({ leisure: 'ice_rink', sport: 'curling;ice_hockey;multi', name: 'Foo' });
     });
 
     it('upgrades an entire semicolon-delimited tag value', function () {
@@ -101,7 +101,7 @@ describe('iD.actionUpgradeTags', function () {
             newTags = { vending: 'parcel_pickup;parcel_mail_in' },
             entity = new iD.osmNode({ tags: { vending: 'parcel_mail_in;parcel_pickup', name: 'Foo' }}),
             graph  = iD.actionUpgradeTags(entity.id, oldTags, newTags)(new iD.coreGraph([entity]));
-        expect(graph.entity(entity.id).tags).to.eql({ vending: 'parcel_pickup;parcel_mail_in', name: 'Foo' });
+        expect(graph.entity(entity.id).tags).toEqual({ vending: 'parcel_pickup;parcel_mail_in', name: 'Foo' });
     });
 
 });

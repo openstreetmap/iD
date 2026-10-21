@@ -1,5 +1,5 @@
 import { t } from '../core/localizer';
-import { osmEntity, osmNote, osmRelation, osmWay } from '../osm';
+import { OsmAbstractEntity, osmNote, osmRelation, osmWay } from '../osm';
 import { svgIcon } from '../svg/icon';
 import { getRelativeDate } from '../util/date';
 
@@ -10,7 +10,7 @@ export function uiViewOnOSM(context) {
 
     function viewOnOSM(selection) {
         var url;
-        if (_what instanceof osmEntity) {
+        if (_what instanceof OsmAbstractEntity) {
             url = context.connection().historyURL(_what);
         } else if (_what instanceof osmNote) {
             url = context.connection().noteURL(_what);

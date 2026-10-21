@@ -1,4 +1,4 @@
-import { debounce } from 'es-toolkit/compat';
+import { debounce } from 'es-toolkit';
 
 import { decimalCoordinatePair, dmsCoordinatePair } from '../../util/units';
 import { t } from '../../core/localizer';
@@ -10,7 +10,7 @@ export function uiPanelLocation(context) {
 
 
     function redraw(selection) {
-        selection.html('');
+        selection.text('');
 
         var list = selection
             .append('ul');

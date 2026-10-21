@@ -34,7 +34,7 @@ export default {
             } else if (result.address) {
                 return callback(null, result.address.country_code);
             } else {
-                return callback('Unable to geocode', null);
+                return callback(new Error('Unable to geocode'));
             }
         });
     },
@@ -75,7 +75,7 @@ export default {
             .catch(function(err) {
                 delete _inflight[url];
                 if (err.name === 'AbortError') return;
-                if (callback) callback(err.message);
+                if (callback) callback(err);
             });
     },
 
@@ -108,7 +108,7 @@ export default {
             .catch(function(err) {
                 delete _inflight[url];
                 if (err.name === 'AbortError') return;
-                if (callback) callback(err.message);
+                if (callback) callback(err);
             });
     }
 

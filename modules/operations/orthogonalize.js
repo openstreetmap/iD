@@ -121,7 +121,7 @@ export function operationOrthogonalize(context, selectedIDs) {
         const graph = context.graph();
         return _actions.map((action, idx) => {
             if (!action.disabled(graph)) {
-                const previewGraph = action(graph, t);
+                const previewGraph = action(graph);
                 const way = previewGraph.hasEntity(selectedIDs[idx]);
                 const getPath = svgPath(context.projection, previewGraph, false);
                 return {

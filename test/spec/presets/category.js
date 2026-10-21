@@ -14,14 +14,14 @@ describe('iD.presetCategory', function() {
 
     it('maps members names to preset instances', function() {
         var c = iD.presetCategory('road', category, allPresets);
-        expect(c.members.collection[0]).to.eql(residential);
+        expect(c.members.collection[0]).toEqual(residential);
     });
 
     describe('#matchGeometry', function() {
         it('matches the type of an entity', function() {
             var c = iD.presetCategory('road', category, allPresets);
-            expect(c.matchGeometry('line')).to.eql(true);
-            expect(c.matchGeometry('point')).to.eql(false);
+            expect(c.matchGeometry('line')).toEqual(true);
+            expect(c.matchGeometry('point')).toEqual(false);
         });
     });
 });

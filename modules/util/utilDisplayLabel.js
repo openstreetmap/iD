@@ -9,7 +9,7 @@ import { utilDisplayName, utilDisplayType } from './util';
  *
  * If `verbose=true`, include both preset name and feature name.
  *    "Tertiary Road Main Street"
- * @param {osmEntity} entity
+ * @param {iD.OsmEntity} entity
  * @param {string | unknown} graphOrGeometry
  * @param {boolean} [verbose]
  * @returns {string}

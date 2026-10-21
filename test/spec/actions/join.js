@@ -10,7 +10,7 @@ describe('iD.actionJoin', function () {
                 new iD.osmWay({id: '=', nodes: ['b', 'c']})
             ]);
 
-            expect(iD.actionJoin(['-', '=']).disabled(graph)).not.to.be.ok;
+            expect(iD.actionJoin(['-', '=']).disabled(graph)).toBeFalsy();
         });
 
         it('returns falsy for ways that share a start/end node', function () {
@@ -23,7 +23,7 @@ describe('iD.actionJoin', function () {
                 new iD.osmWay({id: '=', nodes: ['c', 'b']})
             ]);
 
-            expect(iD.actionJoin(['-', '=']).disabled(graph)).not.to.be.ok;
+            expect(iD.actionJoin(['-', '=']).disabled(graph)).toBeFalsy();
         });
 
         it('returns falsy for ways that share a start/start node', function () {
@@ -36,7 +36,7 @@ describe('iD.actionJoin', function () {
                 new iD.osmWay({id: '=', nodes: ['b', 'c']})
             ]);
 
-            expect(iD.actionJoin(['-', '=']).disabled(graph)).not.to.be.ok;
+            expect(iD.actionJoin(['-', '=']).disabled(graph)).toBeFalsy();
         });
 
         it('returns falsy for ways that share an end/end node', function () {
@@ -49,7 +49,7 @@ describe('iD.actionJoin', function () {
                 new iD.osmWay({id: '=', nodes: ['c', 'b']})
             ]);
 
-            expect(iD.actionJoin(['-', '=']).disabled(graph)).not.to.be.ok;
+            expect(iD.actionJoin(['-', '=']).disabled(graph)).toBeFalsy();
         });
 
         it('returns falsy for more than two ways when connected, regardless of order', function () {
@@ -64,12 +64,12 @@ describe('iD.actionJoin', function () {
                 new iD.osmWay({id: '~', nodes: ['c', 'd']})
             ]);
 
-            expect(iD.actionJoin(['-', '=', '~']).disabled(graph)).not.to.be.ok;
-            expect(iD.actionJoin(['-', '~', '=']).disabled(graph)).not.to.be.ok;
-            expect(iD.actionJoin(['=', '-', '~']).disabled(graph)).not.to.be.ok;
-            expect(iD.actionJoin(['=', '~', '-']).disabled(graph)).not.to.be.ok;
-            expect(iD.actionJoin(['~', '=', '-']).disabled(graph)).not.to.be.ok;
-            expect(iD.actionJoin(['~', '-', '=']).disabled(graph)).not.to.be.ok;
+            expect(iD.actionJoin(['-', '=', '~']).disabled(graph)).toBeFalsy();
+            expect(iD.actionJoin(['-', '~', '=']).disabled(graph)).toBeFalsy();
+            expect(iD.actionJoin(['=', '-', '~']).disabled(graph)).toBeFalsy();
+            expect(iD.actionJoin(['=', '~', '-']).disabled(graph)).toBeFalsy();
+            expect(iD.actionJoin(['~', '=', '-']).disabled(graph)).toBeFalsy();
+            expect(iD.actionJoin(['~', '-', '=']).disabled(graph)).toBeFalsy();
         });
 
         it('returns \'not_eligible\' for non-line geometries', function () {
@@ -77,7 +77,7 @@ describe('iD.actionJoin', function () {
                 new iD.osmNode({id: 'a', loc: [0,0]})
             ]);
 
-            expect(iD.actionJoin(['a']).disabled(graph)).to.equal('not_eligible');
+            expect(iD.actionJoin(['a']).disabled(graph)).toEqual('not_eligible');
         });
 
         it('returns \'not_adjacent\' for ways that don\'t share the necessary nodes', function () {
@@ -93,7 +93,7 @@ describe('iD.actionJoin', function () {
                 new iD.osmWay({id: '=', nodes: ['b', 'd']})
             ]);
 
-            expect(iD.actionJoin(['-', '=']).disabled(graph)).to.equal('not_adjacent');
+            expect(iD.actionJoin(['-', '=']).disabled(graph)).toEqual('not_adjacent');
         });
 
         ['restriction', 'connectivity'].forEach(function (type) {
@@ -115,7 +115,7 @@ describe('iD.actionJoin', function () {
                     ]})
                 ]);
 
-                expect(iD.actionJoin(['-', '=']).disabled(graph)).to.equal(type);
+                expect(iD.actionJoin(['-', '=']).disabled(graph)).toEqual(type);
             });
 
             it('returns ' + type + ' in situations where a ' + type + 'relation would be damaged (b)', function () {
@@ -140,7 +140,7 @@ describe('iD.actionJoin', function () {
                     ]})
                 ]);
 
-                expect(iD.actionJoin(['-', '=']).disabled(graph)).to.equal(type);
+                expect(iD.actionJoin(['-', '=']).disabled(graph)).toEqual(type);
             });
 
             it('returns falsy in situations where a '+ type + 'relation wouldn\'t be damaged (a)', function () {
@@ -165,7 +165,7 @@ describe('iD.actionJoin', function () {
                     ]})
                 ]);
 
-                expect(iD.actionJoin(['-', '=']).disabled(graph)).not.to.be.ok;
+                expect(iD.actionJoin(['-', '=']).disabled(graph)).toBeFalsy();
             });
 
             it('returns falsy in situations where a ' + type + 'restriction wouldn\'t be damaged (b)', function () {
@@ -194,7 +194,7 @@ describe('iD.actionJoin', function () {
                     ]})
                 ]);
 
-                expect(iD.actionJoin(['-', '=']).disabled(graph)).not.to.be.ok;
+                expect(iD.actionJoin(['-', '=']).disabled(graph)).toBeFalsy();
             });
         });
 
@@ -213,7 +213,7 @@ describe('iD.actionJoin', function () {
                     ]})
             ]);
 
-            expect(iD.actionJoin(['-', '=']).disabled(graph)).to.equal('conflicting_relations');
+            expect(iD.actionJoin(['-', '=']).disabled(graph)).toEqual('conflicting_relations');
         });
 
         it('returns \'conflicting_relations\' when a relation would be forked', function () {
@@ -236,7 +236,7 @@ describe('iD.actionJoin', function () {
                 ]})
             ]);
 
-            expect(iD.actionJoin(['-', '|']).disabled(graph)).to.equal('conflicting_relations');
+            expect(iD.actionJoin(['-', '|']).disabled(graph)).toEqual('conflicting_relations');
         });
 
         it('returns \'paths_intersect\' if resulting way intersects itself', function () {
@@ -255,7 +255,7 @@ describe('iD.actionJoin', function () {
                 new iD.osmWay({id: '=', nodes: ['c', 'd']}),
             ]);
 
-            expect(iD.actionJoin(['-', '=']).disabled(graph)).to.equal('paths_intersect');
+            expect(iD.actionJoin(['-', '=']).disabled(graph)).toEqual('paths_intersect');
         });
 
         it('returns \'conflicting_tags\' for two entities that have conflicting tags', function () {
@@ -267,7 +267,7 @@ describe('iD.actionJoin', function () {
                 new iD.osmWay({id: '=', nodes: ['b', 'c'], tags: {highway: 'secondary'}})
             ]);
 
-            expect(iD.actionJoin(['-', '=']).disabled(graph)).to.equal('conflicting_tags');
+            expect(iD.actionJoin(['-', '=']).disabled(graph)).toEqual('conflicting_tags');
         });
 
         it('takes tag reversals into account when calculating conflicts', function () {
@@ -279,7 +279,7 @@ describe('iD.actionJoin', function () {
                 new iD.osmWay({id: '=', nodes: ['c', 'b'], tags: {'oneway': '-1'}})
             ]);
 
-            expect(iD.actionJoin(['-', '=']).disabled(graph)).not.to.be.ok;
+            expect(iD.actionJoin(['-', '=']).disabled(graph)).toBeFalsy();
         });
 
         it('returns falsy for exceptions to tag conflicts: missing tag', function () {
@@ -291,7 +291,7 @@ describe('iD.actionJoin', function () {
                 new iD.osmWay({id: '=', nodes: ['b', 'c'], tags: {}})
             ]);
 
-            expect(iD.actionJoin(['-', '=']).disabled(graph)).not.to.be.ok;
+            expect(iD.actionJoin(['-', '=']).disabled(graph)).toBeFalsy();
         });
 
         it('returns falsy for exceptions to tag conflicts: uninteresting tag', function () {
@@ -303,7 +303,7 @@ describe('iD.actionJoin', function () {
                 new iD.osmWay({id: '=', nodes: ['b', 'c'], tags: {'tiger:cfcc': 'A42'}})
             ]);
 
-            expect(iD.actionJoin(['-', '=']).disabled(graph)).not.to.be.ok;
+            expect(iD.actionJoin(['-', '=']).disabled(graph)).toBeFalsy();
         });
     });
 
@@ -320,8 +320,8 @@ describe('iD.actionJoin', function () {
 
         graph = iD.actionJoin(['-', '='])(graph);
 
-        expect(graph.entity('-').nodes).to.eql(['a', 'b', 'c']);
-        expect(graph.hasEntity('=')).to.be.undefined;
+        expect(graph.entity('-').nodes).toEqual(['a', 'b', 'c']);
+        expect(graph.hasEntity('=')).toBeUndefined();
     });
 
     it('joins a <-- b <== c', function () {
@@ -336,8 +336,8 @@ describe('iD.actionJoin', function () {
         ]);
 
         graph = iD.actionJoin(['-', '='])(graph);
-        expect(graph.entity('-').nodes).to.eql(['c', 'b', 'a']);
-        expect(graph.hasEntity('=')).to.be.undefined;
+        expect(graph.entity('-').nodes).toEqual(['c', 'b', 'a']);
+        expect(graph.hasEntity('=')).toBeUndefined();
     });
 
     it('joins a <-- b ==> c', function () {
@@ -353,9 +353,9 @@ describe('iD.actionJoin', function () {
 
         graph = iD.actionJoin(['-', '='])(graph);
 
-        expect(graph.entity('-').nodes).to.eql(['c', 'b', 'a']);
-        expect(graph.hasEntity('=')).to.be.undefined;
-        expect(graph.entity('-').tags).to.eql({'lanes:forward': 2});
+        expect(graph.entity('-').nodes).toEqual(['c', 'b', 'a']);
+        expect(graph.hasEntity('=')).toBeUndefined();
+        expect(graph.entity('-').tags).toEqual({'lanes:forward': 2});
     });
 
     it('joins a --> b <== c', function () {
@@ -372,9 +372,9 @@ describe('iD.actionJoin', function () {
 
         graph = iD.actionJoin(['-', '='])(graph);
 
-        expect(graph.entity('-').nodes).to.eql(['a', 'b', 'c']);
-        expect(graph.hasEntity('=')).to.be.undefined;
-        expect(graph.entity('-').tags).to.eql({'lanes:backward': 2});
+        expect(graph.entity('-').nodes).toEqual(['a', 'b', 'c']);
+        expect(graph.hasEntity('=')).toBeUndefined();
+        expect(graph.entity('-').tags).toEqual({'lanes:backward': 2});
     });
 
     it('joins a --> b <== c <++ d **> e', function () {
@@ -395,11 +395,11 @@ describe('iD.actionJoin', function () {
 
         graph = iD.actionJoin(['-', '=', '+', '*'])(graph);
 
-        expect(graph.entity('-').nodes).to.eql(['a', 'b', 'c', 'd', 'e']);
-        expect(graph.hasEntity('=')).to.be.undefined;
-        expect(graph.hasEntity('+')).to.be.undefined;
-        expect(graph.hasEntity('*')).to.be.undefined;
-        expect(graph.entity('-').tags).to.eql({'lanes:backward': 2});
+        expect(graph.entity('-').nodes).toEqual(['a', 'b', 'c', 'd', 'e']);
+        expect(graph.hasEntity('=')).toBeUndefined();
+        expect(graph.hasEntity('+')).toBeUndefined();
+        expect(graph.hasEntity('*')).toBeUndefined();
+        expect(graph.entity('-').tags).toEqual({'lanes:backward': 2});
     });
 
     it('keeps the way already in the database', function () {
@@ -419,9 +419,9 @@ describe('iD.actionJoin', function () {
 
         graph = iD.actionJoin(['w-1', 'w1', 'w-2'])(graph);
 
-        expect(graph.entity('w1').nodes).to.eql(['a', 'b', 'c', 'd']);
-        expect(graph.hasEntity('w-1')).to.be.undefined;
-        expect(graph.hasEntity('w-2')).to.be.undefined;
+        expect(graph.entity('w1').nodes).toEqual(['a', 'b', 'c', 'd']);
+        expect(graph.hasEntity('w-1')).toBeUndefined();
+        expect(graph.hasEntity('w-2')).toBeUndefined();
     });
 
     it('prefers to keep the oldest way', function () {
@@ -442,9 +442,9 @@ describe('iD.actionJoin', function () {
         graph = iD.actionJoin(['w1', 'w2', 'w-1'])(graph);
 
         // way 1 is the oldest (it has the lower id) so it kept that one
-        expect(graph.entity('w1').nodes).to.eql(['n1', 'n2', 'n3', 'n4']);
-        expect(graph.hasEntity('w2')).to.be.undefined;
-        expect(graph.hasEntity('w-1')).to.be.undefined;
+        expect(graph.entity('w1').nodes).toEqual(['n1', 'n2', 'n3', 'n4']);
+        expect(graph.hasEntity('w2')).toBeUndefined();
+        expect(graph.hasEntity('w-1')).toBeUndefined();
     });
 
     it('keeps the oldest id - oldest first', function () {
@@ -460,9 +460,9 @@ describe('iD.actionJoin', function () {
 
         graph = iD.actionJoin(['w1', 'w2', 'w3'])(graph);
 
-        expect(graph.entity('w1').nodes).to.eql(['a', 'b', 'c', 'd']);
-        expect(graph.hasEntity('w2')).to.be.undefined;
-        expect(graph.hasEntity('w3')).to.be.undefined;
+        expect(graph.entity('w1').nodes).toEqual(['a', 'b', 'c', 'd']);
+        expect(graph.hasEntity('w2')).toBeUndefined();
+        expect(graph.hasEntity('w3')).toBeUndefined();
     });
 
     it('keeps the oldest id - oldest last', function () {
@@ -478,9 +478,9 @@ describe('iD.actionJoin', function () {
 
         graph = iD.actionJoin(['w3', 'w2', 'w1'])(graph);
 
-        expect(graph.entity('w1').nodes).to.eql(['a', 'b', 'c', 'd']);
-        expect(graph.hasEntity('w2')).to.be.undefined;
-        expect(graph.hasEntity('w3')).to.be.undefined;
+        expect(graph.entity('w1').nodes).toEqual(['a', 'b', 'c', 'd']);
+        expect(graph.hasEntity('w2')).toBeUndefined();
+        expect(graph.hasEntity('w3')).toBeUndefined();
     });
 
     it('keeps the oldest id - oldest middle', function () {
@@ -496,9 +496,9 @@ describe('iD.actionJoin', function () {
 
         graph = iD.actionJoin(['w2', 'w1', 'w3'])(graph);
 
-        expect(graph.entity('w1').nodes).to.eql(['a', 'b', 'c', 'd']);
-        expect(graph.hasEntity('w2')).to.be.undefined;
-        expect(graph.hasEntity('w3')).to.be.undefined;
+        expect(graph.entity('w1').nodes).toEqual(['a', 'b', 'c', 'd']);
+        expect(graph.hasEntity('w2')).toBeUndefined();
+        expect(graph.hasEntity('w3')).toBeUndefined();
     });
 
     it('merges tags', function () {
@@ -515,7 +515,7 @@ describe('iD.actionJoin', function () {
 
         graph = iD.actionJoin(['-', '=', '+'])(graph);
 
-        expect(graph.entity('-').tags).to.eql({a: 'a', b: '-;=', c: 'c', d: 'd', e: 'e'});
+        expect(graph.entity('-').tags).toEqual({a: 'a', b: '-;=', c: 'c', d: 'd', e: 'e'});
     });
 
     it('preserves sidedness of start segment, co-directional lines', function () {
@@ -534,8 +534,8 @@ describe('iD.actionJoin', function () {
             new iD.osmWay({id: '=', nodes: ['b', 'c']})
         ]);
         graph = iD.actionJoin(['-', '='])(graph);
-        expect(graph.entity('-').nodes).to.eql(['a', 'b', 'c']);
-        expect(graph.entity('-').tags).to.eql({ natural: 'cliff' });
+        expect(graph.entity('-').nodes).toEqual(['a', 'b', 'c']);
+        expect(graph.entity('-').tags).toEqual({ natural: 'cliff' });
     });
 
     it('preserves sidedness of end segment, co-directional lines', function () {
@@ -554,8 +554,8 @@ describe('iD.actionJoin', function () {
             new iD.osmWay({id: '=', nodes: ['b', 'c'], tags: { natural: 'cliff' }})
         ]);
         graph = iD.actionJoin(['-', '='])(graph);
-        expect(graph.entity('-').nodes).to.eql(['a', 'b', 'c']);
-        expect(graph.entity('-').tags).to.eql({ natural: 'cliff' });
+        expect(graph.entity('-').nodes).toEqual(['a', 'b', 'c']);
+        expect(graph.entity('-').tags).toEqual({ natural: 'cliff' });
     });
 
     it('preserves sidedness of start segment, contra-directional lines', function () {
@@ -574,8 +574,8 @@ describe('iD.actionJoin', function () {
             new iD.osmWay({id: '=', nodes: ['c', 'b']})
         ]);
         graph = iD.actionJoin(['-', '='])(graph);
-        expect(graph.entity('-').nodes).to.eql(['a', 'b', 'c']);
-        expect(graph.entity('-').tags).to.eql({ natural: 'cliff' });
+        expect(graph.entity('-').nodes).toEqual(['a', 'b', 'c']);
+        expect(graph.entity('-').tags).toEqual({ natural: 'cliff' });
     });
 
     it('preserves sidedness of end segment, contra-directional lines', function () {
@@ -594,8 +594,8 @@ describe('iD.actionJoin', function () {
             new iD.osmWay({id: '=', nodes: ['c', 'b'], tags: { natural: 'cliff' }})
         ]);
         graph = iD.actionJoin(['-', '='])(graph);
-        expect(graph.entity('-').nodes).to.eql(['c', 'b', 'a']);
-        expect(graph.entity('-').tags).to.eql({ natural: 'cliff' });
+        expect(graph.entity('-').nodes).toEqual(['c', 'b', 'a']);
+        expect(graph.entity('-').tags).toEqual({ natural: 'cliff' });
     });
 
     it('merges the number of steps', function () {
@@ -608,7 +608,7 @@ describe('iD.actionJoin', function () {
         ]);
         graph = iD.actionJoin(['-', '='])(graph);
         // step count should be merged
-        expect(graph.entity('-').tags.step_count).to.equal('42');
+        expect(graph.entity('-').tags.step_count).toEqual('42');
     });
 
     it('returns conflicting_tags when the first way has a non-numeric summable tag', function () {
@@ -619,7 +619,7 @@ describe('iD.actionJoin', function () {
             new iD.osmWay({ id: '-', nodes: ['a', 'b'], tags: { highway: 'steps', step_count: 'many' } }),
             new iD.osmWay({ id: '=', nodes: ['b', 'c'], tags: { highway: 'steps', step_count: '10' } })
         ]);
-        expect(iD.actionJoin(['-', '=']).disabled(graph)).to.equal('conflicting_tags');
+        expect(iD.actionJoin(['-', '=']).disabled(graph)).toEqual('conflicting_tags');
     });
 
     it('returns conflicting_tags when the second way has a non-numeric summable tag', function () {
@@ -630,7 +630,7 @@ describe('iD.actionJoin', function () {
             new iD.osmWay({ id: '-', nodes: ['a', 'b'], tags: { highway: 'steps', step_count: '10' } }),
             new iD.osmWay({ id: '=', nodes: ['b', 'c'], tags: { highway: 'steps', step_count: 'bbb' } })
         ]);
-        expect(iD.actionJoin(['-', '=']).disabled(graph)).to.equal('conflicting_tags');
+        expect(iD.actionJoin(['-', '=']).disabled(graph)).toEqual('conflicting_tags');
     });
 
     it('returns conflicting_tags when both ways have non-numeric summable tags', function () {
@@ -641,7 +641,7 @@ describe('iD.actionJoin', function () {
             new iD.osmWay({ id: '-', nodes: ['a', 'b'], tags: { highway: 'steps', step_count: 'many' } }),
             new iD.osmWay({ id: '=', nodes: ['b', 'c'], tags: { highway: 'steps', step_count: 'lots' } })
         ]);
-        expect(iD.actionJoin(['-', '=']).disabled(graph)).to.equal('conflicting_tags');
+        expect(iD.actionJoin(['-', '=']).disabled(graph)).toEqual('conflicting_tags');
     });
 
 
@@ -663,8 +663,8 @@ describe('iD.actionJoin', function () {
 
         graph = iD.actionJoin(['-', '='])(graph);
 
-        expect(graph.entity('r1').members).to.eql([{id: '-', role: 'r1', type: 'way'}]);
-        expect(graph.entity('r2').members).to.eql([{id: '-', role: 'r2', type: 'way'}]);
+        expect(graph.entity('r1').members).toEqual([{id: '-', role: 'r1', type: 'way'}]);
+        expect(graph.entity('r2').members).toEqual([{id: '-', role: 'r2', type: 'way'}]);
     });
 
     it('preserves duplicate route segments in relations', function () {
@@ -697,9 +697,9 @@ describe('iD.actionJoin', function () {
 
         graph = iD.actionJoin(['-', '='])(graph);
 
-        expect(graph.entity('-').nodes).to.eql(['a', 'b', 'c']);
-        expect(graph.entity('~').nodes).to.eql(['c', 'd']);
-        expect(graph.entity('r').members).to.eql([
+        expect(graph.entity('-').nodes).toEqual(['a', 'b', 'c']);
+        expect(graph.entity('~').nodes).toEqual(['c', 'd']);
+        expect(graph.entity('r').members).toEqual([
                 {id: '-', role: 'forward', type: 'way'},
                 {id: '~', role: 'forward', type: 'way'},
                 {id: '~', role: 'forward', type: 'way'},
@@ -739,10 +739,10 @@ describe('iD.actionJoin', function () {
 
         graph = iD.actionJoin(['-', '='])(graph);
 
-        expect(graph.entity('-').nodes).to.eql(['a', 'b', 'c', 'd', 'a']);
-        expect(graph.entity('-').tags).to.eql({ man_made: 'pier', area: 'yes' });
-        expect(graph.hasEntity('=')).to.be.undefined;
-        expect(graph.hasEntity('m')).to.be.undefined;
+        expect(graph.entity('-').nodes).toEqual(['a', 'b', 'c', 'd', 'a']);
+        expect(graph.entity('-').tags).toEqual({ man_made: 'pier', area: 'yes' });
+        expect(graph.hasEntity('=')).toBeUndefined();
+        expect(graph.hasEntity('m')).toBeUndefined();
     });
 
     it('transfers memberships of collapsed single-member multipolygon onto resulting basic area', function () {
@@ -771,9 +771,9 @@ describe('iD.actionJoin', function () {
 
         graph = iD.actionJoin(['-', '='])(graph);
 
-        expect(graph.hasEntity('s')).to.not.be.undefined;
-        expect(graph.entity('s').members.length).to.eql(1);
-        expect(graph.entity('s').members[0]).to.eql(
+        expect(graph.hasEntity('s')).toBeDefined();
+        expect(graph.entity('s').members.length).toEqual(1);
+        expect(graph.entity('s').members[0]).toEqual(
             {id: '-', role: 'main', type: 'way'}
         );
     });
@@ -811,10 +811,10 @@ describe('iD.actionJoin', function () {
 
         graph = iD.actionJoin(['-', '='])(graph);
 
-        expect(graph.entity('-').nodes).to.eql(['a', 'b', 'c', 'd', 'a']);
-        expect(graph.entity('-').tags).to.eql({ surface: 'paved' });
-        expect(graph.hasEntity('=')).to.be.undefined;
-        expect(graph.hasEntity('m').tags).to.eql({
+        expect(graph.entity('-').nodes).toEqual(['a', 'b', 'c', 'd', 'a']);
+        expect(graph.entity('-').tags).toEqual({ surface: 'paved' });
+        expect(graph.hasEntity('=')).toBeUndefined();
+        expect(graph.hasEntity('m').tags).toEqual({
             type: 'multipolygon',
             man_made: 'pier',
             surface: 'wood'

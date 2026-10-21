@@ -1,6 +1,6 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { select as d3_select } from 'd3-selection';
-import { utilGetSetValue, utilRebind, utilTriggerEvent } from '../util';
+import { utilEditDistance, utilGetSetValue, utilRebind, utilTriggerEvent } from '../util';
 
 
 // This code assumes that the combobox values will not have duplicate entries.
@@ -15,6 +15,13 @@ import { utilGetSetValue, utilRebind, utilTriggerEvent } from '../util';
 
 var _comboHideTimerID;
 
+export function fuzzyMatch(search, string) {
+    const numAllowedTypos = Math.floor(search.length / 5);
+    if (utilEditDistance(search, string, {substring: true}) <= numAllowedTypos) {
+        return true;
+    }
+}
+
 export function uiCombobox(context, klass) {
     var dispatch = d3_dispatch('accept', 'cancel', 'update');
     var container = context.container();
@@ -26,11 +33,12 @@ export function uiCombobox(context, klass) {
     var _canAutocomplete = true;
     var _caseSensitive = false;
     var _cancelFetch = false;
-    var _minItems = 2;
+    var _minItems = 1;
     var _tDown = 0;
     var _mouseEnterHandler, _mouseLeaveHandler;
 
     var _fetcher = function(val, cb) {
+        val = val.toLowerCase();
         cb(_data.filter(function(d) {
             var terms = d.terms || [];
             terms.push(d.value);
@@ -38,10 +46,12 @@ export function uiCombobox(context, klass) {
                 terms.push(d.key);
             }
             return terms.some(function(term) {
-                return term
+                term = term
                     .toString()
-                    .toLowerCase()
-                    .indexOf(val.toLowerCase()) !== -1;
+                    .toLowerCase();
+                if (term.indexOf(val.toLowerCase()) !== -1) return true;
+                if (fuzzyMatch(val, term)) return true;
+                return false;
             });
         }));
     };
@@ -55,7 +65,7 @@ export function uiCombobox(context, klass) {
             .on('blur.combo-input', blur)
             .on('keydown.combo-input', keydown)
             .on('keyup.combo-input', keyup)
-            .on('input.combo-input', change)
+            .on('input.combo-input', d3_event => change(d3_event))
             .on('mousedown.combo-input', mousedown)
             .on('mouseup.combo-input', mouseup)
             .each(function() {
@@ -173,8 +183,8 @@ export function uiCombobox(context, klass) {
                     input.on('input.combo-input', function() {
                         var start = input.property('selectionStart');
                         input.node().setSelectionRange(start, start);
-                        input.on('input.combo-input', change); // reset event handler
-                        change(false);
+                        input.on('input.combo-input', d3_event => change(d3_event)); // reset event handler
+                        change(undefined, false);
                     });
                     break;
 
@@ -219,8 +229,9 @@ export function uiCombobox(context, klass) {
 
 
         // Called whenever the input value is changed (e.g. on typing)
-        function change(doAutoComplete) {
+        function change(d3_event, doAutoComplete) {
             if (doAutoComplete === undefined) doAutoComplete = true;
+            if (d3_event?.isComposing) doAutoComplete = false;
             fetchComboData(value(), function(skipAutosuggest) {
                 _selected = null;
                 var val = input.property('value');
@@ -326,6 +337,7 @@ export function uiCombobox(context, klass) {
 
         function tryAutocomplete() {
             if (!_canAutocomplete) return;
+            if (input.node() !== document.activeElement) return;
 
             var val = _caseSensitive ? value() : value().toLowerCase();
             if (!val) return;
@@ -400,10 +412,14 @@ export function uiCombobox(context, klass) {
                     } else {
                         labelSpan.text(d.value);
                     }
-                    if (d.description) {
+                    if (typeof d.description === 'string') {
                         sel.append('span')
                             .attr('class', 'combobox-option-description')
                             .text(d.description);
+                    } else if (typeof d.description === 'function') {
+                        sel.append('span')
+                            .attr('class', 'combobox-option-description')
+                            .call(d.description);
                     }
                 });
 

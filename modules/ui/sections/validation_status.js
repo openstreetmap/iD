@@ -1,4 +1,4 @@
-import { debounce } from 'es-toolkit/compat';
+import { debounce } from 'es-toolkit';
 
 import { svgIcon } from '../../svg/icon';
 import { prefs } from '../../core/preferences';
@@ -96,7 +96,7 @@ export function uiSectionValidationStatus(context) {
                 var hiddenIssues = context.validator().getIssues(hiddenOpts);
                 if (hiddenIssues.length) {
                     selection.select('.box .details')
-                        .html('')
+                        .text('')
                         .call(t.append(
                             'issues.no_issues.hidden_issues.' + type,
                             { count: hiddenIssues.length.toString() }
@@ -105,7 +105,7 @@ export function uiSectionValidationStatus(context) {
                 }
             }
             selection.select('.box .details')
-                .html('')
+                .text('')
                 .call(t.append('issues.no_issues.hidden_issues.none'));
         }
 
@@ -161,7 +161,7 @@ export function uiSectionValidationStatus(context) {
         }
 
         selection.select('.box .message')
-            .html('')
+            .text('')
             .call(t.append('issues.no_issues.message.' + messageType));
 
     }

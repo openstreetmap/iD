@@ -1,4 +1,4 @@
-import { throttle } from 'es-toolkit/compat';
+import { throttle } from 'es-toolkit';
 
 import { geoPath as d3_geoPath } from 'd3-geo';
 import RBush from 'rbush';
@@ -9,9 +9,12 @@ import {
     geoScaleToZoom, geoVecInterp, geoVecLength
 } from '../geo';
 import { presetManager } from '../presets';
-import { osmEntity, osmIsInterestingTag } from '../osm';
+import { osmIdManager, osmIsInterestingTag } from '../osm';
 import { utilDetect } from '../util/detect';
-import { utilArrayDifference, utilArrayUniq, utilDisplayName, utilDisplayNameForPath, utilEntitySelector } from '../util';
+import {
+    utilArrayDifference, utilArrayUniq, utilDisplayName, utilDisplayNameForPath, utilEntitySelector,
+    utilUnicodeCharsCount, utilUnicodeCharsTruncated
+} from '../util';
 
 
 
@@ -90,7 +93,7 @@ export function svgLabels(projection, context) {
     function drawLinePaths(selection, labels, filter, classes) {
         var paths = selection.selectAll('path:not(.debug)')
             .filter(d => filter(d.entity))
-            .data(labels, d => osmEntity.key(d.entity));
+            .data(labels, d => osmIdManager.key(d.entity));
 
         // exit
         paths.exit()
@@ -110,7 +113,7 @@ export function svgLabels(projection, context) {
     function drawLineLabels(selection, labels, filter, classes) {
         var texts = selection.selectAll('text.' + classes)
             .filter(d => filter(d.entity))
-            .data(labels, d => osmEntity.key(d.entity));
+            .data(labels, d => osmIdManager.key(d.entity));
 
         // exit
         texts.exit()
@@ -127,7 +130,7 @@ export function svgLabels(projection, context) {
         // update
         selection.selectAll('text.' + classes).selectAll('.textpath')
             .filter(d => filter(d.entity))
-            .data(labels, d => osmEntity.key(d.entity))
+            .data(labels, d => osmIdManager.key(d.entity))
             .attr('startOffset', '50%')
             .attr('xlink:href', function(d) { return '#ideditor-labelpath-' + d.entity.id; })
             .text(d => d.name);
@@ -140,7 +143,7 @@ export function svgLabels(projection, context) {
         }
         var texts = selection.selectAll('text.' + classes)
             .filter(d => filter(d.entity))
-            .data(labels, d => osmEntity.key(d.entity));
+            .data(labels, d => osmIdManager.key(d.entity));
 
         // exit
         texts.exit()
@@ -171,7 +174,7 @@ export function svgLabels(projection, context) {
     function drawAreaIcons(selection, labels, filter, classes) {
         var icons = selection.selectAll('use.' + classes)
             .filter(d => filter(d.entity))
-            .data(labels, d => osmEntity.key(d.entity));
+            .data(labels, d => osmIdManager.key(d.entity));
 
         // exit
         icons.exit()
@@ -343,8 +346,9 @@ export function svgLabels(projection, context) {
                     if (wireframe) continue;
                     var renderAs = renderNodeAs[entity.id];
                     if (renderAs.geometry === 'vertex' && zoom < 17) continue;
+                    let charsRemaining = utilUnicodeCharsCount(name) - 1;
                     while (renderAs.isAddr && width > 36) {
-                        name = `${name.substring(0, name.replace(/…$/, '').length - 1)}…`;
+                        name = `${utilUnicodeCharsTruncated(name.replace(/…$/, ''), charsRemaining--)}…`;
                         width = textWidth(name, fontSize, selection.select('g.layer-osm.labels').node());
                     }
 
@@ -445,7 +449,7 @@ export function svgLabels(projection, context) {
 
             // % along the line to attempt to place the label
             var lineOffsets = [50, 45, 55, 40, 60, 35, 65, 30, 70,
-                               25, 75, 20, 80, 15, 95, 10, 90, 5, 95];
+                               25, 75, 20, 80, 15, 85, 10, 90, 5, 95];
             var padding = 3;
 
             for (var i = 0; i < lineOffsets.length; i++) {

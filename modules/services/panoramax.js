@@ -1,6 +1,6 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 
-import Protobuf from 'pbf';
+import { PbfReader } from 'pbf';
 import RBush from 'rbush';
 import { VectorTile } from '@mapbox/vector-tile';
 import { utilRebind, utilTiler, utilUniqueDomId } from '../util';
@@ -153,7 +153,7 @@ function loadTile(which, url, tile, zoom) {
  * @param {*} zoom Current zoom
  */
 function loadTileDataToCache(data, tile, zoom) {
-    const vectorTile = new VectorTile(new Protobuf(data));
+    const vectorTile = new VectorTile(new PbfReader(data));
 
     let features,
         cache,
@@ -163,7 +163,7 @@ function loadTileDataToCache(data, tile, zoom) {
         loc,
         d;
 
-    if (vectorTile.layers.hasOwnProperty(pictureLayer)) {
+    if (Object.hasOwnProperty.call(vectorTile.layers, pictureLayer)) {
         features = [];
         cache = _cache.images;
         layer = vectorTile.layers[pictureLayer];
@@ -195,7 +195,7 @@ function loadTileDataToCache(data, tile, zoom) {
         }
     }
 
-    if (vectorTile.layers.hasOwnProperty(sequenceLayer)) {
+    if (Object.hasOwnProperty.call(vectorTile.layers, sequenceLayer)) {
 
         cache = _cache.sequences;
 

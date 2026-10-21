@@ -1,3 +1,5 @@
+import { select as d3_select } from 'd3-selection';
+
 import { t } from '../core/localizer';
 
 import { actionChangePreset } from '../actions/change_preset';
@@ -6,7 +8,8 @@ import { actionUpgradeTags } from '../actions/upgrade_tags';
 import { fileFetcher } from '../core';
 import { presetManager } from '../presets';
 import { services } from '../services';
-import {  utilHashcode, utilTagDiff } from '../util';
+import { utilArrayUniq, utilHashcode, utilTagDiff } from '../util';
+import { utilSplitAtSemicolon } from '../util/util';
 import { utilDisplayLabel } from '../util/utilDisplayLabel';
 import { validationIssue, validationIssueFix } from '../core/validation';
 import { getDeprecatedTags } from '../osm/deprecated';
@@ -91,22 +94,15 @@ export function validationOutdatedTags() {
         }
       });
     }
-    const deprecationDiff = utilTagDiff(oldTags, newTags);
     const deprecationDiffContext = Object.keys(oldTags)
         .filter(key => deprecatedTags?.some(deprecated => deprecated.replace?.[key] !== undefined))
-        .filter(key => newTags[key] === oldTags[key])
-        .map(key => ({
-          type: '~',
-          key,
-          oldVal: oldTags[key],
-          newVal: newTags[key],
-          display: decodeURIComponent('%C2%A0' /* &nbsp; */) + ' ' + key + '=' + oldTags[key]
-        }));
+        .filter(key => newTags[key] === oldTags[key]);
+    const deprecationDiff = utilTagDiff(oldTags, newTags, deprecationDiffContext);
 
     let issues = [];
     issues.provisional = (_waitingForDeprecated || waitingForNsi);
 
-    if (deprecationDiff.length) {
+    if (deprecationDiff.some(d => d.type !== '~')) {
       const isOnlyAddingTags = !deprecationDiff.some(d => d.type === '-');
       const prefix = isOnlyAddingTags ? 'incomplete.' : '';
 
@@ -122,10 +118,10 @@ export function validationOutdatedTags() {
 
           return t.append(`issues.outdated_tags.${prefix}message`, { feature });
         },
-        reference: selection => showReference(
+        reference: selection => showTagDiffReference(
           selection,
           t.append(`issues.outdated_tags.${prefix}reference`),
-          [...deprecationDiff, ...deprecationDiffContext]
+          deprecationDiff
         ),
         entityIds: [entity.id],
         hash: utilHashcode(JSON.stringify(deprecationDiff)),
@@ -160,7 +156,7 @@ export function validationOutdatedTags() {
             ? t.append('issues.outdated_tags.noncanonical_brand.message_incomplete', { feature })
             : t.append('issues.outdated_tags.noncanonical_brand.message', { feature });
         },
-        reference: selection => showReference(
+        reference: selection => showTagDiffReference(
           selection,
           t.append('issues.outdated_tags.noncanonical_brand.reference'),
           nsiDiff
@@ -219,7 +215,14 @@ export function validationOutdatedTags() {
       const wd = item.mainTag;     // e.g. `brand:wikidata`
       const notwd = `not:${wd}`;   // e.g. `not:brand:wikidata`
       const qid = item.tags[wd];
-      newTags[notwd] = qid;
+      if (newTags[notwd]) {
+        newTags[notwd] = utilArrayUniq([
+            ...utilSplitAtSemicolon(newTags[notwd]),
+            qid,
+        ]).join(';');
+      } else {
+        newTags[notwd] = qid;
+      }
 
       if (newTags[wd] === qid) {   // if `brand:wikidata` was set to that qid
         const wp = item.mainTag.replace('wikidata', 'wikipedia');
@@ -229,50 +232,50 @@ export function validationOutdatedTags() {
 
       return actionChangeTags(currEntity.id, newTags)(graph);
     }
-
-
-    function showReference(selection, reference, tagDiff) {
-      let enter = selection.selectAll('.issue-reference')
-        .data([0])
-        .enter();
-
-      enter
-        .append('div')
-        .attr('class', 'issue-reference')
-        .call(reference);
-
-      enter
-        .append('strong')
-        .call(t.append('issues.suggested'));
-
-      enter
-        .append('table')
-        .attr('class', 'tagDiff-table')
-        .selectAll('.tagDiff-row')
-        .data(tagDiff)
-        .enter()
-        .append('tr')
-        .attr('class', 'tagDiff-row')
-        .append('td')
-        .attr('class', d => {
-          const klass = 'tagDiff-cell';
-          switch (d.type) {
-            case '+':
-              return `${klass} tagDiff-cell-add`;
-            case '-':
-              return `${klass} tagDiff-cell-remove`;
-            default:
-              return `${klass} tagDiff-cell-unchanged`;
-          }
-        })
-        .text(d => d.display);
-    }
   }
-
 
   let validation = oldTagIssues;
 
   validation.type = type;
 
   return validation;
+}
+
+export function showTagDiffReference(selection, reference, tagDiff) {
+    let enter = selection.selectAll('.issue-reference')
+    .data([0])
+    .enter();
+
+    enter
+    .append('div')
+    .attr('class', 'issue-reference')
+    .call(reference);
+
+    enter
+    .append('strong')
+    .call(t.append('issues.suggested'));
+
+    enter
+    .append('table')
+    .attr('class', 'tagDiff-table')
+    .selectAll('.tagDiff-row')
+    .data(tagDiff)
+    .enter()
+    .append('tr')
+    .attr('class', 'tagDiff-row')
+    .append('td')
+    .attr('class', d => {
+        const klass = 'tagDiff-cell';
+        switch (d.type) {
+        case '+':
+            return `${klass} tagDiff-cell-add`;
+        case '-':
+            return `${klass} tagDiff-cell-remove`;
+        default:
+            return `${klass} tagDiff-cell-unchanged`;
+        }
+    })
+    .each(function(d) {
+        d3_select(this).call(d.render);
+    });
 }

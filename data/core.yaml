@@ -848,7 +848,7 @@ en:
       description: Show Location Panel
       tooltip: Show coordinates and regional details.
     fix_misalignment: Imagery Offset
-    offset: "Drag anywhere in the gray area below to adjust the imagery offset, or enter the offset values in meters."
+    offset: "Drag anywhere in the gray area below to adjust the imagery offset, or enter the offset values."
     offset_label: "Adjust Imagery Offset"
     nudge:
       top: "nudge top"
@@ -942,7 +942,7 @@ en:
       description: Indoor Features
       tooltip: "Rooms, Corridors, Stairwells, etc."
     landuse:
-      description: Landuse Features
+      description: Land Use Features
       tooltip: "Forests, Farmland, Parks, Residential, Commercial, etc."
     boundaries:
       description: Boundaries
@@ -1005,7 +1005,7 @@ en:
             scale_factor: "`{@2x}` or `{r}`: resolution scale factor"
         example: "Example:"
       template:
-        placeholder: Enter a url template
+        placeholder: Enter a URL template
     custom_data:
       tooltip: Edit custom data layer
       header: Custom Map Data Settings
@@ -1015,7 +1015,7 @@ en:
       or: "Or"
       url:
         instructions: "Enter a data file URL or vector tile URL template. Valid tokens are:\n   {zoom} or {z}, {x}, {y} for Z/X/Y tile scheme"
-        placeholder: Enter a url
+        placeholder: Enter a URL
   preferences:
     title: Preferences
     description: Preferences
@@ -1025,7 +1025,7 @@ en:
       privacy_link: View the iD privacy policy
       third_party_icons:
         description: Show Third Party Icons
-        tooltip: Uncheck this box to avoid loading icons from third party sites such as Wikimedia Commons, Facebook, or Twitter.
+        tooltip: Uncheck this box to avoid loading icons from third-party sites such as Wikimedia Commons or Facebook.
   restore:
     heading: You have unsaved changes
     description: "Do you wish to restore unsaved changes from a previous editing session?"
@@ -1274,7 +1274,7 @@ en:
       before_start: "You should be familiar with OpenStreetMap and this editor before you start editing. iD contains a walkthrough to teach you the basics of editing OpenStreetMap. Press the \"{start_the_walkthrough}\" button on this screen to start the tutorial—it takes only about 15 minutes."
       open_source_h: "Open Source"
       open_source: "The iD editor is a collaborative open source project, and you are using version {version} now. The source code is available [on GitHub](https://github.com/openstreetmap/iD)."
-      open_source_attribution: "This project includes icons from [Maki](https://github.com/mapbox/maki) (CC0), [temaki](https://github.com/ideditor/temaki) (CC0), [Fontawesome](https://github.com/FortAwesome/Font-Awesome) (CC BY 4.0) and [Röntgen](https://github.com/enzet/Roentgen) (CC BY 4.0)."
+      open_source_attribution: "This project includes icons from [Maki](https://github.com/mapbox/maki) (CC0), [temaki](https://github.com/ideditor/temaki) (CC0), [Fontawesome](https://github.com/FortAwesome/Font-Awesome) (CC BY 4.0), [Röntgen](https://github.com/enzet/Roentgen) (CC BY 4.0) and [Pinhead](https://pinhead.ink/) (CC0)."
       open_source_help: "You can help iD by [translating](https://github.com/openstreetmap/iD/blob/develop/CONTRIBUTING.md#translating) or [reporting bugs](https://github.com/openstreetmap/iD/issues)."
     overview:
       title: Overview
@@ -1547,6 +1547,8 @@ en:
         reference: Intersecting highways should share a junction vertex.
     area_as_point:
       message: '{feature} should be an area, not a point'
+    area_as_line:
+      message: '{feature} should be a closed area, not a line'
     close_nodes:
       title: "Very Close Points"
       tip: "Find redundant and crowded points"
@@ -1636,9 +1638,14 @@ en:
         message_multi: '{feature} has multiple invalid email addresses'
         reference: 'Email addresses must look like "user@example.com".'
       website:
-        message: '{feature} has an invalid URL'
-        message_multi: '{feature} has multiple invalid URLs'
+        message: '{feature} has an invalid URL in {where}'
+        message_multi: '{feature} has multiple invalid URLs in {where}'
         reference: 'URLs must start with "http://" or "https://".'
+      wikimedia_commons:
+        message: '{feature} has a suspicious Wikimedia Commons tag'
+        reference:
+          wrong_key: 'Wikimedia Commons links should preferably use the wikimedia_commons tag.'
+          wrong_value: 'Wikimedia Commons tags should only contain the file or category instead of the full URL.'
     line_as_area:
       message: '{feature} should be a line, not an area'
     line_as_point:
@@ -1775,6 +1782,9 @@ en:
         title: Connect this feature
       connect_features:
         title: Connect the features
+      connect_features_manually:
+        title: Connect the features manually
+        tooltip: For example by mapping missing sections of roads or paths, or fixing disconnected road intersections.
       connect_using_crossing:
         title: Connect using a crossing
       connect_using_ford:
@@ -1785,6 +1795,8 @@ en:
         title: Continue drawing from end
       convert_to_line:
         title: Convert this to a line
+      convert_to_area:
+        title: Convert this to an area
         annotation: Converted an area to a line.
       delete_feature:
         title: Delete this feature
@@ -2200,7 +2212,7 @@ en:
         title: "Selecting features"
         select_one: "Select a single feature"
         select_multi: "Select multiple features"
-        lasso: "Draw a selection lasso around features"
+        lasso: "Draw a selection lasso to select points in an area"
         search: "Find features matching search text"
       with_selected:
         title: "With features selected"

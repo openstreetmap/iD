@@ -662,6 +662,7 @@ button.add-note svg.icon {
     bottom: 4px;
     height: 20px;
     width: 20px;
+    pointer-events: none;
 }
 .spinner img {
     height: 100%;
@@ -1951,19 +1952,23 @@ input.date-selector {
 
 /* draw the up/down on the buttons */
 .form-field-input-number button.decrement::after,
-.form-field-input-number button.increment::after {
+.form-field-input-number button.increment::after,
+.form-field-input-integer button.decrement::after,
+.form-field-input-integer button.increment::after {
     content: "";
     height: 0; width: 0;
     position: absolute;
     left: 0; right: 0; bottom: 0; top: 0;
     margin: auto;
 }
-.form-field-input-number button.decrement::after {
+.form-field-input-number button.decrement::after,
+.form-field-input-integer button.decrement::after {
     border-top: 5px solid var(--border-color);
     border-left: 5px solid transparent;
     border-right: 5px solid transparent;
 }
-.form-field-input-number button.increment::after {
+.form-field-input-number button.increment::after,
+.form-field-input-integer button.increment::after {
     border-bottom: 5px solid var(--border-color);
     border-left: 5px solid transparent;
     border-right: 5px solid transparent;
@@ -1988,6 +1993,10 @@ input.date-selector {
 }
 .form-field-input-check > span {
     flex: 1 1 auto;
+}
+.form-field-input-check > span.raw-value {
+    font-family: monospace;
+    color: var(--text-color);
 }
 .form-field-input-check > span.mixed {
     font-style: italic;
@@ -2053,6 +2062,10 @@ input.date-selector {
     color: var(--link-color);
     cursor: pointer;
 }
+.form-field-input-radio > label .raw-value {
+    font-family: monospace;
+    color: var(--text-color);
+}
 .form-field-input-radio > label.mixed {
     font-style: italic;
 }
@@ -2093,6 +2106,49 @@ input.date-selector {
     height: 0;
     display: block;
     overflow: hidden;
+}
+
+/* One-line (horizontal) layout when all options fit on a single row */
+.form-field-input-radio.one-line {
+    overflow: hidden;
+}
+.form-field-input-radio.one-line > label {
+    flex: 1 1 auto;
+    min-width: 0;
+    width: auto;
+}
+.form-field-input-radio.one-line.equal-spacing > label {
+    flex: 1 1 0;
+}
+.form-field-input-radio.one-line > label:first-of-type {
+    border-end-start-radius: 4px;
+}
+.form-field-input-radio.one-line > label:last-of-type {
+    border-end-start-radius: 0;
+}
+.form-field-input-radio.one-line > label:not(:first-of-type) {
+    border-inline-start: none;
+}
+
+/* Two-column layout when all options fit on a half-width box */
+.form-field-input-radio.two-column {
+    overflow: hidden;
+}
+.form-field-input-radio.two-column > label {
+    flex: 1 1 auto;
+    min-width: 50%;
+    max-width: 100%;
+    width: 50%;
+}
+.form-field-input-radio.two-column > label:nth-last-of-type(2):nth-of-type(odd),
+.form-field-input-radio.two-column > label:last-of-type:nth-of-type(odd) {
+    border-end-start-radius: 4px;
+}
+.form-field-input-radio.two-column > label:last-of-type:nth-of-type(even) {
+    border-end-start-radius: 0;
+}
+.form-field-input-radio.two-column > label:nth-of-type(even) {
+    border-inline-start: none;
 }
 
 
@@ -3278,13 +3334,29 @@ img.tag-reference-wiki-image {
     border-radius: 5px 0 0 5px;
 }
 
-/* custom data editor - no info/delete buttons */
-.data-editor.raw-tag-editor .tag-row button {
+.data-editor {
+    padding: 20px;
+}
+/* custom data editor: no info/delete/add buttons */
+.data-editor.raw-tag-editor .tag-row button,
+.data-editor.raw-tag-editor .add-tag {
     display: none;
 }
 .data-editor.raw-tag-editor .tag-row .key-wrap,
 .data-editor.raw-tag-editor .tag-row .value-wrap {
     width: 50%;
+}
+.data-editor.raw-tag-editor.tag-row {
+    background-color: transparent;
+}
+.data-editor.raw-tag-editor li:first-child input.value {
+    border-start-end-radius: 4px;
+}
+.data-editor.raw-tag-editor li:nth-last-child(2) input.key {
+    border-end-start-radius: 4px;
+}
+.data-editor.raw-tag-editor li:nth-last-child(2) input.value {
+    border-end-end-radius: 4px;
 }
 
 
@@ -3588,6 +3660,15 @@ div.full-screen > button:focus {
 .ideditor[dir='rtl'] .map-data-pane .layer-list button:last-of-type,
 .ideditor[dir='rtl'] .background-pane .layer-list button:last-of-type {
     border-radius: 3px 0 0 3px;
+}
+
+.layer-list select {
+    padding-left: 4px;
+    padding-bottom: 1px;
+}
+.ideditor[dir='rtl'] .layer-list select {
+    padding-left: 0px;
+    padding-right: 4px;
 }
 
 .map-data-pane .vectortile-container .vectortile-header {
@@ -4871,20 +4952,18 @@ img.tile-debug {
     }
 }
 
-.attribution-wrap .attribution span {
-    background-color: rgba(0,0,0,0.33);
-    padding: 3px 6px;
-    border-radius: 4px;
-}
-
 .attribution-wrap .attribution .source-image {
     height: 20px;
     vertical-align: middle;
     border-radius: 3px;
 }
 
-.attribution-wrap .attribution span {
+.attribution-wrap .attribution .attribution-text {
+    background-color: rgba(0,0,0,0.33);
+    border-radius: 4px;
     margin: 0 3px;
+    padding: 3px 6px;
+    vertical-align: middle;
 }
 
 

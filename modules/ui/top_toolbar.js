@@ -2,7 +2,7 @@ import {
     select as d3_select
 } from 'd3-selection';
 
-import { debounce } from 'es-toolkit/compat';
+import { debounce } from 'es-toolkit';
 import { uiToolDrawModes, uiToolNotes, uiToolSave, uiToolSidebarToggle, uiToolUndoRedo } from './tools';
 
 
@@ -29,7 +29,7 @@ export function uiTopToolbar(context) {
             }
         });
 
-        var debouncedUpdate = debounce(update, 500, { leading: true, trailing: true });
+        var debouncedUpdate = debounce(update, 500, { edges: ['leading', 'trailing'] });
         context.layers()
             .on('change.topToolbar', debouncedUpdate);
 

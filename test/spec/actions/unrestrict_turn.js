@@ -18,6 +18,6 @@ describe('iD.actionUnrestrictTurn', function() {
         var action = iD.actionUnrestrictTurn({ restrictionID: 'r' });
 
         graph = action(graph);
-        expect(graph.hasEntity('r')).to.be.undefined;
+        expect(graph.hasEntity('r')).toBeUndefined();
     });
 });

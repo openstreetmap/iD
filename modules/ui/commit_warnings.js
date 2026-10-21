@@ -82,22 +82,16 @@ export function uiCommitWarnings(context) {
 
             buttons
                 .append('strong')
-                .attr('class', 'issue-message');
+                .attr('class', 'issue-message')
+                .each(function(d) {
+                    return d.message(context)(d3_select(this));
+                });
 
             buttons.filter(function(d) { return d.tooltip; })
                 .call(uiTooltip()
                     .title(function(d) { return d.tooltip; })
                     .placement('top')
                 );
-
-            items = itemsEnter
-                .merge(items);
-
-            items.selectAll('.issue-message')
-                .text('')
-                .each(function(d) {
-                    return d.message(context)(d3_select(this));
-                });
         }
     }
 

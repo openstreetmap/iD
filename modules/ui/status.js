@@ -1,4 +1,4 @@
-import { throttle } from 'es-toolkit/compat';
+import { throttle } from 'es-toolkit';
 
 import { t } from '../core/localizer';
 import { svgIcon } from '../svg/icon';
@@ -12,7 +12,7 @@ export function uiStatus(context) {
         if (!osm) return;
 
         function update(err, apiStatus) {
-            selection.html('');
+            selection.text('');
 
             if (err) {
                 if (apiStatus === 'connectionSwitched') {

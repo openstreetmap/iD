@@ -6,7 +6,7 @@ describe('iD.actionAddMidpoint', function () {
             midpoint = {loc: [1, 2], edge: [a.id, b.id]},
             graph = iD.actionAddMidpoint(midpoint, node)(new iD.coreGraph([a, b]));
 
-        expect(graph.entity(node.id).loc).to.eql([1, 2]);
+        expect(graph.entity(node.id).loc).toEqual([1, 2]);
     });
 
     it('adds the node to a way that contains the given edge in forward order', function () {
@@ -18,8 +18,8 @@ describe('iD.actionAddMidpoint', function () {
             midpoint = {loc: [1, 2], edge: [a.id, b.id]},
             graph = iD.actionAddMidpoint(midpoint, node)(new iD.coreGraph([a, b, w1, w2]));
 
-        expect(graph.entity(w1.id).nodes).to.eql([]);
-        expect(graph.entity(w2.id).nodes).to.eql([a.id, node.id, b.id]);
+        expect(graph.entity(w1.id).nodes).toEqual([]);
+        expect(graph.entity(w2.id).nodes).toEqual([a.id, node.id, b.id]);
     });
 
     it('adds the node to a way that contains the given edge in reverse order', function () {
@@ -31,8 +31,8 @@ describe('iD.actionAddMidpoint', function () {
             midpoint = {loc: [1, 2], edge: [a.id, b.id]},
             graph = iD.actionAddMidpoint(midpoint, node)(new iD.coreGraph([a, b, w1, w2]));
 
-        expect(graph.entity(w1.id).nodes).to.eql([]);
-        expect(graph.entity(w2.id).nodes).to.eql([b.id, node.id, a.id]);
+        expect(graph.entity(w1.id).nodes).toEqual([]);
+        expect(graph.entity(w2.id).nodes).toEqual([b.id, node.id, a.id]);
     });
 
     it('turns an invalid double-back into a self-intersection', function () {
@@ -49,6 +49,6 @@ describe('iD.actionAddMidpoint', function () {
             midpoint = {loc: [1, 2], edge: [a.id, b.id]},
             graph = iD.actionAddMidpoint(midpoint, c)(new iD.coreGraph([a, b, w]));
 
-        expect(graph.entity(w.id).nodes).to.eql([a.id, c.id, b.id, a.id]);
+        expect(graph.entity(w.id).nodes).toEqual([a.id, c.id, b.id, a.id]);
     });
 });

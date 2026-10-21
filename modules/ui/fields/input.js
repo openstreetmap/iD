@@ -1,6 +1,6 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { select as d3_select } from 'd3-selection';
-import { debounce } from 'es-toolkit/compat';
+import { debounce } from 'es-toolkit';
 import { deepEqual } from 'fast-equals';
 import * as countryCoder from '@rapideditor/country-coder';
 
@@ -20,6 +20,7 @@ export {
     uiFieldText as uiFieldEmail,
     uiFieldText as uiFieldIdentifier,
     uiFieldText as uiFieldNumber,
+    uiFieldText as uiFieldInteger,
     uiFieldText as uiFieldSchedule,
     uiFieldText as uiFieldTel,
     uiFieldText as uiFieldUrl,

@@ -1,4 +1,4 @@
-import { debounce } from 'es-toolkit/compat';
+import { debounce, sortBy } from 'es-toolkit';
 import {
     select as d3_select
 } from 'd3-selection';
@@ -10,7 +10,7 @@ import { t } from '../../core/localizer';
 import { utilHighlightEntities } from '../../util';
 import { uiSection } from '../section';
 import { validationIssue } from '../../core/validation';
-import { sortBy } from 'es-toolkit';
+
 
 export function uiSectionValidationIssues(id, severity, context) {
 
@@ -46,21 +46,21 @@ export function uiSectionValidationIssues(id, severity, context) {
         // finally: cut off at a maximum 1000 entries
         const center = context.map().center();
         const graph = context.graph();
-        const rules = sortBy(context.validator().getRuleKeys().filter(key => key !== 'maprules'), [
+        const rules = sortBy(context.validator().getRuleKeys(), [
             rule => t(`issues.${rule}.title`)
         ]);
         const withDistance = _issues.map(issue => {
             const extent = issue.extent(graph);
             return {
-                ...issue,
+                issue,
                 dist: extent ? geoSphericalDistance(center, extent.center()) : 0
             };
         });
         const issues = sortBy(withDistance, [
-            issue => rules.indexOf(issue.type),
-            'subtype',
+            ({ issue }) => rules.indexOf(issue.type),
+            row => row.issue.subtype,
             'dist'
-        ]).slice(0, 1000);
+        ]).slice(0, 1000).map(({ issue }) => issue);
 
         //renderIgnoredIssuesReset(_warningsSelection);
 
