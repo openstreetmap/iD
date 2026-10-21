@@ -12,6 +12,7 @@ import { utilCheckTagDictionary } from '../../util';
 import { osmOneWayTags } from '../../osm/tags';
 import type { EntityId } from '../../osm';
 import { formatTag } from './tag_title';
+import { uiTooltip } from '../tooltip';
 
 export { uiFieldCheck as uiFieldDefaultCheck };
 export { uiFieldCheck as uiFieldOnewayCheck };
@@ -123,6 +124,11 @@ export function uiFieldCheck(field: any, context: iD.Context) {
             enter
                 .append('button')
                 .attr('class', 'reverser' + (reverserHidden() ? ' hide' : ''))
+                .call((uiTooltip() as any)
+                     .title(() => t.append('inspector.check.reverser'))
+                     .keys([t('operations.reverse.key')])
+                     .placement('top')
+                )
                 .append('span')
                 .attr('class', 'reverser-span');
         }
@@ -164,13 +170,14 @@ export function uiFieldCheck(field: any, context: iD.Context) {
                     d3_event.preventDefault();
                     d3_event.stopPropagation();
                     context.perform(
+
                         function(graph: iD.Graph) {
                             for (var i in _entityIDs) {
                                 graph = actionReverse(_entityIDs[i])(graph);
                             }
                             return graph;
                         },
-                        t('operations.reverse.annotation.line', { n: '1' })
+                        t('operations.reverse.annotation.line', { n: _entityIDs.length })
                     );
 
                     // must manually revalidate since no 'change' event was called

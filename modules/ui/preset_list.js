@@ -26,7 +26,7 @@ export function uiPresetList(context) {
 
         var presets = presetManager.matchAllGeometry(entityGeometries());
 
-        selection.html('');
+        selection.text('');
 
         var messagewrap = selection
             .append('div')

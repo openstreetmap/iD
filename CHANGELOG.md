@@ -42,20 +42,24 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Render diameter and radius tags when a node is selected ([#9732], thanks [@k-yle])
 * Dedicated rendering for road sections tagged with `ford=yes` ([#12830], thanks [@Geo-2695])
 * Allow to press `=` key to switch between _key_ and _value_ part of tags in the raw tag editor ([#12828], thanks [@hemaksh2007jain-bit]) and allow to press _Enter_ key to switch between tag parts or next tag in the raw tag editor
+* Make `waterway=dam` lines more visible on the map, and render them above water areas ([#12540], thanks [@matkoniecz])
 * Prevent the browser tab from accidentally being closed while uploading a changeset ([#12928], thanks [@k-yle])
 * Include all imagery layers from the editor-layer-index, even those older than 20 years ([#12878], thanks [@andrewharvey])
 * Don't discard incomplete lines in the (text mode) raw tag editor when switching browser tabs ([#12958], thanks [@aakarshitv])
 #### :scissors: Operations
+* Add shortcut tooltip to reverse direction button ([#12961], thanks [@SaifuddinM23])
 #### :camera: Street-Level
 #### :white_check_mark: Validation
 * Warn about `goo.gl` shortlinks as sources, alongside full Google URLs ([#12740])
 * Allow (address) points at the same coordinate if they have different `addr:floor` ([#8424])
 * Implement functionality to show tooltips for individual validation fixes.
 * Improve wording for "connect the features (manually)" fix for routing-islands validator, and show tooltip with further instructions ([#8402])
+* Show all `mutually_exclusive_tags` validation warnings when there are multiple present on a single object ([#13016], thanks [@matkoniecz])
 #### :bug: Bugfixes
 * Fix exceptions when resizing the browser tab when nothing is selected ([#12800], thanks [@k-yle])
 * Allow tags like `not:*:wikidata` to have multiple values ([#12736], thanks [@k-yle])
 * Fix the icon of the GPS Overlay layer not working ([#12760], thanks [@hlfan])
+* Fix minor labelling bug - try 85 and 95 offsets rather than trying 95 twice ([#13009], thanks [@matkoniecz])
 #### :earth_asia: Localization
 * Support 835 new languages in the dropdown when adding a `name:*` tag ([#12802])
 * Support territory-level address hints ([#12704], thanks [@Vectorial1024])
@@ -66,10 +70,12 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :hammer: Development
 * Ongoing work to migrate the codebase from JavaScript to TypeScript ([view progress](https://github.com/openstreetmap/iD/milestone/47?closed=1))
 * Drop code previously responsible for _maprules_ integration (which has been defunct for a while now) ([#12679])
+* Drop confusing dead code ([#13014], thanks [@matkoniecz])
 
 [#8402]: https://github.com/openstreetmap/iD/issues/8402
 [#8424]: https://github.com/openstreetmap/iD/issues/8424
 [#9732]: https://github.com/openstreetmap/iD/pull/9732
+[#12540]: https://github.com/openstreetmap/iD/issues/12540
 [#12679]: https://github.com/openstreetmap/iD/pull/12679
 [#12704]: https://github.com/openstreetmap/iD/pull/12704
 [#12724]: https://github.com/openstreetmap/iD/pull/12724
@@ -84,8 +90,12 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#12910]: https://github.com/openstreetmap/iD/pull/12910
 [#12928]: https://github.com/openstreetmap/iD/pull/12928
 [#12958]: https://github.com/openstreetmap/iD/pull/12958
+[#13009]: https://github.com/openstreetmap/iD/pull/13009
+[#13014]: https://github.com/openstreetmap/iD/pull/13014
+[#13016]: https://github.com/openstreetmap/iD/pull/13016
 [@Geo-2695]: https://github.com/Geo-2695
 [@hemaksh2007jain-bit]: https://github.com/hemaksh2007jain-bit
+[@SaifuddinM23]: https://github.com/SaifuddinM23
 
 
 # 2.42.1
@@ -361,6 +371,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 
 * Fix regression where some strings (like some section headings) are not rendered correctly ([#12083])
 
+[#12083]: https://github.com/openstreetmap/iD/issues/12083
 
 # 2.39.4
 ##### 2026-03-23
