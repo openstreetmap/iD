@@ -5972,6 +5972,11 @@ li.hide + li.version .badge .tooltip .popover-arrow {
 
 /* Scrollbars
  ----------------------------------------------------- */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0,0,0,.35) rgba(0,0,0,.03);
+}
+
 ::-webkit-scrollbar {
     height: 10px;
     overflow: visible;
@@ -5980,32 +5985,34 @@ li.hide + li.version .badge .tooltip .popover-arrow {
 }
 
 ::-webkit-scrollbar-track {
+    background-color: rgba(0,0,0,.03);
     background-clip: padding-box;
     border: solid transparent;
     border-width: 0;
 }
 
 ::-webkit-scrollbar-thumb {
-    background-color: rgba(0,0,0,.2);
+    background-color: rgba(0,0,0,.35);
     background-clip: padding-box;
-    border: solid transparent;
-    border-width: 3px 3px 3px 4px;
+    border: 2px solid transparent;
     border-radius: 6px;
     cursor: auto;
 }
+::-webkit-scrollbar-thumb:active {
+    background-color: rgba(0,0,0,.65);
+}
+@media (hover: hover) {
+    ::-webkit-scrollbar-thumb:hover {
+        background-color: rgba(0,0,0,.5);
+    }
+}
 ::-webkit-scrollbar-track:active {
-    background-color: rgba(0,0,0,.05);
+    background-color: rgba(0,0,0,.06);
 }
 @media (hover: hover) {
     ::-webkit-scrollbar-track:hover {
-        background-color: rgba(0,0,0,.05);
+        background-color: rgba(0,0,0,.06);
     }
-}
-/* Firefox */
-@-moz-document url-prefix() {
-	* {
-	    scrollbar-width: thin;
-	}
 }
 
 :dir(rtl)::-webkit-scrollbar {
@@ -6013,7 +6020,7 @@ li.hide + li.version .badge .tooltip .popover-arrow {
     border-left: none;
 }
 :dir(rtl)::-webkit-scrollbar-thumb {
-    border-width: 3px 4px 3px 3px;
+    border: 2px solid transparent;
     border-radius: 6px;
 }
 
