@@ -68,7 +68,7 @@ export function behaviorDraw(context) {
             id: d3_event.pointerId || 'mouse',
             pointerLocGetter: pointerLocGetter,
             downTime: +new Date(),
-            downLoc: pointerLocGetter(d3_event)
+            downLoc: context.map().mouse(d3_event) || pointerLocGetter(d3_event)
         };
 
         dispatch.call('down', this, d3_event, datum(d3_event));
@@ -86,7 +86,7 @@ export function behaviorDraw(context) {
         if (downPointer.isCancelled) return;
 
         var t2 = +new Date();
-        var p2 = downPointer.pointerLocGetter(d3_event);
+        var p2 = context.map().mouse(d3_event) || downPointer.pointerLocGetter(d3_event);
         var dist = geoVecLength(downPointer.downLoc, p2);
 
         if (dist < _closeTolerance ||
@@ -111,7 +111,7 @@ export function behaviorDraw(context) {
         if (_downPointer &&
             _downPointer.id === (d3_event.pointerId || 'mouse') &&
             !_downPointer.isCancelled) {
-            var p2 = _downPointer.pointerLocGetter(d3_event);
+            var p2 = context.map().mouse(d3_event) || _downPointer.pointerLocGetter(d3_event);
             var dist = geoVecLength(_downPointer.downLoc, p2);
             if (dist >= _closeTolerance) {
                 _downPointer.isCancelled = true;
