@@ -153,11 +153,7 @@ export function uiFieldCheck(field: any, context: iD.Context) {
                 var t: TagsUpdate = {};
 
                 if (Array.isArray(_tags[field.key])) {
-                    if (values.includes(forwardValue)) {
-                        t[field.key] = forwardValue;
-                    } else {
-                        t[field.key] = values[0];
-                    }
+                    t[field.key] = values[1]; // set to checked/"yes" state
                 } else {
                     t[field.key] = values[(values.indexOf(_value) + 1) % values.length];
                 }
