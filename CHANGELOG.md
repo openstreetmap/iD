@@ -71,6 +71,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :hammer: Development
 * Ongoing work to migrate the codebase from JavaScript to TypeScript ([view progress](https://github.com/openstreetmap/iD/milestone/47?closed=1))
 * Drop code previously responsible for _maprules_ integration (which has been defunct for a while now) ([#12679])
+* Drop support for `oneway=1` ([#13026], thanks [@k-yle])
 * Drop confusing dead code ([#13014], thanks [@matkoniecz])
 
 [#8402]: https://github.com/openstreetmap/iD/issues/8402
@@ -95,6 +96,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#13009]: https://github.com/openstreetmap/iD/pull/13009
 [#13014]: https://github.com/openstreetmap/iD/pull/13014
 [#13016]: https://github.com/openstreetmap/iD/pull/13016
+[#13026]: https://github.com/openstreetmap/iD/pull/13026
 [@Geo-2695]: https://github.com/Geo-2695
 [@hemaksh2007jain-bit]: https://github.com/hemaksh2007jain-bit
 [@SaifuddinM23]: https://github.com/SaifuddinM23

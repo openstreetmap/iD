@@ -86,7 +86,6 @@ export function actionReverse(entityID: EntityId, options?: ReverseOptions): Act
     };
     var onewayReplacements: Record<TagValue, TagValue> = {
         yes: '-1',
-        '1': '-1',
         '-1': 'yes'
     };
 

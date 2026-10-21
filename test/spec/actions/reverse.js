@@ -167,7 +167,6 @@ describe('iD.actionReverse', function () {
             var graph = new iD.coreGraph([
                 new iD.osmWay({id: 'yes', tags: {oneway: 'yes'}}),
                 new iD.osmWay({id: 'no', tags: {oneway: 'no'}}),
-                new iD.osmWay({id: '1', tags: {oneway: '1'}}),
                 new iD.osmWay({id: '-1', tags: {oneway: '-1'}})
             ]);
 
@@ -175,8 +174,6 @@ describe('iD.actionReverse', function () {
                 .entity('yes').tags).toEqual({oneway: '-1'}, 'yes');
             expect(iD.actionReverse('no', {reverseOneway: true})(graph)
                 .entity('no').tags).toEqual({oneway: 'no'}, 'no');
-            expect(iD.actionReverse('1', {reverseOneway: true})(graph)
-                .entity('1').tags).toEqual({oneway: '-1'}, '1');
             expect(iD.actionReverse('-1', {reverseOneway: true})(graph)
                 .entity('-1').tags).toEqual({oneway: 'yes'}, '-1');
         });
