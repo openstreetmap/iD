@@ -47,6 +47,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Include all imagery layers from the editor-layer-index, even those older than 20 years ([#12878], thanks [@andrewharvey])
 * Don't discard incomplete lines in the (text mode) raw tag editor when switching browser tabs ([#12958], thanks [@aakarshitv])
 #### :scissors: Operations
+* Treat `conveying=*` the same as `oneway=*` when reversing a line ([#13027], thanks [@k-yle])
 * Add shortcut tooltip to reverse direction button ([#12961], thanks [@SaifuddinM23])
 #### :camera: Street-Level
 #### :white_check_mark: Validation
@@ -97,6 +98,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#13014]: https://github.com/openstreetmap/iD/pull/13014
 [#13016]: https://github.com/openstreetmap/iD/pull/13016
 [#13026]: https://github.com/openstreetmap/iD/pull/13026
+[#13027]: https://github.com/openstreetmap/iD/pull/13027
 [@Geo-2695]: https://github.com/Geo-2695
 [@hemaksh2007jain-bit]: https://github.com/hemaksh2007jain-bit
 [@SaifuddinM23]: https://github.com/SaifuddinM23
