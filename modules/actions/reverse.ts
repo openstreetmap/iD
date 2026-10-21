@@ -134,7 +134,7 @@ export function actionReverse(entityID: EntityId, options?: ReverseOptions): Act
 
         } else if (forwardValues && backwardValues && (forwardValues[value] || backwardValues[value])) {
             if (!options?.reverseOneway) return value;
-            // this assumes that there will will never be duplicate oneway tags which the same meaning
+            // this assumes that there will will never be duplicate oneway tags with the same meaning
             // e.g. oneway=yes and oneway=1
             return Object.keys(forwardValues[value] ? backwardValues : forwardValues)[0];
 
