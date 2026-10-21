@@ -341,7 +341,7 @@ export function uiSuccess(context) {
         .call(uiDisclosure(context, `community-events-${d.id}`, false)
           .expanded(false)
           .updatePreference(false)
-          .label(t.append('success.events'))
+          .label(() => t.append('success.events'))
           .content(showNextEvents)
         )
         .select('.hide-toggle')
