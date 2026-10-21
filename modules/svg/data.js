@@ -56,6 +56,7 @@ export function svgData(projection, context, dispatch) {
                 d3_event.preventDefault();
                 if (!detected.filedrop) return;
                 var f = d3_event.dataTransfer.files[0];
+                if (!f) return;
                 var extension = getExtension(f.name);
                 if (!supportedFormats.includes(extension)) return;
                 drawData.fileList(d3_event.dataTransfer.files);
