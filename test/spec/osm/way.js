@@ -385,6 +385,29 @@ describe('iD.osmWay', function() {
         });
     });
 
+    describe('#isOneWayForwards, #isOneWayBackwards, #isBiDirectional', function() {
+        // regression test: the combined `osmOneWayTags` dictionary must not be
+        // built by mutating one of the directional dictionaries
+        it('only matches the respective direction', function() {
+            const yes = new iD.osmWay({tags: { oneway: 'yes' }});
+            expect(yes.isOneWayForwards(), 'yes forwards').toBe(true);
+            expect(yes.isOneWayBackwards(), 'yes backwards').toBe(false);
+            expect(yes.isBiDirectional(), 'yes bidirectional').toBe(false);
+
+            const backwards = new iD.osmWay({tags: { oneway: '-1' }});
+            expect(backwards.isOneWayForwards(), '-1 forwards').toBe(false);
+            expect(backwards.isOneWayBackwards(), '-1 backwards').toBe(true);
+            expect(backwards.isBiDirectional(), '-1 bidirectional').toBe(false);
+
+            for (const value of ['alternating', 'reversible']) {
+                const way = new iD.osmWay({tags: { oneway: value }});
+                expect(way.isOneWayForwards(), `${value} forwards`).toBe(false);
+                expect(way.isOneWayBackwards(), `${value} backwards`).toBe(false);
+                expect(way.isBiDirectional(), `${value} bidirectional`).toBe(true);
+            }
+        });
+    });
+
     describe('#sidednessIdentifier', function() {
         it('returns tag when the tag has implied sidedness', function() {
             expect(new iD.osmWay({tags: { natural: 'cliff' }}).sidednessIdentifier()).toEqual('natural');

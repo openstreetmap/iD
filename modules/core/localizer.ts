@@ -1,5 +1,5 @@
 import { select as d3_select } from 'd3-selection';
-import { escape } from 'es-toolkit/compat';
+import { escape } from 'es-toolkit';
 
 import { fileFetcher } from './file_fetcher';
 import { utilDetect } from '../util/detect';

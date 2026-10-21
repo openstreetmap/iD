@@ -2,7 +2,7 @@ import { dispatch as d3_dispatch } from 'd3-dispatch';
 import {
     select as d3_select
 } from 'd3-selection';
-import { omit } from 'es-toolkit/compat';
+import { omit } from 'es-toolkit';
 
 import { utilRebind } from '../../util/rebind';
 import { localizer, t } from '../../core/localizer';
@@ -64,7 +64,7 @@ export function uiFieldCheck(field: any, context: iD.Context) {
         // where implied oneway tag exists (e.g. `junction=roundabout`) #2220, #1841
         if (field.id === 'oneway') {
             var entity = context.entity(_entityIDs[0]);
-            if (entity.type === 'way' && !!utilCheckTagDictionary(entity.tags, omit(osmOneWayTags, 'oneway'))) {
+            if (entity.type === 'way' && !!utilCheckTagDictionary(entity.tags, omit(osmOneWayTags, ['oneway']))) {
                 _impliedYes = true;
                 texts[0] = t.append('_tagging.presets.fields.oneway_yes.options.undefined');
             }

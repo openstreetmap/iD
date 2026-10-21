@@ -1,4 +1,4 @@
-import { merge } from 'es-toolkit/compat';
+import { toMerged } from 'es-toolkit';
 import type { TagDictionary } from '../util/object';
 import { getLuma } from '../util/util';
 
@@ -228,9 +228,10 @@ export const osmOneWayBiDirectionalTags: TagDictionary<boolean> = {
         'reversible': true,
     },
 };
-export const osmOneWayTags = merge(
-    osmOneWayForwardTags,
-    osmOneWayBackwardTags,
+// `toMerged` returns a new object (unlike lodash's `merge`, which mutates its
+// first argument), so the three dictionaries above are left untouched.
+export const osmOneWayTags: TagDictionary<boolean> = toMerged(
+    toMerged(osmOneWayForwardTags, osmOneWayBackwardTags),
     osmOneWayBiDirectionalTags,
 );
 

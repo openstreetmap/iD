@@ -1,5 +1,4 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
-import { isArray, isNumber } from 'es-toolkit/compat';
 
 import { t } from '../../core/localizer';
 import { uiConfirm } from '../confirm';
@@ -78,7 +77,7 @@ export function uiSettingsLocalPhotos(context) {
 
     function updatePhotoList(container) {
         function locationUnavailable(d) {
-            return !(isArray(d.loc) && isNumber(d.loc[0]) && isNumber(d.loc[1]));
+            return !(Array.isArray(d.loc) && typeof d.loc[0] === 'number' && typeof d.loc[1] === 'number');
         }
 
         container.selectAll('li.placeholder').remove();
