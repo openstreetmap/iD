@@ -88,6 +88,45 @@ describe('iD.validations.mismatched_geometry', function () {
         expect(issues).toHaveLength(0);
     });
 
+    it('flags type=multipolygon on a point and removes the tag', function() {
+        const container = d3_select(document.createElement('div'));
+        createPoint({ type: 'multipolygon', name: 'Test' });
+
+        const issues = validate();
+        expect(issues).toHaveLength(1);
+        expect(issues[0].type).toEqual('mismatched_geometry');
+        expect(issues[0].subtype).toEqual('multipolygon_type_on_non_relation');
+        expect(issues[0].severity).toEqual('warning');
+        issues[0].message(context)(container);
+        expect(container.text()).toBe('Point Test has type=multipolygon but is not a relation');
+
+        issues[0].fixes(context)[0].onClick(context);
+        expect(context.entity('n-1').tags).toStrictEqual({ name: 'Test' });
+    });
+
+    it('flags type=multipolygon on a way', function() {
+        createOpenWay({ type: 'multipolygon', highway: 'service' });
+
+        const issues = validate();
+        expect(issues).toHaveLength(1);
+        expect(issues[0].subtype).toEqual('multipolygon_type_on_non_relation');
+        expect(issues[0].entityIds).toEqual(['w-1']);
+    });
+
+    it('does not flag other type tags on nodes or ways', function() {
+        createOpenWay({ type: 'palm', natural: 'tree' });
+        var issues = validate();
+        expect(issues).toHaveLength(0);
+    });
+
+    it('does not flag type=multipolygon on a relation', function() {
+        var relation = new iD.osmRelation({ id: 'r-1', tags: { type: 'multipolygon', landuse: 'forest' } });
+        context.perform(iD.actionAddEntity(relation));
+
+        var issues = validate();
+        expect(issues).toHaveLength(0);
+    });
+
     it('ignores points', function() {
         createPoint({ building: 'yes' });
         var issues = validate();
