@@ -99,7 +99,7 @@
     "@typescript/native": "npm:typescript@^7.0.2",
     "@vitest/coverage-v8": "^5.0.1",
     "@vitest/eslint-plugin": "^1.6.23",
-    "@waysidemapping/pinhead": "^15.23.0",
+    "@waysidemapping/pinhead": "^16.26.0",
     "autoprefixer": "^10.4.21",
     "browserslist": "^4.27.0",
     "browserslist-to-esbuild": "^2.1.1",
