@@ -233,7 +233,6 @@ export const osmOneWayTags: TagDictionary<boolean> = [
     osmOneWayBackwardTags,
     osmOneWayBiDirectionalTags
 ].reduce(toMerged);
-);
 
 // solid and smooth surfaces akin to the assumed default road or path surface
 export const osmPavedTags: TagDictionary<boolean> = {
