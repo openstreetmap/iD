@@ -63,6 +63,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Fix some tags (such as `railway:preferred_direction`) from being falsely detected as non-reversible ([#13018], thanks [@matkoniecz])
 * Fix exception when dragging some undraggable parts of the UI ([#13030], thanks [@k-yle])
 * Fix minor labelling bug - try 85 and 95 offsets rather than trying 95 twice ([#13009], thanks [@matkoniecz])
+* Fix mistake in right-to-left text detection ([#13032], thanks [@matkoniecz])
 #### :earth_asia: Localization
 * Support 835 new languages in the dropdown when adding a `name:*` tag ([#12802])
 * Support territory-level address hints ([#12704], thanks [@Vectorial1024])
@@ -99,6 +100,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#13014]: https://github.com/openstreetmap/iD/pull/13014
 [#13016]: https://github.com/openstreetmap/iD/pull/13016
 [#13026]: https://github.com/openstreetmap/iD/pull/13026
+[#13032]: https://github.com/openstreetmap/iD/pull/13032
 [#13027]: https://github.com/openstreetmap/iD/pull/13027
 [#13030]: https://github.com/openstreetmap/iD/pull/13030
 [@Geo-2695]: https://github.com/Geo-2695
