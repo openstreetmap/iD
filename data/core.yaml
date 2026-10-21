@@ -1602,6 +1602,10 @@ en:
         reference: "Crossing indoor features should use different levels."
       indoor-indoor_connectable:
         reference: "Crossing indoor features should be connected or use different levels."
+    overlapping_ways:
+      title: Overlapping Ways
+      message: "{feature} overlaps {feature2}"
+      tip: "Find features that incorrectly overlap one another"
     disconnected_way:
       title: Disconnected Ways
       tip: "Find unroutable roads, paths, and ferry routes"
