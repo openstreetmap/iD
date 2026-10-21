@@ -45,8 +45,10 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Make `waterway=dam` lines more visible on the map, and render them above water areas ([#12540], thanks [@matkoniecz])
 * Prevent the browser tab from accidentally being closed while uploading a changeset ([#12928], thanks [@k-yle])
 * Include all imagery layers from the editor-layer-index, even those older than 20 years ([#12878], thanks [@andrewharvey])
+* Dedicated, more visible rendering for `railway=platform_edge`, so that it stands out on the outline of `railway=platform` areas ([#12858], thanks [@matkoniecz])
 * Don't discard incomplete lines in the (text mode) raw tag editor when switching browser tabs ([#12958], thanks [@aakarshitv])
 #### :scissors: Operations
+* Treat `conveying=*` the same as `oneway=*` when reversing a line ([#13027], thanks [@k-yle])
 * Add shortcut tooltip to reverse direction button ([#12961], thanks [@SaifuddinM23])
 #### :camera: Street-Level
 #### :white_check_mark: Validation
@@ -59,9 +61,12 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Fix exceptions when resizing the browser tab when nothing is selected ([#12800], thanks [@k-yle])
 * Allow tags like `not:*:wikidata` to have multiple values ([#12736], thanks [@k-yle])
 * Fix the icon of the GPS Overlay layer not working ([#12760], thanks [@hlfan])
-* Fix some tags (such as `railway:preferred_direction`) from being falsely detected as non-reversible ([#13018], thanks [@matkoniecz])
-* Don't flip values of tags which are not relative to the way direction (such as `driving_side`) when reversing a way (thanks [@matkoniecz])
+* Flip some tags (such as `railway:preferred_direction`) that were falsely detected as non-reversible ([#13018], thanks [@matkoniecz])
+* Don't flip values of tags which are not relative to the way direction (such as `driving_side`) when reversing a way ([#13036], thanks [@matkoniecz])
+* Fix exception when dragging some undraggable parts of the UI ([#13030], thanks [@k-yle])
 * Fix minor labelling bug - try 85 and 95 offsets rather than trying 95 twice ([#13009], thanks [@matkoniecz])
+* Fix mistake in right-to-left text detection ([#13032], thanks [@matkoniecz])
+* Fix some checkbox fields from not setting the "checked" state on the first click when editing a multiselection with multiple values
 #### :earth_asia: Localization
 * Support 835 new languages in the dropdown when adding a `name:*` tag ([#12802])
 * Support territory-level address hints ([#12704], thanks [@Vectorial1024])
@@ -69,6 +74,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :hourglass: Performance
 #### :mortar_board: Walkthrough / Help
 #### :rocket: Presets
+* Allow the field UI for `oneway=*` to be reused by other tags like `conveying=*` ([#13029], thanks [@k-yle])
 #### :hammer: Development
 * Ongoing work to migrate the codebase from JavaScript to TypeScript ([view progress](https://github.com/openstreetmap/iD/milestone/47?closed=1))
 * Drop code previously responsible for _maprules_ integration (which has been defunct for a while now) ([#12679])
@@ -87,6 +93,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#12760]: https://github.com/openstreetmap/iD/pull/12760
 [#12800]: https://github.com/openstreetmap/iD/pull/12800
 [#12802]: https://github.com/openstreetmap/iD/pull/12802
+[#12858]: https://github.com/openstreetmap/iD/issues/12858
 [#12828]: https://github.com/openstreetmap/iD/pull/12828
 [#12830]: https://github.com/openstreetmap/iD/pull/12830
 [#12878]: https://github.com/openstreetmap/iD/pull/12878
@@ -98,6 +105,11 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#13014]: https://github.com/openstreetmap/iD/pull/13014
 [#13016]: https://github.com/openstreetmap/iD/pull/13016
 [#13026]: https://github.com/openstreetmap/iD/pull/13026
+[#13032]: https://github.com/openstreetmap/iD/pull/13032
+[#13027]: https://github.com/openstreetmap/iD/pull/13027
+[#13029]: https://github.com/openstreetmap/iD/pull/13029
+[#13030]: https://github.com/openstreetmap/iD/pull/13030
+[#13036]: https://github.com/openstreetmap/iD/pull/13036
 [@Geo-2695]: https://github.com/Geo-2695
 [@hemaksh2007jain-bit]: https://github.com/hemaksh2007jain-bit
 [@SaifuddinM23]: https://github.com/SaifuddinM23

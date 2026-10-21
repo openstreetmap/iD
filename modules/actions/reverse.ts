@@ -1,7 +1,7 @@
 import type { coreGraph } from '../core';
 import type { Action } from '../core/history';
 import type { EntityId, OsmEntity, osmWay } from '../osm';
-import { osmMatchTags } from '../osm/tags';
+import { osmMatchTags, osmOneWayBackwardTags, osmOneWayForwardTags } from '../osm/tags';
 import { presetManager } from '../presets';
 
 export interface ActionReverse extends Action {
@@ -93,10 +93,6 @@ export function actionReverse(entityID: EntityId, options?: ReverseOptions): Act
         forwards: 'backward',
         backwards: 'forward'
     };
-    var onewayReplacements: Record<TagValue, TagValue> = {
-        yes: '-1',
-        '-1': 'yes'
-    };
 
     var compassReplacements: Record<TagValue, TagValue> = {
         N: 'S',
@@ -139,11 +135,17 @@ export function actionReverse(entityID: EntityId, options?: ReverseOptions): Act
             }
         }
 
+        const forwardValues = osmOneWayForwardTags[key];
+        const backwardValues = osmOneWayBackwardTags[key];
+
         if (key === 'incline' && numeric.test(value)) {
             return value.replace(numeric, function(_, sign) { return sign === '-' ? '' : '-'; });
 
-        } else if (options && options.reverseOneway && key === 'oneway') {
-            return onewayReplacements[value] || value;
+        } else if (forwardValues && backwardValues && (forwardValues[value] || backwardValues[value])) {
+            if (!options?.reverseOneway) return value;
+            // this assumes that there will will never be duplicate oneway tags with the same meaning
+            // e.g. oneway=yes and oneway=1
+            return Object.keys(forwardValues[value] ? backwardValues : forwardValues)[0];
 
         } else if (includeAbsolute && directionKey.test(key)) {
             return value.split(';').map(value => {
