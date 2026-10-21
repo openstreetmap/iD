@@ -1055,6 +1055,7 @@ en:
   merge_remote_changes:
     conflict:
       deleted: 'This feature has been deleted by {user}.'
+      deleted_locally: '{user} changed this feature, but you deleted it.'
       location: 'This feature was moved by both you and {user}.'
       nodelist: 'Nodes were changed by both you and {user}.'
       memberlist: 'Relation members were changed by both you and {user}.'

@@ -7,15 +7,22 @@ import { actionNoop } from '../actions/noop';
 import { actionRevert } from '../actions/revert';
 import { coreGraph } from './graph';
 import { t } from './localizer';
-import { utilArrayUnion, utilArrayUniq, utilDisplayName, utilDisplayType, utilRebind } from '../util';
+import { utilArrayUnion, utilDisplayName, utilDisplayType, utilRebind } from '../util';
 import type { coreContext } from './context';
 import type { EntityId, osmChangeset, OsmEntity } from '../osm';
 import type { Action } from './history';
 import type { OsmChange } from '../osm/changeset';
 import type { Discarded } from '@openstreetmap/id-tagging-schema';
+import { rebaseRemoteChangesIntoBaseGraph } from './rebaser';
 
+
+export enum ConflictChoiceType {
+    KEEP_LOCAL = 0,
+    KEEP_REMOTE = 1,
+}
 
 export interface Choice {
+    choiceType: ConflictChoiceType;
     id: EntityId;
     text: string;
     action(): void;
@@ -25,7 +32,7 @@ export interface Conflict {
     id: EntityId;
     name: string;
     details: d3.Selector[];
-    chosen: number;
+    chosen: ConflictChoiceType;
     choices: Choice[];
 }
 
@@ -145,14 +152,11 @@ export function coreUploader(context: coreContext) {
         var localGraph = context.graph();
         var remoteGraph = new coreGraph(history.base(), true);
 
-        var summary = history.difference().summary();
-        var _toCheck: EntityId[] = [];
-        for (var i = 0; i < summary.length; i++) {
-            var item = summary[i];
-            if (item.changeType === 'modified') {
-                _toCheck.push(item.entity.id);
-            }
-        }
+        const difference = history.difference();
+        const _toCheck = [
+            ...difference.modified(),
+            ...difference.deleted(),
+        ].map(entity => entity.id);
 
         var _toLoad = withChildNodes(_toCheck, localGraph);
         var _loaded: { [id: string]: boolean } = {};
@@ -172,8 +176,8 @@ export function coreUploader(context: coreContext) {
         function withChildNodes(ids: EntityId[], graph: coreGraph) {
             var s = new Set(ids);
             ids.forEach(function(id) {
-                var entity = graph.entity(id);
-                if (entity.type !== 'way') return;
+                var entity = graph.hasEntity(id);
+                if (entity?.type !== 'way') return;
 
                 graph.childNodes(entity).forEach(function(child) {
                     if (child.version !== undefined) {
@@ -247,8 +251,9 @@ export function coreUploader(context: coreContext) {
 
 
         function detectConflicts() {
-            function choice(id: EntityId, text: string, action: Action): Choice {
+            function choice(choiceType: ConflictChoiceType, id: EntityId, text: string, action: Action): Choice {
                 return {
+                    choiceType,
                     id: id,
                     text: text,
                     action: function() {
@@ -270,6 +275,9 @@ export function coreUploader(context: coreContext) {
             function sameVersions(local: OsmEntity, remote: OsmEntity) {
                 if (local.version !== remote.version) return false;
 
+                // if the local version was deleted, no need to continue
+                if (!localGraph.hasEntity(local.id)) return true;
+
                 if (local.type === 'way' && remote.type === 'way') {
                     var children = utilArrayUnion(local.nodes, remote.nodes);
                     for (var i = 0; i < children.length; i++) {
@@ -283,10 +291,16 @@ export function coreUploader(context: coreContext) {
             }
 
             _toCheck.forEach(function(id) {
-                var local = localGraph.entity(id);
+                // for local_delete, we need to find the feature from the base graph
+                var local = localGraph.hasEntity(id) || localGraph.base().entities[id]!;
                 var remote = remoteGraph.entity(id);
 
                 if (sameVersions(local, remote)) return;
+
+                if (!localGraph.hasEntity(id) && remote.visible) {
+                    // local_delete + remote_modify
+                    rebaseRemoteChangesIntoBaseGraph(context, remote, remoteGraph);
+                }
 
                 var merge = actionMergeRemoteChanges(id, localGraph, remoteGraph, _discardTags, formatUser);
 
@@ -307,10 +321,10 @@ export function coreUploader(context: coreContext) {
                     id: id,
                     name: entityName(local),
                     details: mergeConflicts,
-                    chosen: 1,
+                    chosen: ConflictChoiceType.KEEP_LOCAL,
                     choices: [
-                        choice(id, keepMine, forceLocal),
-                        choice(id, keepTheirs, forceRemote)
+                        choice(ConflictChoiceType.KEEP_LOCAL, id, keepMine, forceLocal),
+                        choice(ConflictChoiceType.KEEP_REMOTE, id, keepTheirs, forceRemote)
                     ]
                 });
             });
@@ -414,7 +428,7 @@ export function coreUploader(context: coreContext) {
             endSave();
 
             context.flush(); // reset iD
-        }, 2500);
+        }, window.VITEST ? 0 : 2500);
     }
 
 
@@ -426,6 +440,9 @@ export function coreUploader(context: coreContext) {
 
 
     uploader.cancelConflictResolution = function() {
+        // this doesn't work, and it seems like it hasn't worked
+        // properly for many years.
+        // TODO: consider disabling the cancel button, since we know it's broken?
         context.history().pop();
     };
 
@@ -434,14 +451,7 @@ export function coreUploader(context: coreContext) {
         var history = context.history();
 
         for (var i = 0; i < _conflicts.length; i++) {
-            if (_conflicts[i].chosen === 1) {  // user chose "use theirs"
-                var entity = context.hasEntity(_conflicts[i].id);
-                if (entity && entity.type === 'way') {
-                    var children = utilArrayUniq(entity.nodes);
-                    for (var j = 0; j < children.length; j++) {
-                        history.replace(actionRevert(children[j]));
-                    }
-                }
+            if (_conflicts[i].chosen === ConflictChoiceType.KEEP_REMOTE) {  // user chose "use theirs"
                 history.replace(actionRevert(_conflicts[i].id));
             }
         }

@@ -192,4 +192,54 @@ describe('iD.actionRevert', function() {
         });
     });
 
+    describe('reverting children recursively', () => {
+        const n1 = new iD.osmNode({ id: 'n1' });
+        const n2 = new iD.osmNode({ id: 'n2' });
+        const n3 = new iD.osmNode({ id: 'n3', tags: { a: 'b' } }); // won't be deleted
+        const w1 = new iD.osmWay({ id: 'w1', nodes: ['n1', 'n2', 'n3'] });
+        const r1 = new iD.osmRelation({ id: 'r1', members: [{ id: 'w1', role: 'outer', type: 'way' }] });
+        const r2 = new iD.osmRelation({ id: 'r2', members: [{ id: 'r1', role: '', type: 'relation' }] });
+
+        it('reverts the child nodes of a way too', () => {
+            let graph = new iD.coreGraph([n1, n2, n3, w1]);
+
+            // delete w1, which would delete the child nodes n1 and n2
+            graph = iD.actionDeleteWay('w1')(graph);
+            expect(graph.hasEntity('n1')).toBeUndefined();
+            expect(graph.hasEntity('n2')).toBeUndefined();
+            expect(graph.hasEntity('n3')).toStrictEqual(n3); // not deleted
+            expect(graph.hasEntity('w1')).toBeUndefined();
+
+            // revert the deletion, which should bring back the child nodes
+            graph = iD.actionRevert('w1')(graph);
+            expect(graph.hasEntity('n1')).toStrictEqual(n1);
+            expect(graph.hasEntity('n2')).toStrictEqual(n2);
+            expect(graph.hasEntity('n3')).toStrictEqual(n3);
+            expect(graph.hasEntity('w1')).toStrictEqual(w1);
+        });
+
+        it('reverts relation members recursively', () => {
+            let graph = new iD.coreGraph([n1, n2, n3, w1, r1, r2]);
+
+            // delete r1, which would delete w1, which would delete the child nodes n1 and n2
+            // it will also delete the parent which has no more members (r2)
+            graph = iD.actionDeleteRelation('r1')(graph);
+            expect(graph.hasEntity('n1')).toBeUndefined();
+            expect(graph.hasEntity('n2')).toBeUndefined();
+            expect(graph.hasEntity('n3')).toStrictEqual(n3); // not deleted
+            expect(graph.hasEntity('w1')).toBeUndefined();
+            expect(graph.hasEntity('r1')).toBeUndefined();
+            expect(graph.hasEntity('r2')).toBeUndefined();
+
+            // revert the deletion, which should bring back the child nodes
+            graph = iD.actionRevert('r1')(graph);
+            expect(graph.hasEntity('n1')).toStrictEqual(n1);
+            expect(graph.hasEntity('n2')).toStrictEqual(n2);
+            expect(graph.hasEntity('n3')).toStrictEqual(n3);
+            expect(graph.hasEntity('w1')).toStrictEqual(w1);
+            expect(graph.hasEntity('r1')).toStrictEqual(r1);
+            expect(graph.hasEntity('r2')).toBeUndefined(); // parent is not restored
+        });
+    });
+
 });
