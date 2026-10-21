@@ -47,6 +47,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Include all imagery layers from the editor-layer-index, even those older than 20 years ([#12878], thanks [@andrewharvey])
 * Don't discard incomplete lines in the (text mode) raw tag editor when switching browser tabs ([#12958], thanks [@aakarshitv])
 #### :scissors: Operations
+* Treat `conveying=*` the same as `oneway=*` when reversing a line ([#13027], thanks [@k-yle])
 * Add shortcut tooltip to reverse direction button ([#12961], thanks [@SaifuddinM23])
 #### :camera: Street-Level
 #### :white_check_mark: Validation
@@ -72,6 +73,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :hammer: Development
 * Ongoing work to migrate the codebase from JavaScript to TypeScript ([view progress](https://github.com/openstreetmap/iD/milestone/47?closed=1))
 * Drop code previously responsible for _maprules_ integration (which has been defunct for a while now) ([#12679])
+* Drop support for `oneway=1` ([#13026], thanks [@k-yle])
 * Drop confusing dead code ([#13014], thanks [@matkoniecz])
 
 [#8402]: https://github.com/openstreetmap/iD/issues/8402
@@ -96,13 +98,21 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#13009]: https://github.com/openstreetmap/iD/pull/13009
 [#13014]: https://github.com/openstreetmap/iD/pull/13014
 [#13016]: https://github.com/openstreetmap/iD/pull/13016
+[#13026]: https://github.com/openstreetmap/iD/pull/13026
+[#13027]: https://github.com/openstreetmap/iD/pull/13027
 [#13030]: https://github.com/openstreetmap/iD/pull/13030
 [@Geo-2695]: https://github.com/Geo-2695
 [@hemaksh2007jain-bit]: https://github.com/hemaksh2007jain-bit
 [@SaifuddinM23]: https://github.com/SaifuddinM23
 
 
-# 2.42.1
+# 2.42.3
+##### 2026-Oct-20
+
+* Sanitize remaining occurrences of rendered html.
+
+
+# 2.42.2
 ##### 2026-Aug-18
 
 #### :bug: Bugfixes
