@@ -100,7 +100,13 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [@SaifuddinM23]: https://github.com/SaifuddinM23
 
 
-# 2.42.1
+# 2.42.3
+##### 2026-Oct-20
+
+* Sanitize remaining occurrences of rendered html.
+
+
+# 2.42.2
 ##### 2026-Aug-18
 
 #### :bug: Bugfixes
