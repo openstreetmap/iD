@@ -70,11 +70,20 @@ export function actionReverse(entityID: EntityId, options?: ReverseOptions): Act
             keyRegex: /^turn:lanes:?/,
             prerequisiteTags: [{}]
         }, {
+            keyRegex: /^turn(:forward|:backward|:both_ways)?$/,
+            prerequisiteTags: [{}]
+        }, {
+            keyRegex: /^destination:arrow(:lanes)?(:forward|:backward)?$/,
+            prerequisiteTags: [{}]
+        }, {
             // https://github.com/openstreetmap/iD/issues/10128
             keyRegex: /^side$/,
             prerequisiteTags: [{highway: 'cyclist_waiting_aid'}]
         }, {
             keyRegex: /^railway:turnout_side$/,
+            prerequisiteTags: [{}]
+        }, {
+            keyRegex: /^driving_side$/,
             prerequisiteTags: [{}]
         }
     ];

@@ -718,6 +718,45 @@ describe('iD.actionReverse', function () {
             expect(target.tags['railway:turnout_side']).toBe('right');
         });
 
+        it('preserves the value of driving_side', () => {
+            const way = new iD.osmWay({ tags: { highway: 'primary', driving_side: 'left' } });
+            const graph = iD.actionReverse(way.id)(new iD.coreGraph([way]));
+            const target = graph.entity(way.id);
+            expect(target.tags.driving_side).toBe('left');
+        });
+
+        it('preserves the turn direction of a single lane road with turn tag', () => {
+            const way = new iD.osmWay({ tags: { highway: 'primary', oneway: 'yes', turn: 'left' } });
+            const graph = iD.actionReverse(way.id, { reverseOneway: true })(new iD.coreGraph([way]));
+            const target = graph.entity(way.id);
+            expect(target.tags.oneway).toBe('-1');
+            expect(target.tags.turn).toBe('left');
+        });
+
+        it('preserves the turn direction of each direction with turn:forward and turn:backward', () => {
+            const way = new iD.osmWay({ tags: { highway: 'primary', 'turn:forward': 'left', 'turn:backward': 'right' } });
+            const graph = iD.actionReverse(way.id)(new iD.coreGraph([way]));
+            const target = graph.entity(way.id);
+            expect(target.tags['turn:backward']).toBe('left');
+            expect(target.tags['turn:forward']).toBe('right');
+        });
+
+        it('preserves the value of destination:arrow', () => {
+            const way = new iD.osmWay({ tags: { highway: 'primary', oneway: 'yes', destination: 'Berlin', 'destination:arrow': 'left' } });
+            const graph = iD.actionReverse(way.id, { reverseOneway: true })(new iD.coreGraph([way]));
+            const target = graph.entity(way.id);
+            expect(target.tags.oneway).toBe('-1');
+            expect(target.tags['destination:arrow']).toBe('left');
+        });
+
+        it('preserves the value of destination:arrow:lanes', () => {
+            const way = new iD.osmWay({ tags: { highway: 'primary', oneway: 'yes', 'destination:arrow:lanes': 'left' } });
+            const graph = iD.actionReverse(way.id, { reverseOneway: true })(new iD.coreGraph([way]));
+            const target = graph.entity(way.id);
+            expect(target.tags.oneway).toBe('-1');
+            expect(target.tags['destination:arrow:lanes']).toBe('left');
+        });
+
         it('preserves the direction of a red turn at a traffic signal', function () {
             var node1 = new iD.osmNode();
             var node2 = new iD.osmNode({tags: {
