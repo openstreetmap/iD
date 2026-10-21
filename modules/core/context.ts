@@ -123,7 +123,7 @@ export interface coreContext extends Pick<Dispatch<object, EventMap>, 'on'> {
 
     copyGraph(): coreGraph;
     copyIDs: GetSet<coreContext, EntityId[]>;
-    copyLonLat: GetSet<coreContext, Vec2>;
+    copyLonLat: GetSet<coreContext, Vec2 | null>;
 
     background(): ReturnType<typeof rendererBackground>;
 
@@ -517,7 +517,7 @@ export function coreContext(this: object): coreContext {
     return context;
   } as coreContext['copyIDs'];
 
-  let _copyLonLat: Vec2;
+  let _copyLonLat: Vec2 | null;
   context.copyLonLat = function(val) {
     if (!arguments.length) return _copyLonLat;
     _copyLonLat = val;
