@@ -69,13 +69,13 @@ describe('iD.uiSectionRawTagEditor', function() {
         it('keeps an incomplete line when the window loses focus', function() {
             var textarea = element.select('textarea.tag-text').node();
             textarea.focus();
-            textarea.value = 'highway=residential\ncontact:instagram';
+            textarea.value = 'highway=residential\nname';
 
             // switching to another browser tab blurs the textarea, but it stays the active element
             textarea.dispatchEvent(new FocusEvent('blur'));
 
             expect(document.activeElement).toBe(textarea);
-            expect(element.select('textarea.tag-text').property('value')).toBe('highway=residential\ncontact:instagram');
+            expect(element.select('textarea.tag-text').property('value')).toBe('highway=residential\nname');
         });
 
         it('applies changes when focus moves elsewhere', async () => {
