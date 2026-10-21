@@ -594,14 +594,16 @@ export function uiInit(context) {
             .classed('shown', false)
             .classed('hide', true);
 
+        var mapControls = context.container().selectAll('.map-controls');
         context.container().selectAll('.map-pane-control button')
             .classed('active', false);
 
         if (showPane) {
+            const width = getComputedStyle(showPane.node()).width;
             hidePanes
                 .classed('shown', false)
                 .classed('hide', true)
-                .style(side, '-500px');
+                .style(side, width);
 
             context.container().selectAll('.' + showPane.attr('pane') + '-control button')
                 .classed('active', true);
@@ -611,27 +613,40 @@ export function uiInit(context) {
                 .classed('hide', false);
             if (hidePanes.empty()) {
                 showPane
-                    .style(side, '-500px')
+                    .style(side, '-' + width)
                     .transition()
                     .duration(200)
                     .style(side, '0px');
+                mapControls
+                    .style('margin-' + side, '0px')
+                    .transition()
+                    .duration(200)
+                    .style('margin-' + side, width);
             } else {
                 showPane
                     .style(side, '0px');
+                mapControls
+                    .style('margin-' + side, width);
             }
         } else {
+            const width = getComputedStyle(hidePanes.node()).width;
             hidePanes
                 .classed('shown', true)
                 .classed('hide', false)
                 .style(side, '0px')
                 .transition()
                 .duration(200)
-                .style(side, '-500px')
+                .style(side, '-' + width)
                 .on('end', function() {
                     d3_select(this)
                         .classed('shown', false)
                         .classed('hide', true);
                 });
+            mapControls
+                .style('margin-' + side, width)
+                .transition()
+                .duration(200)
+                .style('margin-' + side, '0px');
         }
     };
 
