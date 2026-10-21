@@ -319,6 +319,10 @@ describe('iD.osmWay', function() {
             expect(new iD.osmWay({tags: { waterway: 'stream' }}).layer()).toEqual(-1);
         });
 
+        it('returns 0 for waterway=dam, as waterway=dam lines should be rendered over water area', function() {
+            expect(new iD.osmWay({tags: { waterway: 'dam' }}).layer()).toEqual(0);
+        });
+
         it('returns -10 for pipelines', function() {
             expect(new iD.osmWay({tags: { man_made: 'pipeline' }}).layer()).toEqual(-10);
         });
