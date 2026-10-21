@@ -101,6 +101,16 @@ path.line.casing.tag-waterway-flowline {
 }
 
 
+/* dam */
+path.line.casing.tag-waterway-dam {
+    stroke: #444;
+    stroke-width: 10;
+}
+path.line.stroke.tag-waterway-dam {
+    stroke-width: 8;
+}
+
+
 /* ditch */
 .preset-icon .icon.tag-waterway-ditch {
     color: #39a;
