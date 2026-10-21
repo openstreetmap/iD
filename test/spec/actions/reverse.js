@@ -178,6 +178,28 @@ describe('iD.actionReverse', function () {
                 .entity('-1').tags).toEqual({oneway: 'yes'}, '-1');
         });
 
+        it('preserves conveying tags', () => {
+            const graph = new iD.coreGraph([
+                new iD.osmWay({ id: 'w1', tags: { conveying: 'forward' } }),
+                new iD.osmWay({ id: 'w2', tags: { conveying: 'backward' } })
+            ]);
+
+            expect(iD.actionReverse('w1')(graph).entity('w1').tags).toStrictEqual({ conveying: 'forward' });
+            expect(iD.actionReverse('w2')(graph).entity('w2').tags).toStrictEqual({ conveying: 'backward' });
+        });
+
+        it('reverses conveying tags if reverseOneway: true is provided', () => {
+            const graph = new iD.coreGraph([
+                new iD.osmWay({ id: 'w1', tags: { conveying: 'forward' } }),
+                new iD.osmWay({ id: 'w2', tags: { conveying: 'backward' } }),
+                new iD.osmWay({ id: 'w3', tags: { conveying: 'reversible' } })
+            ]);
+
+            expect(iD.actionReverse('w1', { reverseOneway: true })(graph).entity('w1').tags).toEqual({ conveying: 'backward' });
+            expect(iD.actionReverse('w2', { reverseOneway: true })(graph).entity('w2').tags).toEqual({ conveying: 'forward' });
+            expect(iD.actionReverse('w3', { reverseOneway: true })(graph).entity('w3').tags).toEqual({ conveying: 'reversible' });
+        });
+
         it('ignores other oneway tags', function () {
             var graph = new iD.coreGraph([
                 new iD.osmWay({id: 'alternating', tags: {oneway: 'alternating'}}),
@@ -310,7 +332,6 @@ describe('iD.actionReverse', function () {
 
         it('transforms *=forward ⟺ *=backward', function () {
             var graph = new iD.coreGraph([
-                new iD.osmWay({id: 'conveyingF', tags: {conveying: 'forward'}}),
                 new iD.osmWay({id: 'directionF', tags: {direction: 'forward'}}),
                 new iD.osmWay({id: 'priorityF', tags: {priority: 'forward'}}),
                 new iD.osmWay({id: 'trolley_wireF', tags: {trolley_wire: 'forward'}}),
@@ -322,8 +343,6 @@ describe('iD.actionReverse', function () {
                 new iD.osmWay({id: 'preferred_directionB', tags: {'railway:preferred_direction': 'backward'}})
             ]);
 
-            expect(iD.actionReverse('conveyingF')(graph)
-                .entity('conveyingF').tags).toEqual({conveying: 'backward'}, 'conveyingF');
             expect(iD.actionReverse('directionF')(graph)
                 .entity('directionF').tags).toEqual({direction: 'backward'}, 'directionF');
             expect(iD.actionReverse('priorityF')(graph)
@@ -333,8 +352,6 @@ describe('iD.actionReverse', function () {
             expect(iD.actionReverse('preferred_directionF')(graph)
                 .entity('preferred_directionF').tags).toEqual({'railway:preferred_direction': 'backward'}, 'preferred_directionF');
 
-            expect(iD.actionReverse('conveyingB')(graph)
-                .entity('conveyingB').tags).toEqual({conveying: 'forward'}, 'conveyingB');
             expect(iD.actionReverse('directionB')(graph)
                 .entity('directionB').tags).toEqual({direction: 'forward'}, 'directionB');
             expect(iD.actionReverse('priorityB')(graph)
