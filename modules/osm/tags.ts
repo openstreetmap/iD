@@ -229,6 +229,7 @@ export const osmOneWayBiDirectionalTags: TagDictionary<boolean> = {
     },
 };
 export const osmOneWayTags = merge(
+    {},
     osmOneWayForwardTags,
     osmOneWayBackwardTags,
     osmOneWayBiDirectionalTags,
