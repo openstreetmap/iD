@@ -44,6 +44,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Allow to press `=` key to switch between _key_ and _value_ part of tags in the raw tag editor ([#12828], thanks [@hemaksh2007jain-bit]) and allow to press _Enter_ key to switch between tag parts or next tag in the raw tag editor
 * Prevent the browser tab from accidentally being closed while uploading a changeset ([#12928], thanks [@k-yle])
 * Include all imagery layers from the editor-layer-index, even those older than 20 years ([#12878], thanks [@andrewharvey])
+* Don't discard incomplete lines in the (text mode) raw tag editor when switching browser tabs ([#12958], thanks [@aakarshitv])
 #### :scissors: Operations
 #### :camera: Street-Level
 #### :white_check_mark: Validation
@@ -82,6 +83,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#12878]: https://github.com/openstreetmap/iD/pull/12878
 [#12910]: https://github.com/openstreetmap/iD/pull/12910
 [#12928]: https://github.com/openstreetmap/iD/pull/12928
+[#12958]: https://github.com/openstreetmap/iD/pull/12958
 [@Geo-2695]: https://github.com/Geo-2695
 [@hemaksh2007jain-bit]: https://github.com/hemaksh2007jain-bit
 
@@ -101,6 +103,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#12734]: https://github.com/openstreetmap/iD/pull/12734
 [#12735]: https://github.com/openstreetmap/iD/pull/12735
 [#12736]: https://github.com/openstreetmap/iD/pull/12736
+[@aakarshitv]: https://github.com/aakarshitv
 
 
 # 2.42.0
