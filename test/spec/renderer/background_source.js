@@ -100,9 +100,36 @@ describe('iD.rendererBackgroundSource.Custom', function() {
             var source = iD.rendererBackgroundSource.Custom('http://example.com/wms/v1/token/MYTOKEN/1.0.0/layer');
             expect(source.imageryUsed()).toEqual('Custom (http://example.com/wms/v1/token/{apikey}/1.0.0/layer )');
         });
+        it('sanitizes wms path `token` values containing `-`, `.` or `~`', function() {
+            var source = iD.rendererBackgroundSource.Custom('http://example.com/wms/v1/token/abc-def.ghi~jkl/1.0.0/layer');
+            expect(source.imageryUsed()).toEqual('Custom (http://example.com/wms/v1/token/{apikey}/1.0.0/layer )');
+        });
+        it('sanitizes wms path `token` case-insensitively', function() {
+            var source = iD.rendererBackgroundSource.Custom('http://example.com/wms/v1/Token/abc-def/1.0.0/layer');
+            expect(source.imageryUsed()).toEqual('Custom (http://example.com/wms/v1/Token/{apikey}/1.0.0/layer )');
+        });
         it('sanitizes `key` in the URL path', function() {
             var source = iD.rendererBackgroundSource.Custom('http://example.com/services;key=MYTOKEN/layer');
             expect(source.imageryUsed()).toEqual('Custom (http://example.com/services;key={apikey}/layer )');
+        });
+        it('sanitizes `key` values containing `-`, `.` or `~`', function() {
+            // real keys may contain `-`, for example (these services are not necessarily
+            // usable as imagery in iD, but they show that such keys exist):
+            // Google Map Tiles API `key=`, see https://developers.google.com/maps/documentation/tile/2d-tiles-overview
+            // and key format at https://learn.microsoft.com/purview/sit-defn-google-api-key
+            // which gives `A1bC2dE3f-4iJ5_L6mN\oP8qR9sT0u` as an example
+            var source = iD.rendererBackgroundSource.Custom('http://example.com/tiles?key=abc-def.ghi~jkl&foo=1');
+            expect(source.imageryUsed()).toEqual('Custom (http://example.com/tiles?key={apikey}&foo=1 )');
+        });
+        it('sanitizes `key` case-insensitively', function() {
+            // HERE uses `apiKey=` (https://docs.here.com/map-rendering/docs/quickstart-raster-tile-api)
+            // (not necessarily usable as imagery in iD, but it shows that such parameter names exist)
+            var source = iD.rendererBackgroundSource.Custom('http://example.com/tiles?apiKey=MY-TOKEN&foo=1');
+            expect(source.imageryUsed()).toEqual('Custom (http://example.com/tiles?apiKey={apikey}&foo=1 )');
+        });
+        it('sanitizes every occurrence of `key`', function() {
+            var source = iD.rendererBackgroundSource.Custom('http://example.com/services;key=MYTOKEN/layer?apikey=OTHER-TOKEN');
+            expect(source.imageryUsed()).toEqual('Custom (http://example.com/services;key={apikey}/layer?apikey={apikey} )');
         });
     });
 
