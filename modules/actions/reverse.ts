@@ -63,7 +63,7 @@ export function actionReverse(entityID: EntityId, options?: ReverseOptions): Act
     // If a key matches the key regex and any of the provided context
     // tag sets, it will not be reversed.
     const keyValuesToKeepUnchanged = [{
-            keyRegex: /^.*(_|:)?(description|name|note|website|ref|source|comment|watch|attribution)(_|:)?/,
+            keyRegex: /(^|_|:)(description|name|note|website|ref|source|comment|watch|attribution)(_|:|$)/,
             prerequisiteTags: [{}]
         }, {
             // Turn lanes are left/right to key (not way) direction - #5674
