@@ -59,6 +59,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Fix exceptions when resizing the browser tab when nothing is selected ([#12800], thanks [@k-yle])
 * Allow tags like `not:*:wikidata` to have multiple values ([#12736], thanks [@k-yle])
 * Fix the icon of the GPS Overlay layer not working ([#12760], thanks [@hlfan])
+* Fix some tags (such as `railway:preferred_direction`) from being falsely detected as non-reversible ([#13018], thanks [@matkoniecz])
 * Fix minor labelling bug - try 85 and 95 offsets rather than trying 95 twice ([#13009], thanks [@matkoniecz])
 #### :earth_asia: Localization
 * Support 835 new languages in the dropdown when adding a `name:*` tag ([#12802])
@@ -89,6 +90,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#12878]: https://github.com/openstreetmap/iD/pull/12878
 [#12910]: https://github.com/openstreetmap/iD/pull/12910
 [#12928]: https://github.com/openstreetmap/iD/pull/12928
+[#13018]: https://github.com/openstreetmap/iD/pull/13018
 [#12958]: https://github.com/openstreetmap/iD/pull/12958
 [#13009]: https://github.com/openstreetmap/iD/pull/13009
 [#13014]: https://github.com/openstreetmap/iD/pull/13014
