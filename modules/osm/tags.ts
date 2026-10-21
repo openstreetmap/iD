@@ -228,11 +228,11 @@ export const osmOneWayBiDirectionalTags: TagDictionary<boolean> = {
         'reversible': true,
     },
 };
-// `toMerged` returns a new object (unlike lodash's `merge`, which mutates its
-// first argument), so the three dictionaries above are left untouched.
-export const osmOneWayTags: TagDictionary<boolean> = toMerged(
-    toMerged(osmOneWayForwardTags, osmOneWayBackwardTags),
-    osmOneWayBiDirectionalTags,
+export const osmOneWayTags: TagDictionary<boolean> = [
+    osmOneWayForwardTags,
+    osmOneWayBackwardTags,
+    osmOneWayBiDirectionalTags
+].reduce(toMerged);
 );
 
 // solid and smooth surfaces akin to the assumed default road or path surface
