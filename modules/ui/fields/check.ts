@@ -217,7 +217,7 @@ export function uiFieldCheck(field: any, context: iD.Context) {
         const isMixed = Array.isArray(tag);
         _value = !isMixed && tag ? tag.toLowerCase() : undefined;
 
-        if (field.type === 'onewayCheck' && (_value === '1' || _value === '-1')) {
+        if (field.type === 'onewayCheck' && _value === '-1') {
             _value = 'yes';
         }
 
