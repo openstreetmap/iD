@@ -9,7 +9,7 @@ import { localizer, t } from '../../core/localizer';
 import { actionReverse } from '../../actions/reverse';
 import { svgIcon } from '../../svg/icon';
 import { utilCheckTagDictionary } from '../../util';
-import { osmOneWayTags } from '../../osm/tags';
+import { osmOneWayBackwardTags, osmOneWayBiDirectionalTags, osmOneWayForwardTags, osmOneWayTags } from '../../osm/tags';
 import type { EntityId } from '../../osm';
 import { formatTag } from './tag_title';
 import { uiTooltip } from '../tooltip';
@@ -55,6 +55,11 @@ export function uiFieldCheck(field: any, context: iD.Context) {
         }
     }
 
+    const forwardValues = Object.keys(field.type === 'onewayCheck' && (osmOneWayForwardTags[field.key] || {}));
+    const backwardValues = Object.keys(field.type === 'onewayCheck' && (osmOneWayBackwardTags[field.key] || {}));
+    const bidiValues = Object.keys(field.type === 'onewayCheck' && (osmOneWayBiDirectionalTags[field.key] || {}));
+    const forwardValue = forwardValues[0] || 'yes';
+
 
     // Checks tags to see whether an undefined value is "Assumed to be Yes"
     function checkImpliedYes() {
@@ -76,7 +81,12 @@ export function uiFieldCheck(field: any, context: iD.Context) {
         if (!context.container().select('div.inspector-hover').empty()) return true;
         const entity = _entityIDs.length && context.hasEntity(_entityIDs[0]);
         if (!entity || entity.type !== 'way') return true;
-        return !(_value === 'yes' || (_impliedYes && !_value));
+
+        const isFwd = _value && forwardValues.includes(_value);
+        const isBwd = _value && backwardValues.includes(_value);
+        if (isFwd || isBwd) return false;
+        if (_impliedYes && !_value) return false;
+        return true;
     }
 
 
@@ -143,8 +153,8 @@ export function uiFieldCheck(field: any, context: iD.Context) {
                 var t: TagsUpdate = {};
 
                 if (Array.isArray(_tags[field.key])) {
-                    if (values.includes('yes')) {
-                        t[field.key] = 'yes';
+                    if (values.includes(forwardValue)) {
+                        t[field.key] = forwardValue;
                     } else {
                         t[field.key] = values[0];
                     }
@@ -154,7 +164,7 @@ export function uiFieldCheck(field: any, context: iD.Context) {
 
                 // Don't cycle through `alternating` or `reversible` states - #4970
                 // (They are supported as translated strings, but should not toggle with clicks)
-                if (t[field.key] === 'reversible' || t[field.key] === 'alternating') {
+                if (bidiValues.includes(t[field.key]!)) {
                     t[field.key] = values[0];
                 }
 
@@ -217,8 +227,9 @@ export function uiFieldCheck(field: any, context: iD.Context) {
         const isMixed = Array.isArray(tag);
         _value = !isMixed && tag ? tag.toLowerCase() : undefined;
 
-        if (field.type === 'onewayCheck' && _value === '-1') {
-            _value = 'yes';
+        // for tags like oneway=-1, reuse the labels for oneway=yes
+        if (field.type === 'onewayCheck' && _value && backwardValues.includes(_value) && !values.includes(_value)) {
+            _value = forwardValue;
         }
 
         input
