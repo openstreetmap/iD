@@ -3552,6 +3552,8 @@ div.full-screen > button:focus {
     color: var(--link-color);
     position: relative;
     display: flex;
+    align-items: center;
+    gap: 0.5rem;
 }
 
 .layer-list:empty {
@@ -3608,6 +3610,7 @@ div.full-screen > button:focus {
     flex: 1 1 auto;
     display: flex;
     align-items: center;
+    gap: 0.5rem;
     overflow: hidden;
 }
 
@@ -3626,6 +3629,31 @@ div.full-screen > button:focus {
 
 .layer-list label span.localized-text {
     line-height: 0.95rem;
+}
+
+/* Esri Wayback: keep the name; swap date select and spinner in the same inline slot */
+.layer-list .wayback-date,
+.layer-list .wayback-spinner {
+    display: none;
+    margin-inline-start: 0.5rem;
+    vertical-align: middle;
+}
+.layer-list li.wayback-ready:not(.wayback-loading) .wayback-date {
+    display: inline;
+}
+.layer-list li.wayback-loading .wayback-spinner {
+    display: inline-block;
+    width: 1.35em;
+    height: 1.35em;
+    overflow: hidden;
+}
+.layer-list .wayback-spinner.hide {
+    display: none;
+}
+.layer-list .wayback-spinner img {
+    display: block;
+    width: 100%;
+    height: 100%;
 }
 
 .layer-list input.list-item-input {
