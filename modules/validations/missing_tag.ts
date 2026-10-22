@@ -1,3 +1,5 @@
+import { deepEqual } from 'fast-equals';
+
 import { operationDelete } from '../operations/delete';
 import { osmIsInterestingTag } from '../osm/tags';
 import { t } from '../core/localizer';
@@ -77,10 +79,21 @@ export const validationMissingTag: CreateValidator = (context) => {
         // can always delete if the user created it in the first place..
         var canDelete = (entity.version === undefined || entity.v !== undefined);
 
+        var isError = canDelete && subtype !== 'highway_classification';
+
+        // an existing relation without a `type` tag shouldn't block the upload
+        // if the user only changed its members but not its tags - #10649
+        if (isError && subtype === 'relation_type' && entity.version !== undefined) {
+            var baseEntity = context.history().base().hasEntity(entity.id);
+            if (baseEntity && deepEqual(baseEntity.tags, entity.tags)) {
+                isError = false;
+            }
+        }
+
         return [new validationIssue({
             type: type,
             subtype: subtype,
-            severity: (canDelete && subtype !== 'highway_classification') ? 'error' : 'warning',
+            severity: isError ? 'error' : 'warning',
             message: function(context) {
                 var entity = context.hasEntity(this.entityIds[0]);
                 return entity ? t.append('issues.' + messageID + '.message', {

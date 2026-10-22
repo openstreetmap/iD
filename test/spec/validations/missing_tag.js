@@ -122,4 +122,33 @@ describe('iD.validations.missing_tag', function () {
         expect(issue.entityIds[0]).toEqual('w-1');
     });
 
+    describe('existing relation without a type tag', function() {
+        beforeEach(function() {
+            context.history().merge([
+                new iD.osmNode({ id: 'n1', loc: [4, 4], version: '1' }),
+                new iD.osmNode({ id: 'n2', loc: [4, 5], version: '1' }),
+                new iD.osmNode({ id: 'n3', loc: [5, 5], version: '1' }),
+                new iD.osmWay({ id: 'w1', nodes: ['n1', 'n2'], tags: { highway: 'path' }, version: '1' }),
+                new iD.osmWay({ id: 'w2', nodes: ['n2', 'n3'], tags: { highway: 'path' }, version: '1' }),
+                new iD.osmRelation({ id: 'r1', members: [{ id: 'w1', type: 'way' }], tags: { 'disused:type': 'route', route: 'foot' }, version: '1' })
+            ]);
+        });
+
+        it('flags the missing type tag as an error if the user edited its tags', function() {
+            context.perform(iD.actionChangeTags('r1', { 'disused:type': 'route', route: 'foot', name: 'Foo' }));
+            var issues = validate();
+            expect(issues).toHaveLength(1);
+            expect(issues[0].subtype).toEqual('relation_type');
+            expect(issues[0].severity).toEqual('error');
+        });
+
+        it('flags the missing type tag only as a warning if the user just changed its members', function() {
+            context.perform(iD.actionAddMember('r1', { id: 'w2', type: 'way' }));
+            var issues = validate();
+            expect(issues).toHaveLength(1);
+            expect(issues[0].subtype).toEqual('relation_type');
+            expect(issues[0].severity).toEqual('warning');
+        });
+    });
+
 });
