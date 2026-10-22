@@ -220,6 +220,8 @@ of iD, it's risky to do so. Your edits could be lost or garbled at any time. Pre
 the ![live](http://labl.es/svg?text=live&bgcolor=d32232) button in the bottom bar to
 switch to the development database.
 
+To test uploading changesets to the test server with a locally running development version of iD you need to specify [OAuth 2 connection details](API.md#environment-variables), after you registered [a new OAuth 2 application](https://master.apis.dev.openstreetmap.org/oauth2/applications/new).
+
 
 ## Contributing Documentation
 
