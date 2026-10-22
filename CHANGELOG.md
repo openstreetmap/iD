@@ -66,6 +66,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Fix minor labelling bug - try 85 and 95 offsets rather than trying 95 twice ([#13009], thanks [@matkoniecz])
 * Fix mistake in right-to-left text detection ([#13032], thanks [@matkoniecz])
 * Fix some checkbox fields from not setting the "checked" state on the first click when editing a multiselection with multiple values
+* Fix the undo/redo annotation shown after converting an area to a line, or a line to an area, through a validation fix ([#12978], thanks [@wantaekchoi])
 #### :earth_asia: Localization
 * Support 835 new languages in the dropdown when adding a `name:*` tag ([#12802])
 * Support territory-level address hints ([#12704], thanks [@Vectorial1024])
@@ -108,6 +109,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#13027]: https://github.com/openstreetmap/iD/pull/13027
 [#13029]: https://github.com/openstreetmap/iD/pull/13029
 [#13030]: https://github.com/openstreetmap/iD/pull/13030
+[#12978]: https://github.com/openstreetmap/iD/pull/12978
 [@Geo-2695]: https://github.com/Geo-2695
 [@hemaksh2007jain-bit]: https://github.com/hemaksh2007jain-bit
 [@SaifuddinM23]: https://github.com/SaifuddinM23
