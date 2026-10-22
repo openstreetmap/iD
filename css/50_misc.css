@@ -566,3 +566,16 @@ path.fill.tag-building {
     stroke: rgba(224, 110, 95, 0.3);
     fill: rgba(224, 110, 95, 0.3);
 }
+
+/* Playground features (skip playground=yes that is either unspecific or property) */
+svg:not(.low-zoom) path.line.stroke.tag-playground:not(.tag-playground-yes),
+svg:not(.low-zoom) path.area.stroke.tag-playground:not(.tag-playground-yes) {
+    stroke: rgb(170, 90, 220);
+}
+svg:not(.low-zoom) path.line.stroke.tag-playground:not(.tag-playground-yes) {
+    stroke-width: 4;
+}
+svg:not(.low-zoom) path.area.fill.tag-playground:not(.tag-playground-yes) {
+    stroke: rgba(170, 90, 220, 0.3);
+    fill: rgba(170, 90, 220, 0.3);
+}
