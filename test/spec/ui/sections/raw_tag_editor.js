@@ -89,5 +89,31 @@ describe('iD.uiSectionRawTagEditor', function() {
 
             expect(await tags).toEqual({name: 'Main Street'});
         });
+
+        it('shows double quotes and backslashes without escaping them', function() {
+            element.remove();
+            render({ old_name: 'Viaduto "Zé Cocada"', note: 'C:\\path' });
+            expect(element.select('textarea.tag-text').property('value'))
+                .toBe('note=C:\\path\nold_name=Viaduto "Zé Cocada"\n');
+        });
+
+        it('still quotes values which need it to be read back correctly', function() {
+            element.remove();
+            render({ a: '"quoted"', b: 'two\nlines', c: 'x=y', d: '"x" ' });
+            expect(element.select('textarea.tag-text').property('value'))
+                .toBe('a="\\"quoted\\""\nb="two\\nlines"\nc="x=y"\nd="\\"x\\" "\n');
+        });
+
+        it('reads back unescaped double quotes and backslashes unchanged', async () => {
+            const tags = new Promise(cb => {
+                taglist.on('change', (_, tags) => cb(tags));
+            });
+            var textarea = element.select('textarea.tag-text').node();
+            textarea.focus();
+            textarea.value = 'highway=residential\nold_name=Viaduto "Zé Cocada"\nnote=C:\\path';
+            textarea.blur();
+
+            expect(await tags).toEqual({ old_name: 'Viaduto "Zé Cocada"', note: 'C:\\path' });
+        });
     });
 });

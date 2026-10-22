@@ -330,7 +330,13 @@ export function uiSectionRawTagEditor(id, context) {
 
     function stringify(s) {
         const stringified = JSON.stringify(s).slice(1, -1);   // without leading/trailing "
-        if (stringified !== s || s.includes('=')) {
+        // double quotes and backslashes can be shown as they are, as long as the
+        // text can't be mistaken for a quoted string when it is read back - #9886
+        const needsEscaping = stringified.replace(/\\(["\\])/g, '$1') !== s;
+        // (lines are trimmed before they are read back, so check the trimmed text)
+        const trimmed = s.trim();
+        const looksQuoted = trimmed.length > 1 && trimmed.charAt(0) === '"' && trimmed.charAt(trimmed.length - 1) === '"';
+        if (needsEscaping || looksQuoted || s.includes('=')) {
             return `"${stringified}"`;
         } else {
             return s;
