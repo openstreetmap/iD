@@ -69,28 +69,62 @@ path.line.stroke.tag-piste_type {
 }
 
 
-/* ferry routes  */
+/* ferry routes & linear seamarks */
 .preset-icon .icon.tag-route-ferry {
     color: #58a9ed;
     fill: #fff;
 }
+.preset-icon .icon.tag-seamark_type-recommended_track,
+.preset-icon .icon.tag-seamark_type-navigation_line {
+    color: #aaaaaa;
+    fill: #fff;
+}
+.preset-icon .icon[class*="tag-seamark_type-separation"] {
+    color: #be8ff0;
+    fill: #fff;
+}
+path.line.shadow.tag-seamark_type-navigation_line,
+path.line.shadow.tag-seamark_type-recommended_track,
+path.line.shadow.tag-seamark_type-separation_boundary,
 path.line.shadow.tag-route-ferry {
     stroke-width: 16;
 }
+path.line.stroke.tag-seamark_type-navigation_line,
+path.line.stroke.tag-seamark_type-separation_boundary,
 path.line.stroke.tag-route-ferry {
     stroke: #58a9ed;
     stroke-width: 3;
     stroke-linecap: butt;
     stroke-dasharray: 12,8;
 }
+.low-zoom path.line.shadow.tag-seamark_type-navigation_line,
+.low-zoom path.line.shadow.tag-seamark_type-recommended_track,
+.low-zoom path.line.shadow.tag-seamark_type-separation_boundary,
 .low-zoom path.line.shadow.tag-route-ferry {
     stroke-width: 12;
 }
+.low-zoom path.line.stroke.tag-seamark_type-navigation_line,
+.preset-icon-container path.line.stroke.tag-seamark_type-navigation_line,
+.low-zoom path.line.stroke.tag-seamark_type-separation_boundary,
+.preset-icon-container path.line.stroke.tag-seamark_type-separation_boundary,
 .low-zoom path.line.stroke.tag-route-ferry,
 .preset-icon-container path.line.stroke.tag-route-ferry {
     stroke-width: 2;
     stroke-dasharray: 6,4;
 }
+path.line.stroke.tag-seamark_type-recommended_track,
+path.line.stroke.tag-seamark_type-navigation_line {
+    stroke: #aaaaaa;
+}
+path.line.stroke.tag-route-ferry {
+    stroke: #58a9ed;
+}
+path.line.stroke[class*="tag-seamark_type-separation"]  {
+    stroke: #be8ff0;
+}
+path.line.casing.tag-seamark_type-navigation_line,
+path.line.casing.tag-seamark_type-recommended_track,
+path.line.casing.tag-seamark_type-separation_boundary,
 path.line.casing.tag-route-ferry {
     stroke: none;
 }

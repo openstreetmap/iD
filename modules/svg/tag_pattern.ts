@@ -76,6 +76,10 @@ const patterns: TagDictionary<string | Tags[]> = {
     surface: {
         grass: 'grass',
         sand: 'beach'
+    },
+    'seamark:type': {
+        anchorage: 'anchorage',
+        fairway: 'fairway',
     }
 };
 

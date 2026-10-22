@@ -9,6 +9,11 @@ svg.preset-icon-category-border path {
     fill: rgba(200, 144, 144, 0.3);
 }
 
+.preset-category-seamark svg.preset-icon-category-border path {
+    stroke: rgb(198, 95, 224);
+    fill: rgba(198, 95, 224, 0.3);
+}
+
 .preset-category-building svg.preset-icon-category-border path {
     stroke: rgb(224, 110, 95);
     fill: rgba(224, 110, 95, 0.3);
