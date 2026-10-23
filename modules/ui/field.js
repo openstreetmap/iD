@@ -38,6 +38,8 @@ export function uiField(context, presetField, entityIDs, options) {
     }
 
     var _locked = false;
+    var _lockOverridden = false;   // true once the user has clicked the lock icon to unlock the field
+    var _selection = d3_select(null);
     var _lockedTip = uiTooltip()
         .title(() => t.append('inspector.lock.suggestion', { label: field.label() }))
         .placement('bottom');
@@ -153,7 +155,24 @@ export function uiField(context, presetField, entityIDs, options) {
     }
 
 
+    // Unlocks the field so its value(s) can be edited. Clicking the lock icon
+    // acknowledges the Wikidata-tag warning shown in the tooltip; the field
+    // then behaves like any other unlocked field for the rest of this
+    // editing session (see https://github.com/openstreetmap/iD/issues/12330).
+    function unlock(d3_event) {
+        d3_event.stopPropagation();
+        d3_event.preventDefault();
+        if (!_locked) return;
+
+        _lockOverridden = true;
+        _locked = false;
+        field.render(_selection);
+    }
+
+
     field.render = function(selection) {
+        _selection = selection;
+
         var container = selection.selectAll('.form-field')
             .data([field]);
 
@@ -271,19 +290,22 @@ export function uiField(context, presetField, entityIDs, options) {
                 .classed('present', tagsContainFieldKey());
 
 
-            // show a tip and lock icon if the field is locked
+            // show a tip and a toggleable lock icon if the field is locked
             var annotation = container.selectAll('.field-label .label-textannotation');
-            var icon = annotation.selectAll('.icon')
+            var lockButton = annotation.selectAll('.lock-icon')
                 .data(_locked ? [0]: []);
 
-            icon.exit()
+            lockButton.exit()
                 .remove();
 
-            icon.enter()
-                .append('svg')
-                .attr('class', 'icon')
-                .append('use')
-                .attr('xlink:href', '#fas-lock');
+            var lockButtonEnter = lockButton.enter()
+                .append('button')
+                .attr('class', 'lock-icon')
+                .attr('title', t('icons.unlock'))
+                .call(svgIcon('#fas-lock'));
+
+            lockButtonEnter.merge(lockButton)
+                .on('click', unlock);
 
             container.call(_locked ? _lockedTip : _lockedTip.destroy);
     };
@@ -314,7 +336,9 @@ export function uiField(context, presetField, entityIDs, options) {
 
     field.locked = function(val) {
         if (!arguments.length) return _locked;
-        _locked = val;
+        // once the user has unlocked the field, keep it unlocked regardless
+        // of what the lock computation says on subsequent renders
+        _locked = val && !_lockOverridden;
         return field;
     };
 
