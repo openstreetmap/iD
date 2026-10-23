@@ -28,13 +28,6 @@ export function utilDetect(refresh?: boolean) {
     _detected.version = m[2];
   }
   if (!_detected.browser) {
-    m = ua.match(/Trident\/.*rv:([0-9]{1,}[\.0-9]{0,})/i);   // IE11
-    if (m !== null) {
-      _detected.browser = 'msie';
-      _detected.version = m[1];
-    }
-  }
-  if (!_detected.browser) {
     m = ua.match(/(opr)\/?\s*(\.?\d+(\.\d+)*)/i);   // Opera 15+
     if (m !== null) {
       _detected.browser = 'Opera';
