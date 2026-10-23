@@ -282,15 +282,31 @@ export function uiFieldLocalized(field, context) {
                 (d.localName && d.localName.toLowerCase() === lang) ||
                 (d.nativeName && d.nativeName.toLowerCase() === lang);
         });
-        if (language) lang = language.code;
+        if (language) {
+            lang = language.code;
+        } else if (lang) {
+            try {
+                lang = Intl.getCanonicalLocales(lang)[0];
+            } catch {
+                // Keep unrecognized input until the user corrects it.
+            }
+        }
+
+        var value = utilGetSetValue(d3_select(this.parentNode).selectAll('.localized-value'));
+
+        if (lang && !LANGUAGE_SUFFIX_REGEX.test(key(lang))) {
+            d.pendingLang = utilGetSetValue(d3_select(this));
+            d.value = value;
+            return;
+        }
+
+        delete d.pendingLang;
 
         if (d.lang && d.lang !== lang) {
             tags[key(d.lang)] = undefined;
         }
 
         var newKey = lang && context.cleanTagKey(key(lang));
-
-        var value = utilGetSetValue(d3_select(this.parentNode).selectAll('.localized-value'));
 
         if (newKey && value) {
             tags[newKey] = value;
@@ -302,15 +318,16 @@ export function uiFieldLocalized(field, context) {
 
 
     function changeValue(d3_event, d) {
-        if (!d.lang) return;
         var value = context.cleanTagValue(utilGetSetValue(d3_select(this))) || undefined;
 
         // don't override multiple values with blank string
         if (!value && Array.isArray(d.value)) return;
 
+        d.value = value;
+        if (!d.lang || d.pendingLang) return;
+
         var t = {};
         t[key(d.lang)] = value;
-        d.value = value;
         dispatch.call('change', this, t);
     }
 
@@ -415,6 +432,9 @@ export function uiFieldLocalized(field, context) {
                     .attr('id', domId)
                     .attr('type', 'text')
                     .attr('placeholder', t('translate.localized_translation_language'))
+                    .on('input', function(d3_event, d) {
+                        d.pendingLang = utilGetSetValue(d3_select(this));
+                    })
                     .on('blur', changeLang)
                     .on('change', changeLang)
                     .call(langCombo);
@@ -424,6 +444,9 @@ export function uiFieldLocalized(field, context) {
                     .attr('type', 'text')
                     .attr('dir', 'auto')
                     .attr('class', 'localized-value')
+                    .on('input', function(d3_event, d) {
+                        d.value = utilGetSetValue(d3_select(this));
+                    })
                     .on('blur', changeValue)
                     .on('change', changeValue);
             });
@@ -451,6 +474,7 @@ export function uiFieldLocalized(field, context) {
         entries.classed('present', true);
 
         utilGetSetValue(entries.select('.localized-lang'), function(d) {
+            if (d.pendingLang !== undefined) return d.pendingLang;
             var langItem = _languagesArray.find(function(item) {
                 return item.code === d.lang;
             });
