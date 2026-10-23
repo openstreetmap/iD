@@ -138,13 +138,7 @@ export function uiEditMenu(context) {
         }
 
         // update
-        buttonsEnter
-            .merge(buttons)
-            .classed('disabled', d => {
-                // interruptible operations are not shown as disabled.
-                const reason = d.disabled();
-                return reason && !d.interrupts?.[reason];
-            });
+        updateDisabled();
 
         updatePosition();
 
@@ -156,7 +150,10 @@ export function uiEditMenu(context) {
                 }
             })
             .on('drawn.edit-menu', function(info) {
-                if (info.full) updatePosition();
+                if (info.full) {
+                    updateDisabled();
+                    updatePosition();
+                }
             });
 
         var lastPointerUpType;
@@ -204,6 +201,15 @@ export function uiEditMenu(context) {
 
         dispatch.call('toggled', this, true);
     };
+
+    function updateDisabled() {
+        _menu.selectAll('.edit-menu-item')
+            .classed('disabled', d => {
+                // interruptible operations are not shown as disabled.
+                const reason = d.disabled();
+                return reason && !d.interrupts?.[reason];
+            });
+    }
 
     function updatePosition() {
 
