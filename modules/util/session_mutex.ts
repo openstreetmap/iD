@@ -3,9 +3,9 @@
 // after 5 seconds.
 
 // This accepts a string and returns an object that complies with utilSessionMutexType
-export function utilSessionMutex(name) {
-    var mutex = {};
-    var intervalID;
+export function utilSessionMutex(name: string) {
+    const mutex = function() {};
+    var intervalID: number | null;
 
     function renew() {
         // in unit tests, we need to abort if the test has already completed
@@ -38,3 +38,5 @@ export function utilSessionMutex(name) {
 
     return mutex;
 }
+
+export interface utilSessionMutex extends ReturnType<typeof utilSessionMutex> {};
