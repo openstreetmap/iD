@@ -1,4 +1,4 @@
-import { throttle, isArray, clamp } from 'es-toolkit/compat';
+import { throttle, clamp } from 'es-toolkit';
 
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { interpolate as d3_interpolate } from 'd3-interpolate';
@@ -959,7 +959,7 @@ export function rendererMap(context) {
             extent = what;
         } else {
             // we're given one or more entities to zoom to
-            if (!isArray(what)) what = [what];
+            if (!Array.isArray(what)) what = [what];
             extent = what
                 .map(entity => entity.extent(context.graph()))
                 .reduce((a, b) => a.extend(b));
