@@ -50,7 +50,7 @@ export function uiOsmoseDetails(context) {
       div
         .append('p')
           .attr('class', 'qa-details-description-text')
-          .html(d => utilDisplayName(issueString(d, 'detail')))
+          .html(d => utilSanitizeHTML(issueString(d, 'detail')))
         .selectAll('a')
           .attr('rel', 'noopener')
           .attr('target', '_blank');

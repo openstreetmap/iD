@@ -58,6 +58,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Improve wording for "connect the features (manually)" fix for routing-islands validator, and show tooltip with further instructions ([#8402])
 * Show all `mutually_exclusive_tags` validation warnings when there are multiple present on a single object ([#13016], thanks [@matkoniecz])
 #### :bug: Bugfixes
+* Fix crash when using the osmose integration ([#13043], thanks [@k-yle])
 * Fix exceptions when resizing the browser tab when nothing is selected ([#12800], thanks [@k-yle])
 * Allow tags like `not:*:wikidata` to have multiple values ([#12736], thanks [@k-yle])
 * Fix the icon of the GPS Overlay layer not working ([#12760], thanks [@hlfan])
@@ -108,6 +109,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#13027]: https://github.com/openstreetmap/iD/pull/13027
 [#13029]: https://github.com/openstreetmap/iD/pull/13029
 [#13030]: https://github.com/openstreetmap/iD/pull/13030
+[#13043]: https://github.com/openstreetmap/iD/pull/13043
 [@Geo-2695]: https://github.com/Geo-2695
 [@hemaksh2007jain-bit]: https://github.com/hemaksh2007jain-bit
 [@SaifuddinM23]: https://github.com/SaifuddinM23
