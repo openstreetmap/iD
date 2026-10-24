@@ -229,6 +229,7 @@ export const osmOneWayBiDirectionalTags: TagDictionary<boolean> = {
     },
 };
 export const osmOneWayTags = merge(
+    {},
     osmOneWayForwardTags,
     osmOneWayBackwardTags,
     osmOneWayBiDirectionalTags,
@@ -450,3 +451,22 @@ export const osmUrlKeys: Set<TagKey> = new Set([
     'website:menu',
     'post_office:website',
 ]);
+
+/** returns true if `tags` matches any of the criteria in `matchers` */
+export function osmMatchTags(matchers: Tags[], tags: Tags) {
+    for (const matcher of matchers) {
+        const isMatching = Object.keys(matcher).every((key) => {
+            const expectedValue = matcher[key];
+            const actualValue = tags[key];
+
+            if (!actualValue) return false;
+            if (expectedValue === '*') return true;
+            if (expectedValue === actualValue) return true;
+            if (actualValue.includes(';') && actualValue.split(';').filter(Boolean).includes(expectedValue)) return true;
+
+            return false;
+        });
+        if (isMatching) return true;
+    }
+    return false;
+}

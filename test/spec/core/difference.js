@@ -368,7 +368,6 @@ describe('iD.coreDifference', function () {
             node = node.mergeTags({ref: '42'});
             const head = base.replace(way).replace(node);
             const diff = iD.coreDifference(base, head);
-            console.error(diff.summary()[1]);
 
             expect(diff.summary()).toEqual([{
                 changeType: 'modified',

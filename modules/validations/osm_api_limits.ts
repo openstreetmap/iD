@@ -1,12 +1,14 @@
 import { t } from '../core/localizer';
 import { validationIssue, validationIssueFix } from '../core/validation';
 import { operationSplit } from '../operations/split';
+import type { EntityId, osmWay } from '../osm';
+import type { CreateValidator, Validator } from '../core/validation/models';
 
-export function validationOsmApiLimits(context) {
+export const validationOsmApiLimits: CreateValidator = (context) => {
     const type = 'osm_api_limits';
 
-    const validation = function checkOsmApiLimits(entity) {
-        const issues = [];
+    const validation: Validator = function checkOsmApiLimits(entity) {
+        const issues: validationIssue[] = [];
         const osm = context.connection();
         if (!osm) return issues; // cannot check if there is no connection to the osm api, e.g. during unit tests
         const maxWayNodes = osm.maxWayNodes();
@@ -37,7 +39,7 @@ export function validationOsmApiLimits(context) {
         return issues;
     };
 
-    function splitWayIntoSmallChunks() {
+    function splitWayIntoSmallChunks(this: validationIssue) {
         const fix = new validationIssueFix({
             icon: 'iD-operation-split',
             title: t.append('issues.fix.split_way.title'),
@@ -46,10 +48,10 @@ export function validationOsmApiLimits(context) {
                 const maxWayNodes = context.connection().maxWayNodes();
                 const g = context.graph();
 
-                const entityId = this.entityIds[0];
-                const entity = context.graph().entities[entityId];
+                const entityId = this.entityIds![0];
+                const entity = context.graph().hasEntity<osmWay>(entityId)!;
                 const numberOfParts = Math.ceil(entity.nodes.length / maxWayNodes);
-                let splitVertices;
+                let splitVertices: EntityId[] | undefined;
 
                 if (numberOfParts === 2) {
                     // simple case: try to split at the an intersection vertex
@@ -95,4 +97,4 @@ export function validationOsmApiLimits(context) {
     validation.type = type;
 
     return validation;
-}
+};

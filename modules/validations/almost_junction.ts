@@ -4,7 +4,7 @@ import {
   geoSphericalClosestNode, geoAngle
 } from '../geo';
 
-import { actionAddMidpoint } from '../actions/add_midpoint';
+import { actionAddMidpoint, type Edge } from '../actions/add_midpoint';
 import { actionChangeTags } from '../actions/change_tags';
 import { actionMergeNodes } from '../actions/merge_nodes';
 import { t } from '../core/localizer';
@@ -12,12 +12,29 @@ import { utilDisplayLabel } from '../util/utilDisplayLabel';
 import { osmRoutableHighwayTagValues } from '../osm/tags';
 import { validationIssue, validationIssueFix } from '../core/validation';
 import { services } from '../services';
+import type { Vec2 } from '../geo/vector';
+import type { CreateValidator, Validator } from '../core/validation/models';
+import type { NodeId, OsmEntity, osmNode, osmWay, WayId } from '../osm';
+import type { coreContext } from '../core';
 
+interface ConnectionInfo {
+  mid: osmNode;
+  node: osmNode;
+  wid: WayId;
+  edge: Edge;
+  cross_loc: Vec2;
+}
+
+interface Data {
+  midId: NodeId;
+  edge: Edge;
+  cross_loc: Vec2;
+}
 
 /**
  * Look for roads that can be connected to other roads with a short extension
  */
-export function validationAlmostJunction(context) {
+export const validationAlmostJunction: CreateValidator = (context) => {
   const type = 'almost_junction';
   const EXTEND_TH_METERS = 5;
   const WELD_TH_METERS = 0.75;
@@ -26,29 +43,29 @@ export function validationAlmostJunction(context) {
   // Comes from considering bounding case of perpendicular ways
   const SIG_ANGLE_TH = Math.atan(WELD_TH_METERS / EXTEND_TH_METERS);
 
-  function isHighway(entity) {
+  function isHighway(entity: OsmEntity): entity is osmWay {
     return entity.type === 'way'
       && osmRoutableHighwayTagValues[entity.tags.highway];
   }
 
-  function isTaggedAsNotContinuing(node) {
+  function isTaggedAsNotContinuing(node: osmNode) {
     return node.tags.noexit === 'yes'
       || node.tags.amenity === 'parking_entrance'
       || (node.tags.entrance && node.tags.entrance !== 'no');
   }
 
 
-  const validation = function checkAlmostJunction(entity, graph) {
+  const validation: Validator = function checkAlmostJunction(entity, graph) {
     if (!isHighway(entity)) return [];
     if (entity.isDegenerate()) return [];
 
     const tree = context.history().tree();
     const extendableNodeInfos = findConnectableEndNodesByExtension(entity);
 
-    let issues = [];
+    let issues: validationIssue<Data>[] = [];
 
     extendableNodeInfos.forEach(extendableNodeInfo => {
-      issues.push(new validationIssue({
+      issues.push(new validationIssue<Data>({
         type,
         subtype: 'highway-highway',
         severity: 'warning',
@@ -85,16 +102,16 @@ export function validationAlmostJunction(context) {
 
     return issues;
 
-    function makeFixes(context) {
-      let fixes = [new validationIssueFix({
+    function makeFixes(this: validationIssue<Data>, context: coreContext) {
+      let fixes = [new validationIssueFix<Data>({
         icon: 'iD-icon-abutment',
         title: t.append('issues.fix.connect_features.title'),
         onClick: function(context) {
           const annotation = t('issues.fix.connect_almost_junction.annotation');
-          const [, endNodeId, crossWayId] = this.issue.entityIds;
-          const midNode = context.entity(this.issue.data.midId);
-          const endNode = context.entity(endNodeId);
-          const crossWay = context.entity(crossWayId);
+          const [, endNodeId, crossWayId] = this.issue!.entityIds;
+          const midNode = context.entity(this.issue!.data!.midId);
+          const endNode = context.entity<osmNode>(endNodeId);
+          const crossWay = context.entity<osmWay>(crossWayId);
 
           // When endpoints are close, just join if resulting small change in angle (#7201)
           const nearEndNodes = findNearbyEndNodes(endNode, crossWay);
@@ -109,10 +126,10 @@ export function validationAlmostJunction(context) {
             }
           }
 
-          const targetEdge = this.issue.data.edge;
-          const crossLoc = this.issue.data.cross_loc;
+          const targetEdge = this.issue!.data!.edge;
+          const crossLoc = this.issue!.data!.cross_loc;
           const edgeNodes = [context.entity(targetEdge[0]), context.entity(targetEdge[1])];
-          const closestNodeInfo = geoSphericalClosestNode(edgeNodes, crossLoc);
+          const closestNodeInfo = geoSphericalClosestNode(edgeNodes, crossLoc)!;
 
           // already a point nearby, just connect to that
           if (closestNodeInfo.distance < WELD_TH_METERS) {
@@ -133,12 +150,12 @@ export function validationAlmostJunction(context) {
       const node = context.hasEntity(this.entityIds[1]);
       if (node && !node.hasInterestingTags()) {
         // node has no descriptive tags, suggest noexit fix
-        fixes.push(new validationIssueFix({
+        fixes.push(new validationIssueFix<Data>({
           icon: 'maki-barrier',
           title: t.append('issues.fix.tag_as_disconnected.title'),
           onClick: function(context) {
-            const nodeID = this.issue.entityIds[1];
-            const tags = Object.assign({}, context.entity(nodeID).tags);
+            const nodeID = this.issue!.entityIds[1];
+            const tags = { ...context.entity(nodeID).tags };
             tags.noexit = 'yes';
             context.perform(
               actionChangeTags(nodeID, tags),
@@ -151,7 +168,7 @@ export function validationAlmostJunction(context) {
       return fixes;
     }
 
-    function showReference(selection) {
+    function showReference(selection: d3.Selection) {
       selection.selectAll('.issue-reference')
         .data([0])
         .enter()
@@ -160,7 +177,7 @@ export function validationAlmostJunction(context) {
         .call(t.append('issues.almost_junction.highway-highway.reference'));
     }
 
-    function isExtendableCandidate(node, way) {
+    function isExtendableCandidate(node: osmNode, way: osmWay) {
       // can not accurately test vertices on tiles not downloaded from osm - #5938
       const osm = services.osm;
       if (osm && !osm.isDataLoaded(node.loc)) {
@@ -182,8 +199,8 @@ export function validationAlmostJunction(context) {
       return true;
     }
 
-    function findConnectableEndNodesByExtension(way) {
-      let results = [];
+    function findConnectableEndNodesByExtension(way: osmWay) {
+      let results: ConnectionInfo[] = [];
       if (way.isClosed()) return results;
 
       let testNodes;
@@ -209,7 +226,7 @@ export function validationAlmostJunction(context) {
       return results;
     }
 
-    function findNearbyEndNodes(node, way) {
+    function findNearbyEndNodes(node: osmNode, way: osmWay) {
       return [
         way.nodes[0],
         way.nodes[way.nodes.length - 1]
@@ -221,9 +238,9 @@ export function validationAlmostJunction(context) {
       });
     }
 
-    function findSmallJoinAngle(midNode, tipNode, endNodes) {
+    function findSmallJoinAngle(midNode: osmNode, tipNode: osmNode, endNodes: osmNode[]) {
       // Both nodes could be close, so want to join whichever is closest to collinear
-      let joinTo;
+      let joinTo: osmNode | undefined;
       let minAngle = Infinity;
 
       // Checks midNode -> tipNode -> endNode for collinearity
@@ -245,11 +262,11 @@ export function validationAlmostJunction(context) {
       return null;
     }
 
-    function hasTag(tags, key) {
+    function hasTag(tags: Tags, key: TagKey) {
       return tags[key] !== undefined && tags[key] !== 'no';
     }
 
-    function canConnectWays(way, way2) {
+    function canConnectWays(way: osmWay, way2: osmWay) {
 
       // allow self-connections
       if (way.id === way2.id) return true;
@@ -272,7 +289,7 @@ export function validationAlmostJunction(context) {
       return true;
     }
 
-    function canConnectByExtend(way, endNodeIdx) {
+    function canConnectByExtend(way: osmWay, endNodeIdx: number): ConnectionInfo | null {
       const tipNid = way.nodes[endNodeIdx];  // the 'tip' node for extension point
       const midNid = endNodeIdx === 0 ? way.nodes[1] : way.nodes[way.nodes.length - 2];  // the other node of the edge
       const tipNode = graph.entity(tipNid);
@@ -327,4 +344,4 @@ export function validationAlmostJunction(context) {
   validation.type = type;
 
   return validation;
-}
+};

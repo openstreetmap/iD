@@ -1,14 +1,18 @@
 import { throttle } from 'es-toolkit';
+import type { Dispatch } from 'd3-dispatch';
 import { select as d3_select } from 'd3-selection';
 import { svgPointTransform } from './helpers';
 import { services } from '../services';
 import { t } from '../core/localizer';
+import type { Projection } from '../geo/raw_mercator';
+import type { MlyImage } from '../services/mapillary';
+import type { coreContext } from '../core';
 
-export function svgMapillaryMapFeatures(projection, context, dispatch) {
+export function svgMapillaryMapFeatures(projection: Projection, context: coreContext, dispatch: Dispatch<object>) {
     const throttledRedraw = throttle(function () { dispatch.call('change'); }, 1000);
     const minZoom = 12;
-    let layer = d3_select(null);
-    let _mapillary;
+    let layer: d3.Selection<SVGGElement> = d3_select(null!);
+    let _mapillary: typeof services.mapillary | null;
 
 
     function init() {
@@ -55,7 +59,7 @@ export function svgMapillaryMapFeatures(projection, context, dispatch) {
     }
 
 
-    function click(d3_event, d) {
+    function click(d3_event: MouseEvent, d: MlyImage) {
         const service = getService();
         if (!service) return;
 
@@ -84,18 +88,18 @@ export function svgMapillaryMapFeatures(projection, context, dispatch) {
     }
 
 
-    function filterData(detectedFeatures) {
+    function filterData(detectedFeatures: MlyImage[]) {
         const fromDate = context.photos().fromDate();
         const toDate = context.photos().toDate();
 
         if (fromDate) {
             detectedFeatures = detectedFeatures.filter(function(feature) {
-                return new Date(feature.last_seen_at).getTime() >= new Date(fromDate).getTime();
+                return new Date(feature.last_seen_at!).getTime() >= new Date(fromDate).getTime();
             });
         }
         if (toDate) {
             detectedFeatures = detectedFeatures.filter(function(feature) {
-                return new Date(feature.first_seen_at).getTime() <= new Date(toDate).getTime();
+                return new Date(feature.first_seen_at!).getTime() <= new Date(toDate).getTime();
             });
         }
 
@@ -110,7 +114,7 @@ export function svgMapillaryMapFeatures(projection, context, dispatch) {
 
         const transform = svgPointTransform(projection);
 
-        const mapFeatures = layer.selectAll('.icon-map-feature')
+        const mapFeatures = layer.selectAll<SVGGElement, MlyImage>('.icon-map-feature')
             .data(data, function(d) { return d.id; });
 
         // exit
@@ -126,7 +130,7 @@ export function svgMapillaryMapFeatures(projection, context, dispatch) {
         enter
             .append('title')
             .text(function(d) {
-                var id = d.value.replace(/--/g, '.').replace(/-/g, '_');
+                var id = d.value!.replace(/--/g, '.').replace(/-/g, '_');
                 return t('mapillary_map_features.' + id);
             });
 
@@ -158,11 +162,11 @@ export function svgMapillaryMapFeatures(projection, context, dispatch) {
     }
 
 
-    function drawMapFeatures(selection) {
+    function drawMapFeatures(selection: d3.Selection<SVGGElement>) {
         const enabled = svgMapillaryMapFeatures.enabled;
         const service = getService();
 
-        layer = selection.selectAll('.layer-mapillary-map-features')
+        layer = selection.selectAll<SVGGElement, 0>('.layer-mapillary-map-features')
             .data(service ? [0] : []);
 
         layer.exit()
@@ -189,7 +193,7 @@ export function svgMapillaryMapFeatures(projection, context, dispatch) {
     }
 
 
-    drawMapFeatures.enabled = function(_) {
+    drawMapFeatures.enabled = function(_: boolean) {
         if (!arguments.length) return svgMapillaryMapFeatures.enabled;
         svgMapillaryMapFeatures.enabled = _;
         if (svgMapillaryMapFeatures.enabled) {
@@ -208,7 +212,7 @@ export function svgMapillaryMapFeatures(projection, context, dispatch) {
         return !!getService();
     };
 
-    drawMapFeatures.rendered = function(zoom) {
+    drawMapFeatures.rendered = function(zoom: number) {
       return zoom >= minZoom;
     };
 
@@ -216,3 +220,5 @@ export function svgMapillaryMapFeatures(projection, context, dispatch) {
     init();
     return drawMapFeatures;
 }
+svgMapillaryMapFeatures.enabled = false;
+svgMapillaryMapFeatures.initialized = false;

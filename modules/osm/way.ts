@@ -105,6 +105,7 @@ export class osmWay extends OsmAbstractEntity {
         if (this.tags.bridge) return 1;
         if (this.tags.cutting) return -1;
         if (this.tags.tunnel) return -1;
+        if (this.tags.waterway === 'dam') return 0;
         if (this.tags.waterway) return -1;
         if (this.tags.man_made === 'pipeline') return -10;
         if (this.tags.boundary) return -10;

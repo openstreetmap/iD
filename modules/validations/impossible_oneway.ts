@@ -6,14 +6,17 @@ import { osmFlowingWaterwayTagValues, osmOneWayTags, osmRoutableHighwayTagValues
 import { validationIssue, validationIssueFix } from '../core/validation';
 import { services } from '../services';
 import { utilCheckTagDictionary, utilObjectOmit } from '../util';
+import type { CreateValidator, Validator } from '../core/validation/models';
+import type { NodeId, osmNode, osmWay, WayId } from '../osm';
+import type { coreContext } from '../core';
 
-export function validationImpossibleOneway() {
+export const validationImpossibleOneway: CreateValidator = () => {
     const type = 'impossible_oneway';
 
     // ignore these oneway tags when checking for oneway-ness of highways
     const ignoreNonHighwayKeys = ['piste:type', 'aerialway', 'man_made', 'seamark:type', 'waterway'];
 
-    const validation = function checkImpossibleOneway(entity, graph) {
+    const validation: Validator = function checkImpossibleOneway(entity, graph) {
         if (entity.type !== 'way' || entity.geometry(graph) !== 'line') return [];
         if (entity.isClosed()) return [];
         if (!typeForWay(entity)) return [];
@@ -30,7 +33,7 @@ export function validationImpossibleOneway() {
             ...issuesForNode(entity, entity.last())
         ];
 
-        function typeForWay(way) {
+        function typeForWay(way: osmWay) {
             if (way.geometry(graph) !== 'line') return null;
 
             if (osmRoutableHighwayTagValues[way.tags.highway]) return 'highway';
@@ -38,7 +41,7 @@ export function validationImpossibleOneway() {
             return null;
         }
 
-        function nodeOccursMoreThanOnce(way, nodeID) {
+        function nodeOccursMoreThanOnce(way: osmWay, nodeID: NodeId) {
             let occurrences = 0;
             for (const index in way.nodes) {
                 if (way.nodes[index] === nodeID) {
@@ -49,7 +52,7 @@ export function validationImpossibleOneway() {
             return false;
         }
 
-        function isConnectedViaOtherTypes(way, node) {
+        function isConnectedViaOtherTypes(way: osmWay, node: osmNode) {
 
             var wayType = typeForWay(way);
 
@@ -95,8 +98,8 @@ export function validationImpossibleOneway() {
             });
         }
 
-        function issuesForNode(way, nodeID) {
-            const isFirst = (nodeID === way.first()) ^ way.isOneWayBackwards();
+        function issuesForNode(way: osmWay, nodeID: NodeId) {
+            const isFirst = (nodeID === way.first()) !== way.isOneWayBackwards();
             const wayType = typeForWay(way);
 
             // ignore if this way is self-connected at this node
@@ -127,7 +130,7 @@ export function validationImpossibleOneway() {
             if (attachedOneways.length) {
                 const connectedEndpointsOkay = attachedOneways.some(attachedOneway => {
                     const isAttachedBackwards = attachedOneway.isOneWayBackwards();
-                    if ((isFirst ^ isAttachedBackwards
+                    if ((isFirst !== isAttachedBackwards
                         ? attachedOneway.first()
                         : attachedOneway.last()
                     ) !== nodeID) {
@@ -173,7 +176,7 @@ export function validationImpossibleOneway() {
                             title: t.append('issues.fix.reverse_feature.title'),
                             entityIds: [way.id],
                             onClick: function(context) {
-                                var id = this.issue.entityIds[0];
+                                var id = this.issue!.entityIds[0];
                                 context.perform(actionReverse(id), t('operations.reverse.annotation.line', { n: 1 }));
                             }
                         }));
@@ -186,8 +189,8 @@ export function validationImpossibleOneway() {
                             icon: 'iD-operation-continue' + (useLeftContinue ? '-left' : ''),
                             title: t.append('issues.fix.continue_from_' + (isFirst ? 'start' : 'end') + '.title'),
                             onClick: function(context) {
-                                var entityID = this.issue.entityIds[0];
-                                var vertexID = this.issue.entityIds[1];
+                                var entityID = this.issue!.entityIds[0] as WayId;
+                                var vertexID = this.issue!.entityIds[1] as NodeId;
                                 var way = context.entity(entityID);
                                 var vertex = context.entity(vertexID);
                                 continueDrawing(way, vertex, context);
@@ -200,8 +203,8 @@ export function validationImpossibleOneway() {
                 loc: node.loc
             })];
 
-            function getReference(referenceID) {
-                return function showReference(selection) {
+            function getReference(referenceID: string) {
+                return function showReference(selection: d3.Selection) {
                     selection.selectAll('.issue-reference')
                         .data([0])
                         .enter()
@@ -213,7 +216,7 @@ export function validationImpossibleOneway() {
         }
     };
 
-    function continueDrawing(way, vertex, context) {
+    function continueDrawing(way: osmWay, vertex: osmNode, context: coreContext) {
         // make sure the vertex is actually visible and editable
         var map = context.map();
         if (!context.editable() || !map.trimmedExtent().contains(vertex.loc)) {
@@ -228,4 +231,4 @@ export function validationImpossibleOneway() {
     validation.type = type;
 
     return validation;
-}
+};

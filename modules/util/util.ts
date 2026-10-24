@@ -11,6 +11,10 @@ import type { osmNode as OsmNode } from '../osm/node';
 import type { EntityId as EntityID } from '../osm';
 
 
+export function utilSplitAtSemicolon(s: TagValue | undefined | null) {
+    return (s || '').split(';').map(s => s.trim()).filter(Boolean);
+}
+
 export function utilTagText(entity: iD.OsmEntity): string {
     const obj = (entity && entity.tags) || {};
     return Object.keys(obj)
@@ -534,7 +538,7 @@ export function utilPrefixCSSProperty(property: string): string | false {
 
 
 let transformProperty;
-export function utilSetTransform(el: d3.Selection, x: number, y: number, scale: number): d3.Selection {
+export function utilSetTransform<T extends d3.Selection<any>>(el: T, x: number, y: number, scale: number): T {
     transformProperty ||= utilPrefixCSSProperty('Transform');
     const prop = transformProperty;
     const translate = utilDetect().opera ? 'translate('   + x + 'px,' + y + 'px)'
