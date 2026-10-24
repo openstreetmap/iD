@@ -54,7 +54,8 @@ export interface presetIndex extends presetCollection {
     matchTags(tags: Tags, geometry: Geometry, loc?: Vec2): presetPreset;
     allowsVertex(entity: OsmEntity, resolver: coreGraph): boolean;
     universal(): presetField[];
-    defaults(geometry: Geometry, n: number, startWithRecents: boolean, loc: Vec2, extraPresets: presetPreset[]): presetCollection;
+    defaults(geometry: Geometry, n: number, startWithRecents?: boolean, loc?: Vec2, extraPresets?: presetPreset[], expectedPresets?: presetPreset[]): presetCollection;
+    expectedVertices(entities: OsmEntity | OsmEntity[] | string | string[], resolver: coreGraph): presetPreset[];
     getPresets(): { [presetId: string]: presetPreset };
     getRawPresets(): { [presetId: string]: Preset };
     addablePresetIDs: GetSet<presetIndex, Set<string> | null>;
@@ -429,7 +430,7 @@ export function presetIndex() {
   _this.universal = () => _universal;
 
 
-  _this.defaults = (geometry, n, startWithRecents, loc, extraPresets) => {
+  _this.defaults = (geometry, n, startWithRecents, loc, extraPresets, expectedPresets) => {
     const validHere = Array.isArray(loc) ? locationManager.locationSetsAt(loc) : null;
 
     let recents: presetPreset[] = [];
@@ -453,11 +454,87 @@ export function presetIndex() {
       defaults = _defaults[geometry].collection.concat(_this.fallback(geometry)!);
     }
 
+    let expected: presetPreset[] = [];
+    if (expectedPresets) {
+      expected = expectedPresets
+        .filter(a => a && a.matchGeometry(geometry))
+        .filter(a => !a.locationSetID || validHere?.has(a.locationSetID));
+    }
+
+    let list: presetPreset[];
+    if (expected.length) {
+      const expectedIds = new Set(expected.map(p => p.id));
+      const expectedRecents = recents.filter(p => expectedIds.has(p.id));
+      const otherRecents = recents.filter(p => !expectedIds.has(p.id));
+      list = expectedRecents.concat(expected).concat(otherRecents).concat(defaults).concat(extraPresets || []);
+    } else {
+      list = recents.concat(defaults).concat(extraPresets || []);
+    }
+
     let result = presetCollection(
-      utilArrayUniq(recents.concat(defaults).concat(extraPresets || [])).slice(0, n - 1)
+      utilArrayUniq(list).slice(0, n - 1)
     );
 
     return result;
+  };
+
+
+  _this.expectedVertices = (entities, resolver) => {
+    if (!entities || !resolver) return [];
+
+    const entityArray: OsmEntity[] = (Array.isArray(entities) ? entities : [entities])
+      .map(e => (typeof e === 'string' ? resolver.hasEntity(e) : e))
+      .filter((e): e is OsmEntity => !!e);
+
+    const wayCount: { [presetId: string]: number } = {};
+    const firstIndex: { [presetId: string]: number } = {};
+    const order: string[] = [];
+    const seenWays = new Set<string>();
+
+    for (const entity of entityArray) {
+      if (entity.type !== 'node') continue;
+
+      const parentWays = resolver.parentWays(entity);
+      for (const way of parentWays) {
+        if (seenWays.has(way.id)) continue;
+        seenWays.add(way.id);
+
+        const parentPreset = _this.match(way, resolver);
+        if (parentPreset?.related?.expectedVertices && Array.isArray(parentPreset.related.expectedVertices)) {
+          for (let i = 0; i < parentPreset.related.expectedVertices.length; i++) {
+            const presetId = parentPreset.related.expectedVertices[i];
+            if (wayCount[presetId] === undefined) {
+              wayCount[presetId] = 0;
+              firstIndex[presetId] = i;
+              order.push(presetId);
+            } else {
+              firstIndex[presetId] = Math.min(firstIndex[presetId], i);
+            }
+            wayCount[presetId]++;
+          }
+        }
+      }
+    }
+
+    if (!order.length) return [];
+
+    order.sort((a, b) => {
+      if (wayCount[b] !== wayCount[a]) {
+        return wayCount[b] - wayCount[a];
+      }
+      return firstIndex[a] - firstIndex[b];
+    });
+
+    const results: presetPreset[] = [];
+    for (const presetId of order) {
+      const preset = _this.item(presetId);
+      if (!preset) continue;
+      if (!preset.matchGeometry('vertex')) continue;
+      if (_addablePresetIDs && !_addablePresetIDs.has(preset.id)) continue;
+      results.push(preset);
+    }
+
+    return results;
   };
 
   // pass a Set of addable preset ids
