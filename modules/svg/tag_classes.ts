@@ -9,7 +9,8 @@ export function svgTagClasses<T>() {
         'building', 'highway', 'railway', 'waterway', 'aeroway', 'aerialway',
         'piste:type', 'boundary', 'power', 'amenity', 'natural', 'landuse',
         'leisure', 'military', 'place', 'man_made', 'route', 'attraction',
-        'roller_coaster', 'building:part', 'indoor', 'climbing', 'cemetery'
+        'roller_coaster', 'building:part', 'indoor', 'climbing', 'cemetery',
+        'seamark:type',
     ];
     const statuses: string[] = Object.keys(osmLifecyclePrefixes);
     const secondaries = [

@@ -192,14 +192,24 @@ path.fill.tag-landuse-military {
 
 /* Pink things */
 path.stroke.tag-landuse-industrial,
+path.stroke[class*="tag-seamark_type-separation"],
 path.stroke.tag-power-plant {
     stroke: rgb(228, 164, 245);
 }
 path.fill.tag-landuse-industrial,
+path.fill[class*="tag-seamark_type-separation"],
 path.fill.tag-power-plant {
     stroke: rgba(228, 164, 245, 0.3);
     fill: rgba(228, 164, 245, 0.3);
 }
+.preset-icon-fill path.area.stroke[class*="tag-seamark_type-separation"] {
+    stroke: rgb(190, 143, 240);
+}
+
+.pattern-color-anchorage, .pattern-color-fairway {
+    fill: rgba(236, 236, 236, 0.3);
+}
+
 
 
 /* Teal things */
