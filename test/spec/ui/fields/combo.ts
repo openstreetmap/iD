@@ -2,6 +2,61 @@ import type { Field } from '@openstreetmap/id-tagging-schema';
 import { select as d3_select } from 'd3-selection';
 
 describe('iD.uiFieldCombo', () => {
+    describe('combo', () => {
+        let context: iD.Context;
+        let selection: d3.Selection<HTMLDivElement>;
+        let originalTaginfo: typeof iD.services.taginfo;
+
+        beforeEach(() => {
+            selection = d3_select(document.createElement('div'));
+            document.body.appendChild(selection.node()!);
+            context = iD.coreContext().assetPath('../dist/').init();
+            context.container(selection as unknown as d3.Selection<HTMLElement>);
+            originalTaginfo = iD.services.taginfo;
+        });
+
+        afterEach(() => {
+            iD.services.taginfo = originalTaginfo;
+            selection.remove();
+        });
+
+        it('shows Taginfo descriptions for static options when suggestions are disabled', async () => {
+            const taginfo = {
+                values: vi.fn((_params: unknown, callback: Parameters<typeof iD.services.taginfo.values>[1]) => {
+                    callback(null, [
+                        { key: 'example', value: 'fixed', title: 'A description from Taginfo' },
+                        { key: 'example', value: 'fixed_extra', title: 'An additional Taginfo suggestion' }
+                    ]);
+                })
+            };
+            iD.services.taginfo = taginfo as unknown as typeof iD.services.taginfo;
+
+            const field = iD.presetField('a', {
+                key: 'example',
+                type: 'combo',
+                options: ['fixed'],
+                autoSuggestions: false,
+                strings: { options: { fixed: 'Fixed option' } },
+                label: 'Example'
+            } as unknown as Field);
+            const instance = iD.uiFieldCombo(field, context);
+            selection.call(instance);
+
+            // Wait for the static options to be installed by initCombo.
+            await new Promise(resolve => { setTimeout(resolve, 0); });
+
+            const input = selection.select<HTMLInputElement>('input');
+            input.node()!.focus();
+            iD.utilGetSetValue(input, 'fix');
+            input.dispatch('input');
+
+            expect(taginfo.values).toHaveBeenCalled();
+            const options = selection.selectAll<HTMLAnchorElement, unknown>('.combobox-option').nodes();
+            expect(options).toHaveLength(1);
+            expect(options[0].getAttribute('title')).toContain('A description from Taginfo');
+        });
+    });
+
     describe('semiCombo', () => {
         let context: iD.Context;
         let selection: d3.Selection<HTMLDivElement>;
