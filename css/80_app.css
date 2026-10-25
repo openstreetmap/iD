@@ -369,6 +369,7 @@ button.disabled {
 }
 button.disabled .icon {
     fill: var(--transparent-text-emphasis-color);
+    stroke: var(--transparent-text-emphasis-color);
 }
 
 .joined > * {
@@ -645,6 +646,9 @@ button.add-note svg.icon {
 button.add-note svg.icon {
     margin-left: unset;
     margin-right: 4px;
+}
+button.add-note.disabled svg.icon {
+    stroke: var(--transparent-text-emphasis-color);
 }
 .ideditor[dir='rtl'] button.add-note svg.icon {
     margin-left: 4px;
