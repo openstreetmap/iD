@@ -95,7 +95,9 @@ export const operationStraighten: CreateOperation = (context, selectedIDs) => {
 
 
     operation.disabled = function() {
-        var reason = _action!.disabled!(context.graph());
+        if (!_action) return false;
+
+        var reason = _action.disabled?.(context.graph());
         if (reason) {
             return reason;
         } else if (_extent.percentContainedIn(context.map().extent()) < 0.8) {

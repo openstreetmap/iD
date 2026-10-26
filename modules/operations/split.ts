@@ -62,7 +62,7 @@ export const operationSplit: CreateOperation = (context, selectedIDs) => {
 
 
     operation.disabled = function() {
-        var reason = _action.disabled!(context.graph());
+        var reason = _action.disabled?.(context.graph());
         if (reason) {
             return reason;
         } else if (selectedIDs.some(context.hasHiddenConnections)) {
