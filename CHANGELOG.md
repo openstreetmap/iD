@@ -47,11 +47,13 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :hourglass: Performance
 #### :mortar_board: Walkthrough / Help
 #### :rocket: Presets
+* Show reasonable default on `access` field for `barrier=stile` nodes ([#12971], thanks [@matkoniecz])
 #### :hammer: Development
 * Drop code previously responsible for _maprules_ integration (which has been defunct for a while now) ([#12679])
 
 [#9732]: https://github.com/openstreetmap/iD/pull/9732
 [#12679]: https://github.com/openstreetmap/iD/pull/12679
+[#12971]: https://github.com/openstreetmap/iD/pull/12971
 
 
 # 2.42.1
