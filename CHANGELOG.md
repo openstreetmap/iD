@@ -61,7 +61,8 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Fix exceptions when resizing the browser tab when nothing is selected ([#12800], thanks [@k-yle])
 * Allow tags like `not:*:wikidata` to have multiple values ([#12736], thanks [@k-yle])
 * Fix the icon of the GPS Overlay layer not working ([#12760], thanks [@hlfan])
-* Fix some tags (such as `railway:preferred_direction`) from being falsely detected as non-reversible ([#13018], thanks [@matkoniecz])
+* Flip some tags (such as `railway:preferred_direction`) that were falsely detected as non-reversible ([#13018], thanks [@matkoniecz])
+* Don't flip values of tags which are not relative to the way direction (such as `driving_side`) when reversing a way ([#13036], thanks [@matkoniecz])
 * Fix exception when dragging some undraggable parts of the UI ([#13030], thanks [@k-yle])
 * Fix minor labelling bug - try 85 and 95 offsets rather than trying 95 twice ([#13009], thanks [@matkoniecz])
 * Fix mistake in right-to-left text detection ([#13032], thanks [@matkoniecz])
@@ -108,6 +109,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#13027]: https://github.com/openstreetmap/iD/pull/13027
 [#13029]: https://github.com/openstreetmap/iD/pull/13029
 [#13030]: https://github.com/openstreetmap/iD/pull/13030
+[#13036]: https://github.com/openstreetmap/iD/pull/13036
 [@Geo-2695]: https://github.com/Geo-2695
 [@hemaksh2007jain-bit]: https://github.com/hemaksh2007jain-bit
 [@SaifuddinM23]: https://github.com/SaifuddinM23
