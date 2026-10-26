@@ -26,6 +26,7 @@ export function modeMove(context, entityIDs, baseGraph) {
 
     var _tolerancePx = 4; // see also behaviorDrag, behaviorSelect, modeRotate
 
+    /** @type {import('../core/context').Mode} */
     var mode = {
         id: 'move',
         button: 'browse'
