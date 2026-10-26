@@ -2090,6 +2090,16 @@ input.date-selector {
 .form-field-input-radio > label > input[type="radio"] {
     flex: 0 1 auto;
 }
+.form-field-input-radio > label.mixed > input[type="radio"] {
+    appearance: none;
+    -webkit-appearance: none;
+    border-radius: 50%;
+    background-color: var(--link-color);
+    border: 1px solid var(--link-color);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14'%3E%3Crect x='3' y='6' width='8' height='2' rx='1' fill='%23fff'/%3E%3C/svg%3E");
+    background-position: center;
+    background-repeat: no-repeat;
+}
 .form-field-input-radio > label > span {
     flex: 1 1 auto;
     overflow: hidden;
