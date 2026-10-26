@@ -83,7 +83,6 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Drop support for `oneway=1` ([#13026], thanks [@k-yle])
 * Drop confusing dead code ([#13014], thanks [@matkoniecz])
 
-[#6801]: https://github.com/openstreetmap/iD/issues/6801
 [#8402]: https://github.com/openstreetmap/iD/issues/8402
 [#8424]: https://github.com/openstreetmap/iD/issues/8424
 [#9732]: https://github.com/openstreetmap/iD/pull/9732
