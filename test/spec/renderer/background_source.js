@@ -128,8 +128,8 @@ describe('iD.rendererBackgroundSource.Custom', function() {
             expect(source.imageryUsed()).toEqual('Custom (http://example.com/tiles?apiKey={apikey}&foo=1 )');
         });
         it('sanitizes every occurrence of `key`', function() {
-            var source = iD.rendererBackgroundSource.Custom('http://example.com/services;key=MYTOKEN/layer?apikey=OTHER-TOKEN');
-            expect(source.imageryUsed()).toEqual('Custom (http://example.com/services;key={apikey}/layer?apikey={apikey} )');
+            var source = iD.rendererBackgroundSource.Custom('http://example.com/services/layer?apikey=MYTOKEN&otherkey=OTHER-TOKEN');
+            expect(source.imageryUsed()).toEqual('Custom (http://example.com/services/layer?apikey={apikey}&otherkey={apikey} )');
         });
     });
 
