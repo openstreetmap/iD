@@ -6,6 +6,7 @@ import { utilDetect } from '../util/detect';
 import { utilExpandLocaleCode, utilStringQs } from '../util';
 import { utilArrayUniq } from '../util/array';
 import { presetsCdnUrl } from '../../config/id.js';
+import { utilSanitizeHTML } from '../util/sanitize';
 
 export type LanguagesJSON = {
     [localeCode: string]: {
@@ -31,6 +32,8 @@ export type Translations = {
     languageNames?: Record<string, string>,
     scriptNames?: Record<string, string>
 };
+
+export type TextDirection = 'ltr' | 'rtl';
 
 export type LocaleIndexKey = `locales_index_${string}`; // e.g. 'locales_index_genera'
 export type LocaleDataKey = `locale_${string}_${string}`; // e.g. 'locales_genera_es'
@@ -103,7 +106,7 @@ export class coreLocalizer {
     private _localeCodes = ['en-US', 'en'];
     private _expandedLocaleCodes = utilExpandLocaleCode(this._localeCode);
     private _languageCode = 'en';
-    private _textDirection: 'ltr' | 'rtl' = 'ltr';
+    private _textDirection: TextDirection = 'ltr';
     private _usesMetric = false;
     private _languageNames: Record<string, string> = {};
     private _scriptNames: Record<string, string> = {};
@@ -519,7 +522,7 @@ export class coreLocalizer {
         // text may be empty or undefined if `replacements.default` is
         const text = info.texts.join('');
         if (text) {
-            return `<span class="localized-text" lang="${info.locale || 'und'}">${text}</span>`;
+            return utilSanitizeHTML(`<span class="localized-text" lang="${info.locale || 'und'}">${text}</span>`);
         } else {
             return '';
         }

@@ -78,7 +78,7 @@ export function uiPanelBackground(context) {
             .selectAll('.background-info-span-zoom')
             .text(_metadata.zoom);
 
-        if (!d || !d.length >= 3) return;
+        if (!d) return;
 
         background.baseLayerSource().getMetadata(center, d, function(err, result) {
             if (err || _currSource.id !== sourceId) return;

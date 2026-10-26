@@ -1,7 +1,12 @@
+import type { Fields, Geometry, Preset, PresetCategories, PresetDefaults, Presets } from '@openstreetmap/id-tagging-schema';
 import { prefs } from '../core/preferences';
 import { fileFetcher } from '../core/file_fetcher';
 import { locationManager } from '../core/location_manager';
-
+import type { TagDictionary } from '../util/object';
+import type { OsmEntity } from '../osm';
+import type { coreGraph } from '../core';
+import type { Vec2 } from '../geo/vector';
+import type { FeatureCollection } from 'geojson';
 import { osmNodeGeometriesForTags, osmSetAreaKeys, osmSetPointTags, osmSetVertexTags } from '../osm/tags';
 import { presetCategory } from './category';
 import { presetCollection } from './collection';
@@ -16,6 +21,49 @@ export { presetPreset };
 
 let _mainPresetIndex = presetIndex(); // singleton
 export { _mainPresetIndex as presetManager };
+
+interface MinifiedRibbonItem { pID: string }
+
+export class RibbonItem {
+    preset: presetPreset;
+    constructor (preset: presetPreset) {
+        this.preset = preset;
+    }
+    matches = (preset: presetPreset) => this.preset.id === preset.id;
+    minified = (): MinifiedRibbonItem => ({ pID: this.preset.id });
+}
+
+
+export interface presetIndex extends presetCollection {
+    merge(arg: {
+        categories?: PresetCategories;
+        defaults?: PresetDefaults;
+        presets?: Presets;
+        fields?: Fields;
+        featureCollection?: FeatureCollection;
+    }): this;
+    /** @param bypassCache - used by unit tests */
+    ensureLoaded(bypassCache?: boolean): Promise<void>;
+
+    areaKeys(): TagDictionary<true>;
+    pointTags(): TagDictionary<true>;
+    vertexTags(): TagDictionary<true>;
+
+    field(fieldId: string): presetField | undefined;
+    match(entity: OsmEntity, resolver: coreGraph): presetPreset;
+    matchTags(tags: Tags, geometry: Geometry, loc?: Vec2): presetPreset;
+    allowsVertex(entity: OsmEntity, resolver: coreGraph): boolean;
+    universal(): presetField[];
+    defaults(geometry: Geometry, n: number, startWithRecents: boolean, loc: Vec2, extraPresets: presetPreset[]): presetCollection;
+    getPresets(): { [presetId: string]: presetPreset };
+    getRawPresets(): { [presetId: string]: Preset };
+    addablePresetIDs: GetSet<presetIndex, Set<string> | null>;
+
+    recent(): presetCollection;
+    getRecents(): RibbonItem[];
+    recentMatching(preset: presetPreset): RibbonItem | null;
+    setMostRecent(preset: presetPreset): void;
+}
 
 //
 // `presetIndex` wraps a `presetCollection`
@@ -33,9 +81,9 @@ export function presetIndex() {
   const AREA = presetPreset('area', { name: 'Area', tags: { area: 'yes' }, geometry: ['area'], matchScore: 0.1 } );
   const RELATION = presetPreset('relation', { name: 'Relation', tags: {}, geometry: ['relation'], matchScore: 0.1 } );
 
-  let _this = presetCollection([POINT, LINE, AREA, RELATION]);
-  let _presets = { point: POINT, line: LINE, area: AREA, relation: RELATION };
-  const _rawPresets = {};
+  let _this = <presetIndex>presetCollection([POINT, LINE, AREA, RELATION]);
+  let _presets: { [presetId: string]: presetPreset } = { point: POINT, line: LINE, area: AREA, relation: RELATION };
+  const _rawPresets: { [presetId: string]: Preset } = {};
 
   let _defaults = {
     point: presetCollection([POINT]),
@@ -45,18 +93,17 @@ export function presetIndex() {
     relation: presetCollection([RELATION])
   };
 
-  let _fields = {};
-  let _categories = {};
-  let _universal = [];
-  let _addablePresetIDs = null;   // Set of preset IDs that the user can add
-  let _recents;
+  let _fields: { [fieldId: string]: presetField } = {};
+  let _categories: { [categoryId: string]: presetCategory } = {};
+  let _universal: presetField[] = [];
+  let _addablePresetIDs: Set<string> | null = null;   // Set of preset IDs that the user can add
+  let _recents: RibbonItem[];
 
   // Index of presets by (geometry, tag key).
-  let _geometryIndex = { point: {}, vertex: {}, line: {}, area: {}, relation: {} };
-  let _loadPromise;
+  let _geometryIndex: Record<Geometry, Record<string, Record<string, presetPreset[]>>> = { point: {}, vertex: {}, line: {}, area: {}, relation: {} };
+  let _loadPromise: Promise<void>;
 
 
-  /** @param {boolean=} bypassCache - used by unit tests */
   _this.ensureLoaded = (bypassCache) => {
     if (_loadPromise && !bypassCache) return _loadPromise;
 
@@ -89,15 +136,14 @@ export function presetIndex() {
   //   featureCollection: {}
   //}
   _this.merge = (d) => {
-    let newLocationSets = [];
+    let newLocationSets: (presetField | presetPreset)[] = [];
 
     // Merge Fields
     if (d.fields) {
-      Object.keys(d.fields).forEach(fieldID => {
-        let f = d.fields[fieldID];
+      Object.entries(d.fields).forEach(([fieldID, rawField]) => {
 
-        if (f) {   // add or replace
-          f = presetField(fieldID, f);
+        if (rawField) {   // add or replace
+          const f = presetField(fieldID, rawField);
           if (f.locationSet) newLocationSets.push(f);
           _fields[fieldID] = f;
 
@@ -109,13 +155,12 @@ export function presetIndex() {
 
     // Merge Presets
     if (d.presets) {
-      Object.keys(d.presets).forEach(presetID => {
-        let p = d.presets[presetID];
+      Object.entries(d.presets).forEach(([presetID, rawPreset]) => {
 
-        if (p) {   // add or replace
+        if (rawPreset) {   // add or replace
           const isAddable = !_addablePresetIDs || _addablePresetIDs.has(presetID);
-          _rawPresets[presetID] = p;
-          p = presetPreset(presetID, p, isAddable, _fields, _presets);
+          _rawPresets[presetID] = rawPreset;
+          const p = presetPreset(presetID, rawPreset, isAddable, _fields, _presets);
           if (p.locationSet) newLocationSets.push(p);
           _presets[presetID] = p;
 
@@ -131,12 +176,10 @@ export function presetIndex() {
 
     // Merge Categories
     if (d.categories) {
-      Object.keys(d.categories).forEach(categoryID => {
-        let c = d.categories[categoryID];
+      Object.entries(d.categories).forEach(([categoryID, rawCategory]) => {
 
-        if (c) {   // add or replace
-          c = presetCategory(categoryID, c, _presets);
-          if (c.locationSet) newLocationSets.push(c);
+        if (rawCategory) {   // add or replace
+          const c = presetCategory(categoryID, rawCategory, _presets);
           _categories[categoryID] = c;
 
         } else {   // remove
@@ -146,12 +189,12 @@ export function presetIndex() {
     }
 
     // Rebuild _this.collection after changing presets and categories
-    _this.collection = Object.values(_presets).concat(Object.values(_categories));
+    _this.collection = Object.values(_presets).concat(Object.values(_categories) as []);
 
     // Merge Defaults
     if (d.defaults) {
       Object.keys(d.defaults).forEach(geometry => {
-        const def = d.defaults[geometry];
+        const def = d.defaults![geometry];
         if (Array.isArray(def)) {   // add or replace
           _defaults[geometry] = presetCollection(
             def.map(id => _presets[id] || _categories[id]).filter(Boolean)
@@ -194,9 +237,9 @@ export function presetIndex() {
 
   _this.match = (entity, resolver) => {
     return resolver.transient(entity, 'presetMatch', () => {
-      let geometry = entity.geometry(resolver);
+      let geometry: Geometry = entity.geometry(resolver);
       // Treat entities on addr:interpolation lines as points, not vertices - #3241
-      if (geometry === 'vertex' && entity.isOnAddressLine(resolver)) {
+      if (entity.type === 'node' && geometry === 'vertex' && entity.isOnAddressLine(resolver)) {
         geometry = 'point';
       }
       const entityExtent = entity.extent(resolver);
@@ -265,7 +308,7 @@ export function presetIndex() {
       }
     }
 
-    return bestMatch || _this.fallback(geometry);
+    return bestMatch || _this.fallback(geometry)!;
   };
 
   _this.allowsVertex = (entity, resolver) => {
@@ -298,7 +341,7 @@ export function presetIndex() {
   // and the subkeys form the discardlist.
   _this.areaKeys = () => {
     // The ignore list is for keys that imply lines. (We always add `area=yes` for exceptions)
-    const ignore = {
+    const ignore: Record<TagKey, true> = {
       barrier: true,
       highway: true,
       footway: true,
@@ -306,7 +349,7 @@ export function presetIndex() {
       junction: true,
       type: true
     };
-    let areaKeys = {};
+    let areaKeys: TagDictionary<true> = {};
 
     // ignore name-suggestion-index and deprecated presets
     const presets = _this.collection.filter(p => !p.suggestion && !p.replacement);
@@ -342,7 +385,7 @@ export function presetIndex() {
 
 
   _this.pointTags = () => {
-    return _this.collection.reduce((pointTags, d) => {
+    return _this.collection.reduce<TagDictionary<true>>((pointTags, d) => {
       // ignore name-suggestion-index, deprecated, and generic presets
       if (d.suggestion || d.replacement || d.searchable === false) return pointTags;
 
@@ -362,7 +405,7 @@ export function presetIndex() {
 
 
   _this.vertexTags = () => {
-    return _this.collection.reduce((vertexTags, d) => {
+    return _this.collection.reduce<TagDictionary<true>>((vertexTags, d) => {
       // ignore name-suggestion-index, deprecated, and generic presets
       if (d.suggestion || d.replacement || d.searchable === false) return vertexTags;
 
@@ -389,7 +432,7 @@ export function presetIndex() {
   _this.defaults = (geometry, n, startWithRecents, loc, extraPresets) => {
     const validHere = Array.isArray(loc) ? locationManager.locationSetsAt(loc) : null;
 
-    let recents = [];
+    let recents: presetPreset[] = [];
     if (startWithRecents) {
         // filtering before slicing to prevent unused slots in the recent preset list, issue #11405
         recents = _this.recent().matchGeometry(geometry).collection
@@ -397,7 +440,7 @@ export function presetIndex() {
         .slice(0, MAX_RECENTS_TO_SHOW);
     }
 
-    let defaults;
+    let defaults: presetPreset[];
     if (_addablePresetIDs) {
       defaults = Array.from(_addablePresetIDs).map(function(id) {
         var preset = _this.item(id);
@@ -405,9 +448,9 @@ export function presetIndex() {
         return null;
       })
         .filter(Boolean)
-        .filter(a => !a.locationSetID || validHere.has(a.locationSetID));
+        .filter(a => !a.locationSetID || validHere?.has(a.locationSetID));
     } else {
-      defaults = _defaults[geometry].collection.concat(_this.fallback(geometry));
+      defaults = _defaults[geometry].collection.concat(_this.fallback(geometry)!);
     }
 
     let result = presetCollection(
@@ -428,7 +471,7 @@ export function presetIndex() {
     if (_addablePresetIDs) {   // reset all presets
       _this.collection.forEach(p => {
         // categories aren't addable
-        if (p.addable) p.addable(_addablePresetIDs.has(p.id));
+        if (p.addable) p.addable(_addablePresetIDs!.has(p.id));
       });
     } else {
       _this.collection.forEach(p => {
@@ -437,7 +480,7 @@ export function presetIndex() {
     }
 
     return _this;
-  };
+  } as presetIndex['addablePresetIDs'];
 
 
   _this.recent = () => {
@@ -456,28 +499,17 @@ export function presetIndex() {
   };
 
 
-  function RibbonItem(preset) {
-    let item = {};
-    item.preset = preset;
-
-    item.matches = (preset) => item.preset.id === preset.id;
-    item.minified = () => ({ pID: item.preset.id });
-
-    return item;
-  }
-
-
-  function ribbonItemForMinified(d) {
+  function ribbonItemForMinified(d: MinifiedRibbonItem) {
     if (d && d.pID) {
       const preset = _this.item(d.pID);
       if (!preset) return null;
-      return RibbonItem(preset);
+      return new RibbonItem(preset);
     }
     return null;
   }
 
 
-  function setRecents(items) {
+  function setRecents(items: RibbonItem[]) {
     _recents = items;
     const minifiedItems = items.map(d => d.minified());
     prefs('preset_recents', JSON.stringify(minifiedItems));
@@ -487,8 +519,8 @@ export function presetIndex() {
   _this.getRecents = () => {
     if (!_recents) {
       // fetch from local storage
-      _recents = (JSON.parse(prefs('preset_recents')) || [])
-        .reduce((acc, d) => {
+      _recents = (JSON.parse(prefs('preset_recents')!) as MinifiedRibbonItem[] || [])
+        .reduce<RibbonItem[]>((acc, d) => {
           let item = ribbonItemForMinified(d);
           if (item && item.preset.addable()) acc.push(item);
           return acc;
@@ -517,7 +549,7 @@ export function presetIndex() {
     if (item) {
       items.splice(items.indexOf(item), 1);
     } else {
-      item = RibbonItem(preset);
+      item = new RibbonItem(preset);
     }
 
     // remove the last recent (first in, first out)

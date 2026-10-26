@@ -941,7 +941,7 @@ en:
       description: Indoor Features
       tooltip: "Rooms, Corridors, Stairwells, etc."
     landuse:
-      description: Landuse Features
+      description: Land Use Features
       tooltip: "Forests, Farmland, Parks, Residential, Commercial, etc."
     boundaries:
       description: Boundaries
@@ -1004,7 +1004,7 @@ en:
             scale_factor: "`{@2x}` or `{r}`: resolution scale factor"
         example: "Example:"
       template:
-        placeholder: Enter a url template
+        placeholder: Enter a URL template
     custom_data:
       tooltip: Edit custom data layer
       header: Custom Map Data Settings
@@ -1014,7 +1014,7 @@ en:
       or: "Or"
       url:
         instructions: "Enter a data file URL or vector tile URL template. Valid tokens are:\n   {zoom} or {z}, {x}, {y} for Z/X/Y tile scheme"
-        placeholder: Enter a url
+        placeholder: Enter a URL
   preferences:
     title: Preferences
     description: Preferences
@@ -1024,7 +1024,7 @@ en:
       privacy_link: View the iD privacy policy
       third_party_icons:
         description: Show Third Party Icons
-        tooltip: Uncheck this box to avoid loading icons from third party sites such as Wikimedia Commons, Facebook, or Twitter.
+        tooltip: Uncheck this box to avoid loading icons from third-party sites such as Wikimedia Commons or Facebook.
   restore:
     heading: You have unsaved changes
     description: "Do you wish to restore unsaved changes from a previous editing session?"
@@ -1781,6 +1781,9 @@ en:
         title: Connect this feature
       connect_features:
         title: Connect the features
+      connect_features_manually:
+        title: Connect the features manually
+        tooltip: For example by mapping missing sections of roads or paths, or fixing disconnected road intersections.
       connect_using_crossing:
         title: Connect using a crossing
       connect_using_ford:

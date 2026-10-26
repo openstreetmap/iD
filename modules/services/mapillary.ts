@@ -1,15 +1,21 @@
+/* eslint-disable @typescript-eslint/no-this-alias */
 /* global mapillary:false */
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { select as d3_select } from 'd3-selection';
-
+import type { SequenceComponent, TagComponent, ViewerBearingEvent, ViewerImageEvent, FilterExpression, Image, Viewer, ViewerOptions } from 'mapillary-js';
 import { PbfReader } from 'pbf';
 import RBush from 'rbush';
 import { VectorTile } from '@mapbox/vector-tile';
 import { geoExtent } from '../geo';
 import { utilRebind, utilTiler } from '../util';
-import { services } from './';
-import { searchLimited } from '../util/partition';
+import { services } from '.';
+import { searchLimited, type WithBbox } from '../util/partition';
 import { patchHash } from '../behavior';
+import type { Projection } from '../geo/raw_mercator';
+import type { Tile } from '../util/tiler';
+import type { Vec2 } from '../geo/vector';
+import type { Feature, LineString, Point } from 'geojson';
+import type { coreContext } from '../core';
 
 const accessToken = 'MLY|4100327730013843|5bb78b81720791946a9a7b956c57b7cf';
 const apiUrl = 'https://graph.mapillary.com/';
@@ -21,22 +27,112 @@ const trafficSignTileUrl = `${baseTileUrl}/mly_map_feature_traffic_sign/2/{z}/{x
 const viewercss = 'mapillary-js/mapillary.css';
 const viewerjs = 'mapillary-js/mapillary.js';
 const minZoom = 14;
-const dispatch = d3_dispatch('change', 'loadedImages', 'loadedSigns', 'loadedMapFeatures', 'bearingChanged', 'imageChanged');
+const dispatch = d3_dispatch<object, {
+    change: [];
+    loadedImages: [];
+    loadedSigns: [];
+    loadedMapFeatures: [];
+    bearingChanged: [ViewerBearingEvent];
+    imageChanged: [];
+}>('change', 'loadedImages', 'loadedSigns', 'loadedMapFeatures', 'bearingChanged', 'imageChanged');
 
-let _loadViewerPromise;
-let _mlyActiveImage;
-let _mlyCache;
+export interface MlyImage {
+    service?: 'photo';
+    loc: Vec2;
+    id: string;
+
+    first_seen_at?: string;
+    last_seen_at?: string;
+    value?: string;
+    captured_at?: string;
+
+    ca?: number;
+    unsafeId?: boolean;
+    is_pano?: boolean;
+    sequence_id?: string;
+}
+
+export type MlySequence = Feature<LineString, {
+    id: string;
+    captured_at: string;
+    is_pano?: boolean;
+}>;
+
+
+type RawPoint = Feature<Point, {
+    id: string;
+    first_seen_at: string;
+    last_seen_at: string;
+    value: string;
+}>;
+
+type RawImage = Feature<Point, {
+    captured_at: string;
+    compass_angle: number;
+    id: string;
+    is_pano: boolean;
+    sequence_id: string;
+}>;
+
+interface Detection {
+    id: string;
+    value: string;
+    /** base64 encoded */
+    geometry: string;
+    image_id: string;
+}
+export interface DetectionWithImage extends Detection {
+    image: MlyImage
+}
+
+let _loadViewerPromise: Promise<void> | undefined | null;
+let _mlyActiveImage: MlyImage | null;
+let _mlyCache: {
+    images: {
+        rtree: RBush<WithBbox<MlyImage>>;
+        forImageId: {
+            [imageId: string]: unknown;
+        };
+    },
+    image_detections: {
+        forImageId: {
+            [imageId: string]: Detection[];
+        };
+    },
+    signs: {
+        rtree: RBush<WithBbox<MlyImage>>;
+    };
+    points: {
+        rtree: RBush<WithBbox<MlyImage>>;
+    };
+    sequences: {
+        rtree: RBush<WithBbox<MlyImage>>;
+        lineString: {
+            [sequenceId: string]: MlySequence[];
+        };
+    };
+    requests: {
+        loaded: {
+            [tileId: string]: boolean;
+        };
+        inflight: {
+            [tileId: string]: AbortController;
+        };
+    };
+};
 let _mlyFallback = false;
-let _mlyHighlightedDetection;
+let _mlyHighlightedDetection: unknown | null;
 let _mlyShowFeatureDetections = false;
 let _mlyShowSignDetections = false;
-let _mlyViewer;
-let _mlyViewerFilter = ['all'];
+let _mlyViewer: Viewer;
+let _mlyViewerFilter: FilterExpression = ['all'];
 let _isViewerOpen = false;
 
 
+type Which = 'images' | 'signs' | 'points';
+
 // Load all data for the specified type from Mapillary vector tiles
-function loadTiles(which, url, maxZoom, projection) {
+function loadTiles(which: Which, url: string, maxZoom: number, projection: Projection) {
     const tiler = utilTiler().zoomExtent([minZoom, maxZoom]).skipNullIsland(true);
     const tiles = tiler.getTiles(projection);
 
@@ -47,15 +143,16 @@ function loadTiles(which, url, maxZoom, projection) {
 
 
 // Load all data for the specified type from one vector tile
-function loadTile(which, url, tile) {
+function loadTile(which: Which, url: string, tile: Tile) {
     const cache = _mlyCache.requests;
     const tileId = `${tile.id}-${which}`;
     if (cache.loaded[tileId] || cache.inflight[tileId]) return;
     const controller = new AbortController();
     cache.inflight[tileId] = controller;
-    const requestUrl = url.replace('{x}', tile.xyz[0])
-        .replace('{y}', tile.xyz[1])
-        .replace('{z}', tile.xyz[2]);
+    const requestUrl = url
+        .replace('{x}', String(tile.xyz[0]))
+        .replace('{y}', String(tile.xyz[1]))
+        .replace('{z}', String(tile.xyz[2]));
 
     fetch(requestUrl, { signal: controller.signal })
         .then(function(response) {
@@ -88,7 +185,7 @@ function loadTile(which, url, tile) {
 
 
 // Load the data from the vector tile into cache
-function loadTileDataToCache(data, tile, which) {
+function loadTileDataToCache(data: ArrayBuffer, tile: Tile, which: Which) {
     const vectorTile = new VectorTile(new PbfReader(data));
     let features,
         cache,
@@ -96,7 +193,7 @@ function loadTileDataToCache(data, tile, which) {
         i,
         feature,
         loc,
-        d;
+        d: MlyImage;
 
     if (Object.hasOwnProperty.call(vectorTile.layers, 'image')) {
         features = [];
@@ -104,9 +201,9 @@ function loadTileDataToCache(data, tile, which) {
         layer = vectorTile.layers.image;
 
         for (i = 0; i < layer.length; i++) {
-            feature = layer.feature(i).toGeoJSON(tile.xyz[0], tile.xyz[1], tile.xyz[2]);
+            feature = layer.feature(i).toGeoJSON(tile.xyz[0], tile.xyz[1], tile.xyz[2]) as RawImage;
             const unsafeId = typeof feature.properties.id === 'number' && feature.properties.id > Number.MAX_SAFE_INTEGER; // #12575
-            loc = feature.geometry.coordinates;
+            loc = feature.geometry.coordinates as Vec2;
             d = {
                 service: 'photo',
                 loc: loc,
@@ -132,7 +229,7 @@ function loadTileDataToCache(data, tile, which) {
         layer = vectorTile.layers.sequence;
 
         for (i = 0; i < layer.length; i++) {
-            feature = layer.feature(i).toGeoJSON(tile.xyz[0], tile.xyz[1], tile.xyz[2]);
+            feature = layer.feature(i).toGeoJSON(tile.xyz[0], tile.xyz[1], tile.xyz[2]) as MlySequence;
             if (cache.lineString[feature.properties.id]) {
                 cache.lineString[feature.properties.id].push(feature);
             } else {
@@ -147,9 +244,9 @@ function loadTileDataToCache(data, tile, which) {
         layer = vectorTile.layers.point;
 
         for (i = 0; i < layer.length; i++) {
-            feature = layer.feature(i).toGeoJSON(tile.xyz[0], tile.xyz[1], tile.xyz[2]);
+            feature = layer.feature(i).toGeoJSON(tile.xyz[0], tile.xyz[1], tile.xyz[2]) as RawPoint;
             if (typeof feature.properties.id === 'number' && feature.properties.id > Number.MAX_SAFE_INTEGER) continue; // skip unsafe ids #12575
-            loc = feature.geometry.coordinates;
+            loc = feature.geometry.coordinates as Vec2;
 
             d = {
                 service: 'photo',
@@ -174,9 +271,9 @@ function loadTileDataToCache(data, tile, which) {
         layer = vectorTile.layers.traffic_sign;
 
         for (i = 0; i < layer.length; i++) {
-            feature = layer.feature(i).toGeoJSON(tile.xyz[0], tile.xyz[1], tile.xyz[2]);
+            feature = layer.feature(i).toGeoJSON(tile.xyz[0], tile.xyz[1], tile.xyz[2]) as RawPoint;
             if (typeof feature.properties.id === 'number' && feature.properties.id > Number.MAX_SAFE_INTEGER) continue; // skip unsafe ids #12575
-            loc = feature.geometry.coordinates;
+            loc = feature.geometry.coordinates as Vec2;
 
             d = {
                 service: 'photo',
@@ -198,7 +295,7 @@ function loadTileDataToCache(data, tile, which) {
 
 
 // Get data from the API
-function loadData(url) {
+function loadData<T>(url: string): Promise<T[]> {
     return fetch(url)
         .then(function(response) {
             if (!response.ok) {
@@ -214,18 +311,20 @@ function loadData(url) {
         });
 }
 
-export default {
+export default new class {
+    event!: Pick<typeof dispatch, 'on'>;
+
     // Initialize Mapillary
-    init: function() {
+    init() {
         if (!_mlyCache) {
             this.reset();
         }
 
         this.event = utilRebind(this, dispatch, 'on');
-    },
+    }
 
     // Reset cache and state
-    reset: function() {
+    reset() {
         if (_mlyCache) {
             Object.values(_mlyCache.requests.inflight).forEach(function(request) { request.abort(); });
         }
@@ -240,39 +339,39 @@ export default {
         };
 
         _mlyActiveImage = null;
-    },
+    }
 
     // Get visible images
-    images: function(projection) {
+    images(projection: Projection) {
         const limit = 5;
         return searchLimited(limit, projection, _mlyCache.images.rtree);
-    },
+    }
 
     // Get visible traffic signs
-    signs: function(projection) {
+    signs(projection: Projection) {
         const limit = 5;
         return searchLimited(limit, projection, _mlyCache.signs.rtree);
-    },
+    }
 
     // Get visible map (point) features
-    mapFeatures: function(projection) {
+    mapFeatures(projection: Projection) {
         const limit = 5;
         return searchLimited(limit, projection, _mlyCache.points.rtree);
-    },
+    }
 
     // Get cached image by id
-    cachedImage: function(imageId) {
+    cachedImage(imageId: string) {
         return _mlyCache.images.forImageId[imageId];
-    },
+    }
 
     // Get visible sequences
-    sequences: function(projection) {
+    sequences(projection: Projection) {
         const viewport = projection.clipExtent();
-        const min = [viewport[0][0], viewport[1][1]];
-        const max = [viewport[1][0], viewport[0][1]];
+        const min: Vec2 = [viewport[0][0], viewport[1][1]];
+        const max: Vec2 = [viewport[1][0], viewport[0][1]];
         const bbox = geoExtent(projection.invert(min), projection.invert(max)).bbox();
-        const sequenceIds = {};
-        let lineStrings = [];
+        const sequenceIds: Record<string, true> = {};
+        let lineStrings: MlySequence[] = [];
 
         _mlyCache.images.rtree.search(bbox)
             .forEach(function(d) {
@@ -288,29 +387,29 @@ export default {
         });
 
         return lineStrings;
-    },
+    }
 
 
     // Load images in the visible area
-    loadImages: function(projection) {
+    loadImages(projection: Projection) {
         loadTiles('images', tileUrl, 14, projection);
-    },
+    }
 
 
     // Load traffic signs in the visible area
-    loadSigns: function(projection) {
+    loadSigns(projection: Projection) {
         loadTiles('signs', trafficSignTileUrl, 14, projection);
-    },
+    }
 
 
     // Load map (point) features in the visible area
-    loadMapFeatures: function(projection) {
+    loadMapFeatures(projection: Projection) {
         loadTiles('points', mapFeatureTileUrl, 14, projection);
-    },
+    }
 
 
     // Return a promise that resolves when the image viewer (Mapillary JS) library has finished loading
-    ensureViewerLoaded: function(context) {
+    ensureViewerLoaded(context: coreContext) {
         if (_loadViewerPromise) return _loadViewerPromise;
 
         // add mly-wrapper
@@ -326,7 +425,7 @@ export default {
 
         const that = this;
 
-        _loadViewerPromise = new Promise((resolve, reject) => {
+        _loadViewerPromise = new Promise<void>((resolve, reject) => {
             let loadedCount = 0;
             function loaded() {
                 loadedCount += 1;
@@ -372,59 +471,59 @@ export default {
         });
 
         return _loadViewerPromise;
-    },
+    }
 
 
     // Load traffic sign image sprites
-    loadSignResources: function(context) {
+    loadSignResources(context: coreContext) {
         context.ui().svgDefs.addSprites(['mapillary-sprite'], false /* don't override colors */ );
         return this;
-    },
+    }
 
 
     // Load map (point) feature image sprites
-    loadObjectResources: function(context) {
+    loadObjectResources(context: coreContext) {
         context.ui().svgDefs.addSprites(['mapillary-object-sprite'], false /* don't override colors */ );
         return this;
-    },
+    }
 
 
     // Remove previous detections in image viewer
-    resetTags: function() {
+    resetTags() {
         if (_mlyViewer && !_mlyFallback) {
-            _mlyViewer.getComponent('tag').removeAll();
+            _mlyViewer.getComponent<TagComponent>('tag').removeAll();
         }
-    },
+    }
 
 
     // Show map feature detections in image viewer
-    showFeatureDetections: function(value) {
+    showFeatureDetections(value: boolean) {
         _mlyShowFeatureDetections = value;
         if (!_mlyShowFeatureDetections && !_mlyShowSignDetections) {
             this.resetTags();
         }
-    },
+    }
 
 
     // Show traffic sign detections in image viewer
-    showSignDetections: function(value) {
+    showSignDetections(value: boolean) {
         _mlyShowSignDetections = value;
         if (!_mlyShowFeatureDetections && !_mlyShowSignDetections) {
             this.resetTags();
         }
-    },
+    }
 
 
     // Apply filter to image viewer
-    filterViewer: function(context) {
+    filterViewer(context: coreContext) {
         const showsPano = context.photos().showsPanoramic();
         const showsFlat = context.photos().showsFlat();
         const fromDate = context.photos().fromDate();
         const toDate = context.photos().toDate();
-        const filter = ['all'];
+        const filter: FilterExpression = ['all'];
 
         if (!showsPano) filter.push([ '!=', 'cameraType', 'spherical' ]);
-        if (!showsFlat && showsPano) filter.push(['==', 'pano', true]);
+        if (!showsFlat && showsPano) filter.push(['==', 'cameraType', 'spherical']);
         if (fromDate) {
             filter.push(['>=', 'capturedAt', new Date(fromDate).getTime()]);
         }
@@ -438,18 +537,18 @@ export default {
         _mlyViewerFilter = filter;
 
         return filter;
-    },
+    }
 
 
     // Make the image viewer visible
-    showViewer: function(context) {
+    showViewer(context: coreContext) {
         const wrap = context.container().select('.photoviewer');
         const isHidden = wrap.selectAll('.photo-wrapper.mly-wrapper.hide').size();
 
         if (isHidden && _mlyViewer) {
             for (const service of Object.values(services)) {
                 if (service === this) continue;
-                if (typeof service.hideViewer === 'function') {
+                if (service && 'hideViewer' in service && typeof service.hideViewer === 'function') {
                     service.hideViewer(context);
                 }
             }
@@ -463,15 +562,15 @@ export default {
 
         _isViewerOpen = true;
         return this;
-    },
+    }
 
 
     // Hide the image viewer and resets map markers
-    hideViewer: function(context) {
+    hideViewer(context: coreContext) {
         _mlyActiveImage = null;
 
         if (!_mlyFallback && _mlyViewer) {
-            _mlyViewer.getComponent('sequence').stop();
+            _mlyViewer.getComponent<SequenceComponent>('sequence').stop();
         }
 
         const viewer = context.container().select('.photoviewer');
@@ -491,30 +590,30 @@ export default {
         _isViewerOpen = false;
 
         return this.setStyles(context, null);
-    },
+    }
 
 
     // Get viewer status
-    isViewerOpen: function() {
+    isViewerOpen() {
             return _isViewerOpen;
-    },
+    }
 
 
     // Highlight the detection in the viewer that is related to the clicked map feature
-    highlightDetection: function(detection) {
+    highlightDetection(detection: Detection) {
         if (detection) {
             _mlyHighlightedDetection = detection.id;
         }
 
         return this;
-    },
+    }
 
 
     // Initialize image viewer (Mapillar JS)
-    initViewer: function(context) {
+    initViewer(context: coreContext) {
         if (!window.mapillary) return;
 
-        const opts = {
+        const opts: ViewerOptions = {
             accessToken: accessToken,
             component: {
                 cover: false,
@@ -530,13 +629,14 @@ export default {
             opts.component = {
                 cover: false,
                 direction: false,
-                imagePlane: false,
                 keyboard: false,
-                mouse: false,
+                pointer: false,
                 sequence: false,
                 tag: false,
-                image: true,        // fallback
-                navigation: true    // fallback
+                fallback: {
+                    image: true,        // fallback
+                    navigation: true    // fallback
+                },
             };
         }
 
@@ -554,7 +654,7 @@ export default {
         });
 
         // imageChanged: called after the viewer has changed images and is ready.
-        function imageChanged(photo) {
+        function imageChanged(this: any, photo: ViewerImageEvent) {
             this.resetTags();
             const image = photo.image;
             this.setActiveImage(image);
@@ -571,14 +671,14 @@ export default {
 
 
         // bearingChanged: called when the bearing changes in the image viewer.
-        function bearingChanged(e) {
+        function bearingChanged(e: ViewerBearingEvent) {
             dispatch.call('bearingChanged', undefined, e);
         }
-    },
+    }
 
 
     // Move to an image
-    selectImage: function(image) {
+    selectImage(image: MlyImage) {
         if (!_mlyViewer || !image.id) return this;
 
         if (!image.unsafeId) {
@@ -589,7 +689,7 @@ export default {
                 });
         } else {
             fetch(`https://graph.mapillary.com/image_ids?sequence_id=${image.sequence_id}`, { headers: { 'Authorization': `OAuth ${accessToken}` } })
-                .then(response => response.json())
+                .then(response => response.json() as Promise<{ data: MlyImage[] }>)
                 .then(result => {
                     const correctedId = result.data.map(d => d.id).find(id =>
                         id.startsWith(`${image.id}`.substring(0, 10)));
@@ -604,23 +704,23 @@ export default {
         }
 
         return this;
-    },
+    }
 
 
     // Return the currently displayed image
-    getActiveImage: function() {
+    getActiveImage() {
         return _mlyActiveImage;
-    },
+    }
 
 
     // Return a list of detection objects for the given id
-    getDetections: function(id) {
-        return loadData(`${apiUrl}/${id}/detections?access_token=${accessToken}&fields=id,value,image`);
-    },
+    getDetections(id: string) {
+        return loadData<DetectionWithImage>(`${apiUrl}/${id}/detections?access_token=${accessToken}&fields=id,value,image`);
+    }
 
 
     // Set the currently visible image
-    setActiveImage: function(image) {
+    setActiveImage(image: Image) {
         if (image) {
             _mlyActiveImage = {
                 ca: image.originalCompassAngle,
@@ -632,36 +732,36 @@ export default {
         } else {
             _mlyActiveImage = null;
         }
-    },
+    }
 
 
     // Update the currently highlighted sequence and selected bubble.
-    setStyles: function(context, hovered) {
+    setStyles(context: coreContext, hovered?: MlyImage | null) {
         const hoveredImageId = hovered && hovered.id;
         const hoveredSequenceId = hovered && hovered.sequence_id;
         const selectedSequenceId = _mlyActiveImage && _mlyActiveImage.sequence_id;
 
-        context.container().selectAll('.layer-mapillary .viewfield-group')
+        context.container().selectAll<SVGElement, MlyImage>('.layer-mapillary .viewfield-group')
             .classed('highlighted', function(d) { return (d.sequence_id === selectedSequenceId) || (d.id === hoveredImageId); })
             .classed('hovered', function(d) { return d.id === hoveredImageId; });
 
-        context.container().selectAll('.layer-mapillary .sequence')
+        context.container().selectAll<SVGElement, MlySequence>('.layer-mapillary .sequence')
             .classed('highlighted', function(d) { return d.properties.id === hoveredSequenceId; })
             .classed('currentView', function(d) { return d.properties.id === selectedSequenceId; });
 
         return this;
-    },
+    }
 
 
     // Get detections for the current image and shows them in the image viewer
-    updateDetections: function(imageId, url) {
+    updateDetections(imageId: string, url: string) {
         if (!_mlyViewer || _mlyFallback) return;
         if (!imageId) return;
         const cache = _mlyCache.image_detections;
         if (cache.forImageId[imageId]) {
             showDetections(_mlyCache.image_detections.forImageId[imageId]);
         } else {
-            loadData(url)
+            loadData<Detection>(url)
                 .then(detections => {
                     detections.forEach(function(detection) {
                         if (!cache.forImageId[imageId]) {
@@ -681,8 +781,8 @@ export default {
 
 
         // Create a tag for each detection and shows it in the image viewer
-        function showDetections(detections) {
-            const tagComponent = _mlyViewer.getComponent('tag');
+        function showDetections(detections: Detection[]) {
+            const tagComponent = _mlyViewer.getComponent<TagComponent>('tag');
             detections.forEach(function(data) {
                 const tag = makeTag(data);
                 if (tag) {
@@ -693,7 +793,7 @@ export default {
 
 
         // Create a Mapillary JS tag object
-        function makeTag(data) {
+        function makeTag(data: Detection) {
             const valueParts = data.value.split('--');
             if (!valueParts.length) return;
 
@@ -741,11 +841,11 @@ export default {
 
             return tag;
         }
-    },
+    }
 
 
     // Return the current cache
-    cache: function() {
+    cache() {
         return _mlyCache;
     }
 };

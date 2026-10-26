@@ -276,7 +276,7 @@ export function uiCommit(context) {
             .call(t.addOrUpdate('commit.upload_explanation'))
             .merge(prose);
 
-        // always check if this has changed, but only update prose.html()
+        // always check if this has changed, but only update prose
         // if needed, because it can trigger a style recalculation
         osm.userDetails(function(err, user) {
             if (err) return;
