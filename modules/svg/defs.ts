@@ -208,6 +208,7 @@ export function svgDefs(context: iD.Context) {
         var patterns = _defsSelection.selectAll('pattern')
             .data([
                 // pattern name, pattern image name
+                ['anchorage', 'anchorage'],
                 ['beach', 'dots'],
                 ['construction', 'construction'],
                 ['cemetery', 'cemetery'],
@@ -215,6 +216,7 @@ export function svgDefs(context: iD.Context) {
                 ['cemetery_buddhist', 'cemetery_buddhist'],
                 ['cemetery_muslim', 'cemetery_muslim'],
                 ['cemetery_jewish', 'cemetery_jewish'],
+                ['fairway', 'lines'],
                 ['farmland', 'farmland'],
                 ['farmyard', 'farmyard'],
                 ['flowers', 'flowers'],
