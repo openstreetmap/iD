@@ -2,8 +2,6 @@ export interface Detected {
   browser: string;
   version: string;
   opera: boolean;
-  ie: boolean;
-  support: boolean;
   filedrop: boolean;
   os: 'win' | 'mac' | 'linux';
   platform: 'Windows' | 'Macintosh' | 'Linux' | 'Unknown';
@@ -35,7 +33,7 @@ export function utilDetect(refresh?: boolean) {
     }
   }
   if (!_detected.browser) {
-    m = ua.match(/(opera|chrome|safari|firefox|msie)\/?\s*(\.?\d+(\.\d+)*)/i);
+    m = ua.match(/(opera|chrome|safari|firefox)\/?\s*(\.?\d+(\.\d+)*)/i);
     if (m !== null) {
       _detected.browser = m[1];
       _detected.version = m[2];
@@ -54,15 +52,6 @@ export function utilDetect(refresh?: boolean) {
   // detect other browser capabilities
   // Legacy Opera has incomplete svg style support. See #715
   _detected.opera = (_detected.browser.toLowerCase() === 'opera' && Number(_detected.version) < 15 );
-
-  if (_detected.browser.toLowerCase() === 'msie') {
-    _detected.ie = true;
-    _detected.browser = 'Internet Explorer';
-    _detected.support = false;
-  } else {
-    _detected.ie = false;
-    _detected.support = true;
-  }
 
   _detected.filedrop = (window.FileReader && 'ondrop' in window);
 
@@ -87,9 +76,7 @@ export function utilDetect(refresh?: boolean) {
     // so assume any "mac" with multitouch is actually iOS
     (navigator.platform === 'MacIntel' && 'maxTouchPoints' in navigator && navigator.maxTouchPoints > 1)) &&
     /WebKit/.test(ua) &&
-    !/Edge/.test(ua) &&
-    // @ts-expect-error -- this attribute is so old that there are no definitions in @types/web
-    !window.MSStream;
+    !/Edge/.test(ua);
 
   /* Locale */
   // An array of locales requested by the browser in priority order.
