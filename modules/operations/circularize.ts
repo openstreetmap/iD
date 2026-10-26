@@ -3,7 +3,7 @@ import { actionCircularize, type ActionCircularize } from '../actions/circulariz
 import { behaviorOperation } from '../behavior/operation';
 import { utilGetAllNodes } from '../util';
 import { svgPath } from '../svg';
-import { osmIdManager, osmJoinWays, osmWay, type EntityId } from '../osm';
+import { osmIdManager, osmJoinWays, osmWay, type EntityId, type WayId } from '../osm';
 import { actionAddEntity, actionDeleteWay } from '../actions';
 import type { coreGraph } from '../core';
 import type { Action, CreateOperation, Operation } from '../core/history';
@@ -25,7 +25,7 @@ export const operationCircularize: CreateOperation = (context, selectedIDs) => {
         const initialGraph = context.graph();
         const joined = osmJoinWays(selectedIDs
             .filter(id => checkActionAllowed(id, context.graph()))
-            .map(id => ({ type: 'way', id }) as osmWay),
+            .map(id => ({ type: 'way', id })),
             initialGraph);
         const rings = joined
             .map(ring => ring.length === 1
@@ -41,6 +41,7 @@ export const operationCircularize: CreateOperation = (context, selectedIDs) => {
             // add temporary auxiliary ways (if necessary)
             ...rings
                 .filter(way => !initialGraph.hasEntity(way.id))
+                .filter(way => way instanceof osmWay)
                 .map(way => actionAddEntity(way)),
             // circularize closed ways
             ...rings
@@ -52,7 +53,7 @@ export const operationCircularize: CreateOperation = (context, selectedIDs) => {
         ];
     }();
 
-    function checkActionAllowed(entityID: EntityId, graph: coreGraph) {
+    function checkActionAllowed(entityID: EntityId, graph: coreGraph): entityID is WayId {
         const entity = graph.entity(entityID);
         if (entity.type !== 'way' || new Set(entity.nodes).size <= 1) return false;
         return true;
