@@ -1,10 +1,10 @@
 import type { coreGraph } from '../core';
 import type { Action } from '../core/history';
-import { type EntityId, type NodeId } from '../osm';
+import { type NodeId, type RelationId, type WayId } from '../osm';
 import { osmNode } from '../osm/node';
 
 export interface ActionDisconnect extends Action {
-    limitWays(wayIds?: EntityId[]): EntityId[] | this;
+    limitWays: GetSet<this, WayId[] | undefined>;
 }
 
 
@@ -22,8 +22,8 @@ export interface ActionDisconnect extends Action {
 //   https://github.com/openstreetmap/potlatch2/blob/master/net/systemeD/halcyon/connection/actions/UnjoinNodeAction.as
 //   https://github.com/openstreetmap/josm/blob/mirror/src/org/openstreetmap/josm/actions/UnGlueAction.java
 //
-export function actionDisconnect(nodeId: NodeId, newNodeId?: EntityId): ActionDisconnect {
-    var wayIds: EntityId[];
+export function actionDisconnect(nodeId: NodeId, newNodeId?: NodeId): ActionDisconnect {
+    var wayIds: WayId[] | undefined;
 
     const disconnectableRelationTypes: Record<string, true> = {
         'associatedStreet': true,
@@ -95,7 +95,7 @@ export function actionDisconnect(nodeId: NodeId, newNodeId?: EntityId): ActionDi
         if (connections.length === 0) return 'not_connected';
 
         var parentWays = graph.parentWays(graph.entity(nodeId));
-        var seenRelationIds: Record<EntityId, EntityId> = {};
+        var seenRelationIds: Record<RelationId, WayId> = {};
         var sharedRelation;
 
         parentWays.forEach(function(way) {
@@ -126,7 +126,7 @@ export function actionDisconnect(nodeId: NodeId, newNodeId?: EntityId): ActionDi
         if (!arguments.length) return wayIds;
         wayIds = val!;
         return action;
-    };
+    } as GetSet<ActionDisconnect, WayId[] | undefined>;
 
 
     return action;
