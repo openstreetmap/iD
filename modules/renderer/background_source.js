@@ -591,7 +591,7 @@ rendererBackgroundSource.Custom = function(template) {
 
         // from wms/wmts api path parameters, and query parameters such as apiKey
         cleaned = cleaned
-            .replace(/(key=)[^&/?#]+/gi, '$1{apikey}')
+            .replace(/((key|token)=)[^&?#]+/gi, '$1{apikey}')
             .replace(/(token\/)[^&/?#]+/gi, '$1{apikey}');
         return 'Custom (' + cleaned + ' )';
     };
