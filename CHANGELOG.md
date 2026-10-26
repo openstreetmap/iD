@@ -73,6 +73,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :hourglass: Performance
 #### :mortar_board: Walkthrough / Help
 #### :rocket: Presets
+* Show reasonable default on `access` field for `barrier=stile` nodes ([#12971], thanks [@matkoniecz])
 * Allow the field UI for `oneway=*` to be reused by other tags like `conveying=*` ([#13029], thanks [@k-yle])
 #### :hammer: Development
 * Ongoing work to migrate the codebase from JavaScript to TypeScript ([view progress](https://github.com/openstreetmap/iD/milestone/47?closed=1))
@@ -98,6 +99,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#12878]: https://github.com/openstreetmap/iD/pull/12878
 [#12910]: https://github.com/openstreetmap/iD/pull/12910
 [#12928]: https://github.com/openstreetmap/iD/pull/12928
+[#12971]: https://github.com/openstreetmap/iD/pull/12971
 [#13018]: https://github.com/openstreetmap/iD/pull/13018
 [#12958]: https://github.com/openstreetmap/iD/pull/12958
 [#13009]: https://github.com/openstreetmap/iD/pull/13009
