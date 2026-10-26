@@ -29,6 +29,7 @@ export function modeRotate(context, entityIDs) {
 
     var _tolerancePx = 4; // see also behaviorDrag, behaviorSelect, modeMove
 
+    /** @type {import('../core/context').Mode} */
     var mode = {
         id: 'rotate',
         button: 'browse'

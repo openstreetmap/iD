@@ -4,10 +4,12 @@ import { osmWay } from './way';
 import type { Action } from '../core/history';
 import type { RelationMember } from './relation';
 import type { osmNode } from './node';
+import type { EntityId, OsmType } from './id_manager';
 
 
-export type Sequences<T extends RelationMember | osmWay> = Sequence<T>[] & { actions: Action[] };
-export type Sequence<T extends RelationMember | osmWay> = T[] & { nodes: osmNode[] };
+export interface EntityReference { type: OsmType; id: EntityId };
+export type Sequences<T extends RelationMember | EntityReference | osmWay> = Sequence<T>[] & { actions: Action[] };
+export type Sequence<T extends RelationMember | EntityReference | osmWay> = T[] & { nodes: osmNode[] };
 
 // Join `toJoin` array into sequences of connecting ways.
 
@@ -34,7 +36,7 @@ export type Sequence<T extends RelationMember | osmWay> = T[] & { nodes: osmNode
 // Incomplete members (those for which `graph.hasEntity(element.id)` returns
 // false) and non-way members are ignored.
 //
-export function osmJoinWays<T extends RelationMember | osmWay>(toJoin: T[], graph: coreGraph): Sequences<T> {
+export function osmJoinWays<T extends RelationMember | EntityReference | osmWay>(toJoin: T[], graph: coreGraph): Sequences<T> {
     function resolve(member: T) {
         return graph.childNodes(graph.entity(member.id));
     }
