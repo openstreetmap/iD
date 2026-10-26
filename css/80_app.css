@@ -369,7 +369,6 @@ button.disabled {
 }
 button.disabled .icon {
     fill: var(--transparent-text-emphasis-color);
-    stroke: var(--transparent-text-emphasis-color);
 }
 
 .joined > * {
