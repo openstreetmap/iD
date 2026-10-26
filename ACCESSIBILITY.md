@@ -37,7 +37,6 @@ elsewhere in this document.
 | ✅ | ![safari logo] | [Safari](https://en.wikipedia.org/wiki/Safari_(web_browser)) | |
 | 🟩 | ![opera logo] | [Opera](https://en.wikipedia.org/wiki/Opera_(web_browser)) | |
 | 🟩 | ![edge logo] | [Edge](https://en.wikipedia.org/wiki/Microsoft_Edge) | |
-| ❌ | ![ie logo] | [Internet Explorer](https://en.wikipedia.org/wiki/Internet_Explorer) | IE has been discontinued, but [IE 11 is still maintained](https://docs.microsoft.com/en-us/lifecycle/faq/internet-explorer-microsoft-edge). iD uses features of modern web standard which are not supported by Internet Explorer. |
 | 🟩 | ![tor logo] | [Tor Browser](https://en.wikipedia.org/wiki/Tor_(network)#Tor_Browser) | Note that OpenStreetMap account creation is not part of iD. |
 | ✅ | ![webkit logo] | [iOS](https://en.wikipedia.org/wiki/IOS) browsers | All browsers on iOS (e.g. Safari, Chrome, Firefox, Edge) use the [WebKit](https://en.wikipedia.org/wiki/WebKit) engine and should thus have equivalent support |
 | 🟩 | ![android logo] | [Android](https://en.wikipedia.org/wiki/Android_(operating_system)) browsers | Browsers on Android can use their own engines, so support may vary, but there are currently no known issues |
