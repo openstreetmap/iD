@@ -147,6 +147,21 @@ describe('iD.Map', function() {
         });
     });
 
+    describe('#activeAreaFill', function() {
+        it('redraws the selected point when leaving wireframe (#10719)', function() {
+            map.centerZoom([0, 0], 19);
+            map.activeAreaFill('wireframe');
+            var node = new iD.osmNode({ loc: [0, 0], tags: { highway: 'street_lamp' } });
+            context.perform(iD.actionAddEntity(node));
+            context.enter(iD.modeMove(context, [node.id], context.graph()));
+            expect(map.surface.selectAll('.vertices g.' + node.id).size()).toBe(1);
+
+            map.activeAreaFill('partial');
+            expect(map.surface.selectAll('.vertices g.' + node.id).size()).toBe(0);
+            context.enter(iD.modeBrowse(context));
+        });
+    });
+
     describe('cursors', function() {
         var mode, behavior, point, vertex, line, area, midpoint;
 
