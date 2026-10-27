@@ -1,7 +1,7 @@
 import {
     select as d3_select
 } from 'd3-selection';
-import { clamp } from 'es-toolkit/compat';
+import { clamp } from 'es-toolkit';
 
 import { t } from '../core/localizer';
 import { dispatch as d3_dispatch } from 'd3-dispatch';
@@ -219,7 +219,9 @@ export function uiPhotoviewer(context) {
                 if (resizeOnX) {
                     var mapWidth = mapSize[0];
                     const viewerMargin = parseInt(d3_select('.photoviewer').style('margin-left'), 10);
-                    var newWidth = clamp((startWidth + d3_event.clientX - startX), minWidth, mapWidth - viewerMargin * 2);
+                    // if the map is narrower than `minWidth`, `minWidth` wins
+                    var maxWidth = Math.max(minWidth, mapWidth - viewerMargin * 2);
+                    var newWidth = clamp((startWidth + d3_event.clientX - startX), minWidth, maxWidth);
                     target.style('width', newWidth + 'px');
                 }
 
@@ -227,7 +229,8 @@ export function uiPhotoviewer(context) {
                     const menuHeight = utilGetDimensions(d3_select('.top-toolbar'))[1] +
                                        utilGetDimensions(d3_select('.map-footer'))[1];
                     const viewerMargin = parseInt(d3_select('.photoviewer').style('margin-bottom'), 10);
-                    var maxHeight = mapSize[1] - menuHeight - viewerMargin * 2;  // preserve space at top/bottom of map
+                    // preserve space at top/bottom of map, but if the map is shorter than `minHeight`, `minHeight` wins
+                    var maxHeight = Math.max(minHeight, mapSize[1] - menuHeight - viewerMargin * 2);
                     var newHeight = clamp((startHeight + startY - d3_event.clientY), minHeight, maxHeight);
                     target.style('height', newHeight + 'px');
                 }

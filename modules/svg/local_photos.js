@@ -1,6 +1,5 @@
 import { select as d3_select } from 'd3-selection';
 import exifr from 'exifr';
-import { isArray, isNumber } from 'es-toolkit/compat';
 
 import { localizer } from '../core/localizer';
 import { utilDetect } from '../util/detect';
@@ -176,7 +175,7 @@ export function svgLocalPhotos(projection, context, dispatch) {
 
     // puts the image markers on the map
     function display_markers(imageList) {
-        imageList = imageList.filter(image => isArray(image.loc) && isNumber(image.loc[0]) && isNumber(image.loc[1]));
+        imageList = imageList.filter(image => Array.isArray(image.loc) && typeof image.loc[0] === 'number' && typeof image.loc[1] === 'number');
         const groups = layer.selectAll('.markers').selectAll('.viewfield-group')
             .data(imageList, function(d) { return d.id; });
 
@@ -231,7 +230,7 @@ export function svgLocalPhotos(projection, context, dispatch) {
             .attr('d', 'M 6,9 C 8,8.4 8,8.4 10,9 L 16,-2 C 12,-5 4,-5 0,-2 z')
             .style('visibility', function() {
                 const d = this.parentNode.__data__;
-                return isNumber(d.direction) ? 'visible' : 'hidden';
+                return typeof d.direction === 'number' ? 'visible' : 'hidden';
             });
     }
 
@@ -347,7 +346,7 @@ export function svgLocalPhotos(projection, context, dispatch) {
     drawPhotos.fitZoom = function(force) {
         const coords = _photos
             .map(image => image.loc)
-            .filter(l => isArray(l) && isNumber(l[0]) && isNumber(l[1]));
+            .filter(l => Array.isArray(l) && typeof l[0] === 'number' && typeof l[1] === 'number');
         if (coords.length === 0) return;
         const extent = coords
             .map(l => geoExtent(l, l))
@@ -399,7 +398,7 @@ export function svgLocalPhotos(projection, context, dispatch) {
     };
 
     drawPhotos.hasData = function() {
-        return isArray(_photos) && _photos.length > 0;
+        return Array.isArray(_photos) && _photos.length > 0;
     };
 
 

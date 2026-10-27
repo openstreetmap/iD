@@ -1,5 +1,5 @@
 import { deepEqual } from 'fast-equals';
-import { clamp } from 'es-toolkit/compat';
+import { clamp } from 'es-toolkit';
 import { select as d3_select } from 'd3';
 
 import { geoScaleToZoom } from '../geo';
