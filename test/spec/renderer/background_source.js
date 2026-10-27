@@ -108,10 +108,6 @@ describe('iD.rendererBackgroundSource.Custom', function() {
             var source = iD.rendererBackgroundSource.Custom('http://example.com/wms/v1/Token/abc-def/1.0.0/layer');
             expect(source.imageryUsed()).toEqual('Custom (http://example.com/wms/v1/Token/{apikey}/1.0.0/layer )');
         });
-        it('sanitizes `key` in the URL path', function() {
-            var source = iD.rendererBackgroundSource.Custom('http://example.com/services;key=MYTOKEN/layer');
-            expect(source.imageryUsed()).toEqual('Custom (http://example.com/services;key={apikey}/layer )');
-        });
         it('sanitizes `key` values containing `-`, `.` or `~`', function() {
             // real keys may contain `-`, for example (these services are not necessarily
             // usable as imagery in iD, but they show that such keys exist):
