@@ -95,4 +95,14 @@ describe('deprecatedTagValuesByKey', () => {
       man_made: ['water_tank'],
     });
   });
+
+  it('does not reuse cached values for different data', () => {
+    const otherDeprecated: DataDeprecated = [
+      { old: { railway: 'abandoned' } },
+    ];
+
+    expect(deprecatedTagValuesByKey(otherDeprecated)).toStrictEqual({
+      railway: ['abandoned'],
+    });
+  });
 });

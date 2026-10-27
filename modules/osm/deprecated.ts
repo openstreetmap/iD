@@ -32,25 +32,27 @@ export function getDeprecatedTags(tags: Tags, dataDeprecated: DataDeprecated): D
   return deprecated;
 }
 
-var _deprecatedTagValuesByKey: { [key: string]: string[] };
+const _deprecatedTagValuesByKey = new WeakMap<DataDeprecated, { [key: string]: string[] }>();
 
 export function deprecatedTagValuesByKey(dataDeprecated: DataDeprecated) {
-    if (!_deprecatedTagValuesByKey) {
-        _deprecatedTagValuesByKey = {};
-        dataDeprecated.forEach((d) => {
+    var valuesByKey = _deprecatedTagValuesByKey.get(dataDeprecated);
+    if (valuesByKey) return valuesByKey;
+
+    var groupedValues: { [key: string]: string[] } = {};
+    dataDeprecated.forEach((d) => {
             var oldKeys = Object.keys(d.old);
             if (oldKeys.length === 1) {
                 var oldKey = oldKeys[0];
                 var oldValue = d.old[oldKey];
                 if (oldValue !== '*') {
-                    if (!_deprecatedTagValuesByKey[oldKey]) {
-                        _deprecatedTagValuesByKey[oldKey] = [oldValue];
+                    if (!groupedValues[oldKey]) {
+                        groupedValues[oldKey] = [oldValue];
                     } else {
-                        _deprecatedTagValuesByKey[oldKey].push(oldValue);
+                        groupedValues[oldKey].push(oldValue);
                     }
                 }
             }
-        });
-    }
-    return _deprecatedTagValuesByKey;
+    });
+    _deprecatedTagValuesByKey.set(dataDeprecated, groupedValues);
+    return groupedValues;
 };
