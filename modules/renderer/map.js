@@ -1106,6 +1106,13 @@ export function rendererMap(context) {
             prefs('area-fill-toggle', val);
         }
         updateAreaFill();
+        if (map.editableDataEnabled()) {
+            // points render as vertices in wireframe, so redraw the selection too (#10719)
+            var graph = context.graph();
+            surface
+                .call(drawPoints.drawSelected, graph)
+                .call(drawVertices.drawSelected, graph, map.extent());
+        }
         map.pan([0,0]);  // trigger a redraw
         dispatch.call('changeAreaFill', this);
         return map;
