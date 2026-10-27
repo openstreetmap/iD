@@ -99,12 +99,12 @@ function abortRequest(controller: AbortController) {
 
 
 function maxPageAtZoom(z: number) {
-    if (z < 15)   return 2;
-    if (z === 15) return 5;
-    if (z === 16) return 10;
-    if (z === 17) return 20;
-    if (z === 18) return 40;
-    if (z > 18)   return 80;
+    if (z < 15)        return 2;
+    else if (z === 15) return 5;
+    else if (z === 16) return 10;
+    else if (z === 17) return 20;
+    else if (z === 18) return 40;
+    else               return 80;
 }
 
 
@@ -141,7 +141,7 @@ function loadNextTilePage(which: 'images', currZoom: number, url: string, tile: 
         bbBottomRight: [bbox.minY, bbox.maxX].join(',')
     }, true);
 
-    if (nextPage > maxPages!) return;
+    if (nextPage > maxPages) return;
 
     var id = tile.id + ',' + String(nextPage);
     if (cache.loaded[id] || cache.inflight[id]) return;
