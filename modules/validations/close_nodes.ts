@@ -206,13 +206,13 @@ export const validationCloseNodes: CreateValidator = (context) => {
             return issues;
 
             function showReference(selection: d3.Selection) {
-                var referenceText = t('issues.close_nodes.detached.reference');
+                var referenceText = t.addOrUpdate('issues.close_nodes.detached.reference');
                 selection.selectAll('.issue-reference')
                     .data([0])
                     .enter()
                     .append('div')
                     .attr('class', 'issue-reference')
-                    .html(referenceText);
+                    .call(referenceText);
             }
         }
 
@@ -270,13 +270,13 @@ export const validationCloseNodes: CreateValidator = (context) => {
             });
 
             function showReference(selection: d3.Selection) {
-                var referenceText = t('issues.close_nodes.reference');
+                var referenceText = t.addOrUpdate('issues.close_nodes.reference');
                 selection.selectAll('.issue-reference')
                     .data([0])
                     .enter()
                     .append('div')
                     .attr('class', 'issue-reference')
-                    .html(referenceText);
+                    .call(referenceText);
             }
         }
 

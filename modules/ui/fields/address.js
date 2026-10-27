@@ -201,7 +201,7 @@ export function uiFieldAddress(field, context) {
         if (!(_countryCodes?.length)) return;
 
         // find the country with a usable format
-        let addressFormat = undefined;
+        let addressFormat;
         for (const currentCountryCode of _countryCodes) {
             addressFormat = _addressFormats.find(format => (format.countryCodes?.includes(currentCountryCode)));
             if (addressFormat) {
@@ -365,7 +365,7 @@ export function uiFieldAddress(field, context) {
         var extent = combinedEntityExtent();
 
         if (extent) {
-            var countryCodes = [];
+            var countryCodes;
             if (context.inIntro()) {
                 // localize the address format for the walkthrough
                 countryCodes = [t('intro.graph.countrycode')];

@@ -405,7 +405,7 @@ export function uiIntroNavigation(context, reveal) {
         var firstName = first.select('.entity-name');
         var name = t('intro.graph.name.spring-street');
 
-        if (!firstName.empty() && firstName.html() === name) {
+        if (!firstName.empty() && firstName.text() === name) {
             reveal(first.node(),
                 helpHtml('intro.navigation.choose_street', { name: name }),
                 { duration: 300 }

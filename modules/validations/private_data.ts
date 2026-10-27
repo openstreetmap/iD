@@ -135,7 +135,7 @@ export const validationPrivateData: CreateValidator = () => {
                     var klass = d.type === '+' ? 'add' : 'remove';
                     return 'tagDiff-cell tagDiff-cell-' + klass;
                 })
-                .html(function(d) { return d.display; });
+                .text(function(d) { return d.display; });
         }
     };
 

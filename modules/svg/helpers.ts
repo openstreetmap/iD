@@ -159,14 +159,14 @@ export function svgMarkerSegments(
 }
 
 
-export function svgPath(projection: Projection, graph?: coreGraph, isArea?: boolean) {
+export function svgPath(projection: Projection, graph?: coreGraph | null, isArea?: boolean) {
     const cache: Record<EntityId, string | null> = {};
     const project = projection.stream;
     const clip = paddedClipExtent(projection, isArea);
     const path = d3_geoPath()
         .projection({stream: function(output) { return project(clip(output)); }});
 
-    const svgpath = function(entity: osmWay) {
+    const svgpath = function(entity: OsmEntity) {
         if (entity.id in cache) {
             return cache[entity.id];
         } else {
