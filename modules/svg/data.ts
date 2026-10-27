@@ -54,7 +54,7 @@ export function svgData(projection: Projection, context: coreContext, dispatch: 
         function over(d3_event: DragEvent) {
             d3_event.stopPropagation();
             d3_event.preventDefault();
-            d3_event.dataTransfer!.dropEffect = 'copy';
+            d3_event.dataTransfer!.dropEffect = 'copy'; // dataTransfer is never null when dispatched by the browser.
         }
 
         context.container()
@@ -63,11 +63,12 @@ export function svgData(projection: Projection, context: coreContext, dispatch: 
                 d3_event.stopPropagation();
                 d3_event.preventDefault();
                 if (!detected.filedrop) return;
-                var f = d3_event.dataTransfer!.files[0];
+                const dataTransfer = d3_event.dataTransfer!; // dataTransfer is never null when dispatched by the browser.
+                var f = dataTransfer.files[0];
                 if (!f) return;
                 var extension = getExtension(f.name);
                 if (!extension || !supportedFormats.includes(extension)) return;
-                drawData.fileList(d3_event.dataTransfer!.files);
+                drawData.fileList(dataTransfer.files);
             })
             .on('dragenter.svgData', over)
             .on('dragleave.svgData', over)
