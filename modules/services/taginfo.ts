@@ -54,13 +54,16 @@ export interface TaginfoRole {
     count_relation_members_fraction: number;
 }
 
+type Filter = 'nodes' | 'ways';
+type SortOption = 'count_all' | 'count_nodes' | 'count_ways' | 'count_node_members' | 'count_way_members' | 'count_relation_members' | 'values_all';
+
 export type Params = {
     debounce?: boolean;
     rp?: number;
     query?: string;
     geometry?: Geometry
     filter?: Filter;
-    sortname?: string;
+    sortname?: SortOption;
     sortorder?: 'asc' | 'desc';
     page?: number;
     lang?: string;
@@ -71,28 +74,29 @@ interface ValueTitle {
     title: string;
 }
 
-var tag_sorts = {
+type GeometryOptions<T> = Partial<Record<Geometry, T>>;
+
+const tag_sorts: GeometryOptions<SortOption> = {
     point: 'count_nodes',
     vertex: 'count_nodes',
     area: 'count_ways',
     line: 'count_ways'
 };
-var tag_sort_members = {
+const tag_sort_members: GeometryOptions<SortOption> = {
     point: 'count_node_members',
     vertex: 'count_node_members',
     area: 'count_way_members',
     line: 'count_way_members',
     relation: 'count_relation_members'
 };
-var tag_filters = {
+const tag_filters: GeometryOptions<Filter> = {
     point: 'nodes',
     vertex: 'nodes',
     area: 'ways',
     line: 'ways'
 } as const;
-type Filter = typeof tag_filters[keyof typeof tag_filters];
 
-var tag_members_fractions = {
+const tag_members_fractions = {
     point: 'count_node_members_fraction',
     vertex: 'count_node_members_fraction',
     area: 'count_way_members_fraction',
@@ -102,26 +106,27 @@ var tag_members_fractions = {
 type Geometry = keyof typeof tag_members_fractions;
 
 
-function sets<T extends Params>(params: T, n: keyof T, o: Partial<Record<Geometry, string>>): T {
-    if (params.geometry && o[params.geometry]) {
-        params[n] = o[params.geometry] as never;
+function setFilter<T extends Params>(params: T): T {
+    if (params.geometry && tag_filters[params.geometry]) {
+        params.filter = tag_filters[params.geometry];
     }
     return params;
 }
 
 
-function setFilter<T extends Params>(params: T): T {
-    return sets(params, 'filter', tag_filters);
-}
-
-
 function setSort<T extends Params>(params: T): T {
-    return sets(params, 'sortname', tag_sorts);
+    if (params.geometry && tag_sorts[params.geometry]) {
+        params.sortname = tag_sorts[params.geometry];
+    }
+    return params;
 }
 
 
 function setSortMembers<T extends Params>(params: T): T {
-    return sets(params, 'sortname', tag_sort_members);
+    if (params.geometry && tag_sort_members[params.geometry]) {
+        params.sortname = tag_sort_members[params.geometry];
+    }
+    return params;
 }
 
 
