@@ -8,7 +8,8 @@ import { actionUpgradeTags } from '../actions/upgrade_tags';
 import { fileFetcher } from '../core';
 import { presetManager } from '../presets';
 import { services } from '../services';
-import {  utilHashcode, utilTagDiff } from '../util';
+import { utilArrayUniq, utilHashcode, utilTagDiff } from '../util';
+import { utilSplitAtSemicolon } from '../util/util';
 import { utilDisplayLabel } from '../util/utilDisplayLabel';
 import { validationIssue, validationIssueFix } from '../core/validation';
 import { getDeprecatedTags } from '../osm/deprecated';
@@ -214,7 +215,14 @@ export function validationOutdatedTags() {
       const wd = item.mainTag;     // e.g. `brand:wikidata`
       const notwd = `not:${wd}`;   // e.g. `not:brand:wikidata`
       const qid = item.tags[wd];
-      newTags[notwd] = qid;
+      if (newTags[notwd]) {
+        newTags[notwd] = utilArrayUniq([
+            ...utilSplitAtSemicolon(newTags[notwd]),
+            qid,
+        ]).join(';');
+      } else {
+        newTags[notwd] = qid;
+      }
 
       if (newTags[wd] === qid) {   // if `brand:wikidata` was set to that qid
         const wp = item.mainTag.replace('wikidata', 'wikipedia');

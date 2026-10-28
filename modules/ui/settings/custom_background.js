@@ -5,6 +5,7 @@ import { prefs } from '../../core/preferences';
 import { localizer, t } from '../../core/localizer';
 import { uiConfirm } from '../confirm';
 import { utilNoAuto, utilRebind } from '../../util';
+import { utilSanitizeHTML } from '../../util/sanitize';
 
 
 export function uiSettingsCustomBackground() {
@@ -58,7 +59,7 @@ ${localizer.t_html('settings.custom_background.instructions.license_disclaimer')
         textSection
             .append('div')
             .attr('class', 'instructions-template')
-            .html(marked(instructions))
+            .html(utilSanitizeHTML(marked(instructions)))
             .selectAll('p')
             .attr('dir', 'auto');
 

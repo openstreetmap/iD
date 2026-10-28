@@ -51,6 +51,7 @@ export function svgLabels(projection, context) {
         ['area', 'tourism', '*', 12],
         ['area', 'camp_site', '*', 12],
         ['area', 'animal', 'horse_walker', 12],
+        ['area', 'playground', '*', 12],
         ['point', 'aeroway', '*', 10],
         ['point', 'amenity', '*', 10],
         ['point', 'building', '*', 10],
@@ -449,7 +450,7 @@ export function svgLabels(projection, context) {
 
             // % along the line to attempt to place the label
             var lineOffsets = [50, 45, 55, 40, 60, 35, 65, 30, 70,
-                               25, 75, 20, 80, 15, 95, 10, 90, 5, 95];
+                               25, 75, 20, 80, 15, 85, 10, 90, 5, 95];
             var padding = 3;
 
             for (var i = 0; i < lineOffsets.length; i++) {

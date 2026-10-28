@@ -20,7 +20,10 @@ describe('iD.validations.outdated_tags', function () {
                 const NSI = { 'Fish Bowl': 'Q110785465' };
                 if (tags.brand && NSI[tags.brand] && tags['brand:wikidata'] !== NSI[tags.brand]) {
                     return {
-                        matched: {},
+                        matched: {
+                            mainTag: 'brand:wikidata',
+                            tags: { 'brand:wikidata': NSI[tags.brand] },
+                        },
                         newTags: { ...tags, 'brand:wikidata': NSI[tags.brand] }
                     };
                 }
@@ -193,6 +196,44 @@ describe('iD.validations.outdated_tags', function () {
             amenity: 'fast_food',
             brand: 'Fish Bowl',
             'brand:wikidata': 'Q110785465', // added
+        });
+    });
+
+    it('adds a not:brand:wikidata tag if an NSI suggestion is rejected', async () => {
+        createWay({ amenity: 'fast_food', brand: 'Fish Bowl' });
+        const validator = iD.validationOutdatedTags(context);
+        await setTimeout(20);
+        const issues = validate(validator);
+
+        expect(issues).toHaveLength(1);
+
+        // click on "Tag as not the same as 'Fish Bowl'"
+        issues[0].dynamicFixes()[1].onClick(context);
+        expect(context.graph().entity('w-1').tags).toStrictEqual({
+            amenity: 'fast_food',
+            brand: 'Fish Bowl',
+            'not:brand:wikidata': 'Q110785465', // added
+        });
+    });
+
+    it('preserves existing values in the not:brand:wikidata tag if an NSI suggestion is rejected', async () => {
+        createWay({
+            amenity: 'fast_food',
+            brand: 'Fish Bowl',
+            'not:brand:wikidata': 'existing_value',
+        });
+        const validator = iD.validationOutdatedTags(context);
+        await setTimeout(20);
+        const issues = validate(validator);
+
+        expect(issues).toHaveLength(1);
+
+        // click on "Tag as not the same as 'Fish Bowl'"
+        issues[0].dynamicFixes()[1].onClick(context);
+        expect(context.graph().entity('w-1').tags).toStrictEqual({
+            amenity: 'fast_food',
+            brand: 'Fish Bowl',
+            'not:brand:wikidata': 'existing_value;Q110785465', // modified
         });
     });
 
