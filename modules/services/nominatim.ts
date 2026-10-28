@@ -72,17 +72,16 @@ export default {
         var controller = new AbortController();
         _inflight[url] = controller;
 
-        d3_json(url, {
+        d3_json<NominatimReverseResult>(url, {
             signal: controller.signal,
             headers: {
                 'Accept-Language': localizer.localeCodes().join(',')
             }
         })
-            .then(function(_result) {
-                const result = _result as NominatimReverseResult;
+            .then(function(result) {
                 delete _inflight[url];
-                if (result && result.error) {
-                    throw new Error(result.error);
+                if (result && result.error || result === undefined) {
+                    throw new Error(result?.error);
                 }
                 var extent = geoExtent(loc).padByMeters(200);
                 _nominatimCache.insert(Object.assign(extent.bbox(), {data: result}));
@@ -108,17 +107,16 @@ export default {
         var controller = new AbortController();
         _inflight[url] = controller;
 
-        d3_json(url, {
+        d3_json<NominatimSearchResult>(url, {
             signal: controller.signal,
             headers: {
                 'Accept-Language': localizer.localeCodes().join(',')
             }
         })
-            .then(function(_result) {
-                const result = _result as NominatimSearchResult;
+            .then(function(result) {
                 delete _inflight[url];
-                if (result && result.error) {
-                    throw new Error(result.error);
+                if (result && result.error || result === undefined) {
+                    throw new Error(result?.error);
                 }
                 if (callback) callback(null, result);
             })
