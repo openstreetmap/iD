@@ -103,7 +103,7 @@
     "autoprefixer": "^10.4.21",
     "browserslist": "^4.27.0",
     "browserslist-to-esbuild": "^2.1.1",
-    "chokidar": "^5.0.0",
+    "chokidar": "^6.0.0",
     "cldr-core": "^48.0.0",
     "cldr-localenames-full": "^48.0.0",
     "concat-files": "^0.1.1",
@@ -140,6 +140,6 @@
     "node": ">=22"
   },
   "browserslist": [
-    "> 0.3%, last 6 major versions, Firefox ESR, not Safari < 14.1, not iOS <= 14, not dead, maintained node versions"
+    "> 0.3%, last 6 major versions, Firefox ESR, not dead, maintained node versions"
   ]
 }

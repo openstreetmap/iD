@@ -42,10 +42,11 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Render diameter and radius tags when a node is selected ([#9732], thanks [@k-yle])
 * Dedicated rendering for road sections tagged with `ford=yes` ([#12830], thanks [@Geo-2695])
 * Allow to press `=` key to switch between _key_ and _value_ part of tags in the raw tag editor ([#12828], thanks [@hemaksh2007jain-bit]) and allow to press _Enter_ key to switch between tag parts or next tag in the raw tag editor
-* Make `waterway=dam` lines more visible on the map, and render them above water areas ([#12540], thanks [@matkoniecz])
 * Prevent the browser tab from accidentally being closed while uploading a changeset ([#12928], thanks [@k-yle])
 * Include all imagery layers from the editor-layer-index, even those older than 20 years ([#12878], thanks [@andrewharvey])
 * Dedicated, more visible rendering for `railway=platform_edge`, so that it stands out on the outline of `railway=platform` areas ([#12858], thanks [@matkoniecz])
+* Make `waterway=dam` lines more visible on the map, and render them above water areas ([#12540], thanks [@matkoniecz])
+* Render in purple playground objects mapped lines/areas ([#13042], thanks [@matkoniecz])
 * Don't discard incomplete lines in the (text mode) raw tag editor when switching browser tabs ([#12958], thanks [@aakarshitv])
 #### :scissors: Operations
 * Treat `conveying=*` the same as `oneway=*` when reversing a line ([#13027], thanks [@k-yle])
@@ -74,6 +75,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :hourglass: Performance
 #### :mortar_board: Walkthrough / Help
 #### :rocket: Presets
+* Show reasonable default on `access` field for `barrier=stile` nodes ([#12971], thanks [@matkoniecz])
 * Allow the field UI for `oneway=*` to be reused by other tags like `conveying=*` ([#13029], thanks [@k-yle])
 #### :hammer: Development
 * Ongoing work to migrate the codebase from JavaScript to TypeScript ([view progress](https://github.com/openstreetmap/iD/milestone/47?closed=1))
@@ -99,6 +101,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#12878]: https://github.com/openstreetmap/iD/pull/12878
 [#12910]: https://github.com/openstreetmap/iD/pull/12910
 [#12928]: https://github.com/openstreetmap/iD/pull/12928
+[#12971]: https://github.com/openstreetmap/iD/pull/12971
 [#13018]: https://github.com/openstreetmap/iD/pull/13018
 [#12958]: https://github.com/openstreetmap/iD/pull/12958
 [#13009]: https://github.com/openstreetmap/iD/pull/13009
@@ -110,6 +113,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#13029]: https://github.com/openstreetmap/iD/pull/13029
 [#13030]: https://github.com/openstreetmap/iD/pull/13030
 [#12978]: https://github.com/openstreetmap/iD/pull/12978
+[#13042]: https://github.com/openstreetmap/iD/pull/13042
 [@Geo-2695]: https://github.com/Geo-2695
 [@hemaksh2007jain-bit]: https://github.com/hemaksh2007jain-bit
 [@SaifuddinM23]: https://github.com/SaifuddinM23
