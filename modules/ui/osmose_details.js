@@ -122,7 +122,7 @@ export function uiOsmoseDetails(context) {
 
           detailsDiv
             .append('p')
-              .html(utilSanitizeHTML(d => d.detail))
+              .html(utilSanitizeHTML(d.detail))
             .selectAll('a')
               .attr('rel', 'noopener')
               .attr('target', '_blank');
