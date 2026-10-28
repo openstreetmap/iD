@@ -39,6 +39,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 
 #### :sparkles: Usability & Accessibility
 * Render diameter and radius tags when a node is selected ([#9732], thanks [@k-yle])
+* Disable the locator overlay when osm carto is selected as the background ([#9931], thanks [@k-yle])
 #### :scissors: Operations
 #### :camera: Street-Level
 #### :white_check_mark: Validation
@@ -51,6 +52,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Drop code previously responsible for _maprules_ integration (which has been defunct for a while now) ([#12679])
 
 [#9732]: https://github.com/openstreetmap/iD/pull/9732
+[#9931]: https://github.com/openstreetmap/iD/pull/9931
 [#12679]: https://github.com/openstreetmap/iD/pull/12679
 
 
