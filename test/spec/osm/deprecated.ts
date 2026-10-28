@@ -96,7 +96,7 @@ describe('deprecatedTagValuesByKey', () => {
     });
   });
 
-  it('does not reuse cached values for different data', () => {
+  it('groups different data independently', () => {
     const otherDeprecated: DataDeprecated = [
       { old: { railway: 'abandoned' } },
     ];

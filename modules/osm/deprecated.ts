@@ -32,12 +32,7 @@ export function getDeprecatedTags(tags: Tags, dataDeprecated: DataDeprecated): D
   return deprecated;
 }
 
-const _deprecatedTagValuesByKey = new WeakMap<DataDeprecated, { [key: string]: string[] }>();
-
 export function deprecatedTagValuesByKey(dataDeprecated: DataDeprecated) {
-    var valuesByKey = _deprecatedTagValuesByKey.get(dataDeprecated);
-    if (valuesByKey) return valuesByKey;
-
     var groupedValues: { [key: string]: string[] } = {};
     dataDeprecated.forEach((d) => {
             var oldKeys = Object.keys(d.old);
@@ -53,6 +48,5 @@ export function deprecatedTagValuesByKey(dataDeprecated: DataDeprecated) {
                 }
             }
     });
-    _deprecatedTagValuesByKey.set(dataDeprecated, groupedValues);
     return groupedValues;
 };

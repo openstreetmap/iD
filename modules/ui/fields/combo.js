@@ -48,9 +48,9 @@ export function uiFieldCombo(field, context) {
     var _customOptions = [];
 
     // initialize deprecated tags array
-    var _dataDeprecated = [];
+    var _dataDeprecated = {};
     fileFetcher.get('deprecated')
-        .then(function(d) { _dataDeprecated = d; })
+        .then(function(d) { _dataDeprecated = deprecatedTagValuesByKey(d); })
         .catch(function() { /* ignore */ });
 
 
@@ -439,7 +439,7 @@ export function uiFieldCombo(field, context) {
                 return value === restrictTagValueSpelling(value);
             });
 
-            var deprecatedValues = deprecatedTagValuesByKey(_dataDeprecated)[field.key];
+            var deprecatedValues = _dataDeprecated[field.key];
             if (deprecatedValues) {
                 // don't suggest deprecated tag values
                 data = data.filter(d  =>
