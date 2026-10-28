@@ -67,7 +67,7 @@ export function svgMapillarySigns(projection: Projection, context: coreContext, 
 
         const selectedImage = service.getActiveImage();
 
-        service.getDetections(d.id).then(detections => {
+        service.getDetections(d.id, context).then(detections => {
             if (detections.length) {
                 const { image } = detections[0];
                 if (selectedImage && image.id === selectedImage.id) {
