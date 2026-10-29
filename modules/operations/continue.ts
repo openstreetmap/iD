@@ -15,15 +15,17 @@ export const operationContinue: CreateOperation = (context, selectedIDs) => {
         vertex: [],
         ...utilArrayGroupBy(_entities, function(entity) { return entity.geometry(context.graph()); })
     };
-    var _vertex = <osmNode>(_geometries.vertex.length && _geometries.vertex[0]);
+    var _vertex: osmNode | undefined = <osmNode>(_geometries.vertex[0]);
 
 
     function candidateWays() {
+        if (!_vertex) return [];
+        const vertex = _vertex;
         return _vertex ? context.graph().parentWays(_vertex).filter(function(parent) {
             const geom = parent.geometry(context.graph());
             return (geom === 'line' || geom === 'area') &&
                 !parent.isClosed() &&
-                parent.affix(_vertex.id) &&
+                parent.affix(vertex.id) &&
                 (_geometries.line.length === 0 || _geometries.line[0] === parent);
         }) : [];
     }
@@ -33,25 +35,26 @@ export const operationContinue: CreateOperation = (context, selectedIDs) => {
 
     const operation: Operation = function() {
         var candidate = _candidates[0];
+        const vertex = _vertex!; // vertex is guaranteed to be defined via `.available()`
 
         // remove fixme=continue or noexit=yes from the vertex.
         const tagsToRemove = new Set<string>();
-        if (_vertex.tags.fixme === 'continue') tagsToRemove.add('fixme');
-        if (_vertex.tags.noexit === 'yes') tagsToRemove.add('noexit');
+        if (vertex.tags.fixme === 'continue') tagsToRemove.add('fixme');
+        if (vertex.tags.noexit === 'yes') tagsToRemove.add('noexit');
 
         if (tagsToRemove.size) {
             context.perform((graph) => {
-                const newTags = { ..._vertex.tags };
+                const newTags = { ...vertex.tags };
                 for (const key of tagsToRemove) {
                     delete newTags[key];
                 }
 
-                return actionChangeTags(_vertex.id, newTags)(graph);
+                return actionChangeTags(vertex.id, newTags)(graph);
             }, operation.annotation());
         }
 
         context.enter(
-            modeDrawLine(context, candidate.id, context.graph(), 'line', candidate.affix(_vertex.id), true)
+            modeDrawLine(context, candidate.id, context.graph(), 'line', candidate.affix(vertex.id), true)
         );
     };
 
