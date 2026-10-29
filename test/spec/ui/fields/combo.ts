@@ -24,8 +24,8 @@ describe('iD.uiFieldCombo', () => {
             const taginfo = {
                 values: vi.fn((_params: unknown, callback: Parameters<typeof iD.services.taginfo.values>[1]) => {
                     callback(null, [
-                        { key: 'example', value: 'fixed', title: 'A description from Taginfo' },
-                        { key: 'example', value: 'fixed_extra', title: 'An additional Taginfo suggestion' }
+                        { value: 'fixed', title: 'A description from Taginfo' },
+                        { value: 'fixed_extra', title: 'An additional Taginfo suggestion' }
                     ]);
                 })
             };
