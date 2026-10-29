@@ -3,7 +3,6 @@ import { select as d3_select } from 'd3-selection';
 import { presetManager } from '../presets';
 import { prefs } from '../core/preferences';
 import { svgIcon, svgTagClasses } from '../svg';
-import { utilFunctor } from '../util';
 
 
 export function uiPresetIcon() {
@@ -373,8 +372,8 @@ export function uiPresetIcon() {
 
 
   function render() {
-    let p = _preset.apply(this, arguments);
-    let geom = _geometry ? _geometry.apply(this, arguments) : null;
+    let p = _preset;
+    let geom = _geometry || null;
     if (geom === 'relation' &&
       p.tags &&
       ((p.tags.type === 'route' && p.tags.route && routeSegments[p.tags.route]) || p.tags.type === 'waterway')) {
@@ -428,14 +427,14 @@ export function uiPresetIcon() {
 
   presetIcon.preset = function(val) {
     if (!arguments.length) return _preset;
-    _preset = utilFunctor(val);
+    _preset = val;
     return presetIcon;
   };
 
 
   presetIcon.geometry = function(val) {
     if (!arguments.length) return _geometry;
-    _geometry = utilFunctor(val);
+    _geometry = val;
     return presetIcon;
   };
 
