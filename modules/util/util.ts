@@ -612,18 +612,6 @@ export function utilWrap(index: number, length: number): number {
 }
 
 
-/**
- * a replacement for functor
- *
- * @param value any value
- * @returns a function that returns that value or the value if it's a function
- */
-export function utilFunctor<T>(value: T | (() => T)): () => T {
-    if (typeof value === 'function') return value as (() => T);
-    return () => value;
-}
-
-
 export function utilNoAuto(selection: d3.Selection): d3.Selection {
     const isText = (selection.size() && selection.node()!.tagName.toLowerCase() === 'textarea');
 
