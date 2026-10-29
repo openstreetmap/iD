@@ -70,6 +70,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Fix minor labelling bug - try 85 and 95 offsets rather than trying 95 twice ([#13009], thanks [@matkoniecz])
 * Fix mistake in right-to-left text detection ([#13032], thanks [@matkoniecz])
 * Fix some checkbox fields from not setting the "checked" state on the first click when editing a multiselection with multiple values
+* Fix double-click zoom not working after cancelling drawing a line or area ([#11926], thanks [@aditya1010-max])
 #### :earth_asia: Localization
 * Support 835 new languages in the dropdown when adding a `name:*` tag ([#12802])
 * Support territory-level address hints ([#12704], thanks [@Vectorial1024])
@@ -89,6 +90,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#8424]: https://github.com/openstreetmap/iD/issues/8424
 [#9732]: https://github.com/openstreetmap/iD/pull/9732
 [#9931]: https://github.com/openstreetmap/iD/pull/9931
+[#11926]: https://github.com/openstreetmap/iD/pull/11926
 [#12540]: https://github.com/openstreetmap/iD/issues/12540
 [#12679]: https://github.com/openstreetmap/iD/pull/12679
 [#12704]: https://github.com/openstreetmap/iD/pull/12704
@@ -119,6 +121,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#13042]: https://github.com/openstreetmap/iD/pull/13042
 [#13043]: https://github.com/openstreetmap/iD/pull/13043
 [#13074]: https://github.com/openstreetmap/iD/pull/13074
+[@aditya1010-max]: https://github.com/aditya1010-max
 [@Geo-2695]: https://github.com/Geo-2695
 [@hemaksh2007jain-bit]: https://github.com/hemaksh2007jain-bit
 [@SaifuddinM23]: https://github.com/SaifuddinM23
