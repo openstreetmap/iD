@@ -1,14 +1,16 @@
+import { fn } from '@vitest/spy';
+import fetchMock from 'fetch-mock';
 import { setTimeout } from 'node:timers/promises';
 
 describe('iD.serviceTaginfo', function() {
     var taginfo;
 
 
-    before(function() {
+    beforeEach(() => {
         iD.services.taginfo = iD.serviceTaginfo;
     });
 
-    after(function() {
+    afterEach(() => {
         delete iD.services.taginfo;
     });
 
@@ -42,14 +44,14 @@ describe('iD.serviceTaginfo', function() {
                 headers: { 'Content-Type': 'application/json' }
             });
 
-            var callback = sinon.spy();
+            const callback = fn();
             taginfo.keys({ query: 'amen' }, callback);
 
             await setTimeout(50);
-            expect(parseQueryString(fetchMock.calls()[0][0])).to.eql(
+            expect(parseQueryString(fetchMock.calls()[0][0])).toEqual(
                 {query: 'amen', page: '1', rp: '10', sortname: 'count_all', sortorder: 'desc', lang: 'en'}
             );
-            expect(callback).to.have.been.calledWith(
+            expect(callback).toHaveBeenCalledWith(
                 null, [{'title':'amenity', 'value':'amenity'}]
             );
         });
@@ -62,11 +64,11 @@ describe('iD.serviceTaginfo', function() {
                 headers: { 'Content-Type': 'application/json' }
             });
 
-            var callback = sinon.spy();
+            const callback = fn();
             taginfo.keys({ query: 'amen' }, callback);
 
             await setTimeout(50);
-            expect(callback).to.have.been.calledWith(
+            expect(callback).toHaveBeenCalledWith(
                 null, [{'title':'amenity', 'value':'amenity'}]
             );
         });
@@ -79,11 +81,11 @@ describe('iD.serviceTaginfo', function() {
                 headers: { 'Content-Type': 'application/json' }
             });
 
-            var callback = sinon.spy();
+            const callback = fn();
             taginfo.keys({ query: 'amen', filter: 'nodes' }, callback);
 
             await setTimeout(50);
-            expect(callback).to.have.been.calledWith(
+            expect(callback).toHaveBeenCalledWith(
                 null, [{'title':'amenity', 'value':'amenity'}]
             );
         });
@@ -96,11 +98,11 @@ describe('iD.serviceTaginfo', function() {
                 headers: { 'Content-Type': 'application/json' }
             });
 
-            var callback = sinon.spy();
+            const callback = fn();
             taginfo.keys({ query: 'amen' }, callback);
 
             await setTimeout(50);
-            expect(callback).to.have.been.calledWith(null, [
+            expect(callback).toHaveBeenCalledWith(null, [
                 {'title':'amenity', 'value':'amenity'},
                 {'title':'amenityother', 'value':'amenityother'}
             ]);
@@ -114,11 +116,11 @@ describe('iD.serviceTaginfo', function() {
                 headers: { 'Content-Type': 'application/json' }
             });
 
-            var callback = sinon.spy();
+            const callback = fn();
             taginfo.keys({ query: 'ref' }, callback);
 
             await setTimeout(50);
-            expect(callback).to.have.been.calledWith(
+            expect(callback).toHaveBeenCalledWith(
                 null, [{'title':'ref', 'value':'ref'},{'title':'ref:bag', 'value':'ref:bag'}]
             );
         });
@@ -132,14 +134,14 @@ describe('iD.serviceTaginfo', function() {
                 headers: { 'Content-Type': 'application/json' }
             });
 
-            var callback = sinon.spy();
+            const callback = fn();
             taginfo.multikeys({ query: 'recycling:' }, callback);
 
             await setTimeout(50);
-            expect(parseQueryString(fetchMock.calls()[0][0])).to.eql(
+            expect(parseQueryString(fetchMock.calls()[0][0])).toEqual(
                 {query: 'recycling:', page: '1', rp: '25', sortname: 'count_all', sortorder: 'desc', lang: 'en'}
             );
-            expect(callback).to.have.been.calledWith(
+            expect(callback).toHaveBeenCalledWith(
                 null, [{'title':'recycling:glass', 'value':'recycling:glass'}]
             );
         });
@@ -152,11 +154,11 @@ describe('iD.serviceTaginfo', function() {
                 headers: { 'Content-Type': 'application/json' }
             });
 
-            var callback = sinon.spy();
+            const callback = fn();
             taginfo.multikeys({ query: 'service:bicycle:' }, callback);
 
             await setTimeout(50);
-            expect(callback).to.have.been.calledWith(
+            expect(callback).toHaveBeenCalledWith(
                 null, [{'title':'service:bicycle:retail', 'value':'service:bicycle:retail'}]
             );
         });
@@ -169,11 +171,11 @@ describe('iD.serviceTaginfo', function() {
                 headers: { 'Content-Type': 'application/json' }
             });
 
-            var callback = sinon.spy();
+            const callback = fn();
             taginfo.multikeys({ query: 'service:bicycle:' }, callback);
 
             await setTimeout(50);
-            expect(callback).to.have.been.calledWith(
+            expect(callback).toHaveBeenCalledWith(
                 null, [{'title':'service:bicycle:retail', 'value':'service:bicycle:retail'}]
             );
         });
@@ -187,14 +189,14 @@ describe('iD.serviceTaginfo', function() {
                 headers: { 'Content-Type': 'application/json' }
             });
 
-            var callback = sinon.spy();
+            const callback = fn();
             taginfo.values({ key: 'amenity', query: 'par' }, callback);
 
             await setTimeout(50);
-            expect(parseQueryString(fetchMock.calls()[0][0])).to.eql(
+            expect(parseQueryString(fetchMock.calls()[0][0])).toEqual(
                 {key: 'amenity', query: 'par', page: '1', rp: '25', sortname: 'count_all', sortorder: 'desc', lang: 'en'}
             );
-            expect(callback).to.have.been.calledWith(
+            expect(callback).toHaveBeenCalledWith(
                 null, [{'value':'parking','title':'A place for parking cars'}]
             );
         });
@@ -207,11 +209,11 @@ describe('iD.serviceTaginfo', function() {
                 headers: { 'Content-Type': 'application/json' }
             });
 
-            var callback = sinon.spy();
+            const callback = fn();
             taginfo.values({ key: 'amenity', query: 'par' }, callback);
 
             await setTimeout(50);
-            expect(callback).to.have.been.calledWith(
+            expect(callback).toHaveBeenCalledWith(
                 null, [{'value':'parking','title':'A place for parking cars'}]
             );
         });
@@ -223,11 +225,11 @@ describe('iD.serviceTaginfo', function() {
                 headers: { 'Content-Type': 'application/json' }
             });
 
-            var callback = sinon.spy();
+            const callback = fn();
             taginfo.values({ key: 'name', query: 'str' }, callback);
 
             await setTimeout(50);
-            expect(callback).to.have.been.calledWith(null, []);
+            expect(callback).toHaveBeenCalledWith(null, []);
         });
 
         it('does not get values for hardcoded excluded keys', async () => {
@@ -247,12 +249,12 @@ describe('iD.serviceTaginfo', function() {
             ];
 
             await Promise.all(keysToTest.map(async key => {
-                var callback = sinon.spy();
+                const callback = fn();
 
                 taginfo.values({ key, query: 'xxx' }, callback);
 
                 await setTimeout(50);
-                expect(callback).to.have.been.calledWith(null, []);
+                expect(callback).toHaveBeenCalledWith(null, []);
             }));
         });
 
@@ -263,11 +265,11 @@ describe('iD.serviceTaginfo', function() {
                 headers: { 'Content-Type': 'application/json' }
             });
 
-            var callback = sinon.spy();
+            const callback = fn();
             taginfo.values({ key: 'amenity', query: 'par' }, callback);
 
             await setTimeout(50);
-            expect(callback).to.have.been.calledWith(
+            expect(callback).toHaveBeenCalledWith(
                 null, []
             );
         });
@@ -283,11 +285,11 @@ describe('iD.serviceTaginfo', function() {
                 headers: { 'Content-Type': 'application/json' }
             });
 
-            var callback = sinon.spy();
+            const callback = fn();
             taginfo.values({ key: 'amenity', query: 'par' }, callback);
 
             await setTimeout(50);
-            expect(callback).to.have.been.calledWith(
+            expect(callback).toHaveBeenCalledWith(
                 null, [{'value':'parking','title':'A place for parking cars'}]
             );
         });
@@ -303,11 +305,11 @@ describe('iD.serviceTaginfo', function() {
                 headers: { 'Content-Type': 'application/json' }
             });
 
-            var callback = sinon.spy();
+            const callback = fn();
             taginfo.values({ key: 'network', query: 'us' }, callback);
 
             await setTimeout(50);
-            expect(callback).to.have.been.calledWith(null, [
+            expect(callback).toHaveBeenCalledWith(null, [
                 {'value':'US:TX:FM','title':'Farm to Market Roads in the U.S. state of Texas.'},
                 {'value':'US:KY','title':'Primary and secondary state highways in the U.S. state of Kentucky.'},
                 {'value':'US:US','title':'U.S. routes in the United States.'},
@@ -323,11 +325,11 @@ describe('iD.serviceTaginfo', function() {
                 headers: { 'Content-Type': 'application/json' }
             });
 
-            var callback = sinon.spy();
+            const callback = fn();
             taginfo.values({ key: 'genus', query: 'qu' }, callback);
 
             await setTimeout(50);
-            expect(callback).to.have.been.calledWith(
+            expect(callback).toHaveBeenCalledWith(
                 null, [{'value':'Quercus','title':'Oak'}]
             );
         });
@@ -339,11 +341,11 @@ describe('iD.serviceTaginfo', function() {
                 headers: { 'Content-Type': 'application/json' }
             });
 
-            var callback = sinon.spy();
+            const callback = fn();
             taginfo.values({ key: 'taxon', query: 'qu' }, callback);
 
             await setTimeout(50);
-            expect(callback).to.have.been.calledWith(
+            expect(callback).toHaveBeenCalledWith(
                 null, [{'value':'Quercus robur','title':'Oak'}]
             );
         });
@@ -355,11 +357,11 @@ describe('iD.serviceTaginfo', function() {
                 headers: { 'Content-Type': 'application/json' }
             });
 
-            var callback = sinon.spy();
+            const callback = fn();
             taginfo.values({ key: 'species', query: 'qu' }, callback);
 
             await setTimeout(50);
-            expect(callback).to.have.been.calledWith(
+            expect(callback).toHaveBeenCalledWith(
                 null, [{'value':'Quercus robur','title':'Oak'}]
             );
         });
@@ -374,14 +376,14 @@ describe('iD.serviceTaginfo', function() {
                 headers: { 'Content-Type': 'application/json' }
             });
 
-            var callback = sinon.spy();
+            const callback = fn();
             taginfo.roles({ rtype: 'route', query: 's', geometry: 'relation' }, callback);
 
             await setTimeout(50);
-            expect(parseQueryString(fetchMock.calls()[0][0])).to.eql(
+            expect(parseQueryString(fetchMock.calls()[0][0])).toEqual(
                 {rtype: 'route', query: 's', page: '1', rp: '25', sortname: 'count_relation_members', sortorder: 'desc', lang: 'en'}
             );
-            expect(callback).to.have.been.calledWith(null, [
+            expect(callback).toHaveBeenCalledWith(null, [
                 {'value': 'stop', 'title': 'stop'},
                 {'value': 'south', 'title': 'south'}
             ]);
@@ -396,14 +398,14 @@ describe('iD.serviceTaginfo', function() {
                 headers: { 'Content-Type': 'application/json' }
             });
 
-            var callback = sinon.spy();
+            const callback = fn();
             taginfo.docs({ key: 'amenity', value: 'parking' }, callback);
 
             await setTimeout(50);
-            expect(parseQueryString(fetchMock.calls()[0][0])).to.eql(
+            expect(parseQueryString(fetchMock.calls()[0][0])).toEqual(
                 {key: 'amenity', value: 'parking'}
             );
-            expect(callback).to.have.been.calledWith(
+            expect(callback).toHaveBeenCalledWith(
                 null, [{'on_way':false,'lang':'en','on_area':true,'image':'File:Car park2.jpg'}]
             );
         });

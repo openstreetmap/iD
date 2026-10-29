@@ -1,4 +1,4 @@
-import _throttle from 'lodash-es/throttle';
+import { throttle } from 'es-toolkit';
 
 import { t } from '../core/localizer';
 import { svgIcon } from '../svg/icon';
@@ -12,7 +12,7 @@ export function uiStatus(context) {
         if (!osm) return;
 
         function update(err, apiStatus) {
-            selection.html('');
+            selection.text('');
 
             if (err) {
                 if (apiStatus === 'connectionSwitched') {
@@ -41,7 +41,7 @@ export function uiStatus(context) {
                 } else {
 
                     // don't allow retrying too rapidly
-                    var throttledRetry = _throttle(function() {
+                    var throttledRetry = throttle(function() {
                         // try loading the visible tiles
                         context.loadTiles(context.projection);
                         // manually reload the status too in case all visible tiles were already loaded

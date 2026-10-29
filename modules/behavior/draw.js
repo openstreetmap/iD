@@ -181,6 +181,8 @@ export function behaviorDraw(context) {
             }
         } else if (mode.id !== 'add-point' || mode.preset.matchGeometry('point')) {
             var locLatLng = context.projection.invert(loc);
+            _disableSpace = true;
+            _lastSpace = loc;
             dispatch.call('click', this, locLatLng, d);
         }
 
@@ -201,16 +203,9 @@ export function behaviorDraw(context) {
 
         if (_disableSpace || _mouseLeave || !_lastMouse) return;
 
-        // user must move mouse or release space bar to allow another click
+        // user must move mouse to allow another click
         _lastSpace = currSpace;
         _disableSpace = true;
-
-        d3_select(window).on('keyup.space-block', function() {
-            d3_event.preventDefault();
-            d3_event.stopPropagation();
-            _disableSpace = false;
-            d3_select(window).on('keyup.space-block', null);
-        });
 
         // get the current mouse position
         var loc = context.map().mouse() ||

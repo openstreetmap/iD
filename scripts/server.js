@@ -1,13 +1,17 @@
 import http from 'node:http';
+import { glob } from 'node:fs/promises';
 import { styleText } from 'node:util';
-import gaze from 'gaze';
+import { watch } from 'chokidar';
 import serve from 'serve-handler';
 import { buildCSS } from './build_css.js';
 
 const port = 8080;
 
-gaze(['css/**/*.css'], (err, watcher) => {
-  watcher.on('all', () => buildCSS());
+watch(
+  await Array.fromAsync(glob('css/**/*.css')), {
+  ignoreInitial: false
+}).on('all', () => {
+  buildCSS();
 });
 
 const server = http.createServer((request, response) => {

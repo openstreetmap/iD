@@ -30,9 +30,10 @@ export function uiSourceSwitch(context) {
         context.flush();                         // remove stored data
 
         d3_select(this)
-            .html(isLive ? t.html('source_switch.live') : t.html('source_switch.dev'))
             .classed('live', isLive)
-            .classed('chip', isLive);
+            .classed('chip', isLive)
+            .text('')
+            .call(isLive ? t.append('source_switch.live') : t.append('source_switch.dev'));
 
         osm.switch(isLive ? keys[0] : keys[1]);  // switch connection (warning: dispatches 'change' event)
     }

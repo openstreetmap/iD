@@ -43,7 +43,7 @@ export function operationDelete(context, selectedIDs) {
                 }
 
                 nextSelectedID = nodes[i];
-                nextSelectedLoc = context.entity(nextSelectedID).loc;
+                nextSelectedLoc = nextSelectedID && context.entity(nextSelectedID).loc;
             }
         }
 

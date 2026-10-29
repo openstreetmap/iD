@@ -6,6 +6,7 @@ import { geoExtent, geoSphericalDistance } from '../geo';
 import { utilQsString, utilStringQs } from '../util';
 import { utilAesDecrypt } from '../util/aes';
 import { IntervalTasksQueue } from '../util/IntervalTasksQueue';
+import { localeDateString } from '../util/date';
 
 var isRetina = window.devicePixelRatio && window.devicePixelRatio >= 2;
 
@@ -20,16 +21,8 @@ window.matchMedia?.(`
 });
 
 
-function localeDateString(s) {
-    if (!s) return null;
-    var options = { day: 'numeric', month: 'short', year: 'numeric' };
-    var d = new Date(s);
-    if (isNaN(d.getTime())) return null;
-    return d.toLocaleDateString(localizer.localeCode(), options);
-}
-
 function vintageRange(vintage) {
-    var s;
+    let s;
     if (vintage.start || vintage.end) {
         s = (vintage.start || '?');
         if (vintage.start !== vintage.end) {
@@ -41,12 +34,12 @@ function vintageRange(vintage) {
 
 
 export function rendererBackgroundSource(data) {
-    var source = Object.assign({}, data);   // shallow copy
-    var _offset = [0, 0];
-    var _name = source.name;
-    var _description = source.description;
-    var _best = !!source.best;
-    var _template = source.encrypted ? utilAesDecrypt(source.template) : source.template;
+    const source = { ...data };   // shallow copy
+    let _offset = [0, 0];
+    const _name = source.name;
+    const _description = source.description;
+    const _best = !!source.best;
+    let _template = source.template;
 
     source.tileSize = data.tileSize || 256;
     source.zoomExtent = data.zoomExtent || [0, 22];
@@ -67,26 +60,26 @@ export function rendererBackgroundSource(data) {
 
 
     source.name = function() {
-        var id_safe = source.id.replace(/\./g, '<TX_DOT>');
+        const id_safe = source.id.replace(/\./g, '<TX_DOT>');
         return t('imagery.' + id_safe + '.name', { default: _name });
     };
 
 
     source.label = function() {
-        var id_safe = source.id.replace(/\./g, '<TX_DOT>');
+        const id_safe = source.id.replace(/\./g, '<TX_DOT>');
         return t.append('imagery.' + id_safe + '.name', { default: _name });
     };
 
 
     source.hasDescription = function() {
-        var id_safe = source.id.replace(/\./g, '<TX_DOT>');
-        var descriptionText = localizer.tInfo('imagery.' + id_safe + '.description', { default: _description }).text;
-        return descriptionText !== '';
+        const id_safe = source.id.replace(/\./g, '<TX_DOT>');
+        const descriptionText = localizer.tInfo('imagery.' + id_safe + '.description', { default: _description }).texts.join('');
+        return !!descriptionText;
     };
 
 
     source.description = function() {
-        var id_safe = source.id.replace(/\./g, '<TX_DOT>');
+        const id_safe = source.id.replace(/\./g, '<TX_DOT>');
         return t.append('imagery.' + id_safe + '.description', { default: _description });
     };
 
@@ -98,7 +91,7 @@ export function rendererBackgroundSource(data) {
 
     source.area = function() {
         if (!data.polygon) return Number.MAX_VALUE;  // worldwide
-        var area = d3_geoArea({ type: 'MultiPolygon', coordinates: [ data.polygon ] });
+        const area = d3_geoArea({ type: 'MultiPolygon', coordinates: [ data.polygon ] });
         return isNaN(area) ? 0 : area;
     };
 
@@ -143,6 +136,7 @@ export function rendererBackgroundSource(data) {
                 var lat = Math.atan(Math.sinh(Math.PI * (1 - 2 * y / zoomSize)));
 
                 switch (source.projection) {
+                    case 'CRS:84':
                     case 'EPSG:4326':
                         return {
                             x: lon * 180 / Math.PI,
@@ -172,7 +166,10 @@ export function rendererBackgroundSource(data) {
                 case 'wkid':
                     return projection.replace(/^EPSG:/, '');
                 case 'bbox':
-                    // WMS 1.3 flips x/y for some coordinate systems including EPSG:4326 - #7557
+                    // WMS versions prior 1.3.0 require easting / northing (x,y) coordinate order for bbox parameter
+                    // WMS version 1.3.0 requires axis ordering as specified in the CRS - #7557
+                    // E.g. http://epsg.io/4326 > Coordinate system: ... Orientations: north, east.
+                    //      http://epsg.io/3857 > Coordinate system: ... Orientations: east, north.
                     if (projection === 'EPSG:4326' &&
                         // The CRS parameter implies version 1.3 (prior versions use SRS)
                         /VERSION=1.3|CRS={proj}/.test(source.template().toUpperCase())) {
@@ -283,14 +280,15 @@ rendererBackgroundSource.Bing = function(data, dispatch) {
     */
     const strictParam = 'n';
 
-    var url = 'https://dev.virtualearth.net/REST/v1/Imagery/Metadata/AerialOSM?include=ImageryProviders&uriScheme=https&key=' + key;
     var cache = {};
     var inflight = {};
     var providers = [];
     var taskQueue = new IntervalTasksQueue(250);
     var metadataLastZoom = -1;
 
-    d3_json(url)
+    key
+        .then(keyString => `https://dev.virtualearth.net/REST/v1/Imagery/Metadata/AerialOSM?include=ImageryProviders&uriScheme=https&key=${keyString}`)
+        .then(d3_json)
         .then(function(json) {
             let imageryResource = json.resourceSets[0].resources[0];
 
@@ -339,12 +337,12 @@ rendererBackgroundSource.Bing = function(data, dispatch) {
     };
 
 
-    bing.getMetadata = function(center, tileCoord, callback) {
+    bing.getMetadata = async function(center, tileCoord, callback) {
         var tileID = tileCoord.slice(0, 3).join('/');
         var zoom = Math.min(tileCoord[2], 21);
         var centerPoint = center[1] + ',' + center[0];  // lat,lng
         var url = 'https://dev.virtualearth.net/REST/v1/Imagery/BasicMetadata/AerialOSM/' + centerPoint +
-                '?zl=' + zoom + '&key=' + key;
+                '?zl=' + zoom + '&key=' + await key;
 
         if (inflight[tileID]) return;
 
@@ -381,7 +379,7 @@ rendererBackgroundSource.Bing = function(data, dispatch) {
                 })
                 .catch(function (err) {
                     delete inflight[tileID];
-                    if (callback) callback(err.message);
+                    if (callback) callback(err);
                 });
         });
     };
@@ -480,8 +478,9 @@ rendererBackgroundSource.Esri = function(data) {
             .then(function(result) {
                 delete inflight[tileID];
 
-                result = result.features.map(f => f.attributes)
-                    .filter(a => a.MinMapLevel <= zoom && a.MaxMapLevel >= zoom)[0];
+                result = result.features
+                    .map(f => f.attributes)
+                    .find(a => a.MinMapLevel <= zoom && a.MaxMapLevel >= zoom);
 
                 if (!result) {
                     throw new Error('Unknown Error');
@@ -519,7 +518,7 @@ rendererBackgroundSource.Esri = function(data) {
             })
             .catch(function(err) {
                 delete inflight[tileID];
-                if (callback) callback(err.message);
+                if (callback) callback(err);
             });
 
 

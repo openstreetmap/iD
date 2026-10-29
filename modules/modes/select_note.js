@@ -18,10 +18,9 @@ import { utilKeybinding } from '../util';
 
 
 export function modeSelectNote(context, selectedNoteID) {
-    var mode = {
-        id: 'select-note',
-        button: 'browse'
-    };
+    var mode = {};
+    mode.id = 'select-note';
+    mode.button = 'browse';
 
     var _keybinding = utilKeybinding('select-note');
     var _noteEditor = uiNoteEditor(context)

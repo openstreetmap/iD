@@ -646,6 +646,9 @@ button.add-note svg.icon {
     margin-left: unset;
     margin-right: 4px;
 }
+button.add-note.disabled svg.icon {
+    stroke: var(--transparent-text-emphasis-color);
+}
 .ideditor[dir='rtl'] button.add-note svg.icon {
     margin-left: 4px;
     margin-right: unset;
@@ -662,6 +665,7 @@ button.add-note svg.icon {
     bottom: 4px;
     height: 20px;
     width: 20px;
+    pointer-events: none;
 }
 .spinner img {
     height: 100%;
@@ -790,19 +794,27 @@ button.add-note svg.icon {
 
 /* Hide/Toggle collapsible sections (aka Disclosure)
 ------------------------------------------------------- */
+summary.hide-toggle {
+    display: block;
+    list-style: none;
+    cursor: pointer;
+    color: var(--link-color);
+    font-size: 14px;
+    font-weight: bold;
+    line-height: 25px;
+    width: fit-content;
+}
+details.disclosure-wrap[open] summary.hide-toggle {
+    margin-bottom: 10px;
+}
+summary.hide-toggle::-webkit-details-marker {
+    display: none;
+}
 .hide-toggle .icon.pre-text {
     vertical-align: middle;
     width: 16px;
     height: 16px;
     margin-top: -3px;
-}
-
-a:visited.hide-toggle,
-a.hide-toggle {
-    display: inline-block;
-    font-size: 14px;
-    font-weight: bold;
-    margin-bottom: 5px;
 }
 
 
@@ -1107,10 +1119,10 @@ a.hide-toggle {
     object-fit: contain;
     border-radius: 2px;
     z-index: 2;
-    visibility: hidden;
+    display: none;
 }
 .preset-icon-container.showing-img img.image-icon {
-    visibility: visible;
+    display: initial;
 }
 .preset-icon-container.showing-img *:not(.image-icon) {
     display: none;
@@ -1447,7 +1459,6 @@ button.preset-reset .label.flash-bg {
 
 .label-text .label-textannotation svg.icon {
     margin: 0 8px;
-    color: #333;
     opacity: 0.5;
     width: 14px;
     height: 14px;
@@ -1818,11 +1829,16 @@ input.date-selector {
 
 .form-field-input-multicombo .input-wrap {
     border: 1px solid var(--border-color-2);
-    width: 180px;
+    width: auto;
+    max-width: 100%;
 }
 .form-field-input-multicombo input {
     border: none;
-    width: 100%;
+}
+.form-field-input-multicombo input.combobox-input {
+    max-width: 100%;
+    min-width: 180px;
+    field-sizing: content;
 }
 
 .form-field-input-multicombo input:focus {
@@ -1859,6 +1875,10 @@ input.date-selector {
 }
 .combobox-address-street-place .combobox-option,
 .combobox-option.has-icon {
+    display: flex;
+    align-items: center;
+}
+.combobox-option.has-icon .combobox-option-label {
     display: flex;
     align-items: center;
 }
@@ -1935,19 +1955,23 @@ input.date-selector {
 
 /* draw the up/down on the buttons */
 .form-field-input-number button.decrement::after,
-.form-field-input-number button.increment::after {
+.form-field-input-number button.increment::after,
+.form-field-input-integer button.decrement::after,
+.form-field-input-integer button.increment::after {
     content: "";
     height: 0; width: 0;
     position: absolute;
     left: 0; right: 0; bottom: 0; top: 0;
     margin: auto;
 }
-.form-field-input-number button.decrement::after {
+.form-field-input-number button.decrement::after,
+.form-field-input-integer button.decrement::after {
     border-top: 5px solid var(--border-color);
     border-left: 5px solid transparent;
     border-right: 5px solid transparent;
 }
-.form-field-input-number button.increment::after {
+.form-field-input-number button.increment::after,
+.form-field-input-integer button.increment::after {
     border-bottom: 5px solid var(--border-color);
     border-left: 5px solid transparent;
     border-right: 5px solid transparent;
@@ -1972,6 +1996,10 @@ input.date-selector {
 }
 .form-field-input-check > span {
     flex: 1 1 auto;
+}
+.form-field-input-check > span.raw-value {
+    font-family: monospace;
+    color: var(--text-color);
 }
 .form-field-input-check > span.mixed {
     font-style: italic;
@@ -2037,6 +2065,10 @@ input.date-selector {
     color: var(--link-color);
     cursor: pointer;
 }
+.form-field-input-radio > label .raw-value {
+    font-family: monospace;
+    color: var(--text-color);
+}
 .form-field-input-radio > label.mixed {
     font-style: italic;
 }
@@ -2077,6 +2109,49 @@ input.date-selector {
     height: 0;
     display: block;
     overflow: hidden;
+}
+
+/* One-line (horizontal) layout when all options fit on a single row */
+.form-field-input-radio.one-line {
+    overflow: hidden;
+}
+.form-field-input-radio.one-line > label {
+    flex: 1 1 auto;
+    min-width: 0;
+    width: auto;
+}
+.form-field-input-radio.one-line.equal-spacing > label {
+    flex: 1 1 0;
+}
+.form-field-input-radio.one-line > label:first-of-type {
+    border-end-start-radius: 4px;
+}
+.form-field-input-radio.one-line > label:last-of-type {
+    border-end-start-radius: 0;
+}
+.form-field-input-radio.one-line > label:not(:first-of-type) {
+    border-inline-start: none;
+}
+
+/* Two-column layout when all options fit on a half-width box */
+.form-field-input-radio.two-column {
+    overflow: hidden;
+}
+.form-field-input-radio.two-column > label {
+    flex: 1 1 auto;
+    min-width: 50%;
+    max-width: 100%;
+    width: 50%;
+}
+.form-field-input-radio.two-column > label:nth-last-of-type(2):nth-of-type(odd),
+.form-field-input-radio.two-column > label:last-of-type:nth-of-type(odd) {
+    border-end-start-radius: 4px;
+}
+.form-field-input-radio.two-column > label:last-of-type:nth-of-type(even) {
+    border-end-start-radius: 0;
+}
+.form-field-input-radio.two-column > label:nth-of-type(even) {
+    border-inline-start: none;
 }
 
 
@@ -2353,11 +2428,8 @@ input.date-selector {
     user-select: none;
 }
 
-.restriction-help span {
-    margin: 2px;
-}
-
 .restriction-help .qualifier {
+    margin: 2px;
     color: #666;
     font-weight: bold;
 }
@@ -2410,6 +2482,9 @@ div.combobox {
     border: 1px solid var(--border-color);
     border-radius: 0 0 4px 4px;
 }
+div.combobox:has(.has-description) {
+    max-height: 400px;
+}
 
 .combobox a {
     display: block;
@@ -2461,6 +2536,18 @@ div.combobox {
     border-right: 5px solid transparent;
 }
 
+.combobox .combobox-option.has-description {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+.combobox .combobox-option-description {
+    font-size: 11px;
+    line-height: 1.3;
+    opacity: 0.7;
+    white-space: normal;
+    padding-top: 2px;
+}
 .combobox .combobox-option.raw-option {
     font-family: monospace;
     color: var(--text-color);
@@ -2903,21 +2990,39 @@ img.tag-reference-wiki-image {
     font-weight: normal;
     padding-left: 10px;
 }
-.section-raw-member-editor .member-row .member-entity-name.has-colour::before,
-.section-raw-membership-editor .member-row .member-entity-name.has-colour::before,
-.feature-list .entity-name.has-colour::before,
+
 .combobox-parent-relation .has-colour::before {
     display: inline-block;
     content: '';
-    margin-left: -5px;
+    margin-left: 2px;
     margin-right: 5px;
     border-style: solid;
     border-width: 4px;
     border-radius: 4px;
     border-color: inherit;
 }
-.combobox-parent-relation .has-colour::before  {
-    margin-left: 2px;
+.section-raw-membership-editor .member-row img.member-entity-icon,
+.section-raw-member-editor .member-row img.member-entity-icon {
+    display: inline-block;
+    width: auto;
+    height: 18px;
+    margin-left: 5px;
+    margin-bottom: -4.5px;
+}
+.section-raw-membership-editor .member-row img.member-entity-icon.hide,
+.section-raw-member-editor .member-row img.member-entity-icon.hide {
+    display: none;
+}
+.section-raw-membership-editor .member-row span.member-entity-ref-color,
+.section-raw-member-editor .member-row span.member-entity-ref-color,
+.feature-list .feature-list-item span.member-entity-ref-color {
+    display: inline-block;
+    margin-left: 5px;
+    margin-right: -5px;
+    border-style: solid;
+    border-width: 4px;
+    border-radius: 10px;
+    line-height: 10px;
 }
 
 .ideditor[dir='rtl'] .section-raw-member-editor .member-row .member-entity-name,
@@ -3232,13 +3337,29 @@ img.tag-reference-wiki-image {
     border-radius: 5px 0 0 5px;
 }
 
-/* custom data editor - no info/delete buttons */
-.data-editor.raw-tag-editor .tag-row button {
+.data-editor {
+    padding: 20px;
+}
+/* custom data editor: no info/delete/add buttons */
+.data-editor.raw-tag-editor .tag-row button,
+.data-editor.raw-tag-editor .add-tag {
     display: none;
 }
 .data-editor.raw-tag-editor .tag-row .key-wrap,
 .data-editor.raw-tag-editor .tag-row .value-wrap {
     width: 50%;
+}
+.data-editor.raw-tag-editor.tag-row {
+    background-color: transparent;
+}
+.data-editor.raw-tag-editor li:first-child input.value {
+    border-start-end-radius: 4px;
+}
+.data-editor.raw-tag-editor li:nth-last-child(2) input.key {
+    border-end-start-radius: 4px;
+}
+.data-editor.raw-tag-editor li:nth-last-child(2) input.value {
+    border-end-end-radius: 4px;
 }
 
 
@@ -3542,6 +3663,15 @@ div.full-screen > button:focus {
 .ideditor[dir='rtl'] .map-data-pane .layer-list button:last-of-type,
 .ideditor[dir='rtl'] .background-pane .layer-list button:last-of-type {
     border-radius: 3px 0 0 3px;
+}
+
+.layer-list select {
+    padding-left: 4px;
+    padding-bottom: 1px;
+}
+.ideditor[dir='rtl'] .layer-list select {
+    padding-left: 0px;
+    padding-right: 4px;
 }
 
 .map-data-pane .vectortile-container .vectortile-header {
@@ -4391,7 +4521,7 @@ li.issue-fix-item button:not(.actionable) .fix-icon {
 
 /* Unstyle button fields */
 .inspector-hover .form-field-input-radio label.active,
-.inspector-hover .entity-editor-pane a.hide-toggle {
+.inspector-hover .entity-editor-pane summary.hide-toggle {
     opacity: 1;
     background-color: transparent;
     color: var(--passive-text-color);
@@ -4831,8 +4961,12 @@ img.tile-debug {
     border-radius: 3px;
 }
 
-.attribution-wrap .attribution span {
+.attribution-wrap .attribution .attribution-text {
+    background-color: rgba(0,0,0,0.33);
+    border-radius: 4px;
     margin: 0 3px;
+    padding: 3px 6px;
+    vertical-align: middle;
 }
 
 
@@ -4976,7 +5110,7 @@ img.tile-debug {
     margin-left: 5px;
 }
 
-.user-list a:not(:last-child):after {
+.user-list a:not(:last-of-type):after {
     content: ', ';
 }
 
@@ -5202,7 +5336,6 @@ img.tile-debug {
 
 .save-success .link-out {
     margin: 0px 5px;
-    white-space: nowrap;
 }
 
 .save-summary,
@@ -5256,8 +5389,7 @@ img.tile-debug {
     margin-top: 0;
 }
 
-.community-detail a.hide-toggle,
-.community-detail a:visited.hide-toggle {
+.community-detail summary.hide-toggle {
     font-size: 12px;
     font-weight: normal;
     padding-bottom: 0;

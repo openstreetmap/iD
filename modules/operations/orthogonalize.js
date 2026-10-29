@@ -2,6 +2,7 @@ import { t } from '../core/localizer';
 import { actionOrthogonalize } from '../actions/orthogonalize';
 import { behaviorOperation } from '../behavior/operation';
 import { utilGetAllNodes } from '../util';
+import { svgPath } from '../svg';
 
 
 export function operationOrthogonalize(context, selectedIDs) {
@@ -113,6 +114,25 @@ export function operationOrthogonalize(context, selectedIDs) {
             }
             return false;
         }
+    };
+
+
+    operation.getAuxiliaryGeometry = function() {
+        const graph = context.graph();
+        return _actions.map((action, idx) => {
+            if (!action.disabled(graph)) {
+                const previewGraph = action(graph);
+                const way = previewGraph.hasEntity(selectedIDs[idx]);
+                const getPath = svgPath(context.projection, previewGraph, false);
+                return {
+                    id: way.id,
+                    path: getPath(way),
+                    klass: 'preview'
+                };
+            } else {
+                return false;
+            }
+        }).filter(Boolean);
     };
 
 

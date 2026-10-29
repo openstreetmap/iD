@@ -26,8 +26,7 @@ export function uiFieldWikidata(field, context) {
     var _hintKey = field.key === 'wikidata' ? 'name' : field.key.split(':')[0];
 
     var combobox = uiCombobox(context, 'combo-' + field.safeid)
-        .caseSensitive(true)
-        .minItems(1);
+        .caseSensitive(true);
 
 
     function wiki(selection) {
@@ -109,7 +108,9 @@ export function uiFieldWikidata(field, context) {
         enter
             .append('div')
             .attr('class', 'label')
-            .html(function(d) { return t.html('wikidata.' + d); });
+            .each(function(d) {
+                d3_select(this).call(t.addOrUpdate('wikidata.' + d));
+            });
 
         enter
             .append('input')
@@ -148,7 +149,7 @@ export function uiFieldWikidata(field, context) {
 
         wikidata.itemsForSearchQuery(q, function(err, data) {
             if (err) {
-                if (err !== 'No query') console.error(err); // eslint-disable-line
+                if (err.message !== 'No query') console.error(err); // eslint-disable-line no-console
                 return;
             }
 
@@ -160,7 +161,13 @@ export function uiFieldWikidata(field, context) {
                         .attr('class', 'localized-text')
                         .attr('lang', item.display.label.language)
                         .text(item.display.label.value),
-                    title: item.display.description && item.display.description.value,
+                    description: item.display.description ? (
+                        selection => selection.append('span')
+                            .attr('class', 'localized-text')
+                            .attr('lang', item.display.description.language)
+                            .text(item.display.description.value)
+                    ) : undefined,
+                    title: item.id + (item.aliases?.length > 0 ? ' (' + item.aliases.join(', ') + ')' : ''),
                     terms: item.aliases
                 };
             });
@@ -207,7 +214,7 @@ export function uiFieldWikidata(field, context) {
                 var foundPreferred;
                 for (var i in langs) {
                     var lang = langs[i];
-                    var siteID = lang.replace('-', '_') + 'wiki';
+                    var siteID = lang.replaceAll('-', '_') + 'wiki';
                     if (entity.sitelinks[siteID]) {
                         foundPreferred = true;
                         newWikipediaValue = lang + ':' + entity.sitelinks[siteID].title;
@@ -228,7 +235,7 @@ export function uiFieldWikidata(field, context) {
                         // if no wikipedia pages are linked to this wikidata entity, delete that tag
                         newWikipediaValue = null;
                     } else {
-                        var wikiLang = wikiSiteKeys[0].slice(0, -4).replace('_', '-');
+                        var wikiLang = wikiSiteKeys[0].slice(0, -4).replaceAll('_', '-');
                         var wikiTitle = entity.sitelinks[wikiSiteKeys[0]].title;
                         newWikipediaValue = wikiLang + ':' + wikiTitle;
                     }

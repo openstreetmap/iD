@@ -1,4 +1,4 @@
-import _debounce from 'lodash-es/debounce';
+import { debounce } from 'es-toolkit';
 
 import { svgIcon } from '../../svg/icon';
 import { prefs } from '../../core/preferences';
@@ -78,7 +78,7 @@ export function uiSectionValidationStatus(context) {
             .merge(resetIgnoredEnter);
 
         resetIgnored.select('a')
-            .html(t.html('inspector.title_count', { title: { html: t.html('issues.reset_ignored') }, count: ignoredIssues.length }));
+            .call(t.addOrUpdate('inspector.title_count', { title: t.append('issues.reset_ignored'), count: ignoredIssues.length }));
 
         resetIgnored.on('click', function(d3_event) {
             d3_event.preventDefault();
@@ -96,7 +96,7 @@ export function uiSectionValidationStatus(context) {
                 var hiddenIssues = context.validator().getIssues(hiddenOpts);
                 if (hiddenIssues.length) {
                     selection.select('.box .details')
-                        .html('')
+                        .text('')
                         .call(t.append(
                             'issues.no_issues.hidden_issues.' + type,
                             { count: hiddenIssues.length.toString() }
@@ -105,7 +105,7 @@ export function uiSectionValidationStatus(context) {
                 }
             }
             selection.select('.box .details')
-                .html('')
+                .text('')
                 .call(t.append('issues.no_issues.hidden_issues.none'));
         }
 
@@ -161,7 +161,7 @@ export function uiSectionValidationStatus(context) {
         }
 
         selection.select('.box .message')
-            .html('')
+            .text('')
             .call(t.append('issues.no_issues.message.' + messageType));
 
     }
@@ -171,7 +171,7 @@ export function uiSectionValidationStatus(context) {
     });
 
     context.map().on('move.uiSectionValidationStatus',
-        _debounce(function() {
+        debounce(function() {
             window.requestIdleCallback(section.reRender);
         }, 1000)
     );

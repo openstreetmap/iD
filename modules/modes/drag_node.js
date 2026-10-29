@@ -145,7 +145,7 @@ export function modeDragNode(context) {
 
         if (_wasMidpoint) {
             var midpoint = entity;
-            entity = osmNode();
+            entity = new osmNode();
             context.perform(actionAddMidpoint(midpoint, entity));
             entity = context.entity(entity.id);   // get post-action entity
 
@@ -279,7 +279,7 @@ export function modeDragNode(context) {
 
         // if snapping to way - add midpoint there and consider that the target..
         if (edge) {
-            var midpoint = osmNode();
+            var midpoint = new osmNode();
             var action = actionAddMidpoint({
                 loc: edge.loc,
                 edge: [target.nodes[edge.index - 1], target.nodes[edge.index]]
@@ -325,6 +325,10 @@ export function modeDragNode(context) {
                 // test active ring for intersections with other rings in the multipolygon
                 for (k = 0; k < rings.length; k++) {
                     if (k === activeIndex) continue;
+
+                    // if the node being dragged belongs to both rings,
+                    // then don't test for intersections (see #9777)
+                    if (rings[k].nodes.some(n => n.id === entity.id)) continue;
 
                     // make sure active ring doesn't cross passive rings
                     if (geoHasLineIntersections(rings[activeIndex].nodes, rings[k].nodes, entity.id)) {

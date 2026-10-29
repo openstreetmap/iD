@@ -1,15 +1,17 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 
-import Protobuf from 'pbf';
+import { PbfReader } from 'pbf';
 import RBush from 'rbush';
 import { VectorTile } from '@mapbox/vector-tile';
-
-import { utilRebind, utilTiler, utilQsString, utilStringQs, utilUniqueDomId} from '../util';
-import { geoExtent, geoScaleToZoom } from '../geo';
-import { t, localizer } from '../core/localizer';
+import { utilRebind, utilTiler, utilUniqueDomId } from '../util';
+import { geoExtent } from '../geo';
+import { t } from '../core/localizer';
 import { pannellumPhotoFrame } from './pannellum_photo';
 import { planePhotoFrame } from './plane_photo';
 import { services } from './';
+import { partitionViewport } from '../util/partition';
+import { localeDateString } from '../util/date';
+import { patchHash } from '../behavior';
 
 
 const apiUrl = 'https://api.panoramax.xyz/';
@@ -49,16 +51,6 @@ let _currentScene = {
 let _activeImage;
 let _isViewerOpen = false;
 
-
-// Partition viewport into higher zoom tiles
-function partitionViewport(projection) {
-    const z = geoScaleToZoom(projection.scale());
-    const z2 = (Math.ceil(z * 2) / 2) + 2.5;   // round to next 0.5 and add 2.5
-    const tiler = utilTiler().zoomExtent([z2, z2]);
-
-    return tiler.getTiles(projection)
-        .map(function(tile) { return tile.extent; });
-}
 
 /**
  * Return no more than `limit` results per partition.
@@ -161,7 +153,7 @@ function loadTile(which, url, tile, zoom) {
  * @param {*} zoom Current zoom
  */
 function loadTileDataToCache(data, tile, zoom) {
-    const vectorTile = new VectorTile(new Protobuf(data));
+    const vectorTile = new VectorTile(new PbfReader(data));
 
     let features,
         cache,
@@ -171,7 +163,7 @@ function loadTileDataToCache(data, tile, zoom) {
         loc,
         d;
 
-    if (vectorTile.layers.hasOwnProperty(pictureLayer)) {
+    if (Object.hasOwnProperty.call(vectorTile.layers, pictureLayer)) {
         features = [];
         cache = _cache.images;
         layer = vectorTile.layers[pictureLayer];
@@ -203,7 +195,7 @@ function loadTileDataToCache(data, tile, zoom) {
         }
     }
 
-    if (vectorTile.layers.hasOwnProperty(sequenceLayer)) {
+    if (Object.hasOwnProperty.call(vectorTile.layers, sequenceLayer)) {
 
         cache = _cache.sequences;
 
@@ -421,20 +413,6 @@ export default {
     },
 
     /**
-     * Updates the URL to save the current shown image
-     * @param {*} imageKey
-     */
-    updateUrlImage: function(imageKey) {
-        const hash = utilStringQs(window.location.hash);
-        if (imageKey) {
-            hash.photo = 'panoramax/' + imageKey;
-        } else {
-            delete hash.photo;
-        }
-        window.history.replaceState(null, '', '#' + utilQsString(hash, true));
-    },
-
-    /**
      * Loads the selected image in the frame
      * @param {*} context Current HTML context
      * @param {*} id of the selected image
@@ -445,7 +423,7 @@ export default {
 
         let d = that.cachedImage(id);
         that.setActiveImage(d);
-        that.updateUrlImage(d.id);
+        patchHash({ photo: 'panoramax/' + d.id });
 
         const viewerLink = `${viewerUrl}#pic=${d.id}&focus=pic`;
 
@@ -551,14 +529,6 @@ export default {
                 .showPhotoFrame(wrap)
                 .selectPhoto(d, true);
         });
-
-        function localeDateString(s) {
-            if (!s) return null;
-            var options = { day: 'numeric', month: 'short', year: 'numeric' };
-            var d = new Date(s);
-            if (isNaN(d.getTime())) return null;
-            return d.toLocaleDateString(localizer.localeCode(), options);
-        }
 
         if (d.account_id) {
             attribution
@@ -743,7 +713,7 @@ export default {
     hideViewer: function (context) {
         let viewer = context.container().select('.photoviewer');
         if (!viewer.empty()) viewer.datum(null);
-        this.updateUrlImage(null);
+        patchHash({ photo: null });
         viewer
             .classed('hide', true)
             .selectAll('.photo-wrapper')

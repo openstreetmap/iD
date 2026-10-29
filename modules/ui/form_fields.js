@@ -6,7 +6,7 @@ import { utilGetSetValue, utilNoAuto } from '../util';
 
 
 export function uiFormFields(context) {
-    var moreCombo = uiCombobox(context, 'more-fields').minItems(1);
+    var moreCombo = uiCombobox(context, 'more-fields');
     var _fieldsArr = [];
     var _lastPlaceholder = '';
     var _state = '';

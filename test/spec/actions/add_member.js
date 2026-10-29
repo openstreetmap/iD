@@ -1,8 +1,8 @@
 describe('iD.actionAddMember', function() {
     it('adds an member to a relation at the specified index', function() {
-        var r = iD.osmRelation({members: [{id: '1'}, {id: '3'}]});
-        var g = iD.actionAddMember(r.id, {id: '2'}, 1)(iD.coreGraph([r]));
-        expect(g.entity(r.id).members).to.eql([{id: '1'}, {id: '2'}, {id: '3'}]);
+        var r = new iD.osmRelation({members: [{id: '1'}, {id: '3'}]});
+        var g = iD.actionAddMember(r.id, {id: '2'}, 1)(new iD.coreGraph([r]));
+        expect(g.entity(r.id).members).toEqual([{id: '1'}, {id: '2'}, {id: '3'}]);
     });
 
     describe('inserts way members at a sensible index', function() {
@@ -11,122 +11,122 @@ describe('iD.actionAddMember', function() {
         }
 
         it('handles incomplete relations', function () {
-            var graph = iD.coreGraph([
-                iD.osmNode({id: 'a', loc: [0, 0]}),
-                iD.osmNode({id: 'b', loc: [0, 0]}),
-                iD.osmNode({id: 'c', loc: [0, 0]}),
-                iD.osmNode({id: 'd', loc: [0, 0]}),
-                iD.osmWay({id: '-', nodes: ['a', 'b', 'c']}),
-                iD.osmWay({id: '=', nodes: ['c','d']}),
-                iD.osmRelation({id: 'r', members: [
+            var graph = new iD.coreGraph([
+                new iD.osmNode({id: 'a', loc: [0, 0]}),
+                new iD.osmNode({id: 'b', loc: [0, 0]}),
+                new iD.osmNode({id: 'c', loc: [0, 0]}),
+                new iD.osmNode({id: 'd', loc: [0, 0]}),
+                new iD.osmWay({id: '-', nodes: ['a', 'b', 'c']}),
+                new iD.osmWay({id: '=', nodes: ['c','d']}),
+                new iD.osmRelation({id: 'r', members: [
                     {id: '~', type: 'way'},
                     {id: '-', type: 'way'}
                 ]})
             ]);
 
             graph = iD.actionAddMember('r', {id: '=', type: 'way'})(graph);
-            expect(members(graph)).to.eql(['~', '-', '=']);
+            expect(members(graph)).toEqual(['~', '-', '=']);
         });
 
         it('adds the member to a relation with no members', function() {
-            var graph = iD.coreGraph([
-                iD.osmNode({id: 'a', loc: [0, 0]}),
-                iD.osmNode({id: 'b', loc: [0, 0]}),
-                iD.osmWay({id: '-', nodes: ['a', 'b']}),
-                iD.osmRelation({id: 'r'})
+            var graph = new iD.coreGraph([
+                new iD.osmNode({id: 'a', loc: [0, 0]}),
+                new iD.osmNode({id: 'b', loc: [0, 0]}),
+                new iD.osmWay({id: '-', nodes: ['a', 'b']}),
+                new iD.osmRelation({id: 'r'})
             ]);
 
             graph = iD.actionAddMember('r', {id: '-', type: 'way'})(graph);
-            expect(members(graph)).to.eql(['-']);
+            expect(members(graph)).toEqual(['-']);
         });
 
         it('appends the member if the ways are not connecting', function() {
             // Before:  a ---> b
             // After:   a ---> b .. c ===> d
-            var graph = iD.coreGraph([
-                iD.osmNode({id: 'a', loc: [0, 0]}),
-                iD.osmNode({id: 'b', loc: [0, 0]}),
-                iD.osmNode({id: 'c', loc: [0, 0]}),
-                iD.osmNode({id: 'd', loc: [0, 0]}),
-                iD.osmWay({id: '-', nodes: ['a', 'b']}),
-                iD.osmWay({id: '=', nodes: ['c', 'd']}),
-                iD.osmRelation({id: 'r', members: [
+            var graph = new iD.coreGraph([
+                new iD.osmNode({id: 'a', loc: [0, 0]}),
+                new iD.osmNode({id: 'b', loc: [0, 0]}),
+                new iD.osmNode({id: 'c', loc: [0, 0]}),
+                new iD.osmNode({id: 'd', loc: [0, 0]}),
+                new iD.osmWay({id: '-', nodes: ['a', 'b']}),
+                new iD.osmWay({id: '=', nodes: ['c', 'd']}),
+                new iD.osmRelation({id: 'r', members: [
                     {id: '-', type: 'way'}
                 ]})
             ]);
 
             graph = iD.actionAddMember('r', {id: '=', type: 'way'})(graph);
-            expect(members(graph)).to.eql(['-', '=']);
+            expect(members(graph)).toEqual(['-', '=']);
         });
 
         it('appends the member if the way connects at end', function() {
             // Before:   a ---> b
             // After:    a ---> b ===> c
-            var graph = iD.coreGraph([
-                iD.osmNode({id: 'a', loc: [0, 0]}),
-                iD.osmNode({id: 'b', loc: [0, 0]}),
-                iD.osmNode({id: 'c', loc: [0, 0]}),
-                iD.osmWay({id: '-', nodes: ['a', 'b']}),
-                iD.osmWay({id: '=', nodes: ['b', 'c']}),
-                iD.osmRelation({id: 'r', members: [
+            var graph = new iD.coreGraph([
+                new iD.osmNode({id: 'a', loc: [0, 0]}),
+                new iD.osmNode({id: 'b', loc: [0, 0]}),
+                new iD.osmNode({id: 'c', loc: [0, 0]}),
+                new iD.osmWay({id: '-', nodes: ['a', 'b']}),
+                new iD.osmWay({id: '=', nodes: ['b', 'c']}),
+                new iD.osmRelation({id: 'r', members: [
                     {id: '-', type: 'way'}
                 ]})
             ]);
 
             graph = iD.actionAddMember('r', {id: '=', type: 'way'})(graph);
-            expect(members(graph)).to.eql(['-', '=']);
+            expect(members(graph)).toEqual(['-', '=']);
         });
 
         it('inserts the member if the way connects at beginning', function() {
             // Before:          b ---> c ~~~> d
             // After:    a ===> b ---> c ~~~> d
-            var graph = iD.coreGraph([
-                iD.osmNode({id: 'a', loc: [0, 0]}),
-                iD.osmNode({id: 'b', loc: [0, 0]}),
-                iD.osmNode({id: 'c', loc: [0, 0]}),
-                iD.osmNode({id: 'd', loc: [0, 0]}),
-                iD.osmWay({id: '=', nodes: ['a', 'b']}),
-                iD.osmWay({id: '-', nodes: ['b', 'c']}),
-                iD.osmWay({id: '~', nodes: ['c', 'd']}),
-                iD.osmRelation({id: 'r', members: [
+            var graph = new iD.coreGraph([
+                new iD.osmNode({id: 'a', loc: [0, 0]}),
+                new iD.osmNode({id: 'b', loc: [0, 0]}),
+                new iD.osmNode({id: 'c', loc: [0, 0]}),
+                new iD.osmNode({id: 'd', loc: [0, 0]}),
+                new iD.osmWay({id: '=', nodes: ['a', 'b']}),
+                new iD.osmWay({id: '-', nodes: ['b', 'c']}),
+                new iD.osmWay({id: '~', nodes: ['c', 'd']}),
+                new iD.osmRelation({id: 'r', members: [
                     {id: '-', type: 'way'},
                     {id: '~', type: 'way'}
                 ]})
             ]);
 
             graph = iD.actionAddMember('r', {id: '=', type: 'way'})(graph);
-            expect(members(graph)).to.eql(['=', '-', '~']);
+            expect(members(graph)).toEqual(['=', '-', '~']);
         });
 
         it('inserts the member if the way connects in middle', function() {
             // Before:  a ---> b  ..  c ~~~> d
             // After:   a ---> b ===> c ~~~> d
-            var graph = iD.coreGraph([
-                iD.osmNode({id: 'a', loc: [0, 0]}),
-                iD.osmNode({id: 'b', loc: [0, 0]}),
-                iD.osmNode({id: 'c', loc: [0, 0]}),
-                iD.osmNode({id: 'd', loc: [0, 0]}),
-                iD.osmWay({id: '-', nodes: ['a', 'b']}),
-                iD.osmWay({id: '=', nodes: ['b', 'c']}),
-                iD.osmWay({id: '~', nodes: ['c', 'd']}),
-                iD.osmRelation({id: 'r', members: [
+            var graph = new iD.coreGraph([
+                new iD.osmNode({id: 'a', loc: [0, 0]}),
+                new iD.osmNode({id: 'b', loc: [0, 0]}),
+                new iD.osmNode({id: 'c', loc: [0, 0]}),
+                new iD.osmNode({id: 'd', loc: [0, 0]}),
+                new iD.osmWay({id: '-', nodes: ['a', 'b']}),
+                new iD.osmWay({id: '=', nodes: ['b', 'c']}),
+                new iD.osmWay({id: '~', nodes: ['c', 'd']}),
+                new iD.osmRelation({id: 'r', members: [
                     {id: '-', type: 'way'},
                     {id: '~', type: 'way'}
                 ]})
             ]);
 
             graph = iD.actionAddMember('r', {id: '=', type: 'way'})(graph);
-            expect(members(graph)).to.eql(['-', '=', '~']);
+            expect(members(graph)).toEqual(['-', '=', '~']);
         });
 
         it('keeps stops and platforms ordered before node, way, relation (for PTv2 routes)', function() {
-            var graph = iD.coreGraph([
-                iD.osmNode({id: 'a', loc: [0, 0]}),
-                iD.osmNode({id: 'b', loc: [0, 0]}),
-                iD.osmNode({id: 'c', loc: [0, 0]}),
-                iD.osmWay({id: '-', nodes: ['a', 'b']}),
-                iD.osmWay({id: '=', nodes: ['b', 'c']}),
-                iD.osmRelation({id: 'r', members: [
+            var graph = new iD.coreGraph([
+                new iD.osmNode({id: 'a', loc: [0, 0]}),
+                new iD.osmNode({id: 'b', loc: [0, 0]}),
+                new iD.osmNode({id: 'c', loc: [0, 0]}),
+                new iD.osmWay({id: '-', nodes: ['a', 'b']}),
+                new iD.osmWay({id: '=', nodes: ['b', 'c']}),
+                new iD.osmRelation({id: 'r', members: [
                     { id: 'n1', type: 'node', role: 'stop' },
                     { id: 'w1', type: 'way', role: 'platform' },
                     { id: 'n2', type: 'node', role: 'stop_entry_only' },
@@ -142,7 +142,7 @@ describe('iD.actionAddMember', function() {
             ]);
 
             graph = iD.actionAddMember('r', { id: '=', type: 'way', role: 'forward' })(graph);
-            expect(graph.entity('r').members).to.eql([
+            expect(graph.entity('r').members).toEqual([
                 { id: 'n1', type: 'node', role: 'stop' },
                 { id: 'w1', type: 'way', role: 'platform' },
                 { id: 'n2', type: 'node', role: 'stop_entry_only' },

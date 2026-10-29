@@ -38,7 +38,7 @@ export function uiTagReference(what) {
 
 
     function gotDocs(err, docs) {
-        _body.html('');
+        _body.text('');
 
         if (!docs || !docs.title) {
             _body

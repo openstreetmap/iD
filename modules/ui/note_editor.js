@@ -1,7 +1,5 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
-import {
-    select as d3_select
-} from 'd3-selection';
+import { select as d3_select } from 'd3-selection';
 
 import { t } from '../core/localizer';
 import { services } from '../services';
@@ -297,24 +295,24 @@ export function uiNoteEditor(context) {
         osm.userDetails(function(err, user) {
             if (err) return;
 
-            var userLink = d3_select(document.createElement('div'));
+            const userLink = selection => {
+                if (user.image_url) {
+                    selection
+                        .append('img')
+                        .attr('src', user.image_url)
+                        .attr('class', 'icon pre-text user-icon');
+                }
 
-            if (user.image_url) {
-                userLink
-                    .append('img')
-                    .attr('src', user.image_url)
-                    .attr('class', 'icon pre-text user-icon');
-            }
-
-            userLink
-                .append('a')
-                .attr('class', 'user-info')
-                .text(user.display_name)
-                .attr('href', osm.userURL(user.display_name))
-                .attr('target', '_blank');
+                selection
+                    .append('a')
+                    .attr('class', 'user-info')
+                    .text(user.display_name)
+                    .attr('href', osm.userURL(user.display_name))
+                    .attr('target', '_blank');
+            };
 
             prose
-                .html(t.html('note.upload_explanation_with_user', { user: { html: userLink.html() } }));
+                .call(t.addOrUpdate('note.upload_explanation_with_user', { user: userLink }));
         });
     }
 

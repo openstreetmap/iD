@@ -4,7 +4,7 @@ import {
 } from 'd3-selection';
 
 import { presetManager } from '../../presets';
-import { t } from '../../core/localizer';
+import { localizer, t } from '../../core/localizer';
 import { actionChangePreset } from '../../actions/change_preset';
 import { modeBrowse } from '../../modes/browse';
 import { modeSelect } from '../../modes/select';
@@ -95,7 +95,7 @@ export function uiIntroPoint(context, reveal) {
                 context.on('enter.intro', null);
 
                 reveal(pointBox, helpHtml('intro.points.place_point_error'), {
-                    buttonText: t.html('intro.ok'),
+                    buttonText: localizer.t_html('intro.ok'),
                     buttonCallback: function() { return chapter.restart(); }
                 });
             } else {
@@ -190,7 +190,7 @@ export function uiIntroPoint(context, reveal) {
         timeout(function() {
             reveal('.entity-editor-pane', helpHtml('intro.points.feature_editor'), {
                 tooltipClass: 'intro-points-describe',
-                buttonText: t.html('intro.ok'),
+                buttonText: localizer.t_html('intro.ok'),
                 buttonCallback: function() { continueTo(addName); }
             });
         }, 400);
@@ -225,7 +225,7 @@ export function uiIntroPoint(context, reveal) {
             if (entity.tags.name) {
                 var tooltip = reveal('.entity-editor-pane', addNameString, {
                     tooltipClass: 'intro-points-describe',
-                    buttonText: t.html('intro.ok'),
+                    buttonText: localizer.t_html('intro.ok'),
                     buttonCallback: function() { continueTo(addCloseEditor); }
                 });
                 tooltip.select('.instruction').style('display', 'none');
@@ -481,7 +481,7 @@ export function uiIntroPoint(context, reveal) {
         reveal('.ideditor',
             helpHtml('intro.points.play', { next: t('intro.areas.title') }), {
                 tooltipBox: '.intro-nav-wrap .chapter-area',
-                buttonText: t.html('intro.ok'),
+                buttonText: localizer.t_html('intro.ok'),
                 buttonCallback: function() { reveal('.ideditor'); }
             }
         );

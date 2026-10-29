@@ -1,7 +1,7 @@
 import {
     select as d3_select
 } from 'd3-selection';
-import { clamp } from 'lodash-es';
+import { clamp } from 'es-toolkit/compat';
 
 import { t } from '../core/localizer';
 import { dispatch as d3_dispatch } from 'd3-dispatch';
@@ -295,6 +295,10 @@ export function uiPhotoviewer(context) {
         }
     };
 
+    /**
+     * @param {import('../geo/vector').Vec2} dimensions
+     * @returns {import('../geo/vector').Vec2}
+     */
     function subtractPadding(dimensions, selection) {
         return [
             dimensions[0] - parseFloat(selection.style('padding-left')) - parseFloat(selection.style('padding-right')),

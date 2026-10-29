@@ -51,18 +51,29 @@ export function uiSplash(context) {
 
     modalSection
       .append('p')
-      .html(t.html('splash.text', {
+      .call(t.addOrUpdate('splash.text', {
         version: context.version,
-        website: { html: '<a target="_blank" href="https://github.com/openstreetmap/iD/blob/develop/CHANGELOG.md#whats-new">' + t.html('splash.changelog') + '</a>' },
-        github: { html: '<a target="_blank" href="https://github.com/openstreetmap/iD/issues">github.com</a>' }
+        website: selection => selection
+          .append('a')
+          .attr('target', '_blank')
+          .attr('href', 'https://github.com/openstreetmap/iD/blob/develop/CHANGELOG.md#whats-new')
+          .call(t.addOrUpdate('splash.changelog')),
+        github: selection => selection
+          .append('a')
+          .attr('target', '_blank')
+          .attr('href', 'https://github.com/openstreetmap/iD/issues')
+          .text('github.com')
       }));
 
     modalSection
       .append('p')
-      .html(t.html('splash.privacy', {
+      .call(t.addOrUpdate('splash.privacy', {
         updateMessage: updateMessage,
-        privacyLink: { html: '<a target="_blank" href="https://github.com/openstreetmap/iD/blob/release/PRIVACY.md">' +
-          t('splash.privacy_policy') + '</a>' }
+        privacyLink: selection => selection
+          .append('a')
+          .attr('target', '_blank')
+          .attr('href', 'https://github.com/openstreetmap/iD/blob/release/PRIVACY.md')
+          .call(t.addOrUpdate('splash.privacy_policy'))
       }));
 
     uiSectionPrivacy(context)

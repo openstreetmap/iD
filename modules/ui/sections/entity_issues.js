@@ -7,6 +7,7 @@ import { t } from '../../core/localizer';
 import { utilHighlightEntities } from '../../util';
 import { uiSection } from '../section';
 import { validationIssue } from '../../core/validation';
+import { uiTooltip } from '../tooltip';
 
 
 export function uiSectionEntityIssues(context) {
@@ -25,7 +26,7 @@ export function uiSectionEntityIssues(context) {
             return _issues.length > 0;
         })
         .label(function() {
-            return t.append('inspector.title_count', { title: t('issues.list_title'), count: _issues.length });
+            return t.append('inspector.title_count', { title: t.append('issues.list_title'), count: _issues.length });
         })
         .disclosureContent(renderDisclosureContent);
 
@@ -256,6 +257,13 @@ export function uiSectionEntityIssues(context) {
                     return d.disabledReason;
                 }
                 return null;
+            })
+            .each(function(d) {
+                if (d.tooltip) {
+                    d3_select(this).call(
+                        uiTooltip().title(() => d.tooltip)
+                    );
+                }
             });
     }
 

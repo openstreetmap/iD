@@ -22,6 +22,7 @@ const defaultOsmApiConnections = {
     client_id: 'Ee1wWJ6UlpERbF6BfTNOpwn0R8k_06mvMXdDUkeHMgw'
   }
 };
+/** @type {{ url: string; apiUrl: string; client_id: string; }[]} */
 const osmApiConnections = [];
 if (ENV__ID_API_CONNECTION_URL !== null &&
     ENV__ID_API_CONNECTION_CLIENT_ID !== null) {

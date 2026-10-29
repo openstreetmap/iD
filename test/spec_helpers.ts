@@ -1,21 +1,9 @@
-import { beforeAll, beforeEach, afterEach } from 'vitest';
-import { use } from 'chai';
-import sinon from 'sinon';
-import sinonChai from 'sinon-chai';
-import 'happen';
+import { beforeAll } from 'vitest';
 import fetchMock from 'fetch-mock';
 import 'fake-indexeddb/auto';
 import envs from '../config/envs.js';
 
-use(sinonChai);
 
-declare var global: typeof globalThis;
-declare var jsdom: typeof globalThis;
-
-global.before = beforeEach;
-global.after = afterEach;
-global.fetchMock = fetchMock;
-global.sinon = sinon;
 global.VITEST = true;
 
 // create global variables for this data, to match what the esbuild config does
@@ -23,18 +11,6 @@ for (const [key, value] of Object.entries(envs)) {
   Reflect.set(global, key, JSON.parse(value));
 }
 
-// the 'happen' library explicitly references `window` when creating an event,
-// but we need to use jsdom's window, so we have to patch initEvent.
-const { initMouseEvent } = MouseEvent.prototype;
-MouseEvent.prototype.initMouseEvent = function (...args) {
-  args[3] = jsdom.window;
-  return initMouseEvent.apply(this, args);
-};
-const { initUIEvent } = UIEvent.prototype;
-UIEvent.prototype.initUIEvent = function (...args) {
-  args[3] = jsdom.window;
-  return initUIEvent.apply(this, args);
-};
 
 // must be imported after global envs are defined
 await import('../modules/id.js');
@@ -118,7 +94,7 @@ cached.locale_tagging_en = {
 // Load the actual data from `dist/locales/` for the 'general' scope
 iD.localizer.loadLocale('en', 'general', 'locales');
 // Load the fake data seeded above for the 'tagging' scope
-iD.localizer.loadLocale('en', 'tagging');
+iD.localizer.loadLocale('en', 'tagging', undefined!);
 
 
 // Initializing `coreContext` initializes `_background`, which tries loading:
@@ -134,36 +110,9 @@ cached.deprecated = [];
 cached.discarded = {};
 
 // @ts-expect-error
-window.d3 = iD.d3; // Remove this if we can avoid exporting all of d3.js
-
-// @ts-expect-error
 delete window.PointerEvent;  // force the browser to use mouse events
 
 // some sticky fallbacks
-const capabilities = `<?xml version="1.0" encoding="UTF-8"?>
-<osm version="0.6" generator="OpenStreetMap server" copyright="OpenStreetMap and contributors" attribution="http://www.openstreetmap.org/copyright" license="http://opendatacommons.org/licenses/odbl/1-0/">
-  <api>
-    <version minimum="0.6" maximum="0.6"/>
-    <area maximum="0.25"/>
-    <note_area maximum="25"/>
-    <tracepoints per_page="5000"/>
-    <waynodes maximum="2000"/>
-    <changesets maximum_elements="10000"/>
-    <timeout seconds="300"/>
-    <status database="online" api="online" gpx="online"/>
-  </api>
-  <policy>
-    <imagery>
-      <blacklist regex=".*\.google(apis)?\..*/(vt|kh)[\?/].*([xyz]=.*){3}.*"/>
-      <blacklist regex="http://xdworld\.vworld\.kr:8080/.*"/>
-      <blacklist regex=".*\.here\.com[/:].*"/>
-    </imagery>
-  </policy>
-</osm>`;
-
-fetchMock.sticky('https://www.openstreetmap.org/api/capabilities', capabilities, {sticky: true});
-fetchMock.sticky('http://www.openstreetmap.org/api/capabilities', capabilities, {sticky: true});
-
 const vegbilderOwsCapabilities = `<?xml version="1.0" encoding="UTF-8"?>
 <wfs:WFS_Capabilities version="2.0.0"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -207,9 +156,9 @@ fetchMock.sticky({
               request: 'GetCapabilities'
             }
           }, vegbilderOwsCapabilities, {sticky: true});
-fetchMock.config.fallbackToNetwork = true;
+fetchMock.config.fallbackToNetwork = false;
 fetchMock.config.overwriteRoutes = false;
 
 beforeAll(async () => {
-  await iD.coreLocalizer().ensureLoaded();
+  await new iD.coreLocalizer().ensureLoaded();
 });

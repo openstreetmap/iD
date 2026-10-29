@@ -516,7 +516,6 @@ path.line.stroke.tag-footway-access_aisle,
 path.line.stroke.tag-public_transport-platform,
 path.line.stroke.tag-highway-platform,
 path.line.stroke.tag-railway-platform,
-path.line.stroke.tag-railway-platform_edge,
 path.line.stroke.tag-man_made-pier {
     stroke: #dca;
 }
@@ -585,6 +584,27 @@ path.line.stroke.tag-highway-cycleway,
     stroke: #58a9ed;
 }
 .preset-icon-container path.stroke.tag-highway-cycleway:not(.tag-crossing) {
+    stroke: #fff;
+}
+
+/* shared paths */
+path.line.casing.tag-highway-cycleway.tag-foot-designated:not(.tag-crossing),
+path.line.casing.tag-highway-path.tag-bicycle-designated.tag-foot-designated:not(.tag-crossing) {
+    stroke: #fff;
+}
+.preset-icon .icon.tag-highway-cycleway.tag-foot-designated,
+.preset-icon .icon.tag-highway-path.tag-bicycle-designated.tag-foot-designated {
+    color: #b458ed;
+    fill: #fff;
+}
+path.line.stroke.tag-highway-cycleway.tag-foot-designated,
+path.line.stroke.tag-highway-path.tag-bicycle-designated.tag-foot-designated,
+.preset-icon-container path.line.casing.tag-highway-cycleway.tag-foot-designated:not(.tag-crossing),
+.preset-icon-container path.line.casing.tag-highway-path.tag-bicycle-designated.tag-foot-designated:not(.tag-crossing) {
+    stroke: #b458ed;
+}
+.preset-icon-container path.stroke.tag-highway-cycleway.tag-foot-designated:not(.tag-crossing),
+.preset-icon-container path.stroke.tag-highway-path.tag-bicycle-designated.tag-foot-designated:not(.tag-crossing) {
     stroke: #fff;
 }
 

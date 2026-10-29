@@ -72,6 +72,14 @@
     ]
   },
   {
+    "countryCodes": ["hk"],
+    "format": [
+      ["door", "floor"],
+      ["unit", "housename"],
+      ["housenumber", "street+place"]
+    ]
+  },
+  {
     "countryCodes": ["ma"],
     "format": [
       ["housename"],
@@ -79,11 +87,19 @@
       ["postcode", "city"]
     ]
   },
+    {
+    "countryCodes": ["md"],
+    "format": [
+      ["street", "housenumber", "floor", "unit"],
+      ["postcode", "city"],
+      ["subdistrict", "district"]
+    ]
+  },
   {
     "countryCodes": ["mo"],
     "format": [
-      ["housenumber", "street"],
-      ["postcode", "city"]
+      ["street", "housenumber", "unit"],
+      ["floor"]
     ]
   },
   {

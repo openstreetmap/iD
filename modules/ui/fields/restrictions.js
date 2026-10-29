@@ -457,11 +457,14 @@ export function uiFieldRestrictions(field, context) {
 
 
         function updateHints(datum) {
-            var help = _container.selectAll('.restriction-help').html('');
+            var help = _container.selectAll('.restriction-help').text('');
 
             var placeholders = {};
             ['from', 'via', 'to'].forEach(function(k) {
-                placeholders[k] = { html: '<span class="qualifier">' + t('restriction.help.' + k) + '</span>' };
+                placeholders[k] = selection => selection
+                    .append('span')
+                    .classed('qualifier', true)
+                    .call(t.append('restriction.help.' + k));
             });
 
             var entity = datum && datum.properties && datum.properties.entity;
@@ -488,7 +491,7 @@ export function uiFieldRestrictions(field, context) {
                 var clickSelect = (!_fromWayID || _fromWayID !== way.id);
                 help
                     .append('div')      // "Click to select FROM {fromName}." / "FROM {fromName}"
-                    .html(t.html('restriction.help.' + (clickSelect ? 'select_from_name' : 'from_name'), {
+                    .call(t.append('restriction.help.' + (clickSelect ? 'select_from_name' : 'from_name'), {
                         from: placeholders.from,
                         fromName: displayName(way.id, vgraph)
                     }));
@@ -498,31 +501,32 @@ export function uiFieldRestrictions(field, context) {
             } else if (datum instanceof osmTurn) {
                 var restrictionType = osmInferRestriction(vgraph, datum, projection);
                 var turnType = restrictionType.replace(/^(only|no)\_/, '');
-                var indirect = (datum.direct === false ? t.html('restriction.help.indirect') : '');
+                var indirect = (datum.direct === false ? t.append('restriction.help.indirect') : '');
                 var klass, turnText, nextText;
 
                 if (datum.no) {
                     klass = 'restrict';
-                    turnText = t.html('restriction.help.turn.no_' + turnType, { indirect: { html: indirect } });
-                    nextText = t.html('restriction.help.turn.only_' + turnType, { indirect: '' });
+                    turnText = t.append('restriction.help.turn.no_' + turnType, { indirect, _trim: true });
+                    nextText = t.append('restriction.help.turn.only_' + turnType, { indirect: '', _trim: true });
                 } else if (datum.only) {
                     klass = 'only';
-                    turnText = t.html('restriction.help.turn.only_' + turnType, { indirect: { html: indirect } });
-                    nextText = t.html('restriction.help.turn.allowed_' + turnType, { indirect: '' });
+                    turnText = t.append('restriction.help.turn.only_' + turnType, { indirect, _trim: true });
+                    nextText = t.append('restriction.help.turn.allowed_' + turnType, { indirect: '', _trim: true });
                 } else {
                     klass = 'allow';
-                    turnText = t.html('restriction.help.turn.allowed_' + turnType, { indirect: { html: indirect } });
-                    nextText = t.html('restriction.help.turn.no_' + turnType, { indirect: '' });
+                    turnText = t.append('restriction.help.turn.allowed_' + turnType, { indirect, _trim: true });
+                    nextText = t.append('restriction.help.turn.no_' + turnType, { indirect: '', _trim: true });
                 }
 
                 help
                     .append('div')      // "NO Right Turn (indirect)"
-                    .attr('class', 'qualifier ' + klass)
-                    .html(turnText);
+                    .classed('qualifier', true)
+                    .classed(klass, true)
+                    .call(turnText);
 
                 help
                     .append('div')      // "FROM {fromName} TO {toName}"
-                    .html(t.html('restriction.help.from_name_to_name', {
+                    .call(t.append('restriction.help.from_name_to_name', {
                         from: placeholders.from,
                         fromName: displayName(datum.from.way, vgraph),
                         to: placeholders.to,
@@ -542,7 +546,7 @@ export function uiFieldRestrictions(field, context) {
 
                     help
                         .append('div')      // "VIA {viaNames}"
-                        .html(t.html('restriction.help.via_names', {
+                        .call(t.append('restriction.help.via_names', {
                             via: placeholders.via,
                             viaNames: names.join(', ')
                         }));
@@ -551,7 +555,7 @@ export function uiFieldRestrictions(field, context) {
                 if (!indirect) {
                     help
                         .append('div')      // Click for "No Right Turn"
-                        .html(t.html('restriction.help.toggle', { turn: { html: nextText.trim() } }));
+                        .call(t.append('restriction.help.toggle', { turn: nextText }));
                 }
 
                 highlightPathsFrom(null);
@@ -569,7 +573,7 @@ export function uiFieldRestrictions(field, context) {
                 if (_fromWayID) {
                     help
                         .append('div')      // "FROM {fromName}"
-                        .html(t.html('restriction.help.from_name', {
+                        .call(t.append('restriction.help.from_name', {
                             from: placeholders.from,
                             fromName: displayName(_fromWayID, vgraph)
                         }));
@@ -577,7 +581,7 @@ export function uiFieldRestrictions(field, context) {
                 } else {
                     help
                         .append('div')      // "Click to select a FROM segment."
-                        .html(t.html('restriction.help.select_from', {
+                        .call(t.append('restriction.help.select_from', {
                             from: placeholders.from
                         }));
                 }
@@ -601,7 +605,7 @@ export function uiFieldRestrictions(field, context) {
             }
 
             return selection
-                .html('')
+                .text('')
                 .call(t.append('restriction.controls.distance_up_to', opts));
         };
     }
@@ -609,7 +613,7 @@ export function uiFieldRestrictions(field, context) {
 
     function displayMaxVia(maxVia) {
         return selection => {
-            selection = selection.html('');
+            selection = selection.text('');
             return maxVia === 0 ? selection.call(t.append('restriction.controls.via_node_only'))
                 : maxVia === 1 ? selection.call(t.append('restriction.controls.via_up_to_one'))
                 : selection.call(t.append('restriction.controls.via_up_to_two'));

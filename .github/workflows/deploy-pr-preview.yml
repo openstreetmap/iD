@@ -17,15 +17,15 @@ jobs:
     environment: workflows
     if: ${{github.event.workflow_run.event == 'pull_request' && github.event.workflow_run.conclusion == 'success'}}
     steps:
-      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
-      - uses: actions/setup-node@6044e13b5dc448c55e2357c09f80417699197238 # v6.2.0
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
           node-version: '24'
       - run: npm clean-install
 
       - name: Download all artifacts (dist folder and pr_metadata)
-        uses: dawidd6/action-download-artifact@fe9d59ce33ce92db8a6ac90b2c8be6b6d90417c8 # v15
+        uses: dawidd6/action-download-artifact@eab87c9830c39eff17e5a6eadb20bfb4bc880477 # v27
         with:
           github_token: ${{secrets.GITHUB_TOKEN}}
           run_id: ${{github.event.workflow_run.id}}
@@ -39,10 +39,10 @@ jobs:
         env:
           NETLIFY_AUTH_TOKEN: ${{secrets.NETLIFY_AUTH_TOKEN}}
           NETLIFY_SITE_ID: ${{secrets.NETLIFY_SITE_ID}}
-        run: ./node_modules/.bin/netlify deploy --no-build --dir=. --alias=pr-${{steps.pr_metadata.outputs.pr}}
+        run: npx netlify-cli deploy --no-build --dir=. --alias=pr-${{steps.pr_metadata.outputs.pr}}
 
       - name: Run afterDeploy script
-        uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd # v8.0.0
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
         with:
           script: |
             const { afterDeploy } = await import('${{github.workspace}}/scripts/pr_preview.js');

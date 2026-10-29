@@ -1,5 +1,4 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
-import { escape } from 'lodash-es';
 
 import { fileFetcher } from './file_fetcher';
 import { actionDiscardTags } from '../actions/discard_tags';
@@ -108,7 +107,7 @@ export function coreUploader(context) {
         var history = context.history();
 
         var localGraph = context.graph();
-        var remoteGraph = coreGraph(history.base(), true);
+        var remoteGraph = new coreGraph(history.base(), true);
 
         var summary = history.difference().summary();
         var _toCheck = [];
@@ -221,8 +220,12 @@ export function coreUploader(context) {
                     }
                 };
             }
-            function formatUser(d) {
-                return '<a href="' + osm.userURL(d) + '" target="_blank">' + escape(d) + '</a>';
+            function formatUser(selection, d) {
+                selection
+                    .append('a')
+                    .attr('href', osm.userURL(d))
+                    .attr('target', '_blank')
+                    .text(d);
             }
             function entityName(entity) {
                 return utilDisplayName(entity) || (utilDisplayType(entity.id) + ' ' + entity.id);

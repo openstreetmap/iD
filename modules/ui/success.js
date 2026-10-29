@@ -6,12 +6,13 @@ import { resolveStrings } from 'osm-community-index';
 import { showDonationMessage } from '../../config/id.js';
 
 import { fileFetcher } from '../core/file_fetcher';
-import { locationManager } from '../core/LocationManager';
+import { locationManager } from '../core/location_manager.js';
 import { t, localizer } from '../core/localizer';
 
 import { svgIcon } from '../svg/icon';
 import { uiDisclosure } from '../ui/disclosure';
 import { utilRebind } from '../util/rebind';
+import { utilSanitizeHTML } from '../util/sanitize.js';
 
 
 let _oci = null;
@@ -36,20 +37,18 @@ export function uiSuccess(context) {
 
         // Merge Custom Features
         if (vals[0] && Array.isArray(vals[0].features)) {
-          locationManager.mergeCustomGeoJSON(vals[0]);
+          locationManager.addFeatures(vals[0]);
         }
 
         let ociResources = Object.values(vals[1].resources);
         if (ociResources.length) {
           // Resolve all locationSet features.
-          return locationManager.mergeLocationSets(ociResources)
-            .then(() => {
-              _oci = {
-                resources: ociResources,
-                defaults: vals[2].defaults
-              };
-              return _oci;
-            });
+          locationManager.registerLocationSets(ociResources);
+          _oci = {
+            resources: ociResources,
+            defaults: vals[2].defaults
+          };
+          return _oci;
         } else {
           _oci = {
             resources: [],  // no resources?
@@ -153,8 +152,12 @@ export function uiSuccess(context) {
 
     summaryDetail
       .append('div')
-      .html(t.html('success.changeset_id', {
-        changeset_id: { html: `<a href="${changesetURL}" target="_blank">${_changeset.id}</a>` }
+      .call(t.addOrUpdate('success.changeset_id', {
+        changeset_id: selection => selection
+          .append('a')
+          .attr('target', '_blank')
+          .attr('href', changesetURL)
+          .text(_changeset.id)
       }));
 
     if (showDonationMessage !== false) {
@@ -216,12 +219,12 @@ export function uiSuccess(context) {
         // Gather the communities
         let communities = [];
         oci.resources.forEach(resource => {
-          let area = validHere[resource.locationSetID];
+          let area = validHere.get(resource.locationSetID);
           if (!area) return;
 
           // Resolve strings
-          const localizer = (stringID) => t.html(`community.${stringID}`);
-          resource.resolved = resolveStrings(resource, oci.defaults, localizer);
+          const _localizer = (stringID) => localizer.t_html(`community.${stringID}`);
+          resource.resolved = resolveStrings(resource, oci.defaults, _localizer);
 
           communities.push({
             area: area,
@@ -298,12 +301,12 @@ export function uiSuccess(context) {
     selection
       .append('div')
       .attr('class', 'community-name')
-      .html(d.resolved.nameHTML);
+      .html(utilSanitizeHTML(d.resolved.nameHTML));
 
     selection
       .append('div')
       .attr('class', 'community-description')
-      .html(d.resolved.descriptionHTML);
+      .html(utilSanitizeHTML(d.resolved.descriptionHTML));
 
     // Create an expanding section if any of these are present..
     if (d.resolved.extendedDescriptionHTML || (d.languageCodes && d.languageCodes.length)) {
@@ -338,7 +341,7 @@ export function uiSuccess(context) {
         .call(uiDisclosure(context, `community-events-${d.id}`, false)
           .expanded(false)
           .updatePreference(false)
-          .label(t.html('success.events'))
+          .label(() => t.append('success.events'))
           .content(showNextEvents)
         )
         .select('.hide-toggle')
@@ -360,7 +363,7 @@ export function uiSuccess(context) {
         moreEnter
           .append('div')
           .attr('class', 'community-extended-description')
-          .html(d.resolved.extendedDescriptionHTML);
+          .html(utilSanitizeHTML(d.resolved.extendedDescriptionHTML));
       }
 
       if (d.languageCodes && d.languageCodes.length) {

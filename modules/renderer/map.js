@@ -1,4 +1,4 @@
-import _throttle from 'lodash-es/throttle';
+import { throttle, isArray, clamp } from 'es-toolkit/compat';
 
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { interpolate as d3_interpolate } from 'd3-interpolate';
@@ -17,7 +17,6 @@ import { utilGetDimensions } from '../util/dimensions';
 import { utilRebind } from '../util/rebind';
 import { utilZoomPan } from '../util/zoom_pan';
 import { utilDoubleUp } from '../util/double_up';
-import { isArray, clamp } from 'lodash-es';
 
 // constants
 var TILESIZE = 256;
@@ -83,7 +82,7 @@ export function rendererMap(context) {
         });
     var _doubleUpHandler = utilDoubleUp();
 
-    var scheduleRedraw = _throttle(redraw, 750);
+    var scheduleRedraw = throttle(redraw, 750);
     // var isRedrawScheduled = false;
     // var pendingRedrawCall;
     // function scheduleRedraw() {
@@ -156,9 +155,10 @@ export function rendererMap(context) {
             .call(_zoomerPanner.transform, projection.transform())
             .on('dblclick.zoom', null); // override d3-zoom dblclick handling
 
-        map.supersurface = supersurface = selection.append('div')
+        map.supersurface = selection.append('div')
             .attr('class', 'supersurface')
             .call(utilSetTransform, 0, 0);
+        supersurface = map.supersurface;
 
         // Need a wrapper div because Opera can't cope with an absolutely positioned
         // SVG element: http://bl.ocks.org/jfirebaugh/6fbfbd922552bf776c16
@@ -166,9 +166,10 @@ export function rendererMap(context) {
             .append('div')
             .attr('class', 'layer layer-data');
 
-        map.surface = surface = wrapper
+        map.surface = wrapper
             .call(drawLayers)
             .selectAll('.surface');
+        surface = map.surface;
 
         surface
             .call(drawLabels.observe)
@@ -248,7 +249,15 @@ export function rendererMap(context) {
 
         context.on('enter.map',  function() {
             if (!map.editableDataEnabled(true /* skip zoom check */)) return;
-            if (_isTransformed) return;
+
+            if (_isTransformed) {
+                // if we're part way through a transform, don't run
+                // any expensive redraws. Just cleanup any state
+                // that depended on the selected feature.
+                surface
+                    .call(drawVertices.clearSelected);
+                return;
+            }
 
             // redraw immediately any objects affected by a change in selectedIDs.
             var graph = context.graph();
@@ -270,6 +279,7 @@ export function rendererMap(context) {
             data = context.features().filter(data, graph);
 
             surface
+                .call(drawPoints.drawSelected, graph)
                 .call(drawVertices.drawSelected, graph, map.extent())
                 .call(drawLines, graph, data, filter)
                 .call(drawAreas, graph, data, filter)
@@ -283,6 +293,7 @@ export function rendererMap(context) {
 
         map.dimensions(utilGetDimensions(selection));
     }
+    map.surface = undefined; // defined later
 
 
     function zoomEventFilter(d3_event) {
@@ -375,6 +386,7 @@ export function rendererMap(context) {
         if (mode && mode.id === 'select') {
             // update selected vertices - the user might have just double-clicked a way,
             // creating a new vertex, triggering a partial redraw without a mode change
+            surface.call(drawPoints.drawSelected, graph);
             surface.call(drawVertices.drawSelected, graph, map.extent());
         }
 
@@ -645,7 +657,8 @@ export function rendererMap(context) {
         // It would result in artifacts where differenced entities are redrawn with
         // one transform and unchanged entities with another.
         if (resetTransform()) {
-            difference = extent = undefined;
+            difference = undefined;
+            extent = undefined;
         }
 
         var zoom = map.zoom();
@@ -800,6 +813,7 @@ export function rendererMap(context) {
     };
 
 
+    /** @type {GetSet<unknown, Vec2>} */
     map.dimensions = function(val) {
         if (!arguments.length) return _dimensions;
 
@@ -875,6 +889,7 @@ export function rendererMap(context) {
         return footer.node().offsetHeight;
     }
 
+    /** @type {GetSet<typeof map, number>} */
     map.zoom = function(z2) {
         if (!arguments.length) {
             return Math.max(geoScaleToZoom(projection.scale(), TILESIZE), 0);
@@ -978,6 +993,7 @@ export function rendererMap(context) {
     };
 
 
+    /** @type {GetSet<typeof map, geoExtent>} */
     map.extent = function(val) {
         if (!arguments.length) {
             return new geoExtent(
@@ -991,6 +1007,7 @@ export function rendererMap(context) {
     };
 
 
+    /** @type {GetSet<typeof map, geoExtent>} */
     map.trimmedExtent = function(val) {
         if (!arguments.length) {
             var headerY = 71;
@@ -1078,6 +1095,7 @@ export function rendererMap(context) {
     };
 
 
+    /** @type import('../ui/sections/map_style_options').MapStyle[] */
     map.areaFillOptions = ['wireframe', 'partial', 'full'];
 
     map.activeAreaFill = function(val) {

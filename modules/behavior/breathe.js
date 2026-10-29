@@ -1,4 +1,4 @@
-import deepEqual from 'fast-deep-equal';
+import { deepEqual } from 'fast-equals';
 
 import {
     interpolateNumber as d3_interpolateNumber,

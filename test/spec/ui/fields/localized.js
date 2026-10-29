@@ -1,9 +1,10 @@
 import { setTimeout } from 'node:timers/promises';
+import { select as d3_select } from 'd3-selection';
 
 describe('iD.uiFieldLocalized', function() {
     var context, selection, field;
 
-    before(function() {
+    beforeEach(() => {
         iD.fileFetcher.cache().languages = {
           de: { nativeName: 'Deutsch' },
           en: { nativeName: 'English' }
@@ -11,14 +12,14 @@ describe('iD.uiFieldLocalized', function() {
         iD.fileFetcher.cache().territory_languages = {};
     });
 
-    after(function() {
+    afterEach(() => {
         delete iD.fileFetcher.cache().languages;
         delete iD.fileFetcher.cache().territory_languages;
     });
 
     beforeEach(function() {
         context = iD.coreContext().assetPath('../dist/').init();
-        selection = d3.select(document.createElement('div'));
+        selection = d3_select(document.createElement('div'));
         field = iD.presetField('name', { key: 'name', type: 'localized' });
         field.locked = function() { return false; };
     });
@@ -28,73 +29,73 @@ describe('iD.uiFieldLocalized', function() {
         var localized = iD.uiFieldLocalized(field, context);
         await setTimeout(20);
         selection.call(localized);
-        happen.click(selection.selectAll('.localized-add').node());
-        expect(selection.selectAll('.localized-lang').nodes().length).to.equal(1);
-        expect(selection.selectAll('.localized-value').nodes().length).to.equal(1);
+        selection.selectAll('.localized-add').node().dispatchEvent(new MouseEvent('click'));
+        expect(selection.selectAll('.localized-lang').nodes().length).toEqual(1);
+        expect(selection.selectAll('.localized-value').nodes().length).toEqual(1);
     });
 
     it('doesn\'t create a tag when the value is empty', async () => {
         var localized = iD.uiFieldLocalized(field, context);
         await setTimeout(20);
         selection.call(localized);
-        happen.click(selection.selectAll('.localized-add').node());
+        selection.selectAll('.localized-add').node().dispatchEvent(new MouseEvent('click'));
 
         localized.on('change', function(tags) {
-            expect(tags).to.eql({});
+            expect(tags).toEqual({});
         });
 
         iD.utilGetSetValue(selection.selectAll('.localized-lang'), 'Deutsch');
-        happen.once(selection.selectAll('.localized-lang').node(), {type: 'change'});
-        happen.once(selection.selectAll('.localized-lang').node(), {type: 'blur'});
+        selection.selectAll('.localized-lang').node().dispatchEvent(new Event('change'));
+        selection.selectAll('.localized-lang').node().dispatchEvent(new Event('blur'));
     });
 
     it('doesn\'t create a tag when the name is empty', async () => {
         var localized = iD.uiFieldLocalized(field, context);
         await setTimeout(20);
         selection.call(localized);
-        happen.click(selection.selectAll('.localized-add').node());
+        selection.selectAll('.localized-add').node().dispatchEvent(new MouseEvent('click'));
 
         localized.on('change', function(tags) {
-            expect(tags).to.eql({});
+            expect(tags).toEqual({});
         });
 
         iD.utilGetSetValue(selection.selectAll('.localized-value'), 'Value');
-        happen.once(selection.selectAll('.localized-value').node(), {type: 'change'});
-        happen.once(selection.selectAll('.localized-value').node(), {type: 'blur'});
+        selection.selectAll('.localized-value').node().dispatchEvent(new Event('change'));
+        selection.selectAll('.localized-value').node().dispatchEvent(new Event('blur'));
     });
 
     it('creates a tag after setting language then value', async () => {
         var localized = iD.uiFieldLocalized(field, context);
         await setTimeout(20);
         selection.call(localized);
-        happen.click(selection.selectAll('.localized-add').node());
+        selection.selectAll('.localized-add').node().dispatchEvent(new MouseEvent('click'));
 
         iD.utilGetSetValue(selection.selectAll('.localized-lang'), 'Deutsch');
-        happen.once(selection.selectAll('.localized-lang').node(), {type: 'change'});
+        selection.selectAll('.localized-lang').node().dispatchEvent(new Event('change'));
 
         localized.on('change', function(tags) {
-            expect(tags).to.eql({'name:de': 'Value'});
+            expect(tags).toEqual({'name:de': 'Value'});
         });
 
         iD.utilGetSetValue(selection.selectAll('.localized-value'), 'Value');
-        happen.once(selection.selectAll('.localized-value').node(), {type: 'change'});
+        selection.selectAll('.localized-value').node().dispatchEvent(new Event('change'));
     });
 
     it('creates a tag after setting value then language', async () => {
         var localized = iD.uiFieldLocalized(field, context);
         await setTimeout(20);
         selection.call(localized);
-        happen.click(selection.selectAll('.localized-add').node());
+        selection.selectAll('.localized-add').node().dispatchEvent(new MouseEvent('click'));
 
         iD.utilGetSetValue(selection.selectAll('.localized-value'), 'Value');
-        happen.once(selection.selectAll('.localized-value').node(), {type: 'change'});
+        selection.selectAll('.localized-value').node().dispatchEvent(new Event('change'));
 
         localized.on('change', function(tags) {
-            expect(tags).to.eql({'name:de': 'Value'});
+            expect(tags).toEqual({'name:de': 'Value'});
         });
 
         iD.utilGetSetValue(selection.selectAll('.localized-lang'), 'Deutsch');
-        happen.once(selection.selectAll('.localized-lang').node(), {type: 'change'});
+        selection.selectAll('.localized-lang').node().dispatchEvent(new Event('change'));
     });
 
     it('changes an existing language', async () => {
@@ -104,13 +105,13 @@ describe('iD.uiFieldLocalized', function() {
         localized.tags({'name:de': 'Value'});
 
         localized.on('change', function(tags) {
-            expect(tags).to.eql({
+            expect(tags).toEqual({
                 'name:de': undefined,
                 'name:en': 'Value'});
         });
 
         iD.utilGetSetValue(selection.selectAll('.localized-lang'), 'English');
-        happen.once(selection.selectAll('.localized-lang').node(), {type: 'change'});
+        selection.selectAll('.localized-lang').node().dispatchEvent(new Event('change'));
     });
 
     it('ignores similar keys like `old_name`', async () => {
@@ -119,8 +120,8 @@ describe('iD.uiFieldLocalized', function() {
         selection.call(localized);
         localized.tags({'old_name:de': 'Value'});
 
-        expect(selection.selectAll('.localized-lang').empty()).to.be.ok;
-        expect(selection.selectAll('.localized-value').empty()).to.be.ok;
+        expect(selection.selectAll('.localized-lang').empty()).toBeTruthy();
+        expect(selection.selectAll('.localized-value').empty()).toBeTruthy();
     });
 
     it('removes the tag when the language is emptied', async () => {
@@ -130,11 +131,11 @@ describe('iD.uiFieldLocalized', function() {
         localized.tags({'name:de': 'Value'});
 
         localized.on('change', function(tags) {
-            expect(tags).to.eql({'name:de': undefined});
+            expect(tags).toEqual({'name:de': undefined});
         });
 
         iD.utilGetSetValue(selection.selectAll('.localized-lang'), '');
-        happen.once(selection.selectAll('.localized-lang').node(), {type: 'change'});
+        selection.selectAll('.localized-lang').node().dispatchEvent(new Event('change'));
     });
 
     it('removes the tag when the value is emptied', async () => {
@@ -144,11 +145,11 @@ describe('iD.uiFieldLocalized', function() {
         localized.tags({'name:de': 'Value'});
 
         localized.on('change', function(tags) {
-            expect(tags).to.eql({'name:de': undefined});
+            expect(tags).toEqual({'name:de': undefined});
         });
 
         iD.utilGetSetValue(selection.selectAll('.localized-value'), '');
-        happen.once(selection.selectAll('.localized-value').node(), {type: 'change'});
+        selection.selectAll('.localized-value').node().dispatchEvent(new Event('change'));
     });
 
     it('has a lang attribute on an existing multilingual name field', async () => {
@@ -156,6 +157,6 @@ describe('iD.uiFieldLocalized', function() {
         localized.tags({'name:de': 'Value'});
         await setTimeout(20);
         selection.call(localized);
-        expect(selection.selectAll('.localized-value').attr('lang')).to.eql('de');
+        expect(selection.selectAll('.localized-value').attr('lang')).toEqual('de');
     });
 });

@@ -59,6 +59,7 @@ export function uiZoom(context) {
 
     return function(selection) {
         var tooltipBehavior = uiTooltip()
+            .scrollContainer(context.container().select('.over-map'))
             .placement((localizer.textDirection() === 'rtl') ? 'right' : 'left')
             .title(function(d) {
                 if (d.disabled()) {

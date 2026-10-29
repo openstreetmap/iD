@@ -1,8 +1,5 @@
+import { select as d3_select } from 'd3-selection';
 import { dispatch as d3_dispatch } from 'd3-dispatch';
-
-import {
-    select as d3_select
-} from 'd3-selection';
 
 import { t } from '../core/localizer';
 import { JXON } from '../util/jxon';
@@ -191,7 +188,9 @@ export function uiConflicts(context) {
             .enter()
             .append('li')
             .attr('class', 'conflict-detail-item')
-            .html(function(d) { return d; });
+            .each(function(d) {
+                d3_select(this).call(d);
+            });
 
         details
             .append('div')

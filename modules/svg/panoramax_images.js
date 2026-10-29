@@ -1,4 +1,4 @@
-import _throttle from 'lodash-es/throttle';
+import { throttle } from 'es-toolkit';
 
 import { select as d3_select } from 'd3-selection';
 import { services } from '../services';
@@ -6,7 +6,7 @@ import {svgPath, svgPointTransform} from './helpers';
 
 
 export function svgPanoramaxImages(projection, context, dispatch) {
-    const throttledRedraw = _throttle(function () { dispatch.call('change'); }, 1000);
+    const throttledRedraw = throttle(function () { dispatch.call('change'); }, 1000);
     const imageMinZoom = 15;
     const lineMinZoom = 10;
     const viewFieldZoomLevel = 18;

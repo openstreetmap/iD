@@ -1,14 +1,16 @@
+import { fn } from '@vitest/spy';
+import fetchMock from 'fetch-mock';
 import { setTimeout } from 'node:timers/promises';
 
 describe('iD.serviceStreetside', function() {
     var dimensions = [64, 64];
     var context, streetside;
 
-    before(function() {
+    beforeEach(() => {
         iD.services.streetside = iD.serviceStreetside;
     });
 
-    after(function() {
+    afterEach(() => {
         delete iD.services.streetside;
     });
 
@@ -36,7 +38,7 @@ describe('iD.serviceStreetside', function() {
 
             streetside.init();
             var cache2 = streetside.cache();
-            expect(cache).to.equal(cache2);
+            expect(cache).toEqual(cache2);
         });
     });
 
@@ -44,7 +46,7 @@ describe('iD.serviceStreetside', function() {
         it('resets cache', function() {
             streetside.cache().foo = 'bar';
             streetside.reset();
-            expect(streetside.cache()).to.not.have.property('foo');
+            expect(streetside.cache()).not.toHaveProperty('foo');
         });
     });
 
@@ -57,7 +59,7 @@ describe('iD.serviceStreetside', function() {
                 .translate([-1863988.9381333336, 762.8270222954452])  // 10.002,0.002
                 .clipExtent([[0,0], dimensions]);
 
-            var spy = sinon.spy();
+            const spy = fn();
             streetside.on('loadedImages', spy);
 
             var mockData = {
@@ -74,7 +76,7 @@ describe('iD.serviceStreetside', function() {
             streetside.loadBubbles(context.projection, 0);  // 0 = don't fetch margin tiles
 
             await setTimeout(200);
-            expect(spy).to.have.been.calledOnce;
+            expect(spy).toHaveBeenCalledOnce();
         });
 
         it('does not load bubbles around null island', async () => {
@@ -83,7 +85,7 @@ describe('iD.serviceStreetside', function() {
                 .translate([0, 0])
                 .clipExtent([[0,0], dimensions]);
 
-            var spy = sinon.spy();
+            const spy = fn();
             streetside.on('loadedImages', spy);
 
             var mockData = {
@@ -100,7 +102,7 @@ describe('iD.serviceStreetside', function() {
             streetside.loadBubbles(context.projection, 0);  // 0 = don't fetch margin tiles
 
             await setTimeout(200);
-            expect(spy).to.have.been.not.called;
+            expect(spy).not.toHaveBeenCalled();
         });
     });
 
@@ -116,7 +118,7 @@ describe('iD.serviceStreetside', function() {
             streetside.cache().bubbles.rtree.load(features);
             var res = streetside.bubbles(context.projection);
 
-            expect(res).to.deep.eql([
+            expect(res).toEqual([
                 { key: 1, loc: [10, 0], ca: 90, pr: undefined, ne: 2, pano: true, sequenceKey: 1 },
                 { key: 2, loc: [10, 0], ca: 90, pr: 1, ne: 3, pano: true, sequenceKey: 1 }
             ]);
@@ -134,7 +136,7 @@ describe('iD.serviceStreetside', function() {
 
             streetside.cache().bubbles.rtree.load(features);
             var res = streetside.bubbles(context.projection);
-            expect(res).to.have.length.of.at.most(5);
+            expect(res.length).toBeLessThanOrEqual(5);
         });
     });
 
@@ -162,7 +164,7 @@ describe('iD.serviceStreetside', function() {
             streetside.cache().sequences[1] = seq;
 
             var res = streetside.sequences(context.projection);
-            expect(res).to.deep.eql([seq.geojson]);
+            expect(res).toEqual([seq.geojson]);
         });
     });
 

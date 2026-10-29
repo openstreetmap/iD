@@ -40,7 +40,8 @@
     stroke-width: 60px;
     pointer-events: none;
 }
-.fill-partial path.area.fill.tag-building_part {
+.fill-partial path.area.fill.tag-building_part,
+.fill-partial path.area.fill.tag-cemetery-sector {
     stroke-width: 40px;
 }
 .fill-partial path.area.fill.tag-indoor {

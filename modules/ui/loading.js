@@ -21,9 +21,15 @@ export function uiLoading(context) {
       .attr('class', 'loader')
       .attr('src', context.imagePath('loader-white.gif'));
 
-    loadertext
-      .append('h3')
-      .html(_message);
+    if (typeof _message === 'string') {
+      loadertext
+        .append('h3')
+        .text(_message);
+    } else {
+      loadertext
+        .append('h3')
+        .call(_message);
+    }
 
     _modalSelection.select('button.close')
       .attr('class', 'hide');
@@ -39,6 +45,7 @@ export function uiLoading(context) {
   };
 
 
+  /** @type {GetSet<typeof loading, boolean>} */
   loading.blocking = function(val) {
     if (!arguments.length) return _blocking;
     _blocking = val;

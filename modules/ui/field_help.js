@@ -6,6 +6,7 @@ import { marked } from 'marked';
 import { t, localizer } from '../core/localizer';
 import { svgIcon } from '../svg/icon';
 import { icon } from './intro/helper';
+import { utilSanitizeHTML } from '../util/sanitize';
 
 
 // This currently only works with the 'restrictions' field
@@ -54,8 +55,8 @@ export function uiFieldHelp(context, fieldName) {
     var fieldHelpHeadings = {};
 
     var replacements = {
-        distField: { html: t.html('restriction.controls.distance') },
-        viaField: { html: t.html('restriction.controls.via') },
+        distField: { html: localizer.t_html('restriction.controls.distance') },
+        viaField: { html: localizer.t_html('restriction.controls.via') },
         fromShadow: { html: icon('#iD-turn-shadow', 'inline shadow from') },
         allowShadow: { html: icon('#iD-turn-shadow', 'inline shadow allow') },
         restrictShadow: { html: icon('#iD-turn-shadow', 'inline shadow restrict') },
@@ -73,13 +74,13 @@ export function uiFieldHelp(context, fieldName) {
             var subkey = helpkey + '.' + part;
             var depth = fieldHelpHeadings[subkey];                     // is this subkey a heading?
             var hhh = depth ? Array(depth + 1).join('#') + ' ' : '';   // if so, prepend with some ##'s
-            return all + hhh + t.html(subkey, replacements) + '\n\n';
+            return all + hhh + localizer.t_html(subkey, replacements) + '\n\n';
         }, '');
 
         return {
             key: helpkey,
-            title: t.html(helpkey + '.title'),
-            html: marked(text.trim())
+            title: localizer.t_addOrUpdate(helpkey + '.title'),
+            sanitized_html: utilSanitizeHTML(marked(text.trim()))
         };
     });
 
@@ -116,7 +117,7 @@ export function uiFieldHelp(context, fieldName) {
             .classed('active', function(d, i) { return i === index; });
 
         var content = _body.selectAll('.field-help-content')
-            .html(d.html);
+            .html(d.sanitized_html);
 
         // class the paragraphs so we can find and style them
         content.selectAll('p')
@@ -219,7 +220,9 @@ export function uiFieldHelp(context, fieldName) {
             .enter()
             .append('div')
             .attr('class', 'field-help-nav-item')
-            .html(function(d) { return d; })
+            .each(function(title) {
+                d3_select(this).call(title);
+            })
             .on('click', function(d3_event, d) {
                 d3_event.stopPropagation();
                 d3_event.preventDefault();

@@ -120,11 +120,11 @@
     cursor: pointer;
 }
 
-.ideditor.mode-browse .qaItem,
-.ideditor.mode-select .qaItem,
-.ideditor.mode-select-data .qaItem,
-.ideditor.mode-select-error .qaItem,
-.ideditor.mode-select-note .qaItem {
+.ideditor.mode-browse .qaItem.target,
+.ideditor.mode-select .qaItem.target,
+.ideditor.mode-select-data .qaItem.target,
+.ideditor.mode-select-error .qaItem.target,
+.ideditor.mode-select-note .qaItem.target {
     cursor: pointer;
 }
 

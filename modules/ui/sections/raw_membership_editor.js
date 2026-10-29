@@ -9,8 +9,8 @@ import { actionChangeMember } from '../../actions/change_member';
 import { actionDeleteMembers } from '../../actions/delete_members';
 
 import { modeSelect } from '../../modes/select';
-import { osmEntity, osmRelation } from '../../osm';
-import { isColourValid } from '../../osm/tags';
+import { osmIdManager, osmRelation } from '../../osm';
+import { getRelationColor, isColorValid } from '../../osm/tags';
 import { services } from '../../services';
 import { svgIcon } from '../../svg/icon';
 import { uiCombobox } from '../combobox';
@@ -18,6 +18,7 @@ import { uiSection } from '../section';
 import { uiTooltip } from '../tooltip';
 import { utilArrayGroupBy, utilArrayIntersection } from '../../util/array';
 import { utilDisplayName, utilNoAuto, utilHighlightEntities, utilUniqueDomId } from '../../util';
+import { prefs } from '../../core';
 import { idMatch } from '../feature_list';
 
 
@@ -31,13 +32,12 @@ export function uiSectionRawMembershipEditor(context) {
             var parents = getSharedParentRelations();
             var gt = parents.length > _maxMemberships ? '>' : '';
             var count = gt + parents.slice(0, _maxMemberships).length;
-            return t.append('inspector.title_count', { title: t('inspector.relations'), count: count });
+            return t.append('inspector.title_count', { title: t.append('inspector.relations'), count: count });
         })
         .disclosureContent(renderDisclosureContent);
 
     var taginfo = services.taginfo;
     var nearbyCombo = uiCombobox(context, 'parent-relation')
-        .minItems(1)
         .fetcher(fetchNearbyRelations)
         .itemsMouseEnter(function(d3_event, d) {
             if (d.relation) utilHighlightEntities([d.relation.id], true, context);
@@ -68,6 +68,37 @@ export function uiSectionRawMembershipEditor(context) {
         return parents;
     }
 
+    function getConnectedRelations() {
+        const graph = context.graph();
+        const connectedRelationIDs = new Set();
+
+        _entityIDs.forEach((entityID) => {
+            const entity = graph.hasEntity(entityID);
+            if (!entity) return;
+
+            const connectedWays = new Set();
+
+            if (entity.type === 'node') {
+                graph.parentWays(entity)
+                    .forEach(way => connectedWays.add(way));
+            } else if (entity.type === 'way') {
+                entity.nodes.forEach(nodeID => {
+                    const node = graph.hasEntity(nodeID);
+                    if (!node) return;
+                    graph.parentWays(node)
+                        .filter(way => !_entityIDs.includes(way.id))
+                        .forEach(way => connectedWays.add(way));
+                });
+            }
+
+            connectedWays.forEach(way => {
+                graph.parentRelations(way)
+                    .forEach(relation => connectedRelationIDs.add(relation.id));
+            });
+        });
+        return connectedRelationIDs;
+    }
+
     function getMemberships() {
 
         var memberships = [];
@@ -81,7 +112,7 @@ export function uiSectionRawMembershipEditor(context) {
             membership = {
                 relation: relation,
                 members: [],
-                hash: osmEntity.key(relation)
+                hash: osmIdManager.key(relation)
             };
             for (index = 0; index < relation.members.length; index++) {
                 member = relation.members[index];
@@ -98,7 +129,7 @@ export function uiSectionRawMembershipEditor(context) {
                         membership = {
                             relation: relation,
                             members: [],
-                            hash: osmEntity.key(relation)
+                            hash: osmIdManager.key(relation)
                         };
                     }
                 }
@@ -225,7 +256,7 @@ export function uiSectionRawMembershipEditor(context) {
             context.validator().validate();
 
         } else {
-            var relation = osmRelation();
+            var relation = new osmRelation();
             context.perform(
                 actionAddEntity(relation),
                 actionAddMembers(relation.id, _entityIDs, role),
@@ -294,7 +325,7 @@ export function uiSectionRawMembershipEditor(context) {
                     .text(presetName + ' ');
                 selection
                     .append('span')
-                    .classed('has-colour', entity.tags.colour && isColourValid(entity.tags.colour))
+                    .classed('has-colour', entity.tags.colour && isColorValid(entity.tags.colour))
                     .style('border-color', entity.tags.colour)
                     .text(entityName);
             };
@@ -327,7 +358,17 @@ export function uiSectionRawMembershipEditor(context) {
                 });
             });
 
-            result.sort(function(a, b) {
+            const connectedRelationIDs = getConnectedRelations();
+
+            result.sort(function (a, b) {
+                const isRelationAConnectedToSelection = connectedRelationIDs.has(a.relation.id);
+                const isRelationBConnectedToSelection = connectedRelationIDs.has(b.relation.id);
+
+                // if exactly one of the relations is connected to the selected entity,
+                // prioritize the connected relation over the unconnected one
+                if (isRelationAConnectedToSelection && !isRelationBConnectedToSelection) return -1;
+                if (!isRelationAConnectedToSelection && isRelationBConnectedToSelection) return 1;
+
                 return osmRelation.creationOrder(a.relation, b.relation);
             });
 
@@ -407,21 +448,52 @@ export function uiSectionRawMembershipEditor(context) {
         labelLink
             .append('span')
             .attr('class', 'member-entity-type')
-            .text(function(d) {
-                var matched = presetManager.match(d.relation, context.graph());
-                return (matched && matched.name()) || t.html('inspector.relation');
+            .text(d => {
+                let matched = presetManager.match(d.relation, context.graph());
+                while (matched?.suggestion) {
+                    // if is NSI preset: look for a parent preset
+                    matched = matched.getParentPreset();
+                }
+                return (matched && matched.name()) || t('inspector.relation');
             });
+
+        const showThirdPartyIcons = prefs('preferences.privacy.thirdpartyicons') || 'true';
+        labelLink.each(function(d) {
+            if (!showThirdPartyIcons) return;
+            const matched = presetManager.match(d.relation, context.graph());
+            if (matched.suggestion) {
+                // if matching an NSI preset: append icon
+                const img = d3_select(this)
+                    .append('img');
+                img
+                    .classed('member-entity-icon', true)
+                    .on('load', () => img.classed('hide', false))
+                    .on('error', () => img.classed('hide', true))
+                    .attr('src', matched.imageURL);
+            }
+        });
+
+        labelLink.each(function(d) {
+            const relColors = getRelationColor(d.relation.tags, '#555');
+            const hasRef = d.relation.tags.ref;
+            if (relColors.isValid || hasRef) {
+                const refs = (d.relation.tags.ref || '').split(';');
+                for (const ref of refs) {
+                    d3_select(this)
+                        .append('span')
+                        .classed('member-entity-ref-color', true)
+                        .style('border-color', relColors.color)
+                        .style('background-color', relColors.color)
+                        .style('color', relColors.textColor)
+                        .text(ref);
+                }
+            }
+        });
 
         labelLink
             .append('span')
             .attr('class', 'member-entity-name')
-            .classed('has-colour', d => d.relation.tags.colour && isColourValid(d.relation.tags.colour))
-            .style('border-color', d => d.relation.tags.colour)
-            .text(function(d) {
-                const matched = presetManager.match(d.relation, context.graph());
-                // hide the network from the name if there is NSI match
-                return utilDisplayName(d.relation, matched.suggestion);
-            });
+            .text(d => utilDisplayName(d.relation, { hideRef: true }));
 
         labelEnter
             .append('button')

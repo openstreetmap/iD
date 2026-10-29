@@ -1,6 +1,6 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { select as d3_select } from 'd3-selection';
-import deepEqual from 'fast-deep-equal';
+import { deepEqual } from 'fast-equals';
 
 import { presetManager } from '../presets';
 import { t, localizer } from '../core/localizer';
@@ -24,7 +24,7 @@ export function uiEntityEditor(context) {
     var _coalesceChanges = false;
     var _modified = false;
     var _base;
-    var _entityIDs;
+    var _entityIDs = [];
     var _activePresets = [];
     var _newFeature;
 
@@ -118,7 +118,8 @@ export function uiEntityEditor(context) {
         });
 
         context.history()
-            .on('change.entity-editor', historyChanged);
+            .on('change.entity-editor', historyChanged)
+            .on('merge.entity-editor', () => historyChanged());
 
         function historyChanged(difference) {
             if (selection.selectAll('.entity-editor').empty()) return;
@@ -291,7 +292,7 @@ export function uiEntityEditor(context) {
 
         if (val && _entityIDs && utilArrayIdentical(_entityIDs, val)) return entityEditor;  // exit early if no change
 
-        _entityIDs = val;
+        _entityIDs = val || [];
 
         loadActivePresets(true);
 

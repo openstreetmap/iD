@@ -11,8 +11,9 @@ import { fileFetcher } from '../core/file_fetcher';
 import { geoMetersToOffset, geoOffsetToMeters, geoExtent } from '../geo';
 import { rendererBackgroundSource } from './background_source';
 import { rendererTileLayer } from './tile_layer';
-import { utilQsString, utilStringQs } from '../util';
+import { utilAesDecrypt, utilStringQs } from '../util';
 import { utilRebind } from '../util/rebind';
+import { patchHash } from '../behavior';
 
 
 let _imageryIndex = null;
@@ -29,16 +30,21 @@ export function rendererBackground(context) {
   let _sharpness = 1;
 
 
+  function visibleOverlayLayers() {
+    // if the LocatorOverlay is disabled, return everything except that layer
+    if (background.isLocatorOverlayDisabled()) {
+        return _overlayLayers.filter(layer => !layer.source().isLocatorOverlay());
+    }
+    return _overlayLayers;
+  }
+
+
   function ensureImageryIndex() {
     return fileFetcher.get('imagery')
-      .then(sources => {
+      .then(async sources => {
         if (_imageryIndex) return _imageryIndex;
 
-        _imageryIndex = {
-          imagery: sources,
-          features: {}
-        };
-
+        const featuresById = {};
         // use which-polygon to support efficient index and querying for imagery
         const features = sources.map(source => {
           if (!source.polygon) return null;
@@ -55,24 +61,32 @@ export function rendererBackground(context) {
             geometry: { type: 'MultiPolygon', coordinates: rings }
           };
 
-          _imageryIndex.features[source.id] = feature;
+          featuresById[source.id] = feature;
           return feature;
 
         }).filter(Boolean);
 
-        _imageryIndex.query = whichPolygon({ type: 'FeatureCollection', features: features });
-
-
-        // Instantiate `rendererBackgroundSource` objects for each source
-        _imageryIndex.backgrounds = sources.map(source => {
-          if (source.type === 'bing') {
-            return rendererBackgroundSource.Bing(source, dispatch);
-          } else if (/^EsriWorldImagery/.test(source.id)) {
-            return rendererBackgroundSource.Esri(source);
-          } else {
-            return rendererBackgroundSource(source);
+        for (const source of sources) {
+          if (source.encrypted) {
+            source.template = await utilAesDecrypt(source.template);
           }
-        });
+        }
+
+        _imageryIndex = {
+          imagery: sources,
+          features: featuresById,
+          query: whichPolygon({ type: 'FeatureCollection', features: features }),
+          backgrounds: sources.map(source => {
+            // Instantiate `rendererBackgroundSource` objects for each source
+            if (source.type === 'bing') {
+              return rendererBackgroundSource.Bing(source, dispatch);
+            } else if (/^EsriWorldImagery/.test(source.id)) {
+              return rendererBackgroundSource.Esri(source);
+            } else {
+              return rendererBackgroundSource(source);
+            }
+          })
+        };
 
         // Add 'None'
         _imageryIndex.backgrounds.unshift(rendererBackgroundSource.None());
@@ -174,7 +188,7 @@ export function rendererBackground(context) {
 
 
     let overlays = selection.selectAll('.layer-overlay')
-      .data(_overlayLayers, d => d.source().name());
+      .data(visibleOverlayLayers(), d => d.source().name());
 
     overlays.exit()
       .remove();
@@ -200,32 +214,18 @@ export function rendererBackground(context) {
     const EPSILON = 0.01;
     const x = +meters[0].toFixed(2);
     const y = +meters[1].toFixed(2);
-    let hash = utilStringQs(window.location.hash);
+    const notableOffset = Math.abs(x) > EPSILON || Math.abs(y) > EPSILON;
 
     let id = currSource.id;
     if (id === 'custom') {
       id = `custom:${currSource.template()}`;
     }
 
-    if (id) {
-      hash.background = id;
-    } else {
-      delete hash.background;
-    }
-
-    if (o) {
-      hash.overlays = o;
-    } else {
-      delete hash.overlays;
-    }
-
-    if (Math.abs(x) > EPSILON || Math.abs(y) > EPSILON) {
-      hash.offset = `${x},${y}`;
-    } else {
-      delete hash.offset;
-    }
-
-    window.history.replaceState(null, '', '#' + utilQsString(hash, true));
+    patchHash({
+      background: id || null,
+      overlays: o || null,
+      offset: notableOffset ? `${x},${y}` : null
+    });
 
     let imageryUsed = [];
     let photoOverlaysUsed = [];
@@ -354,12 +354,20 @@ export function rendererBackground(context) {
   background.showsLayer = (d) => {
     const currSource = baseLayer.source();
     if (!d || !currSource) return false;
-    return d.id === currSource.id || _overlayLayers.some(layer => d.id === layer.source().id);
+    return d.id === currSource.id || visibleOverlayLayers().some(layer => d.id === layer.source().id);
   };
 
 
   background.overlayLayerSources = () => {
-    return _overlayLayers.map(layer => layer.source());
+    return visibleOverlayLayers().map(layer => layer.source());
+  };
+
+  /**
+   * if using a background layer that contains labels,
+   * disable the locator overlay to avoid overlapping labels.
+   */
+  background.isLocatorOverlayDisabled = () => {
+    return baseLayer.source()?.category === 'osmbasedmap';
   };
 
 

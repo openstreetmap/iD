@@ -1,4 +1,4 @@
-import _debounce from 'lodash-es/debounce';
+import { debounce } from 'es-toolkit';
 
 import { select as d3_select } from 'd3-selection';
 
@@ -58,8 +58,10 @@ export function uiToolDrawModes(context) {
     }
 
     modes.forEach(function(mode) {
-        context.keybinding().on(mode.key, function() {
+        context.keybinding().on(mode.key, function(d3_event) {
             if (!enabled(mode)) return;
+
+            d3_event.preventDefault();
 
             if (mode.id === context.mode().id) {
                 context.enter(modeBrowse(context));
@@ -76,7 +78,7 @@ export function uiToolDrawModes(context) {
             .attr('class', 'joined')
             .style('display', 'flex');
 
-        var debouncedUpdate = _debounce(update, 500, { leading: true, trailing: true });
+        var debouncedUpdate = debounce(update, 500, { edges: ['leading', 'trailing'] });
 
         context.map()
             .on('move.modes', debouncedUpdate)
