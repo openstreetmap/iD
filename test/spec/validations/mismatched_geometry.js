@@ -159,6 +159,34 @@ describe('iD.validations.mismatched_geometry', function () {
         expect(context.entity(way.id).tags).toStrictEqual({});
     });
 
+    it('labels the edit made by the convert-to-line fix', async () => {
+        await iD.presetManager.ensureLoaded(true);
+        createClosedWay({ barrier: 'gate', area: 'yes' });
+        const issue = validate()[0];
+        expect(issue.subtype).toEqual('line_as_area');
+
+        const container = d3_select(document.createElement('div'));
+        issue.fixes(context)[0].title(container);
+        expect(container.text()).toBe('Convert this to a line');
+
+        issue.fixes(context)[0].onClick(context);
+        expect(context.history().undoAnnotation()).toBe('Converted an area to a line.');
+    });
+
+    it('labels the edit made by the convert-to-area fix', async () => {
+        await iD.presetManager.ensureLoaded(true);
+        createClosedWay({ junction: 'yes' });
+        const issue = validate()[0];
+        expect(issue.subtype).toEqual('area_as_line');
+
+        const container = d3_select(document.createElement('div'));
+        issue.fixes(context)[0].title(container);
+        expect(container.text()).toBe('Convert this to an area');
+
+        issue.fixes(context)[0].onClick(context);
+        expect(context.history().undoAnnotation()).toBe('Converted a line to an area.');
+    });
+
     it('flags open way with both area and line tags', function() {
         const way = createOpenWay({ area: 'yes', barrier: 'fence' });
         var issues = validate();

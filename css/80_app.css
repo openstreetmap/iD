@@ -4109,6 +4109,18 @@ li.issue-fix-item button:not(.actionable) .fix-icon {
     margin-right: 5px;
 }
 
+.display-options-container .display-control-invert {
+    display: flex;
+    align-items: center;
+    margin: 10px -10px;
+    padding: 5px 10px;
+    border-top: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color);
+}
+.display-options-container .display-control-invert input[type="checkbox"] {
+    margin: 0;
+}
+
 
 /* Background - Adjust Alignment
 ------------------------------------------------------- */

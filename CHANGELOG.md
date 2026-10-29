@@ -49,6 +49,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Render in purple playground objects mapped lines/areas ([#13042], thanks [@matkoniecz])
 * Don't discard incomplete lines in the (text mode) raw tag editor when switching browser tabs ([#12958], thanks [@aakarshitv])
 * Disable the locator overlay when osm carto is selected as the background ([#9931], thanks [@k-yle])
+* Add invert filter for background imagery ([#12340], thanks [@kalucky0])
 #### :scissors: Operations
 * Treat `conveying=*` the same as `oneway=*` when reversing a line ([#13027], thanks [@k-yle])
 * Add shortcut tooltip to reverse direction button ([#12961], thanks [@SaifuddinM23])
@@ -71,6 +72,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Fix mistake in right-to-left text detection ([#13032], thanks [@matkoniecz])
 * Fix some checkbox fields from not setting the "checked" state on the first click when editing a multiselection with multiple values
 * Fix double-click zoom not working after cancelling drawing a line or area ([#11926], thanks [@aditya1010-max])
+* Fix the undo/redo annotation shown after converting an area to a line, or a line to an area, through a validation fix ([#12978], thanks [@wantaekchoi])
 #### :earth_asia: Localization
 * Support 835 new languages in the dropdown when adding a `name:*` tag ([#12802])
 * Support territory-level address hints ([#12704], thanks [@Vectorial1024])
@@ -91,6 +93,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#9732]: https://github.com/openstreetmap/iD/pull/9732
 [#9931]: https://github.com/openstreetmap/iD/pull/9931
 [#11926]: https://github.com/openstreetmap/iD/pull/11926
+[#12340]: https://github.com/openstreetmap/iD/pull/12340
 [#12540]: https://github.com/openstreetmap/iD/issues/12540
 [#12679]: https://github.com/openstreetmap/iD/pull/12679
 [#12704]: https://github.com/openstreetmap/iD/pull/12704
@@ -118,12 +121,14 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#13027]: https://github.com/openstreetmap/iD/pull/13027
 [#13029]: https://github.com/openstreetmap/iD/pull/13029
 [#13030]: https://github.com/openstreetmap/iD/pull/13030
+[#12978]: https://github.com/openstreetmap/iD/pull/12978
 [#13042]: https://github.com/openstreetmap/iD/pull/13042
 [#13043]: https://github.com/openstreetmap/iD/pull/13043
 [#13074]: https://github.com/openstreetmap/iD/pull/13074
 [@aditya1010-max]: https://github.com/aditya1010-max
 [@Geo-2695]: https://github.com/Geo-2695
 [@hemaksh2007jain-bit]: https://github.com/hemaksh2007jain-bit
+[@kalucky0]: https://github.com/kalucky0
 [@SaifuddinM23]: https://github.com/SaifuddinM23
 
 
