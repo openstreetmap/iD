@@ -82,6 +82,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :rocket: Presets
 * Show reasonable default on `access` field for `barrier=stile` nodes ([#12971], thanks [@matkoniecz])
 * Allow the field UI for `oneway=*` to be reused by other tags like `conveying=*` ([#13029], thanks [@k-yle])
+* Render unknown aerialway features as lines by default ([#13081], thanks [@Geo-2695])
 #### :hammer: Development
 * Ongoing work to migrate the codebase from JavaScript to TypeScript ([view progress](https://github.com/openstreetmap/iD/milestone/47?closed=1))
 * Drop code previously responsible for _maprules_ integration (which has been defunct for a while now) ([#12679])
@@ -125,6 +126,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#13042]: https://github.com/openstreetmap/iD/pull/13042
 [#13043]: https://github.com/openstreetmap/iD/pull/13043
 [#13074]: https://github.com/openstreetmap/iD/pull/13074
+[#13081]: https://github.com/openstreetmap/iD/pull/13081
 [@aditya1010-max]: https://github.com/aditya1010-max
 [@Geo-2695]: https://github.com/Geo-2695
 [@hemaksh2007jain-bit]: https://github.com/hemaksh2007jain-bit
