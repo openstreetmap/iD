@@ -5,7 +5,7 @@ import type { EntityId, OsmEntity } from '../../osm';
 import { t, type LocalizedTextRenderer } from '../localizer';
 
 export interface Validator {
-    (entity: OsmEntity, graph: coreGraph): validationIssue<any>[];
+    (entity: OsmEntity, graph: coreGraph): validationIssueList<any>;
     type: string;
 }
 
@@ -150,3 +150,5 @@ export class validationIssueFix<T = unknown> {
         this.issue = null;    // Generated link - added by validationIssue
     }
 }
+
+export type validationIssueList<T = unknown> = validationIssue<T>[] & { provisional?: boolean };
