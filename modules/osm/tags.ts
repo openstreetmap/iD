@@ -59,7 +59,7 @@ export function osmSetAreaKeys(value: TagDictionary<true>): void {
     osmAreaKeys = value;
 }
 
-// `highway` and `railway` are typically linear features, but there
+// `aerialway`, `highway` and `railway` are typically linear features, but there
 // are a few exceptions that should be treated as areas, even in the
 // absence of a proper `area=yes` or `areaKeys` tag.. see #4194
 // similarly, some tags are both used as a primary key for area features,
