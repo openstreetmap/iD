@@ -1209,7 +1209,10 @@ export default {
     },
 
 
-    /** @param {import('osm-auth').LoginOptions} options */
+    /**
+     * @param {Callback<unknown>} [callback]
+     * @param {import('osm-auth').LoginOptions} [options]
+     */
     authenticate: function(callback, options) {
         var that = this;
         var cid = _connectionID;
