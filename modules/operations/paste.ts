@@ -5,13 +5,17 @@ import { geoExtent, geoVecSubtract } from '../geo';
 import { t } from '../core/localizer';
 import { uiCmd } from '../ui/cmd';
 import { utilDisplayLabel } from '../util/utilDisplayLabel';
+import type { Vec2 } from '../geo/vector';
+import type { EntityId } from '../osm';
+import type { Operation } from '../core/history';
+import type { coreContext } from '../core';
 
 // see also `behaviorPaste`
-export function operationPaste(context) {
+export const operationPaste = (context: coreContext) => {
 
-    var _pastePoint;
+    var _pastePoint: Vec2 | undefined;
 
-    var operation = function() {
+    const operation: Operation = function() {
 
         if (!_pastePoint) return;
 
@@ -21,7 +25,7 @@ export function operationPaste(context) {
         var projection = context.projection;
         var extent = geoExtent();
         var oldGraph = context.copyGraph();
-        var newIDs = [];
+        var newIDs: EntityId[] = [];
 
         var action = actionCopyEntities(oldIDs, oldGraph);
         context.perform(action);
@@ -30,7 +34,8 @@ export function operationPaste(context) {
         var originals = new Set();
         Object.values(copies).forEach(function(entity) { originals.add(entity.id); });
 
-        for (var id in copies) {
+        for (var _id in copies) {
+            const id = <EntityId>_id;
             var oldEntity = oldGraph.entity(id);
             var newEntity = copies[id];
 
@@ -49,7 +54,8 @@ export function operationPaste(context) {
 
         // Use the location of the copy operation to offset the paste location,
         // or else use the center of the pasted extent
-        var copyPoint = (context.copyLonLat() && projection(context.copyLonLat())) ||
+        const copyLoc = context.copyLonLat();
+        const copyPoint = copyLoc ? projection(copyLoc) :
             projection(extent.center());
         var delta = geoVecSubtract(_pastePoint, copyPoint);
 
@@ -68,7 +74,10 @@ export function operationPaste(context) {
     };
 
     operation.disabled = function() {
-        return !context.copyIDs().length;
+        if (!context.copyIDs().length) {
+            return 'nothing_copied';
+        }
+        return false;
     };
 
     operation.tooltip = function() {
@@ -93,4 +102,4 @@ export function operationPaste(context) {
     operation.title = t.append('operations.paste.title');
 
     return operation;
-}
+};
