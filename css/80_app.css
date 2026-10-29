@@ -3170,10 +3170,6 @@ img.tag-reference-wiki-image {
     border-radius: 5px 0 0 5px;
 }
 
-.note-category {
-    margin: 20px 0px;
-}
-
 .comments-container {
     background: var(--bg-color-3);
     padding: 1px 10px;
@@ -4094,6 +4090,18 @@ li.issue-fix-item button:not(.actionable) .fix-icon {
 .ideditor[dir='rtl'] .display-control button {
     margin-left: 0px;
     margin-right: 5px;
+}
+
+.display-options-container .display-control-invert {
+    display: flex;
+    align-items: center;
+    margin: 10px -10px;
+    padding: 5px 10px;
+    border-top: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color);
+}
+.display-options-container .display-control-invert input[type="checkbox"] {
+    margin: 0;
 }
 
 

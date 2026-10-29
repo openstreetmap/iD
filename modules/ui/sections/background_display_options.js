@@ -28,6 +28,14 @@ export function uiSectionBackgroundDisplayOptions(context) {
         sharpness: 1
     };
 
+    var _invert = false;
+
+    function updateInvert(val) {
+        _invert = val;
+        context.background().invert(val);
+        section.reRender();
+    }
+
     function updateValue(d, val) {
         val = clamp(val, _minVal, _maxVal);
 
@@ -92,6 +100,22 @@ export function uiSectionBackgroundDisplayOptions(context) {
             })
             .call(svgIcon('#iD-icon-' + (localizer.textDirection() === 'rtl' ? 'redo' : 'undo')));
 
+        // invert checkbox
+        var invertEnter = containerEnter
+            .append('label')
+            .attr('class', 'display-control-invert');
+
+        invertEnter
+            .append('input')
+            .attr('class', 'display-option-invert')
+            .attr('type', 'checkbox')
+            .on('change', function() {
+                updateInvert(this.checked);
+            });
+
+        invertEnter
+            .call(t.append('background.invert'));
+
         // reset all button
         containerEnter
             .append('a')
@@ -104,6 +128,7 @@ export function uiSectionBackgroundDisplayOptions(context) {
                 for (var i = 0; i < _sliders.length; i++) {
                     updateValue(_sliders[i], 1);
                 }
+                updateInvert(false);
             });
 
         // update
@@ -118,6 +143,9 @@ export function uiSectionBackgroundDisplayOptions(context) {
 
         container.selectAll('.display-option-reset')
             .classed('disabled', function(d) { return _options[d] === 1; });
+
+        container.selectAll('.display-option-invert')
+            .property('checked', _invert);
 
         // first time only, set brightness if needed
         if (containerEnter.size() && _options.brightness !== 1) {

@@ -224,7 +224,7 @@ export function svgLines(projection, context) {
             markers.exit()
                 .remove();
 
-            markers = markers.enter()
+            markers.enter()
                 .append('path')
                 .attr('class', pathclass)
                 .merge(markers)
