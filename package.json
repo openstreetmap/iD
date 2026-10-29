@@ -16,7 +16,7 @@
   "license": "ISC",
   "type": "module",
   "scripts": {
-    "all": "run-s clean build dist",
+    "all": "run-s clean imagery build dist",
     "build": "run-s build:css build:data build:js",
     "build:css": "node scripts/build_css.js",
     "build:data": "shx mkdir -p dist/data && node scripts/build_data.js",
@@ -52,6 +52,7 @@
     "translations": "node scripts/update_locales.js"
   },
   "dependencies": {
+    "@esri/wayback-core": "^1.0.10",
     "@mapbox/geojson-area": "^0.2.2",
     "@mapbox/sexagesimal": "1.2.0",
     "@mapbox/vector-tile": "^3.0.0",
