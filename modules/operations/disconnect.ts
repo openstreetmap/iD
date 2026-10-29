@@ -83,7 +83,7 @@ export const operationDisconnect: CreateOperation = (context, selectedIDs) => {
         nodes.forEach(function(node) {
             const action = actionDisconnect(node.id);
             action.limitWays(_wayIDs);
-            if (action.disabled!(context.graph()) !== 'not_connected') {
+            if (action.disabled?.(context.graph()) !== 'not_connected') {
 
                 var count = 0;
                 for (var i in ways) {
@@ -163,7 +163,7 @@ export const operationDisconnect: CreateOperation = (context, selectedIDs) => {
     operation.disabled = function() {
         var reason;
         for (var actionIndex in _actions) {
-            reason = _actions[actionIndex].disabled!(context.graph());
+            reason = _actions[actionIndex].disabled?.(context.graph());
             if (reason) return reason;
         }
 
