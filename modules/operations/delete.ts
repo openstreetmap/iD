@@ -54,7 +54,7 @@ export const operationDelete: CreateOperation = (context, selectedIDs) => {
 
         if (nextSelectedID && nextSelectedLoc) {
             if (context.hasEntity(nextSelectedID)) {
-                context.enter(modeSelect(context, [nextSelectedID]).follow!(true));
+                context.enter(modeSelect(context, [nextSelectedID]).follow(true));
             } else {
                 context.map().centerEase(nextSelectedLoc);
                 context.enter(modeBrowse(context));

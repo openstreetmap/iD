@@ -30,7 +30,7 @@ export const operationReverse: CreateOperation = (context, selectedIDs) => {
             if (entity.type !== 'node' && geometry !== 'line') return null;
 
             var action = actionReverse(entityID);
-            if (action.disabled!(context.graph())) return null;
+            if (action.disabled?.(context.graph())) return null;
 
             return action;
         }).filter(Boolean);
@@ -39,7 +39,7 @@ export const operationReverse: CreateOperation = (context, selectedIDs) => {
     function reverseTypeID() {
         var acts = actions();
         var nodeActionCount = acts.filter(function(act) {
-            var entity = context.hasEntity(act.entityID!());
+            var entity = context.hasEntity(act.entityID());
             return entity && entity.type === 'node';
         }).length;
         if (nodeActionCount === 0) return 'line';
