@@ -10,7 +10,7 @@ import { behaviorBreathe } from '../../behavior/breathe';
 import { geoExtent, geoRawMercator, geoVecScale, geoVecSubtract, geoZoomToScale } from '../../geo';
 import { osmIntersection, osmInferRestriction, osmTurn, osmWay } from '../../osm';
 import { svgLayers, svgLines, svgTurns, svgVertices } from '../../svg';
-import { utilDisplayName, utilDisplayType, utilEntitySelector, utilFunctor, utilRebind } from '../../util';
+import { utilDisplayName, utilDisplayType, utilEntitySelector, utilRebind } from '../../util';
 import { utilGetDimensions, utilSetDimensions } from '../../util/dimensions';
 
 
@@ -199,7 +199,7 @@ export function uiFieldRestrictions(field, context) {
         if (!_intersection) return;
 
         var vgraph = _intersection.graph;
-        var filter = utilFunctor(true);
+        var filter = () => true;
         var projection = geoRawMercator();
 
         // Reflow warning: `utilGetDimensions` calls `getBoundingClientRect`
