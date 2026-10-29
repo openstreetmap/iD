@@ -65,6 +65,9 @@ export function osmSetAreaKeys(value: TagDictionary<true>): void {
 // similarly, some tags are both used as a primary key for area features,
 // but also as an attribute tag for linear features (e.g. `emergency=yes`)
 export const osmAreaKeysExceptions: TagDictionary<boolean> = {
+    aerialway: {
+        station: true
+    },
     highway: {
         elevator: true,
         rest_area: true,
