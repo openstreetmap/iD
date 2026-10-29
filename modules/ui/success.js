@@ -308,8 +308,8 @@ export function uiSuccess(context) {
       .attr('class', 'community-description')
       .html(utilSanitizeHTML(d.resolved.descriptionHTML));
 
-    // Create an expanding section if any of these are present..
-    if (d.resolved.extendedDescriptionHTML || (d.languageCodes && d.languageCodes.length)) {
+    // Create an expanding section if an extended description is present.
+    if (d.resolved.extendedDescriptionHTML) {
       selection
         .append('div')
         .call(uiDisclosure(context, `community-more-${d.id}`, false)
@@ -318,6 +318,8 @@ export function uiSuccess(context) {
           .label(() => t.append('success.more'))
           .content(showMore)
         );
+    } else {
+      showLanguages(selection);
     }
 
     let nextEvents = (d.events || [])
@@ -366,16 +368,20 @@ export function uiSuccess(context) {
           .html(utilSanitizeHTML(d.resolved.extendedDescriptionHTML));
       }
 
-      if (d.languageCodes && d.languageCodes.length) {
-        const languageList = d.languageCodes
-          .map(code => localizer.languageName(code))
-          .join(', ');
+      showLanguages(moreEnter);
+    }
 
-        moreEnter
-          .append('div')
-          .attr('class', 'community-languages')
-          .call(t.append('success.languages', { languages: languageList }));
-      }
+    function showLanguages(selection) {
+      if (!d.languageCodes || !d.languageCodes.length) return;
+
+      const languageList = d.languageCodes
+        .map(code => localizer.languageName(code))
+        .join(', ');
+
+      selection
+        .append('div')
+        .attr('class', 'community-languages')
+        .call(t.append('success.languages', { languages: languageList }));
     }
 
 
