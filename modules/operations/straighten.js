@@ -1,5 +1,5 @@
 import { t } from '../core/localizer';
-import { actionStraightenNodes } from '../actions/straighten_nodes';
+import { actionStraightenNode, actionStraightenNodes } from '../actions';
 import { actionStraightenWay } from '../actions/straighten_way';
 import { behaviorOperation } from '../behavior/operation';
 import { utilArrayDifference, utilGetAllNodes, utilTotalExtent } from '../util/index';
@@ -19,8 +19,18 @@ export function operationStraighten(context, selectedIDs) {
 
 
     function chooseAction() {
+        // straighten a single vertex
+        if (_wayIDs.length === 0 && _nodeIDs.length === 1) {
+            var node = context.entity(_nodeIDs[0]);
+            var parents = context.graph().parentWays(node);
+
+            if (parents.length !== 1) return null;
+
+            _geometry = 'point';
+            return actionStraightenNode(parents[0].id, node.id, context.projection);
+
         // straighten selected nodes
-        if (_wayIDs.length === 0 && _nodeIDs.length > 2) {
+        } else if (_wayIDs.length === 0 && _nodeIDs.length > 2) {
             _geometry = 'point';
             return actionStraightenNodes(_nodeIDs, context.projection);
 
