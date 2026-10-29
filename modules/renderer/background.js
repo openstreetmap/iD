@@ -28,6 +28,7 @@ export function rendererBackground(context) {
   let _contrast = 1;
   let _saturation = 1;
   let _sharpness = 1;
+  let _invert = false;
 
 
   function visibleOverlayLayers() {
@@ -132,6 +133,9 @@ export function rendererBackground(context) {
     }
     if (_saturation !== 1) {
       baseFilter += ` saturate(${_saturation})`;
+    }
+    if (_invert) {
+      baseFilter += ' invert(1)';
     }
     if (_sharpness < 1) {  // gaussian blur
       const blur = d3_interpolateNumber(0.5, 5)(1 - _sharpness);
@@ -447,6 +451,13 @@ export function rendererBackground(context) {
   background.sharpness = function(d) {
     if (!arguments.length) return _sharpness;
     _sharpness = d;
+    if (context.mode()) dispatch.call('change');
+    return background;
+  };
+
+  background.invert = function(d) {
+    if (!arguments.length) return _invert;
+    _invert = d;
     if (context.mode()) dispatch.call('change');
     return background;
   };
