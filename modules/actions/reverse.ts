@@ -1,6 +1,7 @@
 import type { coreGraph } from '../core';
 import type { Action } from '../core/history';
 import type { EntityId, OsmEntity, osmWay } from '../osm';
+import { osmMatchTags, osmOneWayBackwardTags, osmOneWayForwardTags } from '../osm/tags';
 import { presetManager } from '../presets';
 
 export interface ActionReverse extends Action {
@@ -62,7 +63,7 @@ export function actionReverse(entityID: EntityId, options?: ReverseOptions): Act
     // If a key matches the key regex and any of the provided context
     // tag sets, it will not be reversed.
     const keyValuesToKeepUnchanged = [{
-            keyRegex: /^.*(_|:)?(description|name|note|website|ref|source|comment|watch|attribution)(_|:)?/,
+            keyRegex: /(^|_|:)(description|name|note|website|ref|source|comment|watch|attribution)(_|:|$)/,
             prerequisiteTags: [{}]
         }, {
             // Turn lanes are left/right to key (not way) direction - #5674
@@ -82,11 +83,6 @@ export function actionReverse(entityID: EntityId, options?: ReverseOptions): Act
         backward: 'forward',
         forwards: 'backward',
         backwards: 'forward'
-    };
-    var onewayReplacements: Record<TagValue, TagValue> = {
-        yes: '-1',
-        '1': '-1',
-        '-1': 'yes'
     };
 
     var compassReplacements: Record<TagValue, TagValue> = {
@@ -125,20 +121,22 @@ export function actionReverse(entityID: EntityId, options?: ReverseOptions): Act
 
     function reverseValue(key: TagKey, value: TagValue, includeAbsolute: boolean, allTags: Tags) {
         for (let { keyRegex, prerequisiteTags } of keyValuesToKeepUnchanged) {
-            if (keyRegex.test(key) && prerequisiteTags.some(expectedTags =>
-                Object.entries(expectedTags).every(([k, v]) => {
-                    return allTags[k] && (v === '*' || allTags[k] === v);
-                })
-            )) {
+            if (keyRegex.test(key) && osmMatchTags(prerequisiteTags, allTags)) {
                 return value;
             }
         }
 
+        const forwardValues = osmOneWayForwardTags[key];
+        const backwardValues = osmOneWayBackwardTags[key];
+
         if (key === 'incline' && numeric.test(value)) {
             return value.replace(numeric, function(_, sign) { return sign === '-' ? '' : '-'; });
 
-        } else if (options && options.reverseOneway && key === 'oneway') {
-            return onewayReplacements[value] || value;
+        } else if (forwardValues && backwardValues && (forwardValues[value] || backwardValues[value])) {
+            if (!options?.reverseOneway) return value;
+            // this assumes that there will will never be duplicate oneway tags with the same meaning
+            // e.g. oneway=yes and oneway=1
+            return Object.keys(forwardValues[value] ? backwardValues : forwardValues)[0];
 
         } else if (includeAbsolute && directionKey.test(key)) {
             return value.split(';').map(value => {
@@ -162,7 +160,6 @@ export function actionReverse(entityID: EntityId, options?: ReverseOptions): Act
 
     /** @returns false or the name of the direction key */
     function supportsDirectionField(node: OsmEntity, graph: coreGraph): false | TagKey {
-        // @ts-expect-error -- will be fixed in a different PR
         const preset = presetManager.match(node, graph);
         const loc = node.extent(graph).center();
         const geometry = node.geometry(graph);

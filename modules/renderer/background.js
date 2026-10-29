@@ -30,6 +30,15 @@ export function rendererBackground(context) {
   let _sharpness = 1;
 
 
+  function visibleOverlayLayers() {
+    // if the LocatorOverlay is disabled, return everything except that layer
+    if (background.isLocatorOverlayDisabled()) {
+        return _overlayLayers.filter(layer => !layer.source().isLocatorOverlay());
+    }
+    return _overlayLayers;
+  }
+
+
   function ensureImageryIndex() {
     return fileFetcher.get('imagery')
       .then(async sources => {
@@ -179,7 +188,7 @@ export function rendererBackground(context) {
 
 
     let overlays = selection.selectAll('.layer-overlay')
-      .data(_overlayLayers, d => d.source().name());
+      .data(visibleOverlayLayers(), d => d.source().name());
 
     overlays.exit()
       .remove();
@@ -345,12 +354,20 @@ export function rendererBackground(context) {
   background.showsLayer = (d) => {
     const currSource = baseLayer.source();
     if (!d || !currSource) return false;
-    return d.id === currSource.id || _overlayLayers.some(layer => d.id === layer.source().id);
+    return d.id === currSource.id || visibleOverlayLayers().some(layer => d.id === layer.source().id);
   };
 
 
   background.overlayLayerSources = () => {
-    return _overlayLayers.map(layer => layer.source());
+    return visibleOverlayLayers().map(layer => layer.source());
+  };
+
+  /**
+   * if using a background layer that contains labels,
+   * disable the locator overlay to avoid overlapping labels.
+   */
+  background.isLocatorOverlayDisabled = () => {
+    return baseLayer.source()?.category === 'osmbasedmap';
   };
 
 
