@@ -33,20 +33,20 @@ export function getDeprecatedTags(tags: Tags, dataDeprecated: DataDeprecated): D
 }
 
 export function deprecatedTagValuesByKey(dataDeprecated: DataDeprecated) {
-    var groupedValues: { [key: string]: string[] } = {};
-    dataDeprecated.forEach((d) => {
+    var _deprecatedTagValuesByKey: { [key: string]: string[] } = {};
+        dataDeprecated.forEach((d) => {
             var oldKeys = Object.keys(d.old);
             if (oldKeys.length === 1) {
                 var oldKey = oldKeys[0];
                 var oldValue = d.old[oldKey];
                 if (oldValue !== '*') {
-                    if (!groupedValues[oldKey]) {
-                        groupedValues[oldKey] = [oldValue];
+                    if (!_deprecatedTagValuesByKey[oldKey]) {
+                        _deprecatedTagValuesByKey[oldKey] = [oldValue];
                     } else {
-                        groupedValues[oldKey].push(oldValue);
+                        _deprecatedTagValuesByKey[oldKey].push(oldValue);
                     }
                 }
             }
-    });
-    return groupedValues;
+        });
+    return _deprecatedTagValuesByKey;
 };
