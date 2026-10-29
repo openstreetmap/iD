@@ -69,7 +69,7 @@ export type FileMap = Partial<Record<FileId, string>>;
 export type AssetMap = Record<string, string>;
 
 export interface coreFileFetcher {
-    cache(): void;
+    cache(): Partial<Definitions>;
     get<T extends FileId>(which: T): Promise<Definitions[T]>;
     fileMap: GetSet<coreFileFetcher, FileMap>;
     assetPath: GetSet<coreFileFetcher, string>;
