@@ -48,7 +48,6 @@ elsewhere in this document.
 [firefox logo]: https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Firefox_logo%2C_2019.svg/40px-Firefox_logo%2C_2019.svg.png
 [edge logo]: https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/Microsoft_Edge_logo_%282015%E2%80%932019%29.svg/40px-Microsoft_Edge_logo_%282015%E2%80%932019%29.svg.png
 [tor logo]: https://upload.wikimedia.org/wikipedia/commons/thumb/c/c9/Tor_Browser_icon.svg/40px-Tor_Browser_icon_(New).png
-[ie logo]: https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/Internet_Explorer_10%2B11_logo.svg/40px-Internet_Explorer_10%2B11_logo.svg.png
 [webkit logo]: https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/WebKit_logo.svg/40px-WebKit_logo.svg.png
 [android logo]: https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Android_robot.svg/40px-Android_robot.svg.png
 
