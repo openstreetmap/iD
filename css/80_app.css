@@ -23,8 +23,6 @@
     color: var(--text-color);
 
     touch-action: none;
-    -ms-user-select: none;
-    -ms-content-zooming: none;
 }
 .ideditor div {
     /* disable pinch-to-zoom of the UI on touch devices */
@@ -271,10 +269,6 @@ table th {
 table.tags, table.tags td, table.tags th {
     border: 1px solid var(--border-color);
     padding: 4px;
-}
-
-::-ms-clear {
-   display: none;
 }
 
 /* Grid
@@ -539,8 +533,7 @@ button.loading .icon {
     width: 100%;
 
     /* hide scrollbar but allow scrolling */
-    scrollbar-width: none; /* Firefox */
-    -ms-overflow-style: none; /* IE, Edge */
+    scrollbar-width: none;
 }
 .top-toolbar::-webkit-scrollbar {
     display: none; /* Chrome, Safari, Opera */
@@ -675,8 +668,6 @@ button.add-note.disabled svg.icon {
 }
 .ideditor[dir='rtl'] .spinner img {
     transform: scaleX(-1);
-    filter: FlipH;
-    -ms-filter: "FlipH";
 }
 
 
@@ -826,7 +817,6 @@ summary.hide-toggle::-webkit-details-marker {
     height: 100%;
     z-index: 10;
     background: var(--bg-color-2);
-    -ms-user-select: element;
     border: 0px solid var(--border-color);
     border-right-width: 1px;
 }
@@ -2769,8 +2759,6 @@ button.raw-tag-option svg.icon {
 }
 .ideditor[dir='ltr'] button.raw-tag-option-list {
     transform: scaleX(-1);
-    filter: FlipH;
-    -ms-filter: "FlipH";
 }
 
 
@@ -3395,7 +3383,6 @@ img.tag-reference-wiki-image {
     overflow-x: hidden;
     overflow-y: auto;
     pointer-events: none;
-    -ms-overflow-style: none;
     scrollbar-width: none;
 }
 .map-controls-wrap::-webkit-scrollbar {
@@ -4760,7 +4747,6 @@ img.tile-debug {
     justify-content: flex-end;
     width: 100%;
     z-index: 1;
-    -ms-user-select: element;
     pointer-events: none;
     overflow: hidden;
 }
@@ -4876,7 +4862,6 @@ img.tile-debug {
     pointer-events: none;
     display: flex;
     flex-direction: column;
-    -ms-user-select: element;
     flex: 0 0 auto;
 }
 
