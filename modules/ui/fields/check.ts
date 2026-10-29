@@ -136,7 +136,7 @@ export function uiFieldCheck(field: any, context: iD.Context) {
                 .attr('class', 'reverser' + (reverserHidden() ? ' hide' : ''))
                 .call((uiTooltip() as any)
                      .title(() => t.append('inspector.check.reverser'))
-                     .keys([t('operations.reverse.key')])
+                     .keys(() => [t('operations.reverse.key')])
                      .placement('top')
                 )
                 .append('span')
