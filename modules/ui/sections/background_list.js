@@ -51,7 +51,7 @@ export function uiSectionBackgroundList(context) {
             .append('label')
             .call(uiTooltip()
                 .title(() => t.append('background.minimap.tooltip'))
-                .keys([t('background.minimap.key')])
+                .keys(() => [t('background.minimap.key')])
                 .placement('top')
             );
 
@@ -74,7 +74,7 @@ export function uiSectionBackgroundList(context) {
             .append('label')
             .call(uiTooltip()
                 .title(() => t.append('background.panel.tooltip'))
-                .keys([uiCmd('⌘⇧' + t('info_panels.background.key'))])
+                .keys(() => [uiCmd('⌘⇧' + t('info_panels.background.key'))])
                 .placement('top')
             );
 
@@ -96,7 +96,7 @@ export function uiSectionBackgroundList(context) {
             .append('label')
             .call(uiTooltip()
                 .title(() => t.append('background.location_panel.tooltip'))
-                .keys([uiCmd('⌘⇧' + t('info_panels.location.key'))])
+                .keys(() => [uiCmd('⌘⇧' + t('info_panels.location.key'))])
                 .placement('top')
             );
 
@@ -152,7 +152,7 @@ export function uiSectionBackgroundList(context) {
                 item.call(uiTooltip()
                     .placement(placement)
                     .title(() => t.append('background.switch'))
-                    .keys([uiCmd('⌘' + t('background.key'))])
+                    .keys(() => [uiCmd('⌘' + t('background.key'))])
                 );
             } else if (hasDescription || isOverflowing) {
                 item.call(uiTooltip()

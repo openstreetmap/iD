@@ -47,7 +47,7 @@ export function uiZoomToSelection(context) {
                 }
                 return t.append('inspector.zoom_to.title');
             })
-            .keys([t('inspector.zoom_to.key')]);
+            .keys(() => [t('inspector.zoom_to.key')]);
 
         var button = selection
             .append('button')

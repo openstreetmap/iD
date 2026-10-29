@@ -1,4 +1,3 @@
-import { utilFunctor } from '../util/util';
 import { t } from '../core/localizer';
 import { uiPopover } from './popover';
 
@@ -19,24 +18,24 @@ export function uiTooltip(klass) {
         return title;
     };
 
-    var _heading = utilFunctor(null);
-    var _keys = utilFunctor(null);
+    var _heading = () => null;
+    var _keys = () => null;
 
     tooltip.title = function(val) {
         if (!arguments.length) return _title;
-        _title = utilFunctor(val);
+        _title = val;
         return tooltip;
     };
 
     tooltip.heading = function(val) {
         if (!arguments.length) return _heading;
-        _heading = utilFunctor(val);
+        _heading = val;
         return tooltip;
     };
 
     tooltip.keys = function(val) {
         if (!arguments.length) return _keys;
-        _keys = utilFunctor(val);
+        _keys = val;
         return tooltip;
     };
 
