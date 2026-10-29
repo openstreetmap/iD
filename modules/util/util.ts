@@ -15,7 +15,7 @@ export function utilSplitAtSemicolon(s: TagValue | undefined | null) {
     return (s || '').split(';').map(s => s.trim()).filter(Boolean);
 }
 
-export function utilTagText(entity: iD.OsmEntity): string {
+export function utilTagText(entity: { tags: Tags | null } | undefined): string {
     const obj = (entity && entity.tags) || {};
     return Object.keys(obj)
         .map(k => k + '=' + obj[k])
@@ -35,15 +35,18 @@ export function utilTotalExtent(array: EntityID[] | iD.OsmEntity[], graph: coreG
     return extent;
 }
 
-export type TagDiff = {
-    type: '-' | '+' | '~';
+interface TagDiffBase {
     key: TagKey;
-    oldVal: TagValue;
-    newVal: TagValue;
     display: string;
     render: (selection: d3.Selection<HTMLElement>) => void;
 };
-export function utilTagDiff(oldTags: Tags, newTags: Tags, contextKeys: TagKey[] = []): TagDiff[] {
+export type TagDiff = TagDiffBase & (
+    | { type: '-'; oldVal: TagValue; newVal: TagValueUpdate }
+    | { type: '+'; oldVal: TagValueUpdate; newVal: TagValue }
+    | { type: '~'; oldVal: TagValue; newVal: TagValue }
+);
+
+export function utilTagDiff(oldTags: TagsUpdate, newTags: TagsUpdate, contextKeys: TagKey[] = []): TagDiff[] {
     const tagDiff : TagDiff[] = [];
     const keys = utilArrayUnion(Object.keys(oldTags), Object.keys(newTags)).sort();
     keys.forEach(function(k) {
@@ -98,7 +101,7 @@ export function utilTagDiff(oldTags: Tags, newTags: Tags, contextKeys: TagKey[] 
                 }
             });
         }
-        if (contextKeys.includes(k) && newVal === oldVal) {
+        if (contextKeys.includes(k) && newVal === oldVal && newVal !== undefined) {
             const keyPart = `${decodeURIComponent('%C2%A0' /* &nbsp; */)} ${k}=`;
             tagDiff.push({
                 type: '~',

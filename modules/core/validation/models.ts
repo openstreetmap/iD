@@ -5,7 +5,7 @@ import type { EntityId, OsmEntity } from '../../osm';
 import { t, type LocalizedTextRenderer } from '../localizer';
 
 export interface Validator {
-    (entity: OsmEntity, graph: coreGraph): validationIssue[];
+    (entity: OsmEntity, graph: coreGraph): validationIssue<any>[];
     type: string;
 }
 
@@ -128,7 +128,7 @@ export class validationIssueFix<T = unknown> {
     title: LocalizedTextRenderer;
     tooltip?: LocalizedTextRenderer;
     id?: string;
-    onClick?(this: validationIssueFix<T>, context: iD.Context, completionHandler: ()=> void): void;
+    onClick?: ((this: validationIssueFix<T>, context: iD.Context, completionHandler: () => void) => void) | null;
     disabledReason?: string;
     icon?: string;
     entityIds?: EntityId[];
