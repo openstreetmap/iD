@@ -589,10 +589,10 @@ rendererBackgroundSource.Custom = function(template) {
             cleaned = parts[0] + '?' + utilQsString(qs, true);  // true = soft encode
         }
 
-        // from wms/wmts api path parameters
+        // from wms/wmts api path parameters, and query parameters such as apiKey
         cleaned = cleaned
-            .replace(/token\/(\w+)/, 'token/{apikey}')
-            .replace(/key=(\w+)/, 'key={apikey}');
+            .replace(/((key|token)=)[^&?#]+/gi, '$1{apikey}')
+            .replace(/(token\/)[^&/?#]+/gi, '$1{apikey}');
         return 'Custom (' + cleaned + ' )';
     };
 
