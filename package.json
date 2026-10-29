@@ -99,11 +99,11 @@
     "@typescript/native": "npm:typescript@^7.0.2",
     "@vitest/coverage-v8": "^5.0.1",
     "@vitest/eslint-plugin": "^1.6.23",
-    "@waysidemapping/pinhead": "^15.23.0",
+    "@waysidemapping/pinhead": "^16.26.0",
     "autoprefixer": "^10.4.21",
     "browserslist": "^4.27.0",
     "browserslist-to-esbuild": "^2.1.1",
-    "chokidar": "^5.0.0",
+    "chokidar": "^6.0.0",
     "cldr-core": "^48.0.0",
     "cldr-localenames-full": "^48.0.0",
     "concat-files": "^0.1.1",
@@ -134,12 +134,13 @@
     "typescript": "npm:@typescript/typescript6@^6.0.2",
     "typescript-eslint": "^8.56.0",
     "vite": "^8.0.1",
-    "vitest": "^5.0.1"
+    "vitest": "^5.0.1",
+    "wikibase-sdk": "^11.1.1"
   },
   "engines": {
     "node": ">=22"
   },
   "browserslist": [
-    "> 0.3%, last 6 major versions, Firefox ESR, not Safari < 14.1, not iOS <= 14, not dead, maintained node versions"
+    "> 0.3%, last 6 major versions, Firefox ESR, not dead, maintained node versions"
   ]
 }

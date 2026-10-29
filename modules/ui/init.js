@@ -653,11 +653,8 @@ export function uiInit(context) {
         // disable menu if in wide selection, for example
         if (!context.map().editableDataEnabled()) return;
 
-        var surfaceNode = context.surface().node();
-        if (surfaceNode.focus) {   // FF doesn't support it
-            // focus the surface or else clicking off the menu may not trigger modeBrowse
-            surfaceNode.focus();
-        }
+        // focus the surface or else clicking off the menu may not trigger modeBrowse
+        context.surface().node().focus();
 
         operations.forEach(function(operation) {
             if (operation.point) operation.point(anchorPoint);

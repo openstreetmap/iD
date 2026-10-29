@@ -5,13 +5,24 @@ import { utilQsString } from '../util';
 
 var endpoint = 'https://en.wikipedia.org/w/api.php?';
 
+interface Article {
+    title: string;
+    snippet: string;
+}
+
+interface ApiError {
+    code: string;
+    info: string;
+    '*': string;
+}
+
 export default {
 
     init: function() {},
     reset: function() {},
 
 
-    search: function(lang, query, callback) {
+    search: function(lang: string, query: string, callback: Callback<string[]>) {
         if (!query) {
             if (callback) callback(new Error('No Query'));
             return;
@@ -30,9 +41,10 @@ export default {
             });
 
         d3_json(url)
-            .then(function(result) {
+            .then(function(_result) {
+                const result = _result as { error?: ApiError; query?: { search: Article[] }; };
                 if (result && result.error) {
-                    throw new Error(result.error);
+                    throw new Error(JSON.stringify(result.error));
                 } else if (!result || !result.query || !result.query.search) {
                     throw new Error('No Results');
                 }
@@ -47,7 +59,7 @@ export default {
     },
 
 
-    suggestions: function(lang, query, callback) {
+    suggestions: function(lang: string, query: string, callback: Callback<string[]>) {
         if (!query) {
             if (callback) callback(new Error('No Query'));
             return;
@@ -65,9 +77,10 @@ export default {
             });
 
         d3_json(url)
-            .then(function(result) {
+            .then(function(_result) {
+                const result = _result as [query: string, titles: string[]] & { error?: ApiError };
                 if (result && result.error) {
-                    throw new Error(result.error);
+                    throw new Error(JSON.stringify(result.error));
                 } else if (!result || result.length < 2) {
                     throw new Error('No Results');
                 }

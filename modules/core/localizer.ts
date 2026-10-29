@@ -648,10 +648,7 @@ export class coreLocalizer {
      */
     floatParser(locale: string) {
         // https://stackoverflow.com/a/55366435/4585461
-        const polyfill = (string: string) => +string.trim();
-        if (!('Intl' in window && 'NumberFormat' in Intl)) return polyfill;
         const format = new Intl.NumberFormat(locale, { maximumFractionDigits: 20 });
-        if (!('formatToParts' in format)) return polyfill;
         const parts = format.formatToParts(-12345.6);
         const numerals = Array.from({ length: 10 }).map((_, i) => format.format(i));
         const index = new Map(numerals.map((d, i) => [d, String(i)]));
