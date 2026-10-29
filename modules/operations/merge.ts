@@ -18,21 +18,21 @@ export const operationMerge: CreateOperation = (context, selectedIDs) => {
     function getAction(): Action | ActionJoin {
         // prefer a non-disabled action first
         var join = actionJoin(selectedIDs as WayId[]);
-        if (!join.disabled!(context.graph())) return join;
+        if (!join.disabled?.(context.graph())) return join;
 
         var merge = actionMerge(selectedIDs);
-        if (!merge.disabled!(context.graph())) return merge;
+        if (!merge.disabled?.(context.graph())) return merge;
 
         var mergePolygon = actionMergePolygon(selectedIDs);
-        if (!mergePolygon.disabled!(context.graph())) return mergePolygon;
+        if (!mergePolygon.disabled?.(context.graph())) return mergePolygon;
 
         var mergeNodes = actionMergeNodes(selectedIDs as NodeId[]);
-        if (!mergeNodes.disabled!(context.graph())) return mergeNodes;
+        if (!mergeNodes.disabled?.(context.graph())) return mergeNodes;
 
         // otherwise prefer an action with an interesting disabled reason
-        if (join.disabled!(context.graph()) !== 'not_eligible') return join;
-        if (merge.disabled!(context.graph()) !== 'not_eligible') return merge;
-        if (mergePolygon.disabled!(context.graph()) !== 'not_eligible') return mergePolygon;
+        if (join.disabled?.(context.graph()) !== 'not_eligible') return join;
+        if (merge.disabled?.(context.graph()) !== 'not_eligible') return merge;
+        if (mergePolygon.disabled?.(context.graph()) !== 'not_eligible') return mergePolygon;
 
         return mergeNodes;
     }
@@ -60,7 +60,7 @@ export const operationMerge: CreateOperation = (context, selectedIDs) => {
     };
 
     operation.disabled = function() {
-        var actionDisabled = _action.disabled!(context.graph());
+        var actionDisabled = _action.disabled?.(context.graph());
         if (actionDisabled) return actionDisabled;
 
         var osm = context.connection();
