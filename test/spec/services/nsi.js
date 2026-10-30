@@ -38,15 +38,15 @@ describe('iD.serviceNsi', function () {
         };
     });
 
-    afterEach(() => {
-        delete iD.services.nsi;
-    });
-
     beforeEach(async () => {
         context = iD.coreContext().assetPath('../dist/').init();
         await vi.waitFor(() => {
             expect(iD.services.nsi.status()).not.toBe('loading');
         }, { timeout: 1000, interval: 50 });
+    });
+
+    afterEach(() => {
+        delete iD.services.nsi;
     });
 
     describe('#init', () => {
