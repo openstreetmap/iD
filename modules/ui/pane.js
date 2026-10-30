@@ -74,7 +74,7 @@ export function uiPane(id, context) {
                 .scrollContainer(context.container().select('.over-map'))
                 .placement((localizer.textDirection() === 'rtl') ? 'right' : 'left')
                 .title(() => _description)
-                .keys([_key]);
+                .keys(() => [_key]);
         }
 
         selection

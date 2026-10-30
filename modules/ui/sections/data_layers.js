@@ -97,7 +97,7 @@ export function uiSectionDataLayers(context) {
                     d3_select(this)
                         .call(uiTooltip()
                             .title(() => t.append('map_data.layers.' + d.id + '.tooltip'))
-                            .keys([uiCmd('⌥' + t('area_fill.wireframe.key'))])
+                            .keys(() => [uiCmd('⌥' + t('area_fill.wireframe.key'))])
                             .placement('bottom')
                         );
                 } else {
@@ -256,7 +256,7 @@ export function uiSectionDataLayers(context) {
             .append('label')
             .each(function(d) {
                 d3_select(this).call(
-                    uiTooltip().title(d.tooltip).placement('top')
+                    uiTooltip().title(() => d.tooltip).placement('top')
                 );
             });
 
@@ -403,7 +403,7 @@ export function uiSectionDataLayers(context) {
             .append('label')
             .call(uiTooltip()
                 .title(() => t.append('map_data.history_panel.tooltip'))
-                .keys([uiCmd('⌘⇧' + t('info_panels.history.key'))])
+                .keys(() => [uiCmd('⌘⇧' + t('info_panels.history.key'))])
                 .placement('top')
             );
 
@@ -425,7 +425,7 @@ export function uiSectionDataLayers(context) {
             .append('label')
             .call(uiTooltip()
                 .title(() => t.append('map_data.measurement_panel.tooltip'))
-                .keys([uiCmd('⌘⇧' + t('info_panels.measurement.key'))])
+                .keys(() => [uiCmd('⌘⇧' + t('info_panels.measurement.key'))])
                 .placement('top')
             );
 
