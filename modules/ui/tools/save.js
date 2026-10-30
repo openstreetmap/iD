@@ -5,6 +5,7 @@ import { modeSave } from '../../modes';
 import { svgIcon } from '../../svg';
 import { uiCmd } from '../cmd';
 import { uiTooltip } from '../tooltip';
+import { utilIsDrawing } from '../../util';
 
 
 export function uiToolSave(context) {
@@ -25,13 +26,18 @@ export function uiToolSave(context) {
         return mode && mode.id === 'save';
     }
 
+    function isDrawing() {
+        const mode = context.mode();
+        return mode && utilIsDrawing(mode.id);
+    }
+
     function isDisabled() {
-        return _numChanges === 0 || isSaving();
+        return _numChanges === 0 || isSaving() || isDrawing();
     }
 
     function save(d3_event) {
         d3_event.preventDefault();
-        if (!context.inIntro() && !isSaving() && history.hasChanges()) {
+        if (!context.inIntro() && !isSaving() && !isDrawing() && history.hasChanges()) {
             context.enter(modeSave(context));
         }
     }

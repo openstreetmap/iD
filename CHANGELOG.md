@@ -63,6 +63,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Improve wording for "connect the features (manually)" fix for routing-islands validator, and show tooltip with further instructions ([#8402])
 * Show all `mutually_exclusive_tags` validation warnings when there are multiple present on a single object ([#13016], thanks [@matkoniecz])
 #### :bug: Bugfixes
+* Prevent certain keyboard shortcuts causing all work to be lost ([#10118], thanks [@k-yle])
 * Fix crash when using the osmose integration ([#13043], [#13074], thanks [@k-yle])
 * Fix exceptions when resizing the browser tab when nothing is selected ([#12800], thanks [@k-yle])
 * Allow tags like `not:*:wikidata` to have multiple values ([#12736], thanks [@k-yle])
@@ -93,6 +94,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#8402]: https://github.com/openstreetmap/iD/issues/8402
 [#8424]: https://github.com/openstreetmap/iD/issues/8424
 [#9732]: https://github.com/openstreetmap/iD/pull/9732
+[#10118]: https://github.com/openstreetmap/iD/pull/10118
 [#9931]: https://github.com/openstreetmap/iD/pull/9931
 [#11926]: https://github.com/openstreetmap/iD/pull/11926
 [#12340]: https://github.com/openstreetmap/iD/pull/12340
