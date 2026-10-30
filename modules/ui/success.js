@@ -267,6 +267,8 @@ export function uiSuccess(context) {
                 selection
                     .append('a')
                     .attr('href', `https://www.openstreetmap.org/?mlat=${event.location.coords[1]}&mlon=${event.location.coords[0]}&zoom=15`)
+                    .attr('target', '_blank')
+                    .classed('link-out', true)
                     .text(event.location.venue);
             }
           }));
