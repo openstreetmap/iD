@@ -232,7 +232,9 @@ export function uiSuccess(context) {
             icon: `#community-${resource.type}`,
             name: selection => selection.html(utilSanitizeHTML(resource.resolved.nameHTML)),
             description: selection => selection.html(utilSanitizeHTML(resource.resolved.descriptionHTML)),
-            extendedDescription: selection => selection.html(utilSanitizeHTML(resource.resolved.extendedDescriptionHTML)),
+            extendedDescription: resource.resolved.extendedDescriptionHTML
+                ? selection => selection.html(utilSanitizeHTML(resource.resolved.extendedDescriptionHTML))
+                : undefined,
             languageCodes: resource.languageCodes,
           }));
       });
@@ -343,26 +345,18 @@ export function uiSuccess(context) {
       .attr('target', '_blank')
       .attr('href', d => d.url)
       .each(function(d) {
-        if (typeof d.nameHTML === 'string') {
-          d3_select(this).html(utilSanitizeHTML(d.nameHTML));
-        } else {
-          d3_select(this).call(d.name);
-        }
+        d3_select(this).call(d.name);
       });
 
     selection
       .append('div')
       .classed('community-description', true)
       .each(function(d) {
-        if (typeof d.descriptionHTML === 'string') {
-          d3_select(this).html(utilSanitizeHTML(d.descriptionHTML));
-        } else {
-          d3_select(this).call(d.description);
-        }
+        d3_select(this).call(d.description);
       });
 
     // Create an expanding section if any of these are present..
-    if (d.extendedDescriptionHTML || (d.languageCodes && d.languageCodes.length)) {
+    if (d.extendedDescription || (d.languageCodes && d.languageCodes.length)) {
       selection
         .append('div')
         .call(uiDisclosure(context, `community-more-${communityID}`, false)
@@ -386,11 +380,7 @@ export function uiSuccess(context) {
           .append('div')
           .classed('community-extended-description', true)
           .each(function() {
-            if (typeof d.extendedDescriptionHTML === 'string') {
-              d3_select(this).html(d.extendedDescriptionHTML);
-            } else {
-              d3_select(this).call(d.extendedDescription);
-            }
+            d3_select(this).call(d.extendedDescription);
           });
       }
 
