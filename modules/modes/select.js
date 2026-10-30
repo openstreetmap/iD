@@ -28,7 +28,6 @@ import {
     utilArrayUniq
 } from '../util';
 
-
 export function modeSelect(context, selectedIDs) {
     /** @type {any} */
     var mode = {};
