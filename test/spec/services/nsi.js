@@ -25,11 +25,11 @@ describe('iD.serviceNsi', function () {
         iD.fileFetcher.cache().nsi_wikidata = { wikidata: {} };
 
         iD.fileFetcher.cache().nsi_trees = {
-          trees: {
-            brands: {
-              mainTag: 'brand:wikidata'
+            trees: {
+                brands: {
+                    mainTag: 'brand:wikidata'
+                }
             }
-          }
         };
         iD.fileFetcher.cache().nsi_generics = {
           genericWords: []
