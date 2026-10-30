@@ -103,7 +103,7 @@ export function rendererFeatures(context) {
         100);
 
     defineRule('points', (tags, geometry) =>
-        geometry === 'point' && !isAddressPoint(tags, geometry),
+        geometry === 'point' && !isAddressPoint(tags, geometry) && (!tags.power || tags.power === 'no'),
         200);
 
     defineRule('traffic_roads', function isTrafficRoad(tags) {
@@ -211,7 +211,7 @@ export function rendererFeatures(context) {
     });
 
     defineRule('power', function isPower(tags) {
-        return !!tags.power;
+        return !!tags.power && tags.power !== 'no';
     });
 
     // contains a past/future tag, but not in active use as a road/path/cycleway/etc..
