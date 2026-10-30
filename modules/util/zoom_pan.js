@@ -65,8 +65,20 @@ export function utilZoomPan() {
         .style('-webkit-tap-highlight-color', 'rgba(0,0,0,0)');
 
     d3_select(window)
-        .on('pointermove.zoompan', pointermove)
-        .on('pointerup.zoompan pointercancel.zoompan', pointerup);
+        .on('pointermove.zoompan', pointermove, true)
+        .on('pointerup.zoompan pointercancel.zoompan', pointerup, true)
+        .on('blur.zoompan', resetPointers, true);
+
+    if ('TouchEvent' in window) {
+      d3_select(window)
+        .on('touchend.zoompan touchcancel.zoompan', function(d3_event) {
+          if (d3_event.touches && d3_event.touches.length === 0) {
+            resetPointers(d3_event);
+          } else if (d3_event.touches && d3_event.touches.length === 1 && _activeGesture) {
+            delete _activeGesture.pointer1;
+          }
+        }, true);
+    }
   }
 
   zoom.transform = function(collection, transform, point) {
@@ -237,20 +249,34 @@ export function utilZoomPan() {
   var _downPointerIDs = new Set();
   var _pointerLocGetter;
 
+  function resetPointers(d3_event) {
+    _downPointerIDs.clear();
+    if (_activeGesture) {
+      delete _activeGesture.pointer0;
+      delete _activeGesture.pointer1;
+      _activeGesture.end(d3_event || null);
+    }
+  }
+
   function pointerdown(d3_event) {
+    if (!_activeGesture || _downPointerIDs.size === 0) {
+      _downPointerIDs.clear();
+    }
     _downPointerIDs.add(d3_event.pointerId);
 
     if (!filter.apply(this, arguments)) return;
 
-    var g = gesture(this, arguments, _downPointerIDs.size === 1);
+    var isFirstPointer = _downPointerIDs.size === 1 || !_activeGesture;
+    var g = gesture(this, arguments, isFirstPointer);
     var started;
 
     d3_event.stopImmediatePropagation();
     _pointerLocGetter = utilFastMouse(this);
     var loc = _pointerLocGetter(d3_event);
     var p = [loc, _transform.invert(loc), d3_event.pointerId];
-    if (!g.pointer0) {
+    if (isFirstPointer || !g.pointer0) {
        g.pointer0 = p;
+       delete g.pointer1;
        started = true;
 
     } else if (!g.pointer1 && g.pointer0[2] !== p[2]) {
@@ -273,7 +299,7 @@ export function utilZoomPan() {
     var isPointer0 = g.pointer0 && g.pointer0[2] === d3_event.pointerId;
     var isPointer1 = !isPointer0 && g.pointer1 && g.pointer1[2] === d3_event.pointerId;
 
-    if ((isPointer0 || isPointer1) && 'buttons' in d3_event && !d3_event.buttons) {
+    if ((isPointer0 || isPointer1) && 'buttons' in d3_event && !d3_event.buttons && d3_event.pointerType === 'mouse') {
       // The pointer went up without ending the gesture somehow, e.g.
       // a down mouse was moved off the map and released. End it here.
       if (g.pointer0) _downPointerIDs.delete(g.pointer0[2]);
@@ -291,15 +317,25 @@ export function utilZoomPan() {
     if (isPointer0) g.pointer0[0] = loc;
     else if (isPointer1) g.pointer1[0] = loc;
 
+    // If only one pointer is down, pointer1 cannot be active
+    if (_downPointerIDs.size <= 1 && g.pointer1) {
+      delete g.pointer1;
+    }
+
     t = _transform;
-    if (g.pointer1) {
+    if (g.pointer1 && g.pointer0) {
       var p0 = g.pointer0[0], l0 = g.pointer0[1],
           p1 = g.pointer1[0], l1 = g.pointer1[1],
           dp = (dp = p1[0] - p0[0]) * dp + (dp = p1[1] - p0[1]) * dp,
           dl = (dl = l1[0] - l0[0]) * dl + (dl = l1[1] - l0[1]) * dl;
-      t = scale(t, Math.sqrt(dp / dl));
-      p = [(p0[0] + p1[0]) / 2, (p0[1] + p1[1]) / 2];
-      l = [(l0[0] + l1[0]) / 2, (l0[1] + l1[1]) / 2];
+      if (dl > 0) {
+        t = scale(t, Math.sqrt(dp / dl));
+        p = [(p0[0] + p1[0]) / 2, (p0[1] + p1[1]) / 2];
+        l = [(l0[0] + l1[0]) / 2, (l0[1] + l1[1]) / 2];
+      } else {
+        p = p0;
+        l = l0;
+      }
     } else if (g.pointer0) {
       p = g.pointer0[0];
       l = g.pointer0[1];
@@ -327,10 +363,13 @@ export function utilZoomPan() {
       g.pointer0 = g.pointer1;
       delete g.pointer1;
     }
-    if (g.pointer0) {
-      g.pointer0[1] = _transform.invert(g.pointer0[0]);
-    } else {
+    if (_downPointerIDs.size === 0 || !g.pointer0) {
+      delete g.pointer0;
+      delete g.pointer1;
       g.end(d3_event);
+    } else {
+      delete g.pointer1;
+      g.pointer0[1] = _transform.invert(g.pointer0[0]);
     }
   }
 
