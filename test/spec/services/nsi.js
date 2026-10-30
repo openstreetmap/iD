@@ -61,7 +61,7 @@ describe('iD.serviceNsi', function () {
             expect(iD.services.nsi.upgradeTags({ highway: 'residential', name: 'Aldi' }, world)).toBeNull();
         });
 
-        it('adds missing brand tags [SHOULD NOT FAIL]', () => {
+        it('adds missing brand tags', () => {
             const result = iD.services.nsi.upgradeTags({ shop: 'supermarket', name: 'Examplestan' }, world);
             expect(result.matched.id).toBe('example1');
             expect(result.newTags).toEqual({
