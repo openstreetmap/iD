@@ -24,9 +24,11 @@ const tileStyle = '&STYLE=&TILEMATRIX=EPSG:900913:{z}&TILEMATRIXSET=EPSG:900913&
 const minZoom = 14;
 const dispatch = d3_dispatch('loadedImages', 'loadedLines');
 const imgZoom = d3_zoom()
-    .extent([[0, 0], [320, 240]])
-    .translateExtent([[0, 0], [320, 240]])
     .scaleExtent([1, 15]);
+const constrainPhoto = imgZoom.constrain();
+// The photo fills the zoom target. D3 measures its current viewport for each
+// gesture, so constrain panning to that same extent after a resize too.
+imgZoom.constrain((transform, extent) => constrainPhoto(transform, extent, extent));
 const pannellumViewerCSS = 'pannellum/pannellum.css';
 const pannellumViewerJS = 'pannellum/pannellum.js';
 const resolution = 1080;
@@ -398,8 +400,8 @@ export default {
         });
 
         wrap
-            .transition()
-            .duration(100)
+            .select('#ideditor-viewer-mapilio-simple-wrap')
+            .interrupt()
             .call(imgZoom.transform, d3_zoomIdentity);
 
         wrap
@@ -525,6 +527,9 @@ export default {
             if (_pannellumViewer) {
                 _pannellumViewer.resize();
             }
+            context.container().select('#ideditor-viewer-mapilio-simple-wrap')
+                .interrupt()
+                .call(imgZoom.scaleBy, 1);
         });
 
         _loadViewerPromise = new Promise((resolve, reject) => {
