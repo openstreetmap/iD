@@ -5,16 +5,18 @@ describe('iD.serviceNsi', function () {
     beforeEach(() => {
         iD.services.nsi = iD.serviceNsi;
         iD.fileFetcher.cache().nsi_data = {
-            'brands/shop/supermarket': {
-                properties: { path: 'brands/shop/supermarket' },
-                items: [
-                    {
-                        id: 'example1',
-                        displayName: 'Examplestan',
-                        locationSet: { include: ['001'] },
-                        tags: { brand: 'Examplestan', 'brand:wikidata': 'Q99999999999999', name: 'Examplestan', shop: 'supermarket' }
-                    }
-                ]
+            nsi: {
+                'brands/shop/supermarket': {
+                    properties: { path: 'brands/shop/supermarket' },
+                    items: [
+                        {
+                            id: 'example1',
+                            displayName: 'Examplestan',
+                            locationSet: { include: ['001'] },
+                            tags: { brand: 'Examplestan', 'brand:wikidata': 'Q99999999999999', name: 'Examplestan', shop: 'supermarket' }
+                        }
+                    ]
+                }
             }
         };
         iD.fileFetcher.cache().nsi_features = { type: 'FeatureCollection', features: [] };
@@ -30,12 +32,9 @@ describe('iD.serviceNsi', function () {
           }
         };
         iD.fileFetcher.cache().nsi_generics = {
-          genericWords: ['^stores?$']
+          genericWords: []
         };
         iD.fileFetcher.cache().preset_presets = {
-            'preset1': { tags: { craft: 'sailmaker' }, geometry: ['line'], name: 'Velero', aliases: ['Velaio'] },
-            'preset2': { tags: { craft: 'boatbuilder' }, geometry: ['line'], name: 'Constructor de barco' },
-            '__test__ignored_preset': { tags: { foo: 'bar' }, geometry: ['line'], name: 'Foo Bar' },
         };
     });
 
@@ -43,14 +42,17 @@ describe('iD.serviceNsi', function () {
         delete iD.services.nsi;
     });
 
-    beforeEach(function() {
+    beforeEach(async () => {
         context = iD.coreContext().assetPath('../dist/').init();
+        await vi.waitFor(() => {
+            expect(iD.services.nsi.status()).not.toBe('loading');
+        }, { timeout: 1000, interval: 50 });
     });
 
     describe('#init', () => {
         it('loads the data', () => {
             expect(iD.services.nsi.status()).toBe('ok');
-            expect(iD.services.nsi.cache().ids.has('aldi-test')).toBe(true);
+            expect(iD.services.nsi.cache().ids.has('example1')).toBe(true);
         });
     });
 
@@ -75,20 +77,6 @@ describe('iD.serviceNsi', function () {
             });
         });
     });
-
-    function createWay(tags) {
-        var n1 = new iD.osmNode({id: 'n-1', loc: [4,4]});
-        var n2 = new iD.osmNode({id: 'n-2', loc: [4,5]});
-        var n3 = new iD.osmNode({id: 'n-3', loc: [5,5]});
-        var w = new iD.osmWay({id: 'w-1', nodes: ['n-1', 'n-2', 'n-3'], tags: tags});
-
-        context.perform(
-            iD.actionAddEntity(n1),
-            iD.actionAddEntity(n2),
-            iD.actionAddEntity(n3),
-            iD.actionAddEntity(w)
-        );
-    }
 
     function validate(validator) {
         var changes = context.history().changes();
