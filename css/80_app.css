@@ -5711,6 +5711,34 @@ button.conflicts-button {
 }
 
 
+/* Indoor focus status (top left corner of the map)
+------------------------------------------------------- */
+.indoor-focus-status {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    z-index: 5;
+    max-width: calc(100% - 70px);
+    padding: 4px 8px;
+    border-radius: 4px;
+    background: var(--transparent-bg-color);
+    color: var(--text-color);
+    box-shadow: 0 1px 2px var(--shadow-color);
+    font-size: 12px;
+    line-height: 1.4;
+    pointer-events: none;
+}
+.ideditor[dir='rtl'] .indoor-focus-status {
+    left: auto;
+    right: 10px;
+}
+.indoor-focus-status .icon {
+    width: 14px;
+    height: 14px;
+    vertical-align: text-bottom;
+}
+
+
 /* Tooltips
 ------------------------------------------------------- */
 .popover {
