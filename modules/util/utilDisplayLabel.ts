@@ -1,5 +1,8 @@
+import type { Geometry } from '@openstreetmap/id-tagging-schema';
+import type { OsmEntity } from '../osm';
 import { presetManager } from '../presets';
 import { utilDisplayName, utilDisplayType } from './util';
+import type { coreGraph } from '../core';
 
 /**
  * `utilDisplayLabel` returns a string suitable for display
@@ -9,12 +12,8 @@ import { utilDisplayName, utilDisplayType } from './util';
  *
  * If `verbose=true`, include both preset name and feature name.
  *    "Tertiary Road Main Street"
- * @param {iD.OsmEntity} entity
- * @param {string | unknown} graphOrGeometry
- * @param {boolean} [verbose]
- * @returns {string}
  */
-export function utilDisplayLabel(entity, graphOrGeometry, verbose) {
+export function utilDisplayLabel(entity: OsmEntity, graphOrGeometry: Geometry | coreGraph, verbose?: boolean) {
     var result;
     var displayName = utilDisplayName(entity);
     var preset = typeof graphOrGeometry === 'string' ?

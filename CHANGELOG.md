@@ -38,6 +38,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 # Unreleased (2.43.0-dev)
 
 #### :sparkles: Usability & Accessibility
+* Include upcoming events from [OpenStreetMap Calendar](osmcal.org) in post-upload dialog ([#12678])
 * Increase the colour contrast of the blue text used for links and preset fields ([#12724], thanks [@k-yle])
 * Render diameter and radius tags when a node is selected ([#9732], thanks [@k-yle])
 * Dedicated rendering for road sections tagged with `ford=yes` ([#12830], thanks [@Geo-2695])
@@ -96,6 +97,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#11926]: https://github.com/openstreetmap/iD/pull/11926
 [#12340]: https://github.com/openstreetmap/iD/pull/12340
 [#12540]: https://github.com/openstreetmap/iD/issues/12540
+[#12678]: https://github.com/openstreetmap/iD/pull/12678
 [#12679]: https://github.com/openstreetmap/iD/pull/12679
 [#12704]: https://github.com/openstreetmap/iD/pull/12704
 [#12724]: https://github.com/openstreetmap/iD/pull/12724
