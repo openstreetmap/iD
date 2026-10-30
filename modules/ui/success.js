@@ -27,6 +27,8 @@ export function uiSuccess(context) {
   const loc = context.map().center();
   // start fetching the data
   ensureOSMCommunityIndex();
+  getOsmCalEvents(loc);
+
 
   function ensureOSMCommunityIndex() {
     const data = fileFetcher;
