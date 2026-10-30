@@ -12,21 +12,21 @@ import { t, localizer } from '../core/localizer';
 import { svgIcon } from '../svg/icon';
 import { uiDisclosure } from '../ui/disclosure';
 import { utilRebind } from '../util/rebind';
+import { utilSanitizeHTML } from '../util/sanitize.js';
 import { getOsmCalEvents } from '../services/osmcal.js';
+import { localeTimestamp } from '../util/date.js';
 
 
 let _oci = null;
-/** @type OsmCalEvent[] */
-let _osmCalEvents = null;
 
 export function uiSuccess(context) {
   const MAX_EVENTS = 4;
   const dispatch = d3_dispatch('cancel');
   let _changeset;
   let _location;
-  ensureOSMCommunityIndex();   // start fetching the data
-  ensureOSMCal();
-
+  const loc = context.map().center();
+  // start fetching the data
+  ensureOSMCommunityIndex();
 
   function ensureOSMCommunityIndex() {
     const data = fileFetcher;
@@ -60,16 +60,6 @@ export function uiSuccess(context) {
           return _oci;
         }
       });
-  }
-
-  function ensureOSMCal() {
-    return fileFetcher
-        .get('osmcal_events')
-        .then(events => {
-            if (!_osmCalEvents) _osmCalEvents = events;
-
-            return _osmCalEvents;
-        });
   }
 
 
@@ -238,13 +228,12 @@ export function uiSuccess(context) {
             id: resource.id,
             url: resource.resolved.url,
             icon: `#community-${resource.type}`,
-            name: resource.resolved.name,
-            description: resource.resolved.description,
-            extendedDescription: resource.resolved.extendedDescription,
+            name: selection => selection.html(utilSanitizeHTML(resource.resolved.nameHTML)),
+            description: selection => selection.html(utilSanitizeHTML(resource.resolved.descriptionHTML)),
+            extendedDescription: selection => selection.html(utilSanitizeHTML(resource.resolved.extendedDescriptionHTML)),
             languageCodes: resource.languageCodes,
           }));
       });
-    const loc = context.map().center();
     const fetchEventsData = getOsmCalEvents(loc)
       .then(nearbyEvents => {
         nearbyEvents.sort((a, b) => {
@@ -259,8 +248,23 @@ export function uiSuccess(context) {
             url: event.url,
             icon: '#pinhead-calendar',
             name: selection => selection.text(event.name),
-            description: selection => selection.text(`${event.date.human_short}, ${event.location.short}`),
-            extendedDescription: selection => selection.text(`${event.date.human}, ${event.location.venue}`),
+            description: selection => {
+                selection
+                    .append('span')
+                    .attr('lang', localizer.localeCode())
+                    .text(localeTimestamp(new Date(event.date.start), {
+                        weekday: 'long',
+                        month: 'long',
+                        day: 'numeric',
+                        hour: '2-digit',
+                        minute: '2-digit'
+                    }));
+                selection.append('br');
+                selection
+                    .append('a')
+                    .attr('href', `https://www.openstreetmap.org/?mlat=${event.location.coords[1]}&mlon=${event.location.coords[0]}&zoom=15`)
+                    .text(event.location.venue);
+            }
           }));
       });
 
@@ -337,8 +341,8 @@ export function uiSuccess(context) {
       .attr('target', '_blank')
       .attr('href', d => d.url)
       .each(function(d) {
-        if (typeof d.name === 'string') {
-          d3_select(this).html(d.name);
+        if (typeof d.nameHTML === 'string') {
+          d3_select(this).html(utilSanitizeHTML(d.nameHTML));
         } else {
           d3_select(this).call(d.name);
         }
@@ -346,17 +350,17 @@ export function uiSuccess(context) {
 
     selection
       .append('div')
-      .attr('class', 'community-description')
+      .classed('community-description', true)
       .each(function(d) {
-        if (typeof d.description === 'string') {
-          d3_select(this).html(d.description);
+        if (typeof d.descriptionHTML === 'string') {
+          d3_select(this).html(utilSanitizeHTML(d.descriptionHTML));
         } else {
           d3_select(this).call(d.description);
         }
       });
 
     // Create an expanding section if any of these are present..
-    if (d.extendedDescription || (d.languageCodes && d.languageCodes.length)) {
+    if (d.extendedDescriptionHTML || (d.languageCodes && d.languageCodes.length)) {
       selection
         .append('div')
         .call(uiDisclosure(context, `community-more-${communityID}`, false)
@@ -366,7 +370,6 @@ export function uiSuccess(context) {
           .content(showMore)
         );
     }
-
 
     function showMore(selection) {
       let more = selection.selectAll('.community-more')
@@ -379,10 +382,10 @@ export function uiSuccess(context) {
       if (d.extendedDescription) {
         moreEnter
           .append('div')
-          .attr('class', 'community-extended-description')
+          .classed('community-extended-description', true)
           .each(function() {
-            if (typeof d.extendedDescription === 'string') {
-              d3_select(this).html(d.extendedDescription);
+            if (typeof d.extendedDescriptionHTML === 'string') {
+              d3_select(this).html(d.extendedDescriptionHTML);
             } else {
               d3_select(this).call(d.extendedDescription);
             }

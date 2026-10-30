@@ -836,6 +836,7 @@ en:
     contrast: Contrast
     saturation: Saturation
     sharpness: Sharpness
+    invert: Invert
     minimap:
       description: Show Minimap
       tooltip: Show a zoomed out map to help locate the area currently displayed.
@@ -1004,7 +1005,7 @@ en:
             scale_factor: "`{@2x}` or `{r}`: resolution scale factor"
         example: "Example:"
       template:
-        placeholder: Enter a url template
+        placeholder: Enter a URL template
     custom_data:
       tooltip: Edit custom data layer
       header: Custom Map Data Settings
@@ -1014,7 +1015,7 @@ en:
       or: "Or"
       url:
         instructions: "Enter a data file URL or vector tile URL template. Valid tokens are:\n   {zoom} or {z}, {x}, {y} for Z/X/Y tile scheme"
-        placeholder: Enter a url
+        placeholder: Enter a URL
   preferences:
     title: Preferences
     description: Preferences
@@ -1780,6 +1781,9 @@ en:
         title: Connect this feature
       connect_features:
         title: Connect the features
+      connect_features_manually:
+        title: Connect the features manually
+        tooltip: For example by mapping missing sections of roads or paths, or fixing disconnected road intersections.
       connect_using_crossing:
         title: Connect using a crossing
       connect_using_ford:
@@ -1790,9 +1794,10 @@ en:
         title: Continue drawing from end
       convert_to_line:
         title: Convert this to a line
+        annotation: Converted an area to a line.
       convert_to_area:
         title: Convert this to an area
-        annotation: Converted an area to a line.
+        annotation: Converted a line to an area.
       delete_feature:
         title: Delete this feature
       extract_point:

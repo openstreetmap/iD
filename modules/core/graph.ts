@@ -1,4 +1,4 @@
-import { debug, type EntityId } from '../index';
+import { debug, type EntityId, type OsmEntity } from '../index';
 import type { NodeId, RelationId, WayId } from '../osm/id_manager';
 import type { osmNode } from '../osm/node';
 import type { osmRelation } from '../osm/relation';
@@ -13,7 +13,7 @@ export class coreGraph {
     _childNodes: { [id: EntityId]: osmNode[] };
     frozen: boolean;
 
-  constructor(other?: coreGraph, mutable?: boolean) {
+  constructor(other?: coreGraph | OsmEntity[], mutable?: boolean) {
     if (other instanceof coreGraph) {
         var base = other.base();
         this.entities = Object.assign(Object.create(base.entities), other.entities);
@@ -315,7 +315,7 @@ export class coreGraph {
     }
 
     // Obliterates any existing entities
-    load(entities: { [key: EntityId | number]: iD.OsmEntity }) {
+    load(entities: { [key: EntityId | number]: iD.OsmEntity | undefined }) {
         var base = this.base();
         this.entities = Object.create(base.entities);
 

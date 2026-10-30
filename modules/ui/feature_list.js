@@ -292,7 +292,7 @@ export function uiFeatureList(context) {
                 .attr('class', 'entity-name');
 
             list.selectAll('.no-results-item .entity-name')
-                .html('')
+                .text('')
                 .call(t.append('geocoder.no_results_worldwide'));
 
             if (services.geocoder) {

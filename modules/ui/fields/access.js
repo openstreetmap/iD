@@ -273,6 +273,12 @@ export function uiFieldAccess(field, context) {
             },
             rail_guard: {
                 access: 'no'
+            },
+            stile: {
+                bicycle: 'no',
+                foot: 'yes',
+                horse: 'no',
+                motor_vehicle: 'no'
             }
         }
     };

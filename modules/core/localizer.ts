@@ -6,6 +6,7 @@ import { utilDetect } from '../util/detect';
 import { utilExpandLocaleCode, utilStringQs } from '../util';
 import { utilArrayUniq } from '../util/array';
 import { presetsCdnUrl } from '../../config/id.js';
+import { utilSanitizeHTML } from '../util/sanitize';
 
 export type LanguagesJSON = {
     [localeCode: string]: {
@@ -521,7 +522,7 @@ export class coreLocalizer {
         // text may be empty or undefined if `replacements.default` is
         const text = info.texts.join('');
         if (text) {
-            return `<span class="localized-text" lang="${info.locale || 'und'}">${text}</span>`;
+            return utilSanitizeHTML(`<span class="localized-text" lang="${info.locale || 'und'}">${text}</span>`);
         } else {
             return '';
         }
@@ -647,10 +648,7 @@ export class coreLocalizer {
      */
     floatParser(locale: string) {
         // https://stackoverflow.com/a/55366435/4585461
-        const polyfill = (string: string) => +string.trim();
-        if (!('Intl' in window && 'NumberFormat' in Intl)) return polyfill;
         const format = new Intl.NumberFormat(locale, { maximumFractionDigits: 20 });
-        if (!('formatToParts' in format)) return polyfill;
         const parts = format.formatToParts(-12345.6);
         const numerals = Array.from({ length: 10 }).map((_, i) => format.format(i));
         const index = new Map(numerals.map((d, i) => [d, String(i)]));

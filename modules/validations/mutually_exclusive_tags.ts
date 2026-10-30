@@ -57,6 +57,7 @@ export const validationMutuallyExclusiveTags: CreateValidator = () => {
                 },
                 reference: (selection) => showReference(selection, pair, subtype),
                 entityIds: [entity.id],
+                hash: pair[0] + '|' + pair[1],
                 dynamicFixes: () => [pair[0], pair[1]].map((tagToRemove) => createIssueFix(tagToRemove))
             });
         });

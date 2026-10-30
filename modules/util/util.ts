@@ -248,7 +248,7 @@ export function utilGetAllNodes(ids: EntityID[], graph: coreGraph): OsmNode[] {
  *             - isMapLabel:  If true, this name is for a label on the map.
  *                            If falsy, it's for a label elsewhere in the UI.
  */
-export function utilDisplayName(entity: iD.OsmEntity, flags: {
+export function utilDisplayName(entity: iD.OsmEntity, flags?: {
     hideNetwork?: boolean,
     hideRef?: boolean,
     isMapLabel?: boolean
@@ -484,8 +484,8 @@ export function utilStringQs(str: string): {[k: string]: string} {
 }
 
 
-export function utilQsString(obj: {[k: string]: string}, softEncode: boolean) {
-    let str = new URLSearchParams(obj).toString();
+export function utilQsString(obj: {[k: string]: string | number | boolean}, softEncode?: boolean) {
+    let str = new URLSearchParams(obj as Record<string, string>).toString();
     if (softEncode) {
         // for better readability of URL hashes: optionally
         // leave some special characters unescaped

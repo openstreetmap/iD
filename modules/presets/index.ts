@@ -342,6 +342,7 @@ export function presetIndex() {
   _this.areaKeys = () => {
     // The ignore list is for keys that imply lines. (We always add `area=yes` for exceptions)
     const ignore: Record<TagKey, true> = {
+      aerialway: true,
       barrier: true,
       highway: true,
       footway: true,

@@ -48,11 +48,46 @@ describe('iD.uiSectionRawTagEditor', function() {
         expect(element.select('.tag-list').selectAll('input').nodes()[3].value).toBe('');
     });
 
+    it('moves focus to the value input when pressing equals in the key input', function() {
+        element.remove();
+        render({});
+        var key = element.select('.tag-list input.key');
+        var value = element.select('.tag-list input.value');
+        iD.utilTriggerEvent(key,'keydown', { key: '=' });
+        expect(document.activeElement).toBe(value.node());
+    });
+
     it('removes tags when clicking the remove button', async () => {
         const tags = new Promise(cb => {
             taglist.on('change', (_, tags) => cb(tags));
         });
         iD.utilTriggerEvent(element.selectAll('button.remove'), 'mousedown', { button: 0 });
         expect(await tags).toEqual({highway: undefined});
+    });
+
+    describe('text view', function() {
+        it('keeps an incomplete line when the window loses focus', function() {
+            var textarea = element.select('textarea.tag-text').node();
+            textarea.focus();
+            textarea.value = 'highway=residential\nname';
+
+            // switching to another browser tab blurs the textarea, but it stays the active element
+            textarea.dispatchEvent(new FocusEvent('blur'));
+
+            expect(document.activeElement).toBe(textarea);
+            expect(element.select('textarea.tag-text').property('value')).toBe('highway=residential\nname');
+        });
+
+        it('applies changes when focus moves elsewhere', async () => {
+            const tags = new Promise(cb => {
+                taglist.on('change', (_, tags) => cb(tags));
+            });
+            var textarea = element.select('textarea.tag-text').node();
+            textarea.focus();
+            textarea.value = 'highway=residential\nname=Main Street';
+            textarea.blur();
+
+            expect(await tags).toEqual({name: 'Main Street'});
+        });
     });
 });

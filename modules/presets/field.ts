@@ -9,7 +9,7 @@ export interface presetField extends Omit<Field, 'label' | 'terms' | 'placeholde
   matchGeometry(geom: Geometry): boolean;
   matchAllGeometry(geometries: Geometry[]): boolean;
   t: {
-    (scope: string, options: ReplacementsSimple): string;
+    (scope: string, options?: ReplacementsSimple): string;
     append: typeof t.append;
   };
   t_all: typeof localizer.t_all;
@@ -65,13 +65,14 @@ export function presetField(fieldID: string, field: Field) {
     const allKeys = new Set<TagKey>();
     if (_this.key) allKeys.add(_this.key);
     if (_this.keys) _this.keys.forEach(key => allKeys.add(key));
-    if (field.type === 'directionalCombo' && _this.key) {
+    if (field.type === 'directionalCombo' && field.key) {
         // directionalCombo fields can have an additional key describing the for
         // cases where both directions share a "common" value.
         // The field also support *:both. The preset decides which field to write to.
-        const baseKey = field.key!.replace(/:both$/, '');
-        allKeys.add(baseKey);
-        allKeys.add(`${baseKey}:both`);
+        const otherKey = field.key.includes(':both')
+            ? field.key.replace(/:both(:|$)/, '$1')
+            : `${field.key}:both`;
+        allKeys.add(otherKey);
     }
     if (field.type === 'localized' && field.key && tags) {
         const prefix = `${field.key}:`;

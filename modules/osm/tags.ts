@@ -59,12 +59,15 @@ export function osmSetAreaKeys(value: TagDictionary<true>): void {
     osmAreaKeys = value;
 }
 
-// `highway` and `railway` are typically linear features, but there
+// `aerialway`, `highway` and `railway` are typically linear features, but there
 // are a few exceptions that should be treated as areas, even in the
 // absence of a proper `area=yes` or `areaKeys` tag.. see #4194
 // similarly, some tags are both used as a primary key for area features,
 // but also as an attribute tag for linear features (e.g. `emergency=yes`)
 export const osmAreaKeysExceptions: TagDictionary<boolean> = {
+    aerialway: {
+        station: true
+    },
     highway: {
         elevator: true,
         rest_area: true,
@@ -229,6 +232,7 @@ export const osmOneWayBiDirectionalTags: TagDictionary<boolean> = {
     },
 };
 export const osmOneWayTags = merge(
+    {},
     osmOneWayForwardTags,
     osmOneWayBackwardTags,
     osmOneWayBiDirectionalTags,
@@ -450,3 +454,22 @@ export const osmUrlKeys: Set<TagKey> = new Set([
     'website:menu',
     'post_office:website',
 ]);
+
+/** returns true if `tags` matches any of the criteria in `matchers` */
+export function osmMatchTags(matchers: Tags[], tags: Tags) {
+    for (const matcher of matchers) {
+        const isMatching = Object.keys(matcher).every((key) => {
+            const expectedValue = matcher[key];
+            const actualValue = tags[key];
+
+            if (!actualValue) return false;
+            if (expectedValue === '*') return true;
+            if (expectedValue === actualValue) return true;
+            if (actualValue.includes(';') && actualValue.split(';').filter(Boolean).includes(expectedValue)) return true;
+
+            return false;
+        });
+        if (isMatching) return true;
+    }
+    return false;
+}

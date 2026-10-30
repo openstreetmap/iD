@@ -597,7 +597,7 @@ function _upgradeTags(tags: Tags, loc: Vec2) {
     });
 
     // Replace mistagged `wikidata`/`wikipedia` with e.g. `brand:wikidata`/`brand:wikipedia`
-    if (foundQID) {
+    if (foundQID && foundQID === item.tags[item.mainTag]) {
       delete newTags.wikipedia;
       delete newTags.wikidata;
     }

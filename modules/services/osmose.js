@@ -275,7 +275,7 @@ export default {
 
   getStrings(itemType, locale=localizer.localeCode()) {
     // No need to fallback to English, Osmose API handles this for us
-    return (locale in _cache.strings) ? _cache.strings[locale][itemType] : {};
+    return _cache.strings[locale]?.[itemType] || {};
   },
 
   getColor(itemType) {

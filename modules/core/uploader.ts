@@ -5,15 +5,51 @@ import { actionDiscardTags } from '../actions/discard_tags';
 import { actionMergeRemoteChanges } from '../actions/merge_remote_changes';
 import { actionNoop } from '../actions/noop';
 import { actionRevert } from '../actions/revert';
-import { coreGraph } from '../core/graph';
-import { t } from '../core/localizer';
+import { coreGraph } from './graph';
+import { t } from './localizer';
 import { utilArrayUnion, utilArrayUniq, utilDisplayName, utilDisplayType, utilRebind } from '../util';
+import type { coreContext } from './context';
+import type { EntityId, osmChangeset, OsmEntity } from '../osm';
+import type { Action } from './history';
+import type { OsmChange } from '../osm/changeset';
+import type { Discarded } from '@openstreetmap/id-tagging-schema';
 
 
-/** @param {iD.Context} context */
-export function coreUploader(context) {
+export interface Choice {
+    id: EntityId;
+    text: string;
+    action(): void;
+}
 
-    var dispatch = d3_dispatch(
+export interface Conflict {
+    id: EntityId;
+    name: string;
+    details: d3.Selector[];
+    chosen: number;
+    choices: Choice[];
+}
+
+export interface ConflictError {
+    msg: string;
+    details?: string[];
+}
+
+interface EventMap {
+    saveStarted: [];
+    saveEnded: [];
+
+    willAttemptUpload: [];
+    progressChanged: [current: number, total: number];
+
+    resultNoChanges: [];
+    resultErrors: [errors: ConflictError[]];
+    resultConflicts: [changeset: osmChangeset, conflicts: Conflict[], origChanges: OsmChange | undefined];
+    resultSuccess: [changeset: osmChangeset];
+}
+
+export function coreUploader(context: coreContext) {
+
+    const dispatch = d3_dispatch<object, EventMap>(
         // Start and end events are dispatched exactly once each per legitimate outside call to `save`
         'saveStarted', // dispatched as soon as a call to `save` has been deemed legitimate
         'saveEnded',   // dispatched after the result event has been dispatched
@@ -31,22 +67,22 @@ export function coreUploader(context) {
     var _isSaving = false;
 
     let _anyConflictsAutomaticallyResolved = false;
-    var _conflicts = [];
-    var _errors = [];
-    var _origChanges;
+    let _conflicts: Conflict[] = [];
+    let _errors: ConflictError[] = [];
+    let _origChanges: OsmChange | undefined;
 
-    var _discardTags = {};
+    let _discardTags: Discarded = {};
     fileFetcher.get('discarded')
         .then(function(d) { _discardTags = d; })
         .catch(function() { /* ignore */ });
 
-    const uploader = {};
+    const uploader = function() {};
 
     uploader.isSaving = function() {
         return _isSaving;
     };
 
-    uploader.save = function(changeset, tryAgain, checkConflicts) {
+    uploader.save = function(changeset: osmChangeset, tryAgain?: boolean, checkConflicts?: boolean) {
         // Guard against accidentally entering save code twice - #4641
         if (_isSaving && !tryAgain) {
             return;
@@ -99,7 +135,7 @@ export function coreUploader(context) {
     };
 
 
-    function performFullConflictCheck(changeset) {
+    function performFullConflictCheck(this: any, changeset: osmChangeset) {
 
         var osm = context.connection();
         if (!osm) return;
@@ -110,7 +146,7 @@ export function coreUploader(context) {
         var remoteGraph = new coreGraph(history.base(), true);
 
         var summary = history.difference().summary();
-        var _toCheck = [];
+        var _toCheck: EntityId[] = [];
         for (var i = 0; i < summary.length; i++) {
             var item = summary[i];
             if (item.changeType === 'modified') {
@@ -119,7 +155,7 @@ export function coreUploader(context) {
         }
 
         var _toLoad = withChildNodes(_toCheck, localGraph);
-        var _loaded = {};
+        var _loaded: { [id: string]: boolean } = {};
         var _toLoadCount = 0;
         var _toLoadTotal = _toLoad.length;
 
@@ -133,7 +169,7 @@ export function coreUploader(context) {
 
         return;
 
-        function withChildNodes(ids, graph) {
+        function withChildNodes(ids: EntityId[], graph: coreGraph) {
             var s = new Set(ids);
             ids.forEach(function(id) {
                 var entity = graph.entity(id);
@@ -151,7 +187,7 @@ export function coreUploader(context) {
 
 
         // Reload modified entities into an alternate graph and check for conflicts..
-        function loaded(err, result) {
+        function loaded(this: any, err: any, result: { data: OsmEntity[] }) {
             if (_errors.length) return;
 
             if (err) {
@@ -162,7 +198,7 @@ export function coreUploader(context) {
                 didResultInErrors();
 
             } else {
-                var loadMore = [];
+                var loadMore: EntityId[] = [];
 
                 result.data.forEach(function(entity) {
                     remoteGraph.replace(entity);
@@ -211,7 +247,7 @@ export function coreUploader(context) {
 
 
         function detectConflicts() {
-            function choice(id, text, action) {
+            function choice(id: EntityId, text: string, action: Action): Choice {
                 return {
                     id: id,
                     text: text,
@@ -220,21 +256,21 @@ export function coreUploader(context) {
                     }
                 };
             }
-            function formatUser(selection, d) {
+            function formatUser(selection: d3.Selection, d: string) {
                 selection
                     .append('a')
                     .attr('href', osm.userURL(d))
                     .attr('target', '_blank')
                     .text(d);
             }
-            function entityName(entity) {
+            function entityName(entity: OsmEntity) {
                 return utilDisplayName(entity) || (utilDisplayType(entity.id) + ' ' + entity.id);
             }
 
-            function sameVersions(local, remote) {
+            function sameVersions(local: OsmEntity, remote: OsmEntity) {
                 if (local.version !== remote.version) return false;
 
-                if (local.type === 'way') {
+                if (local.type === 'way' && remote.type === 'way') {
                     var children = utilArrayUnion(local.nodes, remote.nodes);
                     for (var i = 0; i < children.length; i++) {
                         var a = localGraph.hasEntity(children[i]);
@@ -282,7 +318,7 @@ export function coreUploader(context) {
     }
 
 
-    async function upload(changeset) {
+    async function upload(this: any, changeset: osmChangeset) {
         var osm = context.connection();
         if (!osm) {
             _errors.push({ msg: 'No OSM Service' });
@@ -297,7 +333,7 @@ export function coreUploader(context) {
         } else {
             if (_anyConflictsAutomaticallyResolved) {
                 // add a changeset tag to aid reviewers
-                changeset.tags.merge_conflict_resolved = 'automatically';
+                changeset = changeset.mergeTags({ merge_conflict_resolved: 'automatically' });
                 await osm.updateChangesetTags(changeset);
             }
             var history = context.history();
@@ -316,7 +352,7 @@ export function coreUploader(context) {
     }
 
 
-    function uploadCallback(err, changeset) {
+    function uploadCallback(err: any, changeset: osmChangeset) {
         if (err) {
             if (err.status === 409) {  // 409 Conflict
                 uploader.save(changeset, true, true);  // tryAgain = true, checkConflicts = true
@@ -333,7 +369,7 @@ export function coreUploader(context) {
         }
     }
 
-    function didResultInNoChanges() {
+    function didResultInNoChanges(this: any) {
 
         dispatch.call('resultNoChanges', this);
 
@@ -342,7 +378,7 @@ export function coreUploader(context) {
         context.flush(); // reset iD
     }
 
-    function didResultInErrors() {
+    function didResultInErrors(this: any) {
 
         context.history().pop();
 
@@ -352,9 +388,9 @@ export function coreUploader(context) {
     }
 
 
-    function didResultInConflicts(changeset) {
+    function didResultInConflicts(this: any, changeset: osmChangeset) {
         // add a changeset tag to aid reviewers
-        changeset.tags.merge_conflict_resolved = 'manually';
+        changeset = changeset.mergeTags({ merge_conflict_resolved: 'manually' });
         context.connection().updateChangesetTags(changeset);
 
         _conflicts.sort(function(a, b) { return b.id.localeCompare(a.id); });
@@ -365,7 +401,7 @@ export function coreUploader(context) {
     }
 
 
-    function didResultInSuccess(changeset) {
+    function didResultInSuccess(this: any, changeset: osmChangeset) {
 
         // delete the edit stack cached to local storage
         context.history().clearSaved();
@@ -382,7 +418,7 @@ export function coreUploader(context) {
     }
 
 
-    function endSave() {
+    function endSave(this: any) {
         _isSaving = false;
 
         dispatch.call('saveEnded', this);
@@ -394,7 +430,7 @@ export function coreUploader(context) {
     };
 
 
-    uploader.processResolvedConflicts = function(changeset) {
+    uploader.processResolvedConflicts = function(changeset: osmChangeset) {
         var history = context.history();
 
         for (var i = 0; i < _conflicts.length; i++) {
@@ -421,3 +457,5 @@ export function coreUploader(context) {
 
     return utilRebind(uploader, dispatch, 'on');
 }
+
+export interface coreUploader extends ReturnType<typeof coreUploader> {}
