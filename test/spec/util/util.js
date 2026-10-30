@@ -337,8 +337,9 @@ describe('iD.util', function() {
         });
         it('avoids PTv2-formatted names as invalid on routes', function() {
             expect(iD.utilDisplayName({tags: { name: 'NORTA 2: French Market → Canal at Bourbon', route: 'whatever_value', network: 'NORTA', ref: '2', from: 'French Market', to: 'Canal at Bourbon'}})).toEqual('NORTA 2 from French Market to Canal at Bourbon');
-            expect(iD.utilDisplayName({tags: { name: 'VTA 64A: McKee & White => San Jose Diridon => Ohlone/Chynoweth', route: 'ufo', network: 'VTA', ref: '64A', from: 'McKee & White', to: 'Ohlone/Chynoweth', via: 'San Jose Diridon'}})).toEqual('VTA 64A: from McKee & White via San Jose Diridon to Ohlone/Chynoweth');
+            expect(iD.utilDisplayName({tags: { name: 'VTA 64A: McKee & White => San Jose Diridon => Ohlone/Chynoweth', route: 'ufo', network: 'VTA', ref: '64A', from: 'McKee & White', to: 'Ohlone/Chynoweth', via: 'San Jose Diridon'}})).toEqual('VTA 64A from McKee & White via San Jose Diridon to Ohlone/Chynoweth');
             expect(iD.utilDisplayName({tags: { name: 'Bus 224: Downtown Garland Station -> Lake Ray Hubbard TC -> Downtown Dallas', route: 'bus', ref: '224', from: 'Downtown Garland Station', to: 'Downtown Dallas', via: 'Lake Ray Hubbard TC'}})).toEqual('224 from Downtown Garland Station to Downtown Dallas via Lake Ray Hubbard TC');
+            expect(iD.utilDisplayName({tags: { name: 'Valid name: lost -> if -> matches PTv2 format', route: 'bus'}})).toEqual('');
         });
         it('uses PTv2-formatted names outside routes', function() {
             expect(iD.utilDisplayName({tags: { name: 'NORTA 2: French Market → Canal at Bourbon'}})).toEqual('NORTA 2: French Market → Canal at Bourbon');
