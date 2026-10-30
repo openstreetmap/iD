@@ -16,7 +16,7 @@ import { svgIcon } from '../../svg/icon';
 import { services } from '../../services';
 import { uiCombobox } from '../combobox';
 import { uiSection } from '../section';
-import { utilDisplayName, utilDisplayType, utilHighlightEntities, utilNoAuto, utilUniqueDomId } from '../../util';
+import { utilDisplayName, utilDisplayType, utilHighlightEntities, utilNoAuto } from '../../util';
 import { prefs } from '../../core';
 
 
@@ -98,7 +98,21 @@ export function uiSectionRawMemberEditor(context) {
     }
 
 
+    var _memberKeyMap = new WeakMap();
+    var _nextMemberKey = 0;
+    function getMemberKey(member) {
+        var key = _memberKeyMap.get(member);
+        if (!key) {
+            key = ++_nextMemberKey;
+            _memberKeyMap.set(member, key);
+        }
+        return key;
+    }
+
     function deleteMember(d3_event, d) {
+        d3_event.preventDefault();
+        d3_event.stopPropagation();
+        this.blur();
 
         // remove the hover-highlight styling
         utilHighlightEntities([d.id], false, context);
@@ -128,6 +142,7 @@ export function uiSectionRawMemberEditor(context) {
         var memberships = [];
         var entity = context.entity(entityID);
         entity.members.slice(0, _maxMembers).forEach(function(member, index) {
+            var memberKey = getMemberKey(member);
             memberships.push({
                 index: index,
                 id: member.id,
@@ -135,7 +150,8 @@ export function uiSectionRawMemberEditor(context) {
                 role: member.role,
                 relation: entity,
                 member: context.hasEntity(member.id),
-                domId: utilUniqueDomId(entityID + '-member-' + index)
+                key: memberKey,
+                domId: entityID + '-member-' + memberKey
             });
         });
 
@@ -148,9 +164,9 @@ export function uiSectionRawMemberEditor(context) {
             .merge(list);
 
 
-        var items = list.selectAll('li')
+        var items = list.selectAll('li.member-row')
             .data(memberships, function(d) {
-                return osmIdManager.key(d.relation) + ',' + d.index + ',' +
+                return d.key + ',' +
                     (d.member ? osmIdManager.key(d.member) : 'incomplete');
             });
 
@@ -300,7 +316,11 @@ export function uiSectionRawMemberEditor(context) {
             .merge(itemsEnter)
             .order();
 
+        items.select('label.field-label')
+            .attr('for', function(d) { return d.domId; });
+
         items.select('input.member-role')
+            .attr('id', function(d) { return d.domId; })
             .property('value', function(d) { return d.role; })
             .on('blur', changeRole)
             .on('change', changeRole);
