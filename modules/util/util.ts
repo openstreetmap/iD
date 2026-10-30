@@ -297,12 +297,6 @@ export function utilDisplayName(entity: iD.OsmEntity, flags?: {
         }
     }
 
-    // A right or left-right arrow likely indicates a fake formulaic “name” as specified by the Public Transport v2 schema.
-    // This name format is contrary to how names should be used in OpenStreetMap and is deliberately not supported
-    if (entity.tags.route && entity.tags.name && entity.tags.name.match(/[→⇒↔⇔]|[-=]>/)) {
-        return t(keyComponents.join('_'), tags);
-    }
-    
     if (keyComponents.length) {
         return t('inspector.display_name.' + keyComponents.join('_'), tags);
     }
