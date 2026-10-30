@@ -83,7 +83,7 @@ export const operationSplit: CreateOperation = (context, selectedIDs) => {
             if (!confirmed) return; // user cancelled the operation
 
 
-            const loading = uiLoading(context).blocking(true);
+            const loading = uiLoading().blocking(true);
             context.container().call(loading);
 
             const requiredWayIds = new Set<EntityId>();
