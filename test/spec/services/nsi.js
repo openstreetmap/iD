@@ -41,7 +41,7 @@ describe('iD.serviceNsi', function () {
     beforeEach(async () => {
         context = iD.coreContext().assetPath('../dist/').init();
         await vi.waitFor(() => {
-            expect(iD.services.nsi.status()).not.toBe('loading');
+            if (iD.services.nsi.status() === 'loading') throw new Error('NSI still loading');
         }, { timeout: 1000, interval: 50 });
     });
 
