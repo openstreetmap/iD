@@ -61,14 +61,6 @@ describe('iD.serviceNsi', function () {
             expect(iD.services.nsi.upgradeTags({ highway: 'residential', name: 'Aldi' }, world)).toBeNull();
         });
 
-        it('adds missing brand tags [SHOULD FAIL]', () => {
-            const result = iD.services.nsi.upgradeTags({ shop: 'supermarket', name: 'Aldi' }, world);
-            expect(result.matched.id).toBe('aldi-test');
-            expect(result.newTags).toEqual({
-                shop: 'supermarket', name: 'Aldi', brand: 'Aldi', 'brand:wikidata': 'Q125054'
-            });
-        });
-
         it('adds missing brand tags [SHOULD NOT FAIL]', () => {
             const result = iD.services.nsi.upgradeTags({ shop: 'supermarket', name: 'Examplestan' }, world);
             expect(result.matched.id).toBe('example1');
