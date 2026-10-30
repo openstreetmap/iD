@@ -523,7 +523,8 @@ export function rendererFeatures(context) {
 
     features.isHiddenChild = function(entity, resolver, geometry) {
         if (!_hidden.length) return false;
-        if (!entity.version || geometry === 'point') return false;
+        // new vertices are hidden too if all their parent ways are (e.g. after disconnecting, #7864)
+        if (geometry === 'point') return false;
         if (_forceVisible[entity.id]) return false;
 
         var parents = features.getParents(entity, resolver, geometry);
@@ -563,7 +564,6 @@ export function rendererFeatures(context) {
 
     features.isHidden = function(entity, resolver, geometry) {
         if (!_hidden.length) return false;
-        if (!entity.version) return false;
 
         var fn = (geometry === 'vertex' ? features.isHiddenChild : features.isHiddenFeature);
         return fn(entity, resolver, geometry);
