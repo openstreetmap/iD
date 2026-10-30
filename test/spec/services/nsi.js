@@ -1,6 +1,6 @@
 describe('iD.serviceNsi', function () {
     var context;
-    const world = [0, 0];
+    const nullIslandLocation = [0, 0];
 
     beforeEach(() => {
         iD.services.nsi = iD.serviceNsi;
@@ -58,11 +58,11 @@ describe('iD.serviceNsi', function () {
 
     describe('#upgradeTags', () => {
         it('returns null for features which are not covered by NSI', () => {
-            expect(iD.services.nsi.upgradeTags({ highway: 'residential', name: 'Aldi' }, world)).toBeNull();
+            expect(iD.services.nsi.upgradeTags({ highway: 'residential', name: 'Aldi' }, nullIslandLocation)).toBeNull();
         });
 
         it('adds missing brand tags', () => {
-            const result = iD.services.nsi.upgradeTags({ shop: 'supermarket', name: 'Examplestan' }, world);
+            const result = iD.services.nsi.upgradeTags({ shop: 'supermarket', name: 'Examplestan' }, nullIslandLocation);
             expect(result.matched.id).toBe('example1');
             expect(result.newTags).toEqual({
                 shop: 'supermarket', name: 'Examplestan', brand: 'Examplestan', 'brand:wikidata': 'Q99999999999999'
