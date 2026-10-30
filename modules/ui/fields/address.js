@@ -116,7 +116,13 @@ export function uiFieldAddress(field, context) {
             return d.tags.highway && d.tags.name && d.type === 'way';
         }
 
-        return getNear(isAddressable, 'street', 200);
+        const nearRoads = getNear(isAddressable, 'street', 200);
+        const enclosedStreets = getEnclosingValues('street');
+        const combined = [
+            ...enclosedStreets,
+            ...nearRoads
+        ];
+        return utilArrayUniqBy(combined, 'value');
     }
 
     function getNearPlaces() {
