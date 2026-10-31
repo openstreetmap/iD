@@ -26,9 +26,6 @@ const dispatch = d3_dispatch('loadedImages', 'loadedLines');
 const imgZoom = d3_zoom()
     .scaleExtent([1, 15]);
 const constrainPhoto = imgZoom.constrain();
-// The photo fills the zoom target. D3 measures its current viewport for each
-// gesture, so constrain panning to that same extent after a resize too.
-imgZoom.constrain((transform, extent) => constrainPhoto(transform, extent, extent));
 const pannellumViewerCSS = 'pannellum/pannellum.css';
 const pannellumViewerJS = 'pannellum/pannellum.js';
 const resolution = 1080;
@@ -513,9 +510,16 @@ export default {
             .append('div')
             .attr('id', 'ideditor-viewer-mapilio-pnlm');
 
-        wrapEnter
+        const simpleWrap = wrapEnter
             .append('div')
-            .attr('id', 'ideditor-viewer-mapilio-simple-wrap')
+            .attr('id', 'ideditor-viewer-mapilio-simple-wrap');
+        const simpleNode = context.container().select('#ideditor-viewer-mapilio-simple-wrap').node();
+        imgZoom.constrain(transform => {
+            // A gesture can continue across a resize, so read the live viewport.
+            const extent = [[0, 0], [simpleNode.clientWidth, simpleNode.clientHeight]];
+            return constrainPhoto(transform, extent, extent);
+        });
+        simpleWrap
             .call(imgZoom.on('zoom', zoomPan))
             .append('div')
             .attr('id', 'ideditor-viewer-mapilio-simple');

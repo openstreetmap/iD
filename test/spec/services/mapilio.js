@@ -54,8 +54,8 @@ describe('iD.serviceMapilio', function() {
         return node;
     }
 
-    function wheel(node, x, y) {
-        node.dispatchEvent(new WheelEvent('wheel', { bubbles: true, cancelable: true, deltaY: -500, clientX: x, clientY: y }));
+    function wheel(node, x, y, deltaY = -500) {
+        node.dispatchEvent(new WheelEvent('wheel', { bubbles: true, cancelable: true, deltaY, clientX: x, clientY: y }));
     }
 
     function drag(node, dx, dy) {
@@ -119,5 +119,20 @@ describe('iD.serviceMapilio', function() {
         resizeViewer();
         expect(zoomTransform(node).x).toBe(-320);
         expect(zoomTransform(node).y).toBe(-240);
+    });
+
+    it('keeps an ongoing wheel gesture within the resized viewport', async () => {
+        const node = photoViewport(640, 400);
+        select(node).call(zoom().transform, zoomIdentity);
+        wheel(node, 620, 380, -1000);
+        expect(zoomTransform(node).k).toBe(4);
+        photoViewport(320, 240);
+        resizeViewer();
+        // Continue before D3 ends the gesture and replaces its cached extent.
+        wheel(node, 0, 0, 500);
+        expect(zoomTransform(node).k).toBe(2);
+        expect(zoomTransform(node).x).toBe(-320);
+        expect(zoomTransform(node).y).toBe(-240);
+        await new Promise(resolve => { setTimeout(resolve, 160); });
     });
 });
