@@ -74,6 +74,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Fix some checkbox fields from not setting the "checked" state on the first click when editing a multiselection with multiple values
 * Fix double-click zoom not working after cancelling drawing a line or area ([#11926], thanks [@aditya1010-max])
 * Fix the undo/redo annotation shown after converting an area to a line, or a line to an area, through a validation fix ([#12978], thanks [@wantaekchoi])
+* fix bug where `ref=*` labels did not appear for relation members ([#13097], thanks [@k-yle])
 #### :earth_asia: Localization
 * Support 835 new languages in the dropdown when adding a `name:*` tag ([#12802])
 * Support territory-level address hints ([#12704], thanks [@Vectorial1024])
@@ -129,6 +130,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#13043]: https://github.com/openstreetmap/iD/pull/13043
 [#13074]: https://github.com/openstreetmap/iD/pull/13074
 [#13081]: https://github.com/openstreetmap/iD/pull/13081
+[#13097]: https://github.com/openstreetmap/iD/pull/13097
 [@aditya1010-max]: https://github.com/aditya1010-max
 [@Geo-2695]: https://github.com/Geo-2695
 [@hemaksh2007jain-bit]: https://github.com/hemaksh2007jain-bit
