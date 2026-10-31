@@ -37,7 +37,7 @@ export function uiSettingsCustomBackground() {
 ${localizer.t_html('settings.custom_background.instructions.info')}
 
 ${localizer.t_html('settings.custom_background.instructions.license_disclaimer')}
-[${localizer.t_html('settings.custom_background.instructions.license_faq')}](${t('settings.custom_background.instructions.license_faq_url')})
+<a href="${t('settings.custom_background.instructions.license_faq_url')}" target="_blank">${t.html('settings.custom_background.instructions.license_faq')}</a>
 
 #### ${localizer.t_html('settings.custom_background.instructions.wms.tokens_label')}
 * ${localizer.t_html('settings.custom_background.instructions.wms.tokens.proj')}
