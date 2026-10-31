@@ -1,7 +1,7 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 
 import { utilFastMouse } from './util';
-import { utilRebind } from './rebind';
+import { utilBindDispatch } from './rebind';
 import { geoVecLength, type Vec2 } from '../geo/vector';
 
 // A custom double-click / double-tap event detector that works on touch devices
@@ -91,5 +91,6 @@ export function utilDoubleUp() {
             .on('dblclick.doubleUp', null);
     };
 
-    return utilRebind(doubleUp, dispatch, 'on');
+    doubleUp.on = utilBindDispatch(doubleUp, dispatch);
+    return doubleUp;
 }
