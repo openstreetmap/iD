@@ -74,6 +74,9 @@ path.line.stroke.tag-railway {
 path.line.stroke.tag-railway.tag-railway-platform_edge {
     stroke: #fd3;
 }
+.preset-icon-container path.line.stroke.tag-railway.tag-railway-platform_edge {
+    stroke-dasharray: none;
+}
 
 .preset-icon .icon.tag-railway.tag-status {
     color: #999;
