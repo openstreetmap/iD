@@ -6,6 +6,7 @@ import { localizer } from '../core/localizer';
 
 var apibase = 'https://www.wikidata.org/w/api.php?';
 var _wikidataCache: { [qId: ItemId]: Item } = {};
+const _inflight: { [qId: ItemId]: Promise<WikibaseApiResponse | undefined> } = {};
 
 export interface WikibaseApiResponse {
     success: 0 | 1;
@@ -150,16 +151,23 @@ export default {
             origin: '*'
         });
 
-        d3_json(url)
+        _inflight[qid] ||= d3_json(url);
+
+        return _inflight[qid]
             .then(function(_result) {
                 const result = _result as WikibaseApiResponse;
                 if (result && result.error) {
                     throw new Error(JSON.stringify(result.error));
                 }
-                if (callback) callback(null, result.entities[qid] || {});
+                const entity = result.entities[qid];
+                _wikidataCache[qid] = entity;
+                if (callback) callback(null, entity || {});
             })
             .catch(function(err) {
                 if (callback) callback(err);
+            })
+            .finally(() => {
+                delete _inflight[qid];
             });
     },
 
