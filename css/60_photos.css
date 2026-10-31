@@ -346,7 +346,7 @@ li.list-item-photos.list-item-mapilio.active:after {
 #ideditor-viewer-mapilio-simple img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
     overflow: hidden;
 }
 
