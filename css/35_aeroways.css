@@ -42,11 +42,6 @@ path.line.stroke.tag-taxiway {
 }
 
 /* wide aeroways (runway) */
-.preset-icon .icon.tag-aeroway-runway,
-.preset-icon .icon.tag-runway {
-    color: #444;
-    fill: #000;
-}
 path.line.shadow.tag-aeroway-runway {
     stroke-width: 20;
 }
