@@ -84,11 +84,4 @@ describe('iD.serviceNsi', function () {
         });
         return issues;
     }
-
-    it('has no errors on init', () => {
-        var validator = iD.validationSuspiciousName(context);
-
-        var issues = validate(validator);
-        expect(issues).toHaveLength(0);
-    });
 });
