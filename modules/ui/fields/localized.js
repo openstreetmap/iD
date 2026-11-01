@@ -280,15 +280,28 @@ export function uiFieldLocalized(field, context) {
         var language = _languagesArray.find(function(d) {
             return d.label.toLowerCase() === lang ||
                 (d.localName && d.localName.toLowerCase() === lang) ||
-                (d.nativeName && d.nativeName.toLowerCase() === lang);
+                (d.nativeName && d.nativeName.toLowerCase() === lang) ||
+                d.code.toLowerCase() === lang;
         });
         if (language) lang = language.code;
+
+        var newKey = lang && context.cleanTagKey(key(lang));
+
+        // An unrecognized language can produce a tag suffix this field
+        // cannot read back (e.g. 'name:klingon'); writing it would hide
+        // the tag and blank the row's value, losing the user's input - #13019
+        var m = newKey && newKey.match(LANGUAGE_SUFFIX_REGEX);
+        if (newKey && !(m && m[1] === field.key)) {
+            var prevItem = _languagesArray.find(function(item) {
+                return item.code === d.lang;
+            });
+            utilGetSetValue(d3_select(this), prevItem ? prevItem.label : (d.lang || ''));
+            return;
+        }
 
         if (d.lang && d.lang !== lang) {
             tags[key(d.lang)] = undefined;
         }
-
-        var newKey = lang && context.cleanTagKey(key(lang));
 
         var value = utilGetSetValue(d3_select(this.parentNode).selectAll('.localized-value'));
 
