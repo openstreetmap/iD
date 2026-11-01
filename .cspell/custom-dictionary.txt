@@ -1,6 +1,7 @@
 # Custom Dictionary Words
 aerialway
 aeroway
+afterall
 antimeridian
 apibase
 bbox
