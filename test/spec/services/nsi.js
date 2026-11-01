@@ -12,7 +12,7 @@ describe('iD.serviceNsi', function () {
                         {
                             id: 'example1',
                             displayName: 'Examplestan',
-                            locationSet: { include: ['001'] },
+                            locationSet: { include: ['world'] },
                             tags: { brand: 'Examplestan', 'brand:wikidata': 'Q99999999999999', name: 'Examplestan', shop: 'supermarket' }
                         }
                     ]
