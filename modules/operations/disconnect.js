@@ -31,8 +31,6 @@ export function operationDisconnect(context, selectedIDs) {
         // At the selected vertices, disconnect the selected ways, if any, else
         // disconnect all connected ways
 
-        _disconnectingVertexIds = _vertexIDs;
-
         _vertexIDs.forEach(function(vertexID) {
             var action = actionDisconnect(vertexID);
 
@@ -43,7 +41,17 @@ export function operationDisconnect(context, selectedIDs) {
                 });
                 action.limitWays(waysIDsForVertex);
             }
+
+            // When multiple vertices are selected, disconnect whichever ones
+            // can be disconnected and skip the rest, rather than letting one
+            // undisconnectable vertex (e.g. not shared, or in a relation)
+            // block the whole operation (#8362). With a single vertex
+            // selected, keep it so its specific disabled reason still
+            // surfaces via operation.disabled() below, as before.
+            if (_vertexIDs.length > 1 && action.disabled(context.graph())) return;
+
             _actions.push(action);
+            _disconnectingVertexIds.push(vertexID);
             _disconnectingWayIds = _disconnectingWayIds
                 .concat(context.graph().parentWays(context.graph().entity(vertexID)).map(d => d.id));
         });
