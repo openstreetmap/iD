@@ -41,6 +41,9 @@ describe('iD.serviceNsi', function () {
     beforeEach(async () => {
         context = iD.coreContext().assetPath('../dist/').init();
         await vi.waitFor(() => {
+            if (iD.services.nsi.status() === 'failed') {
+                throw new Error('NSI loading failed');
+            }
             if (iD.services.nsi.cache().data !== iD.fileFetcher.cache().nsi_data.nsi) {
                 throw new Error('NSI is still using data from old test');
             }
