@@ -993,6 +993,7 @@ export function uiFieldCombo(field, context) {
                 .attr('href', '#')
                 .on('click', removeMultikey)
                 .attr('class', 'remove')
+                .attr('title', t('icons.remove'))
                 .text('×');
 
             updateIcon('');
