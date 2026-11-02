@@ -353,29 +353,33 @@ describe('iD.presetIndex', function () {
         it('fills all recent slots even when some remembered presets are not available in the current region (#11405)', () => {
             const testIndex = presetIndex();
 
+            const rememberedLocationSetsAt = locationManager.locationSetsAt;
             locationManager.locationSetsAt = () => new Map(Object.entries({ 'world': 1 }));
-
-            const p1 = { id: 'p1', matchGeometry: () => true, locationSetID: 'world' };
-            const p2 = { id: 'p2', matchGeometry: () => true, locationSetID: 'us_only' }; // Invalid
-            const p3 = { id: 'p3', matchGeometry: () => true, locationSetID: 'world' };
-            const p4 = { id: 'p4', matchGeometry: () => true, locationSetID: 'us_only' }; // Invalid
-            const p5 = { id: 'p5', matchGeometry: () => true, locationSetID: 'world' };
-
-            testIndex.recent = () => ({
-                matchGeometry: () => ({
-                    collection: [p1, p2, p3, p4, p5]
-                })
-            });
-
-            const locCoords = [0, 51];
-            const result = testIndex.defaults('point', 10, true, locCoords);
-
-            const ids = result.collection.map(p => p.id);
-
-            expect(ids).toContain('p5');
-            expect(ids).not.toContain('p2');
-            expect(ids).not.toContain('p4');
-            expect(ids.slice(0, 3)).toEqual(['p1', 'p3', 'p5']);
+            try {
+                const p1 = { id: 'p1', matchGeometry: () => true, locationSetID: 'world' };
+                const p2 = { id: 'p2', matchGeometry: () => true, locationSetID: 'us_only' }; // Invalid
+                const p3 = { id: 'p3', matchGeometry: () => true, locationSetID: 'world' };
+                const p4 = { id: 'p4', matchGeometry: () => true, locationSetID: 'us_only' }; // Invalid
+                const p5 = { id: 'p5', matchGeometry: () => true, locationSetID: 'world' };
+    
+                testIndex.recent = () => ({
+                    matchGeometry: () => ({
+                        collection: [p1, p2, p3, p4, p5]
+                    })
+                });
+    
+                const locCoords = [0, 51];
+                const result = testIndex.defaults('point', 10, true, locCoords);
+    
+                const ids = result.collection.map(p => p.id);
+    
+                expect(ids).toContain('p5');
+                expect(ids).not.toContain('p2');
+                expect(ids).not.toContain('p4');
+                expect(ids.slice(0, 3)).toEqual(['p1', 'p3', 'p5']);
+            } finally {
+                locationManager.locationSetsAt = rememberedLocationSetsAt;
+            }
         });
     });
 
