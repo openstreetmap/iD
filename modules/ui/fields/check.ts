@@ -13,6 +13,7 @@ import { osmOneWayBackwardTags, osmOneWayBiDirectionalTags, osmOneWayForwardTags
 import type { EntityId } from '../../osm';
 import { formatTag } from './tag_title';
 import { uiTooltip } from '../tooltip';
+import { getSet } from '../../util/class';
 
 export { uiFieldCheck as uiFieldDefaultCheck };
 export { uiFieldCheck as uiFieldOnewayCheck };
@@ -196,11 +197,7 @@ export function uiFieldCheck(field: any, context: iD.Context) {
     };
 
 
-    check.entityIDs = function(val?: EntityId[]) {
-        if (!arguments.length) return _entityIDs;
-        _entityIDs = val!;
-        return check;
-    };
+    check.entityIDs = getSet(check, () => _entityIDs, _ => _entityIDs = _);
 
 
     check.tags = function(tags: TagsMulti) {

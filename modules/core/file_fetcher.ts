@@ -27,6 +27,7 @@ import type { WmfSite } from '../ui/fields/wikipedia.js';
 import type { EntityId } from '../osm/id_manager.js';
 import type { OsmEntity } from '../osm/abstract-entity.js';
 import packageJSON from '../../package.json';
+import { getSet } from '../util/class.js';
 
 
 
@@ -178,25 +179,13 @@ export function coreFileFetcher() {
 
 
   // Accessor for the file map
-  _this.fileMap = function(val) {
-    if (!arguments.length) return _fileMap;
-    _fileMap = val!;
-    return _this;
-  } as GetSet<coreFileFetcher, FileMap>;
+  _this.fileMap = getSet(_this, () => _fileMap, _ => _fileMap = _);
 
   let _assetPath = '';
-  _this.assetPath = function(val) {
-    if (!arguments.length) return _assetPath;
-    _assetPath = val!;
-    return _this;
-  } as GetSet<coreFileFetcher, string>;
+  _this.assetPath = getSet(_this, () => _assetPath, _ => _assetPath = _);
 
   let _assetMap: AssetMap = {};
-  _this.assetMap = function(val) {
-    if (!arguments.length) return _assetMap;
-    _assetMap = val!;
-    return _this;
-  } as GetSet<coreFileFetcher, AssetMap>;
+  _this.assetMap = getSet(_this, () => _assetMap, _ => _assetMap = _);
 
   _this.asset = (val) => {
     if (/^http(s)?:\/\//i.test(val)) return val;
