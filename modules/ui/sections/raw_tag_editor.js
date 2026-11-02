@@ -1,6 +1,6 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { select as d3_select } from 'd3-selection';
-import { isEmpty } from 'es-toolkit/compat';
+import { isEmptyObject } from 'es-toolkit';
 
 import { services } from '../../services';
 import { svgIcon } from '../../svg/icon';
@@ -274,7 +274,7 @@ export function uiSectionRawTagEditor(id, context) {
             })
             .call(utilGetSetValue,
                 d => d.key,
-                (_, newKey) => _pendingChange === null || isEmpty(_pendingChange) || _pendingChange[newKey] // if there are pending changes: skip untouched tags
+                (_, newKey) => _pendingChange === null || isEmptyObject(_pendingChange) || _pendingChange[newKey] // if there are pending changes: skip untouched tags
             );
 
         items.selectAll('input.value')
@@ -291,7 +291,7 @@ export function uiSectionRawTagEditor(id, context) {
                 return isReadOnly(d) || null;
             })
             .call(utilGetSetValue, d => {
-                if (_pendingChange !== null && !isEmpty(_pendingChange) && !_pendingChange[d.key]) {
+                if (_pendingChange !== null && !isEmptyObject(_pendingChange) && !_pendingChange[d.key]) {
                     // if there are pending changes: skip untouched tags
                     return null;
                 }
@@ -400,7 +400,7 @@ export function uiSectionRawTagEditor(id, context) {
             }
         });
 
-        if (isEmpty(_pendingChange)) {
+        if (isEmptyObject(_pendingChange)) {
             _pendingChange = null;
             section.reRender();
             return;

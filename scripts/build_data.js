@@ -3,7 +3,7 @@ import fs from 'node:fs';
 import { styleText } from 'node:util';
 import shell from 'shelljs';
 import { load as loadYaml } from 'js-yaml';
-import { pull } from 'es-toolkit/compat';
+import { pull } from 'es-toolkit';
 import dotenv from 'dotenv';
 import cldrTerritoryInfo from 'cldr-core/supplemental/territoryInfo.json' with { type: 'json' };
 import packageJson from '../package.json' with { type: 'json' };
@@ -181,7 +181,7 @@ function generateTerritoryLanguages() {
 
   // override/adjust some territory languages which are not included in CLDR data
   territoryLanguages.pk.push('pnb', 'scl', 'trw', 'kls'); // https://github.com/openstreetmap/iD/pull/9242
-  pull(territoryLanguages.pk, 'pa-Arab', 'lah', 'tg-Arab'); // - " -
+  pull(territoryLanguages.pk, ['pa-Arab', 'lah', 'tg-Arab']); // - " -
   territoryLanguages.au = [
      'en', 'aus', 'aer', 'aoi', 'bdy', 'coa', 'dgw', 'gjm', 'gjr', 'gup',
     'jay', 'mwf', 'mwp', 'nys', 'pih', 'piu', 'pjt', 'rop', 'tcs', 'tiw',

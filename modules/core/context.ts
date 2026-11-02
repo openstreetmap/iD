@@ -1,4 +1,4 @@
-import { debounce, throttle, type DebouncedFunc } from 'es-toolkit/compat';
+import { debounce, throttle, type DebouncedFunction } from 'es-toolkit';
 
 import { dispatch as d3_dispatch, type Dispatch } from 'd3-dispatch';
 import { select as d3_select } from 'd3-selection';
@@ -106,7 +106,7 @@ export interface coreContext extends Pick<Dispatch<object, EventMap>, 'on'> {
 
     inIntro: GetSet<coreContext, boolean>;
     save(): void;
-    debouncedSave: DebouncedFunc<coreContext['save']>;
+    debouncedSave: DebouncedFunction<coreContext['save']>;
     hasEntity: coreGraph['hasEntity'];
     entity: coreGraph['entity'];
 

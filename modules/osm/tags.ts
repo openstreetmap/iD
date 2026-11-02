@@ -1,4 +1,4 @@
-import { merge } from 'es-toolkit/compat';
+import { merge } from 'es-toolkit';
 import type { TagDictionary } from '../util/object';
 import { getLuma } from '../util/util';
 
@@ -231,12 +231,10 @@ export const osmOneWayBiDirectionalTags: TagDictionary<boolean> = {
         'reversible': true,
     },
 };
-export const osmOneWayTags = merge(
-    {},
-    osmOneWayForwardTags,
-    osmOneWayBackwardTags,
-    osmOneWayBiDirectionalTags,
-);
+export const osmOneWayTags: TagDictionary<boolean> = {};
+merge(osmOneWayTags, osmOneWayForwardTags);
+merge(osmOneWayTags, osmOneWayBackwardTags);
+merge(osmOneWayTags, osmOneWayBiDirectionalTags);
 
 // solid and smooth surfaces akin to the assumed default road or path surface
 export const osmPavedTags: TagDictionary<boolean> = {

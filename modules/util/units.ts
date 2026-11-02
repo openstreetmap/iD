@@ -1,4 +1,4 @@
-import { clamp } from 'es-toolkit/compat';
+import { clamp } from 'es-toolkit';
 
 import { t, localizer } from '../core/localizer';
 import type { Vec2, Vec3 } from '../geo/vector';

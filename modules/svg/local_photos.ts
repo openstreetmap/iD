@@ -1,7 +1,7 @@
 import { select as d3_select } from 'd3-selection';
 import type { Dispatch } from 'd3-dispatch';
 import exifr from 'exifr';
-import { isArray, isNumber } from 'es-toolkit/compat';
+import { isNumber } from 'es-toolkit';
 import type { coreContext } from '../core';
 import { localizer } from '../core/localizer';
 import { utilDetect } from '../util/detect';
@@ -191,7 +191,7 @@ export function svgLocalPhotos(projection: Projection, context: coreContext, dis
 
     // puts the image markers on the map
     function display_markers(imageList: LocalPhoto[]) {
-        imageList = imageList.filter(image => isArray(image.loc) && isNumber(image.loc[0]) && isNumber(image.loc[1]));
+        imageList = imageList.filter(image => Array.isArray(image.loc) && isNumber(image.loc[0]) && isNumber(image.loc[1]));
         const groups = layer.selectAll('.markers').selectAll<SVGGElement, LocalPhoto>('.viewfield-group')
             .data(imageList, function(d) { return d.id; });
 
@@ -362,7 +362,7 @@ export function svgLocalPhotos(projection: Projection, context: coreContext, dis
     drawPhotos.fitZoom = function(force?: boolean) {
         const coords = _photos
             .map(image => image.loc)
-            .filter(l => isArray(l) && isNumber(l[0]) && isNumber(l[1]));
+            .filter(l => Array.isArray(l) && isNumber(l[0]) && isNumber(l[1]));
         if (coords.length === 0) return;
         const extent = coords
             .map(l => geoExtent(l, l))
@@ -414,7 +414,7 @@ export function svgLocalPhotos(projection: Projection, context: coreContext, dis
     };
 
     drawPhotos.hasData = function() {
-        return isArray(_photos) && _photos.length > 0;
+        return Array.isArray(_photos) && _photos.length > 0;
     };
 
 
