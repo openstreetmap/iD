@@ -1,6 +1,7 @@
+import type { Vec2 } from '../../../modules/geo/vector';
+
 describe('iD.serviceNsi', function () {
-    var context;
-    const nullIslandLocation = [0, 0];
+    const nullIslandLocation: Vec2 = [0, 0];
 
     beforeEach(() => {
         iD.services.nsi = iD.serviceNsi;
@@ -10,6 +11,8 @@ describe('iD.serviceNsi', function () {
                     properties: { path: 'brands/shop/supermarket' },
                     items: [
                         {
+                            mainTag: '',
+                            tkv: '',
                             id: 'example1',
                             displayName: 'Examplestan',
                             locationSet: { include: ['world'] },
@@ -27,8 +30,13 @@ describe('iD.serviceNsi', function () {
         iD.fileFetcher.cache().nsi_trees = {
             trees: {
                 brands: {
+                    emoji: '',
+                    nameTags: { primary: '', alternate: '' },
                     mainTag: 'brand:wikidata'
-                }
+                },
+                operators: undefined as never,
+                transit: undefined as never,
+                flags: undefined as never,
             }
         };
         iD.fileFetcher.cache().nsi_generics = {
@@ -39,21 +47,11 @@ describe('iD.serviceNsi', function () {
     });
 
     beforeEach(async () => {
-        context = iD.coreContext().assetPath('../dist/').init();
-        await vi.waitFor(() => {
-            if (iD.services.nsi.status() === 'failed') {
-                throw new Error('NSI loading failed');
-            }
-            if (iD.services.nsi.cache().data !== iD.fileFetcher.cache().nsi_data.nsi) {
-                throw new Error('NSI is still using data from old test');
-            }
-            if (iD.services.nsi.status() === 'loading') {
-                throw new Error('NSI still loading');
-            }
-        }, { timeout: 1000, interval: 50 });
+        await iD.coreContext().assetPath('../dist/').init(true);
     });
 
     afterEach(() => {
+        // @ts-expect-error -- deleting a required prop
         delete iD.services.nsi;
     });
 
@@ -71,8 +69,8 @@ describe('iD.serviceNsi', function () {
 
         it('adds missing brand tags', () => {
             const result = iD.services.nsi.upgradeTags({ shop: 'supermarket', name: 'Examplestan' }, nullIslandLocation);
-            expect(result.matched.id).toBe('example1');
-            expect(result.newTags).toEqual({
+            expect(result?.matched?.id).toBe('example1');
+            expect(result?.newTags).toEqual({
                 shop: 'supermarket', name: 'Examplestan', brand: 'Examplestan', 'brand:wikidata': 'Q99999999999999'
             });
         });
