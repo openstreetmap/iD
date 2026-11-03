@@ -1,6 +1,6 @@
 import type { Action } from '../core/history';
 import type { EntityId } from '../osm';
-import type { presetPreset } from '../presets';
+import { presetManager, type presetPreset } from '../presets';
 import { utilArrayDifference, utilObjectOmit } from '../util';
 
 export function actionChangePreset(entityID: EntityId, oldPreset: presetPreset | undefined, newPreset: presetPreset | undefined, skipFieldDefaults?: boolean): Action {
@@ -19,8 +19,8 @@ export function actionChangePreset(entityID: EntityId, oldPreset: presetPreset |
             }
             if (oldPreset) {
                 const wasSubPreset = oldPreset.id.startsWith(newPreset.id);
-                newPreset.fields(loc).concat(newPreset.moreFields(loc))
-                    .filter(f => f.matchGeometry(geometry))
+                newPreset.fields(loc).concat(newPreset.moreFields(loc), presetManager.universal())
+                    .filter(f => f?.matchGeometry(geometry))
                     .flatMap(f => f.allKeys(tags))
                     .filter(key => {
                         if (wasSubPreset) {
@@ -43,7 +43,9 @@ export function actionChangePreset(entityID: EntityId, oldPreset: presetPreset |
                     const oldPresetFieldKeys = [
                         ...oldPreset.fields(loc),
                         ...oldPreset.moreFields(loc)
-                    ].flatMap(f => f.allKeys(tags));
+                    ]
+                        .filter(f => !f?.universal)
+                        .flatMap(f => f.allKeys(tags));
 
                     // field-keys used by the old preset but not the new preset
                     const fieldKeysToRemove = utilArrayDifference(oldPresetFieldKeys, preserveKeys);
