@@ -21,6 +21,7 @@ import { uiFlash } from './flash';
 import { uiFullScreen } from './full_screen';
 import { uiGeolocate } from './geolocate';
 import { uiInfo } from './info';
+import { uiIndoorFocusStatus } from './indoor_focus_status';
 import { uiIntro } from './intro';
 import { uiIssuesInfo } from './issues_info';
 import { uiLoading } from './loading';
@@ -176,7 +177,8 @@ export function uiInit(context) {
 
         overMap
             .call(uiMapInMap(context))
-            .call(uiNotice(context));
+            .call(uiNotice(context))
+            .call(uiIndoorFocusStatus(context));
 
         overMap
             .append('div')
