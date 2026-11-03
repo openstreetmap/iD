@@ -1669,6 +1669,9 @@ en:
         message: "{feature} has no descriptive tags"
       relation_type:
         message: "{feature} is a relation without a type"
+    multipolygon_type_on_non_relation:
+      message: "{feature} has type=multipolygon but is not a relation"
+      reference: "The type=multipolygon tag is only valid on relations."
     mutually_exclusive_tags:
       title: Contradictory Tags
       tip: "Find features that have contradictory tags."
