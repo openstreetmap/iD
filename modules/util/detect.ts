@@ -2,6 +2,7 @@ export interface Detected {
   browser: string;
   version: string;
   opera: boolean;
+  support: boolean;
   filedrop: boolean;
   os: 'win' | 'mac' | 'linux';
   platform: 'Windows' | 'Macintosh' | 'Linux' | 'Unknown';
@@ -15,6 +16,7 @@ let _detected: Detected;
 export function utilDetect(refresh?: boolean) {
   if (_detected && !refresh) return _detected;
   _detected = <Detected>{};
+  _detected.support = true; // currently no browser is detected as unsupported, but this might change in the future
 
   const ua = navigator.userAgent;
   let m;
