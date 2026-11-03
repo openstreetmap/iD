@@ -643,7 +643,7 @@ export class coreHistory extends EventDispatcher<EventMap> {
                             loadComplete = false;
                             this.context.map().redrawEnable(false);
 
-                            var loading = uiLoading(this.context).blocking(true);
+                            var loading = uiLoading().blocking(true);
                             this.context.container().call(loading);
 
                             var childNodesLoaded = (err: Error, result: { data: OsmEntity[] }) => {
