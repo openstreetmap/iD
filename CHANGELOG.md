@@ -69,12 +69,16 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Fix the icon of the GPS Overlay layer not working ([#12760], thanks [@hlfan])
 * Fix some tags (such as `railway:preferred_direction`) from being falsely detected as non-reversible ([#13018], thanks [@matkoniecz])
 * Prevent certain keyboard shortcuts causing all work to be lost ([#10118], thanks [@k-yle])
+* Fix wrong preset icon for platform_edge ([#13098], thanks [@k-yle])
 * Fix exception when dragging some undraggable parts of the UI ([#13030], thanks [@k-yle])
+* Fix some preset icons unreadable in dark mode ([#13100], thanks [@k-yle])
 * Fix minor labelling bug - try 85 and 95 offsets rather than trying 95 twice ([#13009], thanks [@matkoniecz])
 * Fix mistake in right-to-left text detection ([#13032], thanks [@matkoniecz])
+* Fix hundreds of API requests sent when you resize the sidebar ([#13102], thanks [@k-yle])
 * Fix some checkbox fields from not setting the "checked" state on the first click when editing a multiselection with multiple values
 * Fix double-click zoom not working after cancelling drawing a line or area ([#11926], thanks [@aditya1010-max])
 * Fix the undo/redo annotation shown after converting an area to a line, or a line to an area, through a validation fix ([#12978], thanks [@wantaekchoi])
+* Fix bug where `ref=*` labels did not appear for relation members ([#13097], thanks [@k-yle])
 #### :earth_asia: Localization
 * Support 835 new languages in the dropdown when adding a `name:*` tag ([#12802])
 * Support territory-level address hints ([#12704], thanks [@Vectorial1024])
@@ -131,6 +135,10 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#13043]: https://github.com/openstreetmap/iD/pull/13043
 [#13074]: https://github.com/openstreetmap/iD/pull/13074
 [#13081]: https://github.com/openstreetmap/iD/pull/13081
+[#13097]: https://github.com/openstreetmap/iD/pull/13097
+[#13098]: https://github.com/openstreetmap/iD/pull/13098
+[#13100]: https://github.com/openstreetmap/iD/pull/13100
+[#13102]: https://github.com/openstreetmap/iD/pull/13102
 [@aditya1010-max]: https://github.com/aditya1010-max
 [@Geo-2695]: https://github.com/Geo-2695
 [@hemaksh2007jain-bit]: https://github.com/hemaksh2007jain-bit
