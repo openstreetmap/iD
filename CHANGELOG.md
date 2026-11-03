@@ -68,7 +68,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Allow tags like `not:*:wikidata` to have multiple values ([#12736], thanks [@k-yle])
 * Fix the icon of the GPS Overlay layer not working ([#12760], thanks [@hlfan])
 * Fix some tags (such as `railway:preferred_direction`) from being falsely detected as non-reversible ([#13018], thanks [@matkoniecz])
-* Prevent certain keyboard shortcuts causing all work to be lost ([#10118], thanks [@k-yle])
+* Prevent certain keyboard shortcuts causing work on the currently drawn feature to be lost ([#10118], thanks [@k-yle])
 * Fix wrong preset icon for platform_edge ([#13098], thanks [@k-yle])
 * Fix exception when dragging some undraggable parts of the UI ([#13030], thanks [@k-yle])
 * Fix some preset icons unreadable in dark mode ([#13100], thanks [@k-yle])
