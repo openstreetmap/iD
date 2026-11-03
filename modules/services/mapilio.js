@@ -22,7 +22,7 @@ const lineLayer = 'map_roads_line';
 const tileStyle = '&STYLE=&TILEMATRIX=EPSG:900913:{z}&TILEMATRIXSET=EPSG:900913&FORMAT=application/vnd.mapbox-vector-tile&TILECOL={x}&TILEROW={y}';
 
 const minZoom = 14;
-const dispatch = d3_dispatch('loadedImages', 'loadedLines');
+const dispatch = d3_dispatch('loadedImages', 'loadedLines', 'viewerChanged');
 const imgZoom = d3_zoom()
     .extent([[0, 0], [320, 240]])
     .translateExtent([[0, 0], [320, 240]])
@@ -37,6 +37,11 @@ let _activeImage;
 let _cache;
 let _loadViewerPromise;
 let _pannellumViewer;
+let _viewerFrame;
+let _viewerImageId;
+let _viewerSceneId;
+let _viewerState;
+let _pendingScene;
 let _sceneOptions = {
     showFullscreenCtrl: false,
     autoLoad: true,
@@ -46,6 +51,36 @@ let _sceneOptions = {
     hfov: 60,
 };
 let _currScene = 0;
+
+function stopViewerUpdates() {
+    if (_viewerFrame !== undefined) cancelAnimationFrame(_viewerFrame);
+    _viewerFrame = undefined;
+}
+
+function updateViewerState() {
+    if (!_pannellumViewer || !_activeImage || _viewerImageId !== _activeImage.id || !_pannellumViewer.isLoaded()) return;
+    if (_pannellumViewer.getScene() !== _viewerSceneId) return;
+
+    const yaw = _pannellumViewer.getYaw();
+    const hfov = _pannellumViewer.getHfov();
+    if (_viewerState?.imageId === _viewerImageId && _viewerState.yaw === yaw && _viewerState.hfov === hfov) return;
+
+    _viewerState = { imageId: _viewerImageId, yaw, hfov };
+    dispatch.call('viewerChanged');
+}
+
+function startViewerUpdates() {
+    if (_viewerFrame !== undefined || !_activeImage || _viewerImageId !== _activeImage.id) return;
+    if (!_pannellumViewer?.isLoaded() || _pannellumViewer.getScene() !== _viewerSceneId) return;
+    updateViewerState();
+
+    // Pannellum has no per-frame view event. Follow its motion until
+    // animatefinished, including touch, keyboard and post-drag inertia.
+    _viewerFrame = requestAnimationFrame(function tick() {
+        _viewerFrame = undefined;
+        startViewerUpdates();
+    });
+}
 
 // Load all data for the specified type from Mapilio vector tiles
 function loadTiles(which, url, maxZoom, projection) {
@@ -177,7 +212,7 @@ function getImageData(imageId, sequenceId) {
             let index = data.data.findIndex((feature) => feature.id === imageId);
             const {filename, uploaded_hash} = data.data[index];
             const targetResolution = _useHd ? hdResolution : resolution;
-            _sceneOptions.panorama = imageBaseUrl + '/' + uploaded_hash + '/' + filename + '/' + targetResolution;
+            return imageBaseUrl + '/' + uploaded_hash + '/' + filename + '/' + targetResolution;
         });
 }
 
@@ -207,6 +242,12 @@ export default {
 
     // Reset cache and state
     reset: function() {
+        stopViewerUpdates();
+        _activeImage = null;
+        _pendingScene = null;
+        _viewerState = null;
+        _viewerImageId = null;
+        _viewerSceneId = null;
         if (_cache) {
             Object.values(_cache.requests.inflight).forEach(function(request) { request.abort(); });
         }
@@ -268,6 +309,11 @@ export default {
 
     // Set the currently visible image
     setActiveImage: function(image) {
+        stopViewerUpdates();
+        _pendingScene = null;
+        _viewerState = null;
+        _viewerImageId = null;
+        _viewerSceneId = null;
         if (image) {
             _activeImage = {
                 id: image.id,
@@ -276,8 +322,16 @@ export default {
         } else {
             _activeImage = null;
         }
+        dispatch.call('viewerChanged');
     },
 
+    getActiveImage: function() {
+        return _activeImage;
+    },
+
+    getViewerState: function() {
+        return _viewerState;
+    },
 
     // Update the currently highlighted sequence and selected bubble.
     setStyles: function(context, hovered) {
@@ -305,13 +359,39 @@ export default {
 
         _currScene += 1;
         const sceneID = _currScene.toString();
+        _viewerSceneId = sceneID;
         const options = {
             'default': { firstScene: sceneID },
             scenes: {}
         };
-        options.scenes[sceneID] = _sceneOptions;
+        options.scenes[sceneID] = { ..._sceneOptions };
 
-        _pannellumViewer = window.pannellum.viewer('ideditor-viewer-mapilio-pnlm', options);
+        const viewer = window.pannellum.viewer('ideditor-viewer-mapilio-pnlm', options);
+        _pannellumViewer = viewer;
+        viewer
+            .on('load', () => {
+                if (_pannellumViewer !== viewer) return;
+                const pendingScene = _pendingScene;
+                _pendingScene = null;
+                if (pendingScene) pendingScene();
+                else startViewerUpdates();
+            })
+            .on('mousedown', startViewerUpdates)
+            .on('touchstart', startViewerUpdates)
+            .on('zoomchange', startViewerUpdates)
+            .on('scenechange', stopViewerUpdates)
+            .on('animatefinished', () => {
+                updateViewerState();
+                stopViewerUpdates();
+            });
+
+        d3_select(_pannellumViewer.getContainer())
+            .on('keydown.mapilio', event => {
+                // Match Pannellum's movement/zoom keys. Other keys, including
+                // Escape, do not start an animation that can stop this loop.
+                const movementKeys = [16, 17, 37, 38, 39, 40, 61, 65, 68, 83, 87, 107, 109, 173, 187, 189];
+                if (movementKeys.includes(event.which || event.keyCode)) startViewerUpdates();
+            });
     },
 
     selectImage: function (context, id) {
@@ -321,8 +401,10 @@ export default {
         let d = this.cachedImage(id);
 
         this.setActiveImage(d);
+        const activeImage = _activeImage;
+        let panorama;
 
-        patchHash({ photo: 'mapilio/' + d.id });
+        patchHash({ photo: d ? 'mapilio/' + d.id : null });
 
         let viewer = context.container().select('.photoviewer');
         if (!viewer.empty()) viewer.datum(d);
@@ -342,6 +424,7 @@ export default {
           }
 
         }).finally(() => {
+            if (_activeImage !== activeImage) return;
 
             attribution
              .append('input')
@@ -350,17 +433,7 @@ export default {
              .on('click',(e) => {
                 e.stopPropagation();
                 _useHd = e.target.checked;
-                let parts = _sceneOptions.panorama.split('/');
-
-                if (_useHd){
-                    parts[parts.length - 1] = hdResolution;
-                    _sceneOptions.panorama= parts.join('/');
-                    loadTheImage();
-                } else {
-                    parts[parts.length - 1] = resolution;
-                    _sceneOptions.panorama=parts.join('/');
-                    loadTheImage();
-                }
+                loadTheImage();
              });
 
             attribution
@@ -415,23 +488,40 @@ export default {
 
 
         function loadTheImage(){
+            if (_activeImage !== activeImage || !panorama) return;
+            stopViewerUpdates();
+            _viewerState = null;
+            dispatch.call('viewerChanged');
             if (d.isPano) {
+                // Pannellum ignores loadScene while busy. Retry only the latest
+                // selection after the current scene finishes loading.
+                if (_pannellumViewer && !_pannellumViewer.isLoaded()) {
+                    _pendingScene = loadTheImage;
+                    return;
+                }
+                _pendingScene = null;
+            }
+            const targetResolution = _useHd ? hdResolution : resolution;
+            _sceneOptions.panorama = panorama.replace(/\/[^/]+$/, '/' + targetResolution);
+            if (d.isPano) {
+                _viewerImageId = d.id;
+                // Mapilio heading describes the center of the equirectangular
+                // image (yaw 0); positive Pannellum yaw turns clockwise.
+                _sceneOptions.northOffset = Number.isFinite(d.heading) ? d.heading : 0;
                 if (!_pannellumViewer) {
                     that.initViewer();
                 } else {
                     // make a new scene
                     _currScene += 1;
-                    let sceneID = _currScene.toString();
+                    const sceneID = _currScene.toString();
+                    const previousScene = _pannellumViewer.getScene();
+                    _viewerSceneId = sceneID;
                     _pannellumViewer
-                        .addScene(sceneID, _sceneOptions)
+                        .addScene(sceneID, { ..._sceneOptions })
                         .loadScene(sceneID);
 
                     // remove previous scene
-                    if (_currScene > 2) {
-                        sceneID = (_currScene - 1).toString();
-                        _pannellumViewer
-                            .removeScene(sceneID);
-                    }
+                    _pannellumViewer.removeScene(previousScene);
                 }
             } else {
                 // make non-panoramic photo viewer
@@ -439,14 +529,25 @@ export default {
             }
         }
 
-        getImageData(d.id,d.sequence_id).then(loadTheImage);
+        getImageData(d.id,d.sequence_id).then(url => {
+            // An older request must not align a newly selected marker to its scene.
+            if (_activeImage !== activeImage) return;
+            panorama = url;
+            loadTheImage();
+        });
 
         return this;
     },
 
     initOnlyPhoto: function (context) {
+        stopViewerUpdates();
+        _pendingScene = null;
+        _viewerState = null;
+        _viewerImageId = null;
+        _viewerSceneId = null;
 
         if (_pannellumViewer) {
+            d3_select(_pannellumViewer.getContainer()).on('keydown.mapilio', null);
             _pannellumViewer.destroy();
             _pannellumViewer = null;
         }
