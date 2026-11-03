@@ -377,6 +377,118 @@ describe('iD.presetIndex', function () {
             expect(ids).not.toContain('p4');
             expect(ids.slice(0, 3)).toEqual(['p1', 'p3', 'p5']);
         });
+
+        it('prioritizes expected presets before standard defaults', function () {
+            const testIndex = presetIndex();
+            const pExp1 = { id: 'exp1', matchGeometry: () => true };
+            const pExp2 = { id: 'exp2', matchGeometry: () => true };
+
+            const result = testIndex.defaults('vertex', 10, false, undefined, undefined, [pExp1, pExp2]);
+            const ids = result.collection.map(p => p.id);
+            expect(ids[0]).toEqual('exp1');
+            expect(ids[1]).toEqual('exp2');
+            expect(ids.slice(2)).toContain('point');
+        });
+
+        it('boosts expected presets present in recents to the top, followed by remaining expected presets, then other recents', function () {
+            const testIndex = presetIndex();
+            const pExp1 = { id: 'exp1', matchGeometry: () => true };
+            const pExp2 = { id: 'exp2', matchGeometry: () => true };
+            const pOtherRecent = { id: 'recent1', matchGeometry: () => true };
+
+            testIndex.recent = () => ({
+                matchGeometry: () => ({
+                    collection: [pOtherRecent, pExp2]
+                })
+            });
+
+            const result = testIndex.defaults('vertex', 10, true, undefined, undefined, [pExp1, pExp2]);
+            const ids = result.collection.map(p => p.id);
+            // pExp2 was used recently, so it is boosted to top of expected recents
+            expect(ids[0]).toEqual('exp2');
+            // pExp1 is expected, so it comes next
+            expect(ids[1]).toEqual('exp1');
+            // pOtherRecent was not an expected vertex, so it comes after expected presets
+            expect(ids[2]).toEqual('recent1');
+        });
+    });
+
+    describe('#expectedVertices', function () {
+        var testPresets = {
+            'power/line': {
+                tags: { power: 'line' },
+                geometry: ['line'],
+                related: {
+                    expectedVertices: ['power/tower', 'power/pole', 'power/transformer']
+                }
+            },
+            'power/minor_line': {
+                tags: { power: 'minor_line' },
+                geometry: ['line'],
+                related: {
+                    expectedVertices: ['power/pole']
+                }
+            },
+            'highway/residential': {
+                tags: { highway: 'residential' },
+                geometry: ['line']
+            },
+            'power/tower': {
+                tags: { power: 'tower' },
+                geometry: ['point', 'vertex']
+            },
+            'power/pole': {
+                tags: { power: 'pole' },
+                geometry: ['point', 'vertex']
+            },
+            'power/transformer': {
+                tags: { power: 'transformer' },
+                geometry: ['point', 'vertex']
+            }
+        };
+
+        it('returns empty array when entity is not a node or has no parent ways', async () => {
+            iD.fileFetcher.cache().preset_presets = testPresets;
+            var presets = iD.presetIndex();
+            await presets.ensureLoaded();
+
+            var node = new iD.osmNode({ id: 'n1' });
+            var way = new iD.osmWay({ id: 'w1', nodes: ['n1'], tags: { highway: 'residential' } });
+            var graph = new iD.coreGraph([node, way]);
+
+            expect(presets.expectedVertices(null, graph)).toEqual([]);
+            expect(presets.expectedVertices(way, graph)).toEqual([]);
+            // node with parent way having no expectedVertices
+            expect(presets.expectedVertices(node, graph)).toEqual([]);
+        });
+
+        it('returns expected vertex presets for a vertex of a power line', async () => {
+            iD.fileFetcher.cache().preset_presets = testPresets;
+            var presets = iD.presetIndex();
+            await presets.ensureLoaded();
+
+            var node = new iD.osmNode({ id: 'n1' });
+            var way = new iD.osmWay({ id: 'w1', nodes: ['n1'], tags: { power: 'line' } });
+            var graph = new iD.coreGraph([node, way]);
+
+            var results = presets.expectedVertices(node, graph);
+            expect(results.map(p => p.id)).toEqual(['power/tower', 'power/pole', 'power/transformer']);
+        });
+
+        it('prioritizes presets expected by multiple parent ways at intersections', async () => {
+            iD.fileFetcher.cache().preset_presets = testPresets;
+            var presets = iD.presetIndex();
+            await presets.ensureLoaded();
+
+            var node = new iD.osmNode({ id: 'n1' });
+            var line1 = new iD.osmWay({ id: 'w1', nodes: ['n1'], tags: { power: 'line' } });
+            var line2 = new iD.osmWay({ id: 'w2', nodes: ['n1'], tags: { power: 'minor_line' } });
+            var graph = new iD.coreGraph([node, line1, line2]);
+
+            // power/pole is in both power/line and power/minor_line -> ranked 1st
+            var results = presets.expectedVertices(node, graph);
+            expect(results.map(p => p.id)).toEqual(['power/pole', 'power/tower', 'power/transformer']);
+        });
     });
 
 });
