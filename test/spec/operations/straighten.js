@@ -106,6 +106,11 @@ describe('iD.operationStraighten', function () {
             expect(result).toBeFalsy();
         });
 
+        it('is available for one selected interior node', function () {
+            var result = iD.operationStraighten(fakeContext, ['n10']).available();
+            expect(result).toBeTruthy();
+        });
+
         it('is not available for one selected node', function () {
             var result = iD.operationStraighten(fakeContext, ['w5', 'n9']).available();
             expect(result).toBeFalsy();
