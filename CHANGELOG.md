@@ -68,6 +68,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Allow tags like `not:*:wikidata` to have multiple values ([#12736], thanks [@k-yle])
 * Fix the icon of the GPS Overlay layer not working ([#12760], thanks [@hlfan])
 * Fix some tags (such as `railway:preferred_direction`) from being falsely detected as non-reversible ([#13018], thanks [@matkoniecz])
+* Fix wrong preset icon for platform_edge ([#13098], thanks [@k-yle])
 * Fix exception when dragging some undraggable parts of the UI ([#13030], thanks [@k-yle])
 * Fix some preset icons unreadable in dark mode ([#13100], thanks [@k-yle])
 * Fix minor labelling bug - try 85 and 95 offsets rather than trying 95 twice ([#13009], thanks [@matkoniecz])
@@ -132,6 +133,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#13074]: https://github.com/openstreetmap/iD/pull/13074
 [#13081]: https://github.com/openstreetmap/iD/pull/13081
 [#13097]: https://github.com/openstreetmap/iD/pull/13097
+[#13098]: https://github.com/openstreetmap/iD/pull/13098
 [#13100]: https://github.com/openstreetmap/iD/pull/13100
 [@aditya1010-max]: https://github.com/aditya1010-max
 [@Geo-2695]: https://github.com/Geo-2695
