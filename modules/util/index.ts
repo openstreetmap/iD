@@ -29,7 +29,7 @@ export { utilOldestID } from './util';
 export { utilPrefixCSSProperty } from './util';
 export { utilPrefixDOMProperty } from './util';
 export { utilQsString } from './util';
-export { utilRebind } from './rebind';
+export * from './rebind';
 export { utilSafeClassName } from './util';
 export { utilSetTransform } from './util';
 export { utilSessionMutex } from './session_mutex';

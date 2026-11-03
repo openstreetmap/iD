@@ -10,7 +10,7 @@ import { uiTagReference } from '../tag_reference';
 import { prefs } from '../../core/preferences';
 import { t } from '../../core/localizer';
 import { utilArrayDifference, utilArrayIdentical } from '../../util/array';
-import { utilGetSetValue, utilNoAuto, utilRebind, utilTagDiff } from '../../util';
+import { utilGetSetValue, utilNoAuto, utilBindDispatch, utilTagDiff } from '../../util';
 import { allowUpperCaseTagValues } from '../../osm/tags';
 import { fileFetcher } from '../../core';
 
@@ -654,5 +654,6 @@ export function uiSectionRawTagEditor(id, context) {
     };
 
 
-    return utilRebind(section, dispatch, 'on');
+    section.on = utilBindDispatch(section, dispatch);
+    return section;
 }
