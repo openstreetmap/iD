@@ -593,8 +593,21 @@ label.streetside-hires {
     pointer-events: initial;
 }
 
+.photo-zoom-controls {
+    position: absolute;
+    right: 14px;
+    bottom: 90px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    z-index: 10;
+    pointer-events: none;
+}
+
 .photo-controls button,
-.photo-controls button:focus {
+.photo-controls button:focus,
+.photo-zoom-controls button,
+.photo-zoom-controls button:focus {
     height: 18px;
     width: 18px;
     line-height: 18px;
@@ -602,18 +615,29 @@ label.streetside-hires {
     color: #eee;
     border-radius: 0;
 }
+.photo-zoom-controls button {
+    pointer-events: initial;
+}
 .photo-controls button:first-of-type {
     border-radius: 3px 0 0 3px;
 }
 .photo-controls button:last-of-type {
     border-radius: 0 3px 3px 0;
 }
-.photo-controls button:active {
+.photo-zoom-controls button:first-of-type {
+    border-radius: 3px 3px 0 0;
+}
+.photo-zoom-controls button:last-of-type {
+    border-radius: 0 0 3px 3px;
+}
+.photo-controls button:active,
+.photo-zoom-controls button:active {
     background: rgba(0,0,0,0.85);
     color: #fff;
 }
 @media (hover: hover) {
-    .photo-controls button:hover {
+    .photo-controls button:hover,
+    .photo-zoom-controls button:hover {
         background: rgba(0,0,0,0.85);
         color: #fff;
     }
