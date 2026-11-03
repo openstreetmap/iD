@@ -116,6 +116,13 @@ export const validationCrossingWays: CreateValidator = (context) => {
         if (featureType1 === 'waterway' && featureType2 === 'highway' && tags2.man_made === 'pier') return true;
         if (featureType2 === 'waterway' && featureType1 === 'highway' && tags1.man_made === 'pier') return true;
 
+        // don't flag crossing waterways and ice roads
+        if (featureType1 === 'waterway' && featureType2 === 'highway' && tags2.ice_road === 'yes') return true;
+        if (featureType2 === 'waterway' && featureType1 === 'highway' && tags1.ice_road === 'yes') return true;
+        // ideally ice roads would get ice_road=yes, but lets avoid pushing suspect suggestion also with imperfect tagging
+        if (featureType1 === 'waterway' && featureType2 === 'highway' && tags2.surface === 'ice') return true;
+        if (featureType2 === 'waterway' && featureType1 === 'highway' && tags1.surface === 'ice') return true;
+
         if (tags1.layer !== undefined && tags1.layer === tags2.layer) return false; // Warn if both have the same defined layer
 
         const isElement1Bridge = allowsBridge(featureType1) && hasTag(tags1, 'bridge');
