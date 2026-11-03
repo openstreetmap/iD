@@ -32,11 +32,8 @@ export function getDeprecatedTags(tags: Tags, dataDeprecated: DataDeprecated): D
   return deprecated;
 }
 
-var _deprecatedTagValuesByKey: { [key: string]: string[] };
-
 export function deprecatedTagValuesByKey(dataDeprecated: DataDeprecated) {
-    if (!_deprecatedTagValuesByKey) {
-        _deprecatedTagValuesByKey = {};
+    var _deprecatedTagValuesByKey: { [key: string]: string[] } = {};
         dataDeprecated.forEach((d) => {
             var oldKeys = Object.keys(d.old);
             if (oldKeys.length === 1) {
@@ -51,6 +48,5 @@ export function deprecatedTagValuesByKey(dataDeprecated: DataDeprecated) {
                 }
             }
         });
-    }
     return _deprecatedTagValuesByKey;
 };

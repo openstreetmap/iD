@@ -48,9 +48,9 @@ export function uiFieldCombo(field, context) {
     var _customOptions = [];
 
     // initialize deprecated tags array
-    var _dataDeprecated = [];
+    var _dataDeprecated = {};
     fileFetcher.get('deprecated')
-        .then(function(d) { _dataDeprecated = d; })
+        .then(function(d) { _dataDeprecated = deprecatedTagValuesByKey(d); })
         .catch(function() { /* ignore */ });
 
 
@@ -266,7 +266,11 @@ export function uiFieldCombo(field, context) {
             setTaginfoValues('', setPlaceholder);
         } else {
             selection.call(_combobox, attachTo);
-            setTimeout(() => setStaticValues(setPlaceholder), 0);
+            if (services.taginfo && hasStaticValues()) {
+                setTaginfoValues('', setPlaceholder, true);
+            } else {
+                setTimeout(() => setStaticValues(setPlaceholder), 0);
+            }
         }
     }
 
@@ -383,7 +387,7 @@ export function uiFieldCombo(field, context) {
     }
 
 
-    function setTaginfoValues(q, callback) {
+    function setTaginfoValues(q, callback, staticOnly = false) {
         var queryFilter = d => {
             const value = d.value.toLowerCase();
             const key = d.key.toLowerCase();
@@ -435,7 +439,7 @@ export function uiFieldCombo(field, context) {
                 return value === restrictTagValueSpelling(value);
             });
 
-            var deprecatedValues = deprecatedTagValuesByKey(_dataDeprecated)[field.key];
+            var deprecatedValues = _dataDeprecated[field.key];
             if (deprecatedValues) {
                 // don't suggest deprecated tag values
                 data = data.filter(d  =>
@@ -486,20 +490,26 @@ export function uiFieldCombo(field, context) {
             });
 
             if (hasStaticValues()) {
-                _comboData = staticOptions.map(option =>
+                const staticData = staticOptions.map(option =>
                     // prefer taginfo entry, as those might have additional details like the taginfoDesc
                     data.find(d => d.key === option.key) || option
-                ).concat(data.filter(d =>
+                );
+                _comboData = staticOnly ? staticData : staticData.concat(data.filter(d =>
                     // append taginfo results that are not present in the static options at the end
                     !staticOptions.some(option => d.key === option.key)));
             } else {
                 _comboData = data;
             }
 
-            _comboData = _comboData.filter(queryFilter);
+            if (!staticOnly) {
+                _comboData = _comboData.filter(queryFilter);
+            }
 
             if (!field.allowDuplicates) {
                 _comboData = objectDifference(_comboData, _multiData);
+            }
+            if (staticOnly) {
+                _combobox.data(_comboData);
             }
             if (callback) callback(_comboData, hasStaticValues());
         });
