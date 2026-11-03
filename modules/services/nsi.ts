@@ -713,7 +713,7 @@ export default {
     // Note: service.init is called immediately after the presetManager has started loading its data.
     // We expect to chain onto an unfulfilled promise here.
     setNsiSources();
-    presetManager.ensureLoaded()
+    return presetManager.ensureLoaded()
       .then(() => loadNsiPresets())
       .then(() => loadNsiData())
       .then(() => _nsiStatus = 'ok')

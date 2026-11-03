@@ -1,14 +1,6 @@
+// @ts-nocheck -- will be migrated in the next PR
 // Copies a variable number of methods from source to target.
-/**
- * @template T
- * @template S
- * @template {keyof S} Args
- * @param {T} target
- * @param {S} source
- * @param {...Args} args
- * @returns {T & Pick<S, Args>}
- */
-export function utilRebind(target, source, ...args) {
+export function utilRebind<T, S, Args extends keyof S>(target: T, source: S, ...args: Args[]): T & Pick<S, Args> {
     for (const method of args) {
         target[method] = d3_rebind(target, source, source[method]);
     }

@@ -5,6 +5,7 @@ import { actionAddVertex } from '../actions/add_vertex';
 import { behaviorAddWay } from '../behavior/add_way';
 import { modeDrawLine } from './draw_line';
 import { osmNode, osmWay } from '../osm';
+import { utilIsDrawing } from '../util/util';
 
 
 export function modeAddLine(context, mode) {
@@ -65,6 +66,7 @@ export function modeAddLine(context, mode) {
         context.enter(modeDrawLine(context, way.id, startGraph, mode.button));
     }
 
+    mode.disabled = () => utilIsDrawing(context.mode().id);
 
     mode.enter = function() {
         context.install(behavior);

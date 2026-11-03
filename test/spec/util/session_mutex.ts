@@ -1,5 +1,8 @@
+import type { utilSessionMutex } from '../../../modules';
+
 describe('iD.utilSessionMutex', function() {
-    var a, b;
+    let a: utilSessionMutex;
+    let b: utilSessionMutex;
 
     afterEach(function() {
         if (a) a.unlock();

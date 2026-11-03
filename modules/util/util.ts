@@ -238,6 +238,10 @@ export function utilGetAllNodes(ids: EntityID[], graph: coreGraph): OsmNode[] {
     }
 }
 
+
+/** @returns true if the current mode is a drawing mode */
+export const utilIsDrawing = (modeId: string) => modeId.startsWith('draw');
+
 /**
  * @param entity the entity to generate a display name for
  * @param flags a set of flags to tweak the display name output:

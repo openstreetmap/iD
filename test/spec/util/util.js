@@ -235,8 +235,7 @@ describe('iD.util', function() {
         });
         it('counts emoji', function() {
             // The `Array.from` polyfill may not account for emojis, so
-            // be lenient here. Worst case scenario is that IE users might be
-            // limited to somewhat fewer characters on tag and role input.
+            // be lenient here.
             expect(iD.utilUnicodeCharsCount('😎')).toBeOneOf([1, 2]);
             expect(iD.utilUnicodeCharsCount('🇨🇦')).toBeOneOf([2, 4]);
             expect(iD.utilUnicodeCharsCount('🏳️‍🌈')).toBeOneOf([4, 6]);
