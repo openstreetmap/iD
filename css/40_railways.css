@@ -1,14 +1,5 @@
 /* railways */
 
-/* defaults */
-.preset-icon .icon.tag-railway.other-line {
-    color: #fff;
-    fill: #777;
-}
-.preset-icon .icon.tag-railway {
-    color: #555;
-}
-
 /* lines */
 /* narrow widths */
 path.line.shadow.tag-railway {
