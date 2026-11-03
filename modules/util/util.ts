@@ -267,12 +267,6 @@ export function utilDisplayName(entity: iD.OsmEntity, flags?: {
         via: entity.tags.via
     };
 
-    // A right or left-right arrow likely indicates a formulaic “name” as specified by the Public Transport v2 schema.
-    // This name format already contains enough details to disambiguate the feature; avoid duplicating these details.
-    if (entity.tags.route && entity.tags.name && entity.tags.name.match(/[→⇒↔⇔]|[-=]>/)) {
-        return entity.tags.name;
-    }
-
     // Non-routes tend to be labeled in many places besides the relation lists, such as the map, where brevity is important.
     if (!entity.tags.route && name) {
         return name;
@@ -286,7 +280,11 @@ export function utilDisplayName(entity: iD.OsmEntity, flags?: {
     if (tags.ref) {
         keyComponents.push('ref');
     }
-    if (tags.name) {
+    if (entity.tags.route && entity.tags.name && entity.tags.name.match(/[→⇒↔⇔]|[-=]>/)) {
+        // deliberately do nothing here
+        // A right or left-right arrow likely indicates a fake formulaic “name” as specified by the Public Transport v2 schema.
+        // This name format is contrary to how names should be used in OpenStreetMap and is deliberately not supported
+    } else if (tags.name) {
         keyComponents.push('name');
     }
 
