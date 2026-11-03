@@ -11,16 +11,34 @@ export function operationDisconnect(context, selectedIDs) {
     var _otherIDs = [];
     var _actions = [];
 
+    // When only nodes are selected (vertices and/or standalone points), disconnect
+    // the vertices that can be disconnected and leave the others unchanged, instead
+    // of refusing the whole operation because of a single node (#8362).
+    var _isNodeMultiselection = selectedIDs.length > 1 && selectedIDs.every(function(id) {
+        return context.entity(id).type === 'node';
+    });
+
     selectedIDs.forEach(function(id) {
         var entity = context.entity(id);
         if (entity.type === 'way'){
             _wayIDs.push(id);
         } else if (entity.geometry(context.graph()) === 'vertex') {
             _vertexIDs.push(id);
-        } else {
+        } else if (!_isNodeMultiselection) {
             _otherIDs.push(id);
         }
     });
+
+    if (_isNodeMultiselection) {
+        var connectedVertexIDs = _vertexIDs.filter(function(vertexID) {
+            return actionDisconnect(vertexID).disabled(context.graph()) !== 'not_connected';
+        });
+        // if none of the vertices are connected, keep them all so that the
+        // operation reports why it is disabled
+        if (connectedVertexIDs.length) {
+            _vertexIDs = connectedVertexIDs;
+        }
+    }
 
     var _coords, _descriptionID = '', _annotationID = 'features';
     var _disconnectingVertexIds = [];
