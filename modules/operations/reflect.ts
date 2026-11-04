@@ -3,20 +3,11 @@ import { actionReflect } from '../actions/reflect';
 import { behaviorOperation } from '../behavior/operation';
 import { utilGetAllNodes, utilTotalExtent } from '../util/util';
 import { svgPath } from '../svg';
+import type { osmWay, EntityId } from '../osm';
+import type { CreateOperation, Operation } from '../core/history';
 
 
-export function operationReflectShort(context, selectedIDs) {
-    return operationReflect(context, selectedIDs, 'short');
-}
-
-
-export function operationReflectLong(context, selectedIDs) {
-    return operationReflect(context, selectedIDs, 'long');
-}
-
-
-export function operationReflect(context, selectedIDs, axis) {
-    axis = axis || 'long';
+const operationReflect = (axis: 'long' | 'short'): CreateOperation => (context, selectedIDs) => {
     var multi = (selectedIDs.length === 1 ? 'single' : 'multiple');
     var nodes = utilGetAllNodes(selectedIDs, context.graph());
     var coords = nodes.map(function(n) { return n.loc; });
@@ -26,7 +17,7 @@ export function operationReflect(context, selectedIDs, axis) {
     var _action = actionReflect(selectedIDs, context.projection)
         .useLongAxis(Boolean(axis === 'long'));
 
-    var operation = function() {
+    const operation: Operation = function() {
         context.perform(_action, operation.annotation());
 
         window.setTimeout(function() {
@@ -68,7 +59,7 @@ export function operationReflect(context, selectedIDs, axis) {
             return false;
         }
 
-        function incompleteRelation(id) {
+        function incompleteRelation(id: EntityId) {
             var entity = context.entity(id);
             return entity.type === 'relation' && !entity.isComplete(context.graph());
         }
@@ -85,7 +76,7 @@ export function operationReflect(context, selectedIDs, axis) {
             path: `M ${p[0]} ${p[1]} L ${q[0]} ${q[1]}`,
             klass: 'reflect-axis'
         }, ...selectedIDs.map(entityId => {
-            const entity = previewGraph.hasEntity(entityId);
+            const entity = previewGraph.hasEntity<osmWay>(entityId)!;
             return {
                 id: entity.id,
                 path: getPath(entity),
@@ -114,4 +105,7 @@ export function operationReflect(context, selectedIDs, axis) {
     operation.behavior = behaviorOperation(context).which(operation);
 
     return operation;
-}
+};
+
+export const operationReflectShort = operationReflect('short');
+export const operationReflectLong = operationReflect('long');
