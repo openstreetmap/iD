@@ -356,7 +356,7 @@ describe('iD.presetIndex', function () {
             rememberedLocationSetsAt = locationManager.locationSetsAt;
             locationManager.locationSetsAt = () => new Map(Object.entries({ 'world': 1 }));
         });
-    
+
         afterEach(() => {
             locationManager.locationSetsAt = rememberedLocationSetsAt;
         });
