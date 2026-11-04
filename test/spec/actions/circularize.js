@@ -300,6 +300,21 @@ describe('iD.actionCircularize', function () {
 
     });
 
+    it('not disable circularize for a slightly oval shape', function () {
+        // 36-point ellipse, 4% wider and 4% shorter than a circle
+        var nodes = [];
+        var ids = [];
+        for (var i = 0; i < 36; i++) {
+            var angle = 2 * Math.PI * i / 36;
+            nodes.push(new iD.osmNode({ id: 'n' + i, loc: [1.04 * Math.cos(angle), 0.96 * Math.sin(angle)] }));
+            ids.push('n' + i);
+        }
+        ids.push('n0');
+        var graph = new iD.coreGraph(nodes.concat([new iD.osmWay({ id: '-', nodes: ids })]));
+        var result = iD.actionCircularize('-', projection).disabled(graph);
+        expect(result).toBe(false);
+    });
+
 
     describe('transitions', function () {
         it('is transitionable', function() {
