@@ -186,8 +186,8 @@ export function modeMove(context, entityIDs, baseGraph) {
             .on(_pointerPrefix + 'down.modeMove', null);
 
         d3_select(window)
-            .on(_pointerPrefix + 'move.modeMove', null, true)
-            .on(_pointerPrefix + 'up.modeMove', null, true);
+            .on(_pointerPrefix + 'move.modeMove', null)
+            .on(_pointerPrefix + 'up.modeMove', null);
 
         context.history()
             .on('undone.modeMove', null);
