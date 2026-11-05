@@ -19,8 +19,8 @@ export function actionChangePreset(entityID: EntityId, oldPreset: presetPreset |
             }
             if (oldPreset) {
                 const wasSubPreset = oldPreset.id.startsWith(newPreset.id);
-                newPreset.fields(loc).concat(newPreset.moreFields(loc), presetManager.universal())
-                    .filter(f => f?.matchGeometry(geometry))
+                newPreset.fields(loc).concat(newPreset.moreFields(loc))
+                    .filter(f => f.matchGeometry(geometry))
                     .flatMap(f => f.allKeys(tags))
                     .filter(key => {
                         if (wasSubPreset) {

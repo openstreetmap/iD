@@ -349,27 +349,23 @@ describe('iD.actionChangePreset', function() {
             lanes: iD.presetField('lanes', { key: 'lanes', geometry: 'point' }),
             destination: iD.presetField('destination', { key: 'destination', geometry: 'point' })
         };
-        iD.presetManager.merge({ fields });
+    
+        const oldPreset = iD.presetPreset('highway/primary', {
+            tags: { highway: 'primary' },
+            fields: ['name', 'lanes']
+        }, undefined, fields);
 
-        try {
-            const oldPreset = iD.presetPreset('highway/primary', {
-                tags: { highway: 'primary' },
-                fields: ['name', 'lanes']
-            }, undefined, fields);
+        const newPreset = iD.presetPreset('highway/primary_link', {
+            tags: { highway: 'primary_link' },
+            fields: ['destination']
+        }, undefined, fields);
 
-            const newPreset = iD.presetPreset('highway/primary_link', {
-                tags: { highway: 'primary_link' },
-                fields: ['destination']
-            }, undefined, fields);
-
-            const action = iD.actionChangePreset(entity.id, oldPreset, newPreset);
-            expect(action(graph).entity(entity.id).tags).toStrictEqual({
-                highway: 'primary_link',
-                name: 'Main Street',
-                'name:en': 'Main Street'
-            });
-        } finally {
-            iD.presetManager.merge({ fields: { name: null, lanes: null, destination: null } });
-        }
+        const action = iD.actionChangePreset(entity.id, oldPreset, newPreset);
+        expect(action(graph).entity(entity.id).tags).toStrictEqual({
+            highway: 'primary_link',
+            name: 'Main Street',
+            'name:en': 'Main Street'
+        });
+    
     });
 });
