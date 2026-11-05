@@ -1,7 +1,11 @@
 import { select as d3_select, selectAll as d3_selectAll } from 'd3-selection';
 
 describe('iD.uiSectionRawTagEditor', function() {
-    var taglist, element, entity, context;
+    let taglist;
+    /** @type {d3.Selection} */
+    let element;
+    let entity;
+    let context;
 
     function render(tags) {
         taglist = iD.uiSectionRawTagEditor('raw-tag-editor', context)
@@ -63,6 +67,24 @@ describe('iD.uiSectionRawTagEditor', function() {
         });
         iD.utilTriggerEvent(element.selectAll('button.remove'), 'mousedown', { button: 0 });
         expect(await tags).toEqual({highway: undefined});
+    });
+
+    it('converts line breaks to the pictorial representation when rendering', async () => {
+        element.remove();
+        render({ inscription: 'ON THIS SITE\nIN 1897' }); // n8001552365
+        const input = element.selectAll('.tag-list input.value');
+
+        expect(input.property('value')).toBe('ON THIS SITE\u240aIN 1897');
+
+        const tags = new Promise(cb => {
+            taglist.on('change', (_, tags) => cb(tags));
+        });
+
+        // modify the value value
+        input.property('value', 'ON THIS SITE\u240aIN 1897 NOTHING\u240aHAPPENED\u240a');
+        iD.utilTriggerEvent(input, 'change');
+        expect(await tags).toEqual({ inscription: 'ON THIS SITE\nIN 1897 NOTHING\nHAPPENED' });
+        // the trailing \n is intentionally trimmed
     });
 
     describe('text view', function() {

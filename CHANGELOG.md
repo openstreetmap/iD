@@ -70,6 +70,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Fix some tags (such as `railway:preferred_direction`) from being falsely detected as non-reversible ([#13018], thanks [@matkoniecz])
 * Prevent certain keyboard shortcuts causing work on the currently drawn feature to be lost ([#10118], thanks [@k-yle])
 * Fix wrong preset icon for platform_edge ([#13098], thanks [@k-yle])
+* Fix linebreaks being deleted by the raw tag editor ([#13146], thanks [@k-yle])
 * Fix exception when dragging some undraggable parts of the UI ([#13030], thanks [@k-yle])
 * Fix some preset icons unreadable in dark mode ([#13100], thanks [@k-yle])
 * Fix minor labelling bug - try 85 and 95 offsets rather than trying 95 twice ([#13009], thanks [@matkoniecz])
@@ -139,6 +140,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#13098]: https://github.com/openstreetmap/iD/pull/13098
 [#13100]: https://github.com/openstreetmap/iD/pull/13100
 [#13102]: https://github.com/openstreetmap/iD/pull/13102
+[#13146]: https://github.com/openstreetmap/iD/pull/13146
 [@aditya1010-max]: https://github.com/aditya1010-max
 [@Geo-2695]: https://github.com/Geo-2695
 [@hemaksh2007jain-bit]: https://github.com/hemaksh2007jain-bit
