@@ -8,12 +8,19 @@ import { t } from '../core/localizer';
 import { services } from '../services';
 import { utilDisplayName, utilHighlightEntities } from '../util';
 import { utilSanitizeHTML } from '../util/sanitize';
+import type { coreContext } from '../core';
+import type { EntityId, QAItem } from '../osm';
+
+interface uiOsmoseDetails {
+    (selection: d3.Selection<HTMLDivElement>): void;
+    issue: GetSet<this, QAItem | undefined>;
+}
 
 
-export function uiOsmoseDetails(context) {
-  let _qaItem;
+export function uiOsmoseDetails(context: coreContext) {
+  let _qaItem: QAItem | undefined;
 
-  function issueString(d, type) {
+  function issueString(d: QAItem | undefined, type: string) {
     if (!d) return '';
 
     // Issue strings are cached from Osmose API
@@ -22,8 +29,8 @@ export function uiOsmoseDetails(context) {
   }
 
 
-  function osmoseDetails(selection) {
-    const details = selection.selectAll('.error-details')
+  const osmoseDetails: uiOsmoseDetails = (selection) => {
+    const details = selection.selectAll<HTMLDivElement, QAItem>('.error-details')
       .data(
         _qaItem ? [_qaItem] : [],
         d => `${d.id}-${d.status || 0}`
@@ -101,6 +108,8 @@ export function uiOsmoseDetails(context) {
           .attr('target', '_blank');
     }
 
+    if (!_qaItem) return;
+
     // Save current item to check if UI changed by time request resolves
     const thisItem = _qaItem;
     services.osmose.loadIssueDetail(_qaItem)
@@ -144,7 +153,7 @@ export function uiOsmoseDetails(context) {
             .text(d => d)
             .each(function() {
               const link = d3_select(this);
-              const entityID = this.textContent;
+              const entityID = this.textContent as EntityId;
               const entity = context.hasEntity(entityID);
 
               // Add click handler
@@ -172,7 +181,7 @@ export function uiOsmoseDetails(context) {
                   } else {
                     context.loadEntity(entityID, (err, result) => {
                       if (err) return;
-                      const entity = result.data.find(e => e.id === entityID);
+                      const entity = result!.data.find(e => e.id === entityID);
                       if (entity) context.enter(modeSelect(context, [entityID]));
                     });
                   }
@@ -181,11 +190,11 @@ export function uiOsmoseDetails(context) {
               // Replace with friendly name if possible
               // (The entity may not yet be loaded into the graph)
               if (entity) {
-                let name = utilDisplayName(entity);  // try to use common name
+                let name: string | undefined = utilDisplayName(entity);  // try to use common name
 
                 if (!name) {
                   const preset = presetManager.match(entity, context.graph());
-                  name = preset && !preset.isFallback() && preset.name();  // fallback to preset name
+                  name = (preset && !preset.isFallback() && preset.name()) || undefined;  // fallback to preset name
                 }
 
                 if (name) {
@@ -201,14 +210,14 @@ export function uiOsmoseDetails(context) {
       .catch(err => {
         console.log(err); // eslint-disable-line no-console
       });
-  }
+  };
 
 
-  osmoseDetails.issue = function(val) {
+  osmoseDetails.issue = function(val: QAItem | undefined) {
     if (!arguments.length) return _qaItem;
     _qaItem = val;
     return osmoseDetails;
-  };
+  } as uiOsmoseDetails['issue'];
 
 
   return osmoseDetails;

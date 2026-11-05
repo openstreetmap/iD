@@ -10,15 +10,21 @@ import { uiOsmoseHeader } from './osmose_header';
 import { uiViewOnOsmose } from './view_on_osmose';
 
 import { utilRebind } from '../util';
+import type { coreContext } from '../core';
+import type { QAItem } from '../osm';
 
-export function uiOsmoseEditor(context) {
-  const dispatch = d3_dispatch('change');
+type OsmoseEventMap = {
+    change: [];
+}
+
+export function uiOsmoseEditor(context: coreContext) {
+  const dispatch = d3_dispatch<object, OsmoseEventMap>('change');
   const qaDetails = uiOsmoseDetails(context);
-  const qaHeader = uiOsmoseHeader(context);
+  const qaHeader = uiOsmoseHeader();
 
-  let _qaItem;
+  let _qaItem: QAItem | undefined;
 
-  function osmoseEditor(selection) {
+  function osmoseEditor(selection :d3.Selection) {
 
     const header = selection.selectAll('.header')
       .data([0]);
@@ -38,7 +44,7 @@ export function uiOsmoseEditor(context) {
       .append('h2')
         .call(t.append('QA.osmose.title'));
 
-    let body = selection.selectAll('.body')
+    let body = selection.selectAll<HTMLDivElement, 0>('.body')
       .data([0]);
 
     body = body.enter()
@@ -46,7 +52,7 @@ export function uiOsmoseEditor(context) {
         .attr('class', 'body')
       .merge(body);
 
-    let editor = body.selectAll('.qa-editor')
+    let editor = body.selectAll<HTMLDivElement, 0>('.qa-editor')
       .data([0]);
 
     editor.enter()
@@ -57,22 +63,22 @@ export function uiOsmoseEditor(context) {
         .call(qaDetails.issue(_qaItem))
         .call(osmoseSaveSection);
 
-    const footer = selection.selectAll('.footer')
+    const footer = selection.selectAll<HTMLDivElement, 0>('.footer')
       .data([0]);
 
     footer.enter()
       .append('div')
       .attr('class', 'footer')
       .merge(footer)
-      .call(uiViewOnOsmose(context).what(_qaItem));
+      .call(uiViewOnOsmose().what(_qaItem));
   }
 
-  function osmoseSaveSection(selection) {
+  function osmoseSaveSection(selection: d3.Selection<HTMLDivElement>) {
     const isSelected = (_qaItem && _qaItem.id === context.selectedErrorID());
     const isShown = (_qaItem && isSelected);
-    let saveSection = selection.selectAll('.qa-save')
+    let saveSection = selection.selectAll<HTMLDivElement, QAItem>('.qa-save')
       .data(
-        (isShown ? [_qaItem] : []),
+        (isShown && _qaItem ? [_qaItem] : []),
         d => `${d.id}-${d.status || 0}`
       );
 
@@ -91,10 +97,10 @@ export function uiOsmoseEditor(context) {
         .call(qaSaveButtons);
   }
 
-  function qaSaveButtons(selection) {
+  function qaSaveButtons(selection: d3.Selection<HTMLDivElement>) {
     const isSelected = (_qaItem && _qaItem.id === context.selectedErrorID());
-    let buttonSection = selection.selectAll('.buttons')
-      .data((isSelected ? [_qaItem] : []), d => d.status + d.id);
+    let buttonSection = selection.selectAll<HTMLDivElement, QAItem>('.buttons')
+      .data((isSelected && _qaItem ? [_qaItem] : []), d => d.status + d.id);
 
     // exit
     buttonSection.exit()
@@ -117,7 +123,7 @@ export function uiOsmoseEditor(context) {
     buttonSection = buttonSection
       .merge(buttonEnter);
 
-    buttonSection.select('.close-button')
+    buttonSection.select<HTMLButtonElement>('.close-button')
       .call(t.append('QA.keepRight.close'))
       .on('click.close', function(d3_event, d) {
         this.blur();    // avoid keeping focus on the button - #4641
@@ -128,7 +134,7 @@ export function uiOsmoseEditor(context) {
         }
       });
 
-    buttonSection.select('.ignore-button')
+    buttonSection.select<HTMLButtonElement>('.ignore-button')
       .call(t.append('QA.keepRight.ignore'))
       .on('click.ignore', function(d3_event, d) {
         this.blur();    // avoid keeping focus on the button - #4641
@@ -141,7 +147,7 @@ export function uiOsmoseEditor(context) {
   }
 
   // NOTE: Don't change method name until UI v3 is merged
-  osmoseEditor.error = function(val) {
+  osmoseEditor.error = function(val: QAItem | undefined) {
     if (!arguments.length) return _qaItem;
     _qaItem = val;
     return osmoseEditor;

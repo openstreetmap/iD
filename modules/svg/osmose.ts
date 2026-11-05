@@ -4,19 +4,27 @@ import { select as d3_select } from 'd3-selection';
 import { modeBrowse } from '../modes/browse';
 import { svgPointTransform } from './helpers';
 import { services } from '../services';
+import type { Projection } from '../geo/raw_mercator';
+import type { coreContext } from '../core';
+import type { Dispatch } from 'd3';
+import type { QAItem } from '../osm';
 
 let _layerEnabled = false;
-let _qaService;
+let _qaService: typeof services.osmose | null = null;
 
-export function svgOsmose(projection, context, dispatch) {
+type EventMap = {
+    change: [];
+}
+
+export function svgOsmose(projection: Projection, context: coreContext, dispatch: Dispatch<object, EventMap>) {
   const throttledRedraw = throttle(() => dispatch.call('change'), 1000);
   const minZoom = 12;
 
-  let touchLayer = d3_select(null);
-  let drawLayer = d3_select(null);
+  let touchLayer: d3.Selection<SVGGElement> = d3_select(null!);
+  let drawLayer: d3.Selection<SVGGElement> = d3_select(null!);
   let layerVisible = false;
 
-  function markerPath(selection, klass) {
+  function markerPath(selection: d3.Selection<SVGPolygonElement>, klass: string) {
     selection
       .attr('class', klass)
       .attr('transform', 'translate(-10, -28)')
@@ -96,7 +104,7 @@ export function svgOsmose(projection, context, dispatch) {
     const getTransform = svgPointTransform(projection);
 
     // Draw markers..
-    const markers = drawLayer.selectAll('.qaItem.osmose')
+    const markers = drawLayer.selectAll<SVGGElement, QAItem>('.qaItem.osmose')
       .data(data, d => d.id);
 
     // exit
@@ -122,7 +130,7 @@ export function svgOsmose(projection, context, dispatch) {
 
     markersEnter
       .append('polygon')
-        .attr('fill', d => service.getColor(d.item))
+        .attr('fill', d => service!.getColor(d.item))
         .call(markerPath, 'qaItem-fill');
 
     markersEnter
@@ -144,7 +152,7 @@ export function svgOsmose(projection, context, dispatch) {
     if (touchLayer.empty()) return;
     const fillClass = context.getDebug('target') ? 'pink' : 'nocolor';
 
-    const targets = touchLayer.selectAll('.qaItem.osmose')
+    const targets = touchLayer.selectAll<SVGRectElement, QAItem>('.qaItem.osmose')
       .data(data, d => d.id);
 
     // exit
@@ -163,7 +171,7 @@ export function svgOsmose(projection, context, dispatch) {
         .attr('class', d => `qaItem ${d.service} target ${fillClass} itemId-${d.id}`)
         .attr('transform', getTransform);
 
-    function sortY(a, b) {
+    function sortY(a: QAItem, b: QAItem) {
       return (a.id === selectedID) ? 1
         : (b.id === selectedID) ? -1
         : b.loc[1] - a.loc[1];
@@ -171,7 +179,7 @@ export function svgOsmose(projection, context, dispatch) {
   }
 
   // Draw the Osmose layer and schedule loading issues and updating markers.
-  function drawOsmose(selection) {
+  function drawOsmose(selection: d3.Selection<SVGGElement>) {
     const service = getService();
 
     const surface = context.surface();
@@ -179,7 +187,7 @@ export function svgOsmose(projection, context, dispatch) {
       touchLayer = surface.selectAll('.data-layer.touch .layer-touch.markers');
     }
 
-    drawLayer = selection.selectAll('.layer-osmose')
+    drawLayer = selection.selectAll<SVGGElement, 0>('.layer-osmose')
       .data(service ? [0] : []);
 
     drawLayer.exit()
@@ -203,7 +211,7 @@ export function svgOsmose(projection, context, dispatch) {
   }
 
   // Toggles the layer on and off
-  drawOsmose.enabled = function(val) {
+  drawOsmose.enabled = function(val: boolean) {
     if (!arguments.length) return _layerEnabled;
 
     _layerEnabled = val;
@@ -211,7 +219,7 @@ export function svgOsmose(projection, context, dispatch) {
       // Strings supplied by Osmose fetched before showing layer for first time
       // NOTE: Currently no way to change locale in iD at runtime, would need to re-call this method if that's ever implemented
       // Also, If layer is toggled quickly multiple requests are sent
-      getService().loadStrings()
+      getService()!.loadStrings()
         .then(layerOn)
         .catch(err => {
           console.log(err); // eslint-disable-line no-console
