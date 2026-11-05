@@ -6,7 +6,7 @@ import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { geoSphericalDistance } from '../geo';
 import { modeBrowse } from '../modes/browse';
 import { modeSelect, modeSelectNote } from '../modes';
-import { utilQsString, utilRebind, utilStringQs } from '../util';
+import { utilIsDrawing, utilQsString, utilRebind, utilStringQs } from '../util';
 import { utilArrayIdentical } from '../util/array';
 import { utilDisplayLabel } from '../util/utilDisplayLabel';
 import { localizer, t } from '../core/localizer';
@@ -195,7 +195,7 @@ export function behaviorHash(context) {
 
             // Don't allow the hash location to change too much while drawing
             // This can happen if the user accidentally hit the back button.  #3996
-            if (mode && mode.id.match(/^draw/) !== null && dist > maxdist) {
+            if (mode && utilIsDrawing(mode.id) && dist > maxdist) {
                 context.enter(modeBrowse(context));
                 return;
             }
