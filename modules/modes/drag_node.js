@@ -208,7 +208,7 @@ export function modeDragNode(context) {
                 }
 
             } else if (targetNodes) {   // snap to way - a line target with `.nodes`
-                edge = geoChooseEdge(targetNodes, context.map().mouse(), context.projection, end.id);
+                edge = geoChooseEdge(targetNodes, context.map().mouse(), context.projection, entity.id);
                 if (edge) {
                     loc = edge.loc;
                 }
