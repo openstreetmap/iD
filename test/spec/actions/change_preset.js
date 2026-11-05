@@ -365,6 +365,5 @@ describe('iD.actionChangePreset', function() {
             name: 'Main Street',
             'name:en': 'Main Street'
         });
-    
-});
+    });
 });

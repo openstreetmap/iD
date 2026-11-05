@@ -1,6 +1,6 @@
 import type { Action } from '../core/history';
 import type { EntityId } from '../osm';
-import { type presetPreset } from '../presets';
+import type { presetPreset } from '../presets';
 import { utilArrayDifference, utilObjectOmit } from '../util';
 
 export function actionChangePreset(entityID: EntityId, oldPreset: presetPreset | undefined, newPreset: presetPreset | undefined, skipFieldDefaults?: boolean): Action {
@@ -44,7 +44,7 @@ export function actionChangePreset(entityID: EntityId, oldPreset: presetPreset |
                         ...oldPreset.fields(loc),
                         ...oldPreset.moreFields(loc)
                     ]
-                        .filter(f => !f?.universal)
+                        .filter(f => !f.universal) // https://github.com/openstreetmap/iD/issues/13105
                         .flatMap(f => f.allKeys(tags));
 
                     // field-keys used by the old preset but not the new preset
