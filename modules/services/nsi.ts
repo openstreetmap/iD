@@ -515,7 +515,9 @@ function _upgradeTags(tags: Tags, loc: Vec2) {
 
   // Do `wikidata=*` or `wikipedia=*` tags identify this entity as a chain? - See #6416
   // If so, these tags can be swapped to e.g. `brand:wikidata`/`brand:wikipedia`.
-  const foundQID = _nsi.qids.get(tags.wikidata) || _nsi.qids.get(tags.wikipedia);
+  // Only trust this if the feature has a tag matching an NSI category - otherwise (e.g. a generic
+  // `building=*`) the Wikidata item may be the organisation itself, like its headquarters - #13077
+  const foundQID = tryKVs.primary.size ? (_nsi.qids.get(tags.wikidata) || _nsi.qids.get(tags.wikipedia)) : undefined;
   if (foundQID) tryNames.primary.add(foundQID);  // matcher will recognize the Wikidata QID as name too
 
   if (!tryNames.primary.size && !tryNames.alternate.size) {
