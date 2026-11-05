@@ -31,7 +31,7 @@ jobs:
             Your account has been [automatically flagged](https://agentscan.tools/user/${{ github.event.pull_request.user.login }}) as likely to be created by a bot, LLM, or agent,
             and will be automatically closed. If you believe this is a mistake, please reply to this comment and we will review it.
 
-            *These measures help us reduce maintenance burden and keep the team's work efficient. See our [AI contribution policy](https://github.com/vitest-dev/vitest/blob/main/AI_POLICY.md) for more context.*
+            *These measures help us reduce maintenance burden and keep the team's work efficient. Fully automated PRs can be easily done by maintainers, if they would judge them as useful. Note that automated LLM-generated pull requests decrease, rather than increase chance of being selected for GSoC.*
         with:
           script: |
             const prNumber = context.payload.pull_request.number;
