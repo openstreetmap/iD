@@ -1,6 +1,6 @@
 import type { Action } from '../core/history';
 import type { EntityId } from '../osm';
-import { presetManager, type presetPreset } from '../presets';
+import { type presetPreset } from '../presets';
 import { utilArrayDifference, utilObjectOmit } from '../util';
 
 export function actionChangePreset(entityID: EntityId, oldPreset: presetPreset | undefined, newPreset: presetPreset | undefined, skipFieldDefaults?: boolean): Action {

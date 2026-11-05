@@ -349,7 +349,6 @@ describe('iD.actionChangePreset', function() {
             lanes: iD.presetField('lanes', { key: 'lanes', geometry: 'point' }),
             destination: iD.presetField('destination', { key: 'destination', geometry: 'point' })
         };
-    
         const oldPreset = iD.presetPreset('highway/primary', {
             tags: { highway: 'primary' },
             fields: ['name', 'lanes']
@@ -367,5 +366,5 @@ describe('iD.actionChangePreset', function() {
             'name:en': 'Main Street'
         });
     
-    });
+});
 });
