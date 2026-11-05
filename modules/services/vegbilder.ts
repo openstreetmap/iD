@@ -553,6 +553,7 @@ export default new class Vegbilder implements IStreetSide {
           service.hideViewer(context);
         }
       }
+      context.ui().photoviewer.restore();
       viewer
         .classed('hide', false)
         .selectAll('.photo-wrapper.vegbilder-wrapper')
