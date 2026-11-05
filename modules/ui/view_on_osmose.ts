@@ -3,16 +3,21 @@ import { services } from '../services';
 import { svgIcon } from '../svg/icon';
 import { QAItem } from '../osm';
 
-export function uiViewOnOsmose() {
-  let _qaItem;
+export interface uiViewOnOsmose {
+    (selection: d3.Selection<HTMLDivElement>): void;
+    what: GetSet<this, QAItem | undefined>
+}
 
-  function viewOnOsmose(selection) {
+export function uiViewOnOsmose() {
+  let _qaItem: QAItem | undefined;
+
+  const viewOnOsmose: uiViewOnOsmose = (selection) => {
     let url;
     if (services.osmose && (_qaItem instanceof QAItem)) {
       url = services.osmose.itemURL(_qaItem);
     }
 
-    const link = selection.selectAll('.view-on-osmose')
+    const link = selection.selectAll<HTMLDivElement, string>('.view-on-osmose')
       .data(url ? [url] : []);
 
     // exit
@@ -31,13 +36,13 @@ export function uiViewOnOsmose() {
     linkEnter
       .append('span')
         .call(t.append('inspector.view_on_osmose'));
-  }
+  };
 
   viewOnOsmose.what = function(val) {
     if (!arguments.length) return _qaItem;
     _qaItem = val;
     return viewOnOsmose;
-  };
+  } as uiViewOnOsmose['what'];
 
   return viewOnOsmose;
 }
