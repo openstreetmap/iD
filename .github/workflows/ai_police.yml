@@ -18,6 +18,7 @@ jobs:
       contents: read
     steps:
       - name: AgentScan
+        id: agentscan
         uses: MatteoGabriele/agentscan-action@8112fb79b33fafb8506159df20129a34209ac410
         with:
           trusted-author-associations: 'owner, collaborator, member'
