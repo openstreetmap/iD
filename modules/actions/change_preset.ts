@@ -43,7 +43,9 @@ export function actionChangePreset(entityID: EntityId, oldPreset: presetPreset |
                     const oldPresetFieldKeys = [
                         ...oldPreset.fields(loc),
                         ...oldPreset.moreFields(loc)
-                    ].flatMap(f => f.allKeys(tags));
+                    ]
+                        .filter(f => !f.universal) // https://github.com/openstreetmap/iD/issues/13105
+                        .flatMap(f => f.allKeys(tags));
 
                     // field-keys used by the old preset but not the new preset
                     const fieldKeysToRemove = utilArrayDifference(oldPresetFieldKeys, preserveKeys);
