@@ -127,7 +127,6 @@ async function buildData() {
     })
   ];
 
-  // eslint-disable-next-line require-atomic-updates -- false positive
   return _currBuild =
     Promise.all(tasks)
     .then(() => {
