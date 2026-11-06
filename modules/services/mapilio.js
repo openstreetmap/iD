@@ -65,25 +65,29 @@ function loadTile(which, url, tile) {
     if (cache.loaded[tileId] || cache.inflight[tileId]) return;
     const controller = new AbortController();
     cache.inflight[tileId] = controller;
+    const isCurrentRequest = () => _cache.requests === cache &&
+        cache.inflight[tileId] === controller && !controller.signal.aborted;
     const requestUrl = url.replace('{x}', tile.xyz[0])
         .replace('{y}', tile.xyz[1])
         .replace('{z}', tile.xyz[2]);
 
     fetch(requestUrl, { signal: controller.signal })
         .then(function(response) {
+            if (!isCurrentRequest()) return;
             if (!response.ok) {
                 throw new Error(response.status + ' ' + response.statusText);
             }
-            cache.loaded[tileId] = true;
-            delete cache.inflight[tileId];
             return response.arrayBuffer();
         })
         .then(function(data) {
+            if (!isCurrentRequest()) return;
             if (data.byteLength === 0) {
-                throw new Error('No Data');
+                cache.loaded[tileId] = true;
+                return;
             }
 
-            loadTileDataToCache(data, tile, which);
+            loadTileDataToCache(data, tile);
+            cache.loaded[tileId] = true;
 
             if (which === 'images') {
                 dispatch.call('loadedImages');
@@ -91,11 +95,14 @@ function loadTile(which, url, tile) {
                 dispatch.call('loadedLines');
             }
         })
-        .catch(function (e) {
-            if (e.message === 'No Data') {
-                cache.loaded[tileId] = true;
-            } else {
+        .catch(function(e) {
+            if (isCurrentRequest() && e.name !== 'AbortError') {
                 console.error(e); // eslint-disable-line no-console
+            }
+        })
+        .finally(function() {
+            if (isCurrentRequest()) {
+                delete cache.inflight[tileId];
             }
         });
 }
