@@ -504,7 +504,7 @@ export function modeDragNode(context) {
 
 
     mode.activeID = function() {
-        if (!arguments.length) return _activeEntity && _activeEntity.id;
+        if (!arguments.length) return _activeEntity?.id;
         // no assign
         return mode;
     };
