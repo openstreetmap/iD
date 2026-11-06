@@ -818,6 +818,10 @@ en:
       disable:
         already_set: "This photo is already tagged on the selected map feature"
         too_far: "This photo is too far away from the selected map feature"
+    set_photo_date_from_viewer:
+        enable: "Tag this photo's date on the currently selected map feature"
+        disable:
+            already_set: "This photo date is already tagged on the selected map feature"    
   background:
     title: Background
     description: Background Settings
