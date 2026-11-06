@@ -254,7 +254,7 @@ export default {
                             const langCode = title.replace(/ /g, '_').replace(/^Locale:/, '');
                             that.addLocale(langCode, res.id);
                         } else {
-                            console.log('Unexpected title ' + title);  // eslint-disable-line no-console
+                            console.error('Unexpected title ' + title);
                         }
                     }
                 });

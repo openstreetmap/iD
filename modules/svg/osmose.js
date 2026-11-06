@@ -214,7 +214,7 @@ export function svgOsmose(projection, context, dispatch) {
       getService().loadStrings()
         .then(layerOn)
         .catch(err => {
-          console.log(err); // eslint-disable-line no-console
+          console.error(err);
         });
     } else {
       layerOff();
