@@ -753,14 +753,27 @@ export function utilCleanOsmString(val: any, maxChars: number) {
     return utilUnicodeCharsTruncated(val, maxChars);
 }
 
+/**
+ * since <input /> elements silently discard line breaks, we need to replace
+ * these characters with the pictorial representation before writing to
+ * `.value`, and then reverse the transformation when reading the input value.
+ */
+export function utilEncodeLineBreaks(str: string) {
+    return str.replaceAll('\n', '\u240a').replaceAll('\r', '\u240d');
+}
+
+/** @see {@link utilEncodeLineBreaks} */
+export function utilDecodeLineBreaks(str: string) {
+    return str.replaceAll('\u240a', '\n').replaceAll('\u240d', '\r');
+}
+
 // https://stackoverflow.com/a/70360753/1627467
 export function getLuma(color: string): number {
     const {r, g, b} = d3_color(color) as RGBColor;
     return 0.2999 * r + 0.587 * g + 0.114 * b;
 }
 
-/** @param {XMLHttpRequestBodyInit} input */
-export function utilGzip(input: string) {
+export function utilGzip(input: XMLHttpRequestBodyInit) {
     // check if compression is supported natively
     if (!globalThis.CompressionStream) return undefined;
 
