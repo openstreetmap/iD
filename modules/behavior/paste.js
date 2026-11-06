@@ -1,6 +1,7 @@
 import { select as d3_select } from 'd3-selection';
 
 import { actionAddEntity } from '../actions/add_entity';
+import { actionChangeTags } from '../actions/change_tags';
 import { actionCopyEntities } from '../actions/copy_entities';
 import { actionMove } from '../actions/move';
 import { geoExtent, geoPointInPolygon, geoVecSubtract } from '../geo';
@@ -13,15 +14,17 @@ import { uiCmd } from '../ui/cmd';
 import { utilGeojsonPoints } from '../util';
 
 // see also `operationPaste`. Without features copied in iD, the browser pastes the clipboard: GeoJSON points
-// copied from another tool (e.g. addresses to add) are added as nodes with their properties as tags.
+// copied from another tool (e.g. addresses to add) are added as nodes with their properties as tags, and the
+// tags of a point with an `osm_id` are added to this OSM element (see `utilGeojsonPoints`).
 export function behaviorPaste(context) {
 
-    function flashNothingCopied() {
+    // Show a message of the paste not done (or not completely)
+    function flashNotPasted(label) {
         context.ui().flash
             .duration(4000)
             .iconName('#iD-icon-no')
             .iconClass('disabled')
-            .label(t.append('operations.paste.nothing_copied'))();
+            .label(label)();
     }
 
 
@@ -89,7 +92,9 @@ export function behaviorPaste(context) {
     }
 
 
-    // Add the GeoJSON points of the clipboard as nodes at their position, and select them
+    // Add the GeoJSON points of the clipboard as nodes at their position, and the tags of those with an OSM
+    // element to this element, without replacing its existing tags; then select the added and changed features.
+    // The OSM elements must be loaded (in the map view): the others are left out, with a message.
     function pasteGeojson(d3_event) {
         // A text field gets the pasted text
         if (d3_event.target.closest?.('input, textarea, [contenteditable]')) return;
@@ -97,21 +102,36 @@ export function behaviorPaste(context) {
 
         var points = utilGeojsonPoints(d3_event.clipboardData?.getData('text/plain') ?? '');
         if (!points.length) {
-            flashNothingCopied();
+            flashNotPasted(t.append('operations.paste.nothing_copied'));
             return;
         }
         d3_event.preventDefault();
 
-        var nodes = points.map(function(point) {
+        var nodes = points.filter(function(point) { return !point.entityID; }).map(function(point) {
             return new osmNode({ loc: point.loc, tags: point.tags });
         });
+        var corrections = points.filter(function(point) { return point.entityID; });
+        var loaded = corrections.filter(function(point) { return context.hasEntity(point.entityID); });
+        var ids = nodes.map(function(node) { return node.id; })
+            .concat(loaded.map(function(point) { return point.entityID; }));
+        if (!ids.length) {
+            flashNotPasted(t.append('operations.paste.geojson_not_loaded', { n: corrections.length }));
+            return;
+        }
         context.perform(
             function(graph) {
-                return nodes.reduce(function(result, node) { return actionAddEntity(node)(result); }, graph);
+                graph = nodes.reduce(function(result, node) { return actionAddEntity(node)(result); }, graph);
+                return loaded.reduce(function(result, point) {
+                    var tags = result.entity(point.entityID).tags;
+                    return actionChangeTags(point.entityID, { ...point.tags, ...tags })(result);
+                }, graph);
             },
-            t('operations.paste.annotation', { n: nodes.length })
+            t('operations.paste.annotation', { n: ids.length })
         );
-        context.enter(modeSelect(context, nodes.map(function(node) { return node.id; })));
+        context.enter(modeSelect(context, ids));
+        if (loaded.length < corrections.length) {
+            flashNotPasted(t.append('operations.paste.geojson_not_loaded', { n: corrections.length - loaded.length }));
+        }
     }
 
 

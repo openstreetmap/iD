@@ -108,6 +108,9 @@ en:
         one: Pasted a feature.
         other: "Pasted {n} features."
       nothing_copied: No features have been copied.
+      geojson_not_loaded:
+        one: "A pasted OSM feature is not loaded: move the map to it and paste again."
+        other: "{n} pasted OSM features are not loaded: move the map to them and paste again."
     circularize:
       title: Circularize
       description:

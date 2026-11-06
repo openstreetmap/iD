@@ -15,6 +15,10 @@ describe('iD.utilGeojsonPoints', function() {
         ['out of range', { ...address, geometry: { type: 'Point', coordinates: [200, 47.6] } }, []],
         ['without tags', { ...address, properties: { numero: 50 } }, []],
         ['not GeoJSON', { foo: 'bar' }, []],
+        ['tags of an existing way', { ...address, properties: { ...address.properties, osm_id: 'way/12' } },
+            [{ loc: [-61.5, 47.6], tags: tags, entityID: 'w12' }]],
+        ['invalid osm_id ignored', { ...address, properties: { ...address.properties, osm_id: 'foo/12' } },
+            [{ loc: [-61.5, 47.6], tags: tags }]],
     ])('%s', function(_, geojson, expected) {
         expect(iD.utilGeojsonPoints(JSON.stringify(geojson))).toEqual(expected);
     });
