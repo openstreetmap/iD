@@ -30,7 +30,7 @@ export function modeDrawArea(context, wayID, startGraph, button) {
     };
 
     mode.activeID = function() {
-        return (behavior && behavior.activeID()) || [];
+        return behavior?.activeID();
     };
 
     return mode;

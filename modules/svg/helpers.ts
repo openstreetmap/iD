@@ -26,7 +26,7 @@ import type { WithLoc } from './geolocate';
 // 1 = passive vertex - yes touch/connect
 // 2 = adjacent vertex - yes but pay attention segmenting a line here
 //
-export function svgPassiveVertex(node: osmNode, graph: coreGraph, activeID: NodeId) {
+export function svgPassiveVertex(node: osmNode, graph: coreGraph, activeID: NodeId | undefined) {
     if (!activeID) return 1;
     if (activeID === node.id) return 0;
 
