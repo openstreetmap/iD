@@ -84,6 +84,7 @@ export function uiPhotoviewer(context) {
                 context.mode().id === 'select';
 
             renderAddPhotoIdButton(service, isActiveForService);
+            renderAddPhotoDateButton(service, isActiveForService);
 
             function layerEnabled(which) {
                 const layers = context.layers();
@@ -170,6 +171,55 @@ export function uiPhotoviewer(context) {
                 } else {
                     buttonDisable(false);
                 }
+            }
+
+            function renderAddPhotoDateButton(service, shouldDisplay) {
+                const button = selection.selectAll('.set-photo-date-from-viewer')
+                    .data(shouldDisplay ? [0] : []);
+
+                button.exit()
+                    .remove();
+
+                const buttonEnter = button.enter()
+                    .append('button')
+                    .attr('class', 'set-photo-date-from-viewer')
+                    .call(svgIcon('#fas-calendar-plus'))
+                    .call(uiTooltip()
+                        .title(() => t.append('inspector.set_photo_date_from_viewer.enable'))
+                        .placement('right')
+                    );
+
+                buttonEnter
+                    .select('.tooltip')
+                    .classed('dark', true)
+                    .style('width', '300px');
+
+                buttonEnter
+                    .merge(button)
+                    .on('click', function (e) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        const activeServiceId = getServiceId();
+                        const image = services[activeServiceId].getActiveImage();
+                        
+                        // Ensure the image has a captured_at date before trying to tag it
+                        if (!image || !image.captured_at) return;
+                        
+                        // Format the date to YYYY-MM-DD
+                        const captureDate = new Date(image.captured_at);
+                        const dateString = captureDate.toISOString().split('T')[0];
+
+                        const action = graph => {
+                            context.selectedIDs().reduce((graph, entityID) => {
+                                const tags = graph.entity(entityID).tags;
+                                const action = actionChangeTags(entityID, {...tags, ['check_date']: dateString});
+                                return action(graph);
+                            }, graph);
+                        };
+                        
+                        const annotation = t('operations.change_tags.annotation');
+                        context.perform(action, annotation);
+                    });
             }
 
             function buttonDisable(reason) {
