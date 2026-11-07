@@ -70,6 +70,19 @@ describe('iD.presetCollection', function() {
         });
     });
 
+    describe('#matchLocation', function() {
+        it('returns the full collection if no location is provided', function() {
+            expect(c.matchLocation().collection).toEqual(c.collection);
+        });
+
+        it('returns valid presets for the given coordinate', function() {
+            var result = c.matchLocation([0, 0]).collection;
+            expect(result).toEqual(expect.arrayContaining([
+                p.area, p.residential, p.park
+            ]));
+        });
+    });
+
     describe('#search', function() {
         it('matches leading name', function() {
             var result = c.search('resid', 'area').collection;
