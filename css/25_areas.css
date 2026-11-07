@@ -288,6 +288,7 @@ path.fill.tag-leisure-horse_riding {
 /* Dark Gray things */
 path.stroke.tag-amenity-parking,
 path.stroke.tag-landuse-railway,
+path.stroke.tag-railway-turntable,
 path.stroke.tag-landuse-quarry,
 path.stroke.tag-leisure-pitch.tag-sport-basketball,
 path.stroke.tag-leisure-pitch.tag-sport-skateboard,
@@ -307,6 +308,7 @@ path.stroke.tag-waterway-weir {
 }
 path.fill.tag-amenity-parking,
 path.fill.tag-landuse-railway,
+path.fill.tag-railway-turntable,
 path.fill.tag-landuse-quarry,
 path.fill.tag-leisure-pitch.tag-sport-basketball,
 path.fill.tag-leisure-pitch.tag-sport-skateboard,
