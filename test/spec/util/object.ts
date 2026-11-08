@@ -42,4 +42,28 @@ describe('stringifyProperties', () => {
             h: '"1"',
         });
     });
+
+    it('does not truncate values by default', () => {
+        const long = 'x'.repeat(10_000);
+        expect(iD.stringifyProperties({ long, arr: [long] })).toStrictEqual({
+            long,
+            arr: `["${long}"]`,
+        });
+    });
+
+    it('truncates values longer than maxLength', () => {
+        const times = Array.from({ length: 10_000 }, (_, i) => new Date(i * 1000).toISOString());
+        const result = iD.stringifyProperties({
+            name: 'track',
+            coordinateProperties: { times },
+            long: 'x'.repeat(300),
+            exact: 'y'.repeat(255),
+        }, 255);
+        expect(result.name).toBe('track');
+        expect(result.coordinateProperties).toHaveLength(255);
+        expect(result.coordinateProperties).toMatch(/^\{"times":\["1970-01-01T00:00:00.000Z",.*…$/);
+        expect(result.long).toBe('x'.repeat(254) + '…');
+        expect(result.exact).toBe('y'.repeat(255));
+        expect(iD.stringifyProperties({ a: 'abcdef' }, 4)).toStrictEqual({ a: 'abc…' });
+    });
 });

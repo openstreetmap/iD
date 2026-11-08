@@ -30,23 +30,26 @@ export function utilCheckTagDictionary<T>(tags:Tags, tagDictionary: TagDictionar
 
 /**
  * converts every value in an object to a string, if
- * it's not already a string.
+ * it's not already a string. If `maxLength` is given, longer
+ * values are truncated and end with an ellipsis.
  */
-export function stringifyProperties(object: Record<string, unknown>): Tags {
+export function stringifyProperties(object: Record<string, unknown>, maxLength = Infinity): Tags {
     const tags: Tags = {};
     for (const key in object) {
+        let value: string;
         switch (typeof object[key]) {
             case 'undefined':
-                break; // skip property
+                continue; // skip property
             case 'string':
-                tags[key] = object[key];
+                value = object[key];
                 break;
             default:
-                tags[key] = JSON.stringify(
+                value = JSON.stringify(
                     object[key],
                     (_, value) => typeof value === 'bigint' ? value.toString() : value
                 );
         }
+        tags[key] = value.length > maxLength ? value.slice(0, maxLength - 1) + '…' : value;
     }
     return tags;
 }
