@@ -1,7 +1,7 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { isArray, isNumber } from 'es-toolkit/compat';
 
-import { t } from '../../core/localizer';
+import { localizer, t } from '../../core/localizer';
 import { uiConfirm } from '../confirm';
 import { utilRebind } from '../../util';
 import { uiTooltip } from '../tooltip';
@@ -105,7 +105,7 @@ export function uiSettingsLocalPhotos(context) {
             .call(svgIcon('#iD-icon-alert'))
             .call(uiTooltip()
                 .title(() => t.append('local_photos.no_geolocation.tooltip'))
-                .placement('left')
+                .placement(localizer.textDirection() === 'rtl' ? 'right' : 'left')
             );
         selectionEnter
             .append('button')
