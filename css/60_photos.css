@@ -323,6 +323,7 @@ li.list-item-photos.list-item-mapilio.active:after {
     align-items: center;
     justify-content: center;
     gap: 4px;
+    direction: ltr;
 }
 .photo-controls-mapilio button {
     padding:0 6px;
@@ -371,6 +372,7 @@ li.list-item-photos.list-item-panoramax.active:after {
     align-items: center;
     justify-content: center;
     gap: 4px;
+    direction: ltr;
 }
 .photo-controls-panoramax button {
     padding:0 6px;
@@ -483,6 +485,10 @@ label.streetside-hires {
     top: -25px;
 }
 
+.mly-wrapper .mapillary-sequence-container {
+    direction: ltr;
+}
+
 .mly-wrapper .mapillary-attribution-container {
     display: flex;
     align-items: center;
@@ -591,6 +597,7 @@ label.streetside-hires {
     display: inline-block;
     z-index: 10;
     pointer-events: initial;
+    direction: ltr;
 }
 
 .photo-controls button,
@@ -722,6 +729,7 @@ label.streetside-hires {
     align-items: center;
     justify-content: center;
     gap: 4px;
+    direction: ltr;
 }
 .photo-controls-local button {
     padding:0 6px;
