@@ -3,7 +3,7 @@ import { PbfWriter } from 'pbf';
 
 // Tiny real MVT fixtures: one point at the tile center and duplicate sequence
 // lines from that point to x + 64. Both layers use the same sequence UUID.
-function tileData(layerName, id = 42, featureCount = null) {
+function tileData(layerName, id = 42, featureCount = null, malformedFeature = null) {
     const pbf = new PbfWriter();
     pbf.writeMessage(3, (_, layer) => {
         layer.writeVarintField(15, 2);
@@ -29,7 +29,8 @@ function tileData(layerName, id = 42, featureCount = null) {
             layer.writeMessage(2, (_, feature) => {
                 feature.writePackedVarint(2, entries.flatMap((_, index) => [index, index]));
                 feature.writeVarintField(3, isPoint ? 1 : 2);
-                feature.writePackedVarint(4, isPoint ? [9, 4096, 4096] : [9, 4096, 4096, 10, 128, 0]);
+                const geometry = isPoint ? [9, 4096, 4096] : [9, 4096, 4096, 10, 128, 0];
+                feature.writePackedVarint(4, i === malformedFeature ? [8] : geometry);
             });
         }
     });
@@ -61,7 +62,7 @@ const failures = [
 // These catch stuck inflight/early loaded state via observable coverage recovery,
 // and stale ownership through events, data, request counts, and reset aborts.
 describe('iD.serviceMapilio tile lifecycle', function() {
-    let mapilio, projection, fetch;
+    let mapilio, projection, fetch, logError;
 
     beforeEach(function() {
         mapilio = iD.serviceMapilio;
@@ -75,7 +76,7 @@ describe('iD.serviceMapilio tile lifecycle', function() {
             .clipExtent([[0, 0], [128, 128]]);
         fetch = vi.fn();
         vi.stubGlobal('fetch', fetch);
-        vi.spyOn(console, 'error').mockImplementation(() => {});
+        logError = vi.spyOn(console, 'error').mockImplementation(() => {});
     });
 
     afterEach(function() {
@@ -84,6 +85,45 @@ describe('iD.serviceMapilio tile lifecycle', function() {
         mapilio.on('loadedLines.tiles', null);
         vi.restoreAllMocks();
         vi.unstubAllGlobals();
+    });
+
+    [
+        ['a later point feature', tileData('map_points', 42, 2, 1)],
+        ['the line layer after valid points', new Uint8Array([
+            ...tileData('map_points'), ...tileData('map_roads_line', 42, 1, 0)
+        ])],
+        ['a later line feature after valid points and lines', new Uint8Array([
+            ...tileData('map_points'), ...tileData('map_roads_line', 99, 2, 1)
+        ])]
+    ].forEach(function([name, malformed]) {
+        it('keeps public caches unchanged when decoding fails in ' + name, async function() {
+            const valid = new Uint8Array([...tileData('map_points'), ...tileData('map_roads_line')]);
+            fetch.mockResolvedValueOnce(response(malformed)).mockResolvedValueOnce(response(valid));
+            const loaded = vi.fn();
+            mapilio.on('loadedImages.tiles', loaded);
+            mapilio.loadImages(projection);
+            await setImmediate();
+            expect(logError).toHaveBeenCalledTimes(1);
+            expect(logError.mock.calls[0][0].message).toContain('unknown command');
+            expect(loaded).not.toHaveBeenCalled();
+            expect(mapilio.cachedImage(42)).toBeUndefined();
+            expect(mapilio.images(projection)).toEqual([]);
+            expect(mapilio.sequences(projection)).toEqual([]);
+            expect(fetch).toHaveBeenCalledTimes(1);
+
+            mapilio.loadImages(projection);
+            await setImmediate();
+            expect(fetch).toHaveBeenCalledTimes(2);
+            expect(loaded).toHaveBeenCalledTimes(1);
+            expect(mapilio.images(projection).map(image => image.id)).toEqual([42]);
+            expect(mapilio.cachedImage(42)).toEqual(mapilio.images(projection)[0]);
+            const sequences = mapilio.sequences(projection);
+            expect(sequences).toHaveLength(1);
+            expect(sequences[0].properties.id).toBe(42);
+            expect(sequences[0].geometry.coordinates).toHaveLength(2);
+            expect(projection(sequences[0].geometry.coordinates[0])[0]).toBeCloseTo(64);
+            expect(projection(sequences[0].geometry.coordinates[1])[0]).toBeCloseTo(68);
+        });
     });
 
     [

@@ -111,9 +111,12 @@ function loadTile(which, url, tile) {
 // Load the data from the vector tile into cache
 function loadTileDataToCache(data, tile) {
     const vectorTile = new VectorTile(new PbfReader(data));
+    // Stage the whole tile so a failed decode cannot leave entries behind for a retry.
+    const imageFeatures = [];
+    const lineFeatures = Object.create(null);
+    const lineStrings = _cache.sequences.lineString;
+
     if (Object.hasOwnProperty.call(vectorTile.layers, pointLayer)) {
-        const features = [];
-        const cache = _cache.images;
         const layer = vectorTile.layers[pointLayer];
 
         for (let i = 0; i < layer.length; i++) {
@@ -136,39 +139,41 @@ function loadTileDataToCache(data, tile) {
                 resolution: feature.properties.resolution,
                 isPano: isPano
             };
-            cache.forImageId[d.id] = d;
-            features.push({
+            imageFeatures.push({
                 minX: loc[0], minY: loc[1], maxX: loc[0], maxY: loc[1], data: d
             });
-        }
-        if (cache.rtree) {
-            cache.rtree.load(features);
         }
     }
 
     if (Object.hasOwnProperty.call(vectorTile.layers, lineLayer)) {
-        const cache = _cache.sequences;
         const layer = vectorTile.layers[lineLayer];
 
         for (let i = 0; i < layer.length; i++) {
             const feature = layer.feature(i).toGeoJSON(tile.xyz[0], tile.xyz[1], tile.xyz[2]);
-            if (cache.lineString[feature.properties.sequence_uuid]) {
-                const cacheEntry = cache.lineString[feature.properties.sequence_uuid];
-                if (cacheEntry.some(f => {
-                    // for some reason, mapilio sometimes returns a large amount of duplicate
-                    // sequence lines, causing very poor performance. this de-duplicates them,
-                    // see https://github.com/openstreetmap/iD/issues/10532
-                    const cachedCoords = f.geometry.coordinates;
-                    const featureCoords = feature.geometry.coordinates;
-                    return deepEqual(cachedCoords, featureCoords);
-                })) continue;
-                cacheEntry.push(feature);
-            } else {
-                cache.lineString[feature.properties.sequence_uuid] = [feature];
-            }
+            const sequenceId = feature.properties.sequence_uuid;
+            // Mapilio can return many duplicate sequence lines. Compare against
+            // both cached lines and this tile's staged lines (iD issue #10532).
+            const sameCoordinates = f => deepEqual(f.geometry.coordinates, feature.geometry.coordinates);
+            if (lineStrings[sequenceId]?.some(sameCoordinates) || lineFeatures[sequenceId]?.some(sameCoordinates)) continue;
+            (lineFeatures[sequenceId] ??= []).push(feature);
         }
     }
 
+    const images = _cache.images;
+    for (const { data: image } of imageFeatures) {
+        images.forImageId[image.id] = image;
+    }
+    if (images.rtree) {
+        images.rtree.load(imageFeatures);
+    }
+    for (const [sequenceId, features] of Object.entries(lineFeatures)) {
+        const entry = lineStrings[sequenceId];
+        if (entry) {
+            for (const feature of features) entry.push(feature);
+        } else {
+            lineStrings[sequenceId] = features;
+        }
+    }
 }
 
 function getImageData(imageId, sequenceId) {
