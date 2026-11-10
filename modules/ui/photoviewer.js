@@ -214,12 +214,13 @@ export function uiPhotoviewer(context) {
                 d3_event.preventDefault();
                 d3_event.stopPropagation();
 
+                const isRTL = localizer.textDirection() === 'rtl';
                 var mapSize = context.map().dimensions();
 
                 if (resizeOnX) {
                     var mapWidth = mapSize[0];
-                    const viewerMargin = parseInt(d3_select('.photoviewer').style('margin-left'), 10);
-                    var newWidth = clamp((startWidth + d3_event.clientX - startX), minWidth, mapWidth - viewerMargin * 2);
+                    const viewerMargin = parseInt(d3_select('.photoviewer').style(isRTL ? 'margin-right' : 'margin-left'), 10);
+                    const newWidth = clamp((startWidth + (d3_event.clientX - startX) * (isRTL ? -1 : 1)), minWidth, mapWidth - viewerMargin * 2);
                     target.style('width', newWidth + 'px');
                 }
 

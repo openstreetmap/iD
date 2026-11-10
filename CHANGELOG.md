@@ -81,6 +81,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Fix bug where `ref=*` labels did not appear for relation members ([#13097], thanks [@k-yle])
 #### :earth_asia: Localization
 * Support 835 new languages in the dropdown when adding a `name:*` tag ([#12802])
+* Fix the streetside photo resizer backwards in RTL layouts ([#13180], thanks [@k-yle])
 * Support territory-level address hints ([#12704], thanks [@Vectorial1024])
 * Add Hong Kong and Macao address formats ([#12704], thanks [@Vectorial1024])
 * Fix inconsistent RTL checkboxes ([#13181], thanks [@k-yle])
@@ -142,6 +143,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#13100]: https://github.com/openstreetmap/iD/pull/13100
 [#13102]: https://github.com/openstreetmap/iD/pull/13102
 [#13178]: https://github.com/openstreetmap/iD/pull/13178
+[#13180]: https://github.com/openstreetmap/iD/pull/13180
 [#13181]: https://github.com/openstreetmap/iD/pull/13181
 [@aditya1010-max]: https://github.com/aditya1010-max
 [@Geo-2695]: https://github.com/Geo-2695
