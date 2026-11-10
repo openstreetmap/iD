@@ -338,7 +338,6 @@ let langNamesInNativeLang;
 export async function languageNamesInLanguageOf(code: string) {
   if (rematchCodes[code]) code = rematchCodes[code];
 
-  // eslint-disable-next-line require-atomic-updates
   langNamesInNativeLang ||= await getLangNamesInNativeLang();
 
   const { language } = new Intl.Locale(code);

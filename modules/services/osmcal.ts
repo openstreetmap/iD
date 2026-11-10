@@ -37,10 +37,10 @@ export async function getOsmCalEvents(center: Vec2): Promise<OsmCalEvent[]> {
     const events = (await fetch(url, { signal: AbortSignal.timeout(2000) })
         .then(r => r.json())
         .catch(err => {
-            console.error(err); // eslint-disable-line no-console
+            console.error(err);
             return [];
         }) as OsmCalEvent[])
         .filter(event => !event.cancelled);
-    _cache[cacheIdx] = events; // eslint-disable-line require-atomic-updates
+    _cache[cacheIdx] = events;
     return events;
 }

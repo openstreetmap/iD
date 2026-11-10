@@ -608,7 +608,7 @@ export function coreValidator(context) {
     function runValidation(key) {
       const fn = _rules[key];
       if (typeof fn !== 'function') {
-        console.error('no such validation rule = ' + key);  // eslint-disable-line no-console
+        console.error('no such validation rule = ' + key);
         return;
       }
 
