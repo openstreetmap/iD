@@ -116,7 +116,7 @@ export function uiPhotoviewer(context) {
                     .call(svgIcon('#fas-eye-dropper'))
                     .call(uiTooltip()
                         .title(() => t.append('inspector.set_photo_from_viewer.enable'))
-                        .placement('right')
+                        .placement(localizer.textDirection() === 'rtl' ? 'left' : 'right')
                     );
 
                 buttonEnter
@@ -181,12 +181,12 @@ export function uiPhotoviewer(context) {
                 if (disabled) {
                     button.call(uiTooltip()
                         .title(() => t.append(`inspector.set_photo_from_viewer.disable.${reason}`))
-                        .placement('right')
+                        .placement(localizer.textDirection() === 'rtl' ? 'left' : 'right')
                     );
                 } else {
                     button.call(uiTooltip()
                         .title(() => t.append('inspector.set_photo_from_viewer.enable'))
-                        .placement('right')
+                        .placement(localizer.textDirection() === 'rtl' ? 'left' : 'right')
                     );
                 }
 

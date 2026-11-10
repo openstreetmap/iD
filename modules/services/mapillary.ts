@@ -685,7 +685,7 @@ export default new class {
             _mlyViewer.moveTo(image.id)
                 .then(image => this.setActiveImage(image))
                 .catch(function(e) {
-                    console.error('mly3', e); // eslint-disable-line no-console
+                    console.error('mly3', e);
                 });
         } else {
             fetch(`https://graph.mapillary.com/image_ids?sequence_id=${image.sequence_id}`, { headers: { 'Authorization': `OAuth ${accessToken}` } })
@@ -694,7 +694,7 @@ export default new class {
                     const correctedId = result.data.map(d => d.id).find(id =>
                         id.startsWith(`${image.id}`.substring(0, 10)));
                     if (!correctedId) {
-                        console.error('unable to determine corrected photo id for'); // eslint-disable-line no-console
+                        console.error('unable to determine corrected photo id for');
                     } else {
                         image.id = correctedId;
                         image.unsafeId = false;

@@ -1,5 +1,4 @@
 /* global locale:true, t:false */
-/* eslint no-console: 0 */
 
 describe.skip('locale', function() {
     var saved, error;

@@ -45,7 +45,11 @@ export default tseslint.config(
       'linebreak-style': ['error', 'unix'],
       'no-caller': 'error',
       'no-catch-shadow': 'error',
-      'no-console': 'warn',
+      'no-console': [
+        'warn',
+        // ban console.log but allow everything else
+        { allow: Object.keys(console).filter((method) => method !== 'log') },
+      ],
       'no-constructor-return': 'error',
       'no-div-regex': 'error',
       'no-duplicate-imports': ['warn', { 'allowSeparateTypeImports': true }],
@@ -115,7 +119,6 @@ export default tseslint.config(
       'prefer-spread': 'off',
       'quotes': ['error', 'single'],
       'radix': ['error', 'always'],
-      'require-atomic-updates': 'error',
       'require-await': 'error',
       'semi': ['error', 'always'],
       'semi-spacing': 'error',
