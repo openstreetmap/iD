@@ -34,5 +34,6 @@ const server = http.createServer((request, response) => {
 
 server.listen(port, () => {
   /* eslint-disable no-console */
-  console.log(styleText('yellow', `Listening on ${port}`));
+  console.log(styleText('yellow', `Listening on port ${port}`));
+  console.log(styleText('yellow', `Open http://127.0.0.1:${port}/`));
 });

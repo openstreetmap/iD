@@ -141,7 +141,7 @@ function loadTile(which, url, tile, zoom) {
             if (e.message === 'No Data') {
                 cache.loaded[tileId] = true;
             } else {
-                console.error(e); // eslint-disable-line no-console
+                console.error(e);
             }
         });
 }

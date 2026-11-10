@@ -97,7 +97,7 @@ function loadTile(which, url, tile) {
         })
         .catch(function(e) {
             if (isCurrentRequest() && e.name !== 'AbortError') {
-                console.error(e); // eslint-disable-line no-console
+                console.error(e);
             }
         })
         .finally(function() {
