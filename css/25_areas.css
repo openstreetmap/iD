@@ -288,7 +288,6 @@ path.fill.tag-leisure-horse_riding {
 /* Dark Gray things */
 path.stroke.tag-amenity-parking,
 path.stroke.tag-landuse-railway,
-path.stroke.tag-railway-turntable,
 path.stroke.tag-landuse-quarry,
 path.stroke.tag-leisure-pitch.tag-sport-basketball,
 path.stroke.tag-leisure-pitch.tag-sport-skateboard,
@@ -306,6 +305,12 @@ path.stroke.tag-waterway-dam,
 path.stroke.tag-waterway-weir {
     stroke: rgb(170, 170, 170);
 }
+
+path.stroke.tag-railway-turntable {
+    stroke: #444;
+    stroke-width: 2;
+}
+
 path.fill.tag-amenity-parking,
 path.fill.tag-landuse-railway,
 path.fill.tag-railway-turntable,
