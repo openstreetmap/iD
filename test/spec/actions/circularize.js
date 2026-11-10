@@ -300,19 +300,28 @@ describe('iD.actionCircularize', function () {
 
     });
 
-    it('not disable circularize for a slightly oval shape', function () {
-        // 36-point ellipse, 4% wider and 4% shorter than a circle
+    it.each([
+        { shape: 0.04, expected: false },
+        { shape: 0.01, expected: true }
+    ])('enable/disable circularize for a slightly oval shape', function ({ shape, expected }) {
+        // 36-point ellipse, x% wider and x% shorter than a circle
         var nodes = [];
         var ids = [];
         for (var i = 0; i < 36; i++) {
             var angle = 2 * Math.PI * i / 36;
-            nodes.push(new iD.osmNode({ id: 'n' + i, loc: [1.04 * Math.cos(angle), 0.96 * Math.sin(angle)] }));
+            nodes.push(new iD.osmNode({
+                id: 'n' + i,
+                loc: [
+                    (1 + shape) * Math.cos(angle),
+                    (1 - shape) * Math.sin(angle)
+                ]
+            }));
             ids.push('n' + i);
         }
         ids.push('n0');
         var graph = new iD.coreGraph(nodes.concat([new iD.osmWay({ id: '-', nodes: ids })]));
         var result = iD.actionCircularize('-', projection).disabled(graph);
-        expect(result).toBe(false);
+        expect(result).toBe(expected);
     });
 
 
