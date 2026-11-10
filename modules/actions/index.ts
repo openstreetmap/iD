@@ -1,6 +1,7 @@
 export { actionAddEntity } from './add_entity';
 export { actionAddMember } from './add_member';
 export { actionAddMidpoint } from './add_midpoint';
+export { actionAddPresetGallery } from './add_preset_gallery';
 export { actionAddVertex } from './add_vertex';
 export { actionChangeMember } from './change_member';
 export { actionChangePreset } from './change_preset';

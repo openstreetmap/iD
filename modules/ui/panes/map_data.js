@@ -6,6 +6,7 @@ import { uiSectionLenses } from '../sections/lenses';
 import { uiSectionMapFeatures } from '../sections/map_features';
 import { uiSectionMapStyleOptions } from '../sections/map_style_options';
 import { uiSectionPhotoOverlays } from '../sections/photo_overlays';
+import { uiSectionPresetGallery } from '../sections/preset_gallery';
 
 export function uiPaneMapData(context) {
 
@@ -19,6 +20,7 @@ export function uiPaneMapData(context) {
             uiSectionPhotoOverlays(context),
             uiSectionMapStyleOptions(context),
             uiSectionLenses(context),
+            uiSectionPresetGallery(context),
             uiSectionMapFeatures(context)
         ]);
 

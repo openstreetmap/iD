@@ -307,6 +307,12 @@
                     "invalid": "Enter a single letter (a-z).",
                     "flash": "Lens: {name}"
                 }
+            },
+            "preset_gallery": {
+                "title": "Preset gallery",
+                "add": "Draw every way preset",
+                "description": "Draws one {length} m segment per line preset, {spacing} m apart, in the open ocean, to check map colors and styles. Undo it before saving.",
+                "annotation": "Drew the preset gallery ({n} ways)."
             }
         },
         "preferences": {

@@ -307,6 +307,12 @@
                     "invalid": "Entrez une seule lettre (a-z).",
                     "flash": "Lentille : {name}"
                 }
+            },
+            "preset_gallery": {
+                "title": "Galerie de presets",
+                "add": "Dessiner tous les presets de ways",
+                "description": "Dessine un segment de {length} m par preset de ligne, espacés de {spacing} m, en plein océan, pour vérifier les couleurs et les styles. Annulez avant d’enregistrer.",
+                "annotation": "Galerie de presets dessinée ({n} ways)."
             }
         },
         "preferences": {
