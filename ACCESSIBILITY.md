@@ -53,6 +53,8 @@ elsewhere in this document.
 
 <br/>
 
+All features from [browser baseline 2022](https://web.dev/articles/use-baseline-with-browserslist#baseline_targets) can be freely used.
+
 ## 🕹 Interaction Support
 
 iD has traditionally assumed the mapper will be interacting via a mouse and keyboard,
