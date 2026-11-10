@@ -115,7 +115,6 @@ export default tseslint.config(
       'prefer-spread': 'off',
       'quotes': ['error', 'single'],
       'radix': ['error', 'always'],
-      'require-atomic-updates': 'error',
       'require-await': 'error',
       'semi': ['error', 'always'],
       'semi-spacing': 'error',

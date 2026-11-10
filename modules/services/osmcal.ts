@@ -41,6 +41,6 @@ export async function getOsmCalEvents(center: Vec2): Promise<OsmCalEvent[]> {
             return [];
         }) as OsmCalEvent[])
         .filter(event => !event.cancelled);
-    _cache[cacheIdx] = events; // eslint-disable-line require-atomic-updates
+    _cache[cacheIdx] = events;
     return events;
 }
