@@ -83,7 +83,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Support 835 new languages in the dropdown when adding a `name:*` tag ([#12802])
 * Support territory-level address hints ([#12704], thanks [@Vectorial1024])
 * Add Hong Kong and Macao address formats ([#12704], thanks [@Vectorial1024])
-* Fix tooltips unreadable in RTL layout ([#13178], thanks [@k-yle])
+* Fix some unreadable tooltips in right-to-left layout ([#13178], thanks [@k-yle])
 #### :hourglass: Performance
 #### :mortar_board: Walkthrough / Help
 #### :rocket: Presets
