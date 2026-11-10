@@ -545,9 +545,9 @@ export function rendererBackground(context) {
       }
     })
     .catch(err => {
-      /* eslint-disable no-console */
+
       console.error(err);
-      /* eslint-enable no-console */
+
     });
   };
 
