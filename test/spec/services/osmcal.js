@@ -17,21 +17,20 @@ describe('getOsmCalEvents', function() {
                 name: 'OpenStreetMap Conference',
                 url: 'https://example.com/event',
                 date: {
-                    start: '2026-11-10',
-                    human: 'November 10, 2026',
-                    human_short: 'Nov 10',
-                    whole_day: true
-                },
-                cancelled: false
+                    start: '2026-11-10T18:00:00-07:00',
+                    human: '10th November 18:00',
+                    human_short: '10th November',
+                    whole_day: false
+                }
             },
             {
                 name: 'Cancelled OSM Meetup',
                 url: 'https://example.com/cancelled-event',
                 date: {
-                    start: '2026-11-11',
-                    human: 'November 11, 2026',
-                    human_short: 'Nov 11',
-                    whole_day: true
+                    start: '2026-11-11T18:00:00-07:00',
+                    human: '11th November 18:00',
+                    human_short: '11th November',
+                    whole_day: false
                 },
                 cancelled: true
             }
@@ -81,7 +80,10 @@ describe('getOsmCalEvents', function() {
     });
 
     it('returns an empty array when response JSON parsing fails', async function() {
-        fetchMock.get('begin:https://osmcal.org/api/v2/events/', 500);
+        fetchMock.get('begin:https://osmcal.org/api/v2/events/', {
+            body: 'invalid json',
+            status: 200
+        });
 
         const result = await getOsmCalEvents([26.9124, 75.7873]);
 
