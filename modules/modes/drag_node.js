@@ -208,6 +208,7 @@ export function modeDragNode(context) {
                 }
 
             } else if (targetNodes) {   // snap to way - a line target with `.nodes`
+                // Pass entity.id as activeID so geoChooseEdge skips segments connected to the dragged node
                 edge = geoChooseEdge(targetNodes, context.map().mouse(), context.projection, entity.id);
                 if (edge) {
                     loc = edge.loc;
