@@ -376,31 +376,35 @@ export function actionSplit(nodeIds: NodeId[], newWayIds?: WayId[]): ActionSplit
                 // loops: try to look one further member ahead/behind to resolve the connectivity
                 if (wayAconnectsPrev && wayBconnectsPrev && wayAconnectsNext && wayBconnectsNext) {
                     // look one further member ahead
-                    if (i > 2 && graph.hasEntity(members[i - 2].id)) {
-                        const prev2Entity = graph.entity<osmWay>(members[i - 2].id);
-                        if (connects(prev2Entity, wayA) && !connects(prev2Entity, wayB)) {
-                            // prev-2 member connects only to A: insert B before A
-                            insertMembers.push({at: i, role: member.role});
-                            continue;
-                        }
-                        if (connects(prev2Entity, wayB) && !connects(prev2Entity, wayA)) {
-                            // prev-2 member connects only to B: insert B after A
-                            insertMembers.push({at: i + 1, role: member.role});
-                            continue;
+                    if (i >= 2 && graph.hasEntity(members[i - 2].id)) {
+                        const prev2Entity = graph.entity(members[i - 2].id);
+                        if (prev2Entity.type === 'way') {
+                            if (connects(prev2Entity, wayA) && !connects(prev2Entity, wayB)) {
+                                // prev-2 member connects only to A: insert B before A
+                                insertMembers.push({at: i, role: member.role});
+                                continue;
+                            }
+                            if (connects(prev2Entity, wayB) && !connects(prev2Entity, wayA)) {
+                                // prev-2 member connects only to B: insert B after A
+                                insertMembers.push({at: i + 1, role: member.role});
+                                continue;
+                            }
                         }
                     }
                     // look one further member behind
                     if (i < members.length - 2 && graph.hasEntity(members[i + 2].id)) {
-                        const next2Entity = graph.entity<osmWay>(members[i + 2].id);
-                        if (connects(next2Entity, wayA) && !connects(next2Entity, wayB)) {
-                            // next+2 member connects only to A: insert B after A
-                            insertMembers.push({at: i + 1, role: member.role});
-                            continue;
-                        }
-                        if (connects(next2Entity, wayB) && !connects(next2Entity, wayA)) {
-                            // next+2 member connects only to B: insert B before A
-                            insertMembers.push({at: i, role: member.role});
-                            continue;
+                        const next2Entity = graph.entity(members[i + 2].id);
+                        if (next2Entity.type === 'way') {
+                            if (connects(next2Entity, wayA) && !connects(next2Entity, wayB)) {
+                                // next+2 member connects only to A: insert B after A
+                                insertMembers.push({at: i + 1, role: member.role});
+                                continue;
+                            }
+                            if (connects(next2Entity, wayB) && !connects(next2Entity, wayA)) {
+                                // next+2 member connects only to B: insert B before A
+                                insertMembers.push({at: i, role: member.role});
+                                continue;
+                            }
                         }
                     }
                 }

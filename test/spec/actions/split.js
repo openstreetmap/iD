@@ -1536,6 +1536,88 @@ describe('iD.actionSplit', function () {
                 expect(members(graph)).toEqual(['~', '=', '-', '=', '~']);
             });
 
+            it('splits spoon1 route at d when a stop node follows the ways', function () {
+                //
+                // Situation:
+                //    b --> c
+                //    |     |
+                //    a <-- d ~~~> e ~~~> f
+                //
+                //    Relation: ['~', '-', '~', 's']
+                //
+                // Expected result:
+                //    Relation: ['~', '-', '=', '~', 's']
+                //
+                var s = new iD.osmNode({ id: 's', loc: [3, 1] });
+                var graph = spoon1.replace(s).replace(spoon1.entity('r').addMember({id: 's', type: 'node', role: 'stop'}));
+                graph = iD.actionSplit('d', ['='])(graph);
+
+                expect(graph.entity('-').nodes).toEqual(['d', 'a', 'b']);
+                expect(graph.entity('=').nodes).toEqual(['b', 'c', 'd']);
+                expect(members(graph)).toEqual(['~', '-', '=', '~', 's']);
+            });
+
+            it('splits spoon1 route at d when stop and platform nodes precede the ways', function () {
+                //
+                // Situation:
+                //    b --> c
+                //    |     |
+                //    a <-- d ~~~> e ~~~> f
+                //
+                //    Relation: ['s', 'p', '~', '-', '~']
+                //
+                // Expected result:
+                //    Relation: ['s', 'p', '~', '-', '=', '~']
+                //
+                var s = new iD.osmNode({ id: 's', loc: [3, 1] });
+                var p = new iD.osmNode({ id: 'p', loc: [3, 2] });
+                var graph = spoon1.replace(s).replace(p).replace(spoon1.entity('r')
+                    .addMember({id: 'p', type: 'node', role: 'platform'}, 0)
+                    .addMember({id: 's', type: 'node', role: 'stop'}, 0));
+                graph = iD.actionSplit('d', ['='])(graph);
+
+                expect(graph.entity('-').nodes).toEqual(['d', 'a', 'b']);
+                expect(graph.entity('=').nodes).toEqual(['b', 'c', 'd']);
+                expect(members(graph)).toEqual(['s', 'p', '~', '-', '=', '~']);
+            });
+
+            it('looks two members behind when the split way is the third member', function () {
+                //
+                // Situation:
+                //            x
+                //          ⟋   ⟍
+                //    s --> a     b
+                //          ⟍   ⟋
+                //            y
+                //
+                //    Relation: ['-', '~', '#', '~']   ('~' via x, '#' via y)
+                //
+                // Expected result: '~' ends at b, so the half of '#' touching b comes first
+                //    Relation: ['-', '~', '=', '#', '~']
+                //
+                var graph = new iD.coreGraph([
+                    new iD.osmNode({ id: 's', loc: [-1, 0] }),
+                    new iD.osmNode({ id: 'a', loc: [0, 0] }),
+                    new iD.osmNode({ id: 'b', loc: [2, 0] }),
+                    new iD.osmNode({ id: 'x', loc: [1, 1] }),
+                    new iD.osmNode({ id: 'y', loc: [1, -1] }),
+                    new iD.osmWay({id: '-', nodes: ['s', 'a']}),
+                    new iD.osmWay({id: '~', nodes: ['a', 'x', 'b']}),
+                    new iD.osmWay({id: '#', nodes: ['a', 'y', 'b']}),
+                    new iD.osmRelation({id: 'r', members: [
+                        {id: '-', type: 'way'},
+                        {id: '~', type: 'way'},
+                        {id: '#', type: 'way'},
+                        {id: '~', type: 'way'}
+                    ]})
+                ]);
+                graph = iD.actionSplit('y', ['='])(graph);
+
+                expect(graph.entity('#').nodes).toEqual(['a', 'y']);
+                expect(graph.entity('=').nodes).toEqual(['y', 'b']);
+                expect(members(graph)).toEqual(['-', '~', '=', '#', '~']);
+            });
+
         });
 
         describe('splitting Y routes', function () {
