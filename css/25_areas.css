@@ -311,6 +311,13 @@ path.stroke.tag-railway-turntable {
     stroke-width: 2;
 }
 
+.z14 path.stroke.tag-railway-turntable,
+.z15 path.stroke.tag-railway-turntable,
+.z16 path.stroke.tag-railway-turntable,
+.z17 path.stroke.tag-railway-turntable {
+    stroke-width: 1;
+}
+
 path.fill.tag-amenity-parking,
 path.fill.tag-landuse-railway,
 path.fill.tag-railway-turntable,
