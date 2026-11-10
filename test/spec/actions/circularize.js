@@ -302,7 +302,7 @@ describe('iD.actionCircularize', function () {
 
     it.each([
         { shape: 0.04, expected: false },
-        { shape: 0.01, expected: true }
+        { shape: 0.005, expected: true }
     ])('enable/disable circularize for a slightly oval shape', function ({ shape, expected }) {
         // 36-point ellipse, x% wider and x% shorter than a circle
         var nodes = [];
