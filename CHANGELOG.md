@@ -79,6 +79,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Fix double-click zoom not working after cancelling drawing a line or area ([#11926], thanks [@aditya1010-max])
 * Fix the undo/redo annotation shown after converting an area to a line, or a line to an area, through a validation fix ([#12978], thanks [@wantaekchoi])
 * Fix bug where `ref=*` labels did not appear for relation members ([#13097], thanks [@k-yle])
+* Fix crash when splitting a closed way in a route relation that also has node members, such as stops and platforms ([#13185], thanks [@rajanpanth])
 #### :earth_asia: Localization
 * Support 835 new languages in the dropdown when adding a `name:*` tag ([#12802])
 * Support territory-level address hints ([#12704], thanks [@Vectorial1024])
@@ -139,10 +140,12 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#13098]: https://github.com/openstreetmap/iD/pull/13098
 [#13100]: https://github.com/openstreetmap/iD/pull/13100
 [#13102]: https://github.com/openstreetmap/iD/pull/13102
+[#13185]: https://github.com/openstreetmap/iD/pull/13185
 [@aditya1010-max]: https://github.com/aditya1010-max
 [@Geo-2695]: https://github.com/Geo-2695
 [@hemaksh2007jain-bit]: https://github.com/hemaksh2007jain-bit
 [@kalucky0]: https://github.com/kalucky0
+[@rajanpanth]: https://github.com/rajanpanth
 [@SaifuddinM23]: https://github.com/SaifuddinM23
 
 
