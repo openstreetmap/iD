@@ -528,7 +528,7 @@ export default new class {
             filter.push(['>=', 'capturedAt', new Date(fromDate).getTime()]);
         }
         if (toDate) {
-            filter.push(['>=', 'capturedAt', new Date(toDate).getTime()]);
+            filter.push(['<=', 'capturedAt', new Date(toDate).getTime()]);
         }
 
         if (_mlyViewer) {
