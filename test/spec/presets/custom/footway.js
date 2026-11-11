@@ -1,4 +1,5 @@
 import { loadCustomPresets } from './setup.js';
+import { footwayGridEntries } from '../../../../data/custom-tagging/src/presets/highway/access_grid';
 
 describe('custom presets — footway', function() {
     loadCustomPresets();
@@ -21,43 +22,30 @@ describe('custom presets — footway', function() {
 
     it('finds restricted footway presets by alias search terms', function() {
         const pool = iD.presetManager.matchAllGeometry(['line']);
-        const byCaa = pool.search('caa', 'line').collection.map((p) => p.id);
-        expect(byCaa).to.include('highway/footway/customers_access_aisle');
-
-        const byCfl = pool.search('cfl', 'line').collection.map((p) => p.id);
-        expect(byCfl).to.include('highway/footway/customers_footway_link');
-
         const byPflIds = pool.search('pfl', 'line').collection.map((p) => p.id);
         expect(byPflIds).to.include('highway/footway/private_footway_link');
-
-        const byCfas = pool.search('cfas', 'line').collection.map((p) => p.id);
-        expect(byCfas).to.include('highway/footway/customers_asphalt');
-
-        const byCsw = pool.search('csw', 'line').collection.map((p) => p.id);
-        expect(byCsw).to.include('highway/footway/customers_sidewalk');
     });
 
-    it('defines customers and private foot path presets', function() {
-        const customersAsphalt = iD.presetManager.item('highway/footway/customers_asphalt');
-        const customersOther = iD.presetManager.item('highway/footway/customers_other');
-        const privateConcrete = iD.presetManager.item('highway/footway/private_concrete');
-        expect(customersAsphalt.tags).to.include({
-            highway: 'footway',
-            access: 'customers',
-            surface: 'asphalt'
+    footwayGridEntries().forEach(function({ id, tags, addTags }) {
+        it(`defines grid preset ${id}`, function() {
+            const preset = iD.presetManager.item(id);
+            expect(preset?.tags, id).to.eql(tags);
+            expect(preset.addTags).to.eql(addTags);
         });
-        expect(customersOther.tags).to.include({ highway: 'footway', access: 'customers' });
-        expect(customersOther.tags).to.not.have.property('surface');
-        expect(privateConcrete.tags).to.include({ access: 'private', surface: 'concrete' });
+    });
+
+    it('offers only the pedestrian access categories on footways', function() {
+        const categories = new Set(footwayGridEntries().map((entry) => entry.category.id));
+        expect([...categories]).to.eql(['private', 'customers', 'permissive', 'private_property', 'destination', 'private_ownership']);
     });
 
     it('defines restricted informal path and sidewalk presets', function() {
-        const customersInformal = iD.presetManager.item('highway/footway/customers_informal');
+        const privateInformal = iD.presetManager.item('highway/footway/private_informal');
         const privateSidewalk = iD.presetManager.item('highway/footway/private_sidewalk');
-        expect(customersInformal.tags).to.include({
+        expect(privateInformal.tags).to.include({
             highway: 'path',
             informal: 'yes',
-            access: 'customers'
+            access: 'private'
         });
         expect(privateSidewalk.tags).to.include({
             highway: 'footway',
@@ -79,18 +67,18 @@ describe('custom presets — footway', function() {
         });
     });
 
-    it('defines customers access aisle without bicycle tag', function() {
-        const customersAisle = iD.presetManager.item('highway/footway/customers_access_aisle');
-        expect(customersAisle, 'customers access aisle').to.exist;
-        expect(customersAisle.tags).to.include({ access: 'customers', footway: 'access_aisle' });
-        expect(customersAisle.tags).to.not.have.property('bicycle');
+    it('defines private access aisle without bicycle tag', function() {
+        const privateAisle = iD.presetManager.item('highway/footway/private_access_aisle');
+        expect(privateAisle, 'private access aisle').to.exist;
+        expect(privateAisle.tags).to.include({ access: 'private', footway: 'access_aisle' });
+        expect(privateAisle.tags).to.not.have.property('bicycle');
     });
 
-    it('defines customers footway link without bicycle tag', function() {
-        const customersLink = iD.presetManager.item('highway/footway/customers_footway_link');
-        expect(customersLink, 'customers footway link').to.exist;
-        expect(customersLink.tags).to.include({ footway: 'link', access: 'customers' });
-        expect(customersLink.tags).to.not.have.property('bicycle');
+    it('defines private footway link without bicycle tag', function() {
+        const privateLink = iD.presetManager.item('highway/footway/private_footway_link');
+        expect(privateLink, 'private footway link').to.exist;
+        expect(privateLink.tags).to.include({ footway: 'link', access: 'private' });
+        expect(privateLink.tags).to.not.have.property('bicycle');
     });
 
     it('exposes pfl alias on private footway link', function() {
@@ -99,9 +87,9 @@ describe('custom presets — footway', function() {
         expect(privateLink.aliases()).to.include('pfl');
     });
 
-    it('removes bicycle when changing from footway link bicycle dismount to customers footway link', function() {
+    it('removes bicycle when changing from footway link bicycle dismount to private footway link', function() {
         const oldPreset = iD.presetManager.item('highway/footway/footway_link_bicycle_dismount');
-        const newPreset = iD.presetManager.item('highway/footway/customers_footway_link');
+        const newPreset = iD.presetManager.item('highway/footway/private_footway_link');
         const n1 = new iD.osmNode({ loc: [0, 0] });
         const n2 = new iD.osmNode({ loc: [1, 1] });
         const way = new iD.osmWay({
@@ -119,7 +107,7 @@ describe('custom presets — footway', function() {
         expect(tags).to.include({
             highway: 'footway',
             footway: 'link',
-            access: 'customers',
+            access: 'private',
             surface: 'asphalt'
         });
         expect(tags).to.not.have.property('bicycle');
@@ -189,8 +177,8 @@ describe('custom presets — footway', function() {
         expect(bySby).to.include('highway/footway/sidewalk_bicycle_yes');
     });
 
-    it('removes access when changing from customers footway link to footway link bicycle dismount', function() {
-        const oldPreset = iD.presetManager.item('highway/footway/customers_footway_link');
+    it('removes access when changing from private footway link to footway link bicycle dismount', function() {
+        const oldPreset = iD.presetManager.item('highway/footway/private_footway_link');
         const newPreset = iD.presetManager.item('highway/footway/footway_link_bicycle_dismount');
         const n1 = new iD.osmNode({ loc: [0, 0] });
         const n2 = new iD.osmNode({ loc: [1, 1] });
@@ -199,7 +187,7 @@ describe('custom presets — footway', function() {
             tags: {
                 highway: 'footway',
                 footway: 'link',
-                access: 'customers',
+                access: 'private',
                 surface: 'asphalt'
             }
         });

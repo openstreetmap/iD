@@ -23,6 +23,7 @@
     "build:data": "shx mkdir -p dist/data && node scripts/build_data.js",
     "build:presets:custom": "tsx scripts/build_custom_presets.ts",
     "generate:presets:custom": "tsx scripts/compile_custom_presets_sources.ts",
+    "generate:locales:access-grid": "tsx scripts/generate_access_grid_locales.ts",
     "validate:presets:custom": "npm run validate:presets:custom:schema",
     "validate:presets:custom:schema": "tsx scripts/build_custom_presets.ts --validate",
     "build:stats": "node config/esbuild.config.min.js --stats && esbuild-visualizer --metadata dist/esbuild.json --filename docs/statistics.html && shx rm dist/esbuild.json",

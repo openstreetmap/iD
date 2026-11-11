@@ -7,8 +7,6 @@ import { presetNameEn } from '../../preset_name_en';
 
 /** Suffix -> distinguishing tag(s) added on top of `highway=steps`. */
 const STEPS_VARIANTS: Record<string, Record<string, string>> = {
-    customers: { access: 'customers' },
-    private: { access: 'private' },
     dismount: { bicycle: 'dismount' }
 };
 

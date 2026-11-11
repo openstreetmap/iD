@@ -48,8 +48,18 @@ function isSurfaceHint(tags) {
   const highway = tags.highway;
   if (!highway || !SURFACE_HINT_HIGHWAYS.has(highway)) return false;
   if (tags.indoor === 'yes') return false;
-  if (tags.access === 'private' && PRIVATE_SURFACE_SKIP.has(highway)) return false;
+  if (isPrivateSurfaceSkip(tags)) return false;
   return !tags.surface || tags.surface === 'paved';
+}
+
+/**
+ * Private footway, path or steps: its surface is never flagged, not even when
+ * the matched preset adds one.
+ * @param {Record<string, string>} tags
+ * @returns {boolean}
+ */
+function isPrivateSurfaceSkip(tags) {
+  return tags.access === 'private' && PRIVATE_SURFACE_SKIP.has(tags.highway);
 }
 
 /**
@@ -145,7 +155,9 @@ export function validationOutdatedTags() {
     const deprecationDiffContext = Object.keys(oldTags)
         .filter(key => deprecatedTags?.some(deprecated => deprecated.replace?.[key] !== undefined))
         .filter(key => newTags[key] === oldTags[key]);
-    const deprecationDiff = utilTagDiff(oldTags, newTags, deprecationDiffContext);
+    const privateSurfaceSkip = isPrivateSurfaceSkip(oldTags);
+    const deprecationDiff = utilTagDiff(oldTags, newTags, deprecationDiffContext)
+        .filter(d => !(privateSurfaceSkip && d.key === 'surface'));
 
     let issues = [];
     issues.provisional = (_waitingForDeprecated || waitingForNsi);

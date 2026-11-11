@@ -502,8 +502,8 @@
         "aliases": "aaby"
     },
     "highway/footway/customers_informal": {
-        "name": "Sentier informel — clients",
-        "terms": "cfi, footway, sentier informel, sentier, chemin de traverse, clients, randonnée",
+        "name": "Sentier informel clients seulement",
+        "terms": "clients, commerce, sentier informel, chemin de traverse",
         "aliases": "cfi"
     },
     "highway/footway/informal_bicycle_dismount_unpaved": {
@@ -521,34 +521,24 @@
         "terms": "ibyu, path, sentier informel, chemin de traverse, vélo autorisé, cyclisme, non revêtu, gravelle, terre, randonnée, marche",
         "aliases": "ibyu"
     },
-    "highway/footway/customers_asphalt": {
-        "name": "Chemin piéton — clients (asphalte)",
-        "terms": "cfas, footway, chemin piéton, sentier, clients, asphalte, randonnée, marche",
-        "aliases": "cfas"
-    },
     "highway/footway/customers_concrete": {
-        "name": "Chemin piéton — clients (béton)",
-        "terms": "cfac, footway, chemin piéton, sentier, clients, béton, randonnée, marche",
+        "name": "Chemin piéton clients seulement, béton",
+        "terms": "clients, commerce, chemin piéton, sentier, béton",
         "aliases": "cfac"
     },
-    "highway/footway/customers_other": {
-        "name": "Chemin piéton — clients",
-        "terms": "cfo, footway, chemin piéton, sentier, clients, randonnée, marche, promenade",
-        "aliases": "cfo"
-    },
     "highway/footway/customers_sidewalk": {
-        "name": "Trottoir — clients",
-        "terms": "csw, trottoir, bordure, footway, clients",
+        "name": "Trottoir clients seulement",
+        "terms": "clients, commerce, trottoir",
         "aliases": "csw"
     },
     "highway/footway/customers_access_aisle": {
-        "name": "Voie de circulation — clients",
-        "terms": "caa, vcc, voie de circulation, allée, zone hachurée, stationnement, clients",
+        "name": "Voie de circulation clients seulement",
+        "terms": "clients, commerce, voie de circulation, zone hachurée",
         "aliases": "caa"
     },
     "highway/footway/customers_footway_link": {
-        "name": "Lien piétonnier — clients",
-        "terms": "cfl, lpc, lien piétonnier, lien, liaison, connecteur, clients",
+        "name": "Lien piétonnier clients seulement",
+        "terms": "clients, commerce, lien piétonnier, connecteur",
         "aliases": "cfl"
     },
     "highway/footway/footway_link_bicycle_dismount": {
@@ -562,38 +552,28 @@
         "terms": "flby, lpvo, lp, lien, liaison, liaison piéton, lien piéton, vélo autorisé, cyclable"
     },
     "highway/footway/private_informal": {
-        "name": "Sentier informel — privé",
-        "terms": "pfi, footway, sentier informel, sentier, chemin de traverse, privé, randonnée",
+        "name": "Sentier informel strictement privé",
+        "terms": "privé, accès interdit, sentier informel, chemin de traverse",
         "aliases": "pfi"
     },
-    "highway/footway/private_asphalt": {
-        "name": "Chemin piéton — privé (asphalte)",
-        "terms": "pfas, footway, chemin piéton, sentier, privé, asphalte, randonnée, marche",
-        "aliases": "pfas"
-    },
     "highway/footway/private_concrete": {
-        "name": "Chemin piéton — privé (béton)",
-        "terms": "pfac, footway, chemin piéton, sentier, privé, béton, randonnée, marche",
+        "name": "Chemin piéton strictement privé, béton",
+        "terms": "privé, accès interdit, chemin piéton, sentier, béton",
         "aliases": "pfac"
     },
-    "highway/footway/private_other": {
-        "name": "Chemin piéton — privé",
-        "terms": "pfo, footway, chemin piéton, sentier, privé, randonnée, marche, promenade",
-        "aliases": "pfo"
-    },
     "highway/footway/private_sidewalk": {
-        "name": "Trottoir — privé",
-        "terms": "psw, trottoir, bordure, footway, privé",
+        "name": "Trottoir strictement privé",
+        "terms": "privé, accès interdit, trottoir",
         "aliases": "psw"
     },
     "highway/footway/private_access_aisle": {
-        "name": "Voie de circulation — privé",
-        "terms": "paa, vcp, voie de circulation, allée, zone hachurée, stationnement, privé",
+        "name": "Voie de circulation strictement privée",
+        "terms": "privé, accès interdit, voie de circulation, zone hachurée",
         "aliases": "paa"
     },
     "highway/footway/private_footway_link": {
-        "name": "Lien piétonnier — privé",
-        "terms": "pfl, lpp, lien piétonnier, lien, liaison, connecteur, privé",
+        "name": "Lien piétonnier strictement privé",
+        "terms": "privé, accès interdit, lien piétonnier, connecteur",
         "aliases": "pfl"
     },
     "highway/footway/sidewalk_bicycle_dismount": {
@@ -757,153 +737,153 @@
         "aliases": "usn"
     },
     "highway/service/customers_driveway": {
-        "name": "Entrée clients",
-        "terms": "scd, clients, entrée, allée, voie de service, service",
+        "name": "Entrée charretière clients seulement",
+        "terms": "clients, commerce, entrée charretière, entrée, allée",
         "aliases": "scd"
     },
     "highway/service/customers_parking_aisle": {
-        "name": "Allée de stationnement clients",
-        "terms": "scpa, clients, allée de stationnement, voie de service, service",
+        "name": "Allée de stationnement clients seulement",
+        "terms": "clients, commerce, allée de stationnement, stationnement",
         "aliases": "scpa"
     },
     "highway/service/customers_unpaved_driveway": {
-        "name": "Entrée clients non revêtue",
-        "terms": "scud, 4du, clients, non revêtue, entrée, allée, voie de service",
+        "name": "Entrée charretière clients seulement, non revêtue",
+        "terms": "clients, commerce, entrée charretière, entrée, allée, non revêtue",
         "aliases": "4du"
     },
     "highway/service/customers_unpaved_parking_aisle": {
-        "name": "Allée de stationnement clients non revêtue",
-        "terms": "scupa, 4pu, clients, non revêtue, allée de stationnement, voie de service",
+        "name": "Allée de stationnement clients seulement, non revêtue",
+        "terms": "clients, commerce, allée de stationnement, stationnement, non revêtue",
         "aliases": "4pu"
     },
     "highway/service/private_driveway": {
-        "name": "Entrée privée",
-        "terms": "spd, privé, entrée, allée, voie de service, service",
+        "name": "Entrée charretière strictement privée",
+        "terms": "privé, accès interdit, entrée charretière, entrée, allée",
         "aliases": "spd"
     },
     "highway/service/private_parking_aisle": {
-        "name": "Allée de stationnement privée",
-        "terms": "sppa, privé, allée de stationnement, voie de service, service",
+        "name": "Allée de stationnement strictement privée",
+        "terms": "privé, accès interdit, allée de stationnement, stationnement",
         "aliases": "sppa"
     },
     "highway/service/private_unpaved_driveway": {
-        "name": "Entrée privée non revêtue",
-        "terms": "spud, 5du, privé, non revêtue, entrée, allée, voie de service",
+        "name": "Entrée charretière strictement privée, non revêtue",
+        "terms": "privé, accès interdit, entrée charretière, entrée, allée, non revêtue",
         "aliases": "5du"
     },
     "highway/service/private_unpaved_parking_aisle": {
-        "name": "Allée de stationnement privée non revêtue",
-        "terms": "spupa, 5pu, privé, non revêtue, allée de stationnement, voie de service",
+        "name": "Allée de stationnement strictement privée, non revêtue",
+        "terms": "privé, accès interdit, allée de stationnement, stationnement, non revêtue",
         "aliases": "5pu"
     },
     "highway/service/destination_driveway": {
-        "name": "Entrée destination",
-        "terms": "sdd, 6d, destination, entrée, allée, voie de service, motor_vehicle",
+        "name": "Entrée charretière publique sans transit",
+        "terms": "public, destination, sans transit, entrée charretière, entrée, allée",
         "aliases": "6d"
     },
     "highway/service/destination_parking_aisle": {
-        "name": "Allée de stationnement destination",
-        "terms": "sdpa, 6p, destination, allée de stationnement, voie de service, motor_vehicle",
+        "name": "Allée de stationnement publique sans transit",
+        "terms": "public, destination, sans transit, allée de stationnement, stationnement",
         "aliases": "6p"
     },
     "highway/service/destination_unpaved_driveway": {
-        "name": "Entrée destination non revêtue",
-        "terms": "sdud, 6du, destination, non revêtue, entrée, allée, voie de service",
+        "name": "Entrée charretière publique sans transit, non revêtue",
+        "terms": "public, destination, sans transit, entrée charretière, entrée, allée, non revêtue",
         "aliases": "6du"
     },
     "highway/service/destination_unpaved_parking_aisle": {
-        "name": "Allée de stationnement destination non revêtue",
-        "terms": "sdupa, 6pu, destination, non revêtue, allée de stationnement, voie de service",
+        "name": "Allée de stationnement publique sans transit, non revêtue",
+        "terms": "public, destination, sans transit, allée de stationnement, stationnement, non revêtue",
         "aliases": "6pu"
     },
     "highway/service/customers": {
-        "name": "Voie de service clients",
-        "terms": "sc, clients, voie de service, service, accès",
+        "name": "Voie de service clients seulement",
+        "terms": "clients, commerce, voie de service",
         "aliases": "sc"
     },
     "highway/service/customers_unpaved": {
-        "name": "Voie de service clients (non revêtue)",
-        "terms": "scu, clients, voie de service, service, non revêtue",
+        "name": "Voie de service clients seulement, non revêtue",
+        "terms": "clients, commerce, voie de service, non revêtue",
         "aliases": "scu"
     },
     "highway/service/customers_sidewalk_both": {
-        "name": "Voie de service clients (trottoir séparé, deux côtés)",
-        "terms": "scsb, clients, voie de service, trottoir, sidepath, séparé, deux côtés, use_sidepath",
+        "name": "Voie de service clients seulement (trottoir séparé, deux côtés)",
+        "terms": "clients, commerce, voie de service, trottoir, deux côtés",
         "aliases": "scsb"
     },
     "highway/service/customers_sidewalk_left": {
-        "name": "Voie de service clients (trottoir séparé, gauche)",
-        "terms": "scsl, clients, voie de service, trottoir, sidepath, séparé, gauche, use_sidepath",
+        "name": "Voie de service clients seulement (trottoir séparé, gauche)",
+        "terms": "clients, commerce, voie de service, trottoir, gauche",
         "aliases": "scsl"
     },
     "highway/service/customers_sidewalk_right": {
-        "name": "Voie de service clients (trottoir séparé, droite)",
-        "terms": "scsr, clients, voie de service, trottoir, sidepath, séparé, droite, use_sidepath",
+        "name": "Voie de service clients seulement (trottoir séparé, droite)",
+        "terms": "clients, commerce, voie de service, trottoir, droite",
         "aliases": "scsr"
     },
     "highway/service/customers_opposite_use_sidepath": {
-        "name": "Voie de service clients (chaussées séparées, trottoir côté opposé)",
-        "terms": "sco, clients, voie de service, chaussées séparées, trottoir, sidepath, côté opposé, use_sidepath",
+        "name": "Voie de service clients seulement (chaussées séparées, trottoir côté opposé)",
+        "terms": "clients, commerce, voie de service, trottoir, chaussées séparées, côté opposé",
         "aliases": "sco"
     },
     "highway/service/private": {
-        "name": "Voie de service privée",
-        "terms": "sp, privé, voie de service, service, accès",
+        "name": "Voie de service strictement privée",
+        "terms": "privé, accès interdit, voie de service",
         "aliases": "sp"
     },
     "highway/service/private_unpaved": {
-        "name": "Voie de service privée (non revêtue)",
-        "terms": "spu, privé, voie de service, service, non revêtue",
+        "name": "Voie de service strictement privée, non revêtue",
+        "terms": "privé, accès interdit, voie de service, non revêtue",
         "aliases": "spu"
     },
     "highway/service/private_sidewalk_both": {
-        "name": "Voie de service privée (trottoir séparé, deux côtés)",
-        "terms": "spsb, privé, voie de service, trottoir, sidepath, séparé, deux côtés, use_sidepath",
+        "name": "Voie de service strictement privée (trottoir séparé, deux côtés)",
+        "terms": "privé, accès interdit, voie de service, trottoir, deux côtés",
         "aliases": "spsb"
     },
     "highway/service/private_sidewalk_left": {
-        "name": "Voie de service privée (trottoir séparé, gauche)",
-        "terms": "spsl, privé, voie de service, trottoir, sidepath, séparé, gauche, use_sidepath",
+        "name": "Voie de service strictement privée (trottoir séparé, gauche)",
+        "terms": "privé, accès interdit, voie de service, trottoir, gauche",
         "aliases": "spsl"
     },
     "highway/service/private_sidewalk_right": {
-        "name": "Voie de service privée (trottoir séparé, droite)",
-        "terms": "spsr, privé, voie de service, trottoir, sidepath, séparé, droite, use_sidepath",
+        "name": "Voie de service strictement privée (trottoir séparé, droite)",
+        "terms": "privé, accès interdit, voie de service, trottoir, droite",
         "aliases": "spsr"
     },
     "highway/service/private_opposite_use_sidepath": {
-        "name": "Voie de service privée (chaussées séparées, trottoir côté opposé)",
-        "terms": "spo, privé, voie de service, chaussées séparées, trottoir, sidepath, côté opposé, use_sidepath",
+        "name": "Voie de service strictement privée (chaussées séparées, trottoir côté opposé)",
+        "terms": "privé, accès interdit, voie de service, trottoir, chaussées séparées, côté opposé",
         "aliases": "spo"
     },
     "highway/service/destination": {
-        "name": "Voie de service (desserte locale)",
-        "terms": "sd, desserte locale, circulation locale, destination, voie de service, motor_vehicle",
+        "name": "Voie de service publique sans transit",
+        "terms": "public, destination, sans transit, voie de service",
         "aliases": "sd"
     },
     "highway/service/destination_unpaved": {
-        "name": "Voie de service (desserte locale, non revêtue)",
-        "terms": "sdu, desserte locale, destination, voie de service, non revêtue",
+        "name": "Voie de service publique sans transit, non revêtue",
+        "terms": "public, destination, sans transit, voie de service, non revêtue",
         "aliases": "sdu"
     },
     "highway/service/destination_sidewalk_both": {
-        "name": "Voie de service (desserte locale, trottoir séparé, deux côtés)",
-        "terms": "sdsb, desserte locale, destination, voie de service, trottoir, sidepath, séparé, deux côtés, use_sidepath",
+        "name": "Voie de service publique sans transit (trottoir séparé, deux côtés)",
+        "terms": "public, destination, sans transit, voie de service, trottoir, deux côtés",
         "aliases": "sdsb"
     },
     "highway/service/destination_sidewalk_left": {
-        "name": "Voie de service (desserte locale, trottoir séparé, gauche)",
-        "terms": "sdsl, desserte locale, destination, voie de service, trottoir, sidepath, séparé, gauche, use_sidepath",
+        "name": "Voie de service publique sans transit (trottoir séparé, gauche)",
+        "terms": "public, destination, sans transit, voie de service, trottoir, gauche",
         "aliases": "sdsl"
     },
     "highway/service/destination_sidewalk_right": {
-        "name": "Voie de service (desserte locale, trottoir séparé, droite)",
-        "terms": "sdsr, desserte locale, destination, voie de service, trottoir, sidepath, séparé, droite, use_sidepath",
+        "name": "Voie de service publique sans transit (trottoir séparé, droite)",
+        "terms": "public, destination, sans transit, voie de service, trottoir, droite",
         "aliases": "sdsr"
     },
     "highway/service/destination_opposite_use_sidepath": {
-        "name": "Voie de service (desserte locale, chaussées séparées, trottoir côté opposé)",
-        "terms": "sdo, desserte locale, destination, voie de service, chaussées séparées, trottoir, sidepath, côté opposé, use_sidepath",
+        "name": "Voie de service publique sans transit (chaussées séparées, trottoir côté opposé)",
+        "terms": "public, destination, sans transit, voie de service, trottoir, chaussées séparées, côté opposé",
         "aliases": "sdo"
     },
     "highway/service/disused": {
@@ -977,13 +957,13 @@
         "aliases": "m43t"
     },
     "highway/steps_customers": {
-        "name": "Escalier clients",
-        "terms": "stc, clients, escalier, escaliers, marches",
+        "name": "Escalier clients seulement",
+        "terms": "clients, commerce, escalier, marches",
         "aliases": "stc"
     },
     "highway/steps_private": {
-        "name": "Escalier privé",
-        "terms": "stp, privé, escalier, escaliers, marches",
+        "name": "Escalier strictement privé",
+        "terms": "privé, accès interdit, escalier, marches",
         "aliases": "stp"
     },
     "highway/steps_dismount": {
@@ -1153,5 +1133,855 @@
     "amenity/post_box/community_quebec": {
         "name": "Boîte postale communautaire (Postes Canada)",
         "terms": "boîte postale communautaire, courrier communautaire, multiboîte, postes canada, canada post, boîte aux lettres, community mailbox"
+    },
+    "highway/service/private_concrete": {
+        "name": "Voie de service strictement privée, béton",
+        "terms": "privé, accès interdit, voie de service, béton"
+    },
+    "highway/service/private_concrete_parking_aisle": {
+        "name": "Allée de stationnement strictement privée, béton",
+        "terms": "privé, accès interdit, allée de stationnement, stationnement, béton"
+    },
+    "highway/service/private_concrete_driveway": {
+        "name": "Entrée charretière strictement privée, béton",
+        "terms": "privé, accès interdit, entrée charretière, entrée, allée, béton"
+    },
+    "highway/service/private_drive_through": {
+        "name": "Service au volant strictement privé",
+        "terms": "privé, accès interdit, service au volant, drive-thru"
+    },
+    "highway/service/private_concrete_drive_through": {
+        "name": "Service au volant strictement privé, béton",
+        "terms": "privé, accès interdit, service au volant, drive-thru, béton"
+    },
+    "highway/service/private_unpaved_drive_through": {
+        "name": "Service au volant strictement privé, non revêtu",
+        "terms": "privé, accès interdit, service au volant, drive-thru, non revêtu"
+    },
+    "highway/service/customers_concrete": {
+        "name": "Voie de service clients seulement, béton",
+        "terms": "clients, commerce, voie de service, béton"
+    },
+    "highway/service/customers_concrete_parking_aisle": {
+        "name": "Allée de stationnement clients seulement, béton",
+        "terms": "clients, commerce, allée de stationnement, stationnement, béton"
+    },
+    "highway/service/customers_concrete_driveway": {
+        "name": "Entrée charretière clients seulement, béton",
+        "terms": "clients, commerce, entrée charretière, entrée, allée, béton"
+    },
+    "highway/service/customers_drive_through": {
+        "name": "Service au volant clients seulement",
+        "terms": "clients, commerce, service au volant, drive-thru"
+    },
+    "highway/service/customers_concrete_drive_through": {
+        "name": "Service au volant clients seulement, béton",
+        "terms": "clients, commerce, service au volant, drive-thru, béton"
+    },
+    "highway/service/customers_unpaved_drive_through": {
+        "name": "Service au volant clients seulement, non revêtu",
+        "terms": "clients, commerce, service au volant, drive-thru, non revêtu"
+    },
+    "highway/service/delivery": {
+        "name": "Voie de service livraisons seulement",
+        "terms": "livraison, débarcadère, voie de service"
+    },
+    "highway/service/delivery_concrete": {
+        "name": "Voie de service livraisons seulement, béton",
+        "terms": "livraison, débarcadère, voie de service, béton"
+    },
+    "highway/service/delivery_unpaved": {
+        "name": "Voie de service livraisons seulement, non revêtue",
+        "terms": "livraison, débarcadère, voie de service, non revêtue"
+    },
+    "highway/service/delivery_parking_aisle": {
+        "name": "Allée de stationnement livraisons seulement",
+        "terms": "livraison, débarcadère, allée de stationnement, stationnement"
+    },
+    "highway/service/delivery_concrete_parking_aisle": {
+        "name": "Allée de stationnement livraisons seulement, béton",
+        "terms": "livraison, débarcadère, allée de stationnement, stationnement, béton"
+    },
+    "highway/service/delivery_unpaved_parking_aisle": {
+        "name": "Allée de stationnement livraisons seulement, non revêtue",
+        "terms": "livraison, débarcadère, allée de stationnement, stationnement, non revêtue"
+    },
+    "highway/service/delivery_driveway": {
+        "name": "Entrée charretière livraisons seulement",
+        "terms": "livraison, débarcadère, entrée charretière, entrée, allée"
+    },
+    "highway/service/delivery_concrete_driveway": {
+        "name": "Entrée charretière livraisons seulement, béton",
+        "terms": "livraison, débarcadère, entrée charretière, entrée, allée, béton"
+    },
+    "highway/service/delivery_unpaved_driveway": {
+        "name": "Entrée charretière livraisons seulement, non revêtue",
+        "terms": "livraison, débarcadère, entrée charretière, entrée, allée, non revêtue"
+    },
+    "highway/service/delivery_drive_through": {
+        "name": "Service au volant livraisons seulement",
+        "terms": "livraison, débarcadère, service au volant, drive-thru"
+    },
+    "highway/service/delivery_concrete_drive_through": {
+        "name": "Service au volant livraisons seulement, béton",
+        "terms": "livraison, débarcadère, service au volant, drive-thru, béton"
+    },
+    "highway/service/delivery_unpaved_drive_through": {
+        "name": "Service au volant livraisons seulement, non revêtu",
+        "terms": "livraison, débarcadère, service au volant, drive-thru, non revêtu"
+    },
+    "highway/service/delivery_sidewalk_both": {
+        "name": "Voie de service livraisons seulement (trottoir séparé, deux côtés)",
+        "terms": "livraison, débarcadère, voie de service, trottoir, deux côtés"
+    },
+    "highway/service/delivery_sidewalk_left": {
+        "name": "Voie de service livraisons seulement (trottoir séparé, gauche)",
+        "terms": "livraison, débarcadère, voie de service, trottoir, gauche"
+    },
+    "highway/service/delivery_sidewalk_right": {
+        "name": "Voie de service livraisons seulement (trottoir séparé, droite)",
+        "terms": "livraison, débarcadère, voie de service, trottoir, droite"
+    },
+    "highway/service/delivery_opposite_use_sidepath": {
+        "name": "Voie de service livraisons seulement (chaussées séparées, trottoir côté opposé)",
+        "terms": "livraison, débarcadère, voie de service, trottoir, chaussées séparées, côté opposé"
+    },
+    "highway/service/permissive": {
+        "name": "Voie de service permissive",
+        "terms": "permissif, toléré, voie de service"
+    },
+    "highway/service/permissive_concrete": {
+        "name": "Voie de service permissive, béton",
+        "terms": "permissif, toléré, voie de service, béton"
+    },
+    "highway/service/permissive_unpaved": {
+        "name": "Voie de service permissive, non revêtue",
+        "terms": "permissif, toléré, voie de service, non revêtue"
+    },
+    "highway/service/permissive_parking_aisle": {
+        "name": "Allée de stationnement permissive",
+        "terms": "permissif, toléré, allée de stationnement, stationnement"
+    },
+    "highway/service/permissive_concrete_parking_aisle": {
+        "name": "Allée de stationnement permissive, béton",
+        "terms": "permissif, toléré, allée de stationnement, stationnement, béton"
+    },
+    "highway/service/permissive_unpaved_parking_aisle": {
+        "name": "Allée de stationnement permissive, non revêtue",
+        "terms": "permissif, toléré, allée de stationnement, stationnement, non revêtue"
+    },
+    "highway/service/permissive_driveway": {
+        "name": "Entrée charretière permissive",
+        "terms": "permissif, toléré, entrée charretière, entrée, allée"
+    },
+    "highway/service/permissive_concrete_driveway": {
+        "name": "Entrée charretière permissive, béton",
+        "terms": "permissif, toléré, entrée charretière, entrée, allée, béton"
+    },
+    "highway/service/permissive_unpaved_driveway": {
+        "name": "Entrée charretière permissive, non revêtue",
+        "terms": "permissif, toléré, entrée charretière, entrée, allée, non revêtue"
+    },
+    "highway/service/permissive_drive_through": {
+        "name": "Service au volant permissif",
+        "terms": "permissif, toléré, service au volant, drive-thru"
+    },
+    "highway/service/permissive_concrete_drive_through": {
+        "name": "Service au volant permissif, béton",
+        "terms": "permissif, toléré, service au volant, drive-thru, béton"
+    },
+    "highway/service/permissive_unpaved_drive_through": {
+        "name": "Service au volant permissif, non revêtu",
+        "terms": "permissif, toléré, service au volant, drive-thru, non revêtu"
+    },
+    "highway/service/permissive_sidewalk_both": {
+        "name": "Voie de service permissive (trottoir séparé, deux côtés)",
+        "terms": "permissif, toléré, voie de service, trottoir, deux côtés"
+    },
+    "highway/service/permissive_sidewalk_left": {
+        "name": "Voie de service permissive (trottoir séparé, gauche)",
+        "terms": "permissif, toléré, voie de service, trottoir, gauche"
+    },
+    "highway/service/permissive_sidewalk_right": {
+        "name": "Voie de service permissive (trottoir séparé, droite)",
+        "terms": "permissif, toléré, voie de service, trottoir, droite"
+    },
+    "highway/service/permissive_opposite_use_sidepath": {
+        "name": "Voie de service permissive (chaussées séparées, trottoir côté opposé)",
+        "terms": "permissif, toléré, voie de service, trottoir, chaussées séparées, côté opposé"
+    },
+    "highway/service/private_property": {
+        "name": "Voie de service propriété privée sans transit",
+        "terms": "privé, propriété, destination, résidentiel, voie de service"
+    },
+    "highway/service/private_property_concrete": {
+        "name": "Voie de service propriété privée sans transit, béton",
+        "terms": "privé, propriété, destination, résidentiel, voie de service, béton"
+    },
+    "highway/service/private_property_unpaved": {
+        "name": "Voie de service propriété privée sans transit, non revêtue",
+        "terms": "privé, propriété, destination, résidentiel, voie de service, non revêtue"
+    },
+    "highway/service/private_property_parking_aisle": {
+        "name": "Allée de stationnement propriété privée sans transit",
+        "terms": "privé, propriété, destination, résidentiel, allée de stationnement, stationnement"
+    },
+    "highway/service/private_property_concrete_parking_aisle": {
+        "name": "Allée de stationnement propriété privée sans transit, béton",
+        "terms": "privé, propriété, destination, résidentiel, allée de stationnement, stationnement, béton"
+    },
+    "highway/service/private_property_unpaved_parking_aisle": {
+        "name": "Allée de stationnement propriété privée sans transit, non revêtue",
+        "terms": "privé, propriété, destination, résidentiel, allée de stationnement, stationnement, non revêtue"
+    },
+    "highway/service/private_property_driveway": {
+        "name": "Entrée charretière propriété privée sans transit",
+        "terms": "privé, propriété, destination, résidentiel, entrée charretière, entrée, allée"
+    },
+    "highway/service/private_property_concrete_driveway": {
+        "name": "Entrée charretière propriété privée sans transit, béton",
+        "terms": "privé, propriété, destination, résidentiel, entrée charretière, entrée, allée, béton"
+    },
+    "highway/service/private_property_unpaved_driveway": {
+        "name": "Entrée charretière propriété privée sans transit, non revêtue",
+        "terms": "privé, propriété, destination, résidentiel, entrée charretière, entrée, allée, non revêtue"
+    },
+    "highway/service/private_property_drive_through": {
+        "name": "Service au volant propriété privée sans transit",
+        "terms": "privé, propriété, destination, résidentiel, service au volant, drive-thru"
+    },
+    "highway/service/private_property_concrete_drive_through": {
+        "name": "Service au volant propriété privée sans transit, béton",
+        "terms": "privé, propriété, destination, résidentiel, service au volant, drive-thru, béton"
+    },
+    "highway/service/private_property_unpaved_drive_through": {
+        "name": "Service au volant propriété privée sans transit, non revêtu",
+        "terms": "privé, propriété, destination, résidentiel, service au volant, drive-thru, non revêtu"
+    },
+    "highway/service/private_property_sidewalk_both": {
+        "name": "Voie de service propriété privée sans transit (trottoir séparé, deux côtés)",
+        "terms": "privé, propriété, destination, résidentiel, voie de service, trottoir, deux côtés"
+    },
+    "highway/service/private_property_sidewalk_left": {
+        "name": "Voie de service propriété privée sans transit (trottoir séparé, gauche)",
+        "terms": "privé, propriété, destination, résidentiel, voie de service, trottoir, gauche"
+    },
+    "highway/service/private_property_sidewalk_right": {
+        "name": "Voie de service propriété privée sans transit (trottoir séparé, droite)",
+        "terms": "privé, propriété, destination, résidentiel, voie de service, trottoir, droite"
+    },
+    "highway/service/private_property_opposite_use_sidepath": {
+        "name": "Voie de service propriété privée sans transit (chaussées séparées, trottoir côté opposé)",
+        "terms": "privé, propriété, destination, résidentiel, voie de service, trottoir, chaussées séparées, côté opposé"
+    },
+    "highway/service/business": {
+        "name": "Voie de service commerciale sans transit",
+        "terms": "commerce, commercial, destination, voie de service"
+    },
+    "highway/service/business_concrete": {
+        "name": "Voie de service commerciale sans transit, béton",
+        "terms": "commerce, commercial, destination, voie de service, béton"
+    },
+    "highway/service/business_unpaved": {
+        "name": "Voie de service commerciale sans transit, non revêtue",
+        "terms": "commerce, commercial, destination, voie de service, non revêtue"
+    },
+    "highway/service/business_parking_aisle": {
+        "name": "Allée de stationnement commerciale sans transit",
+        "terms": "commerce, commercial, destination, allée de stationnement, stationnement"
+    },
+    "highway/service/business_concrete_parking_aisle": {
+        "name": "Allée de stationnement commerciale sans transit, béton",
+        "terms": "commerce, commercial, destination, allée de stationnement, stationnement, béton"
+    },
+    "highway/service/business_unpaved_parking_aisle": {
+        "name": "Allée de stationnement commerciale sans transit, non revêtue",
+        "terms": "commerce, commercial, destination, allée de stationnement, stationnement, non revêtue"
+    },
+    "highway/service/business_driveway": {
+        "name": "Entrée charretière commerciale sans transit",
+        "terms": "commerce, commercial, destination, entrée charretière, entrée, allée"
+    },
+    "highway/service/business_concrete_driveway": {
+        "name": "Entrée charretière commerciale sans transit, béton",
+        "terms": "commerce, commercial, destination, entrée charretière, entrée, allée, béton"
+    },
+    "highway/service/business_unpaved_driveway": {
+        "name": "Entrée charretière commerciale sans transit, non revêtue",
+        "terms": "commerce, commercial, destination, entrée charretière, entrée, allée, non revêtue"
+    },
+    "highway/service/business_drive_through": {
+        "name": "Service au volant commercial sans transit",
+        "terms": "commerce, commercial, destination, service au volant, drive-thru"
+    },
+    "highway/service/business_concrete_drive_through": {
+        "name": "Service au volant commercial sans transit, béton",
+        "terms": "commerce, commercial, destination, service au volant, drive-thru, béton"
+    },
+    "highway/service/business_unpaved_drive_through": {
+        "name": "Service au volant commercial sans transit, non revêtu",
+        "terms": "commerce, commercial, destination, service au volant, drive-thru, non revêtu"
+    },
+    "highway/service/business_sidewalk_both": {
+        "name": "Voie de service commerciale sans transit (trottoir séparé, deux côtés)",
+        "terms": "commerce, commercial, destination, voie de service, trottoir, deux côtés"
+    },
+    "highway/service/business_sidewalk_left": {
+        "name": "Voie de service commerciale sans transit (trottoir séparé, gauche)",
+        "terms": "commerce, commercial, destination, voie de service, trottoir, gauche"
+    },
+    "highway/service/business_sidewalk_right": {
+        "name": "Voie de service commerciale sans transit (trottoir séparé, droite)",
+        "terms": "commerce, commercial, destination, voie de service, trottoir, droite"
+    },
+    "highway/service/business_opposite_use_sidepath": {
+        "name": "Voie de service commerciale sans transit (chaussées séparées, trottoir côté opposé)",
+        "terms": "commerce, commercial, destination, voie de service, trottoir, chaussées séparées, côté opposé"
+    },
+    "highway/service/destination_concrete": {
+        "name": "Voie de service publique sans transit, béton",
+        "terms": "public, destination, sans transit, voie de service, béton"
+    },
+    "highway/service/destination_concrete_parking_aisle": {
+        "name": "Allée de stationnement publique sans transit, béton",
+        "terms": "public, destination, sans transit, allée de stationnement, stationnement, béton"
+    },
+    "highway/service/destination_concrete_driveway": {
+        "name": "Entrée charretière publique sans transit, béton",
+        "terms": "public, destination, sans transit, entrée charretière, entrée, allée, béton"
+    },
+    "highway/service/destination_drive_through": {
+        "name": "Service au volant public sans transit",
+        "terms": "public, destination, sans transit, service au volant, drive-thru"
+    },
+    "highway/service/destination_concrete_drive_through": {
+        "name": "Service au volant public sans transit, béton",
+        "terms": "public, destination, sans transit, service au volant, drive-thru, béton"
+    },
+    "highway/service/destination_unpaved_drive_through": {
+        "name": "Service au volant public sans transit, non revêtu",
+        "terms": "public, destination, sans transit, service au volant, drive-thru, non revêtu"
+    },
+    "highway/service/private_ownership": {
+        "name": "Voie de service propriété privée",
+        "terms": "privé, propriété, voie de service"
+    },
+    "highway/service/private_ownership_concrete": {
+        "name": "Voie de service propriété privée, béton",
+        "terms": "privé, propriété, voie de service, béton"
+    },
+    "highway/service/private_ownership_unpaved": {
+        "name": "Voie de service propriété privée, non revêtue",
+        "terms": "privé, propriété, voie de service, non revêtue"
+    },
+    "highway/service/private_ownership_parking_aisle": {
+        "name": "Allée de stationnement propriété privée",
+        "terms": "privé, propriété, allée de stationnement, stationnement"
+    },
+    "highway/service/private_ownership_concrete_parking_aisle": {
+        "name": "Allée de stationnement propriété privée, béton",
+        "terms": "privé, propriété, allée de stationnement, stationnement, béton"
+    },
+    "highway/service/private_ownership_unpaved_parking_aisle": {
+        "name": "Allée de stationnement propriété privée, non revêtue",
+        "terms": "privé, propriété, allée de stationnement, stationnement, non revêtue"
+    },
+    "highway/service/private_ownership_driveway": {
+        "name": "Entrée charretière propriété privée",
+        "terms": "privé, propriété, entrée charretière, entrée, allée"
+    },
+    "highway/service/private_ownership_concrete_driveway": {
+        "name": "Entrée charretière propriété privée, béton",
+        "terms": "privé, propriété, entrée charretière, entrée, allée, béton"
+    },
+    "highway/service/private_ownership_unpaved_driveway": {
+        "name": "Entrée charretière propriété privée, non revêtue",
+        "terms": "privé, propriété, entrée charretière, entrée, allée, non revêtue"
+    },
+    "highway/service/private_ownership_drive_through": {
+        "name": "Service au volant propriété privée",
+        "terms": "privé, propriété, service au volant, drive-thru"
+    },
+    "highway/service/private_ownership_concrete_drive_through": {
+        "name": "Service au volant propriété privée, béton",
+        "terms": "privé, propriété, service au volant, drive-thru, béton"
+    },
+    "highway/service/private_ownership_unpaved_drive_through": {
+        "name": "Service au volant propriété privée, non revêtu",
+        "terms": "privé, propriété, service au volant, drive-thru, non revêtu"
+    },
+    "highway/service/private_ownership_sidewalk_both": {
+        "name": "Voie de service propriété privée (trottoir séparé, deux côtés)",
+        "terms": "privé, propriété, voie de service, trottoir, deux côtés"
+    },
+    "highway/service/private_ownership_sidewalk_left": {
+        "name": "Voie de service propriété privée (trottoir séparé, gauche)",
+        "terms": "privé, propriété, voie de service, trottoir, gauche"
+    },
+    "highway/service/private_ownership_sidewalk_right": {
+        "name": "Voie de service propriété privée (trottoir séparé, droite)",
+        "terms": "privé, propriété, voie de service, trottoir, droite"
+    },
+    "highway/service/private_ownership_opposite_use_sidepath": {
+        "name": "Voie de service propriété privée (chaussées séparées, trottoir côté opposé)",
+        "terms": "privé, propriété, voie de service, trottoir, chaussées séparées, côté opposé"
+    },
+    "highway/footway/private": {
+        "name": "Chemin piéton strictement privé",
+        "terms": "privé, accès interdit, chemin piéton, sentier",
+        "aliases": "pfas"
+    },
+    "highway/footway/private_unpaved": {
+        "name": "Chemin piéton strictement privé, non revêtu",
+        "terms": "privé, accès interdit, chemin piéton, sentier, non revêtu"
+    },
+    "highway/footway/private_asphalt_sidewalk": {
+        "name": "Trottoir strictement privé, asphalte",
+        "terms": "privé, accès interdit, trottoir, asphalte"
+    },
+    "highway/footway/private_unpaved_sidewalk": {
+        "name": "Trottoir strictement privé, non revêtu",
+        "terms": "privé, accès interdit, trottoir, non revêtu"
+    },
+    "highway/footway/private_concrete_access_aisle": {
+        "name": "Voie de circulation strictement privée, béton",
+        "terms": "privé, accès interdit, voie de circulation, zone hachurée, béton"
+    },
+    "highway/footway/private_unpaved_access_aisle": {
+        "name": "Voie de circulation strictement privée, non revêtue",
+        "terms": "privé, accès interdit, voie de circulation, zone hachurée, non revêtue"
+    },
+    "highway/footway/private_concrete_footway_link": {
+        "name": "Lien piétonnier strictement privé, béton",
+        "terms": "privé, accès interdit, lien piétonnier, connecteur, béton"
+    },
+    "highway/footway/private_unpaved_footway_link": {
+        "name": "Lien piétonnier strictement privé, non revêtu",
+        "terms": "privé, accès interdit, lien piétonnier, connecteur, non revêtu"
+    },
+    "highway/steps_private_asphalt": {
+        "name": "Escalier strictement privé, asphalte",
+        "terms": "privé, accès interdit, escalier, marches, asphalte"
+    },
+    "highway/steps_private_unpaved": {
+        "name": "Escalier strictement privé, non revêtu",
+        "terms": "privé, accès interdit, escalier, marches, non revêtu"
+    },
+    "highway/footway/private_asphalt_path": {
+        "name": "Sentier strictement privé, asphalte",
+        "terms": "privé, accès interdit, sentier, asphalte"
+    },
+    "highway/footway/private_concrete_path": {
+        "name": "Sentier strictement privé, béton",
+        "terms": "privé, accès interdit, sentier, béton"
+    },
+    "highway/footway/private_path": {
+        "name": "Sentier strictement privé",
+        "terms": "privé, accès interdit, sentier"
+    },
+    "highway/footway/private_asphalt_informal": {
+        "name": "Sentier informel strictement privé, asphalte",
+        "terms": "privé, accès interdit, sentier informel, chemin de traverse, asphalte"
+    },
+    "highway/footway/private_concrete_informal": {
+        "name": "Sentier informel strictement privé, béton",
+        "terms": "privé, accès interdit, sentier informel, chemin de traverse, béton"
+    },
+    "highway/footway/customers": {
+        "name": "Chemin piéton clients seulement",
+        "terms": "clients, commerce, chemin piéton, sentier",
+        "aliases": "cfas"
+    },
+    "highway/footway/customers_unpaved": {
+        "name": "Chemin piéton clients seulement, non revêtu",
+        "terms": "clients, commerce, chemin piéton, sentier, non revêtu"
+    },
+    "highway/footway/customers_asphalt_sidewalk": {
+        "name": "Trottoir clients seulement, asphalte",
+        "terms": "clients, commerce, trottoir, asphalte"
+    },
+    "highway/footway/customers_unpaved_sidewalk": {
+        "name": "Trottoir clients seulement, non revêtu",
+        "terms": "clients, commerce, trottoir, non revêtu"
+    },
+    "highway/footway/customers_concrete_access_aisle": {
+        "name": "Voie de circulation clients seulement, béton",
+        "terms": "clients, commerce, voie de circulation, zone hachurée, béton"
+    },
+    "highway/footway/customers_unpaved_access_aisle": {
+        "name": "Voie de circulation clients seulement, non revêtue",
+        "terms": "clients, commerce, voie de circulation, zone hachurée, non revêtue"
+    },
+    "highway/footway/customers_concrete_footway_link": {
+        "name": "Lien piétonnier clients seulement, béton",
+        "terms": "clients, commerce, lien piétonnier, connecteur, béton"
+    },
+    "highway/footway/customers_unpaved_footway_link": {
+        "name": "Lien piétonnier clients seulement, non revêtu",
+        "terms": "clients, commerce, lien piétonnier, connecteur, non revêtu"
+    },
+    "highway/steps_customers_asphalt": {
+        "name": "Escalier clients seulement, asphalte",
+        "terms": "clients, commerce, escalier, marches, asphalte"
+    },
+    "highway/steps_customers_unpaved": {
+        "name": "Escalier clients seulement, non revêtu",
+        "terms": "clients, commerce, escalier, marches, non revêtu"
+    },
+    "highway/footway/customers_asphalt_path": {
+        "name": "Sentier clients seulement, asphalte",
+        "terms": "clients, commerce, sentier, asphalte"
+    },
+    "highway/footway/customers_concrete_path": {
+        "name": "Sentier clients seulement, béton",
+        "terms": "clients, commerce, sentier, béton"
+    },
+    "highway/footway/customers_path": {
+        "name": "Sentier clients seulement",
+        "terms": "clients, commerce, sentier"
+    },
+    "highway/footway/customers_asphalt_informal": {
+        "name": "Sentier informel clients seulement, asphalte",
+        "terms": "clients, commerce, sentier informel, chemin de traverse, asphalte"
+    },
+    "highway/footway/customers_concrete_informal": {
+        "name": "Sentier informel clients seulement, béton",
+        "terms": "clients, commerce, sentier informel, chemin de traverse, béton"
+    },
+    "highway/footway/permissive": {
+        "name": "Chemin piéton permissif",
+        "terms": "permissif, toléré, chemin piéton, sentier"
+    },
+    "highway/footway/permissive_concrete": {
+        "name": "Chemin piéton permissif, béton",
+        "terms": "permissif, toléré, chemin piéton, sentier, béton"
+    },
+    "highway/footway/permissive_unpaved": {
+        "name": "Chemin piéton permissif, non revêtu",
+        "terms": "permissif, toléré, chemin piéton, sentier, non revêtu"
+    },
+    "highway/footway/permissive_asphalt_sidewalk": {
+        "name": "Trottoir permissif, asphalte",
+        "terms": "permissif, toléré, trottoir, asphalte"
+    },
+    "highway/footway/permissive_sidewalk": {
+        "name": "Trottoir permissif",
+        "terms": "permissif, toléré, trottoir"
+    },
+    "highway/footway/permissive_unpaved_sidewalk": {
+        "name": "Trottoir permissif, non revêtu",
+        "terms": "permissif, toléré, trottoir, non revêtu"
+    },
+    "highway/footway/permissive_access_aisle": {
+        "name": "Voie de circulation permissive",
+        "terms": "permissif, toléré, voie de circulation, zone hachurée"
+    },
+    "highway/footway/permissive_concrete_access_aisle": {
+        "name": "Voie de circulation permissive, béton",
+        "terms": "permissif, toléré, voie de circulation, zone hachurée, béton"
+    },
+    "highway/footway/permissive_unpaved_access_aisle": {
+        "name": "Voie de circulation permissive, non revêtue",
+        "terms": "permissif, toléré, voie de circulation, zone hachurée, non revêtue"
+    },
+    "highway/footway/permissive_footway_link": {
+        "name": "Lien piétonnier permissif",
+        "terms": "permissif, toléré, lien piétonnier, connecteur"
+    },
+    "highway/footway/permissive_concrete_footway_link": {
+        "name": "Lien piétonnier permissif, béton",
+        "terms": "permissif, toléré, lien piétonnier, connecteur, béton"
+    },
+    "highway/footway/permissive_unpaved_footway_link": {
+        "name": "Lien piétonnier permissif, non revêtu",
+        "terms": "permissif, toléré, lien piétonnier, connecteur, non revêtu"
+    },
+    "highway/steps_permissive_asphalt": {
+        "name": "Escalier permissif, asphalte",
+        "terms": "permissif, toléré, escalier, marches, asphalte"
+    },
+    "highway/steps_permissive": {
+        "name": "Escalier permissif",
+        "terms": "permissif, toléré, escalier, marches"
+    },
+    "highway/steps_permissive_unpaved": {
+        "name": "Escalier permissif, non revêtu",
+        "terms": "permissif, toléré, escalier, marches, non revêtu"
+    },
+    "highway/footway/permissive_asphalt_path": {
+        "name": "Sentier permissif, asphalte",
+        "terms": "permissif, toléré, sentier, asphalte"
+    },
+    "highway/footway/permissive_concrete_path": {
+        "name": "Sentier permissif, béton",
+        "terms": "permissif, toléré, sentier, béton"
+    },
+    "highway/footway/permissive_path": {
+        "name": "Sentier permissif",
+        "terms": "permissif, toléré, sentier"
+    },
+    "highway/footway/permissive_asphalt_informal": {
+        "name": "Sentier informel permissif, asphalte",
+        "terms": "permissif, toléré, sentier informel, chemin de traverse, asphalte"
+    },
+    "highway/footway/permissive_concrete_informal": {
+        "name": "Sentier informel permissif, béton",
+        "terms": "permissif, toléré, sentier informel, chemin de traverse, béton"
+    },
+    "highway/footway/permissive_informal": {
+        "name": "Sentier informel permissif",
+        "terms": "permissif, toléré, sentier informel, chemin de traverse"
+    },
+    "highway/footway/private_property": {
+        "name": "Chemin piéton propriété privée sans transit",
+        "terms": "privé, propriété, destination, résidentiel, chemin piéton, sentier"
+    },
+    "highway/footway/private_property_concrete": {
+        "name": "Chemin piéton propriété privée sans transit, béton",
+        "terms": "privé, propriété, destination, résidentiel, chemin piéton, sentier, béton"
+    },
+    "highway/footway/private_property_unpaved": {
+        "name": "Chemin piéton propriété privée sans transit, non revêtu",
+        "terms": "privé, propriété, destination, résidentiel, chemin piéton, sentier, non revêtu"
+    },
+    "highway/footway/private_property_asphalt_sidewalk": {
+        "name": "Trottoir propriété privée sans transit, asphalte",
+        "terms": "privé, propriété, destination, résidentiel, trottoir, asphalte"
+    },
+    "highway/footway/private_property_sidewalk": {
+        "name": "Trottoir propriété privée sans transit",
+        "terms": "privé, propriété, destination, résidentiel, trottoir"
+    },
+    "highway/footway/private_property_unpaved_sidewalk": {
+        "name": "Trottoir propriété privée sans transit, non revêtu",
+        "terms": "privé, propriété, destination, résidentiel, trottoir, non revêtu"
+    },
+    "highway/footway/private_property_access_aisle": {
+        "name": "Voie de circulation propriété privée sans transit",
+        "terms": "privé, propriété, destination, résidentiel, voie de circulation, zone hachurée"
+    },
+    "highway/footway/private_property_concrete_access_aisle": {
+        "name": "Voie de circulation propriété privée sans transit, béton",
+        "terms": "privé, propriété, destination, résidentiel, voie de circulation, zone hachurée, béton"
+    },
+    "highway/footway/private_property_unpaved_access_aisle": {
+        "name": "Voie de circulation propriété privée sans transit, non revêtue",
+        "terms": "privé, propriété, destination, résidentiel, voie de circulation, zone hachurée, non revêtue"
+    },
+    "highway/footway/private_property_footway_link": {
+        "name": "Lien piétonnier propriété privée sans transit",
+        "terms": "privé, propriété, destination, résidentiel, lien piétonnier, connecteur"
+    },
+    "highway/footway/private_property_concrete_footway_link": {
+        "name": "Lien piétonnier propriété privée sans transit, béton",
+        "terms": "privé, propriété, destination, résidentiel, lien piétonnier, connecteur, béton"
+    },
+    "highway/footway/private_property_unpaved_footway_link": {
+        "name": "Lien piétonnier propriété privée sans transit, non revêtu",
+        "terms": "privé, propriété, destination, résidentiel, lien piétonnier, connecteur, non revêtu"
+    },
+    "highway/steps_private_property_asphalt": {
+        "name": "Escalier propriété privée sans transit, asphalte",
+        "terms": "privé, propriété, destination, résidentiel, escalier, marches, asphalte"
+    },
+    "highway/steps_private_property": {
+        "name": "Escalier propriété privée sans transit",
+        "terms": "privé, propriété, destination, résidentiel, escalier, marches"
+    },
+    "highway/steps_private_property_unpaved": {
+        "name": "Escalier propriété privée sans transit, non revêtu",
+        "terms": "privé, propriété, destination, résidentiel, escalier, marches, non revêtu"
+    },
+    "highway/footway/private_property_asphalt_path": {
+        "name": "Sentier propriété privée sans transit, asphalte",
+        "terms": "privé, propriété, destination, résidentiel, sentier, asphalte"
+    },
+    "highway/footway/private_property_concrete_path": {
+        "name": "Sentier propriété privée sans transit, béton",
+        "terms": "privé, propriété, destination, résidentiel, sentier, béton"
+    },
+    "highway/footway/private_property_path": {
+        "name": "Sentier propriété privée sans transit",
+        "terms": "privé, propriété, destination, résidentiel, sentier"
+    },
+    "highway/footway/private_property_asphalt_informal": {
+        "name": "Sentier informel propriété privée sans transit, asphalte",
+        "terms": "privé, propriété, destination, résidentiel, sentier informel, chemin de traverse, asphalte"
+    },
+    "highway/footway/private_property_concrete_informal": {
+        "name": "Sentier informel propriété privée sans transit, béton",
+        "terms": "privé, propriété, destination, résidentiel, sentier informel, chemin de traverse, béton"
+    },
+    "highway/footway/private_property_informal": {
+        "name": "Sentier informel propriété privée sans transit",
+        "terms": "privé, propriété, destination, résidentiel, sentier informel, chemin de traverse"
+    },
+    "highway/footway/private_ownership": {
+        "name": "Chemin piéton propriété privée",
+        "terms": "privé, propriété, chemin piéton, sentier"
+    },
+    "highway/footway/private_ownership_concrete": {
+        "name": "Chemin piéton propriété privée, béton",
+        "terms": "privé, propriété, chemin piéton, sentier, béton"
+    },
+    "highway/footway/private_ownership_unpaved": {
+        "name": "Chemin piéton propriété privée, non revêtu",
+        "terms": "privé, propriété, chemin piéton, sentier, non revêtu"
+    },
+    "highway/footway/private_ownership_asphalt_sidewalk": {
+        "name": "Trottoir propriété privée, asphalte",
+        "terms": "privé, propriété, trottoir, asphalte"
+    },
+    "highway/footway/private_ownership_sidewalk": {
+        "name": "Trottoir propriété privée",
+        "terms": "privé, propriété, trottoir"
+    },
+    "highway/footway/private_ownership_unpaved_sidewalk": {
+        "name": "Trottoir propriété privée, non revêtu",
+        "terms": "privé, propriété, trottoir, non revêtu"
+    },
+    "highway/footway/private_ownership_access_aisle": {
+        "name": "Voie de circulation propriété privée",
+        "terms": "privé, propriété, voie de circulation, zone hachurée"
+    },
+    "highway/footway/private_ownership_concrete_access_aisle": {
+        "name": "Voie de circulation propriété privée, béton",
+        "terms": "privé, propriété, voie de circulation, zone hachurée, béton"
+    },
+    "highway/footway/private_ownership_unpaved_access_aisle": {
+        "name": "Voie de circulation propriété privée, non revêtue",
+        "terms": "privé, propriété, voie de circulation, zone hachurée, non revêtue"
+    },
+    "highway/footway/private_ownership_footway_link": {
+        "name": "Lien piétonnier propriété privée",
+        "terms": "privé, propriété, lien piétonnier, connecteur"
+    },
+    "highway/footway/private_ownership_concrete_footway_link": {
+        "name": "Lien piétonnier propriété privée, béton",
+        "terms": "privé, propriété, lien piétonnier, connecteur, béton"
+    },
+    "highway/footway/private_ownership_unpaved_footway_link": {
+        "name": "Lien piétonnier propriété privée, non revêtu",
+        "terms": "privé, propriété, lien piétonnier, connecteur, non revêtu"
+    },
+    "highway/steps_private_ownership_asphalt": {
+        "name": "Escalier propriété privée, asphalte",
+        "terms": "privé, propriété, escalier, marches, asphalte"
+    },
+    "highway/steps_private_ownership": {
+        "name": "Escalier propriété privée",
+        "terms": "privé, propriété, escalier, marches"
+    },
+    "highway/steps_private_ownership_unpaved": {
+        "name": "Escalier propriété privée, non revêtu",
+        "terms": "privé, propriété, escalier, marches, non revêtu"
+    },
+    "highway/footway/private_ownership_asphalt_path": {
+        "name": "Sentier propriété privée, asphalte",
+        "terms": "privé, propriété, sentier, asphalte"
+    },
+    "highway/footway/private_ownership_concrete_path": {
+        "name": "Sentier propriété privée, béton",
+        "terms": "privé, propriété, sentier, béton"
+    },
+    "highway/footway/private_ownership_path": {
+        "name": "Sentier propriété privée",
+        "terms": "privé, propriété, sentier"
+    },
+    "highway/footway/private_ownership_asphalt_informal": {
+        "name": "Sentier informel propriété privée, asphalte",
+        "terms": "privé, propriété, sentier informel, chemin de traverse, asphalte"
+    },
+    "highway/footway/private_ownership_concrete_informal": {
+        "name": "Sentier informel propriété privée, béton",
+        "terms": "privé, propriété, sentier informel, chemin de traverse, béton"
+    },
+    "highway/footway/private_ownership_informal": {
+        "name": "Sentier informel propriété privée",
+        "terms": "privé, propriété, sentier informel, chemin de traverse"
+    },
+    "highway/footway/destination": {
+        "name": "Chemin piéton public sans transit",
+        "terms": "public, destination, sans transit, chemin piéton, sentier"
+    },
+    "highway/footway/destination_concrete": {
+        "name": "Chemin piéton public sans transit, béton",
+        "terms": "public, destination, sans transit, chemin piéton, sentier, béton"
+    },
+    "highway/footway/destination_unpaved": {
+        "name": "Chemin piéton public sans transit, non revêtu",
+        "terms": "public, destination, sans transit, chemin piéton, sentier, non revêtu"
+    },
+    "highway/footway/destination_asphalt_sidewalk": {
+        "name": "Trottoir public sans transit, asphalte",
+        "terms": "public, destination, sans transit, trottoir, asphalte"
+    },
+    "highway/footway/destination_sidewalk": {
+        "name": "Trottoir public sans transit",
+        "terms": "public, destination, sans transit, trottoir"
+    },
+    "highway/footway/destination_unpaved_sidewalk": {
+        "name": "Trottoir public sans transit, non revêtu",
+        "terms": "public, destination, sans transit, trottoir, non revêtu"
+    },
+    "highway/footway/destination_access_aisle": {
+        "name": "Voie de circulation publique sans transit",
+        "terms": "public, destination, sans transit, voie de circulation, zone hachurée"
+    },
+    "highway/footway/destination_concrete_access_aisle": {
+        "name": "Voie de circulation publique sans transit, béton",
+        "terms": "public, destination, sans transit, voie de circulation, zone hachurée, béton"
+    },
+    "highway/footway/destination_unpaved_access_aisle": {
+        "name": "Voie de circulation publique sans transit, non revêtue",
+        "terms": "public, destination, sans transit, voie de circulation, zone hachurée, non revêtue"
+    },
+    "highway/footway/destination_footway_link": {
+        "name": "Lien piétonnier public sans transit",
+        "terms": "public, destination, sans transit, lien piétonnier, connecteur"
+    },
+    "highway/footway/destination_concrete_footway_link": {
+        "name": "Lien piétonnier public sans transit, béton",
+        "terms": "public, destination, sans transit, lien piétonnier, connecteur, béton"
+    },
+    "highway/footway/destination_unpaved_footway_link": {
+        "name": "Lien piétonnier public sans transit, non revêtu",
+        "terms": "public, destination, sans transit, lien piétonnier, connecteur, non revêtu"
+    },
+    "highway/steps_destination_asphalt": {
+        "name": "Escalier public sans transit, asphalte",
+        "terms": "public, destination, sans transit, escalier, marches, asphalte"
+    },
+    "highway/steps_destination": {
+        "name": "Escalier public sans transit",
+        "terms": "public, destination, sans transit, escalier, marches"
+    },
+    "highway/steps_destination_unpaved": {
+        "name": "Escalier public sans transit, non revêtu",
+        "terms": "public, destination, sans transit, escalier, marches, non revêtu"
+    },
+    "highway/footway/destination_asphalt_path": {
+        "name": "Sentier public sans transit, asphalte",
+        "terms": "public, destination, sans transit, sentier, asphalte"
+    },
+    "highway/footway/destination_concrete_path": {
+        "name": "Sentier public sans transit, béton",
+        "terms": "public, destination, sans transit, sentier, béton"
+    },
+    "highway/footway/destination_path": {
+        "name": "Sentier public sans transit",
+        "terms": "public, destination, sans transit, sentier"
+    },
+    "highway/footway/destination_asphalt_informal": {
+        "name": "Sentier informel public sans transit, asphalte",
+        "terms": "public, destination, sans transit, sentier informel, chemin de traverse, asphalte"
+    },
+    "highway/footway/destination_concrete_informal": {
+        "name": "Sentier informel public sans transit, béton",
+        "terms": "public, destination, sans transit, sentier informel, chemin de traverse, béton"
+    },
+    "highway/footway/destination_informal": {
+        "name": "Sentier informel public sans transit",
+        "terms": "public, destination, sans transit, sentier informel, chemin de traverse"
     }
 }

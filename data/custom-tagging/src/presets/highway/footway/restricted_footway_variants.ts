@@ -1,121 +1,110 @@
-import type { CustomPreset } from '../../../types';
+import type { CustomPreset, PresetReference } from '../../../types';
 import { ANY, buildRemoveTags } from '../../../lib/tag_helpers';
 import { presetNameEn } from '../../../preset_name_en';
-import { FOOTWAY_LINK_FIELDS, FOOTWAY_LINK_MORE_FIELDS } from './access_aisle_fields';
+import { footwayGridEntries } from '../access_grid';
+import {
+    ACCESS_AISLE_FIELDS,
+    ACCESS_AISLE_MORE_FIELDS,
+    ACCESS_AISLE_REFERENCE,
+    FOOTWAY_LINK_FIELDS,
+    FOOTWAY_LINK_MORE_FIELDS,
+    FOOTWAY_LINK_REFERENCE,
+    RESTRICTED_AISLE_FIELDS
+} from './access_aisle_fields';
 
-const SIDEWALK_REFERENCE = { key: 'footway', value: 'sidewalk' } as const;
-
-type AccessLevel = 'customers' | 'private';
+// =============================================================================
+// RESTRICTED FOOTWAYS — footways, steps and paths built from the access grid
+// (access_categories.ts): one preset per access category × way kind × surface.
+// =============================================================================
 
 const RESTRICTED_FOOTWAY_FIELDS = [...FOOTWAY_LINK_FIELDS, 'access_restricted'] as const;
 
-const RESTRICTED_REMOVE_WILDCARDS = { bicycle: ANY, footway: ANY, highway: ANY } as const;
-
-interface FootPathVariant {
-    id: string;
-    access: AccessLevel;
-    surface?: 'asphalt' | 'concrete';
+/** Preset shell of one way kind (FOOTWAY_KINDS id in access_categories.ts). */
+interface FootwayShell {
+    icon: string;
+    fields: readonly string[];
+    moreFields: readonly string[];
+    reference: PresetReference;
+    /** Wildcards added to removeTags; undefined keeps iD's default (removeTags = addTags). */
+    removeWildcards?: Record<string, typeof ANY>;
+    /** Above the generic bicycle/footway variants that match the same tags. */
+    matchScore?: number;
 }
 
-const FOOT_PATH_VARIANTS: FootPathVariant[] = [
-    { id: 'highway/footway/customers_asphalt', access: 'customers', surface: 'asphalt' },
-    { id: 'highway/footway/customers_concrete', access: 'customers', surface: 'concrete' },
-    { id: 'highway/footway/customers_other', access: 'customers' },
-    { id: 'highway/footway/private_asphalt', access: 'private', surface: 'asphalt' },
-    { id: 'highway/footway/private_concrete', access: 'private', surface: 'concrete' },
-    { id: 'highway/footway/private_other', access: 'private' }
-];
-
-interface InformalPathVariant {
-    id: string;
-    access: AccessLevel;
-}
-
-const INFORMAL_PATH_VARIANTS: InformalPathVariant[] = [
-    { id: 'highway/footway/customers_informal', access: 'customers' },
-    { id: 'highway/footway/private_informal', access: 'private' }
-];
-
-interface RestrictedSidewalkVariant {
-    id: string;
-    access: AccessLevel;
-}
-
-const RESTRICTED_SIDEWALK_VARIANTS: RestrictedSidewalkVariant[] = [
-    { id: 'highway/footway/customers_sidewalk', access: 'customers' },
-    { id: 'highway/footway/private_sidewalk', access: 'private' }
-];
-
-function footPathPreset(variant: FootPathVariant): CustomPreset {
-    const tags: Record<string, string> = {
-        highway: 'footway',
-        access: variant.access
-    };
-    if (variant.surface) {
-        tags.surface = variant.surface;
-    }
-
-    return {
+const FOOTWAY_SHELLS: Record<string, FootwayShell> = {
+    '': {
         icon: 'temaki-pedestrian',
-        geometry: ['line'],
-        fields: [...RESTRICTED_FOOTWAY_FIELDS],
-        moreFields: [...FOOTWAY_LINK_MORE_FIELDS],
-        tags,
-        addTags: { ...tags },
-        removeTags: buildRemoveTags(tags, { bicycle: ANY, footway: ANY }),
-        matchScore: 2,
+        fields: RESTRICTED_FOOTWAY_FIELDS,
+        moreFields: FOOTWAY_LINK_MORE_FIELDS,
         reference: { key: 'highway', value: 'footway' },
-        name: presetNameEn(variant.id)
-    };
-}
-
-function informalPathPreset(variant: InformalPathVariant): CustomPreset {
-    const tags = {
-        highway: 'path',
-        informal: 'yes',
-        access: variant.access
-    };
-
-    return {
-        icon: 'iD-other-line',
-        geometry: ['line'],
-        fields: [...RESTRICTED_FOOTWAY_FIELDS],
-        moreFields: [...FOOTWAY_LINK_MORE_FIELDS],
-        tags,
-        addTags: { ...tags },
-        removeTags: buildRemoveTags(tags, RESTRICTED_REMOVE_WILDCARDS),
-        matchScore: 2,
-        name: presetNameEn(variant.id)
-    };
-}
-
-function restrictedSidewalkPreset(variant: RestrictedSidewalkVariant): CustomPreset {
-    const tags = {
-        highway: 'footway',
-        footway: 'sidewalk',
-        access: variant.access
-    };
-    const addTags = {
-        ...tags,
-        surface: 'concrete'
-    };
-
-    return {
+        removeWildcards: { bicycle: ANY, footway: ANY },
+        matchScore: 2
+    },
+    sidewalk: {
         icon: 'temaki-pedestrian',
-        geometry: ['line'],
-        fields: [...RESTRICTED_FOOTWAY_FIELDS],
-        moreFields: [...FOOTWAY_LINK_MORE_FIELDS],
-        tags,
-        addTags,
-        removeTags: buildRemoveTags(addTags, { bicycle: ANY }),
-        matchScore: 2,
-        reference: SIDEWALK_REFERENCE,
-        name: presetNameEn(variant.id)
-    };
-}
-
-export const restrictedFootwayVariantPresets: Record<string, CustomPreset> = {
-    ...Object.fromEntries(FOOT_PATH_VARIANTS.map((v) => [v.id, footPathPreset(v)] as const)),
-    ...Object.fromEntries(INFORMAL_PATH_VARIANTS.map((v) => [v.id, informalPathPreset(v)] as const)),
-    ...Object.fromEntries(RESTRICTED_SIDEWALK_VARIANTS.map((v) => [v.id, restrictedSidewalkPreset(v)] as const))
+        fields: RESTRICTED_FOOTWAY_FIELDS,
+        moreFields: FOOTWAY_LINK_MORE_FIELDS,
+        reference: { key: 'footway', value: 'sidewalk' },
+        removeWildcards: { bicycle: ANY },
+        matchScore: 2
+    },
+    access_aisle: {
+        icon: 'temaki-striped_way',
+        fields: ACCESS_AISLE_FIELDS,
+        moreFields: ACCESS_AISLE_MORE_FIELDS,
+        reference: ACCESS_AISLE_REFERENCE,
+        removeWildcards: { bicycle: ANY },
+        matchScore: 2
+    },
+    footway_link: {
+        icon: 'temaki-striped_way',
+        fields: RESTRICTED_AISLE_FIELDS,
+        moreFields: ACCESS_AISLE_MORE_FIELDS,
+        reference: FOOTWAY_LINK_REFERENCE,
+        removeWildcards: { bicycle: ANY },
+        matchScore: 2
+    },
+    steps: {
+        icon: 'iD-highway-steps',
+        fields: ['{highway/steps}'],
+        moreFields: ['{highway/steps}'],
+        reference: { key: 'highway', value: 'steps' }
+    },
+    path: {
+        icon: 'iD-other-line',
+        fields: RESTRICTED_FOOTWAY_FIELDS,
+        moreFields: FOOTWAY_LINK_MORE_FIELDS,
+        reference: { key: 'highway', value: 'path' },
+        removeWildcards: { bicycle: ANY },
+        matchScore: 2
+    },
+    informal: {
+        icon: 'iD-other-line',
+        fields: RESTRICTED_FOOTWAY_FIELDS,
+        moreFields: FOOTWAY_LINK_MORE_FIELDS,
+        reference: { key: 'informal', value: 'yes' },
+        removeWildcards: { bicycle: ANY, footway: ANY, highway: ANY },
+        matchScore: 2
+    }
 };
+
+export const restrictedFootwayVariantPresets: Record<string, CustomPreset> = Object.fromEntries(
+    footwayGridEntries().map((entry): [string, CustomPreset] => {
+        const shell = FOOTWAY_SHELLS[entry.kind.id];
+        return [
+            entry.id,
+            {
+                icon: shell.icon,
+                geometry: ['line'],
+                fields: [...shell.fields],
+                moreFields: [...shell.moreFields],
+                tags: entry.tags,
+                addTags: entry.addTags,
+                ...(shell.removeWildcards ? { removeTags: buildRemoveTags(entry.addTags, shell.removeWildcards) } : {}),
+                ...(shell.matchScore ? { matchScore: shell.matchScore } : {}),
+                reference: shell.reference,
+                name: presetNameEn(entry.id)
+            }
+        ];
+    })
+);

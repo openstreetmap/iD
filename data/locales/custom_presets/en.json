@@ -502,8 +502,8 @@
         "aliases": "aaby"
     },
     "highway/footway/customers_informal": {
-        "name": "Customers informal path",
-        "terms": "cfi, footway, informal path, desire path, trail, customers, hiking, walk",
+        "name": "Informal path customers only",
+        "terms": "customers, business, informal path, desire path",
         "aliases": "cfi"
     },
     "highway/footway/informal_bicycle_dismount_unpaved": {
@@ -521,34 +521,24 @@
         "terms": "ibyu, path, informal path, desire path, trail, bicycle yes, cycling, unpaved, gravel, dirt, hiking, walk",
         "aliases": "ibyu"
     },
-    "highway/footway/customers_asphalt": {
-        "name": "Customers foot path (asphalt)",
-        "terms": "cfas, footway, foot path, pedestrian path, customers, asphalt, hike, trail, walk",
-        "aliases": "cfas"
-    },
     "highway/footway/customers_concrete": {
-        "name": "Customers foot path (concrete)",
-        "terms": "cfac, footway, foot path, pedestrian path, customers, concrete, hike, trail, walk",
+        "name": "Footway customers only, concrete",
+        "terms": "customers, business, footway, foot path, concrete",
         "aliases": "cfac"
     },
-    "highway/footway/customers_other": {
-        "name": "Customers foot path",
-        "terms": "cfo, footway, foot path, pedestrian path, customers, hike, trail, walk, promenade",
-        "aliases": "cfo"
-    },
     "highway/footway/customers_sidewalk": {
-        "name": "Customers sidewalk",
-        "terms": "csw, sidewalk, pavement, sidepath, footway, customers",
+        "name": "Sidewalk customers only",
+        "terms": "customers, business, sidewalk",
         "aliases": "csw"
     },
     "highway/footway/customers_access_aisle": {
-        "name": "Customers access aisle",
-        "terms": "caa, access aisle, parking aisle, striped zone, wheelchair aisle, customers",
+        "name": "Access aisle customers only",
+        "terms": "customers, business, access aisle, striped zone",
         "aliases": "caa"
     },
     "highway/footway/customers_footway_link": {
-        "name": "Customers footway link",
-        "terms": "cfl, footway link, link, connector, customers",
+        "name": "Footway link customers only",
+        "terms": "customers, business, footway link, connector",
         "aliases": "cfl"
     },
     "highway/footway/footway_link_bicycle_dismount": {
@@ -562,38 +552,28 @@
         "terms": "flby, fl, footway link, bicycle yes, link, cycling, connector, connection, footway connector"
     },
     "highway/footway/private_informal": {
-        "name": "Private informal path",
-        "terms": "pfi, footway, informal path, desire path, trail, private, hiking, walk",
+        "name": "Informal path strictly private",
+        "terms": "private, no access, informal path, desire path",
         "aliases": "pfi"
     },
-    "highway/footway/private_asphalt": {
-        "name": "Private foot path (asphalt)",
-        "terms": "pfas, footway, foot path, pedestrian path, private, asphalt, hike, trail, walk",
-        "aliases": "pfas"
-    },
     "highway/footway/private_concrete": {
-        "name": "Private foot path (concrete)",
-        "terms": "pfac, footway, foot path, pedestrian path, private, concrete, hike, trail, walk",
+        "name": "Footway strictly private, concrete",
+        "terms": "private, no access, footway, foot path, concrete",
         "aliases": "pfac"
     },
-    "highway/footway/private_other": {
-        "name": "Private foot path",
-        "terms": "pfo, footway, foot path, pedestrian path, private, hike, trail, walk, promenade",
-        "aliases": "pfo"
-    },
     "highway/footway/private_sidewalk": {
-        "name": "Private sidewalk",
-        "terms": "psw, sidewalk, pavement, sidepath, footway, private",
+        "name": "Sidewalk strictly private",
+        "terms": "private, no access, sidewalk",
         "aliases": "psw"
     },
     "highway/footway/private_access_aisle": {
-        "name": "Private access aisle",
-        "terms": "paa, access aisle, parking aisle, striped zone, wheelchair aisle, private",
+        "name": "Access aisle strictly private",
+        "terms": "private, no access, access aisle, striped zone",
         "aliases": "paa"
     },
     "highway/footway/private_footway_link": {
-        "name": "Private footway link",
-        "terms": "pfl, footway link, link, connector, private",
+        "name": "Footway link strictly private",
+        "terms": "private, no access, footway link, connector",
         "aliases": "pfl"
     },
     "highway/footway/sidewalk_bicycle_dismount": {
@@ -757,153 +737,153 @@
         "aliases": "usn"
     },
     "highway/service/customers_driveway": {
-        "name": "Customers driveway",
-        "terms": "scd, customers, driveway, service, access road",
+        "name": "Driveway customers only",
+        "terms": "customers, business, driveway, entrance",
         "aliases": "scd"
     },
     "highway/service/customers_parking_aisle": {
-        "name": "Customers parking aisle",
-        "terms": "scpa, customers, parking aisle, service, access road",
+        "name": "Parking aisle customers only",
+        "terms": "customers, business, parking aisle, parking lot",
         "aliases": "scpa"
     },
     "highway/service/customers_unpaved_driveway": {
-        "name": "Customers unpaved driveway",
-        "terms": "scud, 4du, customers, unpaved, driveway, service, access road",
+        "name": "Driveway customers only, unpaved",
+        "terms": "customers, business, driveway, entrance, unpaved",
         "aliases": "4du"
     },
     "highway/service/customers_unpaved_parking_aisle": {
-        "name": "Customers unpaved parking aisle",
-        "terms": "scupa, 4pu, customers, unpaved, parking aisle, service, access road",
+        "name": "Parking aisle customers only, unpaved",
+        "terms": "customers, business, parking aisle, parking lot, unpaved",
         "aliases": "4pu"
     },
     "highway/service/private_driveway": {
-        "name": "Private driveway",
-        "terms": "spd, private, driveway, service, access road",
+        "name": "Driveway strictly private",
+        "terms": "private, no access, driveway, entrance",
         "aliases": "spd"
     },
     "highway/service/private_parking_aisle": {
-        "name": "Private parking aisle",
-        "terms": "sppa, private, parking aisle, service, access road",
+        "name": "Parking aisle strictly private",
+        "terms": "private, no access, parking aisle, parking lot",
         "aliases": "sppa"
     },
     "highway/service/private_unpaved_driveway": {
-        "name": "Private unpaved driveway",
-        "terms": "spud, 5du, private, unpaved, driveway, service, access road",
+        "name": "Driveway strictly private, unpaved",
+        "terms": "private, no access, driveway, entrance, unpaved",
         "aliases": "5du"
     },
     "highway/service/private_unpaved_parking_aisle": {
-        "name": "Private unpaved parking aisle",
-        "terms": "spupa, 5pu, private, unpaved, parking aisle, service, access road",
+        "name": "Parking aisle strictly private, unpaved",
+        "terms": "private, no access, parking aisle, parking lot, unpaved",
         "aliases": "5pu"
     },
     "highway/service/destination_driveway": {
-        "name": "Destination driveway",
-        "terms": "sdd, 6d, destination, driveway, service, motor_vehicle",
+        "name": "Driveway public no transit",
+        "terms": "public, destination, no through traffic, driveway, entrance",
         "aliases": "6d"
     },
     "highway/service/destination_parking_aisle": {
-        "name": "Destination parking aisle",
-        "terms": "sdpa, 6p, destination, parking aisle, service, motor_vehicle",
+        "name": "Parking aisle public no transit",
+        "terms": "public, destination, no through traffic, parking aisle, parking lot",
         "aliases": "6p"
     },
     "highway/service/destination_unpaved_driveway": {
-        "name": "Destination unpaved driveway",
-        "terms": "sdud, 6du, destination, unpaved, driveway, service, motor_vehicle",
+        "name": "Driveway public no transit, unpaved",
+        "terms": "public, destination, no through traffic, driveway, entrance, unpaved",
         "aliases": "6du"
     },
     "highway/service/destination_unpaved_parking_aisle": {
-        "name": "Destination unpaved parking aisle",
-        "terms": "sdupa, 6pu, destination, unpaved, parking aisle, service, motor_vehicle",
+        "name": "Parking aisle public no transit, unpaved",
+        "terms": "public, destination, no through traffic, parking aisle, parking lot, unpaved",
         "aliases": "6pu"
     },
     "highway/service/customers": {
-        "name": "Customers service road",
-        "terms": "sc, customers, service, road, access",
+        "name": "Service road customers only",
+        "terms": "customers, business, service road",
         "aliases": "sc"
     },
     "highway/service/customers_unpaved": {
-        "name": "Customers service road (unpaved)",
-        "terms": "scu, customers, service, road, unpaved",
+        "name": "Service road customers only, unpaved",
+        "terms": "customers, business, service road, unpaved",
         "aliases": "scu"
     },
     "highway/service/customers_sidewalk_both": {
-        "name": "Customers service road (separate sidewalk, both sides)",
-        "terms": "scsb, customers, service, road, sidewalk, sidepath, separate, both, use_sidepath",
+        "name": "Service road customers only (separate sidewalk, both sides)",
+        "terms": "customers, business, service road, sidewalk, sidepath, both",
         "aliases": "scsb"
     },
     "highway/service/customers_sidewalk_left": {
-        "name": "Customers service road (separate sidewalk, left)",
-        "terms": "scsl, customers, service, road, sidewalk, sidepath, separate, left, use_sidepath",
+        "name": "Service road customers only (separate sidewalk, left)",
+        "terms": "customers, business, service road, sidewalk, sidepath, left",
         "aliases": "scsl"
     },
     "highway/service/customers_sidewalk_right": {
-        "name": "Customers service road (separate sidewalk, right)",
-        "terms": "scsr, customers, service, road, sidewalk, sidepath, separate, right, use_sidepath",
+        "name": "Service road customers only (separate sidewalk, right)",
+        "terms": "customers, business, service road, sidewalk, sidepath, right",
         "aliases": "scsr"
     },
     "highway/service/customers_opposite_use_sidepath": {
-        "name": "Customers service road (divided, sidewalk opposite side)",
-        "terms": "sco, customers, service, road, sidewalk, sidepath, divided, dual carriageway, opposite, use_sidepath",
+        "name": "Service road customers only (divided, sidewalk opposite side)",
+        "terms": "customers, business, service road, sidewalk, sidepath, divided, opposite",
         "aliases": "sco"
     },
     "highway/service/private": {
-        "name": "Private service road",
-        "terms": "sp, private, service, road, access",
+        "name": "Service road strictly private",
+        "terms": "private, no access, service road",
         "aliases": "sp"
     },
     "highway/service/private_unpaved": {
-        "name": "Private service road (unpaved)",
-        "terms": "spu, private, service, road, unpaved",
+        "name": "Service road strictly private, unpaved",
+        "terms": "private, no access, service road, unpaved",
         "aliases": "spu"
     },
     "highway/service/private_sidewalk_both": {
-        "name": "Private service road (separate sidewalk, both sides)",
-        "terms": "spsb, private, service, road, sidewalk, sidepath, separate, both, use_sidepath",
+        "name": "Service road strictly private (separate sidewalk, both sides)",
+        "terms": "private, no access, service road, sidewalk, sidepath, both",
         "aliases": "spsb"
     },
     "highway/service/private_sidewalk_left": {
-        "name": "Private service road (separate sidewalk, left)",
-        "terms": "spsl, private, service, road, sidewalk, sidepath, separate, left, use_sidepath",
+        "name": "Service road strictly private (separate sidewalk, left)",
+        "terms": "private, no access, service road, sidewalk, sidepath, left",
         "aliases": "spsl"
     },
     "highway/service/private_sidewalk_right": {
-        "name": "Private service road (separate sidewalk, right)",
-        "terms": "spsr, private, service, road, sidewalk, sidepath, separate, right, use_sidepath",
+        "name": "Service road strictly private (separate sidewalk, right)",
+        "terms": "private, no access, service road, sidewalk, sidepath, right",
         "aliases": "spsr"
     },
     "highway/service/private_opposite_use_sidepath": {
-        "name": "Private service road (divided, sidewalk opposite side)",
-        "terms": "spo, private, service, road, sidewalk, sidepath, divided, dual carriageway, opposite, use_sidepath",
+        "name": "Service road strictly private (divided, sidewalk opposite side)",
+        "terms": "private, no access, service road, sidewalk, sidepath, divided, opposite",
         "aliases": "spo"
     },
     "highway/service/destination": {
-        "name": "Destination service road",
-        "terms": "sd, destination, service, road, motor_vehicle",
+        "name": "Service road public no transit",
+        "terms": "public, destination, no through traffic, service road",
         "aliases": "sd"
     },
     "highway/service/destination_unpaved": {
-        "name": "Destination service road (unpaved)",
-        "terms": "sdu, destination, service, road, unpaved",
+        "name": "Service road public no transit, unpaved",
+        "terms": "public, destination, no through traffic, service road, unpaved",
         "aliases": "sdu"
     },
     "highway/service/destination_sidewalk_both": {
-        "name": "Destination service road (separate sidewalk, both sides)",
-        "terms": "sdsb, destination, service, road, sidewalk, sidepath, separate, both, use_sidepath",
+        "name": "Service road public no transit (separate sidewalk, both sides)",
+        "terms": "public, destination, no through traffic, service road, sidewalk, sidepath, both",
         "aliases": "sdsb"
     },
     "highway/service/destination_sidewalk_left": {
-        "name": "Destination service road (separate sidewalk, left)",
-        "terms": "sdsl, destination, service, road, sidewalk, sidepath, separate, left, use_sidepath",
+        "name": "Service road public no transit (separate sidewalk, left)",
+        "terms": "public, destination, no through traffic, service road, sidewalk, sidepath, left",
         "aliases": "sdsl"
     },
     "highway/service/destination_sidewalk_right": {
-        "name": "Destination service road (separate sidewalk, right)",
-        "terms": "sdsr, destination, service, road, sidewalk, sidepath, separate, right, use_sidepath",
+        "name": "Service road public no transit (separate sidewalk, right)",
+        "terms": "public, destination, no through traffic, service road, sidewalk, sidepath, right",
         "aliases": "sdsr"
     },
     "highway/service/destination_opposite_use_sidepath": {
-        "name": "Destination service road (divided, sidewalk opposite side)",
-        "terms": "sdo, destination, service, road, sidewalk, sidepath, divided, dual carriageway, opposite, use_sidepath",
+        "name": "Service road public no transit (divided, sidewalk opposite side)",
+        "terms": "public, destination, no through traffic, service road, sidewalk, sidepath, divided, opposite",
         "aliases": "sdo"
     },
     "highway/service/disused": {
@@ -977,13 +957,13 @@
         "aliases": "m43t"
     },
     "highway/steps_customers": {
-        "name": "Customers steps",
-        "terms": "stc, customers, steps, stairs, staircase, stairway",
+        "name": "Steps customers only",
+        "terms": "customers, business, steps, stairs",
         "aliases": "stc"
     },
     "highway/steps_private": {
-        "name": "Private steps",
-        "terms": "stp, private, steps, stairs, staircase, stairway",
+        "name": "Steps strictly private",
+        "terms": "private, no access, steps, stairs",
         "aliases": "stp"
     },
     "highway/steps_dismount": {
@@ -1153,5 +1133,855 @@
     "amenity/post_box/community_quebec": {
         "name": "Community Mailbox (Canada Post)",
         "terms": "community mailbox, super mailbox, cmb, canada post, postes canada, post box, post_box, courrier communautaire"
+    },
+    "highway/service/private_concrete": {
+        "name": "Service road strictly private, concrete",
+        "terms": "private, no access, service road, concrete"
+    },
+    "highway/service/private_concrete_parking_aisle": {
+        "name": "Parking aisle strictly private, concrete",
+        "terms": "private, no access, parking aisle, parking lot, concrete"
+    },
+    "highway/service/private_concrete_driveway": {
+        "name": "Driveway strictly private, concrete",
+        "terms": "private, no access, driveway, entrance, concrete"
+    },
+    "highway/service/private_drive_through": {
+        "name": "Drive-through strictly private",
+        "terms": "private, no access, drive-through, drive-thru"
+    },
+    "highway/service/private_concrete_drive_through": {
+        "name": "Drive-through strictly private, concrete",
+        "terms": "private, no access, drive-through, drive-thru, concrete"
+    },
+    "highway/service/private_unpaved_drive_through": {
+        "name": "Drive-through strictly private, unpaved",
+        "terms": "private, no access, drive-through, drive-thru, unpaved"
+    },
+    "highway/service/customers_concrete": {
+        "name": "Service road customers only, concrete",
+        "terms": "customers, business, service road, concrete"
+    },
+    "highway/service/customers_concrete_parking_aisle": {
+        "name": "Parking aisle customers only, concrete",
+        "terms": "customers, business, parking aisle, parking lot, concrete"
+    },
+    "highway/service/customers_concrete_driveway": {
+        "name": "Driveway customers only, concrete",
+        "terms": "customers, business, driveway, entrance, concrete"
+    },
+    "highway/service/customers_drive_through": {
+        "name": "Drive-through customers only",
+        "terms": "customers, business, drive-through, drive-thru"
+    },
+    "highway/service/customers_concrete_drive_through": {
+        "name": "Drive-through customers only, concrete",
+        "terms": "customers, business, drive-through, drive-thru, concrete"
+    },
+    "highway/service/customers_unpaved_drive_through": {
+        "name": "Drive-through customers only, unpaved",
+        "terms": "customers, business, drive-through, drive-thru, unpaved"
+    },
+    "highway/service/delivery": {
+        "name": "Service road delivery only",
+        "terms": "delivery, loading, service road"
+    },
+    "highway/service/delivery_concrete": {
+        "name": "Service road delivery only, concrete",
+        "terms": "delivery, loading, service road, concrete"
+    },
+    "highway/service/delivery_unpaved": {
+        "name": "Service road delivery only, unpaved",
+        "terms": "delivery, loading, service road, unpaved"
+    },
+    "highway/service/delivery_parking_aisle": {
+        "name": "Parking aisle delivery only",
+        "terms": "delivery, loading, parking aisle, parking lot"
+    },
+    "highway/service/delivery_concrete_parking_aisle": {
+        "name": "Parking aisle delivery only, concrete",
+        "terms": "delivery, loading, parking aisle, parking lot, concrete"
+    },
+    "highway/service/delivery_unpaved_parking_aisle": {
+        "name": "Parking aisle delivery only, unpaved",
+        "terms": "delivery, loading, parking aisle, parking lot, unpaved"
+    },
+    "highway/service/delivery_driveway": {
+        "name": "Driveway delivery only",
+        "terms": "delivery, loading, driveway, entrance"
+    },
+    "highway/service/delivery_concrete_driveway": {
+        "name": "Driveway delivery only, concrete",
+        "terms": "delivery, loading, driveway, entrance, concrete"
+    },
+    "highway/service/delivery_unpaved_driveway": {
+        "name": "Driveway delivery only, unpaved",
+        "terms": "delivery, loading, driveway, entrance, unpaved"
+    },
+    "highway/service/delivery_drive_through": {
+        "name": "Drive-through delivery only",
+        "terms": "delivery, loading, drive-through, drive-thru"
+    },
+    "highway/service/delivery_concrete_drive_through": {
+        "name": "Drive-through delivery only, concrete",
+        "terms": "delivery, loading, drive-through, drive-thru, concrete"
+    },
+    "highway/service/delivery_unpaved_drive_through": {
+        "name": "Drive-through delivery only, unpaved",
+        "terms": "delivery, loading, drive-through, drive-thru, unpaved"
+    },
+    "highway/service/delivery_sidewalk_both": {
+        "name": "Service road delivery only (separate sidewalk, both sides)",
+        "terms": "delivery, loading, service road, sidewalk, sidepath, both"
+    },
+    "highway/service/delivery_sidewalk_left": {
+        "name": "Service road delivery only (separate sidewalk, left)",
+        "terms": "delivery, loading, service road, sidewalk, sidepath, left"
+    },
+    "highway/service/delivery_sidewalk_right": {
+        "name": "Service road delivery only (separate sidewalk, right)",
+        "terms": "delivery, loading, service road, sidewalk, sidepath, right"
+    },
+    "highway/service/delivery_opposite_use_sidepath": {
+        "name": "Service road delivery only (divided, sidewalk opposite side)",
+        "terms": "delivery, loading, service road, sidewalk, sidepath, divided, opposite"
+    },
+    "highway/service/permissive": {
+        "name": "Service road permissive",
+        "terms": "permissive, tolerated, service road"
+    },
+    "highway/service/permissive_concrete": {
+        "name": "Service road permissive, concrete",
+        "terms": "permissive, tolerated, service road, concrete"
+    },
+    "highway/service/permissive_unpaved": {
+        "name": "Service road permissive, unpaved",
+        "terms": "permissive, tolerated, service road, unpaved"
+    },
+    "highway/service/permissive_parking_aisle": {
+        "name": "Parking aisle permissive",
+        "terms": "permissive, tolerated, parking aisle, parking lot"
+    },
+    "highway/service/permissive_concrete_parking_aisle": {
+        "name": "Parking aisle permissive, concrete",
+        "terms": "permissive, tolerated, parking aisle, parking lot, concrete"
+    },
+    "highway/service/permissive_unpaved_parking_aisle": {
+        "name": "Parking aisle permissive, unpaved",
+        "terms": "permissive, tolerated, parking aisle, parking lot, unpaved"
+    },
+    "highway/service/permissive_driveway": {
+        "name": "Driveway permissive",
+        "terms": "permissive, tolerated, driveway, entrance"
+    },
+    "highway/service/permissive_concrete_driveway": {
+        "name": "Driveway permissive, concrete",
+        "terms": "permissive, tolerated, driveway, entrance, concrete"
+    },
+    "highway/service/permissive_unpaved_driveway": {
+        "name": "Driveway permissive, unpaved",
+        "terms": "permissive, tolerated, driveway, entrance, unpaved"
+    },
+    "highway/service/permissive_drive_through": {
+        "name": "Drive-through permissive",
+        "terms": "permissive, tolerated, drive-through, drive-thru"
+    },
+    "highway/service/permissive_concrete_drive_through": {
+        "name": "Drive-through permissive, concrete",
+        "terms": "permissive, tolerated, drive-through, drive-thru, concrete"
+    },
+    "highway/service/permissive_unpaved_drive_through": {
+        "name": "Drive-through permissive, unpaved",
+        "terms": "permissive, tolerated, drive-through, drive-thru, unpaved"
+    },
+    "highway/service/permissive_sidewalk_both": {
+        "name": "Service road permissive (separate sidewalk, both sides)",
+        "terms": "permissive, tolerated, service road, sidewalk, sidepath, both"
+    },
+    "highway/service/permissive_sidewalk_left": {
+        "name": "Service road permissive (separate sidewalk, left)",
+        "terms": "permissive, tolerated, service road, sidewalk, sidepath, left"
+    },
+    "highway/service/permissive_sidewalk_right": {
+        "name": "Service road permissive (separate sidewalk, right)",
+        "terms": "permissive, tolerated, service road, sidewalk, sidepath, right"
+    },
+    "highway/service/permissive_opposite_use_sidepath": {
+        "name": "Service road permissive (divided, sidewalk opposite side)",
+        "terms": "permissive, tolerated, service road, sidewalk, sidepath, divided, opposite"
+    },
+    "highway/service/private_property": {
+        "name": "Service road private ownership no transit",
+        "terms": "private, ownership, destination, residential, service road"
+    },
+    "highway/service/private_property_concrete": {
+        "name": "Service road private ownership no transit, concrete",
+        "terms": "private, ownership, destination, residential, service road, concrete"
+    },
+    "highway/service/private_property_unpaved": {
+        "name": "Service road private ownership no transit, unpaved",
+        "terms": "private, ownership, destination, residential, service road, unpaved"
+    },
+    "highway/service/private_property_parking_aisle": {
+        "name": "Parking aisle private ownership no transit",
+        "terms": "private, ownership, destination, residential, parking aisle, parking lot"
+    },
+    "highway/service/private_property_concrete_parking_aisle": {
+        "name": "Parking aisle private ownership no transit, concrete",
+        "terms": "private, ownership, destination, residential, parking aisle, parking lot, concrete"
+    },
+    "highway/service/private_property_unpaved_parking_aisle": {
+        "name": "Parking aisle private ownership no transit, unpaved",
+        "terms": "private, ownership, destination, residential, parking aisle, parking lot, unpaved"
+    },
+    "highway/service/private_property_driveway": {
+        "name": "Driveway private ownership no transit",
+        "terms": "private, ownership, destination, residential, driveway, entrance"
+    },
+    "highway/service/private_property_concrete_driveway": {
+        "name": "Driveway private ownership no transit, concrete",
+        "terms": "private, ownership, destination, residential, driveway, entrance, concrete"
+    },
+    "highway/service/private_property_unpaved_driveway": {
+        "name": "Driveway private ownership no transit, unpaved",
+        "terms": "private, ownership, destination, residential, driveway, entrance, unpaved"
+    },
+    "highway/service/private_property_drive_through": {
+        "name": "Drive-through private ownership no transit",
+        "terms": "private, ownership, destination, residential, drive-through, drive-thru"
+    },
+    "highway/service/private_property_concrete_drive_through": {
+        "name": "Drive-through private ownership no transit, concrete",
+        "terms": "private, ownership, destination, residential, drive-through, drive-thru, concrete"
+    },
+    "highway/service/private_property_unpaved_drive_through": {
+        "name": "Drive-through private ownership no transit, unpaved",
+        "terms": "private, ownership, destination, residential, drive-through, drive-thru, unpaved"
+    },
+    "highway/service/private_property_sidewalk_both": {
+        "name": "Service road private ownership no transit (separate sidewalk, both sides)",
+        "terms": "private, ownership, destination, residential, service road, sidewalk, sidepath, both"
+    },
+    "highway/service/private_property_sidewalk_left": {
+        "name": "Service road private ownership no transit (separate sidewalk, left)",
+        "terms": "private, ownership, destination, residential, service road, sidewalk, sidepath, left"
+    },
+    "highway/service/private_property_sidewalk_right": {
+        "name": "Service road private ownership no transit (separate sidewalk, right)",
+        "terms": "private, ownership, destination, residential, service road, sidewalk, sidepath, right"
+    },
+    "highway/service/private_property_opposite_use_sidepath": {
+        "name": "Service road private ownership no transit (divided, sidewalk opposite side)",
+        "terms": "private, ownership, destination, residential, service road, sidewalk, sidepath, divided, opposite"
+    },
+    "highway/service/business": {
+        "name": "Service road business no transit",
+        "terms": "business, commercial, destination, service road"
+    },
+    "highway/service/business_concrete": {
+        "name": "Service road business no transit, concrete",
+        "terms": "business, commercial, destination, service road, concrete"
+    },
+    "highway/service/business_unpaved": {
+        "name": "Service road business no transit, unpaved",
+        "terms": "business, commercial, destination, service road, unpaved"
+    },
+    "highway/service/business_parking_aisle": {
+        "name": "Parking aisle business no transit",
+        "terms": "business, commercial, destination, parking aisle, parking lot"
+    },
+    "highway/service/business_concrete_parking_aisle": {
+        "name": "Parking aisle business no transit, concrete",
+        "terms": "business, commercial, destination, parking aisle, parking lot, concrete"
+    },
+    "highway/service/business_unpaved_parking_aisle": {
+        "name": "Parking aisle business no transit, unpaved",
+        "terms": "business, commercial, destination, parking aisle, parking lot, unpaved"
+    },
+    "highway/service/business_driveway": {
+        "name": "Driveway business no transit",
+        "terms": "business, commercial, destination, driveway, entrance"
+    },
+    "highway/service/business_concrete_driveway": {
+        "name": "Driveway business no transit, concrete",
+        "terms": "business, commercial, destination, driveway, entrance, concrete"
+    },
+    "highway/service/business_unpaved_driveway": {
+        "name": "Driveway business no transit, unpaved",
+        "terms": "business, commercial, destination, driveway, entrance, unpaved"
+    },
+    "highway/service/business_drive_through": {
+        "name": "Drive-through business no transit",
+        "terms": "business, commercial, destination, drive-through, drive-thru"
+    },
+    "highway/service/business_concrete_drive_through": {
+        "name": "Drive-through business no transit, concrete",
+        "terms": "business, commercial, destination, drive-through, drive-thru, concrete"
+    },
+    "highway/service/business_unpaved_drive_through": {
+        "name": "Drive-through business no transit, unpaved",
+        "terms": "business, commercial, destination, drive-through, drive-thru, unpaved"
+    },
+    "highway/service/business_sidewalk_both": {
+        "name": "Service road business no transit (separate sidewalk, both sides)",
+        "terms": "business, commercial, destination, service road, sidewalk, sidepath, both"
+    },
+    "highway/service/business_sidewalk_left": {
+        "name": "Service road business no transit (separate sidewalk, left)",
+        "terms": "business, commercial, destination, service road, sidewalk, sidepath, left"
+    },
+    "highway/service/business_sidewalk_right": {
+        "name": "Service road business no transit (separate sidewalk, right)",
+        "terms": "business, commercial, destination, service road, sidewalk, sidepath, right"
+    },
+    "highway/service/business_opposite_use_sidepath": {
+        "name": "Service road business no transit (divided, sidewalk opposite side)",
+        "terms": "business, commercial, destination, service road, sidewalk, sidepath, divided, opposite"
+    },
+    "highway/service/destination_concrete": {
+        "name": "Service road public no transit, concrete",
+        "terms": "public, destination, no through traffic, service road, concrete"
+    },
+    "highway/service/destination_concrete_parking_aisle": {
+        "name": "Parking aisle public no transit, concrete",
+        "terms": "public, destination, no through traffic, parking aisle, parking lot, concrete"
+    },
+    "highway/service/destination_concrete_driveway": {
+        "name": "Driveway public no transit, concrete",
+        "terms": "public, destination, no through traffic, driveway, entrance, concrete"
+    },
+    "highway/service/destination_drive_through": {
+        "name": "Drive-through public no transit",
+        "terms": "public, destination, no through traffic, drive-through, drive-thru"
+    },
+    "highway/service/destination_concrete_drive_through": {
+        "name": "Drive-through public no transit, concrete",
+        "terms": "public, destination, no through traffic, drive-through, drive-thru, concrete"
+    },
+    "highway/service/destination_unpaved_drive_through": {
+        "name": "Drive-through public no transit, unpaved",
+        "terms": "public, destination, no through traffic, drive-through, drive-thru, unpaved"
+    },
+    "highway/service/private_ownership": {
+        "name": "Service road private ownership",
+        "terms": "private, ownership, service road"
+    },
+    "highway/service/private_ownership_concrete": {
+        "name": "Service road private ownership, concrete",
+        "terms": "private, ownership, service road, concrete"
+    },
+    "highway/service/private_ownership_unpaved": {
+        "name": "Service road private ownership, unpaved",
+        "terms": "private, ownership, service road, unpaved"
+    },
+    "highway/service/private_ownership_parking_aisle": {
+        "name": "Parking aisle private ownership",
+        "terms": "private, ownership, parking aisle, parking lot"
+    },
+    "highway/service/private_ownership_concrete_parking_aisle": {
+        "name": "Parking aisle private ownership, concrete",
+        "terms": "private, ownership, parking aisle, parking lot, concrete"
+    },
+    "highway/service/private_ownership_unpaved_parking_aisle": {
+        "name": "Parking aisle private ownership, unpaved",
+        "terms": "private, ownership, parking aisle, parking lot, unpaved"
+    },
+    "highway/service/private_ownership_driveway": {
+        "name": "Driveway private ownership",
+        "terms": "private, ownership, driveway, entrance"
+    },
+    "highway/service/private_ownership_concrete_driveway": {
+        "name": "Driveway private ownership, concrete",
+        "terms": "private, ownership, driveway, entrance, concrete"
+    },
+    "highway/service/private_ownership_unpaved_driveway": {
+        "name": "Driveway private ownership, unpaved",
+        "terms": "private, ownership, driveway, entrance, unpaved"
+    },
+    "highway/service/private_ownership_drive_through": {
+        "name": "Drive-through private ownership",
+        "terms": "private, ownership, drive-through, drive-thru"
+    },
+    "highway/service/private_ownership_concrete_drive_through": {
+        "name": "Drive-through private ownership, concrete",
+        "terms": "private, ownership, drive-through, drive-thru, concrete"
+    },
+    "highway/service/private_ownership_unpaved_drive_through": {
+        "name": "Drive-through private ownership, unpaved",
+        "terms": "private, ownership, drive-through, drive-thru, unpaved"
+    },
+    "highway/service/private_ownership_sidewalk_both": {
+        "name": "Service road private ownership (separate sidewalk, both sides)",
+        "terms": "private, ownership, service road, sidewalk, sidepath, both"
+    },
+    "highway/service/private_ownership_sidewalk_left": {
+        "name": "Service road private ownership (separate sidewalk, left)",
+        "terms": "private, ownership, service road, sidewalk, sidepath, left"
+    },
+    "highway/service/private_ownership_sidewalk_right": {
+        "name": "Service road private ownership (separate sidewalk, right)",
+        "terms": "private, ownership, service road, sidewalk, sidepath, right"
+    },
+    "highway/service/private_ownership_opposite_use_sidepath": {
+        "name": "Service road private ownership (divided, sidewalk opposite side)",
+        "terms": "private, ownership, service road, sidewalk, sidepath, divided, opposite"
+    },
+    "highway/footway/private": {
+        "name": "Footway strictly private",
+        "terms": "private, no access, footway, foot path",
+        "aliases": "pfas"
+    },
+    "highway/footway/private_unpaved": {
+        "name": "Footway strictly private, unpaved",
+        "terms": "private, no access, footway, foot path, unpaved"
+    },
+    "highway/footway/private_asphalt_sidewalk": {
+        "name": "Sidewalk strictly private, asphalt",
+        "terms": "private, no access, sidewalk, asphalt"
+    },
+    "highway/footway/private_unpaved_sidewalk": {
+        "name": "Sidewalk strictly private, unpaved",
+        "terms": "private, no access, sidewalk, unpaved"
+    },
+    "highway/footway/private_concrete_access_aisle": {
+        "name": "Access aisle strictly private, concrete",
+        "terms": "private, no access, access aisle, striped zone, concrete"
+    },
+    "highway/footway/private_unpaved_access_aisle": {
+        "name": "Access aisle strictly private, unpaved",
+        "terms": "private, no access, access aisle, striped zone, unpaved"
+    },
+    "highway/footway/private_concrete_footway_link": {
+        "name": "Footway link strictly private, concrete",
+        "terms": "private, no access, footway link, connector, concrete"
+    },
+    "highway/footway/private_unpaved_footway_link": {
+        "name": "Footway link strictly private, unpaved",
+        "terms": "private, no access, footway link, connector, unpaved"
+    },
+    "highway/steps_private_asphalt": {
+        "name": "Steps strictly private, asphalt",
+        "terms": "private, no access, steps, stairs, asphalt"
+    },
+    "highway/steps_private_unpaved": {
+        "name": "Steps strictly private, unpaved",
+        "terms": "private, no access, steps, stairs, unpaved"
+    },
+    "highway/footway/private_asphalt_path": {
+        "name": "Path strictly private, asphalt",
+        "terms": "private, no access, path, trail, asphalt"
+    },
+    "highway/footway/private_concrete_path": {
+        "name": "Path strictly private, concrete",
+        "terms": "private, no access, path, trail, concrete"
+    },
+    "highway/footway/private_path": {
+        "name": "Path strictly private",
+        "terms": "private, no access, path, trail"
+    },
+    "highway/footway/private_asphalt_informal": {
+        "name": "Informal path strictly private, asphalt",
+        "terms": "private, no access, informal path, desire path, asphalt"
+    },
+    "highway/footway/private_concrete_informal": {
+        "name": "Informal path strictly private, concrete",
+        "terms": "private, no access, informal path, desire path, concrete"
+    },
+    "highway/footway/customers": {
+        "name": "Footway customers only",
+        "terms": "customers, business, footway, foot path",
+        "aliases": "cfas"
+    },
+    "highway/footway/customers_unpaved": {
+        "name": "Footway customers only, unpaved",
+        "terms": "customers, business, footway, foot path, unpaved"
+    },
+    "highway/footway/customers_asphalt_sidewalk": {
+        "name": "Sidewalk customers only, asphalt",
+        "terms": "customers, business, sidewalk, asphalt"
+    },
+    "highway/footway/customers_unpaved_sidewalk": {
+        "name": "Sidewalk customers only, unpaved",
+        "terms": "customers, business, sidewalk, unpaved"
+    },
+    "highway/footway/customers_concrete_access_aisle": {
+        "name": "Access aisle customers only, concrete",
+        "terms": "customers, business, access aisle, striped zone, concrete"
+    },
+    "highway/footway/customers_unpaved_access_aisle": {
+        "name": "Access aisle customers only, unpaved",
+        "terms": "customers, business, access aisle, striped zone, unpaved"
+    },
+    "highway/footway/customers_concrete_footway_link": {
+        "name": "Footway link customers only, concrete",
+        "terms": "customers, business, footway link, connector, concrete"
+    },
+    "highway/footway/customers_unpaved_footway_link": {
+        "name": "Footway link customers only, unpaved",
+        "terms": "customers, business, footway link, connector, unpaved"
+    },
+    "highway/steps_customers_asphalt": {
+        "name": "Steps customers only, asphalt",
+        "terms": "customers, business, steps, stairs, asphalt"
+    },
+    "highway/steps_customers_unpaved": {
+        "name": "Steps customers only, unpaved",
+        "terms": "customers, business, steps, stairs, unpaved"
+    },
+    "highway/footway/customers_asphalt_path": {
+        "name": "Path customers only, asphalt",
+        "terms": "customers, business, path, trail, asphalt"
+    },
+    "highway/footway/customers_concrete_path": {
+        "name": "Path customers only, concrete",
+        "terms": "customers, business, path, trail, concrete"
+    },
+    "highway/footway/customers_path": {
+        "name": "Path customers only",
+        "terms": "customers, business, path, trail"
+    },
+    "highway/footway/customers_asphalt_informal": {
+        "name": "Informal path customers only, asphalt",
+        "terms": "customers, business, informal path, desire path, asphalt"
+    },
+    "highway/footway/customers_concrete_informal": {
+        "name": "Informal path customers only, concrete",
+        "terms": "customers, business, informal path, desire path, concrete"
+    },
+    "highway/footway/permissive": {
+        "name": "Footway permissive",
+        "terms": "permissive, tolerated, footway, foot path"
+    },
+    "highway/footway/permissive_concrete": {
+        "name": "Footway permissive, concrete",
+        "terms": "permissive, tolerated, footway, foot path, concrete"
+    },
+    "highway/footway/permissive_unpaved": {
+        "name": "Footway permissive, unpaved",
+        "terms": "permissive, tolerated, footway, foot path, unpaved"
+    },
+    "highway/footway/permissive_asphalt_sidewalk": {
+        "name": "Sidewalk permissive, asphalt",
+        "terms": "permissive, tolerated, sidewalk, asphalt"
+    },
+    "highway/footway/permissive_sidewalk": {
+        "name": "Sidewalk permissive",
+        "terms": "permissive, tolerated, sidewalk"
+    },
+    "highway/footway/permissive_unpaved_sidewalk": {
+        "name": "Sidewalk permissive, unpaved",
+        "terms": "permissive, tolerated, sidewalk, unpaved"
+    },
+    "highway/footway/permissive_access_aisle": {
+        "name": "Access aisle permissive",
+        "terms": "permissive, tolerated, access aisle, striped zone"
+    },
+    "highway/footway/permissive_concrete_access_aisle": {
+        "name": "Access aisle permissive, concrete",
+        "terms": "permissive, tolerated, access aisle, striped zone, concrete"
+    },
+    "highway/footway/permissive_unpaved_access_aisle": {
+        "name": "Access aisle permissive, unpaved",
+        "terms": "permissive, tolerated, access aisle, striped zone, unpaved"
+    },
+    "highway/footway/permissive_footway_link": {
+        "name": "Footway link permissive",
+        "terms": "permissive, tolerated, footway link, connector"
+    },
+    "highway/footway/permissive_concrete_footway_link": {
+        "name": "Footway link permissive, concrete",
+        "terms": "permissive, tolerated, footway link, connector, concrete"
+    },
+    "highway/footway/permissive_unpaved_footway_link": {
+        "name": "Footway link permissive, unpaved",
+        "terms": "permissive, tolerated, footway link, connector, unpaved"
+    },
+    "highway/steps_permissive_asphalt": {
+        "name": "Steps permissive, asphalt",
+        "terms": "permissive, tolerated, steps, stairs, asphalt"
+    },
+    "highway/steps_permissive": {
+        "name": "Steps permissive",
+        "terms": "permissive, tolerated, steps, stairs"
+    },
+    "highway/steps_permissive_unpaved": {
+        "name": "Steps permissive, unpaved",
+        "terms": "permissive, tolerated, steps, stairs, unpaved"
+    },
+    "highway/footway/permissive_asphalt_path": {
+        "name": "Path permissive, asphalt",
+        "terms": "permissive, tolerated, path, trail, asphalt"
+    },
+    "highway/footway/permissive_concrete_path": {
+        "name": "Path permissive, concrete",
+        "terms": "permissive, tolerated, path, trail, concrete"
+    },
+    "highway/footway/permissive_path": {
+        "name": "Path permissive",
+        "terms": "permissive, tolerated, path, trail"
+    },
+    "highway/footway/permissive_asphalt_informal": {
+        "name": "Informal path permissive, asphalt",
+        "terms": "permissive, tolerated, informal path, desire path, asphalt"
+    },
+    "highway/footway/permissive_concrete_informal": {
+        "name": "Informal path permissive, concrete",
+        "terms": "permissive, tolerated, informal path, desire path, concrete"
+    },
+    "highway/footway/permissive_informal": {
+        "name": "Informal path permissive",
+        "terms": "permissive, tolerated, informal path, desire path"
+    },
+    "highway/footway/private_property": {
+        "name": "Footway private ownership no transit",
+        "terms": "private, ownership, destination, residential, footway, foot path"
+    },
+    "highway/footway/private_property_concrete": {
+        "name": "Footway private ownership no transit, concrete",
+        "terms": "private, ownership, destination, residential, footway, foot path, concrete"
+    },
+    "highway/footway/private_property_unpaved": {
+        "name": "Footway private ownership no transit, unpaved",
+        "terms": "private, ownership, destination, residential, footway, foot path, unpaved"
+    },
+    "highway/footway/private_property_asphalt_sidewalk": {
+        "name": "Sidewalk private ownership no transit, asphalt",
+        "terms": "private, ownership, destination, residential, sidewalk, asphalt"
+    },
+    "highway/footway/private_property_sidewalk": {
+        "name": "Sidewalk private ownership no transit",
+        "terms": "private, ownership, destination, residential, sidewalk"
+    },
+    "highway/footway/private_property_unpaved_sidewalk": {
+        "name": "Sidewalk private ownership no transit, unpaved",
+        "terms": "private, ownership, destination, residential, sidewalk, unpaved"
+    },
+    "highway/footway/private_property_access_aisle": {
+        "name": "Access aisle private ownership no transit",
+        "terms": "private, ownership, destination, residential, access aisle, striped zone"
+    },
+    "highway/footway/private_property_concrete_access_aisle": {
+        "name": "Access aisle private ownership no transit, concrete",
+        "terms": "private, ownership, destination, residential, access aisle, striped zone, concrete"
+    },
+    "highway/footway/private_property_unpaved_access_aisle": {
+        "name": "Access aisle private ownership no transit, unpaved",
+        "terms": "private, ownership, destination, residential, access aisle, striped zone, unpaved"
+    },
+    "highway/footway/private_property_footway_link": {
+        "name": "Footway link private ownership no transit",
+        "terms": "private, ownership, destination, residential, footway link, connector"
+    },
+    "highway/footway/private_property_concrete_footway_link": {
+        "name": "Footway link private ownership no transit, concrete",
+        "terms": "private, ownership, destination, residential, footway link, connector, concrete"
+    },
+    "highway/footway/private_property_unpaved_footway_link": {
+        "name": "Footway link private ownership no transit, unpaved",
+        "terms": "private, ownership, destination, residential, footway link, connector, unpaved"
+    },
+    "highway/steps_private_property_asphalt": {
+        "name": "Steps private ownership no transit, asphalt",
+        "terms": "private, ownership, destination, residential, steps, stairs, asphalt"
+    },
+    "highway/steps_private_property": {
+        "name": "Steps private ownership no transit",
+        "terms": "private, ownership, destination, residential, steps, stairs"
+    },
+    "highway/steps_private_property_unpaved": {
+        "name": "Steps private ownership no transit, unpaved",
+        "terms": "private, ownership, destination, residential, steps, stairs, unpaved"
+    },
+    "highway/footway/private_property_asphalt_path": {
+        "name": "Path private ownership no transit, asphalt",
+        "terms": "private, ownership, destination, residential, path, trail, asphalt"
+    },
+    "highway/footway/private_property_concrete_path": {
+        "name": "Path private ownership no transit, concrete",
+        "terms": "private, ownership, destination, residential, path, trail, concrete"
+    },
+    "highway/footway/private_property_path": {
+        "name": "Path private ownership no transit",
+        "terms": "private, ownership, destination, residential, path, trail"
+    },
+    "highway/footway/private_property_asphalt_informal": {
+        "name": "Informal path private ownership no transit, asphalt",
+        "terms": "private, ownership, destination, residential, informal path, desire path, asphalt"
+    },
+    "highway/footway/private_property_concrete_informal": {
+        "name": "Informal path private ownership no transit, concrete",
+        "terms": "private, ownership, destination, residential, informal path, desire path, concrete"
+    },
+    "highway/footway/private_property_informal": {
+        "name": "Informal path private ownership no transit",
+        "terms": "private, ownership, destination, residential, informal path, desire path"
+    },
+    "highway/footway/private_ownership": {
+        "name": "Footway private ownership",
+        "terms": "private, ownership, footway, foot path"
+    },
+    "highway/footway/private_ownership_concrete": {
+        "name": "Footway private ownership, concrete",
+        "terms": "private, ownership, footway, foot path, concrete"
+    },
+    "highway/footway/private_ownership_unpaved": {
+        "name": "Footway private ownership, unpaved",
+        "terms": "private, ownership, footway, foot path, unpaved"
+    },
+    "highway/footway/private_ownership_asphalt_sidewalk": {
+        "name": "Sidewalk private ownership, asphalt",
+        "terms": "private, ownership, sidewalk, asphalt"
+    },
+    "highway/footway/private_ownership_sidewalk": {
+        "name": "Sidewalk private ownership",
+        "terms": "private, ownership, sidewalk"
+    },
+    "highway/footway/private_ownership_unpaved_sidewalk": {
+        "name": "Sidewalk private ownership, unpaved",
+        "terms": "private, ownership, sidewalk, unpaved"
+    },
+    "highway/footway/private_ownership_access_aisle": {
+        "name": "Access aisle private ownership",
+        "terms": "private, ownership, access aisle, striped zone"
+    },
+    "highway/footway/private_ownership_concrete_access_aisle": {
+        "name": "Access aisle private ownership, concrete",
+        "terms": "private, ownership, access aisle, striped zone, concrete"
+    },
+    "highway/footway/private_ownership_unpaved_access_aisle": {
+        "name": "Access aisle private ownership, unpaved",
+        "terms": "private, ownership, access aisle, striped zone, unpaved"
+    },
+    "highway/footway/private_ownership_footway_link": {
+        "name": "Footway link private ownership",
+        "terms": "private, ownership, footway link, connector"
+    },
+    "highway/footway/private_ownership_concrete_footway_link": {
+        "name": "Footway link private ownership, concrete",
+        "terms": "private, ownership, footway link, connector, concrete"
+    },
+    "highway/footway/private_ownership_unpaved_footway_link": {
+        "name": "Footway link private ownership, unpaved",
+        "terms": "private, ownership, footway link, connector, unpaved"
+    },
+    "highway/steps_private_ownership_asphalt": {
+        "name": "Steps private ownership, asphalt",
+        "terms": "private, ownership, steps, stairs, asphalt"
+    },
+    "highway/steps_private_ownership": {
+        "name": "Steps private ownership",
+        "terms": "private, ownership, steps, stairs"
+    },
+    "highway/steps_private_ownership_unpaved": {
+        "name": "Steps private ownership, unpaved",
+        "terms": "private, ownership, steps, stairs, unpaved"
+    },
+    "highway/footway/private_ownership_asphalt_path": {
+        "name": "Path private ownership, asphalt",
+        "terms": "private, ownership, path, trail, asphalt"
+    },
+    "highway/footway/private_ownership_concrete_path": {
+        "name": "Path private ownership, concrete",
+        "terms": "private, ownership, path, trail, concrete"
+    },
+    "highway/footway/private_ownership_path": {
+        "name": "Path private ownership",
+        "terms": "private, ownership, path, trail"
+    },
+    "highway/footway/private_ownership_asphalt_informal": {
+        "name": "Informal path private ownership, asphalt",
+        "terms": "private, ownership, informal path, desire path, asphalt"
+    },
+    "highway/footway/private_ownership_concrete_informal": {
+        "name": "Informal path private ownership, concrete",
+        "terms": "private, ownership, informal path, desire path, concrete"
+    },
+    "highway/footway/private_ownership_informal": {
+        "name": "Informal path private ownership",
+        "terms": "private, ownership, informal path, desire path"
+    },
+    "highway/footway/destination": {
+        "name": "Footway public no transit",
+        "terms": "public, destination, no through traffic, footway, foot path"
+    },
+    "highway/footway/destination_concrete": {
+        "name": "Footway public no transit, concrete",
+        "terms": "public, destination, no through traffic, footway, foot path, concrete"
+    },
+    "highway/footway/destination_unpaved": {
+        "name": "Footway public no transit, unpaved",
+        "terms": "public, destination, no through traffic, footway, foot path, unpaved"
+    },
+    "highway/footway/destination_asphalt_sidewalk": {
+        "name": "Sidewalk public no transit, asphalt",
+        "terms": "public, destination, no through traffic, sidewalk, asphalt"
+    },
+    "highway/footway/destination_sidewalk": {
+        "name": "Sidewalk public no transit",
+        "terms": "public, destination, no through traffic, sidewalk"
+    },
+    "highway/footway/destination_unpaved_sidewalk": {
+        "name": "Sidewalk public no transit, unpaved",
+        "terms": "public, destination, no through traffic, sidewalk, unpaved"
+    },
+    "highway/footway/destination_access_aisle": {
+        "name": "Access aisle public no transit",
+        "terms": "public, destination, no through traffic, access aisle, striped zone"
+    },
+    "highway/footway/destination_concrete_access_aisle": {
+        "name": "Access aisle public no transit, concrete",
+        "terms": "public, destination, no through traffic, access aisle, striped zone, concrete"
+    },
+    "highway/footway/destination_unpaved_access_aisle": {
+        "name": "Access aisle public no transit, unpaved",
+        "terms": "public, destination, no through traffic, access aisle, striped zone, unpaved"
+    },
+    "highway/footway/destination_footway_link": {
+        "name": "Footway link public no transit",
+        "terms": "public, destination, no through traffic, footway link, connector"
+    },
+    "highway/footway/destination_concrete_footway_link": {
+        "name": "Footway link public no transit, concrete",
+        "terms": "public, destination, no through traffic, footway link, connector, concrete"
+    },
+    "highway/footway/destination_unpaved_footway_link": {
+        "name": "Footway link public no transit, unpaved",
+        "terms": "public, destination, no through traffic, footway link, connector, unpaved"
+    },
+    "highway/steps_destination_asphalt": {
+        "name": "Steps public no transit, asphalt",
+        "terms": "public, destination, no through traffic, steps, stairs, asphalt"
+    },
+    "highway/steps_destination": {
+        "name": "Steps public no transit",
+        "terms": "public, destination, no through traffic, steps, stairs"
+    },
+    "highway/steps_destination_unpaved": {
+        "name": "Steps public no transit, unpaved",
+        "terms": "public, destination, no through traffic, steps, stairs, unpaved"
+    },
+    "highway/footway/destination_asphalt_path": {
+        "name": "Path public no transit, asphalt",
+        "terms": "public, destination, no through traffic, path, trail, asphalt"
+    },
+    "highway/footway/destination_concrete_path": {
+        "name": "Path public no transit, concrete",
+        "terms": "public, destination, no through traffic, path, trail, concrete"
+    },
+    "highway/footway/destination_path": {
+        "name": "Path public no transit",
+        "terms": "public, destination, no through traffic, path, trail"
+    },
+    "highway/footway/destination_asphalt_informal": {
+        "name": "Informal path public no transit, asphalt",
+        "terms": "public, destination, no through traffic, informal path, desire path, asphalt"
+    },
+    "highway/footway/destination_concrete_informal": {
+        "name": "Informal path public no transit, concrete",
+        "terms": "public, destination, no through traffic, informal path, desire path, concrete"
+    },
+    "highway/footway/destination_informal": {
+        "name": "Informal path public no transit",
+        "terms": "public, destination, no through traffic, informal path, desire path"
     }
 }

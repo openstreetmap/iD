@@ -57,6 +57,17 @@ Full build (generate JSON → schema-builder → `dist/data/custom/*.min.json`):
 npm run build:presets:custom
 ```
 
+## Access grid
+
+Restricted-access service roads, driveways, parking aisles, drive-throughs, footways, steps and paths are generated from one configuration: `src/presets/highway/access_categories.ts` (access categories with their tags and OSM wiki links, way kinds, surfaces, en/fr labels). After editing it:
+
+```bash
+npm run generate:locales:access-grid   # preset names and terms in data/locales/custom_presets/{en,fr}.json
+npm run build:presets:custom
+```
+
+The map color of each category is the `tag-access-category-<id>` rule in `css/30_highways.css`.
+
 ## `@templates`
 
 Virtual presets referenced from other presets, e.g. `"{@templates/placement_line}"`. See upstream [data/presets/@templates/README.md](https://github.com/openstreetmap/id-tagging-schema/blob/main/data/presets/@templates/README.md).
