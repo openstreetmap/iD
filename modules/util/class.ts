@@ -14,3 +14,23 @@ export abstract class EventDispatcher<EventMap extends Dispatch.GenericEventMap>
     utilRebind(this, this.dispatch, 'on');
   }
 }
+
+
+/**
+ * for use in 'legacy classes' which want a single method that acts
+ * as both a getter and a setter (see {@link GetSet}).
+ */
+export function getSet<This, T>(
+    that: This,
+    get: () => T,
+    set: (newValue: T) => void
+): GetSet<This, T> {
+    function overloaded(): T;
+    function overloaded(newValue: T): This;
+    function overloaded(...args: [] | [T]) {
+        if (!args.length) return get();
+        set(args[0]);
+        return that;
+    };
+    return overloaded;
+}
