@@ -55,6 +55,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Treat `conveying=*` the same as `oneway=*` when reversing a line ([#13027], thanks [@k-yle])
 * Add shortcut tooltip to reverse direction button ([#12961], thanks [@SaifuddinM23])
 #### :camera: Street-Level
+* add wikimedia commons as an photo service ([#11666], thanks [@k-yle])
 #### :white_check_mark: Validation
 * Warn about `goo.gl` shortlinks as sources, alongside full Google URLs ([#12740])
 * Allow (address) points at the same coordinate if they have different `addr:floor` ([#8424])
@@ -103,6 +104,8 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#9732]: https://github.com/openstreetmap/iD/pull/9732
 [#9931]: https://github.com/openstreetmap/iD/pull/9931
 [#10118]: https://github.com/openstreetmap/iD/pull/10118
+11666
+[#11666]: https://github.com/openstreetmap/iD/pull/11666
 [#11926]: https://github.com/openstreetmap/iD/pull/11926
 [#12340]: https://github.com/openstreetmap/iD/pull/12340
 [#12540]: https://github.com/openstreetmap/iD/issues/12540
