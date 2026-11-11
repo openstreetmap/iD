@@ -55,7 +55,7 @@ export function uiEntityEditor(context) {
             .append('button')
             .attr('class', 'close')
             .attr('title', t('icons.close'))
-            .on('click', function() { context.enter(modeBrowse(context)); })
+            .on('click', function () { context.enter(modeBrowse(context)); })
             .call(svgIcon(_modified ? '#iD-icon-apply' : '#iD-icon-close'));
 
         headerEnter
@@ -70,7 +70,7 @@ export function uiEntityEditor(context) {
             .call(_entityIDs.length === 1 ? t.append('inspector.edit') : t.append('inspector.edit_features'));
 
         header.selectAll('.preset-reset')
-            .on('click', function() {
+            .on('click', function () {
                 dispatch.call('choose', this, _activePresets);
             });
 
@@ -90,7 +90,7 @@ export function uiEntityEditor(context) {
         if (!_sections) {
             _sections = [
                 uiSectionSelectionList(context),
-                uiSectionFeatureType(context).on('choose', function(presets) {
+                uiSectionFeatureType(context).on('choose', function (presets) {
                     dispatch.call('choose', this, presets);
                 }),
                 uiSectionEntityIssues(context),
@@ -101,7 +101,7 @@ export function uiEntityEditor(context) {
             ];
         }
 
-        _sections.forEach(function(section) {
+        _sections.forEach(function (section) {
             if (section.entityIDs) {
                 section.entityIDs(_entityIDs);
             }
@@ -125,9 +125,9 @@ export function uiEntityEditor(context) {
             if (selection.selectAll('.entity-editor').empty()) return;
             if (_state === 'hide') return;
             var significant = !difference ||
-                    difference.didChange.properties ||
-                    difference.didChange.addition ||
-                    difference.didChange.deletion;
+                difference.didChange.properties ||
+                difference.didChange.addition ||
+                difference.didChange.deletion;
             if (!significant) return;
 
             _entityIDs = _entityIDs.filter(context.hasEntity);
@@ -145,9 +145,14 @@ export function uiEntityEditor(context) {
                 // flash the button to indicate the preset changed
                 context.container().selectAll('.entity-editor button.preset-reset .label')
                     .classed('flash-bg', true)
-                    .on('animationend', function() {
+                    .on('animationend', function () {
                         d3_select(this).classed('flash-bg', false);
                     });
+                // Restore focus to the preset button after the UI finishes transitioning
+                window.setTimeout(function () {
+                    var resetButton = context.container().select('.entity-editor button.preset-reset').node();
+                    if (resetButton) resetButton.focus();
+                }, 50);
             }
         }
     }
@@ -191,8 +196,8 @@ export function uiEntityEditor(context) {
         }
 
         if (actions.length) {
-            var combinedAction = function(graph) {
-                actions.forEach(function(action) {
+            var combinedAction = function (graph) {
+                actions.forEach(function (action) {
                     graph = action(graph);
                 });
                 return graph;
@@ -248,8 +253,8 @@ export function uiEntityEditor(context) {
         }
 
         if (actions.length) {
-            var combinedAction = function(graph) {
-                actions.forEach(function(action) {
+            var combinedAction = function (graph) {
+                actions.forEach(function (action) {
                     graph = action(graph);
                 });
                 return graph;
@@ -268,21 +273,21 @@ export function uiEntityEditor(context) {
     }
 
 
-    entityEditor.modified = function(val) {
+    entityEditor.modified = function (val) {
         if (!arguments.length) return _modified;
         _modified = val;
         return entityEditor;
     };
 
 
-    entityEditor.state = function(val) {
+    entityEditor.state = function (val) {
         if (!arguments.length) return _state;
         _state = val;
         return entityEditor;
     };
 
 
-    entityEditor.entityIDs = function(val) {
+    entityEditor.entityIDs = function (val) {
         if (!arguments.length) return _entityIDs;
 
         // always reload these even if the entityIDs are unchanged, since we
@@ -301,7 +306,7 @@ export function uiEntityEditor(context) {
     };
 
 
-    entityEditor.newFeature = function(val) {
+    entityEditor.newFeature = function (val) {
         if (!arguments.length) return _newFeature;
         _newFeature = val;
         return entityEditor;
@@ -324,9 +329,9 @@ export function uiEntityEditor(context) {
             counts[match.id] += 1;
         }
 
-        var matches = Object.keys(counts).sort(function(p1, p2) {
+        var matches = Object.keys(counts).sort(function (p1, p2) {
             return counts[p2] - counts[p1];
-        }).map(function(pID) {
+        }).map(function (pID) {
             return presetManager.item(pID);
         });
 
@@ -342,7 +347,7 @@ export function uiEntityEditor(context) {
         entityEditor.presets(matches);
     }
 
-    entityEditor.presets = function(val) {
+    entityEditor.presets = function (val) {
         if (!arguments.length) return _activePresets;
 
         // don't reload the same preset
