@@ -354,6 +354,11 @@ function gatherNames(tags: Tags): KVs {
       primary: /^network$/i,
       alternate: /^(operator|operator:\w+|network:\w+|\w+_name|\w+_name:\w+)$/i
     };
+    // Don't use an operator to identify a transit network when
+    // the feature already has an explicit network tag.
+    if (tags.network) {
+      patterns.alternate = /^(network:\w+|\w+_name|\w+_name:\w+)$/i;
+    }
   } else if (t === 'flags') {
     patterns = {
       primary: /^(flag:name|flag:name:\w+)$/i,
