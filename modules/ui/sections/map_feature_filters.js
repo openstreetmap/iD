@@ -4,12 +4,12 @@ import { t } from '../../core/localizer';
 import { uiTooltip } from '../tooltip';
 import { uiSection } from '../section';
 
-export function uiSectionMapFeatures(context) {
+export function uiSectionMapFeatureFilters(context) {
 
     var _features = context.features().keys();
 
-    var section = uiSection('map-features', context)
-        .label(() => t.append('map_data.map_features'))
+    var section = uiSection('map-feature-filters', context)
+        .label(() => t.append('map_data.map_feature_filters'))
         .disclosureContent(renderDisclosureContent)
         .expandedByDefault(false);
 
@@ -131,7 +131,7 @@ export function uiSectionMapFeatures(context) {
 
     // add listeners
     context.features()
-        .on('change.map_features', section.reRender);
+        .on('change.map_feature_filters', section.reRender);
 
     return section;
 }
