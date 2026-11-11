@@ -2,7 +2,7 @@ import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { select as d3_select } from 'd3-selection';
 import { debounce } from 'es-toolkit';
 
-import { presetManager } from '../presets';
+import { presetCollection, presetManager } from '../presets';
 import { t, localizer } from '../core/localizer';
 import { actionChangePreset } from '../actions/change_preset';
 import { svgIcon } from '../svg/index';
@@ -20,6 +20,53 @@ export function uiPresetList(context) {
     var _currentPresets;
     var _autofocus = false;
 
+    function connectedWayPresets() {
+        if (!_autofocus || !_entityIDs.length) return [];
+
+        const graph = context.graph();
+        const entity = graph.entity(_entityIDs[0]);
+
+        if (!entity || entity.type !== 'way') return [];
+
+        const connectedWays = new Set();
+
+        for (const nodeID of [entity.first(), entity.last()]) {
+            const node = graph.entity(nodeID);
+
+            if (!node) continue;
+
+            for (const way of graph.parentWays(node)) {
+                if (way.id !== entity.id && way.geometry(graph) === 'line') {
+                    connectedWays.add(way.id);
+                }
+            }
+        }
+
+        return Array.from(connectedWays)
+            .map(id => presetManager.match(graph.entity(id), graph))
+            .filter(preset => preset && !preset.isFallback());
+    }
+
+    function defaultPresets() {
+        var entityPresets = _entityIDs.map(entityID =>
+            presetManager.match(context.graph().entity(entityID), context.graph()));
+
+        var connectedPresets = connectedWayPresets();
+
+        var defaults = presetManager.defaults(
+            entityGeometries()[0],
+            36,
+            !context.inIntro(),
+            _currLoc,
+            entityPresets
+        );
+
+        var prioritized = connectedPresets.concat(
+            defaults.collection.filter(preset => !connectedPresets.includes(preset))
+        );
+
+        return presetCollection(prioritized);
+    }
 
     function presetList(selection) {
         if (!_entityIDs) return;
@@ -91,9 +138,7 @@ export function uiPresetList(context) {
                     search: value
                 });
             } else {
-                var entityPresets = _entityIDs.map(entityID =>
-                    presetManager.match(context.graph().entity(entityID), context.graph()));
-                results = presetManager.defaults(entityGeometries()[0], 36, !context.inIntro(), _currLoc, entityPresets);
+                results = defaultPresets();
                 messageText = t.addOrUpdate('inspector.choose');
             }
             list.call(drawList, results);
@@ -131,12 +176,10 @@ export function uiPresetList(context) {
             .append('div')
             .attr('class', 'inspector-body');
 
-        var entityPresets = _entityIDs.map(entityID =>
-            presetManager.match(context.graph().entity(entityID), context.graph()));
         var list = listWrap
             .append('div')
             .attr('class', 'preset-list')
-            .call(drawList, presetManager.defaults(entityGeometries()[0], 36, !context.inIntro(), _currLoc, entityPresets));
+            .call(drawList, defaultPresets());
 
         listWrap.node().scrollTo({ top: 0 });
         context.features().on('change.preset-list', updateForFeatureHiddenState);
