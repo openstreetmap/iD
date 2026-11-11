@@ -883,7 +883,7 @@ en:
     style_options: Style Options
     highlight_edits:
       key: G
-    map_features: Filters
+    map_feature_filters: Map Feature Filters
     autohidden: "These features have been automatically hidden because too many would be shown on the screen.  You can zoom in to edit them."
     osmhidden: "These features have been automatically hidden because the OpenStreetMap layer is hidden."
   visual_diff:
