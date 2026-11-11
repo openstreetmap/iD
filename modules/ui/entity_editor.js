@@ -70,7 +70,7 @@ export function uiEntityEditor(context) {
             .call(_entityIDs.length === 1 ? t.append('inspector.edit') : t.append('inspector.edit_features'));
 
         header.selectAll('.preset-reset')
-            .on('click', function () {
+            .on('click', function() {
                 dispatch.call('choose', this, _activePresets);
             });
 
