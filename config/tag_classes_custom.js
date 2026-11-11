@@ -5,6 +5,7 @@
  */
 
 import { appendHighwayValidationTagClasses } from './highway_validation_tag_classes.js';
+import { matchAccessCategory } from '../data/custom-tagging/src/presets/highway/access_grid';
 
 /** Extra secondary OSM keys → `tag-{key}` and `tag-{key}-{value}` (do not duplicate upstream secondaries). */
 export const customSecondaryTagKeys = [
@@ -45,6 +46,13 @@ export const customAccessEmphasisExcludeHighways = [
 
 /** Class name added on motor roads when access emphasis applies (without `tag-` prefix). */
 export const customAccessEmphasisClass = 'custom-access-emphasis';
+
+/**
+ * Prefix of the access category class of highways (`tag-access-category-<id>`), colored in
+ * css/30_highways.css; categories are configured in
+ * data/custom-tagging/src/presets/highway/access_categories.ts.
+ */
+export const accessCategoryClassPrefix = 'tag-access-category-';
 
 /** OSM keys checked for flat-count outline classes (`tag-has-flats`, `tag-flats-N`). */
 export const customFlatsTagKeys = ['building:flats', 'flats', 'houses'];
@@ -120,6 +128,11 @@ export function appendCustomTagClasses(classes, t) {
         }
     }
 
+    const accessCategory = highway ? matchAccessCategory(t) : undefined;
+    if (accessCategory) {
+        classes.push(accessCategoryClassPrefix + accessCategory.id);
+    }
+
     appendBuildingFlatsTagClasses(classes, t);
     appendCrossingStyleTagClasses(classes, t);
     appendHighwayValidationTagClasses(classes, t);
@@ -130,11 +143,13 @@ export function appendCustomTagClasses(classes, t) {
     const motorVehicle = t.motor_vehicle || t['routing:motor_vehicle'];
     const routingMotorVehicle = t['routing:motor_vehicle'];
     const serviceAccess = highway === 'service' && emphasisValues.has(t.service);
-    const emphasized =
-        emphasisValues.has(access) ||
-        emphasisValues.has(motorVehicle) ||
-        emphasisValues.has(routingMotorVehicle) ||
-        serviceAccess;
+    // an access category sets the casing width; other access tags fall back to the emphasis values
+    const emphasized = accessCategory
+        ? accessCategory.wide
+        : emphasisValues.has(access) ||
+          emphasisValues.has(motorVehicle) ||
+          emphasisValues.has(routingMotorVehicle) ||
+          serviceAccess;
 
     if (emphasized) {
         classes.push('tag-' + customAccessEmphasisClass);

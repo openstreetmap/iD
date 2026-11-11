@@ -550,6 +550,34 @@ describe('iD.svgTagClasses', function () {
         expect(selection.classed('tag-access-customers')).to.be.true;
     });
 
+    /** [tags, access category, wide casing] (data/custom-tagging/src/presets/highway/access_categories.ts) */
+    const ACCESS_CATEGORY_CASES = [
+        [{ highway: 'service', access: 'private', ownership: 'private' }, 'private', true],
+        [{ highway: 'service', access: 'customers' }, 'customers', true],
+        [{ highway: 'service', access: 'delivery' }, 'delivery', false],
+        [{ highway: 'service', access: 'permissive' }, 'permissive', false],
+        [{ highway: 'service', access: 'destination', ownership: 'private' }, 'private_property', true],
+        [{ highway: 'service', motor_vehicle: 'destination', ownership: 'private', 'operator:type': 'business' }, 'business', false],
+        [{ highway: 'service', motor_vehicle: 'destination' }, 'destination', false],
+        [{ highway: 'service', access: 'destination' }, 'destination', false],
+        [{ highway: 'footway', access: 'destination' }, 'destination', false],
+        [{ highway: 'service', ownership: 'private' }, 'private_ownership', false],
+        [{ highway: 'footway', ownership: 'private' }, 'private_ownership', false]
+    ];
+
+    ACCESS_CATEGORY_CASES.forEach(function([tags, category, wide]) {
+        it(`adds access category ${category} for ${JSON.stringify(tags)}`, function() {
+            const classes = iD.svgTagClasses().getClassesString(tags, 'way line casing').split(' ');
+            expect(classes.filter((c) => c.startsWith('tag-access-category-'))).to.eql([`tag-access-category-${category}`]);
+            expect(classes.includes('tag-custom-access-emphasis')).to.equal(wide);
+        });
+    });
+
+    it('adds no access category outside highways', function() {
+        const classes = iD.svgTagClasses().getClassesString({ building: 'yes', ownership: 'private' }, 'area');
+        expect(classes).to.not.include('tag-access-category-');
+    });
+
     it('maxspeed lens omits bridge structure classes', function() {
         setLensSecondaryTagKeys(['maxspeed', 'maxspeed_advisory']);
         const classes = iD.svgTagClasses().getClassesString({
@@ -572,5 +600,6 @@ describe('iD.svgTagClasses', function () {
         }, 'way line stroke');
         expect(classes).to.not.match(/\btag-access-private\b/);
         expect(classes).to.not.match(/\btag-foot-private\b/);
+        expect(classes).to.not.include('tag-access-category-');
     });
 });

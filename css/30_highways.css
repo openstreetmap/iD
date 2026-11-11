@@ -896,6 +896,117 @@ path.line.shadow.related.tag-highway-path.tag-foot-permissive {
     stroke-opacity: 0.45 !important;
 }
 
+/* Access categories (tag-access-category-<id>, configured in
+   data/custom-tagging/src/presets/highway/access_categories.ts): colored casing on
+   motor roads, colored dash on a white casing for footways, paths and steps.
+   Layered !important rules also override the lens rules for the same ways. */
+path.line.casing.tag-access-category-private:not(.tag-highway-footway):not(.tag-highway-path):not(.tag-highway-steps),
+path.line.stroke.tag-highway-footway.tag-access-category-private,
+path.line.stroke.tag-highway-path.tag-access-category-private,
+path.line.stroke.tag-highway-steps.tag-access-category-private {
+    stroke: rgb(205, 20, 20) !important;
+}
+path.line.casing.tag-access-category-customers:not(.tag-highway-footway):not(.tag-highway-path):not(.tag-highway-steps),
+path.line.stroke.tag-highway-footway.tag-access-category-customers,
+path.line.stroke.tag-highway-path.tag-access-category-customers,
+path.line.stroke.tag-highway-steps.tag-access-category-customers {
+    stroke: rgb(255, 136, 0) !important;
+}
+path.line.casing.tag-access-category-delivery:not(.tag-highway-footway):not(.tag-highway-path):not(.tag-highway-steps),
+path.line.stroke.tag-highway-footway.tag-access-category-delivery,
+path.line.stroke.tag-highway-path.tag-access-category-delivery,
+path.line.stroke.tag-highway-steps.tag-access-category-delivery {
+    stroke: rgb(63, 214, 156) !important;
+}
+path.line.casing.tag-access-category-permissive:not(.tag-highway-footway):not(.tag-highway-path):not(.tag-highway-steps),
+path.line.stroke.tag-highway-footway.tag-access-category-permissive,
+path.line.stroke.tag-highway-path.tag-access-category-permissive,
+path.line.stroke.tag-highway-steps.tag-access-category-permissive {
+    stroke: #fcc203 !important;
+}
+path.line.casing.tag-access-category-private_property:not(.tag-highway-footway):not(.tag-highway-path):not(.tag-highway-steps),
+path.line.stroke.tag-highway-footway.tag-access-category-private_property,
+path.line.stroke.tag-highway-path.tag-access-category-private_property,
+path.line.stroke.tag-highway-steps.tag-access-category-private_property {
+    stroke: #fc036f !important;
+}
+path.line.casing.tag-access-category-business:not(.tag-highway-footway):not(.tag-highway-path):not(.tag-highway-steps),
+path.line.stroke.tag-highway-footway.tag-access-category-business,
+path.line.stroke.tag-highway-path.tag-access-category-business,
+path.line.stroke.tag-highway-steps.tag-access-category-business {
+    stroke: rgb(255, 136, 0) !important;
+}
+path.line.casing.tag-access-category-destination:not(.tag-highway-footway):not(.tag-highway-path):not(.tag-highway-steps),
+path.line.stroke.tag-highway-footway.tag-access-category-destination,
+path.line.stroke.tag-highway-path.tag-access-category-destination,
+path.line.stroke.tag-highway-steps.tag-access-category-destination {
+    stroke: rgb(255, 55, 188) !important;
+}
+path.line.casing.tag-access-category-private_ownership:not(.tag-highway-footway):not(.tag-highway-path):not(.tag-highway-steps),
+path.line.stroke.tag-highway-footway.tag-access-category-private_ownership,
+path.line.stroke.tag-highway-path.tag-access-category-private_ownership,
+path.line.stroke.tag-highway-steps.tag-access-category-private_ownership {
+    stroke: rgb(205, 20, 20) !important;
+}
+/* steps class repeated to outrank the motor-road access rules above, which do not exclude steps */
+path.line.casing.tag-highway-footway[class*="tag-access-category-"],
+path.line.casing.tag-highway-path[class*="tag-access-category-"],
+path.line.casing.tag-highway-steps.tag-highway-steps[class*="tag-access-category-"] {
+    stroke: #fff !important;
+}
+/* Wide access categories (`wide` in access_categories.ts) on footways, paths and steps:
+   a wider colored casing outlines the way so it stands apart from the categories that
+   share its color. iD draws only a casing and a stroke per way, so the dash is
+   inverted: white dashes on the stroke, colored casing showing through the gaps. */
+path.line.casing.tag-highway-footway.tag-access-category-private,
+path.line.casing.tag-highway-path.tag-access-category-private,
+path.line.casing.tag-highway-steps.tag-highway-steps.tag-access-category-private {
+    stroke: rgb(205, 20, 20) !important;
+}
+path.line.casing.tag-highway-footway.tag-access-category-customers,
+path.line.casing.tag-highway-path.tag-access-category-customers,
+path.line.casing.tag-highway-steps.tag-highway-steps.tag-access-category-customers {
+    stroke: rgb(255, 136, 0) !important;
+}
+path.line.casing.tag-highway-footway.tag-access-category-private_property,
+path.line.casing.tag-highway-path.tag-access-category-private_property,
+path.line.casing.tag-highway-steps.tag-highway-steps.tag-access-category-private_property {
+    stroke: #fc036f !important;
+}
+path.line.casing.tag-highway-footway.tag-access-category-private,
+path.line.casing.tag-highway-path.tag-access-category-private,
+path.line.casing.tag-highway-steps.tag-highway-steps.tag-access-category-private,
+path.line.casing.tag-highway-footway.tag-access-category-customers,
+path.line.casing.tag-highway-path.tag-access-category-customers,
+path.line.casing.tag-highway-steps.tag-highway-steps.tag-access-category-customers,
+path.line.casing.tag-highway-footway.tag-access-category-private_property,
+path.line.casing.tag-highway-path.tag-access-category-private_property,
+path.line.casing.tag-highway-steps.tag-highway-steps.tag-access-category-private_property {
+    stroke-width: 7 !important;
+}
+.low-zoom path.line.casing.tag-highway-footway.tag-access-category-private,
+.low-zoom path.line.casing.tag-highway-path.tag-access-category-private,
+.low-zoom path.line.casing.tag-highway-steps.tag-highway-steps.tag-access-category-private,
+.low-zoom path.line.casing.tag-highway-footway.tag-access-category-customers,
+.low-zoom path.line.casing.tag-highway-path.tag-access-category-customers,
+.low-zoom path.line.casing.tag-highway-steps.tag-highway-steps.tag-access-category-customers,
+.low-zoom path.line.casing.tag-highway-footway.tag-access-category-private_property,
+.low-zoom path.line.casing.tag-highway-path.tag-access-category-private_property,
+.low-zoom path.line.casing.tag-highway-steps.tag-highway-steps.tag-access-category-private_property {
+    stroke-width: 5 !important;
+}
+path.line.stroke.tag-highway-footway.tag-access-category-private,
+path.line.stroke.tag-highway-path.tag-access-category-private,
+path.line.stroke.tag-highway-steps.tag-highway-steps.tag-access-category-private,
+path.line.stroke.tag-highway-footway.tag-access-category-customers,
+path.line.stroke.tag-highway-path.tag-access-category-customers,
+path.line.stroke.tag-highway-steps.tag-highway-steps.tag-access-category-customers,
+path.line.stroke.tag-highway-footway.tag-access-category-private_property,
+path.line.stroke.tag-highway-path.tag-access-category-private_property,
+path.line.stroke.tag-highway-steps.tag-highway-steps.tag-access-category-private_property {
+    stroke: #fff !important;
+}
+
 /* footway=link / cycleway=link — continuous lines (mirrored in lenses/quebec.css) */
 path.line.stroke.tag-highway-footway.tag-footway-link,
 path.line.stroke.tag-highway-footway.tag-footway-link.tag-unpaved {

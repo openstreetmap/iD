@@ -7,6 +7,7 @@ import {
     pickMaxspeedRaw
 } from '../../config/maxspeed_lens.js';
 import { BUNDLED_LENSES, DEFAULT_BUNDLED_LENS_ID, SURFACE_COLOURS_LENS_ID } from '../../config/bundled_lenses.js';
+import { accessCategoryClassPrefix } from '../../config/tag_classes_custom.js';
 
 export { DEFAULT_BUNDLED_LENS_ID, SURFACE_COLOURS_LENS_ID };
 
@@ -431,6 +432,7 @@ const MAXSPEED_LENS_ACCESS_CLASS_PREFIXES = [
 const MAXSPEED_LENS_ACCESS_VALUES = new Set(['private', 'customers', 'permissive']);
 
 function shouldStripClassForMaxspeedLens(klass: string): boolean {
+    if (klass.startsWith(accessCategoryClassPrefix)) return !lensPreservesCoreHighwayClasses;
     if (lensPreservesCoreHighwayClasses) {
         if (klass === 'tag-custom-access-emphasis') return false;
         if (MAXSPEED_LENS_STRUCTURE_CLASS_PREFIXES.some(
