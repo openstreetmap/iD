@@ -139,9 +139,6 @@ export function svgLabels(projection, context) {
 
 
     function drawPointLabels(selection, labels, filter, classes) {
-        if (classes.includes('pointlabel-halo')) {
-            labels = labels.filter(d => !d.position.isAddr);
-        }
         var texts = selection.selectAll('text.' + classes)
             .filter(d => filter(d.entity))
             .data(labels, d => osmIdManager.key(d.entity));
