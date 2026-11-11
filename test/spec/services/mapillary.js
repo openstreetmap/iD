@@ -1,3 +1,6 @@
+import fetchMock from 'fetch-mock';
+
+
 describe('iD.serviceMapillary', function() {
     var dimensions = [64, 64];
     var context, mapillary;
@@ -22,7 +25,9 @@ describe('iD.serviceMapillary', function() {
         mapillary.reset();
     });
 
-    afterEach(function() {});
+    afterEach(function() {
+        fetchMock.reset();
+    });
 
 
     describe('#init', function() {
@@ -197,6 +202,26 @@ describe('iD.serviceMapillary', function() {
             const photo = { id: 'baz', originalLngLat: {lng: 10, lat: 0}};
             mapillary.setActiveImage(photo);
             expect(mapillary.getActiveImage().id).toEqual(photo.id);
+        });
+    });
+
+
+    describe('#getDetections', function() {
+        it('keeps detection photos within the active date range', async function() {
+            context.photos().setDateFilter('fromDate', '2019-01-01');
+            context.photos().setDateFilter('toDate', '2020-01-01');
+            const detections = [
+                { id: 'old', image: { id: 'old-photo', captured_at: Date.parse('2017-01-01') } },
+                { id: 'matching', image: { id: 'matching-photo', captured_at: Date.parse('2019-06-01') } },
+                { id: 'new', image: { id: 'new-photo', captured_at: Date.parse('2021-01-01') } }
+            ];
+            fetchMock.mock(/\/sign\/detections\?/, { data: detections });
+
+            const result = await mapillary.getDetections('sign', context);
+
+            expect(result).toEqual([detections[1]]);
+            const url = new URL(fetchMock.calls()[0][0]);
+            expect(url.searchParams.get('fields')).toBe('id,value,image{id,captured_at}');
         });
     });
 
