@@ -24,6 +24,31 @@ export function uiPhotoviewer(context) {
     function photoviewer(selection) {
         selection
             .append('button')
+            .attr('class', 'thumb-minimise')
+            .attr('title', t('icons.collapse'))
+            .attr('aria-label', t('icons.collapse'))
+            .on('click', () => {
+                selection.classed('minimised', true);
+                selection.select('.thumb-expand').node().focus();
+            })
+            .append('div')
+            .call(svgIcon('#iD-icon-collapse-screen'));
+
+        selection
+            .append('button')
+            .attr('class', 'thumb-expand')
+            .attr('title', t('icons.expand'))
+            .attr('aria-label', t('icons.expand'))
+            .on('click', () => {
+                photoviewer.restore();
+                photoviewer.onMapResize();
+                selection.select('.thumb-minimise').node().focus();
+            })
+            .append('div')
+            .call(svgIcon('#iD-icon-full-screen'));
+
+        selection
+            .append('button')
             .attr('class', 'thumb-hide')
             .attr('title', t('icons.close'))
             .on('click', function () {
@@ -273,6 +298,7 @@ export function uiPhotoviewer(context) {
 
     photoviewer.onMapResize = function() {
         var photoviewer = context.container().select('.photoviewer');
+        if (photoviewer.classed('minimised')) return;
         var content = context.container().select('.main-content');
         var mapDimensions = utilGetDimensions(content, true);
         const menuHeight = utilGetDimensions(d3_select('.top-toolbar'))[1] +
@@ -310,6 +336,10 @@ export function uiPhotoviewer(context) {
     photoviewer.viewerSize = function() {
         const photoviewer = context.container().select('.photoviewer');
         return subtractPadding(utilGetDimensions(photoviewer, true), photoviewer);
+    };
+
+    photoviewer.restore = function() {
+        context.container().select('.photoviewer').classed('minimised', false);
     };
 
     return utilRebind(photoviewer, dispatch, 'on');

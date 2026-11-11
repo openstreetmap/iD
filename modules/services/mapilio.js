@@ -605,6 +605,7 @@ export default {
                     service.hideViewer(context);
                 }
             }
+            context.ui().photoviewer.restore();
             wrap.classed('hide', false)
                 .selectAll('.photo-wrapper.mapilio-wrapper')
                 .classed('hide', false);
