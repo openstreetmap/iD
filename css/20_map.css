@@ -67,6 +67,20 @@
     stroke-linejoin: round;
 }
 
+.ideditor.indoor-focus .main-map .layer-background,
+.ideditor.indoor-focus .main-map .layer-overlay,
+.ideditor.indoor-focus .map-in-map-overlay {
+    filter: grayscale(45%) brightness(82%);
+}
+
+.ideditor.indoor-focus .map-in-map-background {
+    filter: url(#alpha-slope5) grayscale(45%) brightness(82%);
+}
+
+.ideditor.indoor-focus .main-map .layer-osm .indoor-dim {
+    opacity: 0.18 !important;
+}
+
 .ideditor[pointer='pen'] .way.target {
     stroke-width: 18;
 }
