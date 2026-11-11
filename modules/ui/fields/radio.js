@@ -58,10 +58,13 @@ export function uiFieldRadio(field, context) {
 
     function updateRadios() {
         const allOptions = [...(field.options || field.keys)];
-        if (_tags[field.key] && !allOptions.includes(_tags[field.key])) {
-            // include other values as (temporary) option #12082
-            //allOptions.push(`"${_tags[field.key]}"`);
-            allOptions.push(_tags[field.key]);
+        if (field.key && _tags[field.key]) {
+            const rawValues = Array.isArray(_tags[field.key]) ? _tags[field.key] : [_tags[field.key]];
+            for (const val of rawValues) {
+                if (typeof val === 'string' && val && !allOptions.includes(val)) {
+                    allOptions.push(val);
+                }
+            }
         }
 
         labels = wrap.selectAll('label')
@@ -361,6 +364,8 @@ export function uiFieldRadio(field, context) {
         }
 
         updateRadios();
+
+        radios.property('indeterminate', isMixed);
 
         labels
             .classed('active', function(d) {
