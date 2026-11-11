@@ -246,12 +246,21 @@ export function uiSectionRawMemberEditor(context) {
                         .attr('class', 'remove member-delete')
                         .call(svgIcon('#iD-operation-delete'));
 
+                if (d.member.isComplete(context.graph())) {
                     label
                         .append('button')
                         .attr('class', 'member-zoom')
                         .attr('title', t('icons.zoom_to'))
                         .call(svgIcon('#iD-icon-framed-dot', 'monochrome'))
                         .on('click', zoomToMember);
+                } else {
+                    label
+                        .append('button')
+                        .attr('class', 'member-download')
+                        .attr('title', t('icons.download'))
+                        .call(svgIcon('#iD-icon-load'))
+                        .on('click', downloadMember);
+                }
 
                 } else {
                     var labelText = label
