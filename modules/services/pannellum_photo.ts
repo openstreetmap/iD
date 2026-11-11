@@ -116,6 +116,9 @@ export async function pannellumPhotoFrame(context: coreContext, selection: d3.Se
                 .classed('hide', false);
         }
 
+        context.selectAll('button.photo-zoom')
+            .classed('hide', true);
+
         return module;
     };
 

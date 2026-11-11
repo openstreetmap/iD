@@ -11,6 +11,7 @@ import { services } from './';
 import { searchLimited, type WithBbox } from '../util/partition';
 import { localeDateString } from '../util/date';
 import { patchHash } from '../behavior';
+import { photoZoom } from './photo_zoom';
 import type { Projection } from '../geo/raw_mercator';
 import type { Tile } from '../util/tiler';
 import type { PhotoFramePhoto } from './pannellum_photo';
@@ -337,6 +338,8 @@ export default new class Kartaview implements IStreetSide {
             .append('button')
             .on('click.forward', step(1))
             .text('►');
+
+        wrapEnter.call(photoZoom(imgZoom, wrapEnter));
 
         wrapEnter
             .append('div')
