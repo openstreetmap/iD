@@ -286,6 +286,7 @@ export function uiFieldText(field, context) {
             .enter()
             .append('div')
             .attr('class', 'form-field-button colour-preview')
+            .attr('title', t('inspector.colour_picker'))
             .append('div')
             .style('background-color', d => d)
             .attr('class', 'colour-box');
