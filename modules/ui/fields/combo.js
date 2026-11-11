@@ -142,7 +142,7 @@ export function uiFieldCombo(field, context) {
     function tagValue(dval) {
         dval = clean(dval || '');
 
-        var found = getOptions(true).find(function(o) {
+        var found = getOptions().find(function(o) {
             return o.key && clean(o.value).toLowerCase() === dval.toLowerCase();
         });
         if (found) return found.key;
@@ -276,7 +276,7 @@ export function uiFieldCombo(field, context) {
             ? field.t(`options.${value}.description`) : undefined;
     }
 
-    function getOptions(allOptions) {
+    function getOptions() {
         const localeCode = localizer.localeCode();
         // Get dropdown list for language: key via localizer instead of taginfo
         if (field.key === 'language:') {
@@ -336,15 +336,7 @@ export function uiFieldCombo(field, context) {
           return options;
         }
 
-        if (!(field.options || field.options)) return [];
-
-        let options;
-        if (allOptions !== true) {
-            options = field.options || field.options;
-        } else {
-            options = [].concat(field.options, field.options).filter(Boolean);
-        }
-        const result = options.map(function(v) {
+        const result = (field.options || []).map(function(v) {
             const labelId = getLabelId(field, v);
             return {
                 key: v,
