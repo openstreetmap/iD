@@ -29,6 +29,10 @@ export function uiEntityEditor(context) {
     var _newFeature;
 
     var _sections;
+    var isMobile = (
+        window.matchMedia &&
+        window.matchMedia('(max-width: 640px)').matches
+    );
 
     function entityEditor(selection) {
 
@@ -50,6 +54,14 @@ export function uiEntityEditor(context) {
             .attr('class', 'preset-reset preset-choose')
             .attr('title', t('inspector.back_tooltip'))
             .call(svgIcon(`#iD-icon-${direction}`));
+
+        // Sidebar toggle (appears to the left of the close button)
+        isMobile && headerEnter
+            .append('button')
+            .attr('class', 'sidebar-toggle')
+            .attr('title', t('sidebar.tooltip'))
+            .on('click', function() { context.ui().sidebar.toggle(); })
+            .call(svgIcon('#iD-icon-sidebar-' + (localizer.textDirection() === 'rtl' ? 'right' : 'left')));
 
         headerEnter
             .append('button')
