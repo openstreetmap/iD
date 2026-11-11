@@ -63,13 +63,9 @@ export function svgVertices(projection, context) {
         }
 
 
-        // memoize directions results, return false for empty arrays (for use in filter)
+        // memoize directions results
         function getDirections(entity) {
-            if (entity.id in directions) return directions[entity.id];
-
-            var angles = entity.directions(graph, projection);
-            directions[entity.id] = angles.length ? angles : false;
-            return angles;
+            return directions[entity.id] ||= entity.directions(graph, projection);
         }
 
 
@@ -184,7 +180,7 @@ export function svgVertices(projection, context) {
         // Vertices with directions get viewfields
         var dgroups = groups
             .selectAll('.viewfieldgroup')
-            .data(function data(d) { return zoom >= 18 && getDirections(d) ? [d] : []; }, fastEntityKey);
+            .data(function data(d) { return zoom >= 18 && getDirections(d).length ? [d] : []; }, fastEntityKey);
 
         // exit
         dgroups.exit()
@@ -197,7 +193,7 @@ export function svgVertices(projection, context) {
             .merge(dgroups);
 
         var viewfields = dgroups.selectAll('.viewfield')
-            .data(getDirections, function key(d) { return osmIdManager.key(d); });
+            .data(getDirections);
 
         // exit
         viewfields.exit()
