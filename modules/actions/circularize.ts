@@ -286,8 +286,8 @@ export function actionCircularize(wayId: WayId, projection: Projection) {
             actualPoint = hull[i];
             var actualDist = geoVecLength(actualPoint, centroid);
             var diff = Math.abs(actualDist - radius);
-            //compare distances with epsilon-error (5%)
-            if (diff > 0.05 * radius) {
+            //compare distances with epsilon-error (2%)
+            if (diff > 0.02 * radius) {
                 return false;
             }
         }
