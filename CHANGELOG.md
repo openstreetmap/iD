@@ -63,6 +63,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Improve wording for "connect the features (manually)" fix for routing-islands validator, and show tooltip with further instructions ([#8402])
 * Show all `mutually_exclusive_tags` validation warnings when there are multiple present on a single object ([#13016], thanks [@matkoniecz])
 #### :bug: Bugfixes
+* Preserve universal fields when changing presets ([#13105], thanks [@Hirdyansh-bh])
 * Fix crash when using the osmose integration ([#13043], [#13074], thanks [@k-yle])
 * Fix exceptions when resizing the browser tab when nothing is selected ([#12800], thanks [@k-yle])
 * Allow tags like `not:*:wikidata` to have multiple values ([#12736], thanks [@k-yle])
@@ -142,12 +143,14 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#13098]: https://github.com/openstreetmap/iD/pull/13098
 [#13100]: https://github.com/openstreetmap/iD/pull/13100
 [#13102]: https://github.com/openstreetmap/iD/pull/13102
+[#13105]: https://github.com/openstreetmap/iD/pull/13105
 [#13178]: https://github.com/openstreetmap/iD/pull/13178
 [#13180]: https://github.com/openstreetmap/iD/pull/13180
 [#13181]: https://github.com/openstreetmap/iD/pull/13181
 [@aditya1010-max]: https://github.com/aditya1010-max
 [@Geo-2695]: https://github.com/Geo-2695
 [@hemaksh2007jain-bit]: https://github.com/hemaksh2007jain-bit
+[@Hirdyansh-bh]: https://github.com/Hirdyansh-bh
 [@kalucky0]: https://github.com/kalucky0
 [@SaifuddinM23]: https://github.com/SaifuddinM23
 
