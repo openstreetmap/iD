@@ -101,6 +101,11 @@ path.stroke.tag-railway-turntable {
     stroke-width: 1;
 }
 
+path.fill.tag-railway-turntable {
+    stroke: rgba(140, 140, 140, 0.5);
+    fill: rgba(140, 140, 140, 0.5);
+}
+
 /* railways with `service=* tag` (e.g. sidings, crossovers, etc.) */
 path.line.stroke.tag-railway.tag-service {
     stroke: #dca;
