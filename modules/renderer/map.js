@@ -10,7 +10,7 @@ import { prefs } from '../core/preferences';
 import { geoExtent, geoRawMercator, geoScaleToZoom, geoZoomToScale } from '../geo';
 import { modeBrowse } from '../modes/browse';
 import { svgAreas, svgLabels, svgLayers, svgLines, svgMidpoints, svgPoints, svgVertices } from '../svg';
-import { utilFastMouse, utilFunctor, utilSetTransform, utilEntityAndDeepMemberIDs } from '../util/util';
+import { utilFastMouse, utilSetTransform, utilEntityAndDeepMemberIDs } from '../util/util';
 import { utilBindOnce } from '../util/bind_once';
 import { utilDetect } from '../util/detect';
 import { utilGetDimensions } from '../util/dimensions';
@@ -347,7 +347,7 @@ export function rendererMap(context) {
                 if (entity) data.push(entity);
             });
             fullRedraw = true;
-            filter = utilFunctor(true);
+            filter = () => true;
             // selected features should always be visible, so we can skip filtering
             applyFeatureLayerFilters = false;
 
@@ -373,7 +373,7 @@ export function rendererMap(context) {
             } else {
                 data = all;
                 fullRedraw = true;
-                filter = utilFunctor(true);
+                filter = () => true;
             }
         }
 

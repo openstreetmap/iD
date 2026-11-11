@@ -2,7 +2,6 @@ import { dispatch as d3_dispatch } from 'd3-dispatch';
 
 import { prefs } from '../core/preferences';
 import { svgIcon } from '../svg/icon';
-import { utilFunctor } from '../util';
 import { utilRebind } from '../util/rebind';
 import { uiToggle } from './toggle';
 import { t, localizer } from '../core/localizer';
@@ -11,7 +10,7 @@ import { t, localizer } from '../core/localizer';
 export function uiDisclosure(context, key, expandedDefault) {
     const dispatch = d3_dispatch('toggled');
     let _expanded;
-    let _label = utilFunctor('');
+    let _label = () => '';
     let _updatePreference = true;
     let _content = function () {};
 
@@ -112,7 +111,7 @@ export function uiDisclosure(context, key, expandedDefault) {
 
     disclosure.label = function(val) {
         if (!arguments.length) return _label;
-        _label = utilFunctor(val);
+        _label = val;
         return disclosure;
     };
 

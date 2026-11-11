@@ -3,19 +3,18 @@ import {
 } from 'd3-selection';
 
 import { uiDisclosure } from './disclosure';
-import { utilFunctor } from '../util';
 
 // A unit of controls or info to be used in a layout, such as within a pane.
 // Can be labeled and collapsible.
 export function uiSection(id, context) {
 
-    var _classes = utilFunctor('');
+    var _classes = '';
     var _shouldDisplay;
     var _content;
 
     var _disclosure;
-    var _label;
-    var _expandedByDefault = utilFunctor(true);
+    var _label = () => '';
+    var _expandedByDefault = true;
     var _disclosureContent;
     var _disclosureExpanded;
 
@@ -27,25 +26,25 @@ export function uiSection(id, context) {
 
     section.classes = function(val) {
         if (!arguments.length) return _classes;
-        _classes = utilFunctor(val);
+        _classes = val;
         return section;
     };
 
     section.label = function(val) {
         if (!arguments.length) return _label;
-        _label = utilFunctor(val);
+        _label = val;
         return section;
     };
 
     section.expandedByDefault = function(val) {
         if (!arguments.length) return _expandedByDefault;
-        _expandedByDefault = utilFunctor(val);
+        _expandedByDefault = val;
         return section;
     };
 
     section.shouldDisplay = function(val) {
         if (!arguments.length) return _shouldDisplay;
-        _shouldDisplay = utilFunctor(val);
+        _shouldDisplay = val;
         return section;
     };
 
@@ -77,7 +76,7 @@ export function uiSection(id, context) {
         var sectionEnter = _containerSelection
             .enter()
             .append('div')
-            .attr('class', 'section section-' + id + ' ' + (_classes && _classes() || ''));
+            .attr('class', 'section section-' + id + ' ' + _classes);
 
         _containerSelection = sectionEnter
             .merge(_containerSelection);
@@ -112,8 +111,8 @@ export function uiSection(id, context) {
 
         if (_disclosureContent) {
             if (!_disclosure) {
-                _disclosure = uiDisclosure(context, id.replace(/-/g, '_'), _expandedByDefault())
-                    .label(_label || '')
+                _disclosure = uiDisclosure(context, id.replace(/-/g, '_'), _expandedByDefault)
+                    .label(_label)
                     /*.on('toggled', function(expanded) {
                         if (expanded) { selection.node().parentNode.scrollTop += 200; }
                     })*/
