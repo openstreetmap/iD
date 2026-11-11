@@ -306,19 +306,6 @@ path.stroke.tag-waterway-weir {
     stroke: rgb(170, 170, 170);
 }
 
-path.stroke.tag-railway-turntable {
-    stroke: #444;
-    stroke-width: 1;
-}
-
-.z18 path.stroke.tag-railway-turntable,
-.z19 path.stroke.tag-railway-turntable,
-.z20 path.stroke.tag-railway-turntable,
-.z21 path.stroke.tag-railway-turntable,
-.z22 path.stroke.tag-railway-turntable {
-    stroke-width: 2;
-}
-
 path.fill.tag-amenity-parking,
 path.fill.tag-landuse-railway,
 path.fill.tag-railway-turntable,
