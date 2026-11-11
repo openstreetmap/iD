@@ -4,7 +4,7 @@ import { dispatch as d3_dispatch, type Dispatch } from 'd3-dispatch';
 import { select as d3_select } from 'd3-selection';
 
 import packageJSON from '../../package.json';
-import type { EntityId, NoteId, osmChangeset, OsmEntity } from '../osm';
+import type { EntityId, NodeId, NoteId, osmChangeset, OsmEntity } from '../osm';
 import { t, localizer } from './localizer';
 import { fileFetcher, type AssetMap } from './file_fetcher';
 import { coreHistory } from './history';
@@ -34,7 +34,7 @@ export interface Mode {
     enter(): void;
     exit(): void;
     selectedIDs?(): EntityId[];
-    activeID?(): EntityId;
+    activeID?(): NodeId | undefined;
 }
 
 export interface Behaviour extends d3.Selector {
@@ -111,7 +111,7 @@ export interface coreContext extends Pick<Dispatch<object, EventMap>, 'on'> {
     entity: coreGraph['entity'];
 
     selectedIDs(): EntityId[];
-    activeID(): EntityId | undefined;
+    activeID(): NodeId | undefined;
     selectedNoteID: GetSet<coreContext, NoteId | null>;
     selectedErrorID: GetSet<coreContext, string | null>;
 
@@ -483,7 +483,7 @@ export function coreContext(this: object): coreContext {
   };
 
   context.selectedIDs = () => (_mode && _mode.selectedIDs && _mode.selectedIDs()) || [];
-  context.activeID = () => _mode && _mode.activeID && _mode.activeID();
+  context.activeID = () => _mode?.activeID?.();
 
   let _selectedNoteID: NoteId | null;
   context.selectedNoteID = function(noteID) {
