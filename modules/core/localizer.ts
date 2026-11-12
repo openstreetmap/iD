@@ -662,6 +662,7 @@ export class coreLocalizer {
         const getIndex = (d: string) => index.get(d)!;
         return (string: string) => {
             string = string.trim();
+            string = string.replace(/[\u200e\u200f\u061c]/g, '').replace(/[\u2212\u2012\u2013\ufe63\uff0d]/g, '-');
             if (literal) string = string.replace(literal, '');
             if (group) string = string.replace(group, '');
             if (decimal) string = string.replace(decimal, '.');

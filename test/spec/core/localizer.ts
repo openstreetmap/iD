@@ -81,6 +81,28 @@ describe('iD.coreLocalizer', function() {
             expect(parseFloat(formatFloat(1234.56))).toEqual(1234.56);
             expect(parseFloat(formatFloat(3.14159))).toEqual(3.14159);
         });
+        it('parses minus signs and bidi marks in Persian numbers', function () {
+            var localizer = new iD.coreLocalizer();
+            var parseFloat = localizer.floatParser('fa');
+            // LRM + U+2212 MINUS SIGN + U+06F1 EXTENDED ARABIC-INDIC DIGIT ONE
+            expect(parseFloat('\u200e\u2212\u06f1')).toEqual(-1);
+            expect(parseFloat('\u2212\u06f1')).toEqual(-1);
+            expect(parseFloat('-\u06f1')).toEqual(-1);
+        });
+        it('roundtrips Persian numbers', function () {
+            var localizer = new iD.coreLocalizer();
+            var formatFloat = localizer.floatFormatter('fa');
+            var parseFloat = localizer.floatParser('fa');
+            expect(parseFloat(formatFloat(-1))).toEqual(-1);
+            expect(parseFloat(formatFloat(-0.1))).toEqual(-0.1);
+            expect(parseFloat(formatFloat(1234.56))).toEqual(1234.56);
+        });
+        it('roundtrips Swedish numbers', function () {
+            var localizer = new iD.coreLocalizer();
+            var formatFloat = localizer.floatFormatter('sv');
+            var parseFloat = localizer.floatParser('sv');
+            expect(parseFloat(formatFloat(-1))).toEqual(-1);
+        });
     });
     describe('#decimalPlaceCounter', function () {
         it('counts decimal places in English numbers', function () {
