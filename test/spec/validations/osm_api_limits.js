@@ -2,11 +2,12 @@ import { select as d3_select } from 'd3-selection';
 
 describe('iD.validations.osm_api_limits', function () {
     let context;
+    let originalMaxWayNodes;
 
     beforeEach(() => {
         iD.services.osm = iD.serviceOsm;
-        iD.services.osm.maxWayNodes = () => 10;
-        iD.services.osm.on = () => undefined;
+        originalMaxWayNodes = iD.serviceOsm.maxWayNodes;
+        iD.serviceOsm.maxWayNodes = () => 10;
     });
 
     beforeEach(function() {
@@ -15,6 +16,7 @@ describe('iD.validations.osm_api_limits', function () {
     });
 
     afterEach(() => {
+        iD.serviceOsm.maxWayNodes = originalMaxWayNodes;
         delete iD.services.osm;
     });
 
