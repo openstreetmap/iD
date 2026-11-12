@@ -49,7 +49,7 @@ export function modeDragNode(context) {
 
     function startNudge(d3_event, entity, nudge) {
         if (_nudgeInterval) window.clearInterval(_nudgeInterval);
-        _nudgeInterval = window.setInterval(function() {
+        _nudgeInterval = window.setInterval(function () {
             context.map().pan(nudge);
             doMove(d3_event, entity, nudge);
         }, 50);
@@ -208,7 +208,7 @@ export function modeDragNode(context) {
                 }
 
             } else if (targetNodes) {   // snap to way - a line target with `.nodes`
-                edge = geoChooseEdge(targetNodes, context.map().mouse(), context.projection, end.id);
+                edge = geoChooseEdge(targetNodes, context.map().mouse(), context.projection, entity.id);
                 if (edge) {
                     loc = edge.loc;
                 }
@@ -313,13 +313,13 @@ export function modeDragNode(context) {
                 // find active ring and test it for self intersections
                 for (k = 0; k < rings.length; k++) {
                     const nodes = rings[k].nodes;
-                    if (nodes.find(function(n) { return n.id === entity.id; })) {
+                    if (nodes.find(function (n) { return n.id === entity.id; })) {
                         activeIndex = k;
                         if (geoHasSelfIntersections(nodes, entity.id)) {
                             return 'multipolygonMember';
                         }
                     }
-                    rings[k].coords = nodes.map(function(n) { return n.loc; });
+                    rings[k].coords = nodes.map(function (n) { return n.loc; });
                 }
 
                 // test active ring for intersections with other rings in the multipolygon
@@ -341,7 +341,7 @@ export function modeDragNode(context) {
             // If we still haven't tested this node's parent way for self-intersections.
             // (because it's not a member of a multipolygon), test it now.
             if (activeIndex === null) {
-                const nodes = parent.nodes.map(function(nodeID) { return graph.entity(nodeID); });
+                const nodes = parent.nodes.map(function (nodeID) { return graph.entity(nodeID); });
                 if (nodes.length && geoHasSelfIntersections(nodes, entity.id)) {
                     return parent.geometry(graph);
                 }
@@ -417,7 +417,7 @@ export function modeDragNode(context) {
             context.enter(modeSelect(context, [entity.id]));
 
         } else {
-            var reselection = _restoreSelectedIDs.filter(function(id) {
+            var reselection = _restoreSelectedIDs.filter(function (id) {
                 return context.graph().hasEntity(id);
             });
 
@@ -432,7 +432,7 @@ export function modeDragNode(context) {
 
     function _actionBounceBack(nodeID, toLoc) {
         var moveNode = actionMoveNode(nodeID, toLoc);
-        var action = function(graph, t) {
+        var action = function (graph, t) {
             // last time through, pop off the bounceback perform.
             // it will then overwrite the initial perform with a moveNode that does nothing
             if (t === 1) context.pop();
@@ -458,7 +458,7 @@ export function modeDragNode(context) {
         .on('end', end);
 
 
-    mode.enter = function() {
+    mode.enter = function () {
         context.install(hover);
         context.install(edit);
 
@@ -471,7 +471,7 @@ export function modeDragNode(context) {
     };
 
 
-    mode.exit = function() {
+    mode.exit = function () {
         context.ui().sidebar.hover.cancel();
         context.uninstall(hover);
         context.uninstall(edit);
@@ -496,21 +496,21 @@ export function modeDragNode(context) {
     };
 
 
-    mode.selectedIDs = function() {
+    mode.selectedIDs = function () {
         if (!arguments.length) return _activeEntity ? [_activeEntity.id] : [];
         // no assign
         return mode;
     };
 
 
-    mode.activeID = function() {
+    mode.activeID = function () {
         if (!arguments.length) return _activeEntity && _activeEntity.id;
         // no assign
         return mode;
     };
 
 
-    mode.restoreSelectedIDs = function(_) {
+    mode.restoreSelectedIDs = function (_) {
         if (!arguments.length) return _restoreSelectedIDs;
         _restoreSelectedIDs = _;
         return mode;
