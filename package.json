@@ -117,7 +117,7 @@
     "fetch-mock": "^11.1.1",
     "globals": "^17.3.0",
     "js-yaml": "^5.0.0",
-    "jsdom": "^30.0.0",
+    "jsdom": "^31.0.0",
     "json-stringify-pretty-compact": "^3.0.0",
     "language-subtag-registry": "^0.4.2",
     "mapillary-js": "4.1.2",
