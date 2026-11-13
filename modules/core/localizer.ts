@@ -654,6 +654,8 @@ export class coreLocalizer {
         const index = new Map(numerals.map((d, i) => [d, String(i)]));
         const literalPart = parts.find(d => d.type === 'literal');
         const literal = literalPart && new RegExp(`[${literalPart.value}]`, 'g');
+        const minusSignPart = parts.find(d => d.type === 'minusSign');
+        const minusSign = minusSignPart && new RegExp(`[${minusSignPart.value}]`, 'g');
         const groupPart = parts.find(d => d.type === 'group');
         const group = groupPart && new RegExp(`[${groupPart.value}]`, 'g');
         const decimalPart = parts.find(d => d.type === 'decimal');
@@ -663,6 +665,7 @@ export class coreLocalizer {
         return (string: string) => {
             string = string.trim();
             if (literal) string = string.replace(literal, '');
+            if (minusSign) string = string.replace(minusSign, '-');
             if (group) string = string.replace(group, '');
             if (decimal) string = string.replace(decimal, '.');
             string = string.replace(numeral, getIndex);
