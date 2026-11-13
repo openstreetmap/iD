@@ -135,7 +135,7 @@ export function uiSectionRawTagEditor(id, context) {
             .call(utilNoAuto)
             .attr('placeholder', t('inspector.key_value'))
             .attr('spellcheck', 'false')
-            .style('direction', 'ltr')
+            .attr('dir', 'ltr')
             .merge(textarea);
 
         textarea

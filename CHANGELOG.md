@@ -83,6 +83,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Support 835 new languages in the dropdown when adding a `name:*` tag ([#12802])
 * Fix the streetside photo resizer backwards in RTL layouts ([#13180], thanks [@k-yle])
 * Support territory-level address hints ([#12704], thanks [@Vectorial1024])
+* Fix various css issues in RTL mode ([#13206], thanks [@k-yle])
 * Add Hong Kong and Macao address formats ([#12704], thanks [@Vectorial1024])
 * Fix inconsistent RTL checkboxes ([#13181], thanks [@k-yle])
 * Fix some unreadable tooltips in right-to-left layout ([#13178], thanks [@k-yle])
@@ -145,6 +146,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#13178]: https://github.com/openstreetmap/iD/pull/13178
 [#13180]: https://github.com/openstreetmap/iD/pull/13180
 [#13181]: https://github.com/openstreetmap/iD/pull/13181
+[#13206]: https://github.com/openstreetmap/iD/pull/13206
 [@aditya1010-max]: https://github.com/aditya1010-max
 [@Geo-2695]: https://github.com/Geo-2695
 [@hemaksh2007jain-bit]: https://github.com/hemaksh2007jain-bit
