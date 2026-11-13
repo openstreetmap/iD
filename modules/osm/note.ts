@@ -34,7 +34,7 @@ export class osmNote {
         for (var i = 0; i < sources.length; ++i) {
             var source = sources[i];
             for (var prop in source) {
-                if (Object.prototype.hasOwnProperty.call(source, prop)) {
+                if (Object.hasOwn(source, prop)) {
                     if (source[prop as keyof osmNote] === undefined) {
                         delete this[prop as keyof osmNote];
                     } else {

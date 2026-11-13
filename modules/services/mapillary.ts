@@ -195,7 +195,7 @@ function loadTileDataToCache(data: ArrayBuffer, tile: Tile, which: Which) {
         loc,
         d: MlyImage;
 
-    if (Object.hasOwnProperty.call(vectorTile.layers, 'image')) {
+    if (Object.hasOwn(vectorTile.layers, 'image')) {
         features = [];
         cache = _mlyCache.images;
         layer = vectorTile.layers.image;
@@ -224,7 +224,7 @@ function loadTileDataToCache(data: ArrayBuffer, tile: Tile, which: Which) {
         }
     }
 
-    if (Object.hasOwnProperty.call(vectorTile.layers, 'sequence')) {
+    if (Object.hasOwn(vectorTile.layers, 'sequence')) {
         cache = _mlyCache.sequences;
         layer = vectorTile.layers.sequence;
 
@@ -238,7 +238,7 @@ function loadTileDataToCache(data: ArrayBuffer, tile: Tile, which: Which) {
         }
     }
 
-    if (Object.hasOwnProperty.call(vectorTile.layers, 'point')) {
+    if (Object.hasOwn(vectorTile.layers, 'point')) {
         features = [];
         cache = _mlyCache[which];
         layer = vectorTile.layers.point;
@@ -265,7 +265,7 @@ function loadTileDataToCache(data: ArrayBuffer, tile: Tile, which: Which) {
         }
     }
 
-    if (Object.hasOwnProperty.call(vectorTile.layers, 'traffic_sign')) {
+    if (Object.hasOwn(vectorTile.layers, 'traffic_sign')) {
         features = [];
         cache = _mlyCache[which];
         layer = vectorTile.layers.traffic_sign;

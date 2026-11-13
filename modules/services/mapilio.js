@@ -104,7 +104,7 @@ function loadTile(which, url, tile) {
 // Load the data from the vector tile into cache
 function loadTileDataToCache(data, tile) {
     const vectorTile = new VectorTile(new PbfReader(data));
-    if (Object.hasOwnProperty.call(vectorTile.layers, pointLayer)) {
+    if (Object.hasOwn(vectorTile.layers, pointLayer)) {
         const features = [];
         const cache = _cache.images;
         const layer = vectorTile.layers[pointLayer];
@@ -139,7 +139,7 @@ function loadTileDataToCache(data, tile) {
         }
     }
 
-    if (Object.hasOwnProperty.call(vectorTile.layers, lineLayer)) {
+    if (Object.hasOwn(vectorTile.layers, lineLayer)) {
         const cache = _cache.sequences;
         const layer = vectorTile.layers[lineLayer];
 
@@ -408,10 +408,10 @@ export default {
 
         wrap
             .selectAll('button.back')
-            .classed('hide', !_cache.images.forImageId.hasOwnProperty(+id - 1));
+            .classed('hide', !Object.hasOwn(_cache.images.forImageId, +id - 1));
         wrap
             .selectAll('button.forward')
-            .classed('hide', !_cache.images.forImageId.hasOwnProperty(+id + 1));
+            .classed('hide', !Object.hasOwn(_cache.images.forImageId, +id + 1));
 
 
         function loadTheImage(){
