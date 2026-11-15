@@ -78,7 +78,7 @@ describe('iD.actionMergeRemoteChanges', function () {
                     action = iD.actionMergeRemoteChanges('a', localGraph, remoteGraph, discardTags);
                   var  result = action(localGraph);
 
-                expect(result).to.eql(localGraph);
+                expect(result).toEqual(localGraph);
                 expect(action.conflicts()).toHaveLength(1);
             });
 
@@ -92,7 +92,7 @@ describe('iD.actionMergeRemoteChanges', function () {
                     action = iD.actionMergeRemoteChanges('a', localGraph, remoteGraph, discardTags),
                     result = action(localGraph);
 
-                expect(result).to.eql(localGraph);
+                expect(result).toEqual(localGraph);
                 expect(action.conflicts()).toHaveLength(1);
             });
 
@@ -106,7 +106,7 @@ describe('iD.actionMergeRemoteChanges', function () {
                     action = iD.actionMergeRemoteChanges('a', localGraph, remoteGraph, discardTags),
                     result = action(localGraph);
 
-                expect(result).to.eql(localGraph);
+                expect(result).toEqual(localGraph);
                 expect(action.conflicts()).toHaveLength(1);
             });
 
@@ -120,7 +120,7 @@ describe('iD.actionMergeRemoteChanges', function () {
                     action = iD.actionMergeRemoteChanges('a', localGraph, remoteGraph, discardTags),
                     result = action(localGraph);
 
-                expect(result).to.eql(localGraph);
+                expect(result).toEqual(localGraph);
                 expect(action.conflicts()).toHaveLength(1);
             });
 
@@ -135,8 +135,8 @@ describe('iD.actionMergeRemoteChanges', function () {
                     action = iD.actionMergeRemoteChanges('a', localGraph, remoteGraph, discardTags),
                     result = action(localGraph);
 
-                expect(result.entity('a').version).to.eql('2');
-                expect(result.entity('a').tags).to.eql(mergedTags);
+                expect(result.entity('a').version).toEqual('2');
+                expect(result.entity('a').tags).toEqual(mergedTags);
                 expect(action.conflicts()).toHaveLength(0);
             });
 
@@ -151,8 +151,8 @@ describe('iD.actionMergeRemoteChanges', function () {
                     action = iD.actionMergeRemoteChanges('a', localGraph, remoteGraph, discardTags),
                     result = action(localGraph);
 
-                expect(result.entity('a').version).to.eql('2');
-                expect(result.entity('a').tags).to.eql(mergedTags);
+                expect(result.entity('a').version).toEqual('2');
+                expect(result.entity('a').tags).toEqual(mergedTags);
                 expect(action.conflicts()).toHaveLength(0);
             });
         });
@@ -171,7 +171,7 @@ describe('iD.actionMergeRemoteChanges', function () {
                     action = iD.actionMergeRemoteChanges('a', localGraph, remoteGraph, discardTags),
                     result = action(localGraph);
 
-                expect(result).to.eql(localGraph);
+                expect(result).toEqual(localGraph);
             });
 
             it('merges nodes if location is same', function () {
@@ -187,9 +187,9 @@ describe('iD.actionMergeRemoteChanges', function () {
                     action = iD.actionMergeRemoteChanges('a', localGraph, remoteGraph, discardTags),
                     result = action(localGraph);
 
-                expect(result.entity('a').version).to.eql('2');
-                expect(result.entity('a').tags).to.eql(mergedTags);
-                expect(result.entity('a').loc).to.eql([2, 2]);
+                expect(result.entity('a').version).toEqual('2');
+                expect(result.entity('a').tags).toEqual(mergedTags);
+                expect(result.entity('a').loc).toEqual([2, 2]);
                 expect(action.conflicts()).toHaveLength(0);
             });
         });
@@ -207,8 +207,8 @@ describe('iD.actionMergeRemoteChanges', function () {
                     action = iD.actionMergeRemoteChanges('w1', localGraph, remoteGraph, discardTags),
                     result = action(localGraph);
 
-                expect(result.entity('w1').version).to.eql('2');
-                expect(result.entity('w1').tags).to.eql(mergedTags);
+                expect(result.entity('w1').version).toEqual('2');
+                expect(result.entity('w1').tags).toEqual(mergedTags);
                 expect(action.conflicts()).toHaveLength(0);
             });
 
@@ -225,11 +225,11 @@ describe('iD.actionMergeRemoteChanges', function () {
                     action = iD.actionMergeRemoteChanges('w1', localGraph, remoteGraph, discardTags),
                     result = action(localGraph);
 
-                expect(result.entity('w1').version).to.eql('2');
-                expect(result.entity('w1').tags).to.eql(mergedTags);
-                expect(result.entity('w1').nodes).to.eql(remoteNodes);
-                expect(result.hasEntity('r2')).to.eql(r2);
-                expect(result.hasEntity('r3')).to.eql(r3);
+                expect(result.entity('w1').version).toEqual('2');
+                expect(result.entity('w1').tags).toEqual(mergedTags);
+                expect(result.entity('w1').nodes).toEqual(remoteNodes);
+                expect(result.hasEntity('r2')).toEqual(r2);
+                expect(result.hasEntity('r3')).toEqual(r3);
                 expect(action.conflicts()).toHaveLength(0);
             });
 
@@ -246,9 +246,9 @@ describe('iD.actionMergeRemoteChanges', function () {
                     action = iD.actionMergeRemoteChanges('w1', localGraph, remoteGraph, discardTags),
                     result = action(localGraph);
 
-                expect(result.entity('w1').version).to.eql('2');
-                expect(result.entity('w1').tags).to.eql(mergedTags);
-                expect(result.entity('w1').nodes).to.eql(localNodes);
+                expect(result.entity('w1').version).toEqual('2');
+                expect(result.entity('w1').tags).toEqual(mergedTags);
+                expect(result.entity('w1').nodes).toEqual(localNodes);
                 expect(action.conflicts()).toHaveLength(0);
             });
 
@@ -266,11 +266,11 @@ describe('iD.actionMergeRemoteChanges', function () {
                     action = iD.actionMergeRemoteChanges('w1', localGraph, remoteGraph, discardTags),
                     result = action(localGraph);
 
-                expect(result.entity('w1').version).to.eql('2');
-                expect(result.entity('w1').tags).to.eql(mergedTags);
-                expect(result.entity('w1').nodes).to.eql(mergedNodes);
-                expect(result.hasEntity('r3')).to.eql(r3);
-                expect(result.hasEntity('r4')).to.eql(r4);
+                expect(result.entity('w1').version).toEqual('2');
+                expect(result.entity('w1').tags).toEqual(mergedTags);
+                expect(result.entity('w1').nodes).toEqual(mergedNodes);
+                expect(result.hasEntity('r3')).toEqual(r3);
+                expect(result.hasEntity('r4')).toEqual(r4);
                 expect(action.conflicts()).toHaveLength(0);
             });
 
@@ -286,7 +286,7 @@ describe('iD.actionMergeRemoteChanges', function () {
                     action = iD.actionMergeRemoteChanges('w1', localGraph, remoteGraph, discardTags),
                     result = action(localGraph);
 
-                expect(result).to.eql(localGraph);
+                expect(result).toEqual(localGraph);
                 expect(action.conflicts()).toHaveLength(1);
             });
 
@@ -300,8 +300,8 @@ describe('iD.actionMergeRemoteChanges', function () {
                     action = iD.actionMergeRemoteChanges('w1', localGraph, remoteGraph, discardTags),
                     result = action(localGraph);
 
-                expect(result.entity('p1').version).to.eql('2');
-                expect(result.entity('p1').loc).to.eql(remoteLoc);
+                expect(result.entity('p1').version).toEqual('2');
+                expect(result.entity('p1').loc).toEqual(remoteLoc);
                 expect(action.conflicts()).toHaveLength(0);
             });
 
@@ -315,7 +315,7 @@ describe('iD.actionMergeRemoteChanges', function () {
                     action = iD.actionMergeRemoteChanges('w1', localGraph, remoteGraph, discardTags),
                     result = action(localGraph);
 
-                expect(result).to.eql(localGraph);
+                expect(result).toEqual(localGraph);
                 expect(action.conflicts()).toHaveLength(1);
             });
         });
@@ -334,7 +334,7 @@ describe('iD.actionMergeRemoteChanges', function () {
                     action = iD.actionMergeRemoteChanges('r', localGraph, remoteGraph, discardTags),
                     result = action(localGraph);
 
-                expect(result).to.eql(localGraph);
+                expect(result).toEqual(localGraph);
                 expect(action.conflicts()).toHaveLength(1);
             });
 
@@ -351,8 +351,8 @@ describe('iD.actionMergeRemoteChanges', function () {
                     action = iD.actionMergeRemoteChanges('r', localGraph, remoteGraph, discardTags),
                     result = action(localGraph);
 
-                expect(result.entity('r').version).to.eql('2');
-                expect(result.entity('r').tags).to.eql(mergedTags);
+                expect(result.entity('r').version).toEqual('2');
+                expect(result.entity('r').tags).toEqual(mergedTags);
                 expect(action.conflicts()).toHaveLength(0);
             });
         });
@@ -370,7 +370,7 @@ describe('iD.actionMergeRemoteChanges', function () {
                     action = iD.actionMergeRemoteChanges('a', localGraph, remoteGraph, discardTags);
                     action(localGraph);
 
-                expect(action.conflicts()).not.to.be.empty;
+                expect(action.conflicts()).not.toEqual([]);
             });
         });
     });
@@ -390,9 +390,9 @@ describe('iD.actionMergeRemoteChanges', function () {
                     action = iD.actionMergeRemoteChanges('a', localGraph, remoteGraph, discardTags).withOption('force_local'),
                     result = action(localGraph);
 
-                expect(result.entity('a').version).to.eql('2');
-                expect(result.entity('a').tags).to.eql(localTags);
-                expect(result.entity('a').loc).to.eql(localLoc);
+                expect(result.entity('a').version).toEqual('2');
+                expect(result.entity('a').tags).toEqual(localTags);
+                expect(result.entity('a').loc).toEqual(localLoc);
                 expect(action.conflicts()).toHaveLength(0);
             });
 
@@ -408,9 +408,9 @@ describe('iD.actionMergeRemoteChanges', function () {
                     action = iD.actionMergeRemoteChanges('a', localGraph, remoteGraph, discardTags).withOption('force_remote'),
                     result = action(localGraph);
 
-                expect(result.entity('a').version).to.eql('2');
-                expect(result.entity('a').tags).to.eql(remoteTags);
-                expect(result.entity('a').loc).to.eql(remoteLoc);
+                expect(result.entity('a').version).toEqual('2');
+                expect(result.entity('a').tags).toEqual(remoteTags);
+                expect(result.entity('a').loc).toEqual(remoteLoc);
                 expect(action.conflicts()).toHaveLength(0);
             });
         });
@@ -429,9 +429,9 @@ describe('iD.actionMergeRemoteChanges', function () {
                     action = iD.actionMergeRemoteChanges('w1', localGraph, remoteGraph, discardTags).withOption('force_local'),
                     result = action(localGraph);
 
-                expect(result.entity('w1').version).to.eql('2');
-                expect(result.entity('w1').tags).to.eql(localTags);
-                expect(result.entity('w1').nodes).to.eql(localNodes);
+                expect(result.entity('w1').version).toEqual('2');
+                expect(result.entity('w1').tags).toEqual(localTags);
+                expect(result.entity('w1').nodes).toEqual(localNodes);
                 expect(action.conflicts()).toHaveLength(0);
             });
 
@@ -447,11 +447,11 @@ describe('iD.actionMergeRemoteChanges', function () {
                     action = iD.actionMergeRemoteChanges('w1', localGraph, remoteGraph, discardTags).withOption('force_remote'),
                     result = action(localGraph);
 
-                expect(result.entity('w1').version).to.eql('2');
-                expect(result.entity('w1').tags).to.eql(remoteTags);
-                expect(result.entity('w1').nodes).to.eql(remoteNodes);
-                expect(result.hasEntity('r3')).to.eql(r3);
-                expect(result.hasEntity('r4')).to.eql(r4);
+                expect(result.entity('w1').version).toEqual('2');
+                expect(result.entity('w1').tags).toEqual(remoteTags);
+                expect(result.entity('w1').nodes).toEqual(remoteNodes);
+                expect(result.hasEntity('r3')).toEqual(r3);
+                expect(result.hasEntity('r4')).toEqual(r4);
                 expect(action.conflicts()).toHaveLength(0);
             });
 
@@ -465,8 +465,8 @@ describe('iD.actionMergeRemoteChanges', function () {
                     action = iD.actionMergeRemoteChanges('w1', localGraph, remoteGraph, discardTags).withOption('force_local'),
                     result = action(localGraph);
 
-                expect(result.entity('p1').version).to.eql('2');
-                expect(result.entity('p1').loc).to.eql(localLoc);
+                expect(result.entity('p1').version).toEqual('2');
+                expect(result.entity('p1').loc).toEqual(localLoc);
                 expect(action.conflicts()).toHaveLength(0);
             });
 
@@ -480,8 +480,8 @@ describe('iD.actionMergeRemoteChanges', function () {
                     action = iD.actionMergeRemoteChanges('w1', localGraph, remoteGraph, discardTags).withOption('force_remote'),
                     result = action(localGraph);
 
-                expect(result.entity('p1').version).to.eql('2');
-                expect(result.entity('p1').loc).to.eql(remoteLoc);
+                expect(result.entity('p1').version).toEqual('2');
+                expect(result.entity('p1').loc).toEqual(remoteLoc);
             });
 
             it('keeps only important childNodes when merging', function () {
@@ -495,9 +495,9 @@ describe('iD.actionMergeRemoteChanges', function () {
                     action = iD.actionMergeRemoteChanges('w1', localGraph, remoteGraph, discardTags).withOption('force_remote'),
                     result = action(localGraph);
 
-                expect(result.entity('w1').nodes).to.eql(remoteNodes);
-                expect(result.hasEntity('r1')).to.eql(localr1);
-                expect(result.hasEntity('r2')).to.be.not.ok;
+                expect(result.entity('w1').nodes).toEqual(remoteNodes);
+                expect(result.hasEntity('r1')).toEqual(localr1);
+                expect(result.hasEntity('r2')).toBeFalsy();
                 expect(action.conflicts()).toHaveLength(0);
             });
         });
@@ -516,9 +516,9 @@ describe('iD.actionMergeRemoteChanges', function () {
                     action = iD.actionMergeRemoteChanges('r', localGraph, remoteGraph, discardTags).withOption('force_local'),
                     result = action(localGraph);
 
-                expect(result.entity('r').version).to.eql('2');
-                expect(result.entity('r').tags).to.eql(localTags);
-                expect(result.entity('r').members).to.eql(localMembers);
+                expect(result.entity('r').version).toEqual('2');
+                expect(result.entity('r').tags).toEqual(localTags);
+                expect(result.entity('r').members).toEqual(localMembers);
                 expect(action.conflicts()).toHaveLength(0);
             });
 
@@ -534,9 +534,9 @@ describe('iD.actionMergeRemoteChanges', function () {
                     action = iD.actionMergeRemoteChanges('r', localGraph, remoteGraph, discardTags).withOption('force_remote'),
                     result = action(localGraph);
 
-                expect(result.entity('r').version).to.eql('2');
-                expect(result.entity('r').tags).to.eql(remoteTags);
-                expect(result.entity('r').members).to.eql(remoteMembers);
+                expect(result.entity('r').version).toEqual('2');
+                expect(result.entity('r').tags).toEqual(remoteTags);
+                expect(result.entity('r').members).toEqual(remoteMembers);
                 expect(action.conflicts()).toHaveLength(0);
             });
         });

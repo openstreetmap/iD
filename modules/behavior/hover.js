@@ -5,7 +5,7 @@ import {
 } from 'd3-selection';
 
 import { presetManager } from '../presets';
-import { osmEntity, osmNote, QAItem } from '../osm';
+import { OsmAbstractEntity, osmNote, QAItem } from '../osm';
 import { utilKeybinding, utilRebind } from '../util';
 
 /*
@@ -85,7 +85,7 @@ export function behaviorHover(context) {
         function eventTarget(d3_event) {
             var datum = d3_event.target && d3_event.target.__data__;
             if (typeof datum !== 'object') return null;
-            if (!(datum instanceof osmEntity) && datum.properties && (datum.properties.entity instanceof osmEntity)) {
+            if (!(datum instanceof OsmAbstractEntity) && datum.properties && (datum.properties.entity instanceof OsmAbstractEntity)) {
                 return datum.properties.entity;
             }
             return datum;
@@ -138,13 +138,13 @@ export function behaviorHover(context) {
 
             if (!_newNodeId && (mode.id === 'draw-line' || mode.id === 'draw-area')) {
                 var node = targets.find(function(target) {
-                    return target instanceof osmEntity && target.type === 'node';
+                    return target instanceof OsmAbstractEntity && target.type === 'node';
                 });
                 _newNodeId = node && node.id;
             }
 
             targets = targets.filter(function(datum) {
-                if (datum instanceof osmEntity) {
+                if (datum instanceof OsmAbstractEntity) {
                     // If drawing a way, don't hover on a node that was just placed. #3974
                     return datum.id !== _newNodeId &&
                         (datum.type !== 'node' || !_ignoreVertex || allowsVertex(datum)) &&
@@ -169,7 +169,7 @@ export function behaviorHover(context) {
                 } else if (datum instanceof osmNote) {
                     selector += ', .note-' + datum.id;
 
-                } else if (datum instanceof osmEntity) {
+                } else if (datum instanceof OsmAbstractEntity) {
                     selector += ', .' + datum.id;
                     if (datum.type === 'relation') {
                         for (var j in datum.members) {

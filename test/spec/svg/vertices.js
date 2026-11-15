@@ -1,7 +1,11 @@
+import { geoProjection as d3_geoProjection } from 'd3-geo';
+import { select as d3_select } from 'd3-selection';
+
+
 describe('iD.svgVertices', function () {
     var context;
     var surface;
-    var projection = d3.geoProjection(function(x, y) { return [x, -y]; })
+    var projection = d3_geoProjection(function(x, y) { return [x, -y]; })
         .translate([0, 0])
         .scale(iD.geoZoomToScale(17))
         .clipExtent([[0, 0], [Infinity, Infinity]]);
@@ -9,7 +13,7 @@ describe('iD.svgVertices', function () {
 
     beforeEach(function () {
         context = iD.coreContext().assetPath('../dist/').init();
-        d3.select(document.createElement('div'))
+        d3_select(document.createElement('div'))
             .attr('class', 'main-map')
             .call(context.map().centerZoom([0, 0], 17));
         surface = context.surface();
@@ -25,7 +29,7 @@ describe('iD.svgVertices', function () {
         var extent = iD.geoExtent([0, 0], [1, 1]);
 
         surface.call(iD.svgVertices(projection, context), graph, [node], filter, extent);
-        expect(surface.select('.vertex').classed('shared')).to.be.true;
+        expect(surface.select('.vertex').classed('shared')).toBe(true);
     });
 
 
@@ -57,12 +61,12 @@ describe('iD.svgVertices', function () {
         }
 
         beforeEach(function () {
-            nodeA = iD.osmNode({ loc: stackLoc });
-            nodeB = iD.osmNode({ loc: stackLoc });
-            nodeOffA = iD.osmNode({ loc: [1, 0] });
-            nodeOffB = iD.osmNode({ loc: [0, 1] });
-            wayA = iD.osmWay({ nodes: [nodeA.id, nodeOffA.id], tags: { highway: 'residential' } });
-            wayB = iD.osmWay({ nodes: [nodeB.id, nodeOffB.id], tags: { highway: 'service' } });
+            nodeA = new iD.osmNode({ loc: stackLoc });
+            nodeB = new iD.osmNode({ loc: stackLoc });
+            nodeOffA = new iD.osmNode({ loc: [1, 0] });
+            nodeOffB = new iD.osmNode({ loc: [0, 1] });
+            wayA = new iD.osmWay({ nodes: [nodeA.id, nodeOffA.id], tags: { highway: 'residential' } });
+            wayB = new iD.osmWay({ nodes: [nodeB.id, nodeOffB.id], tags: { highway: 'service' } });
             entities = [nodeA, nodeB, nodeOffA, nodeOffB, wayA, wayB];
 
             context.perform(

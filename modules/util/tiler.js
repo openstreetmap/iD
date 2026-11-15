@@ -75,7 +75,7 @@ export function utilTiler() {
 
     /**
      * getTiles() returns an array of tiles that cover the map view
-     * @returns {false | Tile[]}
+     * @returns {Tile[]}
      */
     tiler.getTiles = function(projection) {
         var origin = [
@@ -135,6 +135,7 @@ export function utilTiler() {
     };
 
 
+    /** @type {GetSet<typeof tiler, number>} */
     tiler.tileSize = function(val) {
         if (!arguments.length) return _tileSize;
         _tileSize = val;
@@ -172,6 +173,7 @@ export function utilTiler() {
 
 
     // number to extend the rows/columns beyond those covering the viewport
+    /** @type {GetSet<typeof tiler, number>} */
     tiler.margin = function(val) {
         if (!arguments.length) return _margin;
         _margin = +val;

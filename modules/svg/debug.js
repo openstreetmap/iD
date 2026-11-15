@@ -1,4 +1,3 @@
-import { fileFetcher } from '../core/file_fetcher';
 import { svgPath } from './helpers';
 
 
@@ -68,10 +67,10 @@ export function svgDebug(projection, context) {
 
     // imagery
     const extent = context.map().extent();
-    fileFetcher.get('imagery')
+    context.background().ensureLoaded()
       .then(d => {
         const hits = (showImagery && d.query.bbox(extent.rectangle(), true)) || [];
-        const features = hits.map(d => d.features[d.id]);
+        const features = hits.map(hit => d.features[hit.id]);
 
         let imagery = layer.selectAll('path.debug-imagery')
           .data(features);

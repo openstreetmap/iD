@@ -3,6 +3,7 @@ import js from '@eslint/js';
 import globals from 'globals';
 import confusingGlobals from 'confusing-browser-globals';
 import tseslint from 'typescript-eslint';
+import vitest from '@vitest/eslint-plugin';
 
 export default tseslint.config(
   js.configs.recommended,
@@ -22,6 +23,7 @@ export default tseslint.config(
     rules: {
       '@typescript-eslint/ban-ts-comment': 'off',
       '@typescript-eslint/consistent-type-imports': ['error', { disallowTypeAnnotations: false }],
+      '@typescript-eslint/no-empty-object-type': ['error', { allowInterfaces: 'with-single-extends' }],
       '@typescript-eslint/no-explicit-any': 'off',
 
       'accessor-pairs': 'error',
@@ -43,7 +45,11 @@ export default tseslint.config(
       'linebreak-style': ['error', 'unix'],
       'no-caller': 'error',
       'no-catch-shadow': 'error',
-      'no-console': 'warn',
+      'no-console': [
+        'warn',
+        // ban console.log but allow everything else
+        { allow: Object.keys(console).filter((method) => method !== 'log') },
+      ],
       'no-constructor-return': 'error',
       'no-div-regex': 'error',
       'no-duplicate-imports': ['warn', { 'allowSeparateTypeImports': true }],
@@ -113,7 +119,6 @@ export default tseslint.config(
       'prefer-spread': 'off',
       'quotes': ['error', 'single'],
       'radix': ['error', 'always'],
-      'require-atomic-updates': 'error',
       'require-await': 'error',
       'semi': ['error', 'always'],
       'semi-spacing': 'error',
@@ -131,25 +136,32 @@ export default tseslint.config(
   },
   {
     files: ['test/**/*.{js,ts}'],
+    plugins: {
+      vitest,
+    },
     languageOptions: {
       globals: {
         ...globals.node,
-        ...globals.jest,
-        'after': 'readonly',
-        'before': 'readonly',
-        'd3': 'readonly',
+        ...globals.vitest,
+        ...vitest.environments.env.globals,
         'expect': 'writable',
-        'fetchMock': 'readonly',
-        'happen': 'readonly',
         'iD': 'readonly',
         'jsdom': 'readonly',
-        'sinon': 'readonly',
         'vi': 'readonly'
       }
     },
     rules: {
+      ...vitest.configs.recommended.rules,
+      'no-unused-expressions': 'off',
       'no-unused-vars': 'warn',
-      'no-unused-expressions': 'off'
+      'vitest/expect-expect': ['error', {
+        assertFunctionNames: ['expect', 'doMatch', 'dontMatch', 'verifySingleCrossingIssue']
+      }],
+      'vitest/no-commented-out-tests': 'off',
+      'vitest/no-disabled-tests': 'off',
+      'vitest/valid-expect': ['error', {
+        maxArgs: 2
+      }]
     }
   },
   {
@@ -167,4 +179,3 @@ export default tseslint.config(
     }
   }
 );
-

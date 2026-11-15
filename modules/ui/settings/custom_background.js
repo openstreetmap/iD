@@ -2,9 +2,10 @@ import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { marked } from 'marked';
 
 import { prefs } from '../../core/preferences';
-import { t } from '../../core/localizer';
+import { localizer, t } from '../../core/localizer';
 import { uiConfirm } from '../confirm';
 import { utilNoAuto, utilRebind } from '../../util';
+import { utilSanitizeHTML } from '../../util/sanitize';
 
 
 export function uiSettingsCustomBackground() {
@@ -33,32 +34,34 @@ export function uiSettingsCustomBackground() {
         var textSection = modal.select('.modal-section.message-text');
 
         var instructions = `
-${t.html('settings.custom_background.instructions.info')}
+${localizer.t_html('settings.custom_background.instructions.info')}
 
-${t.html('settings.custom_background.instructions.license_disclaimer')}
-[${t.html('settings.custom_background.instructions.license_faq')}](${t('settings.custom_background.instructions.license_faq_url')})
+${localizer.t_html('settings.custom_background.instructions.license_disclaimer')}
+[${localizer.t_html('settings.custom_background.instructions.license_faq')}](${t('settings.custom_background.instructions.license_faq_url')})
 
-#### ${t.html('settings.custom_background.instructions.wms.tokens_label')}
-* ${t.html('settings.custom_background.instructions.wms.tokens.proj')}
-* ${t.html('settings.custom_background.instructions.wms.tokens.wkid')}
-* ${t.html('settings.custom_background.instructions.wms.tokens.dimensions')}
-* ${t.html('settings.custom_background.instructions.wms.tokens.bbox')}
+#### ${localizer.t_html('settings.custom_background.instructions.wms.tokens_label')}
+* ${localizer.t_html('settings.custom_background.instructions.wms.tokens.proj')}
+* ${localizer.t_html('settings.custom_background.instructions.wms.tokens.wkid')}
+* ${localizer.t_html('settings.custom_background.instructions.wms.tokens.dimensions')}
+* ${localizer.t_html('settings.custom_background.instructions.wms.tokens.bbox')}
 
-#### ${t.html('settings.custom_background.instructions.tms.tokens_label')}
-* ${t.html('settings.custom_background.instructions.tms.tokens.xyz')}
-* ${t.html('settings.custom_background.instructions.tms.tokens.flipped_y')}
-* ${t.html('settings.custom_background.instructions.tms.tokens.switch')}
-* ${t.html('settings.custom_background.instructions.tms.tokens.quadtile')}
-* ${t.html('settings.custom_background.instructions.tms.tokens.scale_factor')}
+#### ${localizer.t_html('settings.custom_background.instructions.tms.tokens_label')}
+* ${localizer.t_html('settings.custom_background.instructions.tms.tokens.xyz')}
+* ${localizer.t_html('settings.custom_background.instructions.tms.tokens.flipped_y')}
+* ${localizer.t_html('settings.custom_background.instructions.tms.tokens.switch')}
+* ${localizer.t_html('settings.custom_background.instructions.tms.tokens.quadtile')}
+* ${localizer.t_html('settings.custom_background.instructions.tms.tokens.scale_factor')}
 
-#### ${t.html('settings.custom_background.instructions.example')}
+#### ${localizer.t_html('settings.custom_background.instructions.example')}
     ${example}
 `;
 
         textSection
             .append('div')
             .attr('class', 'instructions-template')
-            .html(marked(instructions));
+            .html(utilSanitizeHTML(marked(instructions)))
+            .selectAll('p')
+            .attr('dir', 'auto');
 
         textSection
             .append('textarea')

@@ -1,0 +1,130 @@
+import { prefs } from '../core/preferences';
+import { t } from '../core/localizer';
+//import { actionChangeTags } from '../actions/change_tags';
+import { actionOrthogonalize } from '../actions/orthogonalize';
+import { geoOrthoCanOrthogonalize } from '../geo/ortho';
+import { utilDisplayLabel } from '../util/utilDisplayLabel';
+import { validationIssue, validationIssueFix } from '../core/validation';
+import { services } from '../services';
+import type { coreGraph } from '../core/graph';
+import type { OsmEntity, osmWay, WayId } from '../osm';
+import type { CreateValidator, Validator } from '../core/validation/models';
+
+export const validationUnsquareWay: CreateValidator = (context) => {
+    var type = 'unsquare_way';
+    var DEFAULT_DEG_THRESHOLD = 5;   // see also issues.js
+
+    // use looser epsilon for detection to reduce warnings of buildings that are essentially square already
+    var epsilon = 0.05;
+    var nodeThreshold = 10;
+
+    function isBuilding(entity: OsmEntity, graph: coreGraph): entity is osmWay {
+        if (entity.type !== 'way' || entity.geometry(graph) !== 'area') return false;
+        return !!entity.tags.building && entity.tags.building !== 'no';
+    }
+
+
+    const validation: Validator = function checkUnsquareWay(entity, graph) {
+
+        if (!isBuilding(entity, graph)) return [];
+
+        // don't flag ways marked as physically unsquare
+        if (entity.tags.nonsquare === 'yes') return [];
+
+        var isClosed = entity.isClosed();
+        if (!isClosed) return [];        // this building has bigger problems
+
+        // don't flag ways with lots of nodes since they are likely detail-mapped
+        var nodes = graph.childNodes(entity).slice();    // shallow copy
+        if (nodes.length > nodeThreshold + 1) return [];   // +1 because closing node appears twice
+
+        // ignore if not all nodes are fully downloaded
+        var osm = services.osm;
+        if (!osm || nodes.some(function(node) { return !osm.isDataLoaded(node.loc); })) return [];
+
+        // don't flag connected ways to avoid unresolvable unsquare loops
+        var hasConnectedSquarableWays = nodes.some(function(node) {
+            return graph.parentWays(node).some(function(way) {
+                if (way.id === entity.id) return false;
+                if (isBuilding(way, graph)) return true;
+                return graph.parentRelations(way).some(function(parentRelation) {
+                    return parentRelation.isMultipolygon() &&
+                        parentRelation.tags.building &&
+                        parentRelation.tags.building !== 'no';
+                });
+            });
+        });
+        if (hasConnectedSquarableWays) return [];
+
+
+        // user-configurable square threshold
+        var storedDegreeThreshold = prefs('validate-square-degrees');
+        // NOTE: this is an existing bug, the unsquare_way validator does not
+        // work unless you toggle the switch on an off. This will be fixed separately.
+        var degreeThreshold = storedDegreeThreshold === null || isFinite(+storedDegreeThreshold) ? Number(storedDegreeThreshold) : DEFAULT_DEG_THRESHOLD;
+
+        var points = nodes.map(function(node) { return context.projection(node.loc); });
+        if (!geoOrthoCanOrthogonalize(points, isClosed, epsilon, degreeThreshold, true)) return [];
+
+        return [new validationIssue({
+            type: type,
+            subtype: 'building',
+            severity: 'suggestion',
+            message: function(context) {
+                var entity = context.hasEntity(this.entityIds[0]);
+                return entity ? t.append('issues.unsquare_way.message', {
+                    feature: utilDisplayLabel(entity, context.graph())
+                }) : '';
+            },
+            reference: showReference,
+            entityIds: [entity.id],
+            hash: degreeThreshold,
+            dynamicFixes: function() {
+                return [
+                    new validationIssueFix({
+                        icon: 'iD-operation-orthogonalize',
+                        title: t.append('issues.fix.square_feature.title'),
+                        onClick: function(context, completionHandler) {
+                            var entityId = this.issue!.entityIds[0] as WayId;
+                            // use same degree threshold as for detection
+                            context.perform(
+                                actionOrthogonalize(entityId, context.projection, undefined, degreeThreshold),
+                                t('operations.orthogonalize.annotation.feature', { n: 1 })
+                            );
+                            // run after the squaring transition (currently 150ms)
+                            window.setTimeout(function() { completionHandler(); }, 175);
+                        }
+                    }),
+                    /*
+                    new validationIssueFix({
+                        title: t.append('issues.fix.tag_as_unsquare.title'),
+                        onClick: function(context) {
+                            var entityId = this.issue.entityIds[0];
+                            var entity = context.entity(entityId);
+                            var tags = Object.assign({}, entity.tags);  // shallow copy
+                            tags.nonsquare = 'yes';
+                            context.perform(
+                                actionChangeTags(entityId, tags),
+                                t('issues.fix.tag_as_unsquare.annotation')
+                            );
+                        }
+                    })
+                    */
+                ];
+            }
+        })];
+
+        function showReference(selection: d3.Selection) {
+            selection.selectAll('.issue-reference')
+                .data([0])
+                .enter()
+                .append('div')
+                .attr('class', 'issue-reference')
+                .call(t.append('issues.unsquare_way.buildings.reference'));
+        }
+    };
+
+    validation.type = type;
+
+    return validation;
+};

@@ -3,7 +3,7 @@ describe('iD.actionDeleteWay', function() {
         var way    = new iD.osmWay(),
             action = iD.actionDeleteWay(way.id),
             graph  = new iD.coreGraph([way]).update(action);
-        expect(graph.hasEntity(way.id)).to.be.undefined;
+        expect(graph.hasEntity(way.id)).toBeUndefined();
     });
 
     it('removes a way from parent relations', function() {
@@ -12,7 +12,7 @@ describe('iD.actionDeleteWay', function() {
             action   = iD.actionDeleteWay(way.id),
             graph    = new iD.coreGraph([way, relation]).update(action),
             ids      = graph.entity(relation.id).members.map(function (m) { return m.id; });
-        expect(ids).not.to.contain(way.id);
+        expect(ids).not.toContain(way.id);
     });
 
     it('deletes member nodes not referenced by another parent', function() {
@@ -20,7 +20,7 @@ describe('iD.actionDeleteWay', function() {
             way    = new iD.osmWay({nodes: [node.id]}),
             action = iD.actionDeleteWay(way.id),
             graph  = new iD.coreGraph([node, way]).update(action);
-        expect(graph.hasEntity(node.id)).to.be.undefined;
+        expect(graph.hasEntity(node.id)).toBeUndefined();
     });
 
     it('does not delete member nodes referenced by another parent', function() {
@@ -29,7 +29,7 @@ describe('iD.actionDeleteWay', function() {
             way2   = new iD.osmWay({nodes: [node.id]}),
             action = iD.actionDeleteWay(way1.id),
             graph  = new iD.coreGraph([node, way1, way2]).update(action);
-        expect(graph.hasEntity(node.id)).not.to.be.undefined;
+        expect(graph.hasEntity(node.id)).toBeDefined();
     });
 
     it('deletes multiple member nodes', function() {
@@ -38,8 +38,8 @@ describe('iD.actionDeleteWay', function() {
             way    = new iD.osmWay({nodes: [a.id, b.id]}),
             action = iD.actionDeleteWay(way.id),
             graph  = new iD.coreGraph([a, b, way]).update(action);
-        expect(graph.hasEntity(a.id)).to.be.undefined;
-        expect(graph.hasEntity(b.id)).to.be.undefined;
+        expect(graph.hasEntity(a.id)).toBeUndefined();
+        expect(graph.hasEntity(b.id)).toBeUndefined();
     });
 
     it('deletes a circular way\'s start/end node', function() {
@@ -49,9 +49,9 @@ describe('iD.actionDeleteWay', function() {
             way    = new iD.osmWay({nodes: [a.id, b.id, c.id, a.id]}),
             action = iD.actionDeleteWay(way.id),
             graph  = new iD.coreGraph([a, b, c, way]).update(action);
-        expect(graph.hasEntity(a.id)).to.be.undefined;
-        expect(graph.hasEntity(b.id)).to.be.undefined;
-        expect(graph.hasEntity(c.id)).to.be.undefined;
+        expect(graph.hasEntity(a.id)).toBeUndefined();
+        expect(graph.hasEntity(b.id)).toBeUndefined();
+        expect(graph.hasEntity(c.id)).toBeUndefined();
     });
 
     it('does not delete member nodes with interesting tags', function() {
@@ -59,7 +59,7 @@ describe('iD.actionDeleteWay', function() {
             way    = new iD.osmWay({nodes: [node.id]}),
             action = iD.actionDeleteWay(way.id),
             graph  = new iD.coreGraph([node, way]).update(action);
-        expect(graph.hasEntity(node.id)).not.to.be.undefined;
+        expect(graph.hasEntity(node.id)).toBeDefined();
     });
 
     it('deletes parent relations that become empty', function () {
@@ -67,7 +67,7 @@ describe('iD.actionDeleteWay', function() {
             relation = new iD.osmRelation({members: [{ id: way.id }]}),
             action   = iD.actionDeleteWay(way.id),
             graph    = new iD.coreGraph([way, relation]).update(action);
-        expect(graph.hasEntity(relation.id)).to.be.undefined;
+        expect(graph.hasEntity(relation.id)).toBeUndefined();
     });
 
     // This was moved to operationDelete.  We should test operations and move this test there.
@@ -78,8 +78,8 @@ describe('iD.actionDeleteWay', function() {
     //             route    = new iD.osmRelation({members: [{id: 'a'}], tags: {type: 'route'}}),
     //             boundary = new iD.osmRelation({members: [{id: 'b'}], tags: {type: 'boundary'}}),
     //             graph    = new iD.coreGraph([a, b, route, boundary]);
-    //         expect(iD.actionDeleteWay('a').disabled(graph)).to.equal('part_of_relation');
-    //         expect(iD.actionDeleteWay('b').disabled(graph)).to.equal('part_of_relation');
+    //         expect(iD.actionDeleteWay('a').disabled(graph)).toEqual('part_of_relation');
+    //         expect(iD.actionDeleteWay('b').disabled(graph)).toEqual('part_of_relation');
     //     });
 
     //     it('returns \'part_of_relation\' for outer members of multipolygons', function () {
@@ -87,7 +87,7 @@ describe('iD.actionDeleteWay', function() {
     //             relation = new iD.osmRelation({members: [{id: 'w', role: 'outer'}], tags: {type: 'multipolygon'}}),
     //             graph    = new iD.coreGraph([way, relation]),
     //             action   = iD.actionDeleteWay(way.id);
-    //         expect(action.disabled(graph)).to.equal('part_of_relation');
+    //         expect(action.disabled(graph)).toEqual('part_of_relation');
     //     });
 
     //     it('returns falsy for inner members of multipolygons', function () {

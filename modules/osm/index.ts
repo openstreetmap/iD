@@ -1,5 +1,6 @@
+export * from './abstract-entity';
 export { osmChangeset } from './changeset';
-export { osmEntity } from './entity';
+export * from './create-entity';
 export * from './id_manager';
 export { osmNode } from './node';
 export { osmNote } from './note';
@@ -14,28 +15,7 @@ export {
 } from './intersection';
 
 export {
-    osmLanes
-} from './lanes';
-
-export {
     osmJoinWays
 } from './multipolygon';
 
-export {
-    osmAreaKeys,
-    osmSetAreaKeys,
-    osmTagSuggestingArea,
-    osmPointTags,
-    osmSetPointTags,
-    osmVertexTags,
-    osmSetVertexTags,
-    osmNodeGeometriesForTags,
-    osmPavedTags,
-    osmIsInterestingTag,
-    osmLifecyclePrefixes,
-    osmRemoveLifecyclePrefix,
-    osmRoutableHighwayTagValues,
-    osmFlowingWaterwayTagValues,
-    osmRailwayTrackTagValues,
-    osmWayOnlyTags
-} from './tags';
+export * from './tags';

@@ -5,12 +5,12 @@ describe('iD.actionMoveNode', function () {
         var graph = new iD.coreGraph([node]);
 
         graph = iD.actionMoveNode('a', toLoc)(graph);
-        expect(graph.entity('a').loc).to.eql(toLoc);
+        expect(graph.entity('a').loc).toEqual(toLoc);
     });
 
     describe('transitions', function () {
         it('is transitionable', function() {
-            expect(iD.actionMoveNode().transitionable).to.be.true;
+            expect(iD.actionMoveNode().transitionable).toBe(true);
         });
 
         it('move node at t = 0', function() {
@@ -19,8 +19,8 @@ describe('iD.actionMoveNode', function () {
             var graph = new iD.coreGraph([node]);
 
             graph = iD.actionMoveNode('a', toLoc)(graph, 0);
-            expect(graph.entity('a').loc[0]).to.be.closeTo(0, 1e-6);
-            expect(graph.entity('a').loc[1]).to.be.closeTo(0, 1e-6);
+            expect(graph.entity('a').loc[0]).toBeCloseTo(0, 6);
+            expect(graph.entity('a').loc[1]).toBeCloseTo(0, 6);
         });
 
         it('move node at t = 0.5', function() {
@@ -29,8 +29,8 @@ describe('iD.actionMoveNode', function () {
             var graph = new iD.coreGraph([node]);
 
             graph = iD.actionMoveNode('a', toLoc)(graph, 0.5);
-            expect(graph.entity('a').loc[0]).to.be.closeTo(1, 1e-6);
-            expect(graph.entity('a').loc[1]).to.be.closeTo(1.5, 1e-6);
+            expect(graph.entity('a').loc[0]).toBeCloseTo(1, 6);
+            expect(graph.entity('a').loc[1]).toBeCloseTo(1.5, 6);
         });
 
         it('move node at t = 1', function() {
@@ -39,8 +39,8 @@ describe('iD.actionMoveNode', function () {
             var graph = new iD.coreGraph([node]);
 
             graph = iD.actionMoveNode('a', toLoc)(graph, 1);
-            expect(graph.entity('a').loc[0]).to.be.closeTo(2, 1e-6);
-            expect(graph.entity('a').loc[1]).to.be.closeTo(3, 1e-6);
+            expect(graph.entity('a').loc[0]).toBeCloseTo(2, 6);
+            expect(graph.entity('a').loc[1]).toBeCloseTo(3, 6);
         });
     });
 });

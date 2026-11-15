@@ -10,7 +10,7 @@
         "module": "preserve",
         "moduleResolution": "bundler",
         "resolveJsonModule": true,
-        "types": ["vitest/globals", "vitest/jsdom"]
+        "types": ["vitest/globals", "vitest/jsdom", "pannellum"]
     },
     "include": ["modules", "test"]
 }

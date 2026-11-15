@@ -1,5 +1,7 @@
+import { geoMercator as d3_geoMercator } from 'd3-geo';
+
 describe('iD.actionReflect', function() {
-    var projection = d3.geoMercator();
+    var projection = d3_geoMercator();
 
     it('does not create or remove nodes', function () {
         var graph = new iD.coreGraph([
@@ -10,7 +12,7 @@ describe('iD.actionReflect', function() {
                 new iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd', 'a']})
             ]);
         graph = iD.actionReflect(['-'], projection)(graph);
-        expect(graph.entity('-').nodes).to.have.length(5);
+        expect(graph.entity('-').nodes).toHaveLength(5);
     });
 
 
@@ -28,14 +30,14 @@ describe('iD.actionReflect', function() {
                 new iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd', 'a']})
             ]);
         graph = iD.actionReflect(['-'], projection)(graph);
-        expect(graph.entity('a').loc[0]).to.be.closeTo(0, 1e-6);
-        expect(graph.entity('a').loc[1]).to.be.closeTo(2, 1e-6);
-        expect(graph.entity('b').loc[0]).to.be.closeTo(4, 1e-6);
-        expect(graph.entity('b').loc[1]).to.be.closeTo(2, 1e-6);
-        expect(graph.entity('c').loc[0]).to.be.closeTo(4, 1e-6);
-        expect(graph.entity('c').loc[1]).to.be.closeTo(0, 1e-6);
-        expect(graph.entity('d').loc[0]).to.be.closeTo(1, 1e-6);
-        expect(graph.entity('d').loc[1]).to.be.closeTo(0, 1e-6);
+        expect(graph.entity('a').loc[0]).toBeCloseTo(0, 6);
+        expect(graph.entity('a').loc[1]).toBeCloseTo(2, 6);
+        expect(graph.entity('b').loc[0]).toBeCloseTo(4, 6);
+        expect(graph.entity('b').loc[1]).toBeCloseTo(2, 6);
+        expect(graph.entity('c').loc[0]).toBeCloseTo(4, 6);
+        expect(graph.entity('c').loc[1]).toBeCloseTo(0, 6);
+        expect(graph.entity('d').loc[0]).toBeCloseTo(1, 6);
+        expect(graph.entity('d').loc[1]).toBeCloseTo(0, 6);
     });
 
 
@@ -53,20 +55,20 @@ describe('iD.actionReflect', function() {
                 new iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd', 'a']})
             ]);
         graph = iD.actionReflect(['-'], projection).useLongAxis(false)(graph);
-        expect(graph.entity('a').loc[0]).to.be.closeTo(4, 1e-6);
-        expect(graph.entity('a').loc[1]).to.be.closeTo(0, 1e-6);
-        expect(graph.entity('b').loc[0]).to.be.closeTo(0, 1e-6);
-        expect(graph.entity('b').loc[1]).to.be.closeTo(0, 1e-6);
-        expect(graph.entity('c').loc[0]).to.be.closeTo(0, 1e-6);
-        expect(graph.entity('c').loc[1]).to.be.closeTo(2, 1e-6);
-        expect(graph.entity('d').loc[0]).to.be.closeTo(3, 1e-6);
-        expect(graph.entity('d').loc[1]).to.be.closeTo(2, 1e-6);
+        expect(graph.entity('a').loc[0]).toBeCloseTo(4, 6);
+        expect(graph.entity('a').loc[1]).toBeCloseTo(0, 6);
+        expect(graph.entity('b').loc[0]).toBeCloseTo(0, 6);
+        expect(graph.entity('b').loc[1]).toBeCloseTo(0, 6);
+        expect(graph.entity('c').loc[0]).toBeCloseTo(0, 6);
+        expect(graph.entity('c').loc[1]).toBeCloseTo(2, 6);
+        expect(graph.entity('d').loc[0]).toBeCloseTo(3, 6);
+        expect(graph.entity('d').loc[1]).toBeCloseTo(2, 6);
     });
 
 
     describe('transitions', function () {
         it('is transitionable', function() {
-            expect(iD.actionReflect().transitionable).to.be.true;
+            expect(iD.actionReflect().transitionable).toBe(true);
         });
 
         it('reflect long at t = 0', function() {
@@ -78,14 +80,14 @@ describe('iD.actionReflect', function() {
                     new iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd', 'a']})
                 ]);
             graph = iD.actionReflect(['-'], projection)(graph, 0);
-            expect(graph.entity('a').loc[0]).to.be.closeTo(0, 1e-6);
-            expect(graph.entity('a').loc[1]).to.be.closeTo(0, 1e-6);
-            expect(graph.entity('b').loc[0]).to.be.closeTo(4, 1e-6);
-            expect(graph.entity('b').loc[1]).to.be.closeTo(0, 1e-6);
-            expect(graph.entity('c').loc[0]).to.be.closeTo(4, 1e-6);
-            expect(graph.entity('c').loc[1]).to.be.closeTo(2, 1e-6);
-            expect(graph.entity('d').loc[0]).to.be.closeTo(1, 1e-6);
-            expect(graph.entity('d').loc[1]).to.be.closeTo(2, 1e-6);
+            expect(graph.entity('a').loc[0]).toBeCloseTo(0, 6);
+            expect(graph.entity('a').loc[1]).toBeCloseTo(0, 6);
+            expect(graph.entity('b').loc[0]).toBeCloseTo(4, 6);
+            expect(graph.entity('b').loc[1]).toBeCloseTo(0, 6);
+            expect(graph.entity('c').loc[0]).toBeCloseTo(4, 6);
+            expect(graph.entity('c').loc[1]).toBeCloseTo(2, 6);
+            expect(graph.entity('d').loc[0]).toBeCloseTo(1, 6);
+            expect(graph.entity('d').loc[1]).toBeCloseTo(2, 6);
         });
 
         it('reflect long at t = 0.5', function() {
@@ -97,14 +99,14 @@ describe('iD.actionReflect', function() {
                     new iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd', 'a']})
                 ]);
             graph = iD.actionReflect(['-'], projection)(graph, 0.5);
-            expect(graph.entity('a').loc[0]).to.be.closeTo(0, 1e-6);
-            expect(graph.entity('a').loc[1]).to.be.closeTo(1, 1e-6);
-            expect(graph.entity('b').loc[0]).to.be.closeTo(4, 1e-6);
-            expect(graph.entity('b').loc[1]).to.be.closeTo(1, 1e-6);
-            expect(graph.entity('c').loc[0]).to.be.closeTo(4, 1e-6);
-            expect(graph.entity('c').loc[1]).to.be.closeTo(1, 1e-6);
-            expect(graph.entity('d').loc[0]).to.be.closeTo(1, 1e-6);
-            expect(graph.entity('d').loc[1]).to.be.closeTo(1, 1e-6);
+            expect(graph.entity('a').loc[0]).toBeCloseTo(0, 6);
+            expect(graph.entity('a').loc[1]).toBeCloseTo(1, 6);
+            expect(graph.entity('b').loc[0]).toBeCloseTo(4, 6);
+            expect(graph.entity('b').loc[1]).toBeCloseTo(1, 6);
+            expect(graph.entity('c').loc[0]).toBeCloseTo(4, 6);
+            expect(graph.entity('c').loc[1]).toBeCloseTo(1, 6);
+            expect(graph.entity('d').loc[0]).toBeCloseTo(1, 6);
+            expect(graph.entity('d').loc[1]).toBeCloseTo(1, 6);
         });
 
         it('reflect long at t = 1', function() {
@@ -116,14 +118,14 @@ describe('iD.actionReflect', function() {
                     new iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd', 'a']})
                 ]);
             graph = iD.actionReflect(['-'], projection)(graph, 1);
-            expect(graph.entity('a').loc[0]).to.be.closeTo(0, 1e-6);
-            expect(graph.entity('a').loc[1]).to.be.closeTo(2, 1e-6);
-            expect(graph.entity('b').loc[0]).to.be.closeTo(4, 1e-6);
-            expect(graph.entity('b').loc[1]).to.be.closeTo(2, 1e-6);
-            expect(graph.entity('c').loc[0]).to.be.closeTo(4, 1e-6);
-            expect(graph.entity('c').loc[1]).to.be.closeTo(0, 1e-6);
-            expect(graph.entity('d').loc[0]).to.be.closeTo(1, 1e-6);
-            expect(graph.entity('d').loc[1]).to.be.closeTo(0, 1e-6);
+            expect(graph.entity('a').loc[0]).toBeCloseTo(0, 6);
+            expect(graph.entity('a').loc[1]).toBeCloseTo(2, 6);
+            expect(graph.entity('b').loc[0]).toBeCloseTo(4, 6);
+            expect(graph.entity('b').loc[1]).toBeCloseTo(2, 6);
+            expect(graph.entity('c').loc[0]).toBeCloseTo(4, 6);
+            expect(graph.entity('c').loc[1]).toBeCloseTo(0, 6);
+            expect(graph.entity('d').loc[0]).toBeCloseTo(1, 6);
+            expect(graph.entity('d').loc[1]).toBeCloseTo(0, 6);
         });
 
         it('reflect short at t = 0', function() {
@@ -135,14 +137,14 @@ describe('iD.actionReflect', function() {
                     new iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd', 'a']})
                 ]);
             graph = iD.actionReflect(['-'], projection).useLongAxis(false)(graph, 0);
-            expect(graph.entity('a').loc[0]).to.be.closeTo(0, 1e-6);
-            expect(graph.entity('a').loc[1]).to.be.closeTo(0, 1e-6);
-            expect(graph.entity('b').loc[0]).to.be.closeTo(4, 1e-6);
-            expect(graph.entity('b').loc[1]).to.be.closeTo(0, 1e-6);
-            expect(graph.entity('c').loc[0]).to.be.closeTo(4, 1e-6);
-            expect(graph.entity('c').loc[1]).to.be.closeTo(2, 1e-6);
-            expect(graph.entity('d').loc[0]).to.be.closeTo(1, 1e-6);
-            expect(graph.entity('d').loc[1]).to.be.closeTo(2, 1e-6);
+            expect(graph.entity('a').loc[0]).toBeCloseTo(0, 6);
+            expect(graph.entity('a').loc[1]).toBeCloseTo(0, 6);
+            expect(graph.entity('b').loc[0]).toBeCloseTo(4, 6);
+            expect(graph.entity('b').loc[1]).toBeCloseTo(0, 6);
+            expect(graph.entity('c').loc[0]).toBeCloseTo(4, 6);
+            expect(graph.entity('c').loc[1]).toBeCloseTo(2, 6);
+            expect(graph.entity('d').loc[0]).toBeCloseTo(1, 6);
+            expect(graph.entity('d').loc[1]).toBeCloseTo(2, 6);
         });
 
         it('reflect short at t = 0.5', function() {
@@ -154,14 +156,14 @@ describe('iD.actionReflect', function() {
                     new iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd', 'a']})
                 ]);
             graph = iD.actionReflect(['-'], projection).useLongAxis(false)(graph, 0.5);
-            expect(graph.entity('a').loc[0]).to.be.closeTo(2, 1e-6);
-            expect(graph.entity('a').loc[1]).to.be.closeTo(0, 1e-6);
-            expect(graph.entity('b').loc[0]).to.be.closeTo(2, 1e-6);
-            expect(graph.entity('b').loc[1]).to.be.closeTo(0, 1e-6);
-            expect(graph.entity('c').loc[0]).to.be.closeTo(2, 1e-6);
-            expect(graph.entity('c').loc[1]).to.be.closeTo(2, 1e-6);
-            expect(graph.entity('d').loc[0]).to.be.closeTo(2, 1e-6);
-            expect(graph.entity('d').loc[1]).to.be.closeTo(2, 1e-6);
+            expect(graph.entity('a').loc[0]).toBeCloseTo(2, 6);
+            expect(graph.entity('a').loc[1]).toBeCloseTo(0, 6);
+            expect(graph.entity('b').loc[0]).toBeCloseTo(2, 6);
+            expect(graph.entity('b').loc[1]).toBeCloseTo(0, 6);
+            expect(graph.entity('c').loc[0]).toBeCloseTo(2, 6);
+            expect(graph.entity('c').loc[1]).toBeCloseTo(2, 6);
+            expect(graph.entity('d').loc[0]).toBeCloseTo(2, 6);
+            expect(graph.entity('d').loc[1]).toBeCloseTo(2, 6);
         });
 
         it('reflect short at t = 1', function() {
@@ -173,14 +175,14 @@ describe('iD.actionReflect', function() {
                     new iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd', 'a']})
                 ]);
             graph = iD.actionReflect(['-'], projection).useLongAxis(false)(graph, 1);
-            expect(graph.entity('a').loc[0]).to.be.closeTo(4, 1e-6);
-            expect(graph.entity('a').loc[1]).to.be.closeTo(0, 1e-6);
-            expect(graph.entity('b').loc[0]).to.be.closeTo(0, 1e-6);
-            expect(graph.entity('b').loc[1]).to.be.closeTo(0, 1e-6);
-            expect(graph.entity('c').loc[0]).to.be.closeTo(0, 1e-6);
-            expect(graph.entity('c').loc[1]).to.be.closeTo(2, 1e-6);
-            expect(graph.entity('d').loc[0]).to.be.closeTo(3, 1e-6);
-            expect(graph.entity('d').loc[1]).to.be.closeTo(2, 1e-6);
+            expect(graph.entity('a').loc[0]).toBeCloseTo(4, 6);
+            expect(graph.entity('a').loc[1]).toBeCloseTo(0, 6);
+            expect(graph.entity('b').loc[0]).toBeCloseTo(0, 6);
+            expect(graph.entity('b').loc[1]).toBeCloseTo(0, 6);
+            expect(graph.entity('c').loc[0]).toBeCloseTo(0, 6);
+            expect(graph.entity('c').loc[1]).toBeCloseTo(2, 6);
+            expect(graph.entity('d').loc[0]).toBeCloseTo(3, 6);
+            expect(graph.entity('d').loc[1]).toBeCloseTo(2, 6);
         });
 
     });

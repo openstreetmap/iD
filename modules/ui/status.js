@@ -12,7 +12,7 @@ export function uiStatus(context) {
         if (!osm) return;
 
         function update(err, apiStatus) {
-            selection.html('');
+            selection.text('');
 
             if (err) {
                 if (apiStatus === 'connectionSwitched') {

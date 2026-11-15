@@ -1,5 +1,4 @@
 /* global locale:true, t:false */
-/* eslint no-console: 0 */
 
 describe.skip('locale', function() {
     var saved, error;
@@ -18,16 +17,16 @@ describe.skip('locale', function() {
 
     describe('t', function() {
         it('defaults to locale._current', function() {
-            expect(t('test')).to.equal('test');
+            expect(t('test')).toEqual('test');
         });
 
         it('supports a default option', function() {
-            expect(t('nonesuch', {default: 'default'})).to.equal('default');
+            expect(t('nonesuch', {default: 'default'})).toEqual('default');
         });
 
         it('falls back to en', function() {
             locale._current = '__';
-            expect(t('test')).to.equal('test');
+            expect(t('test')).toEqual('test');
         });
     });
 });

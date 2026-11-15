@@ -1,11 +1,14 @@
+import type { Field } from '@openstreetmap/id-tagging-schema';
+import { select as d3_select } from 'd3-selection';
+
 describe('iD.uiFieldRadio', () => {
     describe('structureRadio', () => {
         let context: iD.Context;
-        let selection: d3.Selection;
+        let selection: d3.Selection<HTMLDivElement>;
 
         beforeEach(() => {
             context = iD.coreContext().assetPath('../dist/').init();
-            selection = d3.select(document.createElement('div'));
+            selection = d3_select(document.createElement('div'));
         });
 
         it.each<[fromTags: Tags, optionToClick: string, toTags: Tags]>([
@@ -44,7 +47,7 @@ describe('iD.uiFieldRadio', () => {
                 type: 'structureRadio',
                 keys: ['bridge', 'tunnel'],
                 options: ['bridge', 'tunnel'],
-            });
+            } as Field);
             const instance = iD.uiFieldRadio(field, context);
             const onChange = vi.fn();
 
@@ -55,37 +58,41 @@ describe('iD.uiFieldRadio', () => {
             // confirm that bridge+tunnel buttons are displayed
             const options = selection.selectAll<HTMLLabelElement, unknown>('label').nodes();
             expect(options).toHaveLength(2);
-            expect(options[0].querySelector('.localized-text')?.innerHTML).toBe('bridge');
-            expect(options[1].querySelector('.localized-text')?.innerHTML).toBe('tunnel');
+            expect(options[0].querySelector('.raw-value')?.innerHTML).toBe('"bridge"');
+            expect(options[1].querySelector('.raw-value')?.innerHTML).toBe('"tunnel"');
 
             // click one of the radio button
-            const index = field.keys.indexOf(optionToClick);
+            const index = field.keys!.indexOf(optionToClick);
             const radioToClick = options[index].querySelector('input')!;
             radioToClick.checked = true;
-            d3.select(radioToClick).dispatch('change');
+            d3_select(radioToClick).dispatch('change');
 
             expect(onChange).toHaveBeenCalledTimes(1);
             expect(onChange).toHaveBeenNthCalledWith(1, toTags);
         });
     });
 
-    describe('radio with stringsCrossReference', () => {
+    describe('radio with strings.options', () => {
         let context: iD.Context;
-        let selection: d3.Selection;
+        let selection: d3.Selection<HTMLDivElement>;
 
         beforeEach(() => {
             context = iD.coreContext().assetPath('../dist/').init();
-            selection = d3.select(document.createElement('div'));
+            selection = d3_select(document.createElement('div'));
         });
 
-        it('renders option labels from .title when the referenced field has nested title/description option strings', () => {
-            const accessField = iD.presetField('access', { type: 'combo', key: 'access' });
-            const field = iD.presetField('access_boolean', {
+        it('renders option labels from .title when the field has nested title/description option strings', () => {
+            const field = iD.presetField('access', {
                 type: 'radio',
                 key: 'access',
-                stringsCrossReference: '{access}',
+                strings: {
+                    options: {
+                        yes: { title: 'Allowed', description: '' },
+                        no: { title: 'Prohibited', description: '' },
+                    }
+                },
                 options: ['yes', 'no'],
-            }, { access: accessField });
+            } as Partial<Field> as Field);
 
             const instance = iD.uiFieldRadio(field, context);
 

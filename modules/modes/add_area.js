@@ -5,6 +5,7 @@ import { actionAddVertex } from '../actions/add_vertex';
 import { behaviorAddWay } from '../behavior/add_way';
 import { modeDrawArea } from './draw_area';
 import { osmNode, osmWay } from '../osm';
+import { utilIsDrawing } from '../util/util';
 
 
 export function modeAddArea(context, mode) {
@@ -74,6 +75,7 @@ export function modeAddArea(context, mode) {
         context.enter(modeDrawArea(context, way.id, startGraph, mode.button));
     }
 
+    mode.disabled = () => utilIsDrawing(context.mode().id);
 
     mode.enter = function() {
         context.install(behavior);

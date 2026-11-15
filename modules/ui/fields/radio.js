@@ -2,9 +2,10 @@ import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { select as d3_select } from 'd3-selection';
 
 import { presetManager } from '../../presets';
-import { t } from '../../core/localizer';
+import { localizer, t } from '../../core/localizer';
 import { uiField } from '../field';
 import { utilArrayUnion, utilRebind } from '../../util';
+import { formatTag } from './tag_title';
 
 
 export { uiFieldRadio as uiFieldStructureRadio };
@@ -16,8 +17,6 @@ export function uiFieldRadio(field, context) {
     var wrap = d3_select(null);
     var labels = d3_select(null);
     var radios = d3_select(null);
-    var strings = field.resolveReference('stringsCrossReference');
-    var radioData = (field.options || strings.options || field.keys).slice();  // shallow copy
     var typeField;
     var layerField;
     let _tags = {};
@@ -37,7 +36,7 @@ export function uiFieldRadio(field, context) {
         wrap = selection.selectAll('.form-field-input-wrap')
             .data([0]);
 
-        var enter = wrap.enter()
+        const enter = wrap.enter()
             .append('div')
             .attr('class', 'form-field-input-wrap form-field-input-radio');
 
@@ -51,26 +50,45 @@ export function uiFieldRadio(field, context) {
 
         placeholder = wrap.selectAll('.placeholder');
 
-        labels = wrap.selectAll('label')
-            .data(radioData);
+        updateRadios();
 
-        enter = labels.enter()
+
+    }
+
+
+    function updateRadios() {
+        const allOptions = [...(field.options || field.keys)];
+        if (_tags[field.key] && !allOptions.includes(_tags[field.key])) {
+            // include other values as (temporary) option #12082
+            //allOptions.push(`"${_tags[field.key]}"`);
+            allOptions.push(_tags[field.key]);
+        }
+
+        labels = wrap.selectAll('label')
+            .data(allOptions, d => d);
+
+        labels.exit().remove();
+        const enter = labels.enter()
             .append('label');
 
         enter
             .append('input')
             .attr('type', 'radio')
             .attr('name', field.id)
-            .attr('value', function(d) { return strings.t('options.' + d, { 'default': d }); })
+            .attr('value', (d) => field.t('options.' + d, { 'default': d }))
             .attr('checked', false);
 
         enter
             .append('span')
             .each(function(d) {
-                const labelId = strings.hasTextForStringId('options.' + d + '.title')
+                const labelId = field.hasTextForStringId('options.' + d + '.title')
                     ? 'options.' + d + '.title'
                     : 'options.' + d;
-                strings.t.append(labelId, { 'default': d })(d3_select(this));
+                field.t.append(labelId, {
+                    'default': selection => selection
+                        .classed('raw-value', true)
+                        .text(`"${d}"`)
+                })(d3_select(this));
             });
 
         labels = labels
@@ -79,6 +97,64 @@ export function uiFieldRadio(field, context) {
         radios = labels.selectAll('input')
             .on('change', changeRadio);
 
+
+        function isOptionChecked(d) {
+            if (field.key) {
+                return _tags[field.key] === d;
+            }
+            return !!(typeof _tags[d] === 'string' && _tags[d].toLowerCase() !== 'no');
+        }
+
+        radios.property('checked', function(d) {
+            return isOptionChecked(d) &&
+                (field.key || allOptions.filter(isOptionChecked).length === 1);
+        });
+    }
+
+
+    function updateLayout() {
+        const wrapNode = wrap.node();
+        if (!wrapNode || labels.empty()) return;
+
+        wrap.classed('one-line', false);
+        wrap.classed('two-column', false);
+
+        // Temporarily measure each label at its natural content width (no grow/shrink)
+        // by applying inline styles, forcing a layout read, then removing them.
+        const labelNodes = labels.nodes();
+        labelNodes.forEach(node => {
+            node._originalStyle = node.style;
+            node.style.flex = '0 0 auto';
+            node.style.width = 'auto';
+        });
+
+        const containerWidth = wrapNode.getBoundingClientRect().width;
+        const labelWidths = labelNodes.map(node => node.getBoundingClientRect().width);
+        const sumLabelWidth = labelWidths.reduce((a, b) => a + b);
+        const maxLabelWidth = Math.max(...labelWidths);
+        if (labelWidths.length % 2 === 1) {
+            // for odd number of entries, we can skip the last entry as there is the
+            // full width available
+            labelWidths.pop();
+        }
+        const maxLabelWidthTwoColumns = Math.max(...labelWidths);
+
+        labelNodes.forEach(node => {
+            node.style = node._originalStyle;
+            delete node._originalStyle;
+        });
+
+        // All labels fit on one equal-width line without truncation when the widest
+        // label's natural width fits within each cell's equal share of the container.
+        wrap.classed('one-line', sumLabelWidth <= containerWidth);
+        wrap.classed('equal-spacing', maxLabelWidth * labelNodes.length <= containerWidth);
+        // Otherwise, if all labels fit on half width of the container -> we can use
+        // a more compact two column layout
+        wrap.classed('two-column',
+            sumLabelWidth > containerWidth // not if already one-line layout
+            && maxLabelWidthTwoColumns <= Math.ceil(containerWidth / 2) // has to fit in half-width column
+            && labelNodes.length > 3 // skip if only 3 or fewer options -> looks unbalanced
+        );
     }
 
 
@@ -276,12 +352,6 @@ export function uiFieldRadio(field, context) {
 
     radio.tags = function(tags) {
         _tags = tags;
-        function isOptionChecked(d) {
-            if (field.key) {
-                return tags[field.key] === d;
-            }
-            return !!(typeof tags[d] === 'string' && tags[d].toLowerCase() !== 'no');
-        }
 
         function isMixed(d) {
             if (field.key) {
@@ -290,10 +360,7 @@ export function uiFieldRadio(field, context) {
             return Array.isArray(tags[d]);
         }
 
-        radios.property('checked', function(d) {
-            return isOptionChecked(d) &&
-                (field.key || field.options.filter(isOptionChecked).length === 1);
-        });
+        updateRadios();
 
         labels
             .classed('active', function(d) {
@@ -306,7 +373,12 @@ export function uiFieldRadio(field, context) {
             })
             .classed('mixed', isMixed)
             .attr('title', function(d) {
-                return isMixed(d) ? t('inspector.unshared_value_tooltip') : null;
+                if (isMixed(d)) return t('inspector.unshared_value_tooltip');
+                if (!field.key) return null;
+                const desc = localizer.hasTextForStringId('options.' + d + '.description')
+                    ? t('options.' + d + '.description') : undefined;
+                const tag = formatTag(field.key, d);
+                return desc ? `${desc}\n${tag}` : tag;
             });
 
 
@@ -332,6 +404,8 @@ export function uiFieldRadio(field, context) {
 
             wrap.call(structureExtras, tags);
         }
+
+        updateLayout();
     };
 
 

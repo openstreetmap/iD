@@ -149,7 +149,7 @@ export function uiFieldWikidata(field, context) {
 
         wikidata.itemsForSearchQuery(q, function(err, data) {
             if (err) {
-                if (err !== 'No query') console.error(err); // eslint-disable-line
+                if (err.message !== 'No query') console.error(err);
                 return;
             }
 
@@ -161,7 +161,13 @@ export function uiFieldWikidata(field, context) {
                         .attr('class', 'localized-text')
                         .attr('lang', item.display.label.language)
                         .text(item.display.label.value),
-                    title: item.display.description && item.display.description.value,
+                    description: item.display.description ? (
+                        selection => selection.append('span')
+                            .attr('class', 'localized-text')
+                            .attr('lang', item.display.description.language)
+                            .text(item.display.description.value)
+                    ) : undefined,
+                    title: item.id + (item.aliases?.length > 0 ? ' (' + item.aliases.join(', ') + ')' : ''),
                     terms: item.aliases
                 };
             });

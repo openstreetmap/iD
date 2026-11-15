@@ -46,31 +46,31 @@ describe('iD.validations.disconnected_way', function() {
 
     it('has no errors on init', function() {
         var issues = validate();
-        expect(issues).to.have.lengthOf(0);
+        expect(issues).toHaveLength(0);
     });
 
     it('flags disconnected highway', function() {
         createWay({ 'highway': 'unclassified' });
         var issues = validate();
-        expect(issues).to.have.lengthOf(1);
+        expect(issues).toHaveLength(1);
         var issue = issues[0];
-        expect(issue.type).to.eql('disconnected_way');
-        expect(issue.subtype).to.eql('highway');
-        expect(issue.severity).to.eql('warning');
-        expect(issue.entityIds).to.have.lengthOf(1);
-        expect(issue.entityIds[0]).to.eql('w-1');
+        expect(issue.type).toEqual('disconnected_way');
+        expect(issue.subtype).toEqual('highway');
+        expect(issue.severity).toEqual('warning');
+        expect(issue.entityIds).toHaveLength(1);
+        expect(issue.entityIds[0]).toEqual('w-1');
     });
 
     it('flags highway connected only to service area', function() {
         createConnectingWays({ 'highway': 'unclassified' }, { 'highway': 'services' });
         var issues = validate();
-        expect(issues).to.have.lengthOf(1);
+        expect(issues).toHaveLength(1);
         var issue = issues[0];
-        expect(issue.type).to.eql('disconnected_way');
-        expect(issue.subtype).to.eql('highway');
-        expect(issue.severity).to.eql('warning');
-        expect(issue.entityIds).to.have.lengthOf(1);
-        expect(issue.entityIds[0]).to.eql('w-1');
+        expect(issue.type).toEqual('disconnected_way');
+        expect(issue.subtype).toEqual('highway');
+        expect(issue.severity).toEqual('warning');
+        expect(issue.entityIds).toHaveLength(1);
+        expect(issue.entityIds[0]).toEqual('w-1');
     });
 
     it('flags disconnected highway multipolygon', function() {
@@ -86,13 +86,13 @@ describe('iD.validations.disconnected_way', function() {
 
         context.perform(iD.actionAddEntity(r));
         var issues = validate();
-        expect(issues).to.have.lengthOf(1);
+        expect(issues).toHaveLength(1);
         var issue = issues[0];
-        expect(issue.type).to.eql('disconnected_way');
-        expect(issue.subtype).to.eql('highway');
-        expect(issue.severity).to.eql('warning');
-        expect(issue.entityIds).to.have.lengthOf(1);
-        expect(issue.entityIds[0]).to.eql('r-1');
+        expect(issue.type).toEqual('disconnected_way');
+        expect(issue.subtype).toEqual('highway');
+        expect(issue.severity).toEqual('warning');
+        expect(issue.entityIds).toHaveLength(1);
+        expect(issue.entityIds[0]).toEqual('r-1');
     });
 
     it('ignores highway with connected entrance vertex', function() {
@@ -111,17 +111,17 @@ describe('iD.validations.disconnected_way', function() {
         );
 
         var issues = validate();
-        expect(issues).to.have.lengthOf(0);
+        expect(issues).toHaveLength(0);
     });
 
     it('ignores disconnected golf walking path', function () {
         createWay({ 'highway': 'footway', 'golf': 'path' });
-        expect(validate()).to.have.lengthOf(0);
+        expect(validate()).toHaveLength(0);
     });
 
     it('ignores disconnected golf cartpath', function () {
         createWay({ 'highway': 'path', 'golf': 'cartpath' });
-        expect(validate()).to.have.lengthOf(0);
+        expect(validate()).toHaveLength(0);
     });
 
     it('considers golf path as routable when checking connectivity of other paths', function () {
@@ -141,12 +141,12 @@ describe('iD.validations.disconnected_way', function() {
             iD.actionAddEntity(w2)
         );
 
-        expect(validate()).to.have.lengthOf(0);
+        expect(validate()).toHaveLength(0);
     });
 
     it('ignores disconnected aerialway', function () {
         createWay({ 'aerialway': 'gondola' });
-        expect(validate()).to.have.lengthOf(0);
+        expect(validate()).toHaveLength(0);
     });
 
     it('considers aerialway as routable when checking connectivity of other paths', function () {
@@ -166,6 +166,6 @@ describe('iD.validations.disconnected_way', function() {
             iD.actionAddEntity(w2)
         );
 
-        expect(validate()).to.have.lengthOf(0);
+        expect(validate()).toHaveLength(0);
     });
 });

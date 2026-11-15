@@ -22,7 +22,7 @@ window.matchMedia?.(`
 
 
 function vintageRange(vintage) {
-    var s;
+    let s;
     if (vintage.start || vintage.end) {
         s = (vintage.start || '?');
         if (vintage.start !== vintage.end) {
@@ -34,12 +34,12 @@ function vintageRange(vintage) {
 
 
 export function rendererBackgroundSource(data) {
-    var source = Object.assign({}, data);   // shallow copy
-    var _offset = [0, 0];
-    var _name = source.name;
-    var _description = source.description;
-    var _best = !!source.best;
-    var _template = source.template;
+    const source = { ...data };   // shallow copy
+    let _offset = [0, 0];
+    const _name = source.name;
+    const _description = source.description;
+    const _best = !!source.best;
+    let _template = source.template;
 
     source.tileSize = data.tileSize || 256;
     source.zoomExtent = data.zoomExtent || [0, 22];
@@ -60,26 +60,26 @@ export function rendererBackgroundSource(data) {
 
 
     source.name = function() {
-        var id_safe = source.id.replace(/\./g, '<TX_DOT>');
+        const id_safe = source.id.replace(/\./g, '<TX_DOT>');
         return t('imagery.' + id_safe + '.name', { default: _name });
     };
 
 
     source.label = function() {
-        var id_safe = source.id.replace(/\./g, '<TX_DOT>');
+        const id_safe = source.id.replace(/\./g, '<TX_DOT>');
         return t.append('imagery.' + id_safe + '.name', { default: _name });
     };
 
 
     source.hasDescription = function() {
-        var id_safe = source.id.replace(/\./g, '<TX_DOT>');
-        var descriptionText = localizer.tInfo('imagery.' + id_safe + '.description', { default: escape(_description) }).texts.join('');
+        const id_safe = source.id.replace(/\./g, '<TX_DOT>');
+        const descriptionText = localizer.tInfo('imagery.' + id_safe + '.description', { default: _description }).texts.join('');
         return !!descriptionText;
     };
 
 
     source.description = function() {
-        var id_safe = source.id.replace(/\./g, '<TX_DOT>');
+        const id_safe = source.id.replace(/\./g, '<TX_DOT>');
         return t.append('imagery.' + id_safe + '.description', { default: _description });
     };
 
@@ -91,7 +91,7 @@ export function rendererBackgroundSource(data) {
 
     source.area = function() {
         if (!data.polygon) return Number.MAX_VALUE;  // worldwide
-        var area = d3_geoArea({ type: 'MultiPolygon', coordinates: [ data.polygon ] });
+        const area = d3_geoArea({ type: 'MultiPolygon', coordinates: [ data.polygon ] });
         return isNaN(area) ? 0 : area;
     };
 
@@ -136,6 +136,7 @@ export function rendererBackgroundSource(data) {
                 var lat = Math.atan(Math.sinh(Math.PI * (1 - 2 * y / zoomSize)));
 
                 switch (source.projection) {
+                    case 'CRS:84':
                     case 'EPSG:4326':
                         return {
                             x: lon * 180 / Math.PI,
@@ -165,7 +166,10 @@ export function rendererBackgroundSource(data) {
                 case 'wkid':
                     return projection.replace(/^EPSG:/, '');
                 case 'bbox':
-                    // WMS 1.3 flips x/y for some coordinate systems including EPSG:4326 - #7557
+                    // WMS versions prior 1.3.0 require easting / northing (x,y) coordinate order for bbox parameter
+                    // WMS version 1.3.0 requires axis ordering as specified in the CRS - #7557
+                    // E.g. http://epsg.io/4326 > Coordinate system: ... Orientations: north, east.
+                    //      http://epsg.io/3857 > Coordinate system: ... Orientations: east, north.
                     if (projection === 'EPSG:4326' &&
                         // The CRS parameter implies version 1.3 (prior versions use SRS)
                         /VERSION=1.3|CRS={proj}/.test(source.template().toUpperCase())) {
@@ -375,7 +379,7 @@ rendererBackgroundSource.Bing = function(data, dispatch) {
                 })
                 .catch(function (err) {
                     delete inflight[tileID];
-                    if (callback) callback(err.message);
+                    if (callback) callback(err);
                 });
         });
     };
@@ -474,8 +478,9 @@ rendererBackgroundSource.Esri = function(data) {
             .then(function(result) {
                 delete inflight[tileID];
 
-                result = result.features.map(f => f.attributes)
-                    .filter(a => a.MinMapLevel <= zoom && a.MaxMapLevel >= zoom)[0];
+                result = result.features
+                    .map(f => f.attributes)
+                    .find(a => a.MinMapLevel <= zoom && a.MaxMapLevel >= zoom);
 
                 if (!result) {
                     throw new Error('Unknown Error');
@@ -513,7 +518,7 @@ rendererBackgroundSource.Esri = function(data) {
             })
             .catch(function(err) {
                 delete inflight[tileID];
-                if (callback) callback(err.message);
+                if (callback) callback(err);
             });
 
 

@@ -28,6 +28,16 @@ export function rendererBackground(context) {
   let _contrast = 1;
   let _saturation = 1;
   let _sharpness = 1;
+  let _invert = false;
+
+
+  function visibleOverlayLayers() {
+    // if the LocatorOverlay is disabled, return everything except that layer
+    if (background.isLocatorOverlayDisabled()) {
+        return _overlayLayers.filter(layer => !layer.source().isLocatorOverlay());
+    }
+    return _overlayLayers;
+  }
 
 
   function ensureImageryIndex() {
@@ -35,11 +45,7 @@ export function rendererBackground(context) {
       .then(async sources => {
         if (_imageryIndex) return _imageryIndex;
 
-        _imageryIndex = {
-          imagery: sources,
-          features: {}
-        };
-
+        const featuresById = {};
         // use which-polygon to support efficient index and querying for imagery
         const features = sources.map(source => {
           if (!source.polygon) return null;
@@ -56,30 +62,32 @@ export function rendererBackground(context) {
             geometry: { type: 'MultiPolygon', coordinates: rings }
           };
 
-          _imageryIndex.features[source.id] = feature;
+          featuresById[source.id] = feature;
           return feature;
 
         }).filter(Boolean);
 
-        for (const source of features) {
+        for (const source of sources) {
           if (source.encrypted) {
             source.template = await utilAesDecrypt(source.template);
           }
         }
 
-        _imageryIndex.query = whichPolygon({ type: 'FeatureCollection', features: features });
-
-
-        // Instantiate `rendererBackgroundSource` objects for each source
-        _imageryIndex.backgrounds = sources.map(source => {
-          if (source.type === 'bing') {
-            return rendererBackgroundSource.Bing(source, dispatch);
-          } else if (/^EsriWorldImagery/.test(source.id)) {
-            return rendererBackgroundSource.Esri(source);
-          } else {
-            return rendererBackgroundSource(source);
-          }
-        });
+        _imageryIndex = {
+          imagery: sources,
+          features: featuresById,
+          query: whichPolygon({ type: 'FeatureCollection', features: features }),
+          backgrounds: sources.map(source => {
+            // Instantiate `rendererBackgroundSource` objects for each source
+            if (source.type === 'bing') {
+              return rendererBackgroundSource.Bing(source, dispatch);
+            } else if (/^EsriWorldImagery/.test(source.id)) {
+              return rendererBackgroundSource.Esri(source);
+            } else {
+              return rendererBackgroundSource(source);
+            }
+          })
+        };
 
         // Add 'None'
         _imageryIndex.backgrounds.unshift(rendererBackgroundSource.None());
@@ -125,6 +133,9 @@ export function rendererBackground(context) {
     }
     if (_saturation !== 1) {
       baseFilter += ` saturate(${_saturation})`;
+    }
+    if (_invert) {
+      baseFilter += ' invert(1)';
     }
     if (_sharpness < 1) {  // gaussian blur
       const blur = d3_interpolateNumber(0.5, 5)(1 - _sharpness);
@@ -181,7 +192,7 @@ export function rendererBackground(context) {
 
 
     let overlays = selection.selectAll('.layer-overlay')
-      .data(_overlayLayers, d => d.source().name());
+      .data(visibleOverlayLayers(), d => d.source().name());
 
     overlays.exit()
       .remove();
@@ -347,12 +358,20 @@ export function rendererBackground(context) {
   background.showsLayer = (d) => {
     const currSource = baseLayer.source();
     if (!d || !currSource) return false;
-    return d.id === currSource.id || _overlayLayers.some(layer => d.id === layer.source().id);
+    return d.id === currSource.id || visibleOverlayLayers().some(layer => d.id === layer.source().id);
   };
 
 
   background.overlayLayerSources = () => {
-    return _overlayLayers.map(layer => layer.source());
+    return visibleOverlayLayers().map(layer => layer.source());
+  };
+
+  /**
+   * if using a background layer that contains labels,
+   * disable the locator overlay to avoid overlapping labels.
+   */
+  background.isLocatorOverlayDisabled = () => {
+    return baseLayer.source()?.category === 'osmbasedmap';
   };
 
 
@@ -432,6 +451,13 @@ export function rendererBackground(context) {
   background.sharpness = function(d) {
     if (!arguments.length) return _sharpness;
     _sharpness = d;
+    if (context.mode()) dispatch.call('change');
+    return background;
+  };
+
+  background.invert = function(d) {
+    if (!arguments.length) return _invert;
+    _invert = d;
     if (context.mode()) dispatch.call('change');
     return background;
   };
@@ -519,9 +545,9 @@ export function rendererBackground(context) {
       }
     })
     .catch(err => {
-      /* eslint-disable no-console */
+
       console.error(err);
-      /* eslint-enable no-console */
+
     });
   };
 

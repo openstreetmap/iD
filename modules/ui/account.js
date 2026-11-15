@@ -31,7 +31,7 @@ export function uiAccount(context) {
 
     if (user) {
       userInfo
-        .html('')
+        .text('')
         .classed('hide', false);
 
       let userLink = userInfo
@@ -72,7 +72,7 @@ export function uiAccount(context) {
 
     } else {    // no user
       userInfo
-        .html('')
+        .text('')
         .classed('hide', true);
 
       // show "Log In"

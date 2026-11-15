@@ -10,7 +10,7 @@ export function uiPanelLocation(context) {
 
 
     function redraw(selection) {
-        selection.html('');
+        selection.text('');
 
         var list = selection
             .append('ul');

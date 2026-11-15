@@ -38,7 +38,7 @@ export const osmLifecyclePrefixes = {
     // dilapidated to nonexistent
     abandoned: true, was: true,
     // nonexistent, still may appear in imagery
-    dismantled: true, razed: true, demolished: true, destroyed: true, removed: true, obliterated: true,
+    dismantled: true, razed: true, demolished: true, destroyed: true, removed: true,
     // existent occasionally, e.g. stormwater drainage basin
     intermittent: true
 };
@@ -59,12 +59,15 @@ export function osmSetAreaKeys(value: TagDictionary<true>): void {
     osmAreaKeys = value;
 }
 
-// `highway` and `railway` are typically linear features, but there
+// `aerialway`, `highway` and `railway` are typically linear features, but there
 // are a few exceptions that should be treated as areas, even in the
 // absence of a proper `area=yes` or `areaKeys` tag.. see #4194
 // similarly, some tags are both used as a primary key for area features,
 // but also as an attribute tag for linear features (e.g. `emergency=yes`)
 export const osmAreaKeysExceptions: TagDictionary<boolean> = {
+    aerialway: {
+        station: true
+    },
     highway: {
         elevator: true,
         rest_area: true,
@@ -119,11 +122,6 @@ export function osmTagSuggestingArea(tags: Tags): Tags | null {
         }
     }
     return null;
-}
-
-export let osmLineTags: TagDictionary<true> = {};
-export function osmSetLineTags(value: TagDictionary<true>): void {
-    osmLineTags = value;
 }
 
 // Tags that indicate a node can be a standalone point
@@ -234,12 +232,13 @@ export const osmOneWayBiDirectionalTags: TagDictionary<boolean> = {
     },
 };
 export const osmOneWayTags = merge(
+    {},
     osmOneWayForwardTags,
     osmOneWayBackwardTags,
     osmOneWayBiDirectionalTags,
 );
 
-// solid and smooth surfaces akin to the assumed default road surface in OSM
+// solid and smooth surfaces akin to the assumed default road or path surface
 export const osmPavedTags: TagDictionary<boolean> = {
     'surface': {
         'paved': true,
@@ -248,6 +247,7 @@ export const osmPavedTags: TagDictionary<boolean> = {
         'chipseal': true,
         'concrete:lanes': true,
         'concrete:plates': true,
+        'metal': true,
         'tiles': true
     },
     'tracktype': {
@@ -255,7 +255,7 @@ export const osmPavedTags: TagDictionary<boolean> = {
     }
 };
 
-// solid, if somewhat uncommon surfaces with a high range of smoothness
+// solid, if somewhat uncommon surfaces with a high range of smoothness used on roads or paths
 export const osmSemipavedTags: TagDictionary<boolean> = {
     'surface': {
         'bricks': true,
@@ -264,14 +264,26 @@ export const osmSemipavedTags: TagDictionary<boolean> = {
         'sett': true,
         'paving_stones': true,
         'grass_paver': true,
-        'metal': true,
         'metal_grid': true,
         'fibre_reinforced_polymer_grate': true,
         'wood': true
     }
 };
 
-export const osmRightSideIsInsideTags: TagDictionary<true | string> = {
+/**
+ * `true` means that the right side of the way is representing the "interesting"
+ * side of the feature, e.g.:
+ *   - the face of a cliff
+ *   - the steep side of a retaining wall
+ *   - the road side of a kerb
+ *   - the downstream side of a weir
+ * strings indicate special cases:
+ *   - coastlines have the land on the right hand side, but we want to mark the ocean
+ *   - guard rails have the road on the right, but we use dedicated markers that represent the posts of the guard rail
+ *   - embankments can be on either or (typically) both sides of a road  or railway, they use inverted triangles as markers
+ *   - cuttings (see embankments, triangles have reversed directions)
+ */
+export const osmSidednessTags: TagDictionary<true | string> = {
     'natural': {
         'cliff': true,
         'coastline': 'coastline'
@@ -283,12 +295,25 @@ export const osmRightSideIsInsideTags: TagDictionary<true | string> = {
         'city_wall': true,
     },
     'man_made': {
-        'embankment': true,
+        'embankment': 'embankment-man_made',
         'quay': true
     },
     'waterway': {
         'weir': true
-    }
+    },
+    'cutting': {
+        'yes': 'cutting',
+        'both': 'cutting',
+        'left': 'cutting-left',
+        'right': 'cutting-right'
+    },
+    'embankment': {
+        'yes': 'embankment',
+        'dyke': 'embankment',
+        'both': 'embankment',
+        'left': 'embankment-left',
+        'right': 'embankment-right'
+    },
 };
 
 // "highway" tag values for pedestrian or vehicle right-of-ways that make up the routable network
@@ -429,3 +454,22 @@ export const osmUrlKeys: Set<TagKey> = new Set([
     'website:menu',
     'post_office:website',
 ]);
+
+/** returns true if `tags` matches any of the criteria in `matchers` */
+export function osmMatchTags(matchers: Tags[], tags: Tags) {
+    for (const matcher of matchers) {
+        const isMatching = Object.keys(matcher).every((key) => {
+            const expectedValue = matcher[key];
+            const actualValue = tags[key];
+
+            if (!actualValue) return false;
+            if (expectedValue === '*') return true;
+            if (expectedValue === actualValue) return true;
+            if (actualValue.includes(';') && actualValue.split(';').filter(Boolean).includes(expectedValue)) return true;
+
+            return false;
+        });
+        if (isMatching) return true;
+    }
+    return false;
+}

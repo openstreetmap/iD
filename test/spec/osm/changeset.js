@@ -1,22 +1,22 @@
 describe('iD.osmChangeset', function () {
     it('returns a changeset', function () {
-        expect(new iD.osmChangeset()).to.be.an.instanceOf(iD.osmChangeset);
-        expect(new iD.osmChangeset().type).to.equal('changeset');
+        expect(new iD.osmChangeset()).toBeInstanceOf(iD.osmChangeset);
+        expect(new iD.osmChangeset().type).toEqual('changeset');
     });
 
     it('defaults tags to an empty object', function () {
-        expect(new iD.osmChangeset().tags).to.eql({});
+        expect(new iD.osmChangeset().tags).toEqual({});
     });
 
     it('sets tags as specified', function () {
-        expect(new iD.osmChangeset({tags: {foo: 'bar'}}).tags).to.eql({foo: 'bar'});
+        expect(new iD.osmChangeset({tags: {foo: 'bar'}}).tags).toEqual({foo: 'bar'});
     });
 
 
     describe('#asJXON', function () {
         it('converts a node to jxon', function() {
             var node = new iD.osmChangeset({tags: {'comment': 'hello'}});
-            expect(node.asJXON()).to.eql({
+            expect(node.asJXON()).toEqual({
                 osm: {
                     changeset: {
                         tag: [{ '@k': 'comment', '@v': 'hello' }],
@@ -34,7 +34,7 @@ describe('iD.osmChangeset', function () {
             var changeset = new iD.osmChangeset();
             var jxon = changeset.osmChangeJXON({ created: [], modified: [], deleted: [] });
 
-            expect(jxon).to.eql({
+            expect(jxon).toEqual({
                 osmChange: {
                     '@version': 0.6,
                     '@generator': 'iD',
@@ -54,9 +54,9 @@ describe('iD.osmChangeset', function () {
             var jxon = c.osmChangeJXON(changes);
 
             var result = jxon.osmChange.create;
-            expect(result.node).to.eql([n.asJXON('1234').node]);
-            expect(result.way).to.eql([w.asJXON('1234').way]);
-            expect(result.relation).to.eql([r.asJXON('1234').relation]);
+            expect(result.node).toEqual([n.asJXON('1234').node]);
+            expect(result.way).toEqual([w.asJXON('1234').way]);
+            expect(result.relation).toEqual([r.asJXON('1234').relation]);
         });
 
         it('includes creations ordered by dependencies', function() {
@@ -69,9 +69,9 @@ describe('iD.osmChangeset', function () {
             var jxon = c.osmChangeJXON(changes);
 
             var result = jxon.osmChange.create;
-            expect(result.node).to.eql([n.asJXON('1234').node]);
-            expect(result.way).to.eql([w.asJXON('1234').way]);
-            expect(result.relation).to.eql([r1.asJXON('1234').relation, r2.asJXON('1234').relation]);
+            expect(result.node).toEqual([n.asJXON('1234').node]);
+            expect(result.way).toEqual([w.asJXON('1234').way]);
+            expect(result.relation).toEqual([r1.asJXON('1234').relation, r2.asJXON('1234').relation]);
         });
 
         it('includes creations ignoring circular dependencies', function() {
@@ -85,7 +85,7 @@ describe('iD.osmChangeset', function () {
             jxon = c.osmChangeJXON(changes);
 
             var result = jxon.osmChange.create;
-            expect(result.relation).to.eql([r1.asJXON('1234').relation, r2.asJXON('1234').relation]);
+            expect(result.relation).toEqual([r1.asJXON('1234').relation, r2.asJXON('1234').relation]);
         });
 
         it('includes modifications', function() {
@@ -96,7 +96,7 @@ describe('iD.osmChangeset', function () {
             var changes = { created: [], modified: [r, w, n], deleted: [] };
             var jxon = c.osmChangeJXON(changes);
 
-            expect(jxon.osmChange.modify).to.eql({
+            expect(jxon.osmChange.modify).toEqual({
                 node: [n.asJXON('1234').node],
                 way: [w.asJXON('1234').way],
                 relation: [r.asJXON('1234').relation]
@@ -112,10 +112,10 @@ describe('iD.osmChangeset', function () {
             var jxon = c.osmChangeJXON(changes);
 
             var result = jxon.osmChange.delete;
-            expect(result.node).to.eql([n.asJXON('1234').node]);
-            expect(result.way).to.eql([w.asJXON('1234').way]);
-            expect(result.relation).to.eql([r.asJXON('1234').relation]);
-            expect(result['@if-unused']).to.eql(true);
+            expect(result.node).toEqual([n.asJXON('1234').node]);
+            expect(result.way).toEqual([w.asJXON('1234').way]);
+            expect(result.relation).toEqual([r.asJXON('1234').relation]);
+            expect(result['@if-unused']).toEqual(true);
         });
     });
 

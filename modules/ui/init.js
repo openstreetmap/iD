@@ -47,6 +47,7 @@ import { uiPaneHelp } from './panes/help';
 import { uiPaneIssues } from './panes/issues';
 import { uiPaneMapData } from './panes/map_data';
 import { uiPanePreferences } from './panes/preferences';
+import { utilIsDrawing } from '../util';
 
 export function uiInit(context) {
     var _initCounter = 0;
@@ -354,7 +355,6 @@ export function uiInit(context) {
         ui.onResize();
         map.redrawEnable(true);
 
-        ui.hash = behaviorHash(context);
         ui.hash();
         if (!ui.hash.hadLocation) {
             map.centerZoom([0, 0], 2);
@@ -412,7 +412,7 @@ export function uiInit(context) {
 
                 // Don't allow layer changes while drawing - #6584
                 var mode = context.mode();
-                if (mode && /^draw/.test(mode.id)) return;
+                if (mode && utilIsDrawing(mode.id)) return;
 
                 var layer = context.layers().layer('osm');
                 if (layer) {
@@ -500,7 +500,7 @@ export function uiInit(context) {
             .then(() => {
                 if (!context.container().empty()) render(context.container());
             })
-            .catch(err => console.error(err));  // eslint-disable-line
+            .catch(err => console.error(err));
     };
 
 
@@ -529,6 +529,8 @@ export function uiInit(context) {
     ui.photoviewer = uiPhotoviewer(context);
 
     ui.shortcuts = uiShortcuts(context);
+
+    ui.hash = behaviorHash(context);
 
     ui.onResize = function(withPan) {
         var map = context.map();
@@ -652,11 +654,8 @@ export function uiInit(context) {
         // disable menu if in wide selection, for example
         if (!context.map().editableDataEnabled()) return;
 
-        var surfaceNode = context.surface().node();
-        if (surfaceNode.focus) {   // FF doesn't support it
-            // focus the surface or else clicking off the menu may not trigger modeBrowse
-            surfaceNode.focus();
-        }
+        // focus the surface or else clicking off the menu may not trigger modeBrowse
+        context.surface().node().focus();
 
         operations.forEach(function(operation) {
             if (operation.point) operation.point(anchorPoint);

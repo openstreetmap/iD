@@ -457,7 +457,7 @@ export function uiFieldRestrictions(field, context) {
 
 
         function updateHints(datum) {
-            var help = _container.selectAll('.restriction-help').html('');
+            var help = _container.selectAll('.restriction-help').text('');
 
             var placeholders = {};
             ['from', 'via', 'to'].forEach(function(k) {
@@ -605,7 +605,7 @@ export function uiFieldRestrictions(field, context) {
             }
 
             return selection
-                .html('')
+                .text('')
                 .call(t.append('restriction.controls.distance_up_to', opts));
         };
     }
@@ -613,7 +613,7 @@ export function uiFieldRestrictions(field, context) {
 
     function displayMaxVia(maxVia) {
         return selection => {
-            selection = selection.html('');
+            selection = selection.text('');
             return maxVia === 0 ? selection.call(t.append('restriction.controls.via_node_only'))
                 : maxVia === 1 ? selection.call(t.append('restriction.controls.via_up_to_one'))
                 : selection.call(t.append('restriction.controls.via_up_to_two'));

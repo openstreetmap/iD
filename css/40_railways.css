@@ -1,14 +1,5 @@
 /* railways */
 
-/* defaults */
-.preset-icon .icon.tag-railway.other-line {
-    color: #fff;
-    fill: #777;
-}
-.preset-icon .icon.tag-railway {
-    color: #555;
-}
-
 /* lines */
 /* narrow widths */
 path.line.shadow.tag-railway {
@@ -41,7 +32,6 @@ path.line.stroke.tag-railway.tag-oneway {
     stroke-dasharray: 6;
 }
 
-path.line.casing.tag-railway.tag-railway-platform_edge,
 path.line.casing.tag-railway.tag-railway-platform {
     stroke-width: 0;
 }
@@ -50,12 +40,33 @@ path.line.stroke.tag-railway.tag-railway-platform {
     stroke-dasharray: none;
 }
 
+/* platform edges are usually on the outline of platform areas,
+   render them distinctly so that they stand out from the area stroke */
+path.line.casing.tag-railway.tag-railway-platform_edge {
+    stroke-width: 6;
+}
+path.line.stroke.tag-railway.tag-railway-platform_edge {
+    stroke-width: 3;
+}
+.low-zoom path.line.casing.tag-railway.tag-railway-platform_edge {
+    stroke-width: 4;
+}
+.low-zoom path.line.stroke.tag-railway.tag-railway-platform_edge {
+    stroke-width: 2;
+}
+
 /* styles */
 path.line.casing.tag-railway {
     stroke: #555;
 }
 path.line.stroke.tag-railway {
     stroke: #eee;
+}
+path.line.stroke.tag-railway.tag-railway-platform_edge {
+    stroke: #fd3;
+}
+.preset-icon-container path.line.stroke.tag-railway.tag-railway-platform_edge {
+    stroke-dasharray: none;
 }
 
 .preset-icon .icon.tag-railway.tag-status {

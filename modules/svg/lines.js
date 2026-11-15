@@ -6,9 +6,9 @@ import {
 } from './helpers';
 import { svgTagClasses } from './tag_classes';
 
-import { osmEntity } from '../osm';
+import { osmIdManager } from '../osm';
 import { utilArrayFlatten, utilArrayGroupBy } from '../util';
-import { utilDetect } from '../util/detect';
+import { utilIsDrawing } from '../util/util';
 
 /** @param {{ [key: string ]: string }} tags */
 function onewayArrowColour(tags) {
@@ -22,8 +22,6 @@ function onewayArrowColour(tags) {
 }
 
 export function svgLines(projection, context) {
-    var detected = utilDetect();
-
     var highway_stack = {
         motorway: 0,
         motorway_link: 1,
@@ -130,19 +128,19 @@ export function svgLines(projection, context) {
         function drawLineGroup(selection, klass, isSelected) {
             // Note: Don't add `.selected` class in draw modes
             var mode = context.mode();
-            var isDrawing = mode && /^draw/.test(mode.id);
+            var isDrawing = mode && utilIsDrawing(mode.id);
             var selectedClass = (!isDrawing && isSelected) ? 'selected ' : '';
 
             var lines = selection
                 .selectAll('path')
                 .filter(filter)
-                .data(getPathData(isSelected), osmEntity.key);
+                .data(getPathData(isSelected), osmIdManager.key);
 
             lines.exit()
                 .remove();
 
             // Optimization: Call expensive TagClasses only on enter selection. This
-            // works because osmEntity.key is defined to include the entity v attribute.
+            // works because osmIdManager.key is defined to include the entity v attribute.
             lines.enter()
                 .append('path')
                 .attr('class', function(d) {
@@ -227,16 +225,12 @@ export function svgLines(projection, context) {
             markers.exit()
                 .remove();
 
-            markers = markers.enter()
+            markers.enter()
                 .append('path')
                 .attr('class', pathclass)
                 .merge(markers)
                 .attr('marker-mid', marker)
                 .attr('d', function(d) { return d.d; });
-
-            if (detected.ie) {
-                markers.each(function() { this.parentNode.insertBefore(this, this); });
-            }
         }
 
 

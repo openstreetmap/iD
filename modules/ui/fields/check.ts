@@ -5,11 +5,14 @@ import {
 import { omit } from 'es-toolkit/compat';
 
 import { utilRebind } from '../../util/rebind';
-import { t } from '../../core/localizer';
+import { localizer, t } from '../../core/localizer';
 import { actionReverse } from '../../actions/reverse';
 import { svgIcon } from '../../svg/icon';
 import { utilCheckTagDictionary } from '../../util';
-import { osmOneWayTags } from '../../osm/tags';
+import { osmOneWayBackwardTags, osmOneWayBiDirectionalTags, osmOneWayForwardTags, osmOneWayTags } from '../../osm/tags';
+import type { EntityId } from '../../osm';
+import { formatTag } from './tag_title';
+import { uiTooltip } from '../tooltip';
 
 export { uiFieldCheck as uiFieldDefaultCheck };
 export { uiFieldCheck as uiFieldOnewayCheck };
@@ -23,26 +26,25 @@ export function uiFieldCheck(field: any, context: iD.Context) {
 
     let _tags: TagsMulti;
 
-    let input:    d3.Selection<HTMLInputElement>  | d3.Selection<null> = d3_select(null);
-    let text:     d3.Selection<HTMLSpanElement>   | d3.Selection<null> = d3_select(null);
-    let label:    d3.Selection<HTMLLabelElement>  | d3.Selection<null> = d3_select(null);
-    let reverser: d3.Selection<HTMLButtonElement> | d3.Selection<null> = d3_select(null);
+    let input    = d3_select<HTMLInputElement, any>(null!);
+    let text     = d3_select<HTMLSpanElement, any>(null!);
+    let label    = d3_select<HTMLLabelElement, any>(null!);
+    let reverser = d3_select<HTMLButtonElement, any>(null!);
 
     let _impliedYes: boolean;
-    let _entityIDs: EntityID[]  = [];
+    let _entityIDs: EntityId[]  = [];
     let _value: TagValueUpdate;
 
 
-    var stringsField = field.resolveReference('stringsCrossReference');
-    if (!options && stringsField.options) {
-        options = stringsField.options;
+    if (!options && field.options) {
+        options = field.options;
     }
 
     if (options) {
         for (var i in options) {
             var v = options[i];
             values.push(v === 'undefined' ? undefined : v);
-            texts.push(stringsField.t.append('options.' + v, { 'default': v }));
+            texts.push(field.t.append('options.' + v, { 'default': v }));
         }
     } else {
         values = [undefined, 'yes'];
@@ -52,6 +54,11 @@ export function uiFieldCheck(field: any, context: iD.Context) {
             texts.push(t.append('inspector.check.no'));
         }
     }
+
+    const forwardValues = Object.keys(field.type === 'onewayCheck' && (osmOneWayForwardTags[field.key] || {}));
+    const backwardValues = Object.keys(field.type === 'onewayCheck' && (osmOneWayBackwardTags[field.key] || {}));
+    const bidiValues = Object.keys(field.type === 'onewayCheck' && (osmOneWayBiDirectionalTags[field.key] || {}));
+    const forwardValue = forwardValues[0] || 'yes';
 
 
     // Checks tags to see whether an undefined value is "Assumed to be Yes"
@@ -73,12 +80,17 @@ export function uiFieldCheck(field: any, context: iD.Context) {
     function reverserHidden() {
         if (!context.container().select('div.inspector-hover').empty()) return true;
         const entity = _entityIDs.length && context.hasEntity(_entityIDs[0]);
-        if (entity.type !== 'way') return true;
-        return !(_value === 'yes' || (_impliedYes && !_value));
+        if (!entity || entity.type !== 'way') return true;
+
+        const isFwd = _value && forwardValues.includes(_value);
+        const isBwd = _value && backwardValues.includes(_value);
+        if (isFwd || isBwd) return false;
+        if (_impliedYes && !_value) return false;
+        return true;
     }
 
 
-    function reverserSetText(selection: d3.Selection) {
+    function reverserSetText(selection: d3.Selection<HTMLButtonElement>) {
         const entity = _entityIDs.length && context.hasEntity(_entityIDs[0]);
         if (reverserHidden() || !entity) return selection;
 
@@ -88,7 +100,7 @@ export function uiFieldCheck(field: any, context: iD.Context) {
         const pseudoDirection = first < last;
         const icon = pseudoDirection ? '#iD-icon-forward' : '#iD-icon-backward';
 
-        selection.selectAll('.reverser-span')
+        selection.selectAll<HTMLElement, any>('.reverser-span')
             .text('')
             .call(t.append('inspector.check.reverser'))
             .call(svgIcon(icon, 'inline'));
@@ -122,6 +134,11 @@ export function uiFieldCheck(field: any, context: iD.Context) {
             enter
                 .append('button')
                 .attr('class', 'reverser' + (reverserHidden() ? ' hide' : ''))
+                .call((uiTooltip() as any)
+                     .title(() => t.append('inspector.check.reverser'))
+                     .keys([t('operations.reverse.key')])
+                     .placement('top')
+                )
                 .append('span')
                 .attr('class', 'reverser-span');
         }
@@ -136,18 +153,14 @@ export function uiFieldCheck(field: any, context: iD.Context) {
                 var t: TagsUpdate = {};
 
                 if (Array.isArray(_tags[field.key])) {
-                    if (values.includes('yes')) {
-                        t[field.key] = 'yes';
-                    } else {
-                        t[field.key] = values[0];
-                    }
+                    t[field.key] = values[1]; // set to checked/"yes" state
                 } else {
                     t[field.key] = values[(values.indexOf(_value) + 1) % values.length];
                 }
 
                 // Don't cycle through `alternating` or `reversible` states - #4970
                 // (They are supported as translated strings, but should not toggle with clicks)
-                if (t[field.key] === 'reversible' || t[field.key] === 'alternating') {
+                if (bidiValues.includes(t[field.key]!)) {
                     t[field.key] = values[0];
                 }
 
@@ -163,13 +176,14 @@ export function uiFieldCheck(field: any, context: iD.Context) {
                     d3_event.preventDefault();
                     d3_event.stopPropagation();
                     context.perform(
+
                         function(graph: iD.Graph) {
                             for (var i in _entityIDs) {
                                 graph = actionReverse(_entityIDs[i])(graph);
                             }
                             return graph;
                         },
-                        t('operations.reverse.annotation.line', { n: 1 })
+                        t('operations.reverse.annotation.line', { n: _entityIDs.length })
                     );
 
                     // must manually revalidate since no 'change' event was called
@@ -182,7 +196,7 @@ export function uiFieldCheck(field: any, context: iD.Context) {
     };
 
 
-    check.entityIDs = function(val?: string[]) {
+    check.entityIDs = function(val?: EntityId[]) {
         if (!arguments.length) return _entityIDs;
         _entityIDs = val!;
         return check;
@@ -209,8 +223,9 @@ export function uiFieldCheck(field: any, context: iD.Context) {
         const isMixed = Array.isArray(tag);
         _value = !isMixed && tag ? tag.toLowerCase() : undefined;
 
-        if (field.type === 'onewayCheck' && (_value === '1' || _value === '-1')) {
-            _value = 'yes';
+        // for tags like oneway=-1, reuse the labels for oneway=yes
+        if (field.type === 'onewayCheck' && _value && backwardValues.includes(_value) && !values.includes(_value)) {
+            _value = forwardValue;
         }
 
         input
@@ -224,7 +239,16 @@ export function uiFieldCheck(field: any, context: iD.Context) {
                 : typeof textForValue === 'string'
                     ? (selection: d3.Selection) => selection.text(textForValue)
                     : textForValue)
-            .classed('mixed', isMixed);
+            .classed('mixed', isMixed)
+            .classed('raw-value', !values.some(value => value === tag))
+            .attr('title', function() {
+                if (isMixed) return t('inspector.unshared_value_tooltip');
+                if (!_value) return null;
+                const desc = localizer.hasTextForStringId(`options.${_value}.description`)
+                    ? t(`options.${_value}.description`) : undefined;
+                const tag = formatTag(field.key, _value);
+                return desc ? `${desc}\n${tag}` : tag;
+            });
 
         label
             .classed('set', !!_value);

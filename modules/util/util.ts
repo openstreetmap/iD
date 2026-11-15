@@ -1,5 +1,4 @@
 import { color as d3_color, type RGBColor } from 'd3';
-import { remove as removeDiacritics } from 'diacritics';
 
 import { fixRTLTextForSvg, rtlRegex } from './svg_paths_rtl_fix';
 
@@ -8,8 +7,13 @@ import { utilArrayUnion } from './array';
 import { utilDetect } from './detect';
 import { geoExtent } from '../geo/extent';
 import type { coreGraph } from '../core';
-import type { OsmNode } from '../osm/node';
+import type { osmNode as OsmNode } from '../osm/node';
+import type { EntityId as EntityID } from '../osm';
 
+
+export function utilSplitAtSemicolon(s: TagValue | undefined | null) {
+    return (s || '').split(';').map(s => s.trim()).filter(Boolean);
+}
 
 export function utilTagText(entity: iD.OsmEntity): string {
     const obj = (entity && entity.tags) || {};
@@ -32,35 +36,83 @@ export function utilTotalExtent(array: EntityID[] | iD.OsmEntity[], graph: coreG
 }
 
 export type TagDiff = {
-    type: '-' | '+';
-    key: string;
-    oldVal: string;
-    newVal: string;
+    type: '-' | '+' | '~';
+    key: TagKey;
+    oldVal: TagValue;
+    newVal: TagValue;
     display: string;
+    render: (selection: d3.Selection<HTMLElement>) => void;
 };
-export function utilTagDiff(oldTags: Tags, newTags: Tags): TagDiff[] {
+export function utilTagDiff(oldTags: Tags, newTags: Tags, contextKeys: TagKey[] = []): TagDiff[] {
     const tagDiff : TagDiff[] = [];
     const keys = utilArrayUnion(Object.keys(oldTags), Object.keys(newTags)).sort();
     keys.forEach(function(k) {
         const oldVal = oldTags[k];
         const newVal = newTags[k];
 
+        function renderWithValueLink(
+            selection: d3.Selection<HTMLElement>,
+            keyPart: string,
+            valuePart: string,
+            link: string
+        ) {
+            selection.append('span')
+                .text(keyPart);
+            selection.append('a')
+                .attr('href', link)
+                .attr('target', '_blank')
+                .text(valuePart);
+        }
+
         if ((oldVal || oldVal === '') && (newVal === undefined || newVal !== oldVal)) {
+            const keyPart = `- ${k}=`;
             tagDiff.push({
                 type: '-',
                 key: k,
                 oldVal: oldVal,
                 newVal: newVal,
-                display: '- ' + k + '=' + oldVal
+                display: `${keyPart}${oldVal}`,
+                render: selection => {
+                    if (k.split(':').includes('wikidata') && oldVal.startsWith('Q')) {
+                        renderWithValueLink(selection, keyPart, oldVal, `https://www.wikidata.org/wiki/${oldVal}`);
+                    } else {
+                        selection.text(`${keyPart}${oldVal}`);
+                    }
+                }
             });
         }
         if ((newVal || newVal === '') && (oldVal === undefined || newVal !== oldVal)) {
+            const keyPart = `+ ${k}=`;
             tagDiff.push({
                 type: '+',
                 key: k,
                 oldVal: oldVal,
                 newVal: newVal,
-                display: '+ ' + k + '=' + newVal
+                display: `${keyPart}${newVal}`,
+                render: selection => {
+                    if (k.split(':').includes('wikidata') && newVal.startsWith('Q')) {
+                        renderWithValueLink(selection, keyPart, newVal, `https://www.wikidata.org/wiki/${newVal}`);
+                    } else {
+                        selection.text(`${keyPart}${newVal}`);
+                    }
+                }
+            });
+        }
+        if (contextKeys.includes(k) && newVal === oldVal) {
+            const keyPart = `${decodeURIComponent('%C2%A0' /* &nbsp; */)} ${k}=`;
+            tagDiff.push({
+                type: '~',
+                key: k,
+                oldVal: newVal,
+                newVal: newVal,
+                display: `${keyPart}${newVal}`,
+                render: selection => {
+                    if (k.split(':').includes('wikidata') && newVal.startsWith('Q')) {
+                        renderWithValueLink(selection, keyPart, newVal, `https://www.wikidata.org/wiki/${newVal}`);
+                    } else {
+                        selection.text(`${keyPart}${newVal}`);
+                    }
+                }
             });
         }
     });
@@ -186,6 +238,10 @@ export function utilGetAllNodes(ids: EntityID[], graph: coreGraph): OsmNode[] {
     }
 }
 
+
+/** @returns true if the current mode is a drawing mode */
+export const utilIsDrawing = (modeId: string) => modeId.startsWith('draw');
+
 /**
  * @param entity the entity to generate a display name for
  * @param flags a set of flags to tweak the display name output:
@@ -196,13 +252,14 @@ export function utilGetAllNodes(ids: EntityID[], graph: coreGraph): OsmNode[] {
  *             - isMapLabel:  If true, this name is for a label on the map.
  *                            If falsy, it's for a label elsewhere in the UI.
  */
-export function utilDisplayName(entity: iD.OsmEntity, flags: {
+export function utilDisplayName(entity: iD.OsmEntity, flags?: {
     hideNetwork?: boolean,
     hideRef?: boolean,
     isMapLabel?: boolean
 }): string {
-    const localizedNameKey = 'name:' + localizer.languageCode().toLowerCase();
-    const name = entity.tags[localizedNameKey] || entity.tags.name || '';
+    const name = localizer.expandedLocaleCodes()
+        .map(code => entity.tags[`name:${code}`])
+        .find(Boolean) || entity.tags.name || '';
 
     const tags = {
         direction: entity.tags.direction,
@@ -431,8 +488,8 @@ export function utilStringQs(str: string): {[k: string]: string} {
 }
 
 
-export function utilQsString(obj: {[k: string]: string}, softEncode: boolean) {
-    let str = new URLSearchParams(obj).toString();
+export function utilQsString(obj: {[k: string]: string | number | boolean}, softEncode?: boolean) {
+    let str = new URLSearchParams(obj as Record<string, string>).toString();
     if (softEncode) {
         // for better readability of URL hashes: optionally
         // leave some special characters unescaped
@@ -485,7 +542,7 @@ export function utilPrefixCSSProperty(property: string): string | false {
 
 
 let transformProperty;
-export function utilSetTransform(el: d3.Selection, x: number, y: number, scale: number): d3.Selection {
+export function utilSetTransform<T extends d3.Selection<any>>(el: T, x: number, y: number, scale: number): T {
     transformProperty ||= utilPrefixCSSProperty('Transform');
     const prop = transformProperty;
     const translate = utilDetect().opera ? 'translate('   + x + 'px,' + y + 'px)'
@@ -493,17 +550,26 @@ export function utilSetTransform(el: d3.Selection, x: number, y: number, scale: 
     return el.style(prop, translate + (scale ? ' scale(' + scale + ')' : ''));
 }
 
+export function utilStripDiacritics(string: string) {
+    return string.normalize('NFD').replace(/\p{Dia}/gu, '');
+}
 
 // Calculates Levenshtein distance between two strings
 // see:  https://en.wikipedia.org/wiki/Levenshtein_distance
 // first converts the strings to lowercase and replaces diacritic marks with ascii equivalents.
-export function utilEditDistance(a: string, b: string): number {
-    a = removeDiacritics(a.toLowerCase());
-    b = removeDiacritics(b.toLowerCase());
-    if (a.length === 0) return b.length;
+//
+// if options.substring is true, it instead calculates the minimal Levenshtein distance between
+// the string a and any substring of b
+// see: https://en.wikipedia.org/wiki/Approximate_string_matching#Problem_formulation_and_algorithms
+export function utilEditDistance(a: string, b: string, options?: {
+    substring?: boolean
+}): number {
+    a = utilStripDiacritics(a.toLowerCase());
+    b = utilStripDiacritics(b.toLowerCase());
+    if (a.length === 0) return options?.substring ? 0 : b.length;
     if (b.length === 0) return a.length;
     const matrix = [];
-    for (let i = 0; i <= b.length; i++) { matrix[i] = [i]; }
+    for (let i = 0; i <= b.length; i++) { matrix[i] = options?.substring ? [0] : [i]; }
     for (let j = 0; j <= a.length; j++) { matrix[0][j] = j; }
     for (let i = 1; i <= b.length; i++) {
         for (let j = 1; j <= a.length; j++) {
@@ -515,6 +581,9 @@ export function utilEditDistance(a: string, b: string): number {
                     matrix[i-1][j] + 1)); // deletion
             }
         }
+    }
+    if (options?.substring) {
+        return Math.min(...matrix.map(r => r[a.length]));
     }
     return matrix[b.length][a.length];
 }
@@ -560,7 +629,7 @@ export function utilFunctor<T>(value: T | (() => T)): () => T {
 
 
 export function utilNoAuto(selection: d3.Selection): d3.Selection {
-    const isText = (selection.size() && selection.node().tagName.toLowerCase() === 'textarea');
+    const isText = (selection.size() && selection.node()!.tagName.toLowerCase() === 'textarea');
 
     return selection
         // assign 'new-password' even for non-password fields to prevent browsers (Chrome) ignoring 'off'
@@ -645,7 +714,7 @@ export function utilCompareIDs(left: EntityID, right: EntityID): number {
 // Database IDs (with positive numbers) before editor ones (with negative numbers).
 // Among each category, the closest number to 0 is the oldest.
 // Test IDs (any string that does not conform to OSM's ID scheme) are taken last.
-export function utilOldestID(ids: EntityID[]): EntityID | undefined {
+export function utilOldestID<T extends EntityID>(ids: T[]): T | undefined {
     if (ids.length === 0) {
         return undefined;
     }

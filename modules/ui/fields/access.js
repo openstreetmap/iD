@@ -102,12 +102,11 @@ export function uiFieldAccess(field, context) {
             options.splice(options.length - 4, 0, 'dismount');
         }
 
-        const stringsField = field.resolveReference('stringsCrossReference');
         return options.map(function(option) {
             return {
                 title: formatTag(type, option),
-                description: stringsField.hasTextForStringId('options.' + option + '.description')
-                    ? stringsField.t('options.' + option + '.description') : undefined,
+                description: field.hasTextForStringId('options.' + option + '.description')
+                    ? field.t('options.' + option + '.description') : undefined,
                 value: option
             };
         });
@@ -274,6 +273,12 @@ export function uiFieldAccess(field, context) {
             },
             rail_guard: {
                 access: 'no'
+            },
+            stile: {
+                bicycle: 'no',
+                foot: 'yes',
+                horse: 'no',
+                motor_vehicle: 'no'
             }
         }
     };

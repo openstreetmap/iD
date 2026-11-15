@@ -51,7 +51,7 @@ export function uiDataEditor(context) {
         // enter/update
         editor.enter()
             .append('div')
-            .attr('class', 'modal-section data-editor')
+            .attr('class', 'data-editor')
             .merge(editor)
             .call(dataHeader.datum(_datum));
 

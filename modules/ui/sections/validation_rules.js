@@ -17,7 +17,6 @@ export function uiSectionValidationRules(context) {
         .label(() => t.append('issues.rules.title'));
 
     var _ruleKeys = context.validator().getRuleKeys()
-        .filter(function(key) { return key !== 'maprules'; })
         .sort(function(key1, key2) {
             // alphabetize by localized title
             return t('issues.' + key1 + '.title') < t('issues.' + key2 + '.title') ? -1 : 1;

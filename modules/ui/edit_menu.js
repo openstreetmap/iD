@@ -140,7 +140,11 @@ export function uiEditMenu(context) {
         // update
         buttonsEnter
             .merge(buttons)
-            .classed('disabled', function(d) { return d.disabled(); });
+            .classed('disabled', d => {
+                // interruptible operations are not shown as disabled.
+                const reason = d.disabled();
+                return reason && !d.interrupts?.[reason];
+            });
 
         updatePosition();
 
@@ -168,8 +172,12 @@ export function uiEditMenu(context) {
                 utilHighlightEntities(operation.relatedEntityIds(), false, context);
             }
 
-            if (operation.disabled()) {
-                if (lastPointerUpType === 'touch' ||
+            const disabled = operation.disabled();
+            if (disabled) {
+                const interrupt = operation.interrupts?.[disabled];
+                if (interrupt) {
+                    interrupt();
+                } else if (lastPointerUpType === 'touch' ||
                     lastPointerUpType === 'pen') {
                     // there are no tooltips for touch interactions so flash feedback instead
                     context.ui().flash

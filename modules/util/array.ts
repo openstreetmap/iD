@@ -11,6 +11,13 @@ export function utilArrayIdentical<T>(a: T[], b: T[]): boolean {
     return true;
 }
 
+export function utilArrayPowerset<T>(array: T[]): T[][] {
+    return array.reduce<T[][]>(
+        (accum, value) => [...accum, ...accum.map((pick) => [...pick, value])],
+        [[]],
+    );
+}
+
 // http://2ality.com/2015/01/es6-set-operations.html
 
 // Difference (a \ b): create a set that contains those elements of set a that are not in set b.

@@ -6,7 +6,7 @@ describe('iD.actionDiscardTags', function() {
         var base = new iD.coreGraph([way]);
         var head = base.replace(way.update({ tags: { created_by: 'Potlatch', foo: 'bar' } }));
         var action = iD.actionDiscardTags(iD.coreDifference(base, head), discardTags);
-        expect(action(head).entity(way.id).tags).to.eql({foo: 'bar'});
+        expect(action(head).entity(way.id).tags).toEqual({foo: 'bar'});
     });
 
     it('discards obsolete tags from created entities', function() {
@@ -14,7 +14,7 @@ describe('iD.actionDiscardTags', function() {
         var base = new iD.coreGraph();
         var head = base.replace(way);
         var action = iD.actionDiscardTags(iD.coreDifference(base, head), discardTags);
-        expect(action(head).entity(way.id).tags).to.eql({});
+        expect(action(head).entity(way.id).tags).toEqual({});
     });
 
     it('doesn\'t modify entities without obsolete tags', function() {
@@ -22,7 +22,7 @@ describe('iD.actionDiscardTags', function() {
         var base = new iD.coreGraph();
         var head = base.replace(way);
         var action = iD.actionDiscardTags(iD.coreDifference(base, head), discardTags);
-        expect(action(head).entity(way.id)).to.equal(way);
+        expect(action(head).entity(way.id)).toEqual(way);
     });
 
     it('discards tags with empty values', function() {
@@ -30,7 +30,7 @@ describe('iD.actionDiscardTags', function() {
         var base = new iD.coreGraph();
         var head = base.replace(way);
         var action = iD.actionDiscardTags(iD.coreDifference(base, head), discardTags);
-        expect(action(head).entity(way.id).tags).to.eql({});
+        expect(action(head).entity(way.id).tags).toEqual({});
     });
 
     it('discards obsolete key-value pairs', () => {
@@ -38,7 +38,7 @@ describe('iD.actionDiscardTags', function() {
         const base = new iD.coreGraph([way]);
         const head = base.replace(way.update({ tags: { ...way.tags, foo: 'bar' } }));
         const action = iD.actionDiscardTags(iD.coreDifference(base, head), discardTags);
-        expect(action(head).entity(way.id).tags).to.eql({ foo: 'bar' });
+        expect(action(head).entity(way.id).tags).toEqual({ foo: 'bar' });
     });
 
     it('does not discard tags where the key matches but the value does not match', () => {
@@ -46,6 +46,6 @@ describe('iD.actionDiscardTags', function() {
         const base = new iD.coreGraph([way]);
         const head = base.replace(way.update({ tags: { ...way.tags, foo: 'bar' } }));
         const action = iD.actionDiscardTags(iD.coreDifference(base, head), discardTags);
-        expect(action(head).entity(way.id).tags).to.eql({ attribution: 'some other valid value', foo: 'bar' });
+        expect(action(head).entity(way.id).tags).toEqual({ attribution: 'some other valid value', foo: 'bar' });
     });
 });

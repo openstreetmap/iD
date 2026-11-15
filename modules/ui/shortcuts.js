@@ -4,6 +4,18 @@ import { t } from '../core/localizer';
 import { uiModal } from './modal';
 import { uiCmdSequence } from './cmd_sequence';
 
+/** @typedef {{
+    tab: string;
+    text: string;
+    columns: {
+        rows: {
+            section: string;
+            text: string;
+            separator?: string;
+        }[];
+    }[];
+}[]} ShortcutsJSON */
+
 
 export function uiShortcuts(context) {
     var _activeTab = 0;

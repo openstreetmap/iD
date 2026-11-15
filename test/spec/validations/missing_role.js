@@ -46,55 +46,55 @@ describe('iD.validations.missing_role', function () {
 
     it('has no errors on init', function() {
         var issues = validate();
-        expect(issues).to.have.lengthOf(0);
+        expect(issues).toHaveLength(0);
     });
 
     it('ignores way with no relations', function() {
         createWay({});
         var issues = validate();
-        expect(issues).to.have.lengthOf(0);
+        expect(issues).toHaveLength(0);
     });
 
     it('ignores way with null role in non-multipolygon relation', function() {
         createRelation({ type: 'boundary' }, null);
         var issues = validate();
-        expect(issues).to.have.lengthOf(0);
+        expect(issues).toHaveLength(0);
     });
 
     it('ignores way with outer role in multipolygon', function() {
         createRelation({ type: 'multipolygon' }, 'outer');
         var issues = validate();
-        expect(issues).to.have.lengthOf(0);
+        expect(issues).toHaveLength(0);
     });
 
     it('ignores way with inner role in multipolygon', function() {
         createRelation({ type: 'multipolygon' }, 'inner');
         var issues = validate();
-        expect(issues).to.have.lengthOf(0);
+        expect(issues).toHaveLength(0);
     });
 
     it('flags way with null role in multipolygon', function() {
         createRelation({ type: 'multipolygon' }, null);
         var issues = validate();
-        expect(issues).to.have.lengthOf(2);
-        expect(issues[0].id).to.eql(issues[1].id);
+        expect(issues).toHaveLength(2);
+        expect(issues[0].id).toEqual(issues[1].id);
         var issue = issues[0];
-        expect(issue.type).to.eql('missing_role');
-        expect(issue.entityIds).to.have.lengthOf(2);
-        expect(issue.entityIds[0]).to.eql('w-1');
-        expect(issue.entityIds[1]).to.eql('r-1');
+        expect(issue.type).toEqual('missing_role');
+        expect(issue.entityIds).toHaveLength(2);
+        expect(issue.entityIds[0]).toEqual('w-1');
+        expect(issue.entityIds[1]).toEqual('r-1');
     });
 
     it('flags way with whitespace string role in multipolygon', function() {
         createRelation({ type: 'multipolygon' }, '   ');
         var issues = validate();
-        expect(issues).to.have.lengthOf(2);
-        expect(issues[0].id).to.eql(issues[1].id);
+        expect(issues).toHaveLength(2);
+        expect(issues[0].id).toEqual(issues[1].id);
         var issue = issues[0];
-        expect(issue.type).to.eql('missing_role');
-        expect(issue.entityIds).to.have.lengthOf(2);
-        expect(issue.entityIds[0]).to.eql('w-1');
-        expect(issue.entityIds[1]).to.eql('r-1');
+        expect(issue.type).toEqual('missing_role');
+        expect(issue.entityIds).toHaveLength(2);
+        expect(issue.entityIds[0]).toEqual('w-1');
+        expect(issue.entityIds[1]).toEqual('r-1');
     });
 
 });

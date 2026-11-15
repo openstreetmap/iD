@@ -113,7 +113,7 @@ export function uiPanelMeasurement(context) {
             }
         }
 
-        selection.html('');
+        selection.text('');
 
         if (heading && typeof heading === 'function') {
             selection

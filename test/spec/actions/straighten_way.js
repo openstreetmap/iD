@@ -1,5 +1,7 @@
+import { geoMercator as d3_geoMercator } from 'd3-geo';
+
 describe('iD.actionStraightenWay', function () {
-    var projection = d3.geoMercator();
+    var projection = d3_geoMercator();
 
     describe('#disabled', function () {
         it('returns falsy for ways with internal nodes near centerline', function () {
@@ -10,7 +12,7 @@ describe('iD.actionStraightenWay', function () {
                 new iD.osmNode({id: 'd', loc: [3, 0]}),
                 new iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd']})
             ]);
-            expect(iD.actionStraightenWay(['-'], projection).disabled(graph)).not.to.be.ok;
+            expect(iD.actionStraightenWay(['-'], projection).disabled(graph)).toBeFalsy();
         });
 
         it('returns \'too_bendy\' for ways with internal nodes far off centerline', function () {
@@ -21,7 +23,7 @@ describe('iD.actionStraightenWay', function () {
                 new iD.osmNode({id: 'd', loc: [3, 0]}),
                 new iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd']})
             ]);
-            expect(iD.actionStraightenWay(['-'], projection).disabled(graph)).to.equal('too_bendy');
+            expect(iD.actionStraightenWay(['-'], projection).disabled(graph)).toEqual('too_bendy');
         });
 
         it('returns \'too_bendy\' for ways with coincident start/end nodes', function () {
@@ -32,7 +34,7 @@ describe('iD.actionStraightenWay', function () {
                 new iD.osmNode({id: 'd', loc: [0, 0]}),
                 new iD.osmWay({id: '-', nodes: ['a', 'b', 'c', 'd']})
             ]);
-            expect(iD.actionStraightenWay(['-'], projection).disabled(graph)).to.equal('too_bendy');
+            expect(iD.actionStraightenWay(['-'], projection).disabled(graph)).toEqual('too_bendy');
         });
     });
 
@@ -46,7 +48,7 @@ describe('iD.actionStraightenWay', function () {
         ]);
 
         graph = iD.actionStraightenWay(['-'], projection)(graph);
-        expect(graph.entity('-').nodes).to.eql(['a', 'c']);
+        expect(graph.entity('-').nodes).toEqual(['a', 'c']);
         expect(graph.hasEntity('b')).to.eq(undefined);
     });
 
@@ -59,9 +61,9 @@ describe('iD.actionStraightenWay', function () {
         ]);
 
         graph = iD.actionStraightenWay(['-'], projection)(graph);
-        expect(graph.entity('-').nodes).to.eql(['a', 'b', 'c']);
-        expect(graph.entity('b').loc[0]).to.be.closeTo(1, 1e-6);
-        expect(graph.entity('b').loc[1]).to.be.closeTo(0, 1e-6);
+        expect(graph.entity('-').nodes).toEqual(['a', 'b', 'c']);
+        expect(graph.entity('b').loc[0]).toBeCloseTo(1, 6);
+        expect(graph.entity('b').loc[1]).toBeCloseTo(0, 6);
     });
 
     it('does not delete nodes connected to other ways', function() {
@@ -74,9 +76,9 @@ describe('iD.actionStraightenWay', function () {
         ]);
 
         graph = iD.actionStraightenWay(['-'], projection)(graph);
-        expect(graph.entity('-').nodes).to.eql(['a', 'b', 'c']);
-        expect(graph.entity('b').loc[0]).to.be.closeTo(1, 1e-6);
-        expect(graph.entity('b').loc[1]).to.be.closeTo(0, 1e-6);
+        expect(graph.entity('-').nodes).toEqual(['a', 'b', 'c']);
+        expect(graph.entity('b').loc[0]).toBeCloseTo(1, 6);
+        expect(graph.entity('b').loc[1]).toBeCloseTo(0, 6);
     });
 
     it('straightens multiple, connected ways', function() {
@@ -95,10 +97,10 @@ describe('iD.actionStraightenWay', function () {
         ]);
 
         graph = iD.actionStraightenWay(['-', '--'], projection)(graph);
-        expect(graph.entity('-').nodes).to.eql(['a', 'b', 'd']);
-        expect(graph.entity('--').nodes).to.eql(['d', 'f', 'h']);
-        expect(graph.entity('f').loc[0]).to.be.closeTo(5, 1e-6);
-        expect(graph.entity('f').loc[1]).to.be.closeTo(0, 1e-6);
+        expect(graph.entity('-').nodes).toEqual(['a', 'b', 'd']);
+        expect(graph.entity('--').nodes).toEqual(['d', 'f', 'h']);
+        expect(graph.entity('f').loc[0]).toBeCloseTo(5, 6);
+        expect(graph.entity('f').loc[1]).toBeCloseTo(0, 6);
         expect(graph.hasEntity('g')).to.eq(undefined);
     });
 
@@ -118,16 +120,16 @@ describe('iD.actionStraightenWay', function () {
         ]);
 
         graph = iD.actionStraightenWay(['-', '--'], projection)(graph);
-        expect(graph.entity('-').nodes).to.eql(['a', 'b', 'd']);
-        expect(graph.entity('--').nodes).to.eql(['h', 'f', 'd']);
-        expect(graph.entity('f').loc[0]).to.be.closeTo(5, 1e-6);
-        expect(graph.entity('f').loc[1]).to.be.closeTo(0, 1e-6);
+        expect(graph.entity('-').nodes).toEqual(['a', 'b', 'd']);
+        expect(graph.entity('--').nodes).toEqual(['h', 'f', 'd']);
+        expect(graph.entity('f').loc[0]).toBeCloseTo(5, 6);
+        expect(graph.entity('f').loc[1]).toBeCloseTo(0, 6);
         expect(graph.hasEntity('g')).to.eq(undefined);
     });
 
     describe('transitions', function () {
         it('is transitionable', function() {
-            expect(iD.actionStraightenWay().transitionable).to.be.true;
+            expect(iD.actionStraightenWay().transitionable).toBe(true);
         });
 
         it('straighten at t = 0', function() {
@@ -140,11 +142,11 @@ describe('iD.actionStraightenWay', function () {
             ]);
 
             graph = iD.actionStraightenWay(['-'], projection)(graph, 0);
-            expect(graph.entity('-').nodes).to.eql(['a', 'b', 'c', 'd']);
-            expect(graph.entity('b').loc[0]).to.be.closeTo(1, 1e-6);
-            expect(graph.entity('b').loc[1]).to.be.closeTo(0.01, 1e-6);
-            expect(graph.entity('c').loc[0]).to.be.closeTo(2, 1e-6);
-            expect(graph.entity('c').loc[1]).to.be.closeTo(-0.01, 1e-6);
+            expect(graph.entity('-').nodes).toEqual(['a', 'b', 'c', 'd']);
+            expect(graph.entity('b').loc[0]).toBeCloseTo(1, 6);
+            expect(graph.entity('b').loc[1]).toBeCloseTo(0.01, 6);
+            expect(graph.entity('c').loc[0]).toBeCloseTo(2, 6);
+            expect(graph.entity('c').loc[1]).toBeCloseTo(-0.01, 6);
         });
 
         it('straighten at t = 0.5', function() {
@@ -157,11 +159,11 @@ describe('iD.actionStraightenWay', function () {
             ]);
 
             graph = iD.actionStraightenWay(['-'], projection)(graph, 0.5);
-            expect(graph.entity('-').nodes).to.eql(['a', 'b', 'c', 'd']);
-            expect(graph.entity('b').loc[0]).to.be.closeTo(1, 1e-6);
-            expect(graph.entity('b').loc[1]).to.be.closeTo(0.005, 1e-6);
-            expect(graph.entity('c').loc[0]).to.be.closeTo(2, 1e-6);
-            expect(graph.entity('c').loc[1]).to.be.closeTo(-0.005, 1e-6);
+            expect(graph.entity('-').nodes).toEqual(['a', 'b', 'c', 'd']);
+            expect(graph.entity('b').loc[0]).toBeCloseTo(1, 6);
+            expect(graph.entity('b').loc[1]).toBeCloseTo(0.005, 6);
+            expect(graph.entity('c').loc[0]).toBeCloseTo(2, 6);
+            expect(graph.entity('c').loc[1]).toBeCloseTo(-0.005, 6);
         });
 
         it('straighten at t = 1', function() {
@@ -174,9 +176,9 @@ describe('iD.actionStraightenWay', function () {
             ]);
 
             graph = iD.actionStraightenWay(['-'], projection)(graph, 1);
-            expect(graph.entity('-').nodes).to.eql(['a', 'b', 'd']);
-            expect(graph.entity('b').loc[0]).to.be.closeTo(1, 1e-6);
-            expect(graph.entity('b').loc[1]).to.be.closeTo(0, 1e-6);
+            expect(graph.entity('-').nodes).toEqual(['a', 'b', 'd']);
+            expect(graph.entity('b').loc[0]).toBeCloseTo(1, 6);
+            expect(graph.entity('b').loc[1]).toBeCloseTo(0, 6);
             expect(graph.hasEntity('c')).to.eq(undefined);
         });
     });

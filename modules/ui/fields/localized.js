@@ -45,7 +45,7 @@ export function uiFieldLocalized(field, context) {
     var _multilingual = [];
     var _buttonTip = uiTooltip()
         .title(() => t.append('translate.translate'))
-        .placement('left');
+        .placement(localizer.textDirection() === 'rtl' ? 'right' : 'left');
     var _entityIDs = [];
 
 

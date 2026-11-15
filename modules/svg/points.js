@@ -3,13 +3,16 @@ import { clamp } from 'es-toolkit/compat';
 import { select as d3_select } from 'd3';
 
 import { geoScaleToZoom } from '../geo';
-import { osmEntity } from '../osm';
+import { osmIdManager } from '../osm';
 import { svgPointTransform } from './helpers';
 import { svgTagClasses } from './tag_classes';
 import { presetManager } from '../presets';
+import { getRadiiInPixels } from '../core';
 import { textWidth, isAddressPoint } from './labels';
 
 export function svgPoints(projection, context) {
+    var _currSelected = new Set();
+    var _prevSelected = new Set();
 
     function markerPath(selection, klass) {
         selection
@@ -40,7 +43,7 @@ export function svgPoints(projection, context) {
     function fastEntityKey(d) {
         const mode = context.mode();
         const isMoving = mode && /^(add|draw|drag|move|rotate)/.test(mode.id);
-        return isMoving ? d.id : osmEntity.key(d);
+        return isMoving ? d.id : osmIdManager.key(d);
     }
 
 
@@ -87,6 +90,7 @@ export function svgPoints(projection, context) {
 
 
     function drawPoints(selection, graph, entities, filter) {
+        const selected = context.selectedIDs();
         var wireframe = context.surface().classed('fill-wireframe');
         var zoom = geoScaleToZoom(projection.scale());
         var base = context.history().base();
@@ -158,6 +162,20 @@ export function svgPoints(projection, context) {
             })
             .call(svgTagClasses());
 
+        // Highlighted vertices with a radius/diameter get a circle
+        const circles = groups
+            .selectAll('.radius')
+            .data((d) => selected.includes(d.id) ? getRadiiInPixels(d, projection) : []);
+
+        circles.exit()
+            .remove();
+
+        circles.enter()
+            .insert('circle', '.shadow')
+            .attr('class', 'radius')
+            .merge(circles)
+            .attr('r', d => d);
+
         groups.select('.shadow');   // propagate bound data
         groups.select('.stroke');   // propagate bound data
         groups.select('.icon')      // propagate bound data
@@ -172,6 +190,19 @@ export function svgPoints(projection, context) {
         touchLayer
             .call(drawTargets, graph, points, filter);
     }
+
+    // partial redraw - only update the selected items..
+    drawPoints.drawSelected = (selection, graph) => {
+        _prevSelected = _currSelected;
+        _currSelected = new Set(context.selectedIDs());
+
+        const ids = new Set([..._prevSelected, ..._currSelected]);
+        const selectedEntities = [...ids]
+            .map(id => graph.hasEntity(id))
+            .filter(Boolean);
+
+        drawPoints(selection, graph, selectedEntities, d => ids.has(d.id));
+    };
 
 
     return drawPoints;

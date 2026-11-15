@@ -5,6 +5,7 @@ import { t } from '../core/localizer';
 import { svgIcon } from '../svg/icon';
 import { services } from '../services';
 import { localeDateString } from '../util/date';
+import { utilSanitizeHTML } from '../util/sanitize';
 
 
 export function uiNoteComments() {
@@ -74,7 +75,7 @@ export function uiNoteComments() {
         mainEnter
             .append('div')
             .attr('class', 'comment-text')
-            .html(function(d) { return d.html; })
+            .html(d => utilSanitizeHTML(d.html))
             .selectAll('a')
                 .attr('rel', 'noopener nofollow')
                 .attr('target', '_blank');
@@ -99,7 +100,7 @@ export function uiNoteComments() {
                 if (!user || !user.image_url) return;
 
                 selection.selectAll('.comment-avatar.user-' + uid)
-                    .html('')
+                    .text('')
                     .append('img')
                     .attr('class', 'icon comment-avatar-icon')
                     .attr('src', user.image_url)

@@ -1,4 +1,4 @@
-export function utilCleanTags(tags: Tags) {
+export function utilCleanTags(tags: TagsUpdate) {
     var out: Tags = {};
     for (var k in tags) {
         if (!k) continue;

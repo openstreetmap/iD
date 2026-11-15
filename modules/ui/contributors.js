@@ -27,7 +27,7 @@ export function uiContributors(context) {
         var u = Object.keys(users),
             subset = u.slice(0, u.length > limit ? limit - 1 : limit);
 
-        wrap.html('')
+        wrap.text('')
             .call(svgIcon('#iD-icon-nearby', 'pre-text light'));
 
         const userList = selection => selection.selectAll()

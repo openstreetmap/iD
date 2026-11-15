@@ -21,7 +21,7 @@ describe('iD.coreValidator', function() {
         var validator = new iD.coreValidator(context);
         validator.init();
         var issues = validator.getIssues();
-        expect(issues).to.have.lengthOf(0);
+        expect(issues).toHaveLength(0);
     });
 
     it('validate returns a promise, fulfilled when the validation has completed', async () => {
@@ -29,16 +29,16 @@ describe('iD.coreValidator', function() {
         var validator = new iD.coreValidator(context);
         validator.init();
         var issues = validator.getIssues();
-        expect(issues).to.have.lengthOf(0);
+        expect(issues).toHaveLength(0);
 
         var prom = validator.validate();
         await prom;
         issues = validator.getIssues();
-        expect(issues).to.have.lengthOf(1);
+        expect(issues).toHaveLength(1);
         var issue = issues[0];
-        expect(issue.type).to.eql('missing_tag');
-        expect(issue.entityIds).to.have.lengthOf(1);
-        expect(issue.entityIds[0]).to.eql('w-1');
+        expect(issue.type).toEqual('missing_tag');
+        expect(issue.entityIds).toHaveLength(1);
+        expect(issue.entityIds[0]).toEqual('w-1');
     });
 
     it('removes validation issue when highway is no longer disconnected', async () => {
@@ -56,7 +56,7 @@ describe('iD.coreValidator', function() {
         await validator.validate();
         // Should produce disconnected way error
         let issues = validator.getIssues();
-        expect(issues).to.have.lengthOf(1);
+        expect(issues).toHaveLength(1);
 
         // Add new node with entrance node to simulate connection with rest of map
         var n3 = new iD.osmNode({ id: 'n-3', loc: [4, 6], tags: { 'entrance': 'yes' } });
@@ -68,7 +68,7 @@ describe('iD.coreValidator', function() {
         await validator.validate();
         // Should be no errors
         issues = validator.getIssues();
-        expect(issues).to.have.lengthOf(0);
+        expect(issues).toHaveLength(0);
     });
 
     it('add validation issue when highway becomes disconnected', async () => {
@@ -90,7 +90,7 @@ describe('iD.coreValidator', function() {
         await validator.validate();
         // Should be no errors
         let issues = validator.getIssues();
-        expect(issues).to.have.lengthOf(0);
+        expect(issues).toHaveLength(0);
 
         // delete second way -> first way becomes disconnected form the rest of the network
         context.perform(
@@ -100,7 +100,7 @@ describe('iD.coreValidator', function() {
         await validator.validate();
         // Should produce disconnected way error
         issues = validator.getIssues();
-        expect(issues).to.have.lengthOf(1);
+        expect(issues).toHaveLength(1);
     });
 
     it('removes validation issue when untagged way is becomes part of a boundary relation', async () => {
@@ -123,7 +123,7 @@ describe('iD.coreValidator', function() {
         await validator.validate();
         // There should be a validation error about the untagged way
         let issues = validator.getIssues();
-        expect(issues).to.have.lengthOf(1);
+        expect(issues).toHaveLength(1);
 
         // add way to relation
         context.perform(
@@ -133,7 +133,7 @@ describe('iD.coreValidator', function() {
         await validator.validate();
         // Validation error should be fixed
         issues = validator.getIssues();
-        expect(issues).to.have.lengthOf(0);
+        expect(issues).toHaveLength(0);
     });
 
     it('add validation issue when untagged way is removed from boundary relation', async () => {
@@ -153,7 +153,7 @@ describe('iD.coreValidator', function() {
         await validator.validate();
         // Should be no errors
         let issues = validator.getIssues();
-        expect(issues).to.have.lengthOf(0);
+        expect(issues).toHaveLength(0);
 
         // delete relation
         context.perform(
@@ -163,6 +163,6 @@ describe('iD.coreValidator', function() {
         await validator.validate();
         // Should produce untagged feature error
         issues = validator.getIssues();
-        expect(issues).to.have.lengthOf(1);
+        expect(issues).toHaveLength(1);
     });
 });

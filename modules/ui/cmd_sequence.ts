@@ -151,7 +151,7 @@ export function uiCmdSequence(shortcut: CmdSequence) {
                     .append('span')
                     .attr('class', 'gesture')
                     .each(function (d) {
-                        d3_select(this).call(t.addOrUpdate(d.gesture));
+                        d3_select(this).call(t.addOrUpdate(d.gesture!));
                     });
             });
     };

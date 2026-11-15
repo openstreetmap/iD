@@ -8,6 +8,7 @@ import { uiPane } from '../pane';
 import { t, localizer } from '../../core/localizer';
 import { uiTooltip } from '../tooltip';
 import { helpHtml } from '../intro/helper';
+import { utilSanitizeHTML } from '../../util/sanitize';
 
 export function uiPaneHelp(context) {
 
@@ -268,7 +269,7 @@ export function uiPaneHelp(context) {
         return {
             title: t.addOrUpdate(helpkey + '.title'),
             _title: t(helpkey + '.title'),
-            content: marked(text.trim())
+            sanitized_html: utilSanitizeHTML(marked(text.trim()))
                 // use keyboard key styling for shortcuts
                 .replace(/<code>/g, '<kbd>')
                 .replace(/<\/code>/g, '<\/kbd>')
@@ -289,7 +290,9 @@ export function uiPaneHelp(context) {
             content.property('scrollTop', 0);
             helpPane.selection().select('.pane-heading h2').call(d.title);
 
-            body.html(d.content);
+            body.html(d.sanitized_html);
+            body.selectAll('p')
+                .attr('dir', 'auto');
             body.selectAll('a')
                 .attr('target', '_blank');
             menuItems.classed('selected', function(m) {
