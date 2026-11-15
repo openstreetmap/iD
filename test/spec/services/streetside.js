@@ -79,6 +79,28 @@ describe('iD.serviceStreetside', function() {
             expect(spy).toHaveBeenCalledOnce();
         });
 
+        it('retries failed tile requests', async () => {
+            context.projection
+                .scale(iD.geoZoomToScale(18))
+                .translate([-1863988.9381333336, 762.8270222954452])
+                .clipExtent([[0,0], dimensions]);
+
+            fetchMock.reset();
+            fetchMock.mock(/MetaData\/Streetside/, 500);
+
+            streetside.loadBubbles(context.projection, 0);
+            await setTimeout(200);
+
+            const firstRequestCount = fetchMock.calls().length;
+            expect(firstRequestCount).toBeGreaterThan(0);
+            expect(Object.keys(streetside.cache().bubbles.inflight)).toHaveLength(0);
+
+            streetside.loadBubbles(context.projection, 0);
+            await setTimeout(200);
+
+            expect(fetchMock.calls().length).toBeGreaterThan(firstRequestCount);
+        });
+
         it('does not load bubbles around null island', async () => {
             context.projection
                 .scale(iD.geoZoomToScale(18))

@@ -163,6 +163,23 @@ describe('iD.servicePanoramax', function() {
             expect(result).toEqual([]);
         });
 
+        it('retries failed tile requests', async () => {
+            fetchMock.reset();
+            fetchMock.mock(/api\.panoramax\.xyz/, 500);
+
+            panoramax.loadImages(context.projection);
+            await setTimeout(200);
+
+            const firstRequestCount = fetchMock.calls().length;
+            expect(firstRequestCount).toBeGreaterThan(0);
+            expect(Object.keys(panoramax.cache().requests.inflight)).toHaveLength(0);
+
+            panoramax.loadImages(context.projection);
+            await setTimeout(200);
+
+            expect(fetchMock.calls().length).toBeGreaterThan(firstRequestCount);
+        });
+
         it('load images quickly under normal conditions', function() {
             const start = performance.now();
             panoramax.loadImages(context.projection);

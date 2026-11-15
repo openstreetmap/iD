@@ -152,7 +152,9 @@ function loadNextTilePage(which: 'bubbles', url: string, tile: Omit<Tile, 'xyz'>
   const id = tile.id + ',' + String(nextPage);
   if (cache.loaded[id] || cache.inflight[id]) return;
 
-  cache.inflight[id] = getBubbles(url, tile, response => {
+  const controller = getBubbles(url, tile, response => {
+    if (cache.inflight[id] !== controller) return;
+
     cache.loaded[id] = true;
     delete cache.inflight[id];
     if (!response) return;
@@ -201,14 +203,26 @@ function loadNextTilePage(which: 'bubbles', url: string, tile: Omit<Tile, 'xyz'>
     if (which === 'bubbles') {
       dispatch.call('loadedImages');
     }
+  }, error => {
+    if (cache.inflight[id] !== controller) return;
+
+    delete cache.inflight[id];
+    console.error(error);
   });
+
+  cache.inflight[id] = controller;
 }
 
 
 /**
  * getBubbles() handles the request to the server for a tile extent of 'bubbles' (streetside image locations).
  */
-function getBubbles(url: string, tile: Omit<Tile, 'xyz'>, callback: (result: BubbleResult | null) => void) {
+function getBubbles(
+  url: string,
+  tile: Omit<Tile, 'xyz'>,
+  callback: (result: BubbleResult | null) => void,
+  onError: (error: Error) => void
+) {
   let rect = tile.extent.rectangle();
     const controller = new AbortController();
 
@@ -230,10 +244,8 @@ function getBubbles(url: string, tile: Omit<Tile, 'xyz'>, callback: (result: Bub
         }
         return callback(result || null);
       }).catch(function(err) {
-        if (err.name === 'AbortError') {
-        // ignore aborted requests, e.g. from duplicate requests while zooming/panning the map
-        } else {
-          throw new Error(err);
+        if (err.name !== 'AbortError') {
+          onError(err instanceof Error ? err : new Error(String(err)));
         }
       });
     return controller;

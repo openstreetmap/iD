@@ -120,8 +120,6 @@ function loadTile(which, url, tile, zoom) {
             if (!response.ok) {
                 throw new Error(response.status + ' ' + response.statusText);
             }
-            cache.loaded[tileId] = true;
-            delete cache.inflight[tileId];
             return response.arrayBuffer();
         })
         .then(function(data) {
@@ -130,6 +128,7 @@ function loadTile(which, url, tile, zoom) {
             }
 
             loadTileDataToCache(data, tile, zoom);
+            cache.loaded[tileId] = true;
 
             if (which === 'images') {
                 dispatch.call('loadedImages');
@@ -142,6 +141,11 @@ function loadTile(which, url, tile, zoom) {
                 cache.loaded[tileId] = true;
             } else {
                 console.error(e);
+            }
+        })
+        .finally(function () {
+            if (cache.inflight[tileId] === controller) {
+                delete cache.inflight[tileId];
             }
         });
 }
