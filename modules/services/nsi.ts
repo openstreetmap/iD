@@ -549,7 +549,7 @@ function _upgradeTags(tags: Tags, loc: Vec2) {
 
       if (                                        // Exceptions, skip this hit
         (!itemQID || notQIDs?.includes(itemQID)) ||// No `*:wikidata` or matched a `not:*:wikidata`
-        (newTags.office && !item.tags.office)     // feature may be a corporate office for a brand? - #6416
+        ((newTags.office || newTags.building === 'office') && !item.tags.office) // Avoid matching office features with NSI entries that are not tagged as offices
       ) {
         item = null;
         continue;  // continue looking
