@@ -153,8 +153,8 @@ export default new class CommonsService extends EventDispatcher<{ loadedImages: 
 
             // we're called two 'props', quasi two separate APIs,
             // so the limit must be the same for pagination to work.
-            ggslimit: '500',
-            colimit: '500',
+            ggslimit: '5',
+            colimit: '5',
             prop: 'coordinates|imageinfo',
             iiprop: 'mediatype|metadata|timestamp|user', // extmetadata is not included, since we don't need license filtering
             // iiextmetadatafilter: 'LicenseShortName|AttributionRequired',
