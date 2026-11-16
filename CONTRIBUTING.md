@@ -106,7 +106,7 @@ You can drag the image or video file onto the GitHub issue and it will be includ
 * If you can, enable web developer extensions and report the
 JavaScript error message.
 * When in doubt, over-describe the bug and how you discovered it.
-* Report must not be copy-paste of LLM output
+* Report must not be a copy-paste of LLM output
 
 When requesting a feature:
 
