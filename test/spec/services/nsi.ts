@@ -107,14 +107,21 @@ describe('iD.serviceNsi', function () {
             });
         });
 
-        it('does not suggest transformer tags for the Sydney Trains HQ office building', () => {
+        it('does not suggest unrelated feature tags for the Sydney Trains HQ office building', () => {
             const originalTags = {
                 building: 'office',
                 wikidata: 'Q7660181',
                 name: 'Sydney Trains HQ'
             };
             const result = iD.services.nsi.upgradeTags(originalTags, nullIslandLocation);
-            expect(result).toBeNull();
+            expect(result).not.toBeNull();
+            expect(result?.newTags).toEqual({
+                building: 'office',
+                name: 'Sydney Trains HQ',
+                operator: 'Sydney Trains',
+                'operator:wikidata': 'Q7660181'
+            });
+            expect(result?.newTags).not.toHaveProperty('power');
         });
     });
 });

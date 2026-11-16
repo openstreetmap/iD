@@ -46,12 +46,13 @@ interface KVN {
     k: string;
     v: string;
     n: string;
+    genericBuildingFallback: boolean;
 }
 
 const WHICH = <const>['primary', 'alternate'];
 type Which = (typeof WHICH)[number];
 
-type KVs = Record<Which, Set<string>>;
+type KVs = Record<Which, Set<string>> & { genericBuildingFallback?: boolean };
 
 // DATA
 
@@ -274,11 +275,13 @@ function gatherKVs(tags: Tags) {
   // For example, a way with `building=yes` + `name=Westfield` may be a Westfield department store.
   // But a way with `building=yes` + `name=Westfield` + `public_transport=station` is a train station for a town named "Westfield"
   const preset = presetManager.matchTags(tags, 'area')!;
+  let genericBuildingFallback = false;
   if (buildingPreset[preset.id]) {
     alternate.add('building/yes');
+    genericBuildingFallback = true;
   }
 
-  return { primary: primary, alternate: alternate };
+  return { primary: primary, alternate: alternate, genericBuildingFallback: genericBuildingFallback };
 }
 
 
@@ -456,7 +459,7 @@ function gatherTuples(tryKVs: KVs, tryNames: KVs) {
           const parts = kv.split('/', 2);
           const k = parts[0];
           const v = parts[1];
-          tuples.push({ k: k, v: v, n: n });
+          tuples.push({ k: k, v: v, n: n, genericBuildingFallback: tryKVs.genericBuildingFallback === true && kv === 'building/yes' });
         });
       });
     });
@@ -549,7 +552,7 @@ function _upgradeTags(tags: Tags, loc: Vec2) {
 
       if (                                        // Exceptions, skip this hit
         (!itemQID || notQIDs?.includes(itemQID)) ||// No `*:wikidata` or matched a `not:*:wikidata`
-        ((newTags.office || newTags.building === 'office') && !item.tags.office) // Avoid matching office features with NSI entries that are not tagged as offices
+        (newTags.office && !item.tags.office)     // feature may be a corporate office for a brand? - #6416
       ) {
         item = null;
         continue;  // continue looking
@@ -603,7 +606,16 @@ function _upgradeTags(tags: Tags, loc: Vec2) {
     }
 
     // Do the tag upgrade
-    Object.assign(newTags, item.tags, keepTags);
+    const suggestedTags = tuple.genericBuildingFallback
+      ? Object.fromEntries(
+          Object.entries(item.tags).filter(([key]) =>
+            key === item.mainTag ||
+            key === item.mainTag.replace('wikidata', 'wikipedia') ||
+            key === item.mainTag.replace(':wikidata', '')
+          )
+        )
+      : item.tags;
+    Object.assign(newTags, suggestedTags, keepTags);
 
     // Swap `route` back to `route_master` - name-suggestion-index#5184
     if (isRouteMaster) {
