@@ -51,7 +51,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Don't discard incomplete lines in the (text mode) raw tag editor when switching browser tabs ([#12958], thanks [@aakarshitv])
 * Disable the locator overlay when osm carto is selected as the background ([#9931], thanks [@k-yle])
 * Add invert filter for background imagery ([#12340], thanks [@kalucky0])
-* Don't show postcode and city in the address field in Belgium
+* Don't show postcode and city for the address field in Belgium ([thread](https://community.openstreetmap.org/t/hide-postcode-and-city-fields-in-id-in-belgium/149493))
 #### :scissors: Operations
 * Treat `conveying=*` the same as `oneway=*` when reversing a line ([#13027], thanks [@k-yle])
 * Add shortcut tooltip to reverse direction button ([#12961], thanks [@SaifuddinM23])
