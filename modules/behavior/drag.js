@@ -152,13 +152,17 @@ export function behaviorDrag(context) {
                     } else {
                         _targetEntity = datum?.properties?.entity;
                         if (_targetEntity && target[matchesSelector](_selector)) {
-                            const selectedIDs = context.selectedIDs();
+                            const graph = context.graph();
+                            const selectedIDs = context.selectedIDs()
+                                .map(id => graph.entity(id))
+                                .flatMap(e => [e, ...graph.parentWays(e)]) // include parent ways of selected vertex
+                                .map(e => e.id);
                             if (selectedIDs.includes(_targetEntity.id)) {
                                 // node itself is selected
                                 return pointerdown.call(target, d3_event);
                             }
                             const parents = _targetEntity.parents // a temporary drag vertex
-                                || context.graph().parentWays(_targetEntity); // a regular vertex
+                                || graph.parentWays(_targetEntity); // a regular vertex
                             if (parents.some(parent => selectedIDs.includes(parent.id))) {
                                 return pointerdown.call(target, d3_event);
                             }
