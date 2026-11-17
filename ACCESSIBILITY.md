@@ -53,8 +53,6 @@ elsewhere in this document.
 
 <br/>
 
-All features from "widely available" [browser baseline](https://developer.mozilla.org/en-US/docs/Glossary/Baseline/Compatibility) can be freely used. More modern APIs may be used, as long as there's a fallback.
-
 ## 🕹 Interaction Support
 
 iD has traditionally assumed the mapper will be interacting via a mouse and keyboard,
