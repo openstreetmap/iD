@@ -88,6 +88,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Add Hong Kong and Macao address formats ([#12704], thanks [@Vectorial1024])
 * Fix inconsistent RTL checkboxes ([#13181], thanks [@k-yle])
 * Fix some unreadable tooltips in right-to-left layout ([#13178], thanks [@k-yle])
+* When searching for a language in the multilingual name field, also consider the respective _base_ language's native name (e.g. `српски` for `sr` in `Cyrl` script) ([#8015])
 #### :hourglass: Performance
 #### :mortar_board: Walkthrough / Help
 #### :rocket: Presets
@@ -100,6 +101,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Drop support for `oneway=1` ([#13026], thanks [@k-yle])
 * Drop confusing dead code ([#13014], thanks [@matkoniecz])
 
+[#8015]: https://github.com/openstreetmap/iD/issues/8015
 [#8402]: https://github.com/openstreetmap/iD/issues/8402
 [#8424]: https://github.com/openstreetmap/iD/issues/8424
 [#9732]: https://github.com/openstreetmap/iD/pull/9732
