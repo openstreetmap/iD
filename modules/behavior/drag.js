@@ -26,7 +26,7 @@ import { utilFastMouse, utilPrefixCSSProperty, utilPrefixDOMProperty } from '../
     * An `off` function is available that unbinds the drag's internal event handlers.
  */
 
-export function behaviorDrag() {
+export function behaviorDrag(context) {
     var dispatch = d3_dispatch('start', 'move', 'end');
 
     // see also behaviorSelect
@@ -144,11 +144,25 @@ export function behaviorDrag() {
                 for (; target && target !== root; target = target.parentNode) {
                     var datum = target.__data__;
 
-                    _targetEntity = datum instanceof osmNote ? datum
-                        : datum && datum.properties && datum.properties.entity;
-
-                    if (_targetEntity && target[matchesSelector](_selector)) {
-                        return pointerdown.call(target, d3_event);
+                    if (datum instanceof osmNote) {
+                        _targetEntity = datum;
+                        if (target[matchesSelector](_selector)) {
+                            return pointerdown.call(target, d3_event);
+                        }
+                    } else {
+                        _targetEntity = datum?.properties?.entity;
+                        if (_targetEntity && target[matchesSelector](_selector)) {
+                            const selectedIDs = context.selectedIDs();
+                            if (selectedIDs.includes(_targetEntity.id)) {
+                                // node itself is selected
+                                return pointerdown.call(target, d3_event);
+                            }
+                            const parents = _targetEntity.parents // a temporary drag vertex
+                                || context.graph().parentWays(_targetEntity); // a regular vertex
+                            if (parents.some(parent => selectedIDs.includes(parent.id))) {
+                                return pointerdown.call(target, d3_event);
+                            }
+                        }
                     }
                 }
             };
