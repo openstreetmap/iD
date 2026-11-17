@@ -81,6 +81,22 @@ describe('iD.coreLocalizer', function() {
             expect(parseFloat(formatFloat(1234.56))).toEqual(1234.56);
             expect(parseFloat(formatFloat(3.14159))).toEqual(3.14159);
         });
+        it('roundtrips Persian numerals', () => {
+            const localizer = new iD.coreLocalizer();
+            const formatFloat = localizer.floatFormatter('fa');
+            const parseFloat = localizer.floatParser('fa');
+            expect(parseFloat(formatFloat(-1))).toEqual(-1);
+            expect(parseFloat(formatFloat(-0.1))).toEqual(-0.1);
+            expect(parseFloat(formatFloat(1234.56))).toEqual(1234.56);
+        });
+        it('roundtrips Chinese numerals', () => {
+            const localizer = new iD.coreLocalizer();
+            const formatFloat = localizer.floatFormatter('zh-u-nu-hanidec');
+            const parseFloat = localizer.floatParser('zh-u-nu-hanidec');
+            expect(parseFloat(formatFloat(-1))).toEqual(-1);
+            expect(parseFloat(formatFloat(-0.1))).toEqual(-0.1);
+            expect(parseFloat(formatFloat(1234.56))).toEqual(1234.56);
+        });
     });
     describe('#decimalPlaceCounter', function () {
         it('counts decimal places in English numbers', function () {
