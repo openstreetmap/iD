@@ -53,7 +53,7 @@ elsewhere in this document.
 
 <br/>
 
-All features from [browser baseline 2022](https://web.dev/articles/use-baseline-with-browserslist#baseline_targets) can be freely used.
+All features from "widely available" [browser baseline](https://web.dev/articles/use-baseline-with-browserslist#baseline_targets) can be freely used. More modern APIs may be used, as long as there's a fallback.
 
 ## 🕹 Interaction Support
 
