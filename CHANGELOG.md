@@ -54,6 +54,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :scissors: Operations
 * Treat `conveying=*` the same as `oneway=*` when reversing a line ([#13027], thanks [@k-yle])
 * Add shortcut tooltip to reverse direction button ([#12961], thanks [@SaifuddinM23])
+* Prevent _merge_ operation creating a self-referencing relation under certain conditions ([#7983])
 #### :camera: Street-Level
 #### :white_check_mark: Validation
 * Warn about `goo.gl` shortlinks as sources, alongside full Google URLs ([#12740])
@@ -101,6 +102,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Drop support for `oneway=1` ([#13026], thanks [@k-yle])
 * Drop confusing dead code ([#13014], thanks [@matkoniecz])
 
+[#7983]: https://github.com/openstreetmap/iD/issues/7983
 [#8015]: https://github.com/openstreetmap/iD/issues/8015
 [#8402]: https://github.com/openstreetmap/iD/issues/8402
 [#8424]: https://github.com/openstreetmap/iD/issues/8424
