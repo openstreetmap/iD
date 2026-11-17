@@ -140,7 +140,7 @@ export function modeDragNode(context) {
                     .iconName('#iD-icon-no')
                     .label(t.append('modes.drag_node.connected_to_hidden'))();
             }
-            return drag.cancel();
+            return cancel();
         }
 
         if (_wasMidpoint) {
