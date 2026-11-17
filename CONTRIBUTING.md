@@ -252,6 +252,9 @@ We like when people get involved! iD is a busy project, so it helps if you first
 open an issue to ask whether an idea makes sense,
 instead of surprising us with a pull request.
 
+All features from "widely available" [browser baseline](https://developer.mozilla.org/en-US/docs/Glossary/Baseline/Compatibility) 
+can be freely used. More modern APIs may be used, as long as there's a fallback.
+
 ### JavaScript / Typescript
 
 New and/or updated code uses modern JavaScript ES6+ syntax, and incrementally more and more TypeScript.
