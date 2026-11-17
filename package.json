@@ -52,7 +52,7 @@
     "translations": "node scripts/update_locales.js"
   },
   "dependencies": {
-    "@mapbox/geojson-area": "^0.2.2",
+    "@mapbox/geojson-area": "^0.3.0",
     "@mapbox/sexagesimal": "1.2.0",
     "@mapbox/vector-tile": "^3.0.0",
     "@rapideditor/country-coder": "~5.6.0",
