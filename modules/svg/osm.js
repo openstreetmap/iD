@@ -1,3 +1,7 @@
+/**
+ * @typedef {'vertices' | 'midpoints' | 'points' | 'turns'} PointsGroup
+ */
+
 export function svgOsm(projection, context, dispatch) {
     var enabled = true;
 
