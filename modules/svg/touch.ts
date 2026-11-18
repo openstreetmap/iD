@@ -1,10 +1,12 @@
 import type { SvgLayer } from './layers';
 
+export type TouchLayer = 'areas' | 'lines' | 'points' | 'turns' | 'markers';
+
 export function svgTouch(): SvgLayer {
 
     function drawTouch(selection: d3.Selection<SVGGElement>) {
         selection.selectAll('.layer-touch')
-            .data(['areas', 'lines', 'points', 'turns', 'markers'])
+            .data<TouchLayer>(['areas', 'lines', 'points', 'turns', 'markers'])
             .enter()
             .append('g')
             .attr('class', function(d) { return 'layer-touch ' + d; });

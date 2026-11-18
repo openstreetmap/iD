@@ -1,6 +1,6 @@
-import type { GeoProjection } from 'd3';
 import { geoMetersToLat } from '../geo';
 import type { osmNode } from '../osm';
+import type { Projection } from '../geo/raw_mercator';
 
 /**
  * Parses a distance value from an OSM tag, which
@@ -111,12 +111,12 @@ export function getRadiusValuesFromTags(tags: Tags) {
 }
 
 
-export function getRadiusInPixels(node: osmNode, projection: GeoProjection, radius: number) {
-    const center = projection(node.loc)!;
+export function getRadiusInPixels(node: osmNode, projection: Projection, radius: number) {
+    const center = projection(node.loc);
     const pointOnCircumference = projection([
         node.loc[0],
         node.loc[1] + geoMetersToLat(radius),
-    ])!;
+    ]);
 
     // The radius is the difference in latitude between
     // the centre and the point on the circumference.
@@ -129,7 +129,7 @@ export function getRadiusInPixels(node: osmNode, projection: GeoProjection, radi
 }
 
 /** returns a list of pixels */
-export function getRadiiInPixels(node: osmNode, projection: GeoProjection) {
+export function getRadiiInPixels(node: osmNode, projection: Projection) {
     return getRadiusValuesFromTags(node.tags)
         .filter(radius => radius > 0)
         .map(radius => getRadiusInPixels(node, projection, radius));
