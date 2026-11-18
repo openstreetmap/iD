@@ -8,7 +8,7 @@ import { t, localizer } from '../../core/localizer';
 import { svgIcon } from '../../svg';
 import { uiTooltip } from '../tooltip';
 import { uiCombobox } from '../combobox';
-import { utilArrayUniq, utilGetSetValue, utilNoAuto, utilRebind, utilTotalExtent, utilUniqueDomId } from '../../util';
+import { utilArrayUniq, utilGetSetValue, utilNoAuto, utilBindDispatch, utilTotalExtent, utilUniqueDomId } from '../../util';
 import { uiLengthIndicator } from '../length_indicator';
 
 var _languagesArray = [];
@@ -524,5 +524,6 @@ export function uiFieldLocalized(field, context) {
         return _entityIDs && _entityIDs.length && utilTotalExtent(_entityIDs, context.graph());
     }
 
-    return utilRebind(localized, dispatch, 'on');
+    localized.on = utilBindDispatch(localized, dispatch);
+    return localized;
 }

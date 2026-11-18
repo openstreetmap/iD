@@ -7,7 +7,7 @@ import { actionChangeTags } from '../../actions/change_tags';
 import { services } from '../../services/index';
 import { svgIcon } from '../../svg/icon';
 import { uiCombobox } from '../combobox';
-import { utilGetSetValue, utilNoAuto, utilRebind } from '../../util';
+import { utilGetSetValue, utilNoAuto, utilBindDispatch } from '../../util';
 
 /** @typedef {[enName: string, nativeName: string, code: string]} WmfSite */
 
@@ -326,7 +326,8 @@ export function uiFieldWikipedia(field, context) {
   };
 
 
-  return utilRebind(wiki, dispatch, 'on');
+  wiki.on = utilBindDispatch(wiki, dispatch);
+  return wiki;
 }
 
 uiFieldWikipedia.supportsMultiselection = false;

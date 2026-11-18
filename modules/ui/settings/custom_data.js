@@ -3,7 +3,7 @@ import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { prefs } from '../../core/preferences';
 import { t } from '../../core/localizer';
 import { uiConfirm } from '../confirm';
-import { utilNoAuto, utilRebind } from '../../util';
+import { utilNoAuto, utilBindDispatch } from '../../util';
 
 
 export function uiSettingsCustomData(context) {
@@ -120,5 +120,6 @@ export function uiSettingsCustomData(context) {
         }
     }
 
-    return utilRebind(render, dispatch, 'on');
+    render.on = utilBindDispatch(render, dispatch);
+    return render;
 }

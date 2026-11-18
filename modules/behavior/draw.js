@@ -8,7 +8,7 @@ import { presetManager } from '../presets';
 import { behaviorEdit } from './edit';
 import { behaviorHover } from './hover';
 import { geoChooseEdge, geoVecLength } from '../geo';
-import { utilFastMouse, utilKeybinding, utilRebind } from '../util';
+import { utilFastMouse, utilKeybinding, utilBindDispatch } from '../util';
 
 var _disableSpace = false;
 var _lastSpace = null;
@@ -290,5 +290,6 @@ export function behaviorDraw(context) {
     };
 
 
-    return utilRebind(behavior, dispatch, 'on');
+    behavior.on = utilBindDispatch(behavior, dispatch);
+    return behavior;
 }

@@ -3,7 +3,7 @@ import { isArray, isNumber } from 'es-toolkit/compat';
 
 import { localizer, t } from '../../core/localizer';
 import { uiConfirm } from '../confirm';
-import { utilRebind } from '../../util';
+import { utilBindDispatch } from '../../util';
 import { uiTooltip } from '../tooltip';
 import { svgIcon } from '../../svg';
 
@@ -135,5 +135,6 @@ export function uiSettingsLocalPhotos(context) {
             });
     }
 
-    return utilRebind(render, dispatch, 'on');
+    render.on = utilBindDispatch(render, dispatch);
+    return render;
 }

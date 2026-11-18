@@ -18,7 +18,7 @@ import { svgPanoramaxImages } from './panoramax_images';
 import { svgOsm } from './osm';
 import { svgNotes } from './notes';
 import { svgTouch } from './touch';
-import { utilArrayDifference, utilRebind } from '../util';
+import { utilArrayDifference, utilBindDispatch } from '../util';
 import { utilGetDimensions, utilSetDimensions } from '../util/dimensions';
 import type { Projection } from '../geo/raw_mercator';
 import type { Vec2 } from '../geo/vector';
@@ -140,5 +140,6 @@ export function svgLayers(projection: Projection, context: iD.Context) {
     };
 
 
-    return utilRebind(drawLayers, dispatch, 'on');
+    drawLayers.on = utilBindDispatch(drawLayers, dispatch);
+    return drawLayers;
 }

@@ -4,7 +4,7 @@ import { presetManager } from '../../presets';
 import { localizer, t } from '../../core/localizer';
 import { modeBrowse } from '../../modes/browse';
 import { modeSelect } from '../../modes/select';
-import { utilArrayUniq, utilRebind } from '../../util';
+import { utilArrayUniq, utilBindDispatch } from '../../util';
 import { helpHtml, icon, pad, isMostlySquare, selectMenuItem, transitionTime } from './helper';
 
 
@@ -782,5 +782,6 @@ export function uiIntroBuilding(context, reveal) {
     };
 
 
-    return utilRebind(chapter, dispatch, 'on');
+    chapter.on = utilBindDispatch(chapter, dispatch);
+    return chapter;
 }

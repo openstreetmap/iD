@@ -9,7 +9,7 @@ import { localizer, t } from '../../core/localizer';
 import { geoSphericalDistance } from '../../geo';
 import { modeBrowse } from '../../modes/browse';
 import { modeSelect } from '../../modes/select';
-import { utilRebind } from '../../util/rebind';
+import { utilBindDispatch } from '../../util/rebind';
 import { helpHtml, icon, pad, selectMenuItem, transitionTime } from './helper';
 
 
@@ -1079,5 +1079,6 @@ export function uiIntroLine(context, reveal) {
     };
 
 
-    return utilRebind(chapter, dispatch, 'on');
+    chapter.on = utilBindDispatch(chapter, dispatch);
+    return chapter;
 }

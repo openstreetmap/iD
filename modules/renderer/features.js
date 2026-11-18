@@ -3,7 +3,7 @@ import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { prefs } from '../core/preferences';
 import { osmIdManager } from '../osm';
 import { osmLanduseTags, osmLifecyclePrefixes } from '../osm/tags.js';
-import { utilRebind } from '../util/rebind';
+import { utilBindDispatch } from '../util/rebind';
 import { utilArrayGroupBy, utilArrayUnion, utilStringQs } from '../util';
 import { isAddressPoint } from '../svg/labels';
 import { patchHash } from '../behavior';
@@ -641,5 +641,6 @@ export function rendererFeatures(context) {
     });
 
 
-    return utilRebind(features, dispatch, 'on');
+    features.on = utilBindDispatch(features, dispatch);
+    return features;
 }

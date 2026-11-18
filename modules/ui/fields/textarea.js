@@ -5,7 +5,7 @@ import { t } from '../../core/localizer';
 import {
     utilGetSetValue,
     utilNoAuto,
-    utilRebind
+    utilBindDispatch
 } from '../../util';
 import { uiLengthIndicator } from '..';
 
@@ -81,5 +81,6 @@ export function uiFieldTextarea(field, context) {
     };
 
 
-    return utilRebind(textarea, dispatch, 'on');
+    textarea.on = utilBindDispatch(textarea, dispatch);
+    return textarea;
 }

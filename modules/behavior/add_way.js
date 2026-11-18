@@ -2,7 +2,7 @@ import { dispatch as d3_dispatch } from 'd3-dispatch';
 
 import { behaviorDraw } from './draw';
 import { modeBrowse } from '../modes/browse';
-import { utilRebind } from '../util/rebind';
+import { utilBindDispatch } from '../util/rebind';
 
 
 export function behaviorAddWay(context) {
@@ -34,5 +34,6 @@ export function behaviorAddWay(context) {
     };
 
 
-    return utilRebind(behavior, dispatch, 'on');
+    behavior.on = utilBindDispatch(behavior, dispatch);
+    return behavior;
 }

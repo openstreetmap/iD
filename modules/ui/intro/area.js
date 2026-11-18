@@ -8,7 +8,7 @@ import { presetManager } from '../../presets';
 import { localizer, t } from '../../core/localizer';
 import { modeBrowse } from '../../modes/browse';
 import { modeSelect } from '../../modes/select';
-import { utilRebind } from '../../util/rebind';
+import { utilBindDispatch } from '../../util/rebind';
 import { helpHtml, icon, pad, transitionTime } from './helper';
 
 
@@ -506,5 +506,6 @@ export function uiIntroArea(context, reveal) {
     };
 
 
-    return utilRebind(chapter, dispatch, 'on');
+    chapter.on = utilBindDispatch(chapter, dispatch);
+    return chapter;
 }

@@ -3,7 +3,7 @@ import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { prefs } from '../core/preferences';
 import { svgIcon } from '../svg/icon';
 import { utilFunctor } from '../util';
-import { utilRebind } from '../util/rebind';
+import { utilBindDispatch } from '../util/rebind';
 import { uiToggle } from './toggle';
 import { t, localizer } from '../core/localizer';
 
@@ -138,5 +138,6 @@ export function uiDisclosure(context, key, expandedDefault) {
     };
 
 
-    return utilRebind(disclosure, dispatch, 'on');
+    disclosure.on = utilBindDispatch(disclosure, dispatch);
+    return disclosure;
 }

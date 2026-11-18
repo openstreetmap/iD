@@ -7,7 +7,7 @@ import { svgIcon } from '../svg/icon';
 import { uiCombobox} from './combobox';
 import { uiField } from './field';
 import { uiFormFields } from './form_fields';
-import { utilArrayUniqBy, utilCleanOsmString, utilRebind, utilTriggerEvent, utilUnicodeCharsCount } from '../util';
+import { utilArrayUniqBy, utilCleanOsmString, utilBindDispatch, utilTriggerEvent, utilUnicodeCharsCount } from '../util';
 import { getIncompatibleSources } from '../validations/incompatible_source';
 
 
@@ -185,5 +185,6 @@ export function uiChangesetEditor(context) {
     };
 
 
-    return utilRebind(changesetEditor, dispatch, 'on');
+    changesetEditor.on = utilBindDispatch(changesetEditor, dispatch);
+    return changesetEditor;
 }

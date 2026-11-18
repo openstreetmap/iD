@@ -7,7 +7,7 @@ import { actionNoop } from '../actions/noop';
 import { actionRevert } from '../actions/revert';
 import { coreGraph } from './graph';
 import { t } from './localizer';
-import { utilArrayUnion, utilArrayUniq, utilDisplayName, utilDisplayType, utilRebind } from '../util';
+import { utilArrayUnion, utilArrayUniq, utilDisplayName, utilDisplayType, utilBindDispatch } from '../util';
 import type { coreContext } from './context';
 import type { EntityId, osmChangeset, OsmEntity } from '../osm';
 import type { Action } from './history';
@@ -455,7 +455,8 @@ export function coreUploader(context: coreContext) {
     };
 
 
-    return utilRebind(uploader, dispatch, 'on');
+    uploader.on = utilBindDispatch(uploader, dispatch);
+    return uploader;
 }
 
 export interface coreUploader extends ReturnType<typeof coreUploader> {}

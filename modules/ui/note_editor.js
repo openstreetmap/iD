@@ -12,7 +12,7 @@ import { uiViewOnOSM } from './view_on_osm';
 
 import {
     utilNoAuto,
-    utilRebind
+    utilBindDispatch
 } from '../util';
 import { osmNote } from '../osm';
 
@@ -406,5 +406,6 @@ export function uiNoteEditor(context) {
     };
 
 
-    return utilRebind(noteEditor, dispatch, 'on');
+    noteEditor.on = utilBindDispatch(noteEditor, dispatch);
+    return noteEditor;
 }
