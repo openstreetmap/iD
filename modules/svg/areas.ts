@@ -1,15 +1,23 @@
 import { deepEqual } from 'fast-equals';
 import { bisector as d3_bisector } from 'd3-array';
 
-import { osmIdManager } from '../osm';
-import { svgPath, svgSegmentWay } from './helpers';
+import { osmIdManager, type EntityId, type OsmEntity, type osmRelation, type osmWay } from '../osm';
+import { svgPath, svgSegmentWay, type SegmentFeature } from './helpers';
 import { svgTagClasses } from './tag_classes';
 import { svgTagPattern } from './tag_pattern';
+import type { Projection } from '../geo/raw_mercator';
+import type { coreContext, coreGraph } from '../core';
+import type { OsmLayer } from './osm';
+import type { TouchLayer } from './touch';
 
-export function svgAreas(projection, context) {
+type Area = osmWay | osmRelation;
+
+type AreaGroup = 'fill' | 'shadow' | 'stroke';
+
+export function svgAreas(projection: Projection, context: coreContext) {
 
 
-    function getPatternStyle(tags) {
+    function getPatternStyle(tags: Tags) {
         var imageID = svgTagPattern(tags);
         if (imageID) {
             return 'url("#ideditor-' + imageID + '")';
@@ -18,7 +26,7 @@ export function svgAreas(projection, context) {
     }
 
 
-    function drawTargets(selection, graph, entities, filter) {
+    function drawTargets(selection: d3.Selection<SVGGElement>, graph: coreGraph, entities: osmWay[], filter: (way: osmWay) => boolean) {
         var targetClass = context.getDebug('target') ? 'pink ' : 'nocolor ';
         var nopeClass = context.getDebug('target') ? 'red ' : 'nocolor ';
         var getPath = svgPath(projection).geojson;
@@ -26,7 +34,7 @@ export function svgAreas(projection, context) {
         var base = context.history().base();
 
         // The targets and nopes will be MultiLineString sub-segments of the ways
-        var data = { targets: [], nopes: [] };
+        var data: { targets: SegmentFeature[]; nopes: SegmentFeature[] } = { targets: [], nopes: [] };
 
         entities.forEach(function(way) {
             var features = svgSegmentWay(way, graph, activeID);
@@ -37,24 +45,24 @@ export function svgAreas(projection, context) {
 
         // Targets allow hover and vertex snapping
         var targetData = data.targets.filter(getPath);
-        var targets = selection.selectAll('.area.target-allowed')
+        var targets = selection.selectAll<SVGPathElement, SegmentFeature>('.area.target-allowed')
             .filter(function(d) { return filter(d.properties.entity); })
-            .data(targetData, function key(d) { return d.id; });
+            .data(targetData, function key(d) { return d.id!; });
 
         // exit
         targets.exit()
             .remove();
 
-        var segmentWasEdited = function(d) {
+        var segmentWasEdited = function(d: SegmentFeature) {
             var wayID = d.properties.entity.id;
             // if the whole line was edited, don't draw segment changes
             if (!base.entities[wayID] ||
-                !deepEqual(graph.entities[wayID].nodes, base.entities[wayID].nodes)) {
+                !deepEqual(graph.entity(wayID).nodes, base.entity(wayID).nodes)) {
                 return false;
             }
             return d.properties.nodes.some(function(n) {
                 return !base.entities[n.id] ||
-                       !deepEqual(graph.entities[n.id].loc, base.entities[n.id].loc);
+                       !deepEqual(graph.entity(n.id).loc, base.entity(n.id).loc);
             });
         };
 
@@ -69,9 +77,9 @@ export function svgAreas(projection, context) {
 
         // NOPE
         var nopeData = data.nopes.filter(getPath);
-        var nopes = selection.selectAll('.area.target-nope')
+        var nopes = selection.selectAll<SVGPathElement, SegmentFeature>('.area.target-nope')
             .filter(function(d) { return filter(d.properties.entity); })
-            .data(nopeData, function key(d) { return d.id; });
+            .data(nopeData, function key(d) { return d.id!; });
 
         // exit
         nopes.exit()
@@ -87,13 +95,14 @@ export function svgAreas(projection, context) {
     }
 
 
-    function drawAreas(selection, graph, entities, filter) {
+    function drawAreas(selection: d3.Selection<SVGSVGElement>, graph: coreGraph, entities: OsmEntity[], filter: (area: Area) => boolean) {
         var path = svgPath(projection, graph, true);
-        var areas = {};
+        var areas: Record<EntityId, { entity: Area; area: number }> = {};
         var base = context.history().base();
 
         for (var i = 0; i < entities.length; i++) {
             var entity = entities[i];
+            if (entity.type === 'node') continue;
             if (entity.geometry(graph) !== 'area') continue;
             if (!areas[entity.id]) {
                 areas[entity.id] = {
@@ -103,11 +112,13 @@ export function svgAreas(projection, context) {
             }
         }
 
-        var fills = Object.values(areas).filter(function hasPath(a) { return path(a.entity); });
-        fills.sort(function areaSort(a, b) { return b.area - a.area; });
-        fills = fills.map(function(a) { return a.entity; });
+        var fills = Object
+            .values(areas)
+            .filter(function hasPath(a) { return path(a.entity); })
+            .sort(function areaSort(a, b) { return b.area - a.area; })
+            .map(function(a) { return a.entity; });
 
-        var strokes = fills.filter(function(area) { return area.type === 'way'; });
+        var strokes = fills.filter((area): area is osmWay => area.type === 'way');
 
         var data = {
             clip: fills,
@@ -116,9 +127,9 @@ export function svgAreas(projection, context) {
             fill: fills
         };
 
-        var clipPaths = context.surface().selectAll('defs').selectAll('.clipPath-osm')
+        var clipPaths = context.surface().selectAll('defs').selectAll<SVGClipPathElement, Area>('.clipPath-osm')
            .filter(filter)
-           .data(data.clip, osmIdManager.key);
+           .data<Area>(data.clip, osmIdManager.key);
 
         clipPaths.exit()
            .remove();
@@ -132,17 +143,17 @@ export function svgAreas(projection, context) {
            .append('path');
 
         clipPaths.merge(clipPathsEnter)
-           .selectAll('path')
+           .selectAll<SVGPathElement, Area>('path')
            .attr('d', path);
 
 
-        var drawLayer = selection.selectAll('.layer-osm.areas');
-        var touchLayer = selection.selectAll('.layer-touch.areas');
+        const drawLayer = selection.selectAll<SVGGElement, OsmLayer>('.layer-osm.areas');
+        const touchLayer = selection.selectAll<SVGGElement, TouchLayer>('.layer-touch.areas');
 
         // Draw areas..
         var areagroup = drawLayer
-            .selectAll('g.areagroup')
-            .data(['fill', 'shadow', 'stroke']);
+            .selectAll<SVGGElement, AreaGroup>('g.areagroup')
+            .data<AreaGroup>(['fill', 'shadow', 'stroke']);
 
         areagroup = areagroup.enter()
             .append('g')
@@ -150,28 +161,29 @@ export function svgAreas(projection, context) {
             .merge(areagroup);
 
         var paths = areagroup
-            .selectAll('path')
+            .selectAll<SVGPathElement, Area>('path')
             .filter(filter)
-            .data(function(layer) { return data[layer]; }, osmIdManager.key);
+            .data<Area>(function(layer) { return data[layer]; }, osmIdManager.key);
 
         paths.exit()
             .remove();
 
 
-        var fillpaths = selection.selectAll('.area-fill path.area').nodes();
-        var bisect = d3_bisector(function(node) { return -node.__data__.area(graph); }).left;
+        var fillpaths = selection.selectAll<SVGPathElement, Area>('.area-fill path.area').nodes();
+        var bisect = d3_bisector<SVGPathElement, number>(function(node) { return -node.__data__.area(graph); }).left;
 
-        function sortedByArea(entity) {
+        function sortedByArea(this: any, entity: Area) {
             if (this._parent.__data__ === 'fill') {
                 return fillpaths[bisect(fillpaths, -entity.area(graph))];
             }
+            return null;
         }
 
         paths.enter()
             .insert('path', sortedByArea)
             .merge(paths)
             .each(function(entity) {
-                var layer = this.parentNode.__data__;
+                var layer = this.parentNode!.__data__;
                 this.setAttribute('class', entity.type + ' area ' + layer + ' ' + entity.id);
 
                 if (layer === 'fill') {
@@ -184,14 +196,15 @@ export function svgAreas(projection, context) {
                 return !base.entities[d.id];
             })
             .classed('geometry-edited', function(d) {
-                return graph.entities[d.id] &&
-                    base.entities[d.id] &&
-                    !deepEqual(graph.entities[d.id].nodes, base.entities[d.id].nodes);
+                return !!graph.entities[d.id] &&
+                    !!base.entities[d.id] &&
+                    d.type === 'way' &&
+                    !deepEqual(graph.entity(d.id).nodes, base.entity(d.id).nodes);
             })
             .classed('retagged', function(d) {
-                return graph.entities[d.id] &&
-                    base.entities[d.id] &&
-                    !deepEqual(graph.entities[d.id].tags, base.entities[d.id].tags);
+                return !!graph.entities[d.id] &&
+                    !!base.entities[d.id] &&
+                    !deepEqual(graph.entity(d.id).tags, base.entity(d.id).tags);
             })
             .call(svgTagClasses())
             .attr('d', path);
@@ -204,3 +217,5 @@ export function svgAreas(projection, context) {
 
     return drawAreas;
 }
+
+export interface svgAreas extends ReturnType<typeof svgAreas> {}
