@@ -13,6 +13,7 @@ export interface presetField extends Omit<Field, 'label' | 'terms' | 'placeholde
     append: typeof t.append;
   };
   t_all: typeof localizer.t_all;
+  t_keys: (scope: string, locale?: string) => string[];
   hasTextForStringId(scope: string): boolean;
   title(): string;
   label(): LocalizedTextRenderer;
@@ -44,6 +45,7 @@ export function presetField(fieldID: string, field: Field) {
 
   const _t: presetField['t'] = (scope, options) => t(`_tagging.presets.fields.${fieldID}.${scope}`, options);
   _this.t_all = (scope, options) => localizer.t_all(`_tagging.presets.fields.${fieldID}.${scope}`, options);
+  _this.t_keys = (scope, locale) => localizer.keys(`_tagging.presets.fields.${fieldID}.${scope}`, locale);
   _t.append = (scope, options) => t.append(`_tagging.presets.fields.${fieldID}.${scope}`, options);
   _this.t = _t;
 

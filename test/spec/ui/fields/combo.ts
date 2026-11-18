@@ -68,4 +68,99 @@ describe('iD.uiFieldCombo', () => {
             });
         });
     });
+
+    describe('combo', () => {
+        let context: iD.Context;
+        let selection: d3.Selection<HTMLDivElement>;
+        let originalRegionalTranslations: unknown;
+        const regionalTranslations = {
+            options: {
+                zebra: 'Longitudinal Bars',
+                surface: 'Surface Treatment Only'
+            }
+        };
+        beforeEach(() => {
+            context = iD.coreContext().assetPath('../dist/').init();
+            selection = d3_select(document.createElement('div'));
+
+            const localizerInternals = iD.localizer as any;
+            const fields = localizerInternals._localeStrings.tagging.en.presets.fields;
+
+            originalRegionalTranslations = fields['crossing/markings-BG'];
+            fields['crossing/markings-BG'] = regionalTranslations;
+        });
+
+        afterEach(() => {
+            const localizerInternals = iD.localizer as any;
+            const fields = localizerInternals._localeStrings.tagging.en.presets.fields;
+
+            if (originalRegionalTranslations === undefined) {
+                delete fields['crossing/markings-BG'];
+            } else {
+                fields['crossing/markings-BG'] = originalRegionalTranslations;
+            }
+        });
+
+        it('preserves the canonical value for translated options excluded from regional options', () => {
+            const field = iD.presetField('crossing/markings-BG', {
+                key: 'crossing:markings',
+                type: 'combo',
+                autoSuggestions: false,
+                options: ['zebra', 'no', 'dots', 'dashes', 'yes']
+            } as Field);
+
+            const instance = iD.uiFieldCombo(field, context);
+            selection.call(instance);
+
+            const onChange = vi.fn();
+            instance.on('change', onChange);
+
+            const input = selection.select<HTMLInputElement>('input');
+
+            iD.utilGetSetValue(input, 'Surface Treatment Only');
+            input.dispatch('blur');
+
+            expect(onChange).toHaveBeenCalledTimes(1);
+            expect(onChange).toHaveBeenCalledWith({
+                'crossing:markings': 'surface'
+            });
+            expect(field.options).not.toContain('surface');
+        });
+
+        it('displays excluded translated options using their canonical value', () => {
+            const field = iD.presetField('crossing/markings-BG', {
+                key: 'crossing:markings',
+                type: 'combo',
+                autoSuggestions: false,
+                options: ['zebra', 'no', 'dots', 'dashes', 'yes']
+            } as Field);
+
+            const instance = iD.uiFieldCombo(field, context);
+            selection.call(instance);
+
+            const input = selection.select<HTMLInputElement>('input');
+
+            instance.tags({ 'crossing:markings': 'surface' });
+
+            expect(iD.utilGetSetValue(input)).toBe('surface');
+        });
+
+        it('translates configured options when displaying their canonical value', () => {
+            const field = iD.presetField('crossing/markings-BG', {
+                key: 'crossing:markings',
+                type: 'combo',
+                autoSuggestions: false,
+                options: ['zebra', 'no', 'dots', 'dashes', 'yes']
+            } as Field);
+
+            const instance = iD.uiFieldCombo(field, context);
+            selection.call(instance);
+
+            const input = selection.select<HTMLInputElement>('input');
+
+            instance.tags({ 'crossing:markings': 'zebra' });
+
+            expect(iD.utilGetSetValue(input)).toBe('Longitudinal Bars');
+        });
+    });
 });

@@ -138,4 +138,71 @@ describe('iD.coreLocalizer', function() {
             new iD.coreLocalizer().preferredLocaleCodes([]);
         });
     });
+
+    describe('#keys', function () {
+        it('returns keys from the requested locale', function () {
+            const localizer = new iD.coreLocalizer();
+            const internals = localizer as any;
+
+            internals._localeStrings = {
+                tagging: {
+                    bg: {
+                        presets: {
+                            fields: {
+                                'crossing/markings-BG': {
+                                    options: {
+                                        zebra: 'Зебра',
+                                        dots: 'Точки'
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            };
+
+            internals._localeCodes = ['bg', 'en'];
+
+            expect(localizer.keys(
+                '_tagging.presets.fields.crossing/markings-BG.options',
+                'bg'
+            )).toStrictEqual(['zebra', 'dots']);
+        });
+
+        it('falls back to the next locale when the requested path is missing', function () {
+            const localizer = new iD.coreLocalizer();
+            const internals = localizer as any;
+
+            internals._localeStrings = {
+                tagging: {
+                    en: {
+                        presets: {
+                            fields: {
+                                'crossing/markings-BG': {
+                                    options: {
+                                        zebra: 'Longitudinal Bars',
+                                        surface: 'Surface Treatment Only'
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            };
+
+            internals._localeCodes = ['bg', 'en'];
+
+            expect(localizer.keys(
+                '_tagging.presets.fields.crossing/markings-BG.options',
+                'bg'
+            )).toStrictEqual(['zebra', 'surface']);
+        });
+
+        it('returns an empty array when the translation path does not exist', function () {
+            const localizer = new iD.coreLocalizer();
+
+            expect(localizer.keys('_tagging.presets.fields.unknown.options', 'en'))
+                .toStrictEqual([]);
+        });
+    });
 });

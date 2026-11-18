@@ -325,6 +325,68 @@ export class coreLocalizer {
     };
 
     /**
+     * Returns the keys of a translation object at the given string identifier.
+     * Uses the current locale and falls back through the configured locale codes.
+     *
+     * @param origStringId string identifier
+     * @param locale locale to use (defaults to currentLocale)
+     */
+
+    keys(origStringId: string, locale?: string): string[] {
+        let stringId = origStringId.trim();
+
+        let scopeId = 'general';
+
+        if (stringId[0] === '_') {
+            const split = stringId.split('.');
+            scopeId = split[0].slice(1);
+            stringId = split.slice(1).join('.');
+        }
+
+        locale = locale || this._localeCode;
+
+        const path = stringId
+            .split('.')
+            .map(s => s.replace(/<TX_DOT>/g, '.'));
+
+        const localeIndex = this._localeCodes.indexOf(locale);
+        const locales = localeIndex >= 0
+            ? this._localeCodes.slice(localeIndex)
+            : [locale];
+
+        for (const localeCode of locales) {
+            const stringsKey = localeCode.toLowerCase() === 'en-us'
+                ? 'en'
+                : localeCode;
+
+            let localeString: unknown = this._localeStrings?.[scopeId]?.[stringsKey];
+
+            for (const key of path) {
+                if (
+                    localeString === null ||
+                    typeof localeString !== 'object' ||
+                    Array.isArray(localeString)
+                ) {
+                    localeString = undefined;
+                    break;
+                }
+
+                localeString = (localeString as Record<string, unknown>)[key];
+            }
+
+            if (
+                localeString !== null &&
+                typeof localeString === 'object' &&
+                !Array.isArray(localeString)
+            ) {
+                return Object.keys(localeString);
+            }
+        }
+
+        return [];
+    }
+
+    /**
     * Try to find that string in `locale` or the current `_localeCode` matching
     * the given `stringId`. If no string can be found in the requested locale,
     * we'll recurse down all the `_localeCodes` until one is found.
