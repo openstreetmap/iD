@@ -90,6 +90,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Fix inconsistent RTL checkboxes ([#13181], thanks [@k-yle])
 * Fix some unreadable tooltips in right-to-left layout ([#13178], thanks [@k-yle])
 * When searching for a language in the multilingual name field, also consider the respective _base_ language's native name (e.g. `српски` for `sr` in `Cyrl` script) ([#8015])
+* Fix translated tag values leaking into tags when a field has limited options ([#13233])
 #### :hourglass: Performance
 #### :mortar_board: Walkthrough / Help
 #### :rocket: Presets
@@ -153,6 +154,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#13181]: https://github.com/openstreetmap/iD/pull/13181
 [#13205]: https://github.com/openstreetmap/iD/pull/13205
 [#13206]: https://github.com/openstreetmap/iD/pull/13206
+[#13233]: https://github.com/openstreetmap/iD/issues/13233
 [@aditya1010-max]: https://github.com/aditya1010-max
 [@Geo-2695]: https://github.com/Geo-2695
 [@hemaksh2007jain-bit]: https://github.com/hemaksh2007jain-bit
