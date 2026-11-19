@@ -1,4 +1,4 @@
-import { type BaseType } from 'd3';
+import { type BaseType } from 'd3-selection';
 
 export function svgIcon<T extends BaseType = HTMLElement>(name: string, svgklass?: string, useklass?: string) {
     return function drawIcon(selection: d3.Selection<T>) {

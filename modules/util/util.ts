@@ -1,4 +1,4 @@
-import { color as d3_color, type RGBColor } from 'd3';
+import { color as d3_color, type RGBColor } from 'd3-color';
 
 import { fixRTLTextForSvg, rtlRegex } from './svg_paths_rtl_fix';
 

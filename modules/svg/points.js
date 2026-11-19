@@ -1,6 +1,6 @@
 import { deepEqual } from 'fast-equals';
 import { clamp } from 'es-toolkit/compat';
-import { select as d3_select } from 'd3';
+import { select as d3_select } from 'd3-selection';
 
 import { geoScaleToZoom } from '../geo';
 import { osmIdManager } from '../osm';

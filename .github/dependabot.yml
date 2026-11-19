@@ -39,6 +39,10 @@ updates:
           - "eslint"
           - "typescript-eslint"
         applies-to: version-updates
+      d3:
+        patterns:
+          - "d3-*"
+        applies-to: version-updates
       cldr:
         patterns:
           - "cldr*"
