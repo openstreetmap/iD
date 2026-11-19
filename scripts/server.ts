@@ -3,7 +3,7 @@ import { glob } from 'node:fs/promises';
 import { styleText } from 'node:util';
 import { watch } from 'chokidar';
 import serve from 'serve-handler';
-import { buildCSS } from './build_css.js';
+import { buildCSS } from './build_css.ts';
 
 const port = 8080;
 
