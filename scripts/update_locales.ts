@@ -5,6 +5,8 @@ import { styleText } from 'node:util';
 import { load as loadYaml } from 'js-yaml';
 import { transifexApi } from '@transifex/api';
 import * as languageNames from './language_names.ts';
+import type { ShortcutsJSON } from '../modules/ui/shortcuts.js';
+import type { LocalesJSON } from '../modules/core/localizer.js';
 
 const resourceIds = ['core', 'imagery', 'community'];
 const reviewedOnlyLangs = ['vi'];
@@ -29,16 +31,21 @@ if (process.env.transifex_password) {
 }
 /* eslint-enable no-process-env */
 
-const dataShortcuts = JSON.parse(fs.readFileSync('data/shortcuts.json', 'utf8'));
+const dataShortcuts: ShortcutsJSON = JSON.parse(fs.readFileSync('data/shortcuts.json', 'utf8'));
 
-let shortcuts = [];
+interface ShortcutInfo {
+  shortcut: string;
+  modifier?: string;
+}
+
+let shortcuts: ShortcutInfo[] = [];
 dataShortcuts.forEach(tab => {
   tab.columns.forEach(col => {
     col.rows.forEach(row => {
       if (!row.shortcuts) return;
       row.shortcuts.forEach(shortcut => {
         if (shortcut.includes('.')) {
-          let info = { shortcut: shortcut };
+          let info: ShortcutInfo = { shortcut: shortcut };
           if (row.modifiers) {
             info.modifier = row.modifiers.join('');
           }
@@ -49,42 +56,60 @@ dataShortcuts.forEach(tab => {
   });
 });
 
-let coverageByLocaleCode = {};
+
+interface Stat {
+  relationships: {
+    language: {
+      data: {
+        id: string;
+      };
+    };
+  };
+  attributes: {
+    translated_strings: number;
+    reviewed_strings: number;
+    total_strings: number;
+    rtl: boolean;
+  }
+}
+
+let coverageByLocaleCode: Record<string, number> = {};
 
 /**
  * transifex uses underscores and `@` for locale codes. iD only uses
  * hyphens, so that all locale codes are valid BCP 47 language tags.
- * @param {string} code
  */
-const normaliseLocaleCode = (code) => code.replace(/[@_]/g, '-');
+const normaliseLocaleCode = (code: string) => code.replace(/[@_]/g, '-');
 
 // There's a race condition here, but it's highly unlikely that the info will
 // return after the resources. There's an error check just in case.
 asyncMap(resourceIds, getResourceInfo, gotResourceInfo);
 asyncMap(resourceIds, getResource, gotResource);
 
-async function getResourceInfo(resourceId, callback) {
+async function getResourceInfo(resourceId: string, callback: Callback<Stat[]>) {
   try {
-    const result = [];
+    const result: Stat[] = [];
     for await (const stat of transifexApi.ResourceLanguageStats.filter({
       project: `o:${transifexOrganization}:p:${transifexProject}`,
       resource: `o:${transifexOrganization}:p:${transifexProject}:r:${resourceId}`
     }).all()) {
-      result.push(stat);
+      result.push(stat as unknown as Stat); // transifex types are totally wrong
     }
     console.log(`got resource language stats collection for ${resourceId}`);
     callback(null, result);
-  } catch (err) {
+  } catch (err: any) {
     console.error(`error while getting resource language stats collection for ${resourceId}`);
     callback(err);
   }
 }
-function gotResourceInfo(err, results) {
+function gotResourceInfo(err: Error | null, results?: Stat[][]) {
   if (err) return console.log(err);
+  results = results!; // just to tell TS
+
   results.forEach(info => {
     info.forEach(stat => {
       let code = normaliseLocaleCode(stat.relationships.language.data.id.substr(2));
-      let type = 'translated_strings';
+      let type: 'reviewed_strings' | 'translated_strings' = 'translated_strings';
       if (reviewedOnlyLangs.indexOf(code) !== -1) {
         type = 'reviewed_strings';
       }
@@ -96,11 +121,14 @@ function gotResourceInfo(err, results) {
   });
 }
 
-function gotResource(err, results) {
+type Resource = Record<string, object>;
+
+function gotResource(err: Error | null, results?: Resource[]) {
   if (err) return console.log(err);
+  results = results!; // just to tell TS
 
   // merge in strings fetched from transifex
-  let allStrings = {};
+  let allStrings: Record<string, Resource> = {};
   results.forEach(resourceStrings => {
     Object.keys(resourceStrings).forEach(code => {
       if (!allStrings[code]) { allStrings[code] = {}; }
@@ -111,7 +139,7 @@ function gotResource(err, results) {
   });
 
   // write files and fetch language info for each locale
-  let dataLocales = {
+  let dataLocales: LocalesJSON = {
     en: { rtl: false, pct: 1 }
   };
   asyncMap(Object.keys(allStrings),
@@ -119,9 +147,9 @@ function gotResource(err, results) {
       const code = normaliseLocaleCode(rawCode);
 
       if (code === 'en') {
-        done();
+        done(null, undefined);
       } else {
-        let obj = {};
+        let obj: Record<string, Resource> = {};
         obj[code] = allStrings[rawCode] || {};
         let lNames = await languageNames.languageNamesInLanguageOf(code) || {};
         if (Object.keys(lNames).length) {
@@ -136,7 +164,7 @@ function gotResource(err, results) {
         getLanguageInfo(rawCode, (err, info) => {
           if (err) return console.log(err);
 
-          let rtl = info && info.attributes && info.attributes.rtl;
+          let rtl = !!info?.attributes?.rtl;
           // exceptions: see #4783
           if (code === 'ckb') {
             rtl = true;
@@ -156,7 +184,7 @@ function gotResource(err, results) {
             rtl: rtl,
             pct: coverage
           };
-          done();
+          done(null, undefined);
         });
       }
     },
@@ -165,7 +193,7 @@ function gotResource(err, results) {
         // list the default locale as explicitly supported
         dataLocales['en-US'] = dataLocales.en;
         const keys = Object.keys(dataLocales).sort();
-        let sortedLocales = {};
+        let sortedLocales: LocalesJSON = {};
         keys.forEach(k => sortedLocales[k] = dataLocales[k]);
         fs.writeFileSync('dist/locales/index.min.json', JSON.stringify(sortedLocales));
       }
@@ -174,14 +202,16 @@ function gotResource(err, results) {
 }
 
 
-function getResource(resourceId, callback) {
+function getResource(resourceId: string, callback: Callback<Resource>) {
   getLanguages((err, codes) => {
     if (err) return callback(err);
+    codes = codes!; // just to tell TypeScript
 
     asyncMap(codes, getLanguage(resourceId), (err, results) => {
       if (err) return callback(err);
+      results = results!; // just to tell TypeScript
 
-      let locale = {};
+      let locale: Record<string, any> = {};
       results.forEach((result, i) => {
         if (resourceId === 'community' && Object.keys(result).length) {
           locale[codes[i]] = { community: result };  // add namespace
@@ -201,8 +231,8 @@ function getResource(resourceId, callback) {
 }
 
 
-function getLanguage(resourceId) {
-  return async (code, callback) => {
+function getLanguage(resourceId: string) {
+  return async (code: string, callback: Callback<object>) => {
     try {
       // random delay to avoid rate-limit of Transifex' API
       await delay(Math.random() * 60000);
@@ -214,8 +244,8 @@ function getLanguage(resourceId) {
       });
       const data = await fetch(url).then(d => d.text());
       console.log(`got translations for ${resourceId}, language ${code}`);
-      callback(null, loadYaml(data)[code]);
-    } catch (err) {
+      callback(null, (loadYaml(data) as any)[code]);
+    } catch (err: any) {
       console.error(`error while getting translations for ${resourceId}, language ${code}`, err);
       callback(err);
     }
@@ -223,46 +253,48 @@ function getLanguage(resourceId) {
 }
 
 
-async function getLanguageInfo(code, callback) {
+async function getLanguageInfo(code: string, callback: Callback<Stat>) {
   try {
     const lng = await transifexApi.Language.get({
       code: code
     });
     console.log(`got language details for ${code}`);
-    callback(null, lng);
-  } catch (err) {
+    callback(null, lng as unknown as Stat); // transifex types are wrong
+  } catch (err: any) {
     console.error(`error while getting language details for ${code}`);
     callback(err);
   }
 }
 
 
-async function getLanguages(callback) {
+async function getLanguages(callback: Callback<string[]>) {
   try {
-    const result = [];
+    const result: string[] = [];
     const project = await transifexApi.Project.get({
       organization: `o:${transifexOrganization}`,
       slug: transifexProject
     });
+    // @ts-expect-error -- the transifex API's types are completely wrong
     const lngs = await project.fetch('languages');
+    // @ts-expect-error -- the transifex API's types are completely wrong
     for await (const lng of lngs.all()) {
       if (lng.attributes.code === 'en') continue;
       result.push(lng.attributes.code);
     }
     console.log('got project languages');
     callback(null, result);
-  } catch (err) {
+  } catch (err: any) {
     console.error('error while getting project languages');
     callback(err);
   }
 }
 
 
-function asyncMap(inputs, func, callback) {
+function asyncMap<T, U>(inputs: T[], func: (item: T, callback: Callback<U>) => void, callback: Callback<U[]>) {
   let index = 0;
   let remaining = inputs.length;
-  let results = [];
-  let error;
+  let results: U[] = [];
+  let error: Error | null;
 
   next();
 
@@ -273,20 +305,26 @@ function asyncMap(inputs, func, callback) {
     }
   }
 
-  function callFunc(i) {
+  function callFunc(i: number) {
     let d = inputs[i];
     func(d, (err, data) => {
       if (err) error = err;
-      results[i] = data;
+      results[i] = data!;
       remaining--;
-      if (!remaining) callback(error, results);
+      if (!remaining) {
+        if (error) {
+          callback(error);
+        } else {
+          callback(null, results);
+        }
+      }
     });
   }
 }
 
 
-function checkForDuplicateShortcuts(code, coreStrings) {
-  let usedShortcuts = {};
+function checkForDuplicateShortcuts(code: string, coreStrings: any) {
+  let usedShortcuts: Record<string, string> = {};
 
   shortcuts.forEach(shortcutInfo => {
     let shortcutPathString = shortcutInfo.shortcut;
@@ -300,7 +338,7 @@ function checkForDuplicateShortcuts(code, coreStrings) {
     let rep = coreStrings;
 
     while (rep !== undefined && path.length) {
-      rep = rep[path.pop()];
+      rep = rep[path.pop()!];
     }
 
     if (rep !== undefined) {
@@ -315,6 +353,6 @@ function checkForDuplicateShortcuts(code, coreStrings) {
   });
 }
 
-function delay(t) {
+function delay(t: number) {
   return new Promise(resolve => { setTimeout(resolve, t); });
 }
