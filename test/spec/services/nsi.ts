@@ -115,6 +115,7 @@ describe('iD.serviceNsi', function () {
             const originalTags = {
                 railway: 'station',
                 public_transport: 'station',
+                station: 'subway',
                 operator: 'Transport for London'
             };
             const result = iD.services.nsi.upgradeTags(originalTags, nullIslandLocation);
