@@ -105,6 +105,6 @@ describe('iD.validations.osm_api_limits', function () {
         issues = validate();
         expect(issues).toHaveLength(0);
 
-        context.graph().entity('w-1').nodes.length === 8;
+        expect(context.graph().entity('w-1').nodes).toHaveLength(9);
     });
 });
