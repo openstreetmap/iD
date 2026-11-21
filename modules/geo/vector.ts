@@ -93,6 +93,16 @@ export function geoVecCross(a: Vec2, b: Vec2, origin?: Vec2) {
 }
 
 
+/**
+ * given a line between `o` and `b`, this function determines how far along
+ * this line point `a` is, as a percentage (0-1 if `a` is within range of
+ * `o`...`b`) by projecting point `a` onto the line between `o` and `b`.
+ */
+export function geoVecPositionAlongWay(a: Vec2, o: Vec2, b: Vec2) {
+    return geoVecDot(a, b, o) / geoVecDot(b, b, o);
+}
+
+
 // find closest orthogonal projection of point onto points array
 export function geoVecProject(a: Vec2, points: Vec2[]) {
     var min = Infinity;

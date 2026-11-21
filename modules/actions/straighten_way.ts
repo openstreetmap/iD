@@ -1,10 +1,9 @@
 import { actionDeleteNode } from './delete_node';
-import { geoVecDot, geoVecInterp, geoVecLength } from '../geo';
+import { geoVecInterp, geoVecLength, geoVecPositionAlongWay as positionAlongWay } from '../geo';
 import { utilArrayDifference } from '../util';
 import { type EntityId, type NodeId, type osmNode, type WayId } from '../osm';
 import type { Projection } from '../geo/raw_mercator';
 import type { Action } from '../core/history';
-import type { Vec2 } from '../geo/vector';
 import type { coreGraph } from '../core';
 
 
@@ -12,10 +11,6 @@ import type { coreGraph } from '../core';
  * Based on https://github.com/openstreetmap/potlatch2/net/systemeD/potlatch2/tools/Straighten.as
  */
 export function actionStraightenWay(selectedIDs: EntityId[], projection: Projection): Action {
-
-    function positionAlongWay(a: Vec2, o: Vec2, b: Vec2) {
-        return geoVecDot(a, b, o) / geoVecDot(b, b, o);
-    }
 
     // Return all selected ways as a continuous, ordered array of nodes
     function allNodes(graph: coreGraph): osmNode[] {
