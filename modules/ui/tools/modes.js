@@ -65,6 +65,14 @@ export function uiToolDrawModes(context) {
 
             d3_event.preventDefault();
 
+            if (context.map().zoom() < context.minEditableZoom()) {
+                context.ui().flash
+                    .duration(4000)
+                    .iconName('#iD-icon-no')
+                    .label(t.append('zoom_in_edit'))();
+                return;
+            }
+
             if (mode.id === context.mode().id) {
                 context.enter(modeBrowse(context));
             } else {
