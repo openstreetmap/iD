@@ -10,7 +10,8 @@
         "module": "preserve",
         "moduleResolution": "bundler",
         "resolveJsonModule": true,
+        "allowImportingTsExtensions": true, // for build scripts only
         "types": ["vitest/globals", "vitest/jsdom", "pannellum"]
     },
-    "include": ["modules", "test"]
+    "include": ["modules", "test", "scripts"]
 }

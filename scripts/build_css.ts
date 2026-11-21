@@ -1,14 +1,14 @@
 /* eslint-disable no-console */
 import fs from 'node:fs';
 import { styleText } from 'node:util';
-import postcss from 'postcss';
+import postcss, { type Plugin } from 'postcss';
 import prepend from 'postcss-prefix-selector';
 import autoprefixer from 'autoprefixer';
 
-let _currBuild = null;
+let _currBuild: Promise<void> | null = null;
 
 // if called directly, do the thing.
-if (process.argv[1].indexOf('build_css.js') > -1) {
+if (process.argv[1].indexOf('build_css.ts') > -1) {
   buildCSS();
 }
 
@@ -31,7 +31,7 @@ export function buildCSS() {
         const css = fs.readFileSync('dist/iD.css', 'utf8');
         return postcss([
             autoprefixer,
-            duplicateDarkMode,
+            duplicateDarkMode(),
             prepend({ prefix: '.ideditor', exclude: [ /^\.ideditor(\[.*?\])*/ ] })
           ])
           .process(css, { from: 'dist/iD.css', to: 'dist/iD.css' });
@@ -51,7 +51,7 @@ export function buildCSS() {
 }
 
 
-async function doConcat(files, output) {
+async function doConcat(files: string[], output: string) {
   const buffers = await Promise.all(
     files.map((file) => fs.promises.readFile(file))
   );
@@ -59,7 +59,7 @@ async function doConcat(files, output) {
 }
 
 
-function duplicateDarkMode() {
+function duplicateDarkMode(): Plugin {
   return {
     postcssPlugin: 'duplicate-from-media',
     Once(root) {
@@ -69,7 +69,7 @@ function duplicateDarkMode() {
           const cloned = rule.clone();
           rule.selector += ':not(.theme-light)';
           cloned.selector += '.theme-dark';
-          atRule.parent.insertBefore(atRule, cloned);
+          atRule.parent!.insertBefore(atRule, cloned);
         });
       });
     }
