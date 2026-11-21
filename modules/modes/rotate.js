@@ -176,8 +176,8 @@ export function modeRotate(context, entityIDs) {
             .on(_pointerPrefix + 'down.modeRotate', null);
 
         d3_select(window)
-            .on(_pointerPrefix + 'move.modeRotate', null, true)
-            .on(_pointerPrefix + 'up.modeRotate', null, true);
+            .on(_pointerPrefix + 'move.modeRotate', null)
+            .on(_pointerPrefix + 'up.modeRotate', null);
 
         context.history()
             .on('undone.modeRotate', null);

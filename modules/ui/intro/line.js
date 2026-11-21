@@ -1064,7 +1064,7 @@ export function uiIntroLine(context, reveal) {
 
     chapter.exit = function() {
         timeouts.forEach(window.clearTimeout);
-        d3_select(window).on('pointerdown.intro mousedown.intro', null, true);
+        d3_select(window).on('pointerdown.intro mousedown.intro', null);
         context.on('enter.intro exit.intro', null);
         context.map().on('move.intro drawn.intro', null);
         context.history().on('change.intro', null);
