@@ -417,9 +417,6 @@ export function uiSidebar(context) {
         // toggle the sidebar collapse when double-clicking the resizer
         resizer.on('dblclick', function(d3_event) {
             d3_event.preventDefault();
-            if (d3_event.sourceEvent) {
-                d3_event.sourceEvent.preventDefault();
-            }
             sidebar.toggle();
         });
 
