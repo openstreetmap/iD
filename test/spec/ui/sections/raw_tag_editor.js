@@ -90,4 +90,17 @@ describe('iD.uiSectionRawTagEditor', function() {
             expect(await tags).toEqual({name: 'Main Street'});
         });
     });
+
+    it('does not dispatch change when key is emptied', async () => {
+        let changeFired = false;
+        taglist.on('change', () => { changeFired = true; });
+
+        var keyInput = element.select('.tag-list').select('input.key');
+        iD.utilGetSetValue(keyInput, '');
+        iD.utilTriggerEvent(keyInput, 'change');
+
+        // give it a moment to ensure nothing fires
+        await new Promise(resolve => { window.setTimeout(resolve, 100); });
+        expect(changeFired).to.be.false;
+    });
 });
