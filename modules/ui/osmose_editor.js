@@ -9,7 +9,7 @@ import { uiOsmoseDetails } from './osmose_details';
 import { uiOsmoseHeader } from './osmose_header';
 import { uiViewOnOsmose } from './view_on_osmose';
 
-import { utilRebind } from '../util';
+import { utilBindDispatch } from '../util';
 
 export function uiOsmoseEditor(context) {
   const dispatch = d3_dispatch('change');
@@ -147,5 +147,6 @@ export function uiOsmoseEditor(context) {
     return osmoseEditor;
   };
 
-  return utilRebind(osmoseEditor, dispatch, 'on');
+  osmoseEditor.on = utilBindDispatch(osmoseEditor, dispatch);
+  return osmoseEditor;
 }

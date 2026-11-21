@@ -7,7 +7,7 @@ import * as countryCoder from '@rapideditor/country-coder';
 import { presetManager } from '../../presets';
 import { fileFetcher } from '../../core/file_fetcher';
 import { t, localizer } from '../../core/localizer';
-import { utilDetect, utilGetSetValue, utilNoAuto, utilRebind, utilTotalExtent } from '../../util';
+import { utilDetect, utilGetSetValue, utilNoAuto, utilBindDispatch, utilTotalExtent } from '../../util';
 import { svgIcon } from '../../svg/icon';
 import { cardinal } from '../../osm/node';
 import { isColorValid } from '../../osm/tags';
@@ -601,5 +601,6 @@ export function uiFieldText(field, context) {
         return _entityIDs && _entityIDs.length && utilTotalExtent(_entityIDs, context.graph());
     }
 
-    return utilRebind(i, dispatch, 'on');
+    i.on = utilBindDispatch(i, dispatch);
+    return i;
 }

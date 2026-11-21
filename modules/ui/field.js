@@ -10,7 +10,7 @@ import { uiFieldHelp } from './field_help';
 import { uiFields } from './fields';
 import { LANGUAGE_SUFFIX_REGEX } from './fields/localized';
 import { uiTagReference } from './tag_reference';
-import { utilRebind, utilUniqueDomId } from '../util';
+import { utilBindDispatch, utilUniqueDomId } from '../util';
 
 
 export function uiField(context, presetField, entityIDs, options) {
@@ -396,5 +396,6 @@ export function uiField(context, presetField, entityIDs, options) {
     };
 
 
-    return utilRebind(field, dispatch, 'on');
+    field.on = utilBindDispatch(field, dispatch);
+    return field;
 }

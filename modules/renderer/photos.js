@@ -1,7 +1,7 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 
 import { services } from '../services';
-import { utilRebind } from '../util/rebind';
+import { utilBindDispatch } from '../util/rebind';
 import { utilStringQs } from '../util';
 import { patchHash } from '../behavior';
 
@@ -272,5 +272,6 @@ export function rendererPhotos(context) {
         context.layers().on('change.rendererPhotos', updateStorage);
     };
 
-    return utilRebind(photos, dispatch, 'on');
+    photos.on = utilBindDispatch(photos, dispatch);
+    return photos;
 }

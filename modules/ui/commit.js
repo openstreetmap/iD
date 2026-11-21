@@ -12,7 +12,7 @@ import { uiChangesetEditor } from './changeset_editor';
 import { uiSectionChanges } from './sections/changes';
 import { uiCommitWarnings } from './commit_warnings';
 import { uiSectionRawTagEditor } from './sections/raw_tag_editor';
-import { utilArrayGroupBy, utilRebind, utilUniqueDomId } from '../util';
+import { utilArrayGroupBy, utilBindDispatch, utilUniqueDomId } from '../util';
 import { utilDetect } from '../util/detect';
 import { getIncompatibleSources } from '../validations/incompatible_source';
 
@@ -623,5 +623,6 @@ export function uiCommit(context) {
     };
 
 
-    return utilRebind(commit, dispatch, 'on');
+    commit.on = utilBindDispatch(commit, dispatch);
+    return commit;
 }

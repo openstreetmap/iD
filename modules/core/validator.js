@@ -4,7 +4,7 @@ import { prefs } from './preferences';
 import { coreDifference } from './difference';
 import { geoExtent } from '../geo/extent';
 import { modeSelect } from '../modes/select';
-import { utilArrayChunk, utilArrayDifference, utilArrayGroupBy, utilArrayIntersection, utilArrayUnion, utilEntityAndDeepMemberIDs, utilRebind } from '../util';
+import { utilArrayChunk, utilArrayDifference, utilArrayGroupBy, utilArrayIntersection, utilArrayUnion, utilEntityAndDeepMemberIDs, utilBindDispatch } from '../util';
 import * as Validations from '../validations/index';
 
 
@@ -803,7 +803,8 @@ export function coreValidator(context) {
   }
 
 
-  return utilRebind(validator, dispatch, 'on');
+  validator.on = utilBindDispatch(validator, dispatch);
+  return validator;
 }
 
 

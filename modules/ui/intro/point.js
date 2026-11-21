@@ -8,7 +8,7 @@ import { localizer, t } from '../../core/localizer';
 import { actionChangePreset } from '../../actions/change_preset';
 import { modeBrowse } from '../../modes/browse';
 import { modeSelect } from '../../modes/select';
-import { utilRebind } from '../../util/rebind';
+import { utilBindDispatch } from '../../util/rebind';
 import { helpHtml, icon, pointBox, pad, selectMenuItem, transitionTime } from './helper';
 
 
@@ -509,5 +509,6 @@ export function uiIntroPoint(context, reveal) {
     };
 
 
-    return utilRebind(chapter, dispatch, 'on');
+    chapter.on = utilBindDispatch(chapter, dispatch);
+    return chapter;
 }

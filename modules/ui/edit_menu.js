@@ -4,7 +4,7 @@ import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { geoVecAdd } from '../geo';
 import { localizer } from '../core/localizer';
 import { uiTooltip } from './tooltip';
-import { utilRebind } from '../util/rebind';
+import { utilBindDispatch } from '../util/rebind';
 import { utilHighlightEntities } from '../util/util';
 import { utilGetDimensions } from '../util/dimensions';
 import { svgIcon } from '../svg/icon';
@@ -340,7 +340,8 @@ export function uiEditMenu(context) {
         return editMenu;
     };
 
-    return utilRebind(editMenu, dispatch, 'on');
+    editMenu.on = utilBindDispatch(editMenu, dispatch);
+    return editMenu;
 }
 
 

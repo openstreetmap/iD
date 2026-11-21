@@ -6,7 +6,7 @@ import { presetManager } from '../../presets';
 import { fileFetcher } from '../../core/file_fetcher';
 import { geoChooseEdge, geoSphericalDistance, geoPolygonContainsPolygon, geoPointInPolygon } from '../../geo';
 import { uiCombobox } from '../combobox';
-import { utilArrayUniqBy, utilGetSetValue, utilNoAuto, utilRebind, utilTotalExtent, utilTriggerEvent } from '../../util';
+import { utilArrayUniqBy, utilGetSetValue, utilNoAuto, utilBindDispatch, utilTotalExtent, utilTriggerEvent } from '../../util';
 import { t } from '../../core/localizer';
 
 /** @typedef {{
@@ -498,5 +498,6 @@ export function uiFieldAddress(field, context) {
     };
 
 
-    return utilRebind(address, dispatch, 'on');
+    address.on = utilBindDispatch(address, dispatch);
+    return address;
 }

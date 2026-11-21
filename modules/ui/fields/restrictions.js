@@ -10,7 +10,7 @@ import { behaviorBreathe } from '../../behavior/breathe';
 import { geoExtent, geoRawMercator, geoVecScale, geoVecSubtract, geoZoomToScale } from '../../geo';
 import { osmIntersection, osmInferRestriction, osmTurn, osmWay } from '../../osm';
 import { svgLayers, svgLines, svgTurns, svgVertices } from '../../svg';
-import { utilDisplayName, utilDisplayType, utilEntitySelector, utilFunctor, utilRebind } from '../../util';
+import { utilDisplayName, utilDisplayType, utilEntitySelector, utilFunctor, utilBindDispatch } from '../../util';
 import { utilGetDimensions, utilSetDimensions } from '../../util/dimensions';
 
 
@@ -655,7 +655,8 @@ export function uiFieldRestrictions(field, context) {
     };
 
 
-    return utilRebind(restrictions, dispatch, 'on');
+    restrictions.on = utilBindDispatch(restrictions, dispatch);
+    return restrictions;
 }
 
 uiFieldRestrictions.supportsMultiselection = false;

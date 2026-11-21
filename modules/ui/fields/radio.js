@@ -4,7 +4,7 @@ import { select as d3_select } from 'd3-selection';
 import { presetManager } from '../../presets';
 import { localizer, t } from '../../core/localizer';
 import { uiField } from '../field';
-import { utilArrayUnion, utilRebind } from '../../util';
+import { utilArrayUnion, utilBindDispatch } from '../../util';
 import { formatTag } from './tag_title';
 
 
@@ -427,5 +427,6 @@ export function uiFieldRadio(field, context) {
     };
 
 
-    return utilRebind(radio, dispatch, 'on');
+    radio.on = utilBindDispatch(radio, dispatch);
+    return radio;
 }

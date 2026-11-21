@@ -14,7 +14,7 @@ import { geoChooseEdge, geoHasSelfIntersections } from '../geo';
 import { modeBrowse } from '../modes/browse';
 import { modeSelect } from '../modes/select';
 import { osmNode } from '../osm/node';
-import { utilRebind } from '../util/rebind';
+import { utilBindDispatch } from '../util/rebind';
 import { utilKeybinding } from '../util';
 
 export function behaviorDrawWay(context, wayID, mode, startGraph) {
@@ -586,5 +586,6 @@ export function behaviorDrawWay(context, wayID, mode, startGraph) {
     };
 
 
-    return utilRebind(drawWay, dispatch, 'on');
+    drawWay.on = utilBindDispatch(drawWay, dispatch);
+    return drawWay;
 }

@@ -3,7 +3,7 @@ import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { presetManager } from '../../presets';
 import { t, localizer } from '../../core/localizer';
 import { utilArrayIdentical } from '../../util/array';
-import { utilArrayUnion, utilRebind } from '../../util';
+import { utilArrayUnion, utilBindDispatch } from '../../util';
 import { geoExtent } from '../../geo/extent';
 import { uiField } from '../field';
 import { uiFormFields } from '../form_fields';
@@ -155,5 +155,6 @@ export function uiSectionPresetFields(context) {
         return section;
     };
 
-    return utilRebind(section, dispatch, 'on');
+    section.on = utilBindDispatch(section, dispatch);
+    return section;
 }

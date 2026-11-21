@@ -2,7 +2,7 @@ import { dispatch as d3_dispatch } from 'd3-dispatch';
 
 import { helpHtml } from './helper';
 import { localizer, t } from '../../core/localizer';
-import { utilRebind } from '../../util/rebind';
+import { utilBindDispatch } from '../../util/rebind';
 
 
 export function uiIntroWelcome(context, reveal) {
@@ -62,5 +62,6 @@ export function uiIntroWelcome(context, reveal) {
     };
 
 
-    return utilRebind(chapter, dispatch, 'on');
+    chapter.on = utilBindDispatch(chapter, dispatch);
+    return chapter;
 }
