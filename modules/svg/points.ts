@@ -3,18 +3,28 @@ import { clamp } from 'es-toolkit/compat';
 import { select as d3_select } from 'd3';
 
 import { geoScaleToZoom } from '../geo';
-import { osmIdManager } from '../osm';
+import { osmIdManager, type osmNode, type EntityId, type OsmEntity } from '../osm';
 import { svgPointTransform } from './helpers';
 import { svgTagClasses } from './tag_classes';
 import { presetManager } from '../presets';
-import { getRadiiInPixels } from '../core';
+import { getRadiiInPixels, type coreContext, type coreGraph } from '../core';
 import { textWidth, isAddressPoint } from './labels';
+import type { Projection } from '../geo/raw_mercator';
+import type { Feature, Point } from 'geojson';
+import type { PointsGroup } from './osm';
+import type { TouchLayer } from './touch';
 
-export function svgPoints(projection, context) {
-    var _currSelected = new Set();
-    var _prevSelected = new Set();
+type PointFeature = Feature<Point, {
+    target: true;
+    entity: osmNode;
+    isAddr: boolean;
+}>;
 
-    function markerPath(selection, klass) {
+export function svgPoints(projection: Projection, context: coreContext) {
+    var _currSelected = new Set<EntityId>();
+    var _prevSelected = new Set<EntityId>();
+
+    function markerPath(selection: d3.Selection<SVGPathElement>, klass: string) {
         selection
             .attr('class', klass)
             .attr('transform', d => isAddressPoint(d.tags)
@@ -29,29 +39,29 @@ export function svgPoints(projection, context) {
             });
     }
 
-    function sortY(a, b) {
+    function sortY(a: osmNode, b: osmNode) {
         return b.loc[1] - a.loc[1];
     }
 
-    function addressShieldWidth(d, selection) {
-        const width = textWidth(d.tags['addr:housenumber'] || d.tags['addr:housename'] || '', 10, selection.node().parentElement);
+    function addressShieldWidth<T extends Element>(d: osmNode, selection: d3.Selection<T>) {
+        const width = textWidth(d.tags['addr:housenumber'] || d.tags['addr:housename'] || '', 10, selection.node()!.parentElement!);
         return clamp(width, 10, 34) + 8;
     };
 
     // Avoid exit/enter if we're just moving stuff around.
     // The node will get a new version but we only need to run the update selection.
-    function fastEntityKey(d) {
+    function fastEntityKey(d: osmNode) {
         const mode = context.mode();
         const isMoving = mode && /^(add|draw|drag|move|rotate)/.test(mode.id);
         return isMoving ? d.id : osmIdManager.key(d);
     }
 
 
-    function drawTargets(selection, graph, entities, filter) {
+    function drawTargets(selection: d3.Selection<SVGGElement>, graph: coreGraph, entities: osmNode[], filter: (node: osmNode) => boolean) {
         var fillClass = context.getDebug('target') ? 'pink ' : 'nocolor ';
         var getTransform = svgPointTransform(projection).geojson;
         var activeID = context.activeID();
-        var data = [];
+        var data: PointFeature[] = [];
 
         entities.forEach(function(node) {
             if (activeID === node.id) return;   // draw no target on the activeID
@@ -68,7 +78,7 @@ export function svgPoints(projection, context) {
             });
         });
 
-        var targets = selection.selectAll('.point.target')
+        var targets = selection.selectAll<SVGRectElement, PointFeature>('.point.target')
             .filter(d => filter(d.properties.entity))
             .data(data, d => fastEntityKey(d.properties.entity));
 
@@ -89,15 +99,16 @@ export function svgPoints(projection, context) {
     }
 
 
-    function drawPoints(selection, graph, entities, filter) {
+    function drawPoints(selection: d3.Selection<SVGSVGElement>, graph: coreGraph, entities: OsmEntity[], filter: (node: osmNode) => boolean) {
         const selected = context.selectedIDs();
         var wireframe = context.surface().classed('fill-wireframe');
         var zoom = geoScaleToZoom(projection.scale());
         var base = context.history().base();
 
         // Points with a direction will render as vertices at higher zooms..
-        function renderAsPoint(entity) {
-            return entity.geometry(graph) === 'point' &&
+        function renderAsPoint(entity: OsmEntity): entity is osmNode {
+            return entity.type === 'node' &&
+                entity.geometry(graph) === 'point' &&
                 !(zoom >= 18 && entity.directions(graph, projection).length);
         }
 
@@ -106,11 +117,11 @@ export function svgPoints(projection, context) {
         points.sort(sortY);
 
 
-        var drawLayer = selection.selectAll('.layer-osm.points .points-group.points');
-        var touchLayer = selection.selectAll('.layer-touch.points');
+        var drawLayer = selection.selectAll<SVGGElement, PointsGroup>('.layer-osm.points .points-group.points');
+        var touchLayer = selection.selectAll<SVGGElement, TouchLayer>('.layer-touch.points');
 
         // Draw points..
-        var groups = drawLayer.selectAll('g.point')
+        var groups = drawLayer.selectAll<SVGGElement, osmNode>('g.point')
             .filter(filter)
             .data(points, fastEntityKey);
 
@@ -155,16 +166,16 @@ export function svgPoints(projection, context) {
                 return !base.entities[d.id]; // if it doesn't exist in the base graph, it's new
             })
             .classed('moved', function(d) {
-                return base.entities[d.id] && !deepEqual(graph.entities[d.id].loc, base.entities[d.id].loc);
+                return !!base.entities[d.id] && !deepEqual(graph.entity(d.id).loc, base.entity(d.id).loc);
             })
             .classed('retagged', function(d) {
-                return base.entities[d.id] && !deepEqual(graph.entities[d.id].tags, base.entities[d.id].tags);
+                return !!base.entities[d.id] && !deepEqual(graph.entity(d.id).tags, base.entity(d.id).tags);
             })
             .call(svgTagClasses());
 
         // Highlighted vertices with a radius/diameter get a circle
         const circles = groups
-            .selectAll('.radius')
+            .selectAll<SVGCircleElement, number>('.radius')
             .data((d) => selected.includes(d.id) ? getRadiiInPixels(d, projection) : []);
 
         circles.exit()
@@ -192,7 +203,7 @@ export function svgPoints(projection, context) {
     }
 
     // partial redraw - only update the selected items..
-    drawPoints.drawSelected = (selection, graph) => {
+    drawPoints.drawSelected = (selection: d3.Selection<SVGSVGElement>, graph: coreGraph) => {
         _prevSelected = _currSelected;
         _currSelected = new Set(context.selectedIDs());
 
@@ -207,3 +218,5 @@ export function svgPoints(projection, context) {
 
     return drawPoints;
 }
+
+export interface svgPoints extends ReturnType<typeof svgPoints> {}
