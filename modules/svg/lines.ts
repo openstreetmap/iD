@@ -2,16 +2,21 @@ import { deepEqual } from 'fast-equals';
 import { range as d3_range } from 'd3-array';
 
 import {
-    svgMarkerSegments, svgPath, svgRelationMemberTags, svgSegmentWay
+    svgMarkerSegments, svgPath, svgRelationMemberTags, svgSegmentWay,
+    type MarkerSegment,
+    type SegmentFeature
 } from './helpers';
 import { svgTagClasses } from './tag_classes';
 
-import { osmIdManager } from '../osm';
+import { osmIdManager, type OsmEntity, type osmWay, type WayId } from '../osm';
 import { utilArrayFlatten, utilArrayGroupBy } from '../util';
 import { utilIsDrawing } from '../util/util';
+import type { Projection } from '../geo/raw_mercator';
+import type { coreContext, coreGraph } from '../core';
+import type { OsmLayer } from './osm';
+import type { TouchLayer } from './touch';
 
-/** @param {{ [key: string ]: string }} tags */
-function onewayArrowColour(tags) {
+function onewayArrowColour(tags: Tags) {
     // the return value must be defined in ./defs.js
     if (tags.highway === 'construction' && tags.bridge) return 'white';
     if (tags.highway === 'pedestrian') return 'gray';
@@ -21,8 +26,8 @@ function onewayArrowColour(tags) {
     return 'black';
 }
 
-export function svgLines(projection, context) {
-    var highway_stack = {
+export function svgLines(projection: Projection, context: coreContext) {
+    var highway_stack: Record<string, number> = {
         motorway: 0,
         motorway_link: 1,
         trunk: 2,
@@ -39,7 +44,7 @@ export function svgLines(projection, context) {
     };
 
 
-    function drawTargets(selection, graph, entities, filter) {
+    function drawTargets(selection: d3.Selection<SVGGElement>, graph: coreGraph, entities: osmWay[], filter: (way: osmWay) => boolean) {
         var targetClass = context.getDebug('target') ? 'pink ' : 'nocolor ';
         var nopeClass = context.getDebug('target') ? 'red ' : 'nocolor ';
         var getPath = svgPath(projection).geojson;
@@ -47,7 +52,7 @@ export function svgLines(projection, context) {
         var base = context.history().base();
 
         // The targets and nopes will be MultiLineString sub-segments of the ways
-        var data = { targets: [], nopes: [] };
+        var data: { targets: SegmentFeature[]; nopes: SegmentFeature[]; } = { targets: [], nopes: [] };
 
         entities.forEach(function(way) {
             var features = svgSegmentWay(way, graph, activeID);
@@ -58,24 +63,24 @@ export function svgLines(projection, context) {
 
         // Targets allow hover and vertex snapping
         var targetData = data.targets.filter(getPath);
-        var targets = selection.selectAll('.line.target-allowed')
+        var targets = selection.selectAll<SVGPathElement, SegmentFeature>('.line.target-allowed')
             .filter(function(d) { return filter(d.properties.entity); })
-            .data(targetData, function key(d) { return d.id; });
+            .data(targetData, function key(d) { return d.id!; });
 
         // exit
         targets.exit()
             .remove();
 
-        var segmentWasEdited = function(d) {
+        var segmentWasEdited = function(d: SegmentFeature) {
             var wayID = d.properties.entity.id;
             // if the whole line was edited, don't draw segment changes
             if (!base.entities[wayID] ||
-                !deepEqual(graph.entities[wayID].nodes, base.entities[wayID].nodes)) {
+                !deepEqual(graph.entity(wayID).nodes, base.entity(wayID).nodes)) {
                 return false;
             }
             return d.properties.nodes.some(function(n) {
                 return !base.entities[n.id] ||
-                       !deepEqual(graph.entities[n.id].loc, base.entities[n.id].loc);
+                       !deepEqual(graph.entity(n.id).loc, base.entity(n.id).loc);
             });
         };
 
@@ -91,9 +96,9 @@ export function svgLines(projection, context) {
 
         // NOPE
         var nopeData = data.nopes.filter(getPath);
-        var nopes = selection.selectAll('.line.target-nope')
+        var nopes = selection.selectAll<SVGPathElement, SegmentFeature>('.line.target-nope')
             .filter(function(d) { return filter(d.properties.entity); })
-            .data(nopeData, function key(d) { return d.id; });
+            .data(nopeData, function key(d) { return d.id!; });
 
         // exit
         nopes.exit()
@@ -111,10 +116,10 @@ export function svgLines(projection, context) {
     }
 
 
-    function drawLines(selection, graph, entities, filter) {
+    function drawLines(selection: d3.Selection<SVGSVGElement>, graph: coreGraph, entities: OsmEntity[], filter: (way: osmWay | MarkerSegment) => boolean) {
         var base = context.history().base();
 
-        function waystack(a, b) {
+        function waystack(a: osmWay, b: osmWay) {
             var selected = context.selectedIDs();
             var scoreA = selected.indexOf(a.id) !== -1 ? 20 : 0;
             var scoreB = selected.indexOf(b.id) !== -1 ? 20 : 0;
@@ -125,16 +130,16 @@ export function svgLines(projection, context) {
         }
 
 
-        function drawLineGroup(selection, klass, isSelected) {
+        function drawLineGroup(selection: d3.Selection<SVGGElement>, klass: string, isSelected: boolean) {
             // Note: Don't add `.selected` class in draw modes
             var mode = context.mode();
             var isDrawing = mode && utilIsDrawing(mode.id);
             var selectedClass = (!isDrawing && isSelected) ? 'selected ' : '';
 
             var lines = selection
-                .selectAll('path')
+                .selectAll<SVGPathElement, osmWay>('path')
                 .filter(filter)
-                .data(getPathData(isSelected), osmIdManager.key);
+                .data<osmWay>(getPathData(isSelected), osmIdManager.key);
 
             lines.exit()
                 .remove();
@@ -171,28 +176,28 @@ export function svgLines(projection, context) {
                     return !base.entities[d.id];
                 })
                 .classed('geometry-edited', function(d) {
-                    return graph.entities[d.id] &&
-                        base.entities[d.id] &&
-                        !deepEqual(graph.entities[d.id].nodes, base.entities[d.id].nodes);
+                    return !!graph.entities[d.id] &&
+                        !!base.entities[d.id] &&
+                        !deepEqual(graph.entity(d.id).nodes, base.entity(d.id).nodes);
                 })
                 .classed('retagged', function(d) {
-                    return graph.entities[d.id] &&
-                        base.entities[d.id] &&
-                        !deepEqual(graph.entities[d.id].tags, base.entities[d.id].tags);
+                    return !!graph.entities[d.id] &&
+                        !!base.entities[d.id] &&
+                        !deepEqual(graph.entity(d.id).tags, base.entity(d.id).tags);
                 })
                 .call(svgTagClasses())
                 .merge(lines)
                 .sort(waystack)
                 .attr('d', getPath)
-                .call(svgTagClasses().tags(svgRelationMemberTags(graph)));
+                .call(svgTagClasses<osmWay>().tags(svgRelationMemberTags(graph)));
 
             return selection;
         }
 
 
-        function getPathData(isSelected) {
-            return function() {
-                var layer = this.parentNode.__data__;
+        function getPathData(isSelected: boolean) {
+            return function(this: SVGElement) {
+                var layer = this.parentNode!.__data__;
                 var data = pathdata[layer] || [];
                 return data.filter(function(d) {
                     if (isSelected) {
@@ -204,9 +209,9 @@ export function svgLines(projection, context) {
             };
         }
 
-        function addMarkers(layergroup, pathclass, groupclass, groupdata, marker) {
+        function addMarkers(layergroup: d3.Selection<SVGGElement>, pathclass: string, groupclass: string, groupdata: Record<string, MarkerSegment[]>, marker: (d: MarkerSegment) => string) {
             var markergroup = layergroup
-                .selectAll('g.' + groupclass)
+                .selectAll<SVGGElement, string>('g.' + groupclass)
                 .data([pathclass]);
 
             markergroup = markergroup.enter()
@@ -215,11 +220,11 @@ export function svgLines(projection, context) {
                 .merge(markergroup);
 
             var markers = markergroup
-                .selectAll('path')
+                .selectAll<SVGPathElement, MarkerSegment>('path')
                 .filter(filter)
-                .data(
-                    function data() { return groupdata[this.parentNode.__data__] || []; },
-                    function key(d) { return [d.id, d.index]; }
+                .data<MarkerSegment>(
+                    function data(this: SVGElement) { return groupdata[this.parentNode!.__data__] || []; },
+                    function key(d) { return d.id + ',' + d.index; }
                 );
 
             markers.exit()
@@ -235,13 +240,14 @@ export function svgLines(projection, context) {
 
 
         var getPath = svgPath(projection, graph);
-        var ways = [];
-        var onewaydata = {};
-        var sideddata = {};
-        var oldMultiPolygonOuters = {};
+        var ways: osmWay[] = [];
+        var onewaydata: Record<string, MarkerSegment[]> = {};
+        var sideddata: Record<string, MarkerSegment[]> = {};
+        var oldMultiPolygonOuters: Record<WayId, unknown> = {};
 
         for (var i = 0; i < entities.length; i++) {
             var entity = entities[i];
+            if (entity.type !== 'way') continue;
             if (entity.geometry(graph) === 'line'
                        // to render side-markers for coastlines (see
                        // https://github.com/openstreetmap/iD/issues/9293)
@@ -252,10 +258,10 @@ export function svgLines(projection, context) {
         }
 
         ways = ways.filter(getPath);
-        const pathdata = utilArrayGroupBy(ways, (way) => Math.trunc(way.layer()));
+        const pathdata = utilArrayGroupBy(ways, (way) => Math.trunc(way.layer()).toString());
 
         Object.keys(pathdata).forEach(function(k) {
-            var v = pathdata[k];
+            var v = pathdata[k]!;
             var onewayArr = v.filter(function(d) { return d.isOneWay(); });
             var onewaySegments = svgMarkerSegments(
                 projection, graph, 36,
@@ -272,15 +278,15 @@ export function svgLines(projection, context) {
         });
 
 
-        var covered = selection.selectAll('.layer-osm.covered');     // under areas
-        var uncovered = selection.selectAll('.layer-osm.lines');     // over areas
-        var touchLayer = selection.selectAll('.layer-touch.lines');
+        const covered = selection.selectAll<SVGGElement, OsmLayer>('.layer-osm.covered');     // under areas
+        const uncovered = selection.selectAll<SVGGElement, OsmLayer>('.layer-osm.lines');     // over areas
+        const touchLayer = selection.selectAll<SVGGElement, TouchLayer>('.layer-touch.lines');
 
         // Draw lines..
         [covered, uncovered].forEach(function(selection) {
             var range = (selection === covered ? d3_range(-10,0) : d3_range(0,11));
             var layergroup = selection
-                .selectAll('g.layergroup')
+                .selectAll<SVGGElement, number>('g.layergroup')
                 .data(range);
 
             layergroup = layergroup.enter()
@@ -295,18 +301,18 @@ export function svgLines(projection, context) {
                 .append('g')
                 .attr('class', function(d) { return 'linegroup line-' + d; });
 
-            layergroup.selectAll('g.line-shadow')
+            layergroup.selectAll<SVGGElement, string>('g.line-shadow')
                 .call(drawLineGroup, 'shadow', false);
-            layergroup.selectAll('g.line-casing')
+            layergroup.selectAll<SVGGElement, string>('g.line-casing')
                 .call(drawLineGroup, 'casing', false);
-            layergroup.selectAll('g.line-stroke')
+            layergroup.selectAll<SVGGElement, string>('g.line-stroke')
                 .call(drawLineGroup, 'stroke', false);
 
-            layergroup.selectAll('g.line-shadow-highlighted')
+            layergroup.selectAll<SVGGElement, string>('g.line-shadow-highlighted')
                 .call(drawLineGroup, 'shadow', true);
-            layergroup.selectAll('g.line-casing-highlighted')
+            layergroup.selectAll<SVGGElement, string>('g.line-casing-highlighted')
                 .call(drawLineGroup, 'casing', true);
-            layergroup.selectAll('g.line-stroke-highlighted')
+            layergroup.selectAll<SVGGElement, string>('g.line-stroke-highlighted')
                 .call(drawLineGroup, 'stroke', true);
 
             addMarkers(layergroup, 'oneway', 'onewaygroup', onewaydata, (d) => {
@@ -329,3 +335,5 @@ export function svgLines(projection, context) {
 
     return drawLines;
 }
+
+export interface svgLines extends ReturnType<typeof svgLines> {}
