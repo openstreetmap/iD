@@ -600,6 +600,7 @@ export function uiSectionRawTagEditor(id, context) {
         for (const key in _pendingChange) {
             _tags[key] = _pendingChange[key];
         }
+        _orderedKeys.sort();
         dispatch.call('change', this, _entityIDs, _pendingChange);
         _pendingChange = null;
     }
