@@ -31,4 +31,29 @@ describe('iD.uiEntityEditor', function () {
 
         expect(editor.presets()[0].id).toBe('vertex_only');
     });
+
+    it('preserves inspector-body scrollTop during history changes', async () => {
+        await iD.presetManager.ensureLoaded(true);
+        const container = d3_select(document.createElement('div'));
+        const selection = container.append('div');
+        const context = iD.coreContext().assetPath('../dist/').init().container(container);
+
+        context.history().merge([
+            new iD.osmNode({ id: 'n1', loc: [0, 0], tags: { highway: 'crossing' } })
+        ]);
+
+        const editor = iD.uiEntityEditor(context)
+            .state('select')
+            .entityIDs(['n1']);
+
+        editor(selection);
+
+        const bodyNode = selection.select('.inspector-body').node();
+        bodyNode.scrollTop = 250;
+
+        // Perform a change to trigger historyChanged
+        context.perform(iD.actionChangeTags('n1', { highway: 'crossing', crossing: 'marked' }));
+
+        expect(bodyNode.scrollTop).toBe(250);
+    });
 });

@@ -27,6 +27,7 @@ export function uiEntityEditor(context) {
     var _entityIDs = [];
     var _activePresets = [];
     var _newFeature;
+    var _resetScroll = false;
 
     var _sections;
 
@@ -87,6 +88,10 @@ export function uiEntityEditor(context) {
         body = body
             .merge(bodyEnter);
 
+        var bodyNode = body.node();
+        var scrollPos = (_resetScroll || !bodyNode) ? 0 : bodyNode.scrollTop;
+        _resetScroll = false;
+
         if (!_sections) {
             _sections = [
                 uiSectionSelectionList(context),
@@ -116,6 +121,10 @@ export function uiEntityEditor(context) {
             }
             body.call(section.render);
         });
+
+        if (bodyNode) {
+            bodyNode.scrollTop = scrollPos;
+        }
 
         context.history()
             .on('change.entity-editor', historyChanged)
@@ -293,6 +302,7 @@ export function uiEntityEditor(context) {
         if (val && _entityIDs && utilArrayIdentical(_entityIDs, val)) return entityEditor;  // exit early if no change
 
         _entityIDs = val || [];
+        _resetScroll = true;
 
         loadActivePresets(true);
 
