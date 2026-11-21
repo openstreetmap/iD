@@ -69,6 +69,7 @@ export function helpHtml(id, replacements) {
 
         // operation icons
         circularize_icon: icon('#iD-operation-circularize', 'inline operation'),
+        divide_icon: icon('#iD-operation-divide', 'inline operation'),
         continue_icon: icon('#iD-operation-continue', 'inline operation'),
         copy_icon: icon('#iD-operation-copy', 'inline operation'),
         delete_icon: icon('#iD-operation-delete', 'inline operation'),
@@ -117,6 +118,7 @@ export function helpHtml(id, replacements) {
         note: localizer.t_html('modes.add_note.label'),
 
         circularize: localizer.t_html('operations.circularize.title'),
+        divide: localizer.t_html('operations.divide.title'),
         continue: localizer.t_html('operations.continue.title'),
         copy: localizer.t_html('operations.copy.title'),
         delete: localizer.t_html('operations.delete.title'),

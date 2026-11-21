@@ -81,6 +81,7 @@ export function uiFlash(context) {
     }
 
 
+    /** @type {GetSet<typeof flash, number>} */
     flash.duration = function(_) {
         if (!arguments.length) return _duration;
         _duration = _;
@@ -97,6 +98,7 @@ export function uiFlash(context) {
         return flash;
     };
 
+    /** @type {GetSet<typeof flash, string>} */
     flash.iconName = function(_) {
         if (!arguments.length) return _iconName;
         _iconName = _;
