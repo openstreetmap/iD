@@ -396,9 +396,134 @@ export function uiSectionRawMembershipEditor(context) {
         return presetName + ' ' + entityName;
     }
 
+    function loadAllMembers() {
+        var selectedIDs = context.selectedIDs();
+        if (!selectedIDs.length) return;
+
+        var entityID = selectedIDs[0];
+        var entity = context.graph().hasEntity(entityID);
+        if (!entity || entity.type !== 'relation') return;
+
+        context.loadEntity(entityID);
+    }
+
+    function selectAllMembers() {
+        var graph = context.graph();
+        var selectedIDs = context.selectedIDs();
+        if (!selectedIDs.length) return;
+        var entity = graph.entity(selectedIDs[0]);
+        if (entity.type !== 'relation') return;
+
+        var allLoaded = entity.members.every(m => graph.hasEntity(m.id));
+
+        if (!allLoaded) {
+            context.ui().flash(t('raw_membership_editor.not_all_members_loaded'));
+            return;
+        }
+
+        var memberIDs = entity.members
+            .filter(m => m.type === 'way' || m.type === 'node')
+            .map(m => m.id);
+
+        context.enter(
+            modeSelect(context, memberIDs)
+        );
+    }
+
+    function selectLoadedMembers() {
+        var graph = context.graph();
+        var selectedIDs = context.selectedIDs();
+
+        if (!selectedIDs.length) return;
+
+        var entity = graph.entity(selectedIDs[0]);
+
+        if (entity.type !== 'relation') {
+            return;
+        }
+
+        var memberIDs = entity.members
+            .map(m => m.id)
+            .filter(id => graph.hasEntity(id));
+
+        if (!memberIDs.length) {
+            return;
+        }
+
+        context.enter(modeSelect(context, memberIDs));
+    }
+
     function renderDisclosureContent(selection) {
 
         var memberships = getMemberships();
+
+        //Member Controls (compact UI)
+        var controls = selection.selectAll('.member-controls')
+            .data([0]);
+
+        var controlsEnter = controls.enter()
+            .append('div')
+            .attr('class', 'member-controls');
+
+        controls = controls.merge(controlsEnter);
+
+        // Buttons data
+        var btnData = [
+            { type: 'load', icon: '#iD-icon-plus', title: 'Load all members' },
+            { type: 'selectLoaded', icon: '#iD-icon-note', title: 'Select loaded members' },
+            { type: 'selectAll', icon: '#iD-icon-apply', title: 'Select all members' }
+        ];
+
+        var buttons = controls.selectAll('button')
+            .data(btnData);
+
+        var buttonsEnter = buttons.enter()
+            .append('button')
+            .attr('type', 'button')
+            .attr('class', function(d) { return 'member-btn member-btn-' + d.type; })
+            .attr('title', function(d) { return d.title; })
+            .each(function(d) {
+                d3_select(this).call(svgIcon(d.icon));
+            });
+
+        buttons = buttons.merge(buttonsEnter);
+
+        buttons.on('click', function(event, d) {
+            if (this.disabled) return;
+            if (d.type === 'load') {
+                loadAllMembers();
+            } else if (d.type === 'selectLoaded') {
+                selectLoadedMembers();
+            } else if (d.type === 'selectAll') {
+                selectAllMembers();
+            }
+        });
+
+        buttons.each(function(d) {
+            var isDisabled = false;
+
+            if (d.type === 'selectAll') {
+                var selectedIDs = context.selectedIDs();
+                if (!selectedIDs.length) {
+                    isDisabled = true;
+                } else {
+                    var entity = context.graph().hasEntity(selectedIDs[0]);
+                    if (!entity || entity.type !== 'relation') {
+                        isDisabled = true;
+                    } else {
+                        isDisabled = !entity.members.every(m =>
+                            context.graph().hasEntity(m.id)
+                        );
+                    }
+                }
+            }
+
+            d3_select(this)
+                .classed('disabled', isDisabled)
+                .attr('disabled', isDisabled ? true : null)
+                .attr('aria-disabled', isDisabled ? 'true' : null)
+                .attr('tabindex', isDisabled ? -1 : null);
+        });
 
         var list = selection.selectAll('.member-list')
             .data([0]);
