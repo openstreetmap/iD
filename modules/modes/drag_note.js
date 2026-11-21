@@ -100,7 +100,7 @@ export function modeDragNote(context) {
     }
 
 
-    var drag = behaviorDrag()
+    var drag = behaviorDrag(context)
         .selector('.layer-touch.markers .target.note.new')
         .surface(context.container().select('.main-map').node())
         .origin(origin)

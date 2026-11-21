@@ -449,7 +449,7 @@ export function modeDragNode(context) {
     }
 
 
-    var drag = behaviorDrag()
+    var drag = behaviorDrag(context)
         .selector('.layer-touch.points .target')
         .surface(context.container().select('.main-map').node())
         .origin(origin)
