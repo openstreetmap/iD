@@ -47,7 +47,11 @@ export function uiSectionRawMemberEditor(context) {
         d3_event.preventDefault();
 
         // display the loading indicator
-        d3_select(this).classed('loading', true);
+        d3_select(this)
+          .classed('loading', true)
+          .select('svg')
+          .insert('use', 'use')
+          .attr('href', '#iD-loader');
         context.loadEntity(d.id, function() {
             section.reRender();
         });
