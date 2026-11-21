@@ -48,10 +48,17 @@ export function uiStatus(context) {
                         osm.reloadApiStatus();
                     }, 2000);
 
-                    // eslint-disable-next-line no-warning-comments
-                    // TODO: nice messages for different error types
+                    var messageKey = 'osm_api_status.message.error';
+                    if (err && err.status === 500) {
+                        messageKey = 'osm_api_status.message.server_error';
+                    } else if (err && err.status === 503) {
+                        messageKey = 'osm_api_status.message.service_unavailable';
+                    } else if (err && (err.status === -1 || err.timeout)) {
+                        messageKey = 'osm_api_status.message.timeout';
+                    }
+
                     selection
-                        .call(t.append('osm_api_status.message.error', { suffix: ' ' }))
+                        .call(t.append(messageKey, { suffix: ' ' }))
                         .append('a')
                         .attr('href', '#')
                         // let the user manually retry their connection directly
