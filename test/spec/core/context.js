@@ -79,4 +79,19 @@ describe('iD.coreContext', function() {
         });
     });
 
+    describe('#enter', function() {
+        it('blurs the focused element before changing mode', function() {
+            var context = iD.coreContext();
+            var input = document.createElement('input');
+            document.body.appendChild(input);
+            input.focus();
+            expect(document.activeElement).toBe(input);
+
+            var mockMode = { id: 'test', enter: function() {}, exit: function() {} };
+            context.enter(mockMode);
+            expect(document.activeElement).not.toBe(input);
+            document.body.removeChild(input);
+        });
+    });
+
 });
