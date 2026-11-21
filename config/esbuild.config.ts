@@ -1,7 +1,7 @@
 import esbuild from 'esbuild';
 import fs from 'node:fs';
 import { parseArgs } from 'node:util';
-import envs from './envs.js';
+import envs from './envs.ts';
 import browserslistToEsbuild from 'browserslist-to-esbuild';
 
 let args = parseArgs({options: {
@@ -9,22 +9,26 @@ let args = parseArgs({options: {
   stats: { type: 'boolean' }
 }}).values;
 
-const build = await esbuild.build({
+const context = await esbuild.context({
   define: envs,
-  minify: true,
   bundle: true,
   sourcemap: true,
   entryPoints: ['./modules/id.js'],
   legalComments: 'none',
   logLevel: 'info',
   metafile: true,
-  outfile: 'dist/iD.min.js',
+  outfile: 'dist/iD.js',
   target: browserslistToEsbuild(),
-  loader: { '.DS_Store' : 'empty' },
-  treeShaking: true,
-})
-.catch(() => process.exit(1));
+  loader: { '.DS_Store' : 'empty', '.swp' : 'empty' },
+  treeShaking: false,
+});
 
-if (args.stats) {
-  fs.writeFileSync('./dist/esbuild.json', JSON.stringify(build.metafile, null, 2));
+if (args.watch) {
+  await context.watch();
+} else {
+  const build = await context.rebuild();
+  if (args.stats) {
+    fs.writeFileSync('./dist/esbuild.json', JSON.stringify(build.metafile, null, 2));
+  }
+  await context.dispose();
 }
