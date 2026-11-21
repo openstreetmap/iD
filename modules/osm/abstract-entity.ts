@@ -42,7 +42,7 @@ export abstract class OsmAbstractEntity implements OsmEntityProps {
         for (var i = 0; i < sources.length; ++i) {
             var source = sources[i];
             for (var prop in source) {
-                if (Object.prototype.hasOwnProperty.call(source, prop)) {
+                if (Object.hasOwn(source, prop)) {
                     if (source[prop as keyof OsmEntityProps] === undefined) {
                         delete this[prop as keyof OsmEntityProps];
                     } else {
@@ -101,7 +101,7 @@ export abstract class OsmAbstractEntity implements OsmEntityProps {
         let changed = false;
 
         for (const k in tags) {
-            if (setTags.hasOwnProperty(k)) continue;
+            if (Object.hasOwn(setTags, k)) continue;
             const t1 = this.tags[k];
             const t2 = tags[k];
             if (!t1) {
