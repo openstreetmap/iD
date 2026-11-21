@@ -12,6 +12,7 @@ export { validationMissingTag } from './missing_tag';
 export { validationMutuallyExclusiveTags } from './mutually_exclusive_tags';
 export { validationOsmApiLimits } from './osm_api_limits';
 export { validationOutdatedTags } from './outdated_tags';
+export { validationOverlappingWays } from './overlapping_ways';
 export { validationPrivateData } from './private_data';
 export { validationSuspiciousName } from './suspicious_name';
 export { validationUnsquareWay } from './unsquare_way';
