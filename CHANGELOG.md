@@ -52,6 +52,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Disable the locator overlay when osm carto is selected as the background ([#9931], thanks [@k-yle])
 * Add invert filter for background imagery ([#12340], thanks [@kalucky0])
 #### :scissors: Operations
+* Create a 'distribute' operation ([#12728], thanks [@k-yle])
 * Treat `conveying=*` the same as `oneway=*` when reversing a line ([#13027], thanks [@k-yle])
 * Add shortcut tooltip to reverse direction button ([#12961], thanks [@SaifuddinM23])
 * Prevent _merge_ operation creating a self-referencing relation under certain conditions ([#7983])
@@ -115,6 +116,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#12540]: https://github.com/openstreetmap/iD/issues/12540
 [#12678]: https://github.com/openstreetmap/iD/pull/12678
 [#12679]: https://github.com/openstreetmap/iD/pull/12679
+[#12728]: https://github.com/openstreetmap/iD/pull/12728
 [#12704]: https://github.com/openstreetmap/iD/pull/12704
 [#12724]: https://github.com/openstreetmap/iD/pull/12724
 [#12736]: https://github.com/openstreetmap/iD/pull/12736
