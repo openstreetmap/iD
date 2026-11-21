@@ -44,6 +44,14 @@ export function presetCollection(collection: presetPreset[]) {
     );
   };
 
+  _this.matchLocation = (loc?: Vec2) => {
+    if (!Array.isArray(loc)) return _this;
+    const validHere = locationManager.locationSetsAt(loc);
+    return presetCollection(
+      _this.collection.filter(d => !d.locationSetID || validHere.has(d.locationSetID))
+    );
+  };
+
   _this.fallback = (geometry: Geometry) => {
     let id = geometry;
     if (id === 'vertex') id = 'point';

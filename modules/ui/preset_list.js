@@ -149,7 +149,7 @@ export function uiPresetList(context) {
             if (!preset) return collection;
 
             if (preset.members) {
-                if (preset.members.collection.filter(function(preset) {
+                if (preset.members.matchLocation(_currLoc).collection.filter(function(preset) {
                     return preset.addable();
                 }).length > 1) {
                     collection.push(CategoryItem(preset));
@@ -347,9 +347,11 @@ export function uiPresetList(context) {
                     .style('opacity', '0')
                     .style('max-height', '0px')
                     .style('padding-bottom', '0px');
-            } else {
+           } else {
                 shown = true;
-                var members = preset.members.matchAllGeometry(entityGeometries());
+                var members = preset.members
+                    .matchAllGeometry(entityGeometries())
+                    .matchLocation(_currLoc);
                 sublist.call(drawList, members);
                 box.transition()
                     .duration(200)
