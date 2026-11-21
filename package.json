@@ -49,7 +49,7 @@
     "test:spec": "vitest --no-isolate",
     "test:once": "vitest run --no-isolate",
     "test:coverage": "vitest run --no-isolate --coverage.enabled",
-    "translations": "node scripts/update_locales.js"
+    "translations": "node scripts/update_locales.ts"
   },
   "dependencies": {
     "@mapbox/geojson-area": "^0.3.0",
