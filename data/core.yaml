@@ -819,6 +819,32 @@ en:
       disable:
         already_set: "This photo is already tagged on the selected map feature"
         too_far: "This photo is too far away from the selected map feature"
+  preset_shortcut:
+    title: Set Keyboard Shortcut
+    button_tooltip: Set keyboard shortcut
+    button_tooltip_with_shortcut: "Keyboard shortcut: {shortcut}"
+    preset_label: "Set shortcut for: {preset}"
+    instructions: "Enter a number between 8 and 999 (numbers 1-7 are reserved shortcuts)."
+    modal_title: Edit Keyboard Shortcut
+    modal_description: "Set a numeric keyboard shortcut (8-999) to quickly access this preset"
+    shortcut_label: "Shortcut Number"
+    shortcut_placeholder: "Enter 8-999"
+    save: Save
+    remove: Remove Shortcut
+    edit_tooltip: Edit shortcut
+    error_empty: "Please enter a shortcut number"
+    error_invalid_range: "Shortcut must be between 8 and 999"
+    error_conflict: "Shortcut {shortcut} is already used by {preset}"
+    inline_label: "Keyboard shortcut"
+    none_display: "none"
+    add_tooltip: "Add shortcut"
+    save_tooltip: "Save shortcut"
+    cancel_tooltip: "Cancel"
+  preset_shortcuts_list:
+    title: Keyboard Shortcuts
+    no_shortcuts: "No keyboard shortcuts defined. Use the shortcut button next to preset names to add shortcuts."
+    edit_tooltip: Edit this shortcut
+    delete_tooltip: Delete this shortcut
   background:
     title: Background
     description: Background Settings
