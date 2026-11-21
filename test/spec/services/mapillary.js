@@ -201,12 +201,14 @@ describe('iD.serviceMapillary', function() {
     });
 
 
-    describe('#filterViewer', function() {
+          describe('#filterViewer', function() {
         it('filters images by dates', function() {
             context.photos().setDateFilter('fromDate', '2020-01-01');
             context.photos().setDateFilter('toDate', '2021-01-01');
             var filter = mapillary.filterViewer(context);
             expect(filter.length).toBe(3);
+            expect(filter[1]).toEqual(['>=', 'capturedAt', new Date('2020-01-01').getTime()]);
+            expect(filter[2]).toEqual(['<=', 'capturedAt', new Date('2021-01-01').getTime()]);
         });
     });
 });
