@@ -393,7 +393,7 @@ export function modeSelect(context, selectedIDs) {
                         if (osm) {
                             let missing = nodes.filter(function(n) { return !osm.isDataLoaded(n.loc); });
                             if (missing.length) {
-                                missing.forEach(function(loc) { context.loadTileAtLoc(loc); });
+                                missing.forEach(function(n) { context.loadTileAtLoc(n.loc); });
                                 return true;
                             }
                         }
