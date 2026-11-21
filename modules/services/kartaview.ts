@@ -422,6 +422,7 @@ export default new class Kartaview implements IStreetSide {
                     service.hideViewer(context);
                 }
             }
+            context.ui().photoviewer.restore();
             wrap.classed('hide', false)
                 .selectAll('.photo-wrapper.kartaview-wrapper')
                 .classed('hide', false);

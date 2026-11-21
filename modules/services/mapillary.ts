@@ -553,6 +553,7 @@ export default new class {
                 }
             }
 
+            context.ui().photoviewer.restore();
             wrap.classed('hide', false)
                 .selectAll('.photo-wrapper.mly-wrapper')
                 .classed('hide', false);

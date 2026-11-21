@@ -703,6 +703,7 @@ export default new class BingStreetside implements IStreetSide {
           service.hideViewer(context);
         }
       }
+      context.ui().photoviewer.restore();
       wrap
         .classed('hide', false)
         .selectAll('.photo-wrapper.ms-wrapper')

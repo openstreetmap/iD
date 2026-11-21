@@ -131,6 +131,7 @@ export function svgLocalPhotos(projection: Projection, context: coreContext, dis
                         service.hideViewer(context);
                     }
                 }
+                context.ui().photoviewer.restore();
                 viewer.classed('hide', false);
                 viewerWrap.classed('hide', false);
             }
