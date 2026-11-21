@@ -63,7 +63,10 @@ export function behaviorDraw(context) {
 
         if (_downPointer) return;
 
-        var pointerLocGetter = utilFastMouse(this);
+        // Use the `main-map` coordinate system since the surface and supersurface
+        // are transformed when zooming or panning. - #12889
+        var mapNode = context.container().select('.main-map').node() || this;
+        var pointerLocGetter = utilFastMouse(mapNode);
         _downPointer = {
             id: d3_event.pointerId || 'mouse',
             pointerLocGetter: pointerLocGetter,
