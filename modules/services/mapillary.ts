@@ -714,8 +714,17 @@ export default new class {
 
 
     // Return a list of detection objects for the given id
-    getDetections(id: string) {
-        return loadData<DetectionWithImage>(`${apiUrl}/${id}/detections?access_token=${accessToken}&fields=id,value,image`);
+    getDetections(id: string, context: coreContext) {
+        return loadData<DetectionWithImage>(`${apiUrl}/${id}/detections?access_token=${accessToken}&fields=id,value,image{id,captured_at}`)
+            .then(function(detections) {
+                const fromDate = context.photos().fromDate(), toDate = context.photos().toDate();
+                const from = fromDate ? new Date(fromDate).getTime() : -Infinity;
+                const to = toDate ? new Date(toDate).getTime() : Infinity;
+                return detections.filter(({ image }) => {
+                    const capturedAt = new Date(image.captured_at!).getTime();
+                    return capturedAt >= from && capturedAt <= to;
+                });
+            });
     }
 
 
