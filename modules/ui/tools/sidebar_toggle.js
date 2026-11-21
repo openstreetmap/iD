@@ -20,7 +20,7 @@ export function uiToolSidebarToggle(context) {
             .call(uiTooltip()
                 .placement('bottom')
                 .title(() => t.append('sidebar.tooltip'))
-                .keys([t('sidebar.key')])
+                .keys(() => [t('sidebar.key')])
                 .scrollContainer(context.container().select('.top-toolbar'))
             )
             .call(svgIcon('#iD-icon-sidebar-' + (localizer.textDirection() === 'rtl' ? 'right' : 'left')));
