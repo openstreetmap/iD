@@ -1,5 +1,5 @@
 import { deepEqual } from 'fast-equals';
-
+import type { Geometry } from '@openstreetmap/id-tagging-schema';
 import { actionAddVertex } from '../actions/add_vertex';
 import { actionChangeTags } from '../actions/change_tags';
 import { actionMergeNodes } from '../actions/merge_nodes';
@@ -13,12 +13,15 @@ import { t } from '../core/localizer';
 import { utilTagText } from '../util';
 import { utilDisplayLabel } from '../util/utilDisplayLabel';
 import { validationIssue, validationIssueFix } from '../core/validation';
+import type { CreateValidator, Validator } from '../core/validation/models';
+import type { NodeId, OsmEntity, osmWay, WayId } from '../osm';
+import type { coreContext, coreGraph } from '../core';
 
 
-export function validationMismatchedGeometry() {
+export const validationMismatchedGeometry: CreateValidator = () => {
     var type = 'mismatched_geometry';
 
-    function tagSuggestingLineIsArea(entity) {
+    function tagSuggestingLineIsArea(entity: OsmEntity) {
         if (entity.type !== 'way' || entity.isClosed()) return null;
 
         var tagSuggestingArea = entity.tagSuggestingArea();
@@ -44,7 +47,7 @@ export function validationMismatchedGeometry() {
     }
 
 
-    function makeConnectEndpointsFixOnClick(way, graph) {
+    function makeConnectEndpointsFixOnClick(way: osmWay, graph: coreGraph): null | undefined | ((this: validationIssueFix, context: coreContext) => void) {
         // must have at least three nodes to close this automatically
         if (way.nodes.length < 3) return null;
 
@@ -59,7 +62,7 @@ export function validationMismatchedGeometry() {
             // make sure this will not create a self-intersection
             if (!geoHasSelfIntersections(testNodes, testNodes[0].id)) {
                 return function(context) {
-                    var way = context.entity(this.issue.entityIds[0]);
+                    var way = context.entity(this.issue!.entityIds[0] as WayId);
                     context.perform(
                         actionMergeNodes([way.nodes[0], way.nodes[way.nodes.length-1]], nodes[0].loc),
                         t('issues.fix.connect_endpoints.annotation')
@@ -74,7 +77,7 @@ export function validationMismatchedGeometry() {
         // make sure this will not create a self-intersection
         if (!geoHasSelfIntersections(testNodes, testNodes[0].id)) {
             return function(context) {
-                var wayId = this.issue.entityIds[0];
+                var wayId = this.issue!.entityIds[0] as WayId;
                 var way = context.entity(wayId);
                 var nodeId = way.nodes[0];
                 var index = way.nodes.length;
@@ -86,7 +89,7 @@ export function validationMismatchedGeometry() {
         }
     }
 
-    function areaTaggedAsLineIssue(entity) {
+    function areaTaggedAsLineIssue(entity: OsmEntity) {
 
         var tagSuggestingArea = tagSuggestingLineIsArea(entity);
         if (!tagSuggestingArea) return null;
@@ -124,7 +127,7 @@ export function validationMismatchedGeometry() {
 
                 var fixes = [];
 
-                var entity = context.entity(this.entityIds[0]);
+                var entity = context.entity<osmWay>(this.entityIds[0]);
                 var connectEndsOnClick = makeConnectEndpointsFixOnClick(entity, context.graph());
 
                 if (!validAsLine) {
@@ -139,9 +142,9 @@ export function validationMismatchedGeometry() {
                     icon: 'iD-operation-delete',
                     title: t.append('issues.fix.remove_tag.title'),
                     onClick: function(context) {
-                        var entityId = this.issue.entityIds[0];
+                        var entityId = this.issue!.entityIds[0];
                         var entity = context.entity(entityId);
-                        var tags = Object.assign({}, entity.tags);  // shallow copy
+                        var tags = { ...entity.tags };  // shallow copy
                         for (var key in tagSuggestingArea) {
                             delete tags[key];
                         }
@@ -157,7 +160,7 @@ export function validationMismatchedGeometry() {
         });
 
 
-        function showReference(selection) {
+        function showReference(selection: d3.Selection) {
             selection.selectAll('.issue-reference')
                 .data([0])
                 .enter()
@@ -167,7 +170,7 @@ export function validationMismatchedGeometry() {
         }
     }
 
-    function vertexPointIssue(entity, graph) {
+    function vertexPointIssue(entity: OsmEntity, graph: coreGraph) {
         // we only care about nodes
         if (entity.type !== 'node') return null;
 
@@ -236,7 +239,7 @@ export function validationMismatchedGeometry() {
     }
 
 
-    function otherMismatchIssue(entity, graph) {
+    function otherMismatchIssue(entity: OsmEntity, graph: coreGraph) {
         // ignore boring features
         if (!entity.hasInterestingTags()) return null;
 
@@ -249,7 +252,7 @@ export function validationMismatchedGeometry() {
 
         // order matters. if there are multiple valid geometries,
         // suggest way geometry for ways, and node geometry for nodes.
-        var targetGeoms = entity.type === 'node'
+        const targetGeoms: Geometry[] = entity.type === 'node'
             ? ['point', 'vertex', 'line', 'area']
             : ['line', 'area', 'point', 'vertex'];
 
@@ -292,7 +295,7 @@ export function validationMismatchedGeometry() {
         if (referenceId === 'line_as_vertex') referenceId = 'line_as_point';
         if (referenceId === 'area_as_vertex') referenceId = 'area_as_point';
 
-        var dynamicFixes;
+        let dynamicFixes: validationIssue['dynamicFixes'];
         if (targetGeom === 'point') {
             dynamicFixes = extractPointDynamicFixes;
 
@@ -333,20 +336,20 @@ export function validationMismatchedGeometry() {
         });
     }
 
-    function lineToAreaDynamicFixes(context) {
+    function lineToAreaDynamicFixes(this: validationIssue, context: coreContext) {
 
-        var convertOnClick;
+        var convertOnClick: validationIssueFix['onClick'];
 
         var entityId = this.entityIds[0];
         var entity = context.entity(entityId);
-        var tags = Object.assign({}, entity.tags);  // shallow copy
+        var tags = { ...entity.tags };  // shallow copy
         delete tags.area;
         if (!osmTagSuggestingArea(tags)) {
             // if removing the area tag would make this a line, offer that as a quick fix
             convertOnClick = function(context) {
-                var entityId = this.issue.entityIds[0];
+                var entityId = this.issue!.entityIds[0];
                 var entity = context.entity(entityId);
-                var tags = Object.assign({}, entity.tags);  // shallow copy
+                var tags = { ...entity.tags };  // shallow copy
                 if (tags.area) {
                     delete tags.area;
                 }
@@ -371,7 +374,7 @@ export function validationMismatchedGeometry() {
             icon: 'iD-icon-area',
             title: t.append('issues.fix.convert_to_area.title'),
             onClick: function(context) {
-                const entityId = this.issue.entityIds[0];
+                const entityId = this.issue!.entityIds[0];
                 const entity = context.entity(entityId);
                 const newTags = {
                     ...entity.tags,
@@ -386,15 +389,15 @@ export function validationMismatchedGeometry() {
         return [fix];
     }
 
-    function extractPointDynamicFixes(context) {
+    function extractPointDynamicFixes(this: validationIssue, context: coreContext) {
 
         var entityId = this.entityIds[0];
 
-        var extractOnClick = null;
+        var extractOnClick: validationIssueFix['onClick'] = null;
         if (!context.hasHiddenConnections(entityId)) {
 
             extractOnClick = function(context) {
-                var entityId = this.issue.entityIds[0];
+                var entityId = this.issue!.entityIds[0] as NodeId;
                 var action = actionExtract(entityId, context.projection);
                 context.perform(
                     action,
@@ -414,7 +417,7 @@ export function validationMismatchedGeometry() {
         ];
     }
 
-    function unclosedMultipolygonPartIssues(entity, graph) {
+    function unclosedMultipolygonPartIssues(entity: OsmEntity, graph: coreGraph) {
 
         if (entity.type !== 'relation' ||
             !entity.isMultipolygon() ||
@@ -459,7 +462,7 @@ export function validationMismatchedGeometry() {
 
         return issues;
 
-        function showReference(selection) {
+        function showReference(selection: d3.Selection) {
             selection.selectAll('.issue-reference')
                 .data([0])
                 .enter()
@@ -469,7 +472,7 @@ export function validationMismatchedGeometry() {
         }
     }
 
-    var validation = function checkMismatchedGeometry(entity, graph) {
+    const validation: Validator = function checkMismatchedGeometry(entity: OsmEntity, graph: coreGraph) {
         var vertexPoint = vertexPointIssue(entity, graph);
         if (vertexPoint) return [vertexPoint];
 
@@ -485,4 +488,4 @@ export function validationMismatchedGeometry() {
     validation.type = type;
 
     return validation;
-}
+};
