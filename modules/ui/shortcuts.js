@@ -30,18 +30,24 @@ export function uiShortcuts(context) {
 
         var content = _modalSelection.select('.content');
 
-        content
-            .append('div')
-            .attr('class', 'modal-section header')
-            .append('h2')
-            .call(t.append('shortcuts.title'));
+        content.append('div')
+        .attr('class', 'modal-section header')
+        .append('h2')
+        .call(t.append('shortcuts.title'));
 
-        fileFetcher.get('shortcuts')
-            .then(function(data) {
-                _dataShortcuts = data;
-                content.call(render);
-            })
-            .catch(function() { /* ignore */ });
+    // Create an inner scrollable body container so the header stays fixed at the top
+    var body = content.append('div')
+        .attr('class', 'modal-body')
+        .style('overflow-y', 'auto')
+        .style('flex', '1 1 auto')
+        .style('min-height', '0');
+
+    fileFetcher.get('shortcuts')
+        .then(function(data) {
+            _dataShortcuts = data;
+            body.call(render);
+        })
+        .catch(function() { /* ignore */ });
     }
 
 
