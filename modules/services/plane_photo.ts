@@ -37,6 +37,9 @@ export async function planePhotoFrame(context: coreContext, selection: d3.Select
     }
 
     function updateTransform() {
+        // Wait until both the viewer and the photo have been measured.
+        if (!_viewerDimensions[0] || !_viewerDimensions[1] || !_photoDimensions[0] || !_photoDimensions[1]) return;
+
         const xScale = _viewerDimensions[0] / _photoDimensions[0];
         const yScale = _viewerDimensions[1] / _photoDimensions[1];
         const fitScale = Math.max(xScale, yScale);
