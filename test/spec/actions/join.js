@@ -239,6 +239,91 @@ describe('iD.actionJoin', function () {
             expect(iD.actionJoin(['-', '|']).disabled(graph)).toEqual('conflicting_relations');
         });
 
+        it('returns \'relation\' when the ways have different roles in a shared relation', function () {
+            // a --> b ==> c
+            // members: - (no role), = (outer)
+            var graph = new iD.coreGraph([
+                new iD.osmNode({id: 'a', loc: [0,0]}),
+                new iD.osmNode({id: 'b', loc: [2,0]}),
+                new iD.osmNode({id: 'c', loc: [4,0]}),
+                new iD.osmWay({id: '-', nodes: ['a', 'b']}),
+                new iD.osmWay({id: '=', nodes: ['b', 'c']}),
+                new iD.osmRelation({id: 'r', tags: {type: 'multipolygon'}, members: [
+                    {type: 'way', id: '-', role: ''},
+                    {type: 'way', id: '=', role: 'outer'}
+                ]})
+            ]);
+
+            expect(iD.actionJoin(['-', '=']).disabled(graph)).toEqual('relation');
+        });
+
+        it('returns \'relation\' when the ways have different roles in any of their shared relations', function () {
+            // a --> b ==> c
+            // r1 members: - (outer), = (outer)
+            // r2 members: = (forward), - (backward)
+            var graph = new iD.coreGraph([
+                new iD.osmNode({id: 'a', loc: [0,0]}),
+                new iD.osmNode({id: 'b', loc: [2,0]}),
+                new iD.osmNode({id: 'c', loc: [4,0]}),
+                new iD.osmWay({id: '-', nodes: ['a', 'b']}),
+                new iD.osmWay({id: '=', nodes: ['b', 'c']}),
+                new iD.osmRelation({id: 'r1', tags: {type: 'multipolygon'}, members: [
+                    {type: 'way', id: '-', role: 'outer'},
+                    {type: 'way', id: '=', role: 'outer'}
+                ]}),
+                new iD.osmRelation({id: 'r2', tags: {type: 'route'}, members: [
+                    {type: 'way', id: '=', role: 'forward'},
+                    {type: 'way', id: '-', role: 'backward'}
+                ]})
+            ]);
+
+            expect(iD.actionJoin(['-', '=']).disabled(graph)).toEqual('relation');
+        });
+
+        it('returns \'relation\' when a way has an additional role in a shared relation', function () {
+            // a --> b ==> c
+            // members: - (forward), = (forward), - (backward)
+            var graph = new iD.coreGraph([
+                new iD.osmNode({id: 'a', loc: [0,0]}),
+                new iD.osmNode({id: 'b', loc: [2,0]}),
+                new iD.osmNode({id: 'c', loc: [4,0]}),
+                new iD.osmWay({id: '-', nodes: ['a', 'b']}),
+                new iD.osmWay({id: '=', nodes: ['b', 'c']}),
+                new iD.osmRelation({id: 'r', tags: {type: 'route'}, members: [
+                    {type: 'way', id: '-', role: 'forward'},
+                    {type: 'way', id: '=', role: 'forward'},
+                    {type: 'way', id: '-', role: 'backward'}
+                ]})
+            ]);
+
+            expect(iD.actionJoin(['-', '=']).disabled(graph)).toEqual('relation');
+        });
+
+        it('returns falsy when the ways have the same roles in their shared relations', function () {
+            // a --> b ==> c
+            // r1 members: - (outer), = (outer)
+            // r2 members: - (forward), = (backward), = (forward), - (backward)
+            var graph = new iD.coreGraph([
+                new iD.osmNode({id: 'a', loc: [0,0]}),
+                new iD.osmNode({id: 'b', loc: [2,0]}),
+                new iD.osmNode({id: 'c', loc: [4,0]}),
+                new iD.osmWay({id: '-', nodes: ['a', 'b']}),
+                new iD.osmWay({id: '=', nodes: ['b', 'c']}),
+                new iD.osmRelation({id: 'r1', tags: {type: 'multipolygon'}, members: [
+                    {type: 'way', id: '-', role: 'outer'},
+                    {type: 'way', id: '=', role: 'outer'}
+                ]}),
+                new iD.osmRelation({id: 'r2', tags: {type: 'route'}, members: [
+                    {type: 'way', id: '-', role: 'forward'},
+                    {type: 'way', id: '=', role: 'backward'},
+                    {type: 'way', id: '=', role: 'forward'},
+                    {type: 'way', id: '-', role: 'backward'}
+                ]})
+            ]);
+
+            expect(iD.actionJoin(['-', '=']).disabled(graph)).toBeFalsy();
+        });
+
         it('returns \'paths_intersect\' if resulting way intersects itself', function () {
             //   d
             //   |

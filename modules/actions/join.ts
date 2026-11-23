@@ -3,7 +3,7 @@ import { actionDeleteWay } from './delete_way';
 import { osmIsInterestingTag, osmSummableTags } from '../osm/tags';
 import { osmJoinWays } from '../osm/multipolygon';
 import { geoPathIntersections } from '../geo';
-import { utilArrayGroupBy, utilArrayIdentical, utilArrayIntersection, utilOldestID } from '../util';
+import { utilArrayGroupBy, utilArrayIdentical, utilArrayIntersection, utilArrayUniq, utilOldestID } from '../util';
 import type { osmWay, EntityId, NodeId, osmRelation, WayId } from '../osm';
 import type { Action } from '../core/history';
 import type { coreGraph } from '../core';
@@ -152,11 +152,24 @@ export function actionJoin(ids: WayId[]): ActionJoin {
                 .filter((rel) => !rel.isRestriction() && !rel.isConnectivity())
                 .sort((a, b) => a.id.localeCompare(b.id));
         };
+        // They must also have the same roles in each of these relations, otherwise
+        // the joined way would become a member with each of the roles - #8167
+        var sortedRoles = function (rel: osmRelation, id: EntityId) {
+            return utilArrayUniq(rel.members
+                .filter((member) => member.id === id)
+                .map((member) => member.role))
+                .sort();
+        };
         var relsA = sortedParentRelations(ids[0]);
         for (i = 1; i < ids.length; i++) {
             var relsB = sortedParentRelations(ids[i]);
             if (!utilArrayIdentical(relsA, relsB)) {
                 return 'conflicting_relations';
+            }
+            for (const rel of relsA) {
+                if (!utilArrayIdentical(sortedRoles(rel, ids[0]), sortedRoles(rel, ids[i]))) {
+                    return 'relation';
+                }
             }
         }
 
