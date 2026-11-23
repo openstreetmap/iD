@@ -135,7 +135,7 @@
     "typescript-eslint": "^8.56.0",
     "vite": "^8.0.1",
     "vitest": "^5.0.1",
-    "wikibase-sdk": "^11.1.1"
+    "wikibase-sdk": "^12.0.1"
   },
   "engines": {
     "node": ">=22"
