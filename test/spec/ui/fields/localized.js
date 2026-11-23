@@ -159,4 +159,65 @@ describe('iD.uiFieldLocalized', function() {
         selection.call(localized);
         expect(selection.selectAll('.localized-value').attr('lang')).toEqual('de');
     });
+
+    it('locks the value input until a valid language is entered', async () => {
+        var localized = iD.uiFieldLocalized(field, context);
+        await setTimeout(20);
+        selection.call(localized);
+        selection.selectAll('.localized-add').node().dispatchEvent(new MouseEvent('click'));
+
+        // no language yet
+        expect(selection.selectAll('.localized-value').attr('readonly')).not.toBeNull();
+        expect(selection.selectAll('.localized-value').classed('disabled')).toBe(true);
+
+        // a language which can't be stored as a `name:*` tag
+        iD.utilGetSetValue(selection.selectAll('.localized-lang'), 'Elvish');
+        selection.selectAll('.localized-lang').node().dispatchEvent(new Event('change'));
+        expect(selection.selectAll('.localized-value').attr('readonly')).not.toBeNull();
+
+        iD.utilGetSetValue(selection.selectAll('.localized-lang'), 'Deutsch');
+        selection.selectAll('.localized-lang').node().dispatchEvent(new Event('change'));
+        expect(selection.selectAll('.localized-value').attr('readonly')).toBeNull();
+        expect(selection.selectAll('.localized-value').classed('disabled')).toBe(false);
+    });
+
+    it('doesn\'t create a tag when the language is invalid', async () => {
+        var localized = iD.uiFieldLocalized(field, context);
+        await setTimeout(20);
+        selection.call(localized);
+        selection.selectAll('.localized-add').node().dispatchEvent(new MouseEvent('click'));
+
+        var changes = [];
+        localized.on('change', function(tags) {
+            changes.push(tags);
+        });
+
+        iD.utilGetSetValue(selection.selectAll('.localized-value'), 'Value');
+        iD.utilGetSetValue(selection.selectAll('.localized-lang'), 'Elvish');
+        selection.selectAll('.localized-lang').node().dispatchEvent(new Event('change'));
+
+        expect(changes).toEqual([]);
+    });
+
+    it('keeps the existing tag when the language is changed to an invalid one', async () => {
+        var localized = iD.uiFieldLocalized(field, context);
+        await setTimeout(20);
+        selection.call(localized);
+        localized.tags({'name:de': 'Value'});
+
+        var changes = [];
+        localized.on('change', function(tags) {
+            changes.push(tags);
+        });
+
+        iD.utilGetSetValue(selection.selectAll('.localized-lang'), 'Elvish');
+        selection.selectAll('.localized-lang').node().dispatchEvent(new Event('change'));
+        expect(changes).toEqual([]);
+        expect(selection.selectAll('.localized-value').attr('readonly')).not.toBeNull();
+
+        // correcting the language moves the value to the new tag
+        iD.utilGetSetValue(selection.selectAll('.localized-lang'), 'English');
+        selection.selectAll('.localized-lang').node().dispatchEvent(new Event('change'));
+        expect(changes).toEqual([{'name:de': undefined, 'name:en': 'Value'}]);
+    });
 });
