@@ -33,6 +33,31 @@ describe('iD.actionDisconnect', function () {
             expect(iD.actionDisconnect('a').disabled(graph)).toEqual('not_connected');
         });
 
+        it('returns not_connected for the closing node in a closed multipolygon member', function () {
+            //    a -------- b
+            //    |  e -- f  |
+            //    |   \  /   |
+            //    |    g     |
+            //    d -------- c
+            var graph = new iD.coreGraph([
+                new iD.osmNode({id: 'a'}),
+                new iD.osmNode({id: 'b'}),
+                new iD.osmNode({id: 'c'}),
+                new iD.osmNode({id: 'd'}),
+                new iD.osmNode({id: 'e'}),
+                new iD.osmNode({id: 'f'}),
+                new iD.osmNode({id: 'g'}),
+                new iD.osmWay({id: 'outer', nodes: ['a', 'b', 'c', 'd', 'a']}),
+                new iD.osmWay({id: 'inner', nodes: ['e', 'f', 'g', 'e']}),
+                new iD.osmRelation({id: 'r', tags: {type: 'multipolygon', landuse: 'grass'}, members: [
+                    { id: 'outer', type: 'way', role: 'outer' },
+                    { id: 'inner', type: 'way', role: 'inner' }
+                ]})
+            ]);
+            expect(iD.actionDisconnect('a').disabled(graph)).toEqual('not_connected');
+            expect(iD.actionDisconnect('e').disabled(graph)).toEqual('not_connected');
+        });
+
         it('returns falsy for a shared non-closing node in an area', function () {
             //    a --- b --- c
             //          |     |
@@ -354,6 +379,40 @@ describe('iD.actionDisconnect', function () {
 
         expect(graph.entity('w1').nodes).toEqual(['b', 'c', 'a', 'b']);
         expect(graph.entity('w2').nodes).toEqual(['*', 'd', 'e', '*']);
+    });
+
+    it('disconnects the closing node of a multipolygon member without breaking the member', function() {
+        // Situation:
+        // e --- a --- b
+        //       |     |
+        //       d --- c
+        // multipolygon with outer a-b-c-d-a, and a line e-a
+        //
+        // Disconnect at a
+        //
+        // Expected Result:
+        // e --- *   a --- b
+        //           |     |
+        //           d --- c
+        // multipolygon with outer a-b-c-d-a, and a line e-*
+
+        var graph = new iD.coreGraph([
+            new iD.osmNode({id: 'a'}),
+            new iD.osmNode({id: 'b'}),
+            new iD.osmNode({id: 'c'}),
+            new iD.osmNode({id: 'd'}),
+            new iD.osmNode({id: 'e'}),
+            new iD.osmWay({id: 'outer', nodes: ['a', 'b', 'c', 'd', 'a']}),
+            new iD.osmWay({id: 'line', nodes: ['e', 'a'], tags: {highway: 'path'}}),
+            new iD.osmRelation({id: 'r', tags: {type: 'multipolygon', landuse: 'grass'}, members: [
+                { id: 'outer', type: 'way', role: 'outer' }
+            ]})
+        ]);
+
+        graph = iD.actionDisconnect('a', '*')(graph);
+
+        expect(graph.entity('outer').nodes).toEqual(['a', 'b', 'c', 'd', 'a']);
+        expect(graph.entity('line').nodes).toEqual(['e', '*']);
     });
 
     it('copies location and tags to the new nodes', function () {
