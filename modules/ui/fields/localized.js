@@ -223,6 +223,11 @@ export function uiFieldLocalized(field, context) {
         localizedInputs.selectAll('button, input')
             .classed('disabled', !!isLocked)
             .attr('readonly', isLocked || null);
+
+        localizedInputs.selectAll('.localized-value')
+            .each(function(d) {
+                lockValueInput(d3_select(this), d.lang);
+            });
         selection.selectAll('.combobox-caret').classed('nope', !!isLocked);
 
 
@@ -283,7 +288,7 @@ export function uiFieldLocalized(field, context) {
 
     // the value can only be edited once a valid language is entered - #13019
     function lockValueInput(valueInput, lang) {
-        var isLocked = !isValidLang(lang);
+        var isLocked = field.locked() || !isValidLang(lang);
         valueInput
             .classed('disabled', isLocked)
             .attr('readonly', isLocked || null);

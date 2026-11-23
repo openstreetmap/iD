@@ -181,6 +181,25 @@ describe('iD.uiFieldLocalized', function() {
         expect(selection.selectAll('.localized-value').classed('disabled')).toBe(false);
     });
 
+    it('keeps the value input locked when the field is rendered again', async () => {
+        var localized = iD.uiFieldLocalized(field, context);
+        await setTimeout(20);
+        selection.call(localized);
+        selection.selectAll('.localized-add').node().dispatchEvent(new MouseEvent('click'));
+
+        selection.call(localized);
+        expect(selection.selectAll('.localized-value').attr('readonly')).not.toBeNull();
+    });
+
+    it('keeps the value input locked when the whole field is locked', async () => {
+        field.locked = function() { return true; };
+        var localized = iD.uiFieldLocalized(field, context);
+        localized.tags({'name:de': 'Value'});
+        await setTimeout(20);
+        selection.call(localized);
+        expect(selection.selectAll('.localized-value').attr('readonly')).not.toBeNull();
+    });
+
     it('doesn\'t create a tag when the language is invalid', async () => {
         var localized = iD.uiFieldLocalized(field, context);
         await setTimeout(20);
