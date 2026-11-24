@@ -7,12 +7,15 @@ describe('iD.actionDeleteWay', function() {
     });
 
     it('removes a way from parent relations', function() {
-        var way      = new iD.osmWay(),
-            relation = new iD.osmRelation({members: [{ id: way.id }, { id: 'w-99' }]}),
+        // Explicit IDs: an auto-generated way ID depends on how many ways earlier
+        // test files created in the same worker, and could collide with the
+        // other member's ID.
+        var way      = new iD.osmWay({id: 'w1'}),
+            relation = new iD.osmRelation({id: 'r1', members: [{ id: 'w1' }, { id: 'w2' }]}),
             action   = iD.actionDeleteWay(way.id),
             graph    = new iD.coreGraph([way, relation]).update(action),
             ids      = graph.entity(relation.id).members.map(function (m) { return m.id; });
-        expect(ids).not.toContain(way.id);
+        expect(ids).toEqual(['w2']);
     });
 
     it('deletes member nodes not referenced by another parent', function() {
