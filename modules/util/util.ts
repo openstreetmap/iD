@@ -640,7 +640,7 @@ export function utilNoAuto(selection: d3.Selection): d3.Selection {
         // Bitwarden removing such support in https://github.com/bitwarden/clients/pull/22620
         //
         // proper fix would be enabled by https://github.com/whatwg/html/issues/10115 but it sits ignored
-        // and as such property was misued, it is not likely to be accepted
+        // and as such property was misused, it is not likely to be accepted
         //
         // see also for Chromium:
         // - https://issues.chromium.org/issues/41163264
