@@ -74,8 +74,7 @@ export function rendererMap(context) {
         .filter(zoomEventFilter)
         .on('zoom.map', zoomPan)
         .on('start.map', function(d3_event) {
-            _pointerDown = d3_event && (d3_event.type === 'pointerdown' ||
-                (d3_event.sourceEvent && d3_event.sourceEvent.type === 'pointerdown'));
+            _pointerDown = d3_event?.type === 'pointerdown';
         })
         .on('end.map', function() {
             _pointerDown = false;
