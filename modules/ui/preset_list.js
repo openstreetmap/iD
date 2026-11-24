@@ -91,9 +91,12 @@ export function uiPresetList(context) {
                     search: value
                 });
             } else {
-                var entityPresets = _entityIDs.map(entityID =>
-                    presetManager.match(context.graph().entity(entityID), context.graph()));
-                results = presetManager.defaults(entityGeometries()[0], 36, !context.inIntro(), _currLoc, entityPresets);
+                var entityPresets = _entityIDs
+                    .map(entityID => context.hasEntity(entityID))
+                    .filter(Boolean)
+                    .map(entity => presetManager.match(entity, context.graph()));
+                var expectedPresets = presetManager.expectedVertices(_entityIDs, context.graph());
+                results = presetManager.defaults(entityGeometries()[0], 36, !context.inIntro(), _currLoc, entityPresets, expectedPresets);
                 messageText = t.addOrUpdate('inspector.choose');
             }
             list.call(drawList, results);
@@ -131,12 +134,15 @@ export function uiPresetList(context) {
             .append('div')
             .attr('class', 'inspector-body');
 
-        var entityPresets = _entityIDs.map(entityID =>
-            presetManager.match(context.graph().entity(entityID), context.graph()));
+        var entityPresets = _entityIDs
+            .map(entityID => context.hasEntity(entityID))
+            .filter(Boolean)
+            .map(entity => presetManager.match(entity, context.graph()));
+        var expectedPresets = presetManager.expectedVertices(_entityIDs, context.graph());
         var list = listWrap
             .append('div')
             .attr('class', 'preset-list')
-            .call(drawList, presetManager.defaults(entityGeometries()[0], 36, !context.inIntro(), _currLoc, entityPresets));
+            .call(drawList, presetManager.defaults(entityGeometries()[0], 36, !context.inIntro(), _currLoc, entityPresets, expectedPresets));
 
         listWrap.node().scrollTo({ top: 0 });
         context.features().on('change.preset-list', updateForFeatureHiddenState);
