@@ -1,20 +1,75 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 
 import { prefs } from '../core/preferences';
-import { osmIdManager } from '../osm';
+import { osmIdManager, type EntityId, type OsmEntity, type osmNode, type osmRelation } from '../osm';
 import { osmLanduseTags, osmLifecyclePrefixes } from '../osm/tags.js';
 import { utilRebind } from '../util/rebind';
 import { utilArrayGroupBy, utilArrayUnion, utilStringQs } from '../util';
 import { isAddressPoint } from '../svg/labels';
 import { patchHash } from '../behavior';
+import type { coreContext, coreGraph } from '../core';
+import type { Geometry } from '@openstreetmap/id-tagging-schema';
+import type { presetPreset } from '../presets';
+import type { Vec2 } from '../geo/vector';
+import type { Midpoint } from '../svg/midpoints';
+
+type FilterFunction = (tags: Record<string, string>, geometry?: Geometry) => boolean;
+
+export interface Rule {
+    filter: FilterFunction;
+    enabled: boolean;
+    count: number;
+    currentMax: number;
+    defaultMax: number;
+    enable(): void;
+    disable(): void;
+    hidden(): boolean;
+    autoHidden(): boolean;
+}
+
+type Matches = Record<string, true>;
+
+export interface rendererFeatures {
+    features(): Record<string, Rule>;
+    keys(): string[];
+    enabled(): string[];
+    enabled(ruleId: string): boolean | undefined;
+    disabled(): string[];
+    disabled(ruleId: string): boolean | undefined;
+    hidden(): string[];
+    hidden(ruleId: string): boolean | undefined;
+    autoHidden(): string[];
+    autoHidden(ruleId: string): boolean | undefined;
+    enable(ruleId: string): void;
+    enableAll(): void;
+    disable(ruleId: string): void;
+    disableAll(): void;
+    toggle(ruleId: string): void;
+    resetStats(): void;
+    gatherStats(d: OsmEntity[], resolver: coreGraph, dimensions: Vec2): boolean;
+    stats(): Record<string, number>;
+    clear(entities: OsmEntity[]): void;
+    clearEntity(entity: OsmEntity): void;
+    reset(): void;
+    getMatches(entity: OsmEntity, resolver: coreGraph, geometry: Geometry): Matches;
+    getParents(entity: OsmEntity, resolver: coreGraph, geometry: Geometry): OsmEntity[];
+    isHiddenPreset(preset: presetPreset, geometry: Geometry): string | false;
+    isHiddenFeature(entity: OsmEntity, resolver: coreGraph, geometry: Geometry): boolean;
+    isHiddenChild(entity: OsmEntity, resolver: coreGraph, geometry: Geometry): boolean;
+    hasHiddenConnections(entity: OsmEntity | Midpoint, resolver: coreGraph): boolean;
+    isHidden(entity: OsmEntity, resolver: coreGraph, geometry: Geometry): boolean;
+    filter(d: OsmEntity[], resolver: coreGraph): OsmEntity[];
+    forceVisible: GetSet<this, EntityId[]>;
+    init(): void;
+}
 
 
-export function rendererFeatures(context) {
+export function rendererFeatures(context: coreContext) {
     var dispatch = d3_dispatch('change', 'redraw');
-    const features = {};
-    var _deferred = new Set();
+    const features: rendererFeatures = function() {};
+    var _deferred = new Set<number>();
 
-    var traffic_roads = {
+    var traffic_roads: Record<TagValue, true> = {
         'motorway': true,
         'motorway_link': true,
         'trunk': true,
@@ -31,13 +86,13 @@ export function rendererFeatures(context) {
         'busway': true
     };
 
-    var service_roads = {
+    var service_roads: Record<TagValue, true> = {
         'service': true,
         'road': true,
         'track': true
     };
 
-    var paths = {
+    var paths: Record<TagValue, true> = {
         'path': true,
         'footway': true,
         'cycleway': true,
@@ -48,12 +103,17 @@ export function rendererFeatures(context) {
     };
 
     var _cullFactor = 1;
-    var _cache = {};
-    var _rules = {};
-    var _stats = {};
-    var _keys = [];
-    var _hidden = [];
-    var _forceVisible = {};
+    var _cache: {
+        [ent: string]: {
+            parents?: OsmEntity[];
+            matches?: Matches;
+        };
+    } = {};
+    var _rules: Record<string, Rule> = {};
+    var _stats: Record<string, number> = {};
+    var _keys: string[] = [];
+    var _hidden: string[] = [];
+    var _forceVisible: Record<EntityId, true> = {};
 
 
     function update() {
@@ -66,19 +126,7 @@ export function rendererFeatures(context) {
     }
 
 
-    /**
-     * @callback FilterFunction
-     * @param {Record<string, string>} tags
-     * @param {string} [geometry]
-     * @returns {boolean}
-     */
-
-    /**
-     * @param {string} k
-     * @param {FilterFunction} filter
-     * @param {number} [max]
-     */
-    function defineRule(k, filter, max) {
+    function defineRule(k: string, filter: FilterFunction, max?: number) {
         var isEnabled = true;
 
         _keys.push(k);
@@ -103,7 +151,7 @@ export function rendererFeatures(context) {
         100);
 
     defineRule('points', (tags, geometry) =>
-        geometry === 'point' && !isAddressPoint(tags, geometry),
+        geometry === 'point' && !isAddressPoint(tags),
         200);
 
     defineRule('traffic_roads', function isTrafficRoad(tags) {
@@ -144,7 +192,7 @@ export function rendererFeatures(context) {
         let hasLanduseTag = false;
         for (const key in osmLanduseTags) {
             if (osmLanduseTags[key] === true && tags[key] ||
-                osmLanduseTags[key][tags[key]] === true) {
+                (typeof osmLanduseTags[key] === 'object' && osmLanduseTags[key][tags[key]] === true)) {
                 hasLanduseTag = true;
             }
         }
@@ -201,7 +249,7 @@ export function rendererFeatures(context) {
     });
 
     defineRule('pistes', function isPiste(tags) {
-        return tags['piste:type'];
+        return !!tags['piste:type'];
     });
 
     defineRule('aerialways', function isAerialways(tags) {
@@ -258,7 +306,7 @@ export function rendererFeatures(context) {
             return _keys.filter(function(k) { return _rules[k].enabled; });
         }
         return _rules[k] && _rules[k].enabled;
-    };
+    } as rendererFeatures['enabled'];
 
 
     features.disabled = function(k) {
@@ -266,7 +314,7 @@ export function rendererFeatures(context) {
             return _keys.filter(function(k) { return !_rules[k].enabled; });
         }
         return _rules[k] && !_rules[k].enabled;
-    };
+    } as rendererFeatures['disabled'];
 
 
     features.hidden = function(k) {
@@ -274,7 +322,7 @@ export function rendererFeatures(context) {
             return _keys.filter(function(k) { return _rules[k].hidden(); });
         }
         return _rules[k]?.hidden();
-    };
+    } as rendererFeatures['hidden'];
 
 
     features.autoHidden = function(k) {
@@ -282,7 +330,7 @@ export function rendererFeatures(context) {
             return _keys.filter(function(k) { return _rules[k].autoHidden(); });
         }
         return _rules[k] && _rules[k].autoHidden();
-    };
+    } as rendererFeatures['autoHidden'];
 
 
     features.enable = function(k) {
@@ -342,8 +390,12 @@ export function rendererFeatures(context) {
     features.gatherStats = function(d, resolver, dimensions) {
         var needsRedraw = false;
         var types = utilArrayGroupBy(d, 'type');
-        var entities = [].concat(types.relation || [], types.way || [], types.node || []);
-        var currHidden, geometry, matches, i, j;
+        var entities = [...(types.relation || []), ...(types.way || []), ...(types.node || [])];
+        let currHidden: string[];
+        let geometry: Geometry;
+        let matches: string[];
+        let i: number;
+        let j: number;
 
         for (i = 0; i < _keys.length; i++) {
             _rules[_keys[i]].count = 0;
@@ -413,7 +465,7 @@ export function rendererFeatures(context) {
     };
 
     // only certain relations are worth checking
-    function relationShouldBeChecked(relation) {
+    function relationShouldBeChecked(relation: OsmEntity) {
         // multipolygon features have `area` geometry and aren't checked here
         return relation.tags.type === 'boundary';
     }
@@ -428,7 +480,7 @@ export function rendererFeatures(context) {
         }
 
         if (!_cache[ent].matches) {
-            var matches = {};
+            var matches: Matches = {};
             var hasMatch = false;
 
             for (var i = 0; i < _keys.length; i++) {
@@ -441,7 +493,7 @@ export function rendererFeatures(context) {
                         var parents = features.getParents(entity, resolver, geometry);
 
                         //   2a. belongs only to a single multipolygon relation
-                        if ((parents.length === 1 && parents[0].isMultipolygon()) ||
+                        if ((parents.length === 1 && (parents[0] as osmRelation).isMultipolygon()) ||
                             // 2b. or belongs only to boundary relations
                             (parents.length > 0 && parents.every(function(parent) { return parent.tags.type === 'boundary'; }))) {
 
@@ -468,7 +520,7 @@ export function rendererFeatures(context) {
             _cache[ent].matches = matches;
         }
 
-        return _cache[ent].matches;
+        return _cache[ent].matches!;
     };
 
 
@@ -481,7 +533,7 @@ export function rendererFeatures(context) {
         }
 
         if (!_cache[ent].parents) {
-            let parents;
+            let parents: OsmEntity[];
             if (geometry === 'vertex') {
                 parents = resolver.parentWays(entity);
             } else {   // 'line', 'area', 'relation'
@@ -517,7 +569,7 @@ export function rendererFeatures(context) {
         if (_forceVisible[entity.id]) return false;
 
         var matches = Object.keys(features.getMatches(entity, resolver, geometry));
-        return matches.length && matches.every(function(k) { return features.hidden(k); });
+        return !!matches.length && matches.every(function(k) { return features.hidden(k); });
     };
 
 
@@ -541,12 +593,13 @@ export function rendererFeatures(context) {
     features.hasHiddenConnections = function(entity, resolver) {
         if (!_hidden.length) return false;
 
-        var childNodes, connections;
+        var childNodes: osmNode[];
+        let connections: OsmEntity[];
         if (entity.type === 'midpoint') {
             childNodes = [resolver.entity(entity.edge[0]), resolver.entity(entity.edge[1])];
             connections = [];
         } else {
-            childNodes = entity.nodes ? resolver.childNodes(entity) : [];
+            childNodes = entity.type === 'way' ? resolver.childNodes(entity) : [];
             connections = features.getParents(entity, resolver, entity.geometry(resolver));
         }
 
@@ -607,7 +660,7 @@ export function rendererFeatures(context) {
             }
         }
         return features;
-    };
+    } as rendererFeatures['forceVisible'];
 
 
     features.init = function() {
@@ -631,9 +684,9 @@ export function rendererFeatures(context) {
             var graph = context.graph();
             var types = utilArrayGroupBy(newEntities, 'type');
             // ensure that getMatches is called on relations before ways
-            var entities = [].concat(types.relation || [], types.way || [], types.node || []);
+            var entities = [...(types.relation || []), ...(types.way || []), ...(types.node || [])];
             for (var i = 0; i < entities.length; i++) {
-                var geometry = entities[i].geometry(graph);
+                const geometry = entities[i].geometry(graph);
                 features.getMatches(entities[i], graph, geometry);
             }
         });

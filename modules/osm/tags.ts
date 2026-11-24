@@ -28,7 +28,7 @@ export function osmIsInterestingTag(key: string): boolean {
     return true;
 }
 
-export const osmLifecyclePrefixes = {
+export const osmLifecyclePrefixes: Record<string, true> = {
     // nonexistent, might be built
     proposed: true, planned: true,
     // under maintenance or between groundbreaking and opening
