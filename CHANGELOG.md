@@ -55,6 +55,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Treat `conveying=*` the same as `oneway=*` when reversing a line ([#13027], thanks [@k-yle])
 * Add shortcut tooltip to reverse direction button ([#12961], thanks [@SaifuddinM23])
 * Prevent _merge_ operation creating a self-referencing relation under certain conditions ([#7983])
+* Prevent _merge_ operation creating duplicate relation memberships when the lines have different roles in a relation ([#8167], thanks [@hatemadi15])
 #### :camera: Street-Level
 #### :white_check_mark: Validation
 * Warn about `goo.gl` shortlinks as sources, alongside full Google URLs ([#12740])
@@ -105,6 +106,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 
 [#7983]: https://github.com/openstreetmap/iD/issues/7983
 [#8015]: https://github.com/openstreetmap/iD/issues/8015
+[#8167]: https://github.com/openstreetmap/iD/issues/8167
 [#8402]: https://github.com/openstreetmap/iD/issues/8402
 [#8424]: https://github.com/openstreetmap/iD/issues/8424
 [#9732]: https://github.com/openstreetmap/iD/pull/9732
@@ -157,6 +159,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#13233]: https://github.com/openstreetmap/iD/issues/13233
 [@aditya1010-max]: https://github.com/aditya1010-max
 [@Geo-2695]: https://github.com/Geo-2695
+[@hatemadi15]: https://github.com/hatemadi15
 [@hemaksh2007jain-bit]: https://github.com/hemaksh2007jain-bit
 [@kalucky0]: https://github.com/kalucky0
 [@SaifuddinM23]: https://github.com/SaifuddinM23
