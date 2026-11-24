@@ -8,7 +8,7 @@ export { utilGetSetValue } from './get_set_value';
 export { utilKeybinding } from './keybinding';
 export * from './localizer';
 export { utilObjectOmit, utilCheckTagDictionary, stringifyProperties } from './object';
-export { utilRebind } from './rebind';
+export * from './rebind';
 export { utilSessionMutex } from './session_mutex';
 export { utilTiler } from './tiler';
 export { utilTriggerEvent } from './trigger_event';
