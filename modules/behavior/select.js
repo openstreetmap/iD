@@ -428,9 +428,9 @@ export function behaviorSelect(context) {
             .on('keydown.select', null)
             .on('keyup.select', null)
             .on('contextmenu.select-window', null)
-            .on(_pointerPrefix + 'move.select', null, true)
-            .on(_pointerPrefix + 'up.select', null, true)
-            .on('pointercancel.select', null, true);
+            .on(_pointerPrefix + 'move.select', null)
+            .on(_pointerPrefix + 'up.select', null)
+            .on('pointercancel.select', null);
 
         selection
             .on(_pointerPrefix + 'down.select', null)

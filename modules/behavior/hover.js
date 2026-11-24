@@ -207,7 +207,7 @@ export function behaviorHover(context) {
             .on(_pointerPrefix + 'down.hover', null);
 
         d3_select(window)
-            .on(_pointerPrefix + 'up.hover pointercancel.hover', null, true)
+            .on(_pointerPrefix + 'up.hover pointercancel.hover', null)
             .on('keydown.hover', null)
             .on('keyup.hover', null);
     };
