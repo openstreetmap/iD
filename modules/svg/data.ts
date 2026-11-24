@@ -27,6 +27,23 @@ var _enabled = false;
 var _geojson: FeatureCollection | Feature | null;
 
 
+export interface DrawData {
+    (selection: d3.Selection<SVGGElement>): void
+    setFile(extension: string | undefined, data: string): DrawData;
+    enabled: GetSet<DrawData, boolean>;
+    showLabels: GetSet<DrawData, boolean>;
+    hasData(): boolean;
+    template(): string | null;
+    template(val: string, src?: string): DrawData | undefined;
+    geojson(): typeof _geojson;
+    geojson(val: FeatureCollection, src: string): DrawData;
+    fileList: GetSet<DrawData, FileList>;
+    url(url: string, defaultExtension?: string): DrawData;
+    getSrc(): string;
+    fitZoom(): void;
+}
+
+
 export function svgData(projection: Projection, context: coreContext, dispatch: Dispatch<object>) {
     var throttledRedraw = throttle(function () { dispatch.call('change'); }, 1000);
     var _showLabels = true;
@@ -184,7 +201,7 @@ export function svgData(projection: Projection, context: coreContext, dispatch: 
     }
 
 
-    function drawData(selection: d3.Selection<SVGGElement>) {
+    const drawData: DrawData = function(selection: d3.Selection<SVGGElement>) {
         var vtService = getService();
         var getPath = svgPath(projection).geojson;
         var getAreaPath = svgPath(projection, null, true).geojson;
@@ -207,7 +224,7 @@ export function svgData(projection: Projection, context: coreContext, dispatch: 
 
         // Gather data
         var geoData, polygonData;
-        if (_template && vtService && _enabled) {   // fetch data from vector tile service
+        if (_template && vtService && drawData.enabled()) {   // fetch data from vector tile service
             var sourceID = _template;
             vtService.loadTiles(sourceID, _template, projection);
             geoData = vtService.data(sourceID, projection);
@@ -288,7 +305,6 @@ export function svgData(projection: Projection, context: coreContext, dispatch: 
             .call(drawLabels, 'label-halo', geoData)
             .call(drawLabels, 'label', geoData);
 
-
         function drawLabels(selection: d3.Selection<SVGGElement>, textClass: string, data: Feature[]) {
             var labelPath = d3_geoPath(projection);
             var labelData = data.filter(function(d) {
@@ -319,7 +335,7 @@ export function svgData(projection: Projection, context: coreContext, dispatch: 
                     return centroid[1];
                 });
         }
-    }
+    };
 
 
     function getExtension(fileName: string) {
@@ -380,26 +396,26 @@ export function svgData(projection: Projection, context: coreContext, dispatch: 
         if (Object.keys(gj).length) {
             _geojson = ensureIDs(gj);
             _src = extension + ' data file';
-            this.fitZoom();
+            drawData.fitZoom();
         }
 
         dispatch.call('change');
-        return this;
+        return drawData;
     };
 
 
-    drawData.showLabels = function(val: boolean) {
+    drawData.showLabels = function(val) {
         if (!arguments.length) return _showLabels;
 
-        _showLabels = val;
-        return this;
-    };
+        _showLabels = val!;
+        return drawData;
+    } as GetSet<DrawData, boolean>;
 
 
-    drawData.enabled = function(val: boolean) {
+    drawData.enabled = function(val) {
         if (!arguments.length) return _enabled;
 
-        _enabled = val;
+        _enabled = val!;
         if (_enabled) {
             showLayer();
         } else {
@@ -407,8 +423,9 @@ export function svgData(projection: Projection, context: coreContext, dispatch: 
         }
 
         dispatch.call('change');
-        return this;
-    };
+        return drawData;
+    } as GetSet<DrawData, boolean>;
+
 
 
     drawData.hasData = function() {
@@ -417,34 +434,39 @@ export function svgData(projection: Projection, context: coreContext, dispatch: 
     };
 
 
-    drawData.template = function(val: string, src?: string) {
+    function template(): string;
+    function template(val: string, src?: string): DrawData;
+    function template(val?: string, src?: string) {
         if (!arguments.length) return _template;
 
         // test source against OSM imagery blocklists..
         var osm = context.connection();
         if (osm) {
             for (const regex of osm.imageryBlocklists()) {
-                if (regex.test(val)) {
+                if (regex.test(val!)) {
                     // matches a blocked sources -> do not set template
                     return;
                 };
             }
         }
 
-        _template = val;
+        _template = val!;
         _fileList = null;
         _geojson = null;
 
         // strip off the querystring/hash from the template,
         // it often includes the access token
-        _src = src || ('vectortile:' + val.split(/[?#]/)[0]);
+        _src = src || ('vectortile:' + val!.split(/[?#]/)[0]);
 
         dispatch.call('change');
-        return this;
+        return drawData;
     };
+    drawData.template = template;
 
 
-    drawData.geojson = function(gj: FeatureCollection, src: string) {
+    function geojson(): typeof _geojson;
+    function geojson(gj: FeatureCollection, src: string): DrawData;
+    function geojson(gj?: FeatureCollection, src?: string) {
         if (!arguments.length) return _geojson;
 
         _template = null;
@@ -452,15 +474,16 @@ export function svgData(projection: Projection, context: coreContext, dispatch: 
         _geojson = null;
         _src = null;
 
-        gj = gj || {};
+        gj = gj! || {};
         if (Object.keys(gj).length) {
-            _geojson = ensureIDs(gj);
+            _geojson = ensureIDs(gj!);
             _src = src || 'unknown.geojson';
         }
 
         dispatch.call('change');
-        return this;
+        return drawData;
     };
+    drawData.geojson = geojson;
 
 
     drawData.fileList = function(fileList: FileList) {
@@ -469,9 +492,9 @@ export function svgData(projection: Projection, context: coreContext, dispatch: 
         _template = null;
         _geojson = null;
         _src = null;
-        _fileList = fileList;
+        _fileList = fileList!;
 
-        if (!fileList || !fileList.length) return this;
+        if (!fileList || !fileList.length) return drawData;
         var f = fileList[0];
         var extension = getExtension(f.name);
         var reader = new FileReader();
@@ -483,8 +506,8 @@ export function svgData(projection: Projection, context: coreContext, dispatch: 
 
         reader.readAsText(f);
 
-        return this;
-    };
+        return drawData;
+    } as GetSet<DrawData, FileList>;
 
 
     drawData.url = function(url: string, defaultExtension?: string) {
@@ -510,7 +533,7 @@ export function svgData(projection: Projection, context: coreContext, dispatch: 
             drawData.template(url);
         }
 
-        return this;
+        return drawData;
     };
 
 
@@ -557,7 +580,7 @@ export function svgData(projection: Projection, context: coreContext, dispatch: 
             map.centerZoom(extent.center(), map.trimmedExtentZoom(extent));
         }
 
-        return this;
+        return;
     };
 
 
