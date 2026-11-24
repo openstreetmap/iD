@@ -22,6 +22,9 @@ en:
   toolbar:
     inspect: Inspect
     undo_redo: Undo / Redo
+    operations:
+      title: Edit
+      tooltip: Show the available editing operations for the selected features
     recent: Recent
     favorites: Favorites
     add_feature: Add Feature
