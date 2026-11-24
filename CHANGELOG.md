@@ -63,6 +63,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Implement functionality to show tooltips for individual validation fixes.
 * Improve wording for "connect the features (manually)" fix for routing-islands validator, and show tooltip with further instructions ([#8402])
 * Show all `mutually_exclusive_tags` validation warnings when there are multiple present on a single object ([#13016], thanks [@matkoniecz])
+* Show "reset ignored issues" button also if only a part of the visible issues have been ignored ([#7978])
 #### :bug: Bugfixes
 * Preserve universal fields when changing presets ([#13105], thanks [@Hirdyansh-bh])
 * Fix crash when using the osmose integration ([#13043], [#13074], thanks [@k-yle])
@@ -107,6 +108,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Drop support for `oneway=1` ([#13026], thanks [@k-yle])
 * Drop confusing dead code ([#13014], thanks [@matkoniecz])
 
+[#7978]: https://github.com/openstreetmap/iD/issues/7978
 [#7983]: https://github.com/openstreetmap/iD/issues/7983
 [#8015]: https://github.com/openstreetmap/iD/issues/8015
 [#8402]: https://github.com/openstreetmap/iD/issues/8402
