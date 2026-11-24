@@ -379,7 +379,7 @@ export function uiPaneHelp(context) {
             .attr('class', 'shortcuts')
             .call(uiTooltip()
                 .title(() => t.append('shortcuts.tooltip'))
-                .keys(['?'])
+                .keys(() => ['?'])
                 .placement('top')
             )
             .append('a')
