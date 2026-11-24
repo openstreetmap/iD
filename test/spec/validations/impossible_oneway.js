@@ -1,9 +1,11 @@
 describe('iD.validations.impossible_oneway', function() {
     let context;
+    let originalIsDataLoaded;
 
     beforeEach(() => {
         iD.services.osm = iD.serviceOsm;
-        iD.services.osm.isDataLoaded = () => true;
+        originalIsDataLoaded = iD.serviceOsm.isDataLoaded;
+        iD.serviceOsm.isDataLoaded = () => true;
     });
 
     beforeEach(function() {
@@ -11,6 +13,7 @@ describe('iD.validations.impossible_oneway', function() {
     });
 
     afterEach(() => {
+        iD.serviceOsm.isDataLoaded = originalIsDataLoaded;
         delete iD.services.osm;
     });
 

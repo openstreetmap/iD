@@ -63,10 +63,14 @@ export function uiFieldLocalized(field, context) {
             var metaCode = code;
             if (replacements[code]) metaCode = replacements[code];
 
+            let nativeName = dataLanguages[metaCode].nativeName;
+            if (!nativeName && dataLanguages[metaCode].base) {
+                nativeName = dataLanguages[dataLanguages[metaCode].base].nativeName;
+            }
             _languagesArray.push({
                 localName: localizer.languageName(metaCode, { localOnly: true }),
-                nativeName: dataLanguages[metaCode].nativeName,
-                code: code,
+                nativeName,
+                code,
                 label: localizer.languageName(metaCode)
             });
         }

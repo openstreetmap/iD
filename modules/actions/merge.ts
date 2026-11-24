@@ -1,6 +1,7 @@
 import type { coreGraph } from '../core';
 import type { Action } from '../core/history';
-import type { EntityId, osmNode, osmRelation, osmWay } from '../osm';
+import type { EntityId, osmNode } from '../osm';
+import { osmWay, osmRelation } from '../osm';
 import { osmTagSuggestingArea } from '../osm/tags';
 import { utilArrayGroupBy, utilArrayUniq, utilCompareIDs } from '../util';
 
@@ -16,7 +17,7 @@ export function actionMerge(ids: EntityId[]): Action {
             point: osmNode[];
             vertex: osmNode[];
             line: osmWay[];
-            area: osmWay[];
+            area: (osmWay | osmRelation)[];
             relation: osmRelation[];
         };
     }
@@ -32,10 +33,25 @@ export function actionMerge(ids: EntityId[]): Action {
             graph = graph.replace(target);
 
             graph.parentRelations(point).forEach(function(parent) {
-                graph = graph.replace(parent.replaceMember(point, target));
+                if (parent === target) {
+                    // #7983: don't replace the target with itself
+                    // instead, drop the member node
+                    graph = graph.replace(parent.removeMembersWithID(point.id));
+                } else {
+                    graph = graph.replace(parent.replaceMember(point, target));
+                }
             });
 
-            var nodes = utilArrayUniq(graph.childNodes(target));
+            let targetWay: osmWay;
+            if (target instanceof osmRelation) {
+                // if the target is a multipolygon: choose a random way as the target for the node
+                const targetMember = target.members.find(member => member.type === 'way')!; // a multipolygon area always hat at least one way member
+                targetWay = graph.entity<osmWay>(targetMember.id);
+            } else {
+                targetWay = target;
+            };
+
+            var nodes = utilArrayUniq(graph.childNodes(targetWay));
             var removeNode = point;
 
             if (!point.isNew()) {
@@ -51,8 +67,11 @@ export function actionMerge(ids: EntityId[]): Action {
 
                 var replaceNode = function(node: osmNode) {
                     graph = graph.replace(point.update({ tags: node.tags, loc: node.loc }));
-                    target = target.replaceNode(node.id, point.id);
-                    graph = graph.replace(target);
+                    targetWay = targetWay.replaceNode(node.id, point.id);
+                    graph = graph.replace(targetWay);
+                    if (target instanceof osmWay) {
+                        target = targetWay;
+                    }
                     removeNode = node;
                     inserted = true;
                 };

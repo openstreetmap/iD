@@ -64,7 +64,10 @@ export function uiDataEditor(context) {
             .attr('class', 'raw-tag-editor data-editor')
             .merge(rte)
             .call(rawTagEditor
-                .tags(stringifyProperties(_datum?.properties || {}))
+                // truncate long values: e.g. GPX tracks parsed by togeojson include
+                // per-coordinate arrays with thousands of entries, which would
+                // otherwise freeze the UI when rendered
+                .tags(stringifyProperties(_datum?.properties || {}, context.maxCharsForTagValue()))
                 .state('hover')
                 .render
             )
