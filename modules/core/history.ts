@@ -438,7 +438,7 @@ export class coreHistory extends EventDispatcher<EventMap> {
 
         // restore history state to a given checkpoint or reset completely
         reset(key?: string) {
-            if (key !== undefined && this._checkpoints.hasOwnProperty(key)) {
+            if (key !== undefined && Object.hasOwn(this._checkpoints, key)) {
                 this._stack = this._checkpoints[key].stack;
                 this._index = this._checkpoints[key].index;
             } else {
@@ -523,7 +523,7 @@ export class coreHistory extends EventDispatcher<EventMap> {
                     var nrw = match[1] as 'n' | 'w' | 'r';
                     var permID;
                     do { permID = (nrw + (++nextID[nrw])) as NodeId & WayId & RelationId; }
-                    while (baseEntities.hasOwnProperty(permID));
+                    while (Object.hasOwn(baseEntities, permID));
 
                     copy.id = permID;
                     permIDs[source.id] = permID;
