@@ -13,7 +13,7 @@ import { services } from '../services';
 import { svgPath } from './helpers';
 import { utilDetect } from '../util/detect';
 import { utilArrayFlatten, utilArrayUnion, utilHashcode } from '../util';
-import type { Layer } from '.';
+import type { Drawable } from '.';
 
 interface Feature extends GeoJsonFeature {
     /** property added by iD */
@@ -28,7 +28,7 @@ var _enabled = false;
 var _geojson: FeatureCollection | Feature | null;
 
 
-interface DrawData extends Layer {
+interface DrawData extends Drawable {
     setFile(extension: string | undefined, data: string): DrawData;
     showLabels: GetSet<DrawData, boolean>;
     hasData(): boolean;
