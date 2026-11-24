@@ -97,6 +97,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * When searching for a language in the multilingual name field, also consider the respective _base_ language's native name (e.g. `српски` for `sr` in `Cyrl` script) ([#8015])
 * Fix translated tag values leaking into tags when a field has limited options ([#13233])
 #### :hourglass: Performance
+* Don't fetch data of disabled vector tile overlays ([#7951])
 #### :mortar_board: Walkthrough / Help
 #### :rocket: Presets
 * Show reasonable default on `access` field for `barrier=stile` nodes ([#12971], thanks [@matkoniecz])
@@ -108,6 +109,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Drop support for `oneway=1` ([#13026], thanks [@k-yle])
 * Drop confusing dead code ([#13014], thanks [@matkoniecz])
 
+[#7951]: https://github.com/openstreetmap/iD/issues/7951
 [#7978]: https://github.com/openstreetmap/iD/issues/7978
 [#7983]: https://github.com/openstreetmap/iD/issues/7983
 [#8015]: https://github.com/openstreetmap/iD/issues/8015
