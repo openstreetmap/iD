@@ -1,7 +1,7 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { select as d3_select } from 'd3-selection';
 
-import { utilRebind } from '../../util';
+import { utilBindDispatch } from '../../util';
 import { uiFieldCombo } from './combo';
 
 
@@ -195,5 +195,6 @@ export function uiFieldDirectionalCombo(field, context) {
     };
 
 
-    return utilRebind(directionalCombo, dispatch, 'on');
+    directionalCombo.on = utilBindDispatch(directionalCombo, dispatch);
+    return directionalCombo;
 }

@@ -6,7 +6,7 @@ import {
 import { localizer, t } from '../../core/localizer';
 import { helpHtml } from './helper';
 import { uiModal } from '../modal';
-import { utilRebind } from '../../util/rebind';
+import { utilBindDispatch } from '../../util/rebind';
 
 
 export function uiIntroStartEditing(context, reveal) {
@@ -89,5 +89,6 @@ export function uiIntroStartEditing(context, reveal) {
     };
 
 
-    return utilRebind(chapter, dispatch, 'on');
+    chapter.on = utilBindDispatch(chapter, dispatch);
+    return chapter;
 }

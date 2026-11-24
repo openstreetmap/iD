@@ -10,7 +10,7 @@ import { svgIcon } from '../svg/icon';
 import {
     utilEntityOrMemberSelector,
     utilKeybinding,
-    utilRebind,
+    utilBindDispatch,
     utilWrap
 } from '../util';
 
@@ -342,5 +342,6 @@ export function uiConflicts(context) {
     };
 
 
-    return utilRebind(conflicts, dispatch, 'on');
+    conflicts.on = utilBindDispatch(conflicts, dispatch);
+    return conflicts;
 }

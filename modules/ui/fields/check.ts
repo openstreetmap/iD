@@ -4,7 +4,7 @@ import {
 } from 'd3-selection';
 import { omit } from 'es-toolkit/compat';
 
-import { utilRebind } from '../../util/rebind';
+import { utilBindDispatch } from '../../util/rebind';
 import { localizer, t } from '../../core/localizer';
 import { actionReverse } from '../../actions/reverse';
 import { svgIcon } from '../../svg/icon';
@@ -265,5 +265,6 @@ export function uiFieldCheck(field: any, context: iD.Context) {
         input.node()?.focus();
     };
 
-    return utilRebind(check, dispatch, 'on');
+    check.on = utilBindDispatch(check, dispatch);
+    return check;
 }

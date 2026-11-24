@@ -7,7 +7,7 @@ import { localizer, t } from '../core/localizer';
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { svgIcon } from '../svg/icon';
 import { utilGetDimensions } from '../util/dimensions';
-import { utilRebind } from '../util';
+import { utilBindDispatch } from '../util';
 import { services } from '../services';
 import { uiTooltip } from './tooltip';
 import { actionChangeTags } from '../actions';
@@ -312,5 +312,6 @@ export function uiPhotoviewer(context) {
         return subtractPadding(utilGetDimensions(photoviewer, true), photoviewer);
     };
 
-    return utilRebind(photoviewer, dispatch, 'on');
+    photoviewer.on = utilBindDispatch(photoviewer, dispatch);
+    return photoviewer;
 }

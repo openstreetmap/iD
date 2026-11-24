@@ -4,7 +4,7 @@ import * as countryCoder from '@rapideditor/country-coder';
 
 import { uiCombobox } from '../combobox';
 import { t, localizer } from '../../core/localizer';
-import { utilGetSetValue, utilNoAuto, utilRebind, utilTotalExtent } from '../../util';
+import { utilGetSetValue, utilNoAuto, utilBindDispatch, utilTotalExtent } from '../../util';
 import { likelyRawNumberFormat } from './input';
 
 
@@ -171,5 +171,6 @@ export function uiFieldRoadspeed(field, context) {
     }
 
 
-    return utilRebind(roadspeed, dispatch, 'on');
+    roadspeed.on = utilBindDispatch(roadspeed, dispatch);
+    return roadspeed;
 }

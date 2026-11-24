@@ -5,7 +5,7 @@ import { presetManager } from '../../presets';
 import { utilArrayIdentical } from '../../util/array';
 import { t } from '../../core/localizer';
 import { uiTooltip } from '../tooltip';
-import { utilRebind } from '../../util';
+import { utilBindDispatch } from '../../util';
 import { uiPresetIcon } from '../preset_icon';
 import { uiSection } from '../section';
 import { uiTagReference } from '../tag_reference';
@@ -150,5 +150,6 @@ export function uiSectionFeatureType(context) {
         });
     }
 
-    return utilRebind(section, dispatch, 'on');
+    section.on = utilBindDispatch(section, dispatch);
+    return section;
 }

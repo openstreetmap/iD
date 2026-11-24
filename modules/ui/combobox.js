@@ -1,6 +1,6 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { select as d3_select } from 'd3-selection';
-import { utilEditDistance, utilGetSetValue, utilRebind, utilTriggerEvent } from '../util';
+import { utilEditDistance, utilGetSetValue, utilBindDispatch, utilTriggerEvent } from '../util';
 
 
 // This code assumes that the combobox values will not have duplicate entries.
@@ -534,7 +534,8 @@ export function uiCombobox(context, klass) {
         return combobox;
     };
 
-    return utilRebind(combobox, dispatch, 'on');
+    combobox.on = utilBindDispatch(combobox, dispatch);
+    return combobox;
 }
 
 

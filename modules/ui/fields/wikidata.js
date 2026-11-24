@@ -4,7 +4,7 @@ import { select as d3_select } from 'd3-selection';
 import { actionChangeTags } from '../../actions/change_tags';
 import { services } from '../../services/index';
 import { svgIcon } from '../../svg/icon';
-import { utilGetSetValue, utilNoAuto, utilRebind } from '../../util';
+import { utilGetSetValue, utilNoAuto, utilBindDispatch } from '../../util';
 import { uiCombobox } from '../combobox';
 import { t } from '../../core/localizer';
 
@@ -396,5 +396,6 @@ export function uiFieldWikidata(field, context) {
     };
 
 
-    return utilRebind(wiki, dispatch, 'on');
+    wiki.on = utilBindDispatch(wiki, dispatch);
+    return wiki;
 }

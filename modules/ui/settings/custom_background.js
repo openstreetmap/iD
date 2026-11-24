@@ -4,7 +4,7 @@ import { marked } from 'marked';
 import { prefs } from '../../core/preferences';
 import { localizer, t } from '../../core/localizer';
 import { uiConfirm } from '../confirm';
-import { utilNoAuto, utilRebind } from '../../util';
+import { utilNoAuto, utilBindDispatch } from '../../util';
 import { utilSanitizeHTML } from '../../util/sanitize';
 
 
@@ -111,5 +111,6 @@ ${localizer.t_html('settings.custom_background.instructions.license_disclaimer')
         }
     }
 
-    return utilRebind(render, dispatch, 'on');
+    render.on = utilBindDispatch(render, dispatch);
+    return render;
 }

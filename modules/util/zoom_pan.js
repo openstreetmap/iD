@@ -8,7 +8,7 @@ import { interrupt as d3_interrupt } from 'd3-transition';
 import { zoomIdentity as d3_zoomIdentity, ZoomTransform as Transform } from 'd3-zoom';
 
 import { utilFastMouse, utilFunctor } from './util';
-import { utilRebind } from './rebind';
+import { utilBindDispatch } from './rebind';
 
 // Ignore right-click, since that should open the context menu.
 function defaultFilter(d3_event) {
@@ -365,5 +365,6 @@ export function utilZoomPan() {
     return arguments.length ? (_transform = _, zoom) : _transform;
   };
 
-  return utilRebind(zoom, dispatch, 'on');
+  zoom.on = utilBindDispatch(zoom, dispatch);
+  return zoom;
 }

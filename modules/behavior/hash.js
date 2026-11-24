@@ -6,7 +6,7 @@ import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { geoSphericalDistance } from '../geo';
 import { modeBrowse } from '../modes/browse';
 import { modeSelect, modeSelectNote } from '../modes';
-import { utilIsDrawing, utilQsString, utilRebind, utilStringQs } from '../util';
+import { utilIsDrawing, utilQsString, utilBindDispatch, utilStringQs } from '../util';
 import { utilArrayIdentical } from '../util/array';
 import { utilDisplayLabel } from '../util/utilDisplayLabel';
 import { localizer, t } from '../core/localizer';
@@ -268,5 +268,6 @@ export function behaviorHash(context) {
         window.location.hash = '';
     };
 
-    return utilRebind(behavior, dispatch, 'on');
+    behavior.on = utilBindDispatch(behavior, dispatch);
+    return behavior;
 }

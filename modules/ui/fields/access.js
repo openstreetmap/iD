@@ -2,7 +2,7 @@ import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { select as d3_select } from 'd3-selection';
 
 import { uiCombobox } from '../combobox';
-import { utilGetSetValue, utilNoAuto, utilRebind } from '../../util';
+import { utilGetSetValue, utilNoAuto, utilBindDispatch } from '../../util';
 import { t } from '../../core/localizer';
 import { formatTag } from './tag_title';
 
@@ -360,5 +360,6 @@ export function uiFieldAccess(field, context) {
     };
 
 
-    return utilRebind(access, dispatch, 'on');
+    access.on = utilBindDispatch(access, dispatch);
+    return access;
 }

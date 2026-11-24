@@ -12,7 +12,7 @@ import { geoMetersToOffset, geoOffsetToMeters, geoExtent } from '../geo';
 import { rendererBackgroundSource } from './background_source';
 import { rendererTileLayer } from './tile_layer';
 import { utilAesDecrypt, utilStringQs } from '../util';
-import { utilRebind } from '../util/rebind';
+import { utilBindDispatch } from '../util/rebind';
 import { patchHash } from '../behavior';
 
 
@@ -552,5 +552,6 @@ export function rendererBackground(context) {
   };
 
 
-  return utilRebind(background, dispatch, 'on');
+  background.on = utilBindDispatch(background, dispatch);
+  return background;
 }

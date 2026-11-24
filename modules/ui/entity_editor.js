@@ -8,7 +8,7 @@ import { actionChangeTags } from '../actions/change_tags';
 import { modeBrowse } from '../modes/browse';
 import { svgIcon } from '../svg/icon';
 import { utilArrayIdentical } from '../util/array';
-import { utilCleanTags, utilCombinedTags, utilRebind } from '../util';
+import { utilCleanTags, utilCombinedTags, utilBindDispatch } from '../util';
 
 import { uiSectionEntityIssues } from './sections/entity_issues';
 import { uiSectionFeatureType } from './sections/feature_type';
@@ -352,5 +352,6 @@ export function uiEntityEditor(context) {
         return entityEditor;
     };
 
-    return utilRebind(entityEditor, dispatch, 'on');
+    entityEditor.on = utilBindDispatch(entityEditor, dispatch);
+    return entityEditor;
 }

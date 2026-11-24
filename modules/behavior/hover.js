@@ -6,7 +6,7 @@ import {
 
 import { presetManager } from '../presets';
 import { OsmAbstractEntity, osmNote, QAItem } from '../osm';
-import { utilKeybinding, utilRebind } from '../util';
+import { utilKeybinding, utilBindDispatch } from '../util';
 
 /*
    The hover behavior adds the `.hover` class on pointerover to all elements to which
@@ -230,5 +230,6 @@ export function behaviorHover(context) {
         return behavior;
     };
 
-    return utilRebind(behavior, dispatch, 'on');
+    behavior.on = utilBindDispatch(behavior, dispatch);
+    return behavior;
 }

@@ -10,7 +10,7 @@ import { fuzzyMatch, uiCombobox } from '../combobox';
 import { svgIcon } from '../../svg/icon';
 
 import { utilKeybinding } from '../../util/keybinding';
-import { utilArrayUniq, utilDetect, utilGetSetValue, utilNoAuto, utilRebind, utilTotalExtent, utilUnicodeCharsCount } from '../../util';
+import { utilArrayUniq, utilDetect, utilGetSetValue, utilNoAuto, utilBindDispatch, utilTotalExtent, utilUnicodeCharsCount } from '../../util';
 import { uiLengthIndicator } from '../length_indicator';
 import { deprecatedTagValuesByKey } from '../../osm/deprecated';
 import { osmIsoCountryKeys } from '../../osm/tags';
@@ -1191,5 +1191,6 @@ export function uiFieldCombo(field, context) {
     }
 
 
-    return utilRebind(combo, dispatch, 'on');
+    combo.on = utilBindDispatch(combo, dispatch);
+    return combo;
 }

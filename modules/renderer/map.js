@@ -14,7 +14,7 @@ import { utilFastMouse, utilFunctor, utilSetTransform, utilEntityAndDeepMemberID
 import { utilBindOnce } from '../util/bind_once';
 import { utilDetect } from '../util/detect';
 import { utilGetDimensions } from '../util/dimensions';
-import { utilRebind } from '../util/rebind';
+import { utilBindDispatch } from '../util/rebind';
 import { utilZoomPan } from '../util/zoom_pan';
 import { utilDoubleUp } from '../util/double_up';
 
@@ -1140,5 +1140,6 @@ export function rendererMap(context) {
     };
 
 
-    return utilRebind(map, dispatch, 'on');
+    map.on = utilBindDispatch(map, dispatch);
+    return map;
 }

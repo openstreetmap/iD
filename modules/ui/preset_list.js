@@ -10,7 +10,7 @@ import { uiTooltip } from './tooltip';
 import { geoExtent } from '../geo/extent';
 import { uiPresetIcon } from './preset_icon';
 import { uiTagReference } from './tag_reference';
-import { utilKeybinding, utilNoAuto, utilRebind } from '../util';
+import { utilKeybinding, utilNoAuto, utilBindDispatch } from '../util';
 
 
 export function uiPresetList(context) {
@@ -528,5 +528,6 @@ export function uiPresetList(context) {
         });
     }
 
-    return utilRebind(presetList, dispatch, 'on');
+    presetList.on = utilBindDispatch(presetList, dispatch);
+    return presetList;
 }

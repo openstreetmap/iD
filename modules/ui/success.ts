@@ -11,7 +11,7 @@ import { t, localizer } from '../core/localizer.js';
 
 import { svgIcon } from '../svg/icon.js';
 import { uiDisclosure } from './disclosure.js';
-import { utilRebind } from '../util/rebind.js';
+import { utilBindDispatch } from '../util/rebind.js';
 import { utilSanitizeHTML } from '../util/sanitize.js';
 import { getOsmCalEvents } from '../services/osmcal.js';
 import { localeTimestamp } from '../util/date.js';
@@ -443,5 +443,6 @@ export function uiSuccess(context: coreContext) {
     };
 
 
-    return utilRebind(success, dispatch, 'on');
+    success.on = utilBindDispatch(success, dispatch);
+    return success;
 }

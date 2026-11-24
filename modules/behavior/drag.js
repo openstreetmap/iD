@@ -7,7 +7,7 @@ import {
 
 import { geoVecLength } from '../geo';
 import { osmNote } from '../osm';
-import { utilRebind } from '../util/rebind';
+import { utilBindDispatch } from '../util/rebind';
 import { utilFastMouse, utilPrefixCSSProperty, utilPrefixDOMProperty } from '../util';
 
 
@@ -208,5 +208,6 @@ export function behaviorDrag() {
     };
 
 
-    return utilRebind(behavior, dispatch, 'on');
+    behavior.on = utilBindDispatch(behavior, dispatch);
+    return behavior;
 }
