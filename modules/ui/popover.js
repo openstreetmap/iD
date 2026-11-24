@@ -306,6 +306,12 @@ export function uiPopover(klass) {
         if (position) {
             if (scrollNode) {
                 const MIN_MARGIN = 10;
+                // apply the freshly computed position first, so the measured rect
+                // matches `position` and not the previous (possibly clamped) one
+                popoverSelection
+                    .style('left', ~~position.x + 'px')
+                    .style('top', ~~position.y + 'px');
+
                 const popoverRect = popoverSelection.node().getBoundingClientRect();
                 const scrollNodeRect = scrollNode.getBoundingClientRect();
                 const arrow = anchor.selectAll('.popover-' + _id + ' > .popover-arrow');
