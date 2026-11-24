@@ -634,13 +634,13 @@ export function utilNoAuto(selection: d3.Selection): d3.Selection {
     return selection
         // horrible hack follows
         // it is necessary as many sites invalidly used "off" preference, causing browser to ignore it
-        // previously iD set it to 'new-password' and add manual overrides to styop password managers
+        // previously iD set it to 'new-password' and add manual overrides to stop password managers
         // from treating it as a password field
         // but such manual overrides apparently were misused resulting in
         // Bitwarden removing such support in https://github.com/bitwarden/clients/pull/22620
         //
         // proper fix would be enabled by https://github.com/whatwg/html/issues/10115 but it sits ignored
-        // and as such property was missued, it is not likely to be accepted
+        // and as such property was misued, it is not likely to be accepted
         //
         // see also for Chromium:
         // - https://issues.chromium.org/issues/41163264
@@ -654,7 +654,7 @@ export function utilNoAuto(selection: d3.Selection): d3.Selection {
         // - https://bugzilla.mozilla.org/show_bug.cgi?id=1999789
         // - https://bugzilla.mozilla.org/show_bug.cgi?id=2066340
         //
-        // setting "language" is exploting current browser behaviour
+        // setting "language" is exploiting current browser behaviour
         // and may break at any time, but it works now
         // as mentioned: it is a horrible hack 
         .attr('autocomplete', 'language')
