@@ -1,4 +1,4 @@
-import { fn } from '@vitest/spy';
+import { fn, spyOn } from '@vitest/spy';
 
 describe('iD.operationCircularize', function () {
     let graph;
@@ -61,10 +61,13 @@ describe('iD.operationCircularize', function () {
             expect(operation.disabled()).toEqual('not_closed');
         });
 
-        it('is available for a multiselection of closed ways', function () {
+        it('checks eligibility for a multiselection of closed ways without editing the graph', function () {
             const operation = iD.operationCircularize(fakeContext, ['w2', 'w3']);
+            const replace = spyOn(graph, 'replace');
+
             expect(operation.available()).toBeTruthy();
             expect(operation.disabled()).toEqual(false);
+            expect(replace).not.toHaveBeenCalled();
         });
 
         it('is available for a multiselection of unclosed ways forming a ring', function () {

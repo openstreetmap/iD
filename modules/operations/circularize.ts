@@ -91,21 +91,28 @@ export const operationCircularize: CreateOperation = (context, selectedIDs) => {
         if (!_actions.length) return '';
 
         let graph = context.graph();
-        const actionDisableds = _actions
-            .map(action => {
-                const reason = action.disabled?.(graph);
-                if (typeof reason !== 'string') graph = action(graph);
-                return reason;
-            });
+        const disabledReasons = new Set<string>();
+        let canCircularize = false;
 
-        if (actionDisableds.every(reason => reason === undefined || reason !== false)) {
-            // none of the features can be circularized
+        for (const action of _actions) {
+            const reason = action.disabled?.(graph);
+            if (reason === false) {
+                // One eligible ring is enough to enable the operation.
+                canCircularize = true;
+                break;
+            }
+            if (reason === undefined) {
+                graph = action(graph);  // set up or remove temporary ways
+            } else {
+                disabledReasons.add(reason);
+            }
+        }
 
-            if (new Set(actionDisableds.filter(Boolean)).size > 1) {
+        if (!canCircularize) {
+            if (disabledReasons.size > 1) {
                 return 'multiple_blockers';
             }
-
-            return actionDisableds.filter(Boolean)[0];
+            return disabledReasons.values().next().value ?? '';
         } else if (_extent!.percentContainedIn(context.map().extent()) < 0.8) {
             return 'too_large';
         } else if (someMissing()) {
