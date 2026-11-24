@@ -13,6 +13,7 @@ import { services } from '../services';
 import { svgPath } from './helpers';
 import { utilDetect } from '../util/detect';
 import { utilArrayFlatten, utilArrayUnion, utilHashcode } from '../util';
+import type { Layer } from '.';
 
 interface Feature extends GeoJsonFeature {
     /** property added by iD */
@@ -27,10 +28,8 @@ var _enabled = false;
 var _geojson: FeatureCollection | Feature | null;
 
 
-export interface DrawData {
-    (selection: d3.Selection<SVGGElement>): void
+interface DrawData extends Layer {
     setFile(extension: string | undefined, data: string): DrawData;
-    enabled: GetSet<DrawData, boolean>;
     showLabels: GetSet<DrawData, boolean>;
     hasData(): boolean;
     template(): string | null;
