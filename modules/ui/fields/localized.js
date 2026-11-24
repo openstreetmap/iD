@@ -45,7 +45,7 @@ export function uiFieldLocalized(field, context) {
     var _multilingual = [];
     var _buttonTip = uiTooltip()
         .title(() => t.append('translate.translate'))
-        .placement('left');
+        .placement(localizer.textDirection() === 'rtl' ? 'right' : 'left');
     var _entityIDs = [];
 
 
@@ -63,10 +63,14 @@ export function uiFieldLocalized(field, context) {
             var metaCode = code;
             if (replacements[code]) metaCode = replacements[code];
 
+            let nativeName = dataLanguages[metaCode].nativeName;
+            if (!nativeName && dataLanguages[metaCode].base) {
+                nativeName = dataLanguages[dataLanguages[metaCode].base].nativeName;
+            }
             _languagesArray.push({
                 localName: localizer.languageName(metaCode, { localOnly: true }),
-                nativeName: dataLanguages[metaCode].nativeName,
-                code: code,
+                nativeName,
+                code,
                 label: localizer.languageName(metaCode)
             });
         }

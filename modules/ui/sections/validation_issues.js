@@ -10,6 +10,7 @@ import { t } from '../../core/localizer';
 import { utilHighlightEntities } from '../../util';
 import { uiSection } from '../section';
 import { validationIssue } from '../../core/validation';
+import { renderIgnoredIssuesReset } from './validation_status';
 
 
 export function uiSectionValidationIssues(id, severity, context) {
@@ -62,7 +63,7 @@ export function uiSectionValidationIssues(id, severity, context) {
             'dist'
         ]).slice(0, 1000).map(({ issue }) => issue);
 
-        //renderIgnoredIssuesReset(_warningsSelection);
+        renderIgnoredIssuesReset(context, selection);
 
         selection
             .call(drawIssuesList, issues);

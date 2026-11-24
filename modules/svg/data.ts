@@ -207,7 +207,7 @@ export function svgData(projection: Projection, context: coreContext, dispatch: 
 
         // Gather data
         var geoData, polygonData;
-        if (_template && vtService) {   // fetch data from vector tile service
+        if (_template && vtService && _enabled) {   // fetch data from vector tile service
             var sourceID = _template;
             vtService.loadTiles(sourceID, _template, projection);
             geoData = vtService.data(sourceID, projection);

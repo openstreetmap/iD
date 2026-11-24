@@ -48,42 +48,8 @@ export function uiSectionValidationStatus(context) {
             .append('span')
             .attr('class', 'details');
 
-        renderIgnoredIssuesReset(selection);
+        renderIgnoredIssuesReset(context, selection);
         setNoIssuesText(selection);
-    }
-
-    function renderIgnoredIssuesReset(selection) {
-
-        var ignoredIssues = context.validator()
-            .getIssues({ what: 'all', where: 'all', includeDisabledRules: true, includeIgnored: 'only' });
-
-        var resetIgnored = selection.selectAll('.reset-ignored')
-            .data(ignoredIssues.length ? [0] : []);
-
-        // exit
-        resetIgnored.exit()
-            .remove();
-
-        // enter
-        var resetIgnoredEnter = resetIgnored.enter()
-            .append('div')
-            .attr('class', 'reset-ignored section-footer');
-
-        resetIgnoredEnter
-            .append('a')
-            .attr('href', '#');
-
-        // update
-        resetIgnored = resetIgnored
-            .merge(resetIgnoredEnter);
-
-        resetIgnored.select('a')
-            .call(t.addOrUpdate('inspector.title_count', { title: t.append('issues.reset_ignored'), count: ignoredIssues.length }));
-
-        resetIgnored.on('click', function(d3_event) {
-            d3_event.preventDefault();
-            context.validator().resetIgnoredIssues();
-        });
     }
 
     function setNoIssuesText(selection) {
@@ -177,4 +143,39 @@ export function uiSectionValidationStatus(context) {
     );
 
     return section;
+}
+
+
+export function renderIgnoredIssuesReset(context, selection) {
+
+    var ignoredIssues = context.validator()
+        .getIssues({ what: 'all', where: 'all', includeDisabledRules: true, includeIgnored: 'only' });
+
+    var resetIgnored = selection.selectAll('.reset-ignored')
+        .data(ignoredIssues.length ? [0] : []);
+
+    // exit
+    resetIgnored.exit()
+        .remove();
+
+    // enter
+    var resetIgnoredEnter = resetIgnored.enter()
+        .append('div')
+        .attr('class', 'reset-ignored section-footer');
+
+    resetIgnoredEnter
+        .append('a')
+        .attr('href', '#');
+
+    // update
+    resetIgnored = resetIgnored
+        .merge(resetIgnoredEnter);
+
+    resetIgnored.select('a')
+        .call(t.addOrUpdate('inspector.title_count', { title: t.append('issues.reset_ignored'), count: ignoredIssues.length }));
+
+    resetIgnored.on('click', function(d3_event) {
+        d3_event.preventDefault();
+        context.validator().resetIgnoredIssues();
+    });
 }

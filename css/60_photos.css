@@ -47,7 +47,7 @@ li.list-item-photos.active:after {
     border-radius: 0;
     padding: 5px;
     position: absolute;
-    right: 5px;
+    inset-inline-end: 5px;
     top: 5px;
     z-index: 50;
 }
@@ -56,7 +56,7 @@ li.list-item-photos.active:after {
     border-radius: 0;
     padding: 5px;
     position: absolute;
-    left: 5px;
+    inset-inline-start: 5px;
     top: 5px;
     z-index: 50;
 }
@@ -65,7 +65,7 @@ li.list-item-photos.active:after {
     border-radius: 0;
     position: absolute;
     top: 0;
-    right: 0;
+    inset-inline-end: 0;
     z-index: 49;
     cursor: nesw-resize;
     height: 25px;
@@ -76,12 +76,16 @@ li.list-item-photos.active:after {
     border-radius: 0;
     position: absolute;
     top: 0;
-    right: 0;
+    inset-inline-end: 0;
     bottom: 0;
     z-index: 48;
     cursor: ew-resize;
     height: auto;
     width: 6px;
+}
+
+.ideditor[dir='rtl'] .photoviewer button.resize-handle-xy {
+    cursor: nwse-resize;
 }
 
 .photoviewer button.resize-handle-y {
@@ -633,7 +637,7 @@ label.streetside-hires {
     width: 50%;
 }
 .local-photos > div:first-child {
-    margin-right: 20px;
+    margin-inline-end: 20px;
 }
 
 .list-local-photos {
@@ -642,14 +646,15 @@ label.streetside-hires {
     overflow-x: auto;
     /* workaround for something like "overflow-x: visible"
        see https://stackoverflow.com/a/39554003 */
-    margin-left: -100px;
-    padding-left: 100px;
+    margin-inline-start: -100px;
+    padding-inline-start: 100px;
     margin-top: -20px;
     padding-top: 20px;
     min-height: 100px;
 }
-.list-local-photos::-webkit-scrollbar {
-    border-left: none;
+.list-local-photos::-webkit-scrollbar,
+.list-local-photos:dir(rtl)::-webkit-scrollbar {
+    border-inline-start: none;
 }
 .list-local-photos li {
     list-style: none;
@@ -664,26 +669,25 @@ label.streetside-hires {
     overflow: hidden;
     text-overflow: ellipsis;
     line-height: 30px;
-    padding-left: 8px;
-    border-bottom: 1px solid #ccc;
-    border-left: 1px solid #ccc;
-    border-right: 1px solid #ccc;
+    padding-inline-start: 8px;
+    border-bottom: 1px solid var(--border-color);
+    border-inline: 1px solid var(--border-color);
 }
 .list-local-photos li:first-child span.filename {
-    border-top: 1px solid #ccc;
-    border-top-left-radius: 4px;
+    border-top: 1px solid var(--border-color);
+    border-start-start-radius: 4px;
 }
 .list-local-photos li:first-child button {
-    border-top: 1px solid #ccc;
+    border-top: 1px solid var(--border-color);
 }
 .list-local-photos li:first-child button.remove {
-    border-top-right-radius: 4px;
+    border-start-end-radius: 4px;
 }
 .list-local-photos li:last-child span.filename {
-    border-bottom-left-radius: 4px;
+    border-end-start-radius: 4px;
 }
 .list-local-photos li:last-child button.remove {
-    border-bottom-right-radius: 4px;
+    border-end-end-radius: 4px;
 }
 .list-local-photos li.invalid button.zoom-to-data {
     display: none;

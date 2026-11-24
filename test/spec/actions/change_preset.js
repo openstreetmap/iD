@@ -331,4 +331,39 @@ describe('iD.actionChangePreset', function() {
         const action = iD.actionChangePreset(entity.id, oldPreset, newPreset);
         expect(action(graph).entity(entity.id).tags).toEqual({highway: 'service', name: 'foo bar'});
     });
+
+    it('preserves universal fields when changing to a preset that does not define them', () => {
+        const entity = new iD.osmNode({
+            tags: {
+                highway: 'primary',
+                name: 'Main Street',
+                'name:en': 'Main Street',
+                lanes: '2'
+            },
+            loc: [0, 0]
+        });
+        const graph = new iD.coreGraph([entity]);
+
+        const fields = {
+            name: iD.presetField('name', { type: 'localized', key: 'name', geometry: 'point', universal: true }),
+            lanes: iD.presetField('lanes', { key: 'lanes', geometry: 'point' }),
+            destination: iD.presetField('destination', { key: 'destination', geometry: 'point' })
+        };
+        const oldPreset = iD.presetPreset('highway/primary', {
+            tags: { highway: 'primary' },
+            fields: ['name', 'lanes']
+        }, undefined, fields);
+
+        const newPreset = iD.presetPreset('highway/primary_link', {
+            tags: { highway: 'primary_link' },
+            fields: ['destination']
+        }, undefined, fields);
+
+        const action = iD.actionChangePreset(entity.id, oldPreset, newPreset);
+        expect(action(graph).entity(entity.id).tags).toStrictEqual({
+            highway: 'primary_link',
+            name: 'Main Street',
+            'name:en': 'Main Street'
+        });
+    });
 });

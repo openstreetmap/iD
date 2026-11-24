@@ -199,7 +199,7 @@ export function uiOsmoseDetails(context) {
         context.map().pan([0,0]);  // trigger a redraw
       })
       .catch(err => {
-        console.log(err); // eslint-disable-line no-console
+        console.error(err);
       });
   }
 
