@@ -1,4 +1,14 @@
-/* eslint-disable no-undef */
+declare const ENV__ID_PRESETS_CDN_URL: string | null;
+declare const ENV__ID_OCI_CDN_URL: string | null;
+declare const ENV__ID_WMF_SITEMATRIX_CDN_URL: string | null;
+declare const ENV__ID_NSI_CDN_URL: string | null;
+declare const ENV__ID_API_CONNECTION: string | null;
+declare const ENV__ID_API_CONNECTION_URL: string | null;
+declare const ENV__ID_API_CONNECTION_API_URL: string | null;
+declare const ENV__ID_API_CONNECTION_CLIENT_ID: string | null;
+declare const ENV__ID_TAGINFO_API_URL: string | null;
+declare const ENV__ID_NOMINATIM_API_URL: string | null;
+declare const ENV__ID_SHOW_DONATION_MESSAGE: string | null;
 
 // cdns for external data packages
 const presetsCdnUrl = ENV__ID_PRESETS_CDN_URL
@@ -11,7 +21,7 @@ const nsiCdnUrl = ENV__ID_NSI_CDN_URL
   || 'https://cdn.jsdelivr.net/npm/name-suggestion-index@{version}/';
 
 // api urls and settings
-const defaultOsmApiConnections = {
+const defaultOsmApiConnections: Record<string, Connection> = {
   live: {
     url: 'https://www.openstreetmap.org',
     apiUrl: 'https://api.openstreetmap.org',
@@ -22,8 +32,14 @@ const defaultOsmApiConnections = {
     client_id: 'Ee1wWJ6UlpERbF6BfTNOpwn0R8k_06mvMXdDUkeHMgw'
   }
 };
-/** @type {{ url: string; apiUrl: string; client_id: string; }[]} */
-const osmApiConnections = [];
+
+export interface Connection {
+    url: string;
+    apiUrl?: string;
+    client_id: string;
+};
+
+const osmApiConnections: Connection[] = [];
 if (ENV__ID_API_CONNECTION_URL !== null &&
     ENV__ID_API_CONNECTION_CLIENT_ID !== null) {
   // user specified API Oauth2 connection details
