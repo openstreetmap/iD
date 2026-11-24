@@ -76,6 +76,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Fix some preset icons unreadable in dark mode ([#13100], thanks [@k-yle])
 * Fix minor labelling bug - try 85 and 95 offsets rather than trying 95 twice ([#13009], thanks [@matkoniecz])
 * Fix mistake in right-to-left text detection ([#13032], thanks [@matkoniecz])
+* Do not attempt to clean image and wikimedia_commons values ([#13090], thanks [@matkoniecz])
 * Fix hundreds of API requests sent when you resize the sidebar ([#13102], thanks [@k-yle])
 * Fix some checkbox fields from not setting the "checked" state on the first click when editing a multiselection with multiple values
 * Fix double-click zoom not working after cancelling drawing a line or area ([#11926], thanks [@aditya1010-max])
@@ -148,6 +149,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#13043]: https://github.com/openstreetmap/iD/pull/13043
 [#13074]: https://github.com/openstreetmap/iD/pull/13074
 [#13081]: https://github.com/openstreetmap/iD/pull/13081
+[#13090]: https://github.com/openstreetmap/iD/pull/13090
 [#13097]: https://github.com/openstreetmap/iD/pull/13097
 [#13098]: https://github.com/openstreetmap/iD/pull/13098
 [#13100]: https://github.com/openstreetmap/iD/pull/13100
