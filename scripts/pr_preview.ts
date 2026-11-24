@@ -1,12 +1,7 @@
-// @ts-check
+import type { AsyncFunctionArguments } from '@actions/github-script';
 
-/** @param {import('@actions/github-script').AsyncFunctionArguments} _ */
-export function afterDeploy({ core, github, context }) {
-    /**
-     * @param {string} pr
-     * @param {string} ref
-     */
-    return async (pr, ref) => {
+export function afterDeploy({ core, github, context }: AsyncFunctionArguments) {
+    return async (pr: string, ref: string) => {
         core.info(`Creating deployment event in PR #${pr} for '${ref}'…`);
         const deployment = await github.rest.repos.createDeployment({
             auto_merge: false,
@@ -25,7 +20,7 @@ export function afterDeploy({ core, github, context }) {
             environment_url: `https://pr-${pr}--ideditor.netlify.app`,
             owner: context.repo.owner,
             repo: context.repo.repo,
-            deployment_id: /** @type {{ id: number }} */ (deployment.data).id,
+            deployment_id: (deployment.data as { id: number }).id,
         });
 
         core.info('Fetching all artifacts…');

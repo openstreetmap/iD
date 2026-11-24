@@ -14,6 +14,7 @@ import * as fontawesome from '@fortawesome/fontawesome-svg-core';
 import { fas } from '@fortawesome/free-solid-svg-icons';
 import { far } from '@fortawesome/free-regular-svg-icons';
 import { fab } from '@fortawesome/free-brands-svg-icons';
+import type { Fields, PresetCategories, Presets } from '@openstreetmap/id-tagging-schema';
 fontawesome.library.add(fas, far, fab);
 
 dotenv.config({ quiet: true });
@@ -23,11 +24,11 @@ const presetsVersion = packageJson.devDependencies['@openstreetmap/id-tagging-sc
 const presetsUrl = (process.env.ID_PRESETS_CDN_URL || 'https://cdn.jsdelivr.net/npm/@openstreetmap/id-tagging-schema@{presets_version}').replace('{presets_version}', presetsVersion);
 /* eslint-enable no-process-env */
 
-let _currBuild = null;
+let _currBuild: Promise<void> | null = null;
 
 
 // if called directly, do the thing.
-if (process.argv[1].indexOf('build_data.js') > -1) {
+if (process.argv[1].indexOf('build_data.ts') > -1) {
   await buildData();
 }
 
@@ -93,9 +94,9 @@ async function buildData() {
     minifyJSON('data/shortcuts.json', 'dist/data/shortcuts.min.json'),
     Promise.all([
       // Fetch the icons that are needed by the expected tagging schema version
-      fetchOrRequire(`${presetsUrl}/dist/presets.min.json`),
-      fetchOrRequire(`${presetsUrl}/dist/preset_categories.min.json`),
-      fetchOrRequire(`${presetsUrl}/dist/fields.min.json`)
+      fetchOrRequire<Presets>(`${presetsUrl}/dist/presets.min.json`),
+      fetchOrRequire<PresetCategories>(`${presetsUrl}/dist/preset_categories.min.json`),
+      fetchOrRequire<Fields>(`${presetsUrl}/dist/fields.min.json`)
     ])
     .then(responses => Promise.all(responses.map(response => response.json())))
     .then((results) => {
@@ -104,10 +105,10 @@ async function buildData() {
         for (var key in data) {
           var datum  = data[key];
           // fontawesome icon
-          if (datum.icon && /^fa[srb]-/.test(datum.icon)) {
+          if ('icon' in datum && datum.icon && /^fa[srb]-/.test(datum.icon)) {
             faIcons.add(datum.icon);
           }
-          if (datum.icons) {
+          if ('icons' in datum && datum.icons) {
             Object.values(datum.icons)
               .filter(icon => /^fa[srb]-/.test(icon))
               .forEach(icon => faIcons.add(icon));
@@ -117,7 +118,7 @@ async function buildData() {
     }).then(() =>
       // also fetch the bleeding edge data too to make sure we're always hosting the latest icons
       fetch('https://raw.githubusercontent.com/openstreetmap/id-tagging-schema/interim/icons.json')
-    ).then(response => response.json()).then(cuttingEdgeIcons => {
+    ).then((response): Promise<string[]> => response.json()).then(cuttingEdgeIcons => {
       cuttingEdgeIcons
         .filter(icon => /^fa[srb]-/.test(icon))
         .forEach(icon => faIcons.add(icon));
@@ -143,7 +144,7 @@ async function buildData() {
 }
 
 
-function readQAIssueIcons(faIcons) {
+function readQAIssueIcons(faIcons: Set<string>) {
   const qa = JSON.parse(fs.readFileSync('data/qa_data.json', 'utf8'));
 
   for (const service in qa) {
@@ -161,10 +162,10 @@ function readQAIssueIcons(faIcons) {
 
 function generateTerritoryLanguages() {
   const allRawInfo = cldrTerritoryInfo.supplemental.territoryInfo;
-  let territoryLanguages = {};
+  let territoryLanguages: Record<string, string[]> = {};
 
   Object.keys(allRawInfo).forEach(territoryCode => {
-    let territoryLangInfo = allRawInfo[territoryCode].languagePopulation;
+    let territoryLangInfo = allRawInfo[territoryCode as 'US'].languagePopulation;
     if (!territoryLangInfo) return;
     let langCodes = Object.keys(territoryLangInfo);
 
@@ -200,9 +201,9 @@ function writeEnJson() {
 
   return Promise.all([readCoreYaml, readImagery, readCommunity, readManualImagery])
     .then(async data => {
-      let core = loadYaml(data[0]);
-      let imagery = loadYaml(data[1]);
-      let community = loadYaml(data[2]);
+      let core: any = loadYaml(data[0]);
+      let imagery: any = loadYaml(data[1]);
+      let community: any = loadYaml(data[2]);
       let manualImagery = JSON.parse(data[3]);
 
       for (let i in manualImagery) {
@@ -242,10 +243,10 @@ function writeEnJson() {
 }
 
 
-function writeFaIcons(faIcons) {
+function writeFaIcons(faIcons: Iterable<string>) {
   Array.from(faIcons).forEach(function(key) {
-    const prefix = key.substring(0, 3);   // `fas`, `far`, `fab`
-    const name = key.substring(4);
+    const prefix = key.substring(0, 3) as fontawesome.IconPrefix;   // `fas`, `far`, `fab`
+    const name = key.substring(4) as fontawesome.IconName;
     const def = fontawesome.findIconDefinition({ prefix: prefix, iconName: name });
     try {
       const svg = fontawesome.icon(def, {
@@ -260,8 +261,8 @@ function writeFaIcons(faIcons) {
 }
 
 
-function minifyJSON(inPath, outPath) {
-  return new Promise((resolve, reject) => {
+function minifyJSON(inPath: string, outPath: string) {
+  return new Promise<void>((resolve, reject) => {
     fs.readFile(inPath, 'utf8', (err, data) => {
       if (err) return reject(err);
 
@@ -276,7 +277,7 @@ function minifyJSON(inPath, outPath) {
 }
 
 
-function fetchOrRequire(url) {
+function fetchOrRequire<T>(url: string): Promise<{ json(): Promise<T> }> {
   if (url.startsWith('.')) {
     return import(url, { with: { type: 'json' } })
       .then(module => ({ json: () => module.default }));
