@@ -110,7 +110,7 @@ export function utilArrayFlatten<T>(a: T[][]): T[] {
 //     5: [{type: 'Cat', name: 'Tiger'}, {type: 'Dog', name: 'Rover'}]
 //   }
 export function utilArrayGroupBy<T>(a: T[], key: keyof T): Record<string, T[]>;
-export function utilArrayGroupBy<T, K extends string | number | symbol>(a: T[], key: (item: T) => K): Record<K, T[]>;
+export function utilArrayGroupBy<T, K extends string | number | symbol>(a: T[], key: (item: T) => K): Partial<Record<K, T[]>>;
 export function utilArrayGroupBy<T, K extends string | number | symbol>(a: T[], key: keyof T | ((item: T) => K)): Record<K, T[]> {
     return a.reduce<Record<K, T[]>>((acc, item) => {
         const group: K = (typeof key === 'function') ? key(item) : <K>item[key];
