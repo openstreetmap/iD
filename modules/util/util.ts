@@ -632,12 +632,35 @@ export function utilNoAuto(selection: d3.Selection): d3.Selection {
     const isText = (selection.size() && selection.node()!.tagName.toLowerCase() === 'textarea');
 
     return selection
-        // assign 'new-password' even for non-password fields to prevent browsers (Chrome) ignoring 'off'
-        .attr('autocomplete', 'new-password')
+        // horrible hack follows
+        // it is necessary as many sites invalidly used "off" preference, causing browser to ignore it
+        // previously iD set it to 'new-password' and add manual overrides to stop password managers
+        // from treating it as a password field
+        // but such manual overrides apparently were misused resulting in
+        // Bitwarden removing such support in https://github.com/bitwarden/clients/pull/22620
+        //
+        // proper fix would be enabled by https://github.com/whatwg/html/issues/10115 but it sits ignored
+        // and as such property was misused, it is not likely to be accepted
+        //
+        // see also for Chromium:
+        // - https://issues.chromium.org/issues/41163264
+        // - https://issues.chromium.org/issues/40093420 
+        // - https://issues.chromium.org/issues/41239842
+        //
+        // see also for Firefox:
+        // - https://bugzilla.mozilla.org/show_bug.cgi?id=1754879
+        // - https://bugzilla.mozilla.org/show_bug.cgi?id=1898279
+        // - https://bugzilla.mozilla.org/show_bug.cgi?id=2029971
+        // - https://bugzilla.mozilla.org/show_bug.cgi?id=1999789
+        // - https://bugzilla.mozilla.org/show_bug.cgi?id=2066340
+        //
+        // setting "language" is exploiting current browser behaviour
+        // and may break at any time, but it works now
+        // as mentioned: it is a horrible hack 
+        .attr('autocomplete', 'language')
         .attr('autocorrect', 'off')
         .attr('autocapitalize', 'off')
         .attr('data-1p-ignore', 'true')  // 1Password
-        .attr('data-bwignore', 'true')   // Bitwarden
         .attr('data-form-type', 'other') // Dashlane
         .attr('data-lpignore', 'true')   // LastPass
         .attr('spellcheck', isText ? 'true' : 'false');
