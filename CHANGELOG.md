@@ -54,6 +54,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 #### :scissors: Operations
 * Treat `conveying=*` the same as `oneway=*` when reversing a line ([#13027], thanks [@k-yle])
 * Add shortcut tooltip to reverse direction button ([#12961], thanks [@SaifuddinM23])
+* Prevent _merge_ operation creating a self-referencing relation under certain conditions ([#7983])
 #### :camera: Street-Level
 #### :white_check_mark: Validation
 * Warn about `goo.gl` shortlinks as sources, alongside full Google URLs ([#12740])
@@ -82,8 +83,15 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Fix the browser freezing when hovering over or selecting large GPX tracks loaded as custom map data, by truncating very long property values ([#13169], thanks [@jonorossi])
 #### :earth_asia: Localization
 * Support 835 new languages in the dropdown when adding a `name:*` tag ([#12802])
+* Fix the streetside photo resizer backwards in RTL layouts ([#13180], thanks [@k-yle])
 * Support territory-level address hints ([#12704], thanks [@Vectorial1024])
+* Fix various css issues in RTL mode ([#13206], thanks [@k-yle])
+* Fix persian numerals not being parsed properly ([#13205], thanks [@k-yle])
 * Add Hong Kong and Macao address formats ([#12704], thanks [@Vectorial1024])
+* Fix inconsistent RTL checkboxes ([#13181], thanks [@k-yle])
+* Fix some unreadable tooltips in right-to-left layout ([#13178], thanks [@k-yle])
+* When searching for a language in the multilingual name field, also consider the respective _base_ language's native name (e.g. `српски` for `sr` in `Cyrl` script) ([#8015])
+* Fix translated tag values leaking into tags when a field has limited options ([#13233])
 #### :hourglass: Performance
 #### :mortar_board: Walkthrough / Help
 #### :rocket: Presets
@@ -96,6 +104,8 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Drop support for `oneway=1` ([#13026], thanks [@k-yle])
 * Drop confusing dead code ([#13014], thanks [@matkoniecz])
 
+[#7983]: https://github.com/openstreetmap/iD/issues/7983
+[#8015]: https://github.com/openstreetmap/iD/issues/8015
 [#8402]: https://github.com/openstreetmap/iD/issues/8402
 [#8424]: https://github.com/openstreetmap/iD/issues/8424
 [#9732]: https://github.com/openstreetmap/iD/pull/9732
@@ -141,6 +151,12 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#13100]: https://github.com/openstreetmap/iD/pull/13100
 [#13102]: https://github.com/openstreetmap/iD/pull/13102
 [#13169]: https://github.com/openstreetmap/iD/pull/13169
+[#13178]: https://github.com/openstreetmap/iD/pull/13178
+[#13180]: https://github.com/openstreetmap/iD/pull/13180
+[#13181]: https://github.com/openstreetmap/iD/pull/13181
+[#13205]: https://github.com/openstreetmap/iD/pull/13205
+[#13206]: https://github.com/openstreetmap/iD/pull/13206
+[#13233]: https://github.com/openstreetmap/iD/issues/13233
 [@aditya1010-max]: https://github.com/aditya1010-max
 [@Geo-2695]: https://github.com/Geo-2695
 [@hemaksh2007jain-bit]: https://github.com/hemaksh2007jain-bit

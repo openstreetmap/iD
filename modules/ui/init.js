@@ -500,7 +500,7 @@ export function uiInit(context) {
             .then(() => {
                 if (!context.container().empty()) render(context.container());
             })
-            .catch(err => console.error(err));  // eslint-disable-line
+            .catch(err => console.error(err));
     };
 
 
