@@ -7,6 +7,7 @@ import type { Dispatch } from 'd3-dispatch';
 import type { VegbilderImage, VegbilderLineString } from '../services/vegbilder';
 import type { geoExtent } from '../geo';
 import type { coreContext } from '../core';
+import type { DrawImages } from './images';
 
 
 export function svgVegbilder(projection: Projection, context: coreContext, dispatch: Dispatch<object>) {
@@ -315,12 +316,13 @@ export function svgVegbilder(projection: Projection, context: coreContext, dispa
     }
   }
 
+
   /**
    * drawImages()
    * drawImages is the method that is returned (and that runs) every time 'svgStreetside()' is called.
    * 'svgStreetside()' is called from index.js
    */
-  function drawImages(this: any, selection: d3.Selection<SVGGElement>) {
+  const drawImages: DrawImages = function(selection: d3.Selection<SVGGElement>) {
     const enabled = svgVegbilder.enabled;
     const service = getService();
 
@@ -352,18 +354,14 @@ export function svgVegbilder(projection: Projection, context: coreContext, dispa
         update();
         service.loadImages(context);
       } else {
-        dispatch.call('photoDatesChanged', this, 'vegbilder', []);
+        dispatch.call('photoDatesChanged', drawImages, 'vegbilder', []);
         editOff();
       }
     } else {
-      dispatch.call('photoDatesChanged', this, 'vegbilder', []);
+      dispatch.call('photoDatesChanged', drawImages, 'vegbilder', []);
     }
-  }
+  };
 
-
-  /**
-   * drawImages.enabled().
-   */
   drawImages.enabled = function (_: boolean) {
     if (!arguments.length) return svgVegbilder.enabled;
     svgVegbilder.enabled = _;
@@ -375,12 +373,9 @@ export function svgVegbilder(projection: Projection, context: coreContext, dispa
       context.photos().on('change.vegbilder', null);
     }
     dispatch.call('change');
-    return this;
-  };
+    return drawImages;
+  } as GetSet<DrawImages, boolean>;
 
-  /**
-   * drawImages.supported().
-   */
   drawImages.supported = function () {
     return !!getService();
   };
@@ -394,8 +389,8 @@ export function svgVegbilder(projection: Projection, context: coreContext, dispa
         && getService()!.validHere(extent);
   };
 
-  init();
 
+  init();
   return drawImages;
 }
 svgVegbilder.enabled = false;
