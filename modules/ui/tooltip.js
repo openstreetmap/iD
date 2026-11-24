@@ -2,6 +2,7 @@ import { utilFunctor } from '../util/util';
 import { t } from '../core/localizer';
 import { uiPopover } from './popover';
 
+/** @returns {any} */
 export function uiTooltip(klass) {
 
     var tooltip = uiPopover((klass || '') + ' tooltip')
