@@ -74,24 +74,29 @@ path.line.stroke.tag-piste_type {
     color: #58a9ed;
     fill: #fff;
 }
-path.line.shadow.tag-route-ferry {
+path.line.shadow.tag-route-ferry,
+path.line.shadow.tag-railway-ferry {
     stroke-width: 16;
 }
-path.line.stroke.tag-route-ferry {
+path.line.stroke.tag-route-ferry,
+path.line.stroke.tag-railway-ferry {
     stroke: #58a9ed;
     stroke-width: 3;
     stroke-linecap: butt;
     stroke-dasharray: 12,8;
 }
-.low-zoom path.line.shadow.tag-route-ferry {
+.low-zoom path.line.shadow.tag-route-ferry,
+.low-zoom path.line.shadow.tag-railway-ferry {
     stroke-width: 12;
 }
 .low-zoom path.line.stroke.tag-route-ferry,
+.low-zoom path.line.stroke.tag-railway-ferry,
 .preset-icon-container path.line.stroke.tag-route-ferry {
     stroke-width: 2;
     stroke-dasharray: 6,4;
 }
-path.line.casing.tag-route-ferry {
+path.line.casing.tag-route-ferry,
+path.line.casing.tag-railway-ferry {
     stroke: none;
 }
 

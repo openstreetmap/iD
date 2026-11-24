@@ -597,7 +597,7 @@ function _upgradeTags(tags: Tags, loc: Vec2) {
     });
 
     // Replace mistagged `wikidata`/`wikipedia` with e.g. `brand:wikidata`/`brand:wikipedia`
-    if (foundQID) {
+    if (foundQID && foundQID === item.tags[item.mainTag]) {
       delete newTags.wikipedia;
       delete newTags.wikidata;
     }
@@ -708,7 +708,7 @@ export default {
     // Note: service.init is called immediately after the presetManager has started loading its data.
     // We expect to chain onto an unfulfilled promise here.
     setNsiSources();
-    presetManager.ensureLoaded()
+    return presetManager.ensureLoaded()
       .then(() => loadNsiPresets())
       .then(() => loadNsiData())
       .then(() => _nsiStatus = 'ok')

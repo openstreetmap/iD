@@ -4,11 +4,11 @@ function timeSince(date: Date): [value: number, unit: Intl.RelativeTimeFormatUni
     const seconds = Math.floor((+new Date() - +date) / 1000);
     const s = (n: number) => Math.floor(seconds / n);
 
-    if (s(60 * 60 * 24 * 365) > 1) return [s(60 * 60 * 24 * 365), 'years'];
-    if (s(60 * 60 * 24 * 30) > 1) return [s(60 * 60 * 24 * 30), 'months'];
-    if (s(60 * 60 * 24) > 1) return [s(60 * 60 * 24), 'days'];
-    if (s(60 * 60) > 1) return [s(60 * 60), 'hours'];
-    if (s(60) > 1) return [s(60), 'minutes'];
+    if (s(60 * 60 * 24 * 365) >= 1) return [s(60 * 60 * 24 * 365), 'years'];
+    if (s(60 * 60 * 24 * 30) >= 1) return [s(60 * 60 * 24 * 30), 'months'];
+    if (s(60 * 60 * 24) >= 1) return [s(60 * 60 * 24), 'days'];
+    if (s(60 * 60) >= 1) return [s(60 * 60), 'hours'];
+    if (s(60) >= 1) return [s(60), 'minutes'];
     return [s(1), 'seconds'];
 }
 
@@ -41,8 +41,8 @@ export function localeDateString(date: Date | string) {
     return d.toLocaleDateString(localizer.localeCode(), options);
 }
 
-export function localeTimestamp(date: Date) {
-    const options: Intl.DateTimeFormatOptions = {
+export function localeTimestamp(date: Date, options?: Intl.DateTimeFormatOptions) {
+    options = options || {
         day: '2-digit',
         month: '2-digit',
         year: 'numeric',

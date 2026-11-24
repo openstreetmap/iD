@@ -236,9 +236,7 @@ export default {
 
         // If null default value is reached, data wasn't as expected (or was empty)
         if (!cl) {
-          /* eslint-disable no-console */
-          console.log(`Osmose strings request (${itemType}) had unexpected data`);
-          /* eslint-enable no-console */
+          console.error(`Osmose strings request (${itemType}) had unexpected data`);
           return;
         }
 
@@ -275,7 +273,7 @@ export default {
 
   getStrings(itemType, locale=localizer.localeCode()) {
     // No need to fallback to English, Osmose API handles this for us
-    return (locale in _cache.strings) ? _cache.strings[locale][itemType] : {};
+    return _cache.strings[locale]?.[itemType] || {};
   },
 
   getColor(itemType) {

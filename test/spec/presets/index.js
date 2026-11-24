@@ -350,10 +350,19 @@ describe('iD.presetIndex', function () {
 
 
     describe('PresetIndex.recents', () => {
+        let rememberedLocationSetsAt;
+
+        beforeEach(() => {
+            rememberedLocationSetsAt = locationManager.locationSetsAt;
+            locationManager.locationSetsAt = () => new Map(Object.entries({ 'world': 1 }));
+        });
+    
+        afterEach(() => {
+            locationManager.locationSetsAt = rememberedLocationSetsAt;
+        });
+
         it('fills all recent slots even when some remembered presets are not available in the current region (#11405)', () => {
             const testIndex = presetIndex();
-
-            locationManager.locationSetsAt = () => new Map(Object.entries({ 'world': 1 }));
 
             const p1 = { id: 'p1', matchGeometry: () => true, locationSetID: 'world' };
             const p2 = { id: 'p2', matchGeometry: () => true, locationSetID: 'us_only' }; // Invalid

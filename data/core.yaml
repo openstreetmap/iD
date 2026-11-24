@@ -813,6 +813,7 @@ en:
       inch: in
     max_length_reached: "This string is longer than the maximum length of {maxChars} characters. Anything exceeding that length will be truncated."
     set_today: "Sets the value to today."
+    colour_picker: "Color picker"
     set_photo_from_viewer:
       enable: "Tag this photo ID on the currently selected map feature"
       disable:
@@ -836,6 +837,7 @@ en:
     contrast: Contrast
     saturation: Saturation
     sharpness: Sharpness
+    invert: Invert
     minimap:
       description: Show Minimap
       tooltip: Show a zoomed out map to help locate the area currently displayed.
@@ -1079,7 +1081,6 @@ en:
         details: "Any donation will go directly towards keeping OpenStreetMap running."
     like_osm: "Like OpenStreetMap? Connect with others:"
     more: More
-    events: Events
     languages: "Languages: {languages}"
     missing: "Is something missing from this list?"
     tell_us: "Tell us!"
@@ -1794,9 +1795,10 @@ en:
         title: Continue drawing from end
       convert_to_line:
         title: Convert this to a line
+        annotation: Converted an area to a line.
       convert_to_area:
         title: Convert this to an area
-        annotation: Converted an area to a line.
+        annotation: Converted a line to an area.
       delete_feature:
         title: Delete this feature
       extract_point:

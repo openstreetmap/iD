@@ -889,6 +889,7 @@ export function rendererMap(context) {
         return footer.node().offsetHeight;
     }
 
+    /** @type {GetSet<typeof map, number>} */
     map.zoom = function(z2) {
         if (!arguments.length) {
             return Math.max(geoScaleToZoom(projection.scale(), TILESIZE), 0);

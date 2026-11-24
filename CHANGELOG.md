@@ -38,6 +38,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 # Unreleased (2.43.0-dev)
 
 #### :sparkles: Usability & Accessibility
+* Include upcoming events from [OpenStreetMap Calendar](osmcal.org) in post-upload dialog ([#12678])
 * Increase the colour contrast of the blue text used for links and preset fields ([#12724], thanks [@k-yle])
 * Render diameter and radius tags when a node is selected ([#9732], thanks [@k-yle])
 * Dedicated rendering for road sections tagged with `ford=yes` ([#12830], thanks [@Geo-2695])
@@ -48,50 +49,78 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Make `waterway=dam` lines more visible on the map, and render them above water areas ([#12540], thanks [@matkoniecz])
 * Render in purple playground objects mapped lines/areas ([#13042], thanks [@matkoniecz])
 * Don't discard incomplete lines in the (text mode) raw tag editor when switching browser tabs ([#12958], thanks [@aakarshitv])
+* Disable the locator overlay when osm carto is selected as the background ([#9931], thanks [@k-yle])
+* Add invert filter for background imagery ([#12340], thanks [@kalucky0])
 #### :scissors: Operations
 * Treat `conveying=*` the same as `oneway=*` when reversing a line ([#13027], thanks [@k-yle])
 * Add shortcut tooltip to reverse direction button ([#12961], thanks [@SaifuddinM23])
+* Prevent _merge_ operation creating a self-referencing relation under certain conditions ([#7983])
 #### :camera: Street-Level
 #### :white_check_mark: Validation
 * Warn about `goo.gl` shortlinks as sources, alongside full Google URLs ([#12740])
 * Allow (address) points at the same coordinate if they have different `addr:floor` ([#8424])
+* Only suggest deleting `wikidata`/`wikipedia` tags if they have the same value as the suggested `*:wikidata` tags from NSI ([#12758], thanks [@k-yle])
 * Implement functionality to show tooltips for individual validation fixes.
 * Improve wording for "connect the features (manually)" fix for routing-islands validator, and show tooltip with further instructions ([#8402])
 * Show all `mutually_exclusive_tags` validation warnings when there are multiple present on a single object ([#13016], thanks [@matkoniecz])
 #### :bug: Bugfixes
+* Fix crash when using the osmose integration ([#13043], [#13074], thanks [@k-yle])
 * Fix exceptions when resizing the browser tab when nothing is selected ([#12800], thanks [@k-yle])
 * Allow tags like `not:*:wikidata` to have multiple values ([#12736], thanks [@k-yle])
 * Fix the icon of the GPS Overlay layer not working ([#12760], thanks [@hlfan])
 * Fix some tags (such as `railway:preferred_direction`) from being falsely detected as non-reversible ([#13018], thanks [@matkoniecz])
+* Prevent certain keyboard shortcuts causing work on the currently drawn feature to be lost ([#10118], thanks [@k-yle])
+* Fix wrong preset icon for platform_edge ([#13098], thanks [@k-yle])
 * Fix exception when dragging some undraggable parts of the UI ([#13030], thanks [@k-yle])
+* Fix some preset icons unreadable in dark mode ([#13100], thanks [@k-yle])
 * Fix minor labelling bug - try 85 and 95 offsets rather than trying 95 twice ([#13009], thanks [@matkoniecz])
 * Better redaction of API keys in changeset tag ([#13034], thanks [@matkoniecz])
 * Fix mistake in right-to-left text detection ([#13032], thanks [@matkoniecz])
+* Fix hundreds of API requests sent when you resize the sidebar ([#13102], thanks [@k-yle])
 * Fix some checkbox fields from not setting the "checked" state on the first click when editing a multiselection with multiple values
+* Fix double-click zoom not working after cancelling drawing a line or area ([#11926], thanks [@aditya1010-max])
+* Fix the undo/redo annotation shown after converting an area to a line, or a line to an area, through a validation fix ([#12978], thanks [@wantaekchoi])
+* Fix bug where `ref=*` labels did not appear for relation members ([#13097], thanks [@k-yle])
 #### :earth_asia: Localization
 * Support 835 new languages in the dropdown when adding a `name:*` tag ([#12802])
+* Fix the streetside photo resizer backwards in RTL layouts ([#13180], thanks [@k-yle])
 * Support territory-level address hints ([#12704], thanks [@Vectorial1024])
+* Fix various css issues in RTL mode ([#13206], thanks [@k-yle])
+* Fix persian numerals not being parsed properly ([#13205], thanks [@k-yle])
 * Add Hong Kong and Macao address formats ([#12704], thanks [@Vectorial1024])
+* Fix inconsistent RTL checkboxes ([#13181], thanks [@k-yle])
+* Fix some unreadable tooltips in right-to-left layout ([#13178], thanks [@k-yle])
+* When searching for a language in the multilingual name field, also consider the respective _base_ language's native name (e.g. `српски` for `sr` in `Cyrl` script) ([#8015])
+* Fix translated tag values leaking into tags when a field has limited options ([#13233])
 #### :hourglass: Performance
 #### :mortar_board: Walkthrough / Help
 #### :rocket: Presets
 * Show reasonable default on `access` field for `barrier=stile` nodes ([#12971], thanks [@matkoniecz])
 * Allow the field UI for `oneway=*` to be reused by other tags like `conveying=*` ([#13029], thanks [@k-yle])
+* Render unknown aerialway features as lines by default ([#13081], thanks [@Geo-2695])
 #### :hammer: Development
 * Ongoing work to migrate the codebase from JavaScript to TypeScript ([view progress](https://github.com/openstreetmap/iD/milestone/47?closed=1))
 * Drop code previously responsible for _maprules_ integration (which has been defunct for a while now) ([#12679])
 * Drop support for `oneway=1` ([#13026], thanks [@k-yle])
 * Drop confusing dead code ([#13014], thanks [@matkoniecz])
 
+[#7983]: https://github.com/openstreetmap/iD/issues/7983
+[#8015]: https://github.com/openstreetmap/iD/issues/8015
 [#8402]: https://github.com/openstreetmap/iD/issues/8402
 [#8424]: https://github.com/openstreetmap/iD/issues/8424
 [#9732]: https://github.com/openstreetmap/iD/pull/9732
+[#9931]: https://github.com/openstreetmap/iD/pull/9931
+[#10118]: https://github.com/openstreetmap/iD/pull/10118
+[#11926]: https://github.com/openstreetmap/iD/pull/11926
+[#12340]: https://github.com/openstreetmap/iD/pull/12340
 [#12540]: https://github.com/openstreetmap/iD/issues/12540
+[#12678]: https://github.com/openstreetmap/iD/pull/12678
 [#12679]: https://github.com/openstreetmap/iD/pull/12679
 [#12704]: https://github.com/openstreetmap/iD/pull/12704
 [#12724]: https://github.com/openstreetmap/iD/pull/12724
 [#12736]: https://github.com/openstreetmap/iD/pull/12736
 [#12740]: https://github.com/openstreetmap/iD/issues/12740
+[#12758]: https://github.com/openstreetmap/iD/pull/12758
 [#12760]: https://github.com/openstreetmap/iD/pull/12760
 [#12800]: https://github.com/openstreetmap/iD/pull/12800
 [#12802]: https://github.com/openstreetmap/iD/pull/12802
@@ -102,6 +131,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#12910]: https://github.com/openstreetmap/iD/pull/12910
 [#12928]: https://github.com/openstreetmap/iD/pull/12928
 [#12971]: https://github.com/openstreetmap/iD/pull/12971
+[#12978]: https://github.com/openstreetmap/iD/pull/12978
 [#13018]: https://github.com/openstreetmap/iD/pull/13018
 [#12958]: https://github.com/openstreetmap/iD/pull/12958
 [#13009]: https://github.com/openstreetmap/iD/pull/13009
@@ -114,8 +144,23 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#13030]: https://github.com/openstreetmap/iD/pull/13030
 [#13034]: https://github.com/openstreetmap/iD/pull/13034
 [#13042]: https://github.com/openstreetmap/iD/pull/13042
+[#13043]: https://github.com/openstreetmap/iD/pull/13043
+[#13074]: https://github.com/openstreetmap/iD/pull/13074
+[#13081]: https://github.com/openstreetmap/iD/pull/13081
+[#13097]: https://github.com/openstreetmap/iD/pull/13097
+[#13098]: https://github.com/openstreetmap/iD/pull/13098
+[#13100]: https://github.com/openstreetmap/iD/pull/13100
+[#13102]: https://github.com/openstreetmap/iD/pull/13102
+[#13178]: https://github.com/openstreetmap/iD/pull/13178
+[#13180]: https://github.com/openstreetmap/iD/pull/13180
+[#13181]: https://github.com/openstreetmap/iD/pull/13181
+[#13205]: https://github.com/openstreetmap/iD/pull/13205
+[#13206]: https://github.com/openstreetmap/iD/pull/13206
+[#13233]: https://github.com/openstreetmap/iD/issues/13233
+[@aditya1010-max]: https://github.com/aditya1010-max
 [@Geo-2695]: https://github.com/Geo-2695
 [@hemaksh2007jain-bit]: https://github.com/hemaksh2007jain-bit
+[@kalucky0]: https://github.com/kalucky0
 [@SaifuddinM23]: https://github.com/SaifuddinM23
 
 

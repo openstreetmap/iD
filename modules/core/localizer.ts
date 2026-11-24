@@ -211,7 +211,7 @@ export class coreLocalizer {
                 return this;
             })
             .catch(err => {
-                console.error(err);  // eslint-disable-line
+                console.error(err);
                 throw err;
             });
     };
@@ -386,7 +386,7 @@ export class coreLocalizer {
                             // could be found for the given rule. Just pick the first
                             // string and hope it makes sense.
                             localeString = Object.values(localeString)[0];
-                            console.warn(`plural form not found for "${rule}" of "${stringId}"`);  // eslint-disable-line
+                            console.warn(`plural form not found for "${rule}" of "${stringId}"`);
                         }
                     }
                 }
@@ -457,7 +457,7 @@ export class coreLocalizer {
         }
 
         const missing = `Missing translation: ${origStringId}`;
-        console.error(`${missing} (last tried locale: ${locale})`);  // eslint-disable-line
+        console.error(`${missing} (last tried locale: ${locale})`);
 
         return {
             texts: [missing],
@@ -475,7 +475,7 @@ export class coreLocalizer {
     t(stringId: string, replacements?: ReplacementsSimple, locale?: string): string {
         const info = this.tInfo(stringId, replacements, locale);
         if (Array.isArray(info)) {
-            console.error(`${stringId} is unexpectedly an array of texts`);  // eslint-disable-line
+            console.error(`${stringId} is unexpectedly an array of texts`);
             return '';
         }
         return info.texts.join('');
@@ -490,7 +490,7 @@ export class coreLocalizer {
         const infos = this.tInfo(stringId, { ...replacements, default: 'nothing found' }, locale);
         if (!Array.isArray(infos)) {
             if (replacements && 'default' in replacements) return replacements.default!;
-            console.error(`Missing translation: ${stringId} (expected: array of texts)`);  // eslint-disable-line
+            console.error(`Missing translation: ${stringId} (expected: array of texts)`);
             return [];
         }
         return infos.map(tInfo => tInfo.texts.join(''));
@@ -516,7 +516,7 @@ export class coreLocalizer {
 
         const info = this.tInfo(stringId, replacements as ReplacementsSimple, locale);
         if (Array.isArray(info)) {
-            console.error(`${stringId} is unexpectedly an array of texts`);  // eslint-disable-line
+            console.error(`${stringId} is unexpectedly an array of texts`);
             return '';
         }
         // text may be empty or undefined if `replacements.default` is
@@ -533,7 +533,7 @@ export class coreLocalizer {
         const ret: LocalizedTextRenderer = <T extends HTMLElement>(selection: d3.Selection<T>) => {
             const info = this.tInfo(stringId, replacements, locale);
             if (Array.isArray(info)) {
-                console.error(`${stringId} is unexpectedly an array of texts`);  // eslint-disable-line
+                console.error(`${stringId} is unexpectedly an array of texts`);
                 return;
             }
             const texts = [
@@ -562,7 +562,7 @@ export class coreLocalizer {
         const ret: LocalizedTextRenderer = <T extends HTMLElement>(selection: d3.Selection<T>) => {
             const info = this.tInfo(stringId, replacements, locale);
             if (Array.isArray(info)) {
-                console.error(`${stringId} is unexpectedly an array of texts`);  // eslint-disable-line
+                console.error(`${stringId} is unexpectedly an array of texts`);
                 return;
             }
             const texts = [
@@ -654,6 +654,8 @@ export class coreLocalizer {
         const index = new Map(numerals.map((d, i) => [d, String(i)]));
         const literalPart = parts.find(d => d.type === 'literal');
         const literal = literalPart && new RegExp(`[${literalPart.value}]`, 'g');
+        const minusSignPart = parts.find(d => d.type === 'minusSign');
+        const minusSign = minusSignPart && new RegExp(`[${minusSignPart.value}]`, 'g');
         const groupPart = parts.find(d => d.type === 'group');
         const group = groupPart && new RegExp(`[${groupPart.value}]`, 'g');
         const decimalPart = parts.find(d => d.type === 'decimal');
@@ -663,6 +665,7 @@ export class coreLocalizer {
         return (string: string) => {
             string = string.trim();
             if (literal) string = string.replace(literal, '');
+            if (minusSign) string = string.replace(minusSign, '-');
             if (group) string = string.replace(group, '');
             if (decimal) string = string.replace(decimal, '.');
             string = string.replace(numeral, getIndex);

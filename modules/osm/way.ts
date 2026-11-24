@@ -89,7 +89,7 @@ export class osmWay extends OsmAbstractEntity {
 
     layer() {
         // explicit layer tag, clamp between -10, 10..
-        if (isFinite(+this.tags.layer)) {
+        if (this.tags.layer !== '' && isFinite(+this.tags.layer)) {
             return Math.max(-10, Math.min(+this.tags.layer, 10));
         }
 

@@ -50,7 +50,7 @@ export function uiOsmoseDetails(context) {
       div
         .append('p')
           .attr('class', 'qa-details-description-text')
-          .html(d => utilDisplayName(issueString(d, 'detail')))
+          .html(d => utilSanitizeHTML(issueString(d, 'detail')))
         .selectAll('a')
           .attr('rel', 'noopener')
           .attr('target', '_blank');
@@ -122,7 +122,7 @@ export function uiOsmoseDetails(context) {
 
           detailsDiv
             .append('p')
-              .html(utilSanitizeHTML(d => d.detail))
+              .html(utilSanitizeHTML(d.detail))
             .selectAll('a')
               .attr('rel', 'noopener')
               .attr('target', '_blank');
@@ -199,7 +199,7 @@ export function uiOsmoseDetails(context) {
         context.map().pan([0,0]);  // trigger a redraw
       })
       .catch(err => {
-        console.log(err); // eslint-disable-line no-console
+        console.error(err);
       });
   }
 
