@@ -1,6 +1,6 @@
 import type { coreGraph } from '../core';
 import type { Action } from '../core/history';
-import { type NodeId, type RelationId, type WayId } from '../osm';
+import { type NodeId, type osmWay, type RelationId, type WayId } from '../osm';
 import { osmNode } from '../osm/node';
 
 export interface ActionDisconnect extends Action {
@@ -40,7 +40,7 @@ export function actionDisconnect(nodeId: NodeId, newNodeId?: NodeId): ActionDisc
             var newNode = new osmNode({id: newNodeId, loc: node.loc, tags: node.tags});
 
             graph = graph.replace(newNode);
-            if (connection.index === 0 && way.isArea()) {
+            if (connection.index === 0 && isAreaRing(graph, way)) {
                 // replace shared node with shared node..
                 graph = graph.replace(way.replaceNode(way.nodes[0], newNode.id));
             } else if (way.isClosed() && connection.index === way.nodes.length - 1) {
@@ -56,6 +56,13 @@ export function actionDisconnect(nodeId: NodeId, newNodeId?: NodeId): ActionDisc
     };
 
 
+    // A closed way is the ring of an area if it is tagged as an area, or if it is
+    // a member of a multipolygon. Disconnecting must not open such a ring.
+    function isAreaRing(graph: coreGraph, way: osmWay) {
+        return way.isArea() || (way.isClosed() && graph.parentMultipolygons(way).length > 0);
+    }
+
+
     function getConnections(graph: coreGraph) {
         var candidates = [];
         var keeping = false;
@@ -67,7 +74,7 @@ export function actionDisconnect(nodeId: NodeId, newNodeId?: NodeId): ActionDisc
                 keeping = true;
                 continue;
             }
-            if (way.isArea() && (way.nodes[0] === nodeId)) {
+            if (isAreaRing(graph, way) && (way.nodes[0] === nodeId)) {
                 candidates.push({ wayID: way.id, index: 0 });
             } else {
                 for (var j = 0; j < way.nodes.length; j++) {
