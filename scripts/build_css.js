@@ -1,5 +1,4 @@
 /* eslint-disable no-console */
-import concat from 'concat-files';
 import fs from 'node:fs';
 import { styleText } from 'node:util';
 import postcss from 'postcss';
@@ -52,13 +51,11 @@ export function buildCSS() {
 }
 
 
-function doConcat(files, output) {
-  return new Promise((resolve, reject) => {
-    concat(files, output, (err) => {
-      if (err) return reject(err);
-      resolve();
-    });
-  });
+async function doConcat(files, output) {
+  const buffers = await Promise.all(
+    files.map((file) => fs.promises.readFile(file))
+  );
+  await fs.promises.writeFile(output, Buffer.concat(buffers));
 }
 
 
