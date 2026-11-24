@@ -74,6 +74,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Fix exception when dragging some undraggable parts of the UI ([#13030], thanks [@k-yle])
 * Fix some preset icons unreadable in dark mode ([#13100], thanks [@k-yle])
 * Fix minor labelling bug - try 85 and 95 offsets rather than trying 95 twice ([#13009], thanks [@matkoniecz])
+* Better redaction of API keys in changeset tag ([#13034], thanks [@matkoniecz])
 * Fix mistake in right-to-left text detection ([#13032], thanks [@matkoniecz])
 * Fix hundreds of API requests sent when you resize the sidebar ([#13102], thanks [@k-yle])
 * Fix some checkbox fields from not setting the "checked" state on the first click when editing a multiselection with multiple values
@@ -130,6 +131,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#12910]: https://github.com/openstreetmap/iD/pull/12910
 [#12928]: https://github.com/openstreetmap/iD/pull/12928
 [#12971]: https://github.com/openstreetmap/iD/pull/12971
+[#12978]: https://github.com/openstreetmap/iD/pull/12978
 [#13018]: https://github.com/openstreetmap/iD/pull/13018
 [#12958]: https://github.com/openstreetmap/iD/pull/12958
 [#13009]: https://github.com/openstreetmap/iD/pull/13009
@@ -140,7 +142,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#13027]: https://github.com/openstreetmap/iD/pull/13027
 [#13029]: https://github.com/openstreetmap/iD/pull/13029
 [#13030]: https://github.com/openstreetmap/iD/pull/13030
-[#12978]: https://github.com/openstreetmap/iD/pull/12978
+[#13034]: https://github.com/openstreetmap/iD/pull/13034
 [#13042]: https://github.com/openstreetmap/iD/pull/13042
 [#13043]: https://github.com/openstreetmap/iD/pull/13043
 [#13074]: https://github.com/openstreetmap/iD/pull/13074
