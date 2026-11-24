@@ -1,4 +1,4 @@
-import type { GeoProjection } from 'd3';
+import type { GeoProjection } from 'd3-geo';
 import { geoMetersToLat } from '../geo';
 import type { osmNode } from '../osm';
 
