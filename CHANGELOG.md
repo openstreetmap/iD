@@ -71,6 +71,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Prevent certain keyboard shortcuts causing work on the currently drawn feature to be lost ([#10118], thanks [@k-yle])
 * Fix wrong preset icon for platform_edge ([#13098], thanks [@k-yle])
 * Fix exception when dragging some undraggable parts of the UI ([#13030], thanks [@k-yle])
+* Fix Node selection at stacked vertices ([#12000], thanks [@tordans])
 * Fix some preset icons unreadable in dark mode ([#13100], thanks [@k-yle])
 * Fix minor labelling bug - try 85 and 95 offsets rather than trying 95 twice ([#13009], thanks [@matkoniecz])
 * Fix mistake in right-to-left text detection ([#13032], thanks [@matkoniecz])
@@ -104,6 +105,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#9931]: https://github.com/openstreetmap/iD/pull/9931
 [#10118]: https://github.com/openstreetmap/iD/pull/10118
 [#11926]: https://github.com/openstreetmap/iD/pull/11926
+[#12000]: https://github.com/openstreetmap/iD/pull/12000
 [#12340]: https://github.com/openstreetmap/iD/pull/12340
 [#12540]: https://github.com/openstreetmap/iD/issues/12540
 [#12678]: https://github.com/openstreetmap/iD/pull/12678
