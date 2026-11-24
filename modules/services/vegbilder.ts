@@ -1,4 +1,4 @@
-import { json as d3_json, xml as d3_xml} from 'd3-fetch';
+import { json as d3_json } from 'd3-fetch';
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { pairs as d3_pairs } from 'd3-array';
 import RBush from 'rbush';
@@ -79,6 +79,9 @@ interface WfsLayer {
     layerInfo: LayerInfo;
 }
 
+interface DescribeFeatureType {
+    featureTypes: { typeName: string }[];
+}
 
 interface Cache {
     rtree: RBush<WithBbox<VegbilderImage>>;
@@ -105,16 +108,17 @@ let _vegbilderCache: Cache;
 async function fetchAvailableLayers(): Promise<LayerInfo[]> {
   const params = {
     service: 'WFS',
-    request: 'GetCapabilities',
+    request: 'DescribeFeatureType',
     version: '2.0.0',
+    outputFormat: 'application/json',
   };
 
   const urlForRequest = owsEndpoint + utilQsString(params);
-  const response = await d3_xml(urlForRequest);
-  const regexMatcher = /^vegbilder_1_0:Vegbilder(?<image_type>_360)?_(?<year>\d{4})$/;
+  const response = await d3_json<DescribeFeatureType>(urlForRequest);
+  const regexMatcher = /^Vegbilder(?<image_type>_360)?_(?<year>\d{4})$/;
   const availableLayers = [];
-  for (const node of response.querySelectorAll('FeatureType > Name')) {
-    const match = node.textContent?.match(regexMatcher);
+  for (const node of response?.featureTypes || []) {
+    const match = node.typeName.match(regexMatcher);
     if (match) {
       availableLayers.push({
         name: match[0],
