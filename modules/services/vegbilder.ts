@@ -557,6 +557,11 @@ export default new class Vegbilder implements IStreetSide {
         .classed('hide', false)
         .selectAll('.photo-wrapper.vegbilder-wrapper')
         .classed('hide', false);
+
+      // The photo frame was initialized while the viewer was hidden, so it
+      // measured a zero size. Now that the viewer is visible, trigger a resize
+      // so the image is rendered at the correct dimensions (#13221).
+      context.ui().photoviewer.onMapResize();
     }
     return this;
   }
