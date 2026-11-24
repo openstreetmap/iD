@@ -12,7 +12,6 @@ export function svgMapilioImages(projection, context, dispatch) {
     const viewFieldZoomLevel = 18;
     let layer = d3_select(null);
     let _mapilio;
-    let _viewerYaw = 0;
 
     function init() {
         if (svgMapilioImages.initialized) return;
@@ -24,6 +23,7 @@ export function svgMapilioImages(projection, context, dispatch) {
         if (services.mapilio && !_mapilio) {
             _mapilio = services.mapilio;
             _mapilio.event
+                .on('viewerChanged', viewerChanged)
                 .on('loadedImages', throttledRedraw)
                 .on('loadedLines', throttledRedraw);
         } else if (!services.mapilio && _mapilio) {
@@ -107,10 +107,11 @@ export function svgMapilioImages(projection, context, dispatch) {
 
     function transform(d, selectedImageId) {
         let t = svgPointTransform(projection)(d);
-        let rot = d.heading || 0;
+        let rot = Number.isFinite(d.heading) ? d.heading : 0;
 
-        if (d.id === selectedImageId) {
-            rot += _viewerYaw;
+        const state = getService().getViewerState();
+        if (d.isPano && d.id === selectedImageId && Number.isFinite(d.heading) && state?.imageId === d.id) {
+            rot = ((d.heading + state.yaw) % 360 + 360) % 360;
         }
         if (rot) {
             t += ' rotate(' + Math.floor(rot) + ',0,0)';
@@ -169,7 +170,7 @@ export function svgMapilioImages(projection, context, dispatch) {
         images = await filterImages(images);
         sequences = await filterSequences(sequences);
 
-        const activeImage = service.getActiveImage?.();
+        const activeImage = service.getActiveImage();
         const activeImageId = activeImage ? activeImage.id : null;
 
         let traces = layer
@@ -235,18 +236,38 @@ export function svgMapilioImages(projection, context, dispatch) {
             .insert('path', 'circle')
             .attr('class', 'viewfield')
             .attr('transform', 'scale(1.5,1.5),translate(-8, -13)')
+            .merge(viewfields)
             .attr('d', viewfieldPath);
 
         service.setStyles(context, null);
+    }
 
-        function viewfieldPath() {
-            if (this.parentNode.__data__.isPano) {
-                return 'M 8,13 m -10,0 a 10,10 0 1,0 20,0 a 10,10 0 1,0 -20,0';
-            } else {
-                return 'M 6,9 C 8,8.4 8,8.4 10,9 L 16,-2 C 12,-5 4,-5 0,-2 z';
-            }
+    function viewfieldPath() {
+        const d = this.parentNode.__data__;
+        if (!d.isPano) return 'M 6,9 C 8,8.4 8,8.4 10,9 L 16,-2 C 12,-5 4,-5 0,-2 z';
+
+        const service = getService();
+        const state = service.getViewerState();
+        if (d.id !== service.getActiveImage()?.id || !Number.isFinite(d.heading)) {
+            return 'M 8,13 m -10,0 a 10,10 0 1,0 20,0 a 10,10 0 1,0 -20,0';
         }
 
+        const hfov = state?.imageId === d.id ? state.hfov : 60;
+        const halfAngle = hfov * Math.PI / 360;
+        const x = 16 * Math.sin(halfAngle);
+        const y = 13 - 16 * Math.cos(halfAngle);
+        return `M 8,13 L ${8 - x},${y} A 16,16 0 0,1 ${8 + x},${y} Z`;
+    }
+
+    function viewerChanged() {
+        const service = getService();
+        if (!service || context.map().isTransformed()) return;
+
+        const selectedImageId = service.getActiveImage()?.id;
+        layer.selectAll('.viewfield-group')
+            .attr('transform', d => transform(d, selectedImageId));
+        layer.selectAll('.viewfield').attr('d', viewfieldPath);
+        service.setStyles(context, null);
     }
 
     function drawImages(selection) {
