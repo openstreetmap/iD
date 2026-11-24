@@ -13,6 +13,7 @@ import { utilArrayDifference, utilArrayIdentical } from '../../util/array';
 import { utilGetSetValue, utilNoAuto, utilRebind, utilTagDiff } from '../../util';
 import { allowUpperCaseTagValues } from '../../osm/tags';
 import { fileFetcher } from '../../core';
+import { utilDecodeLineBreaks, utilEncodeLineBreaks } from '../../util/util';
 
 
 export function uiSectionRawTagEditor(id, context) {
@@ -295,7 +296,7 @@ export function uiSectionRawTagEditor(id, context) {
                     // if there are pending changes: skip untouched tags
                     return null;
                 }
-                return Array.isArray(d.value) ? '' : d.value;
+                return utilEncodeLineBreaks(Array.isArray(d.value) ? '' : d.value);
             });
 
         items.selectAll('button.remove')
@@ -428,7 +429,7 @@ export function uiSectionRawTagEditor(id, context) {
                             };
                         }
                         return {
-                            value: tagValue,
+                            value: utilEncodeLineBreaks(tagValue),
                             title: tagValue
                         };
                     });
@@ -548,9 +549,9 @@ export function uiSectionRawTagEditor(id, context) {
             // a new tag was added
             let row = this.parentNode.parentNode;
             let inputVal = d3_select(row).selectAll('input.value');
-            let vNew = context.cleanTagValue(utilGetSetValue(inputVal));
+            let vNew = context.cleanTagValue(utilDecodeLineBreaks(utilGetSetValue(inputVal)));
             _pendingChange[kNew] = vNew;
-            utilGetSetValue(inputVal, vNew);
+            utilGetSetValue(inputVal, utilEncodeLineBreaks(vNew));
         }
 
         // update the ordered key index so this row doesn't change position
@@ -574,9 +575,9 @@ export function uiSectionRawTagEditor(id, context) {
 
         _pendingChange = _pendingChange || {};
 
-        const vNew = context.cleanTagValue(this.value);
-        if (vNew !== this.value) {
-            utilGetSetValue(d3_select(this), vNew);
+        const vNew = context.cleanTagValue(utilDecodeLineBreaks(this.value));
+        if (utilEncodeLineBreaks(vNew) !== this.value) {
+            utilGetSetValue(d3_select(this), utilEncodeLineBreaks(vNew));
         }
 
         _pendingChange[d.key] = vNew;
