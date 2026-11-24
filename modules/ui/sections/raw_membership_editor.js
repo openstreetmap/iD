@@ -314,12 +314,32 @@ export function uiSectionRawMembershipEditor(context) {
 
         var graph = context.graph();
 
-        function baseDisplayLabel(entity) {
+        //select entities
+        const selectedEntities = _entityIDs
+            .map(function(id) {
+                return graph.hasEntity(id);
+            })
+            .filter(function(entity) {
+                return entity;
+            });
+
+        // Map relationID -> number of selected entities in that relation
+        const relationCounts = new Map();
+
+        selectedEntities.forEach(function(ent) {
+            graph.parentRelations(ent).forEach(function (rel) {
+                relationCounts.set(rel.id, (relationCounts.get(rel.id) || 0) + 1);
+            });
+        });
+
+        function baseDisplayLabel(entity, flags) {
+            flags = flags || {};
+
             var matched = presetManager.match(entity, graph);
             var presetName = (matched && matched.name()) || t('inspector.relation');
             var entityName = utilDisplayName(entity) || '';
 
-            return selection => {
+            return function(selection) {
                 selection
                     .append('b')
                     .text(presetName + ' ');
@@ -328,6 +348,18 @@ export function uiSectionRawMembershipEditor(context) {
                     .classed('has-colour', entity.tags.colour && isColorValid(entity.tags.colour))
                     .style('border-color', entity.tags.colour)
                     .text(entityName);
+
+                if (flags.isCommon) {
+                    selection.append('span')
+                        .attr('class', 'relation-badge')
+                        .text('Already Applied');
+                } else if (flags.isPartial) {
+                    selection.append('span')
+                        .attr('class', 'relation-badge')
+                        .text('Partially Applied');
+
+                }
+
             };
         }
 
@@ -341,6 +373,7 @@ export function uiSectionRawMembershipEditor(context) {
             result.push({
                 relation: explicitRelation,
                 value: baseDisplayValue(explicitRelation) + ' ' + explicitRelation.id,
+                title: baseDisplayValue(explicitRelation),
                 display: baseDisplayLabel(explicitRelation)
             });
         } else {
@@ -351,10 +384,17 @@ export function uiSectionRawMembershipEditor(context) {
                 var value = baseDisplayValue(entity);
                 if (q && (value + ' ' + entity.id).toLowerCase().indexOf(q.toLowerCase()) === -1) return;
 
+                const count = relationCounts.get(entity.id) || 0;
+                const isCommon = selectedEntities.length > 0 && count === selectedEntities.length;
+                const isPartial = selectedEntities.length > 0 && count > 0 && count < selectedEntities.length;
+
                 result.push({
                     relation: entity,
                     value,
-                    display: baseDisplayLabel(entity)
+                    display: baseDisplayLabel(entity, { isCommon, isPartial }),
+                    title: value,
+                    isCommon,
+                    isPartial
                 });
             });
 
