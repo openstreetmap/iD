@@ -12,6 +12,9 @@ import { uiCmdSequence } from './cmd_sequence';
             section: string;
             text: string;
             separator?: string;
+            gesture?: string;
+            modifiers?: string[];
+            shortcuts?: string[];
         }[];
     }[];
 }[]} ShortcutsJSON */
