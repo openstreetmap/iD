@@ -1,25 +1,23 @@
 import fs from 'node:fs';
 import { createRequire } from 'node:module';
 import prettyStringify from 'json-stringify-pretty-compact';
+import type { Feature, FeatureCollection, Geometry, Position } from 'geojson';
 
 const require = createRequire(import.meta.url);
 
-/** @type {import("geojson").FeatureCollection} */
-const sources = JSON.parse(
+const sources: FeatureCollection<Geometry | null, RawEliLayer> = JSON.parse(
   fs.readFileSync(require.resolve('@openstreetmap/editor-layer-index/imagery.geojson'), 'utf8')
 );
 
 if (fs.existsSync('./data/manual_imagery.json')) {
-  /** @type {any[]} */
-  const manualImagery = JSON.parse(fs.readFileSync('./data/manual_imagery.json', 'utf8'));
+  const manualImagery: any[] = JSON.parse(fs.readFileSync('./data/manual_imagery.json', 'utf8'));
   // we can include additional imagery sources that aren't in the index
   sources.features = sources.features
     .filter(source => !manualImagery.find(manualSource => manualSource.id === source.properties?.id));
 
   sources.features.push(
     ...manualImagery.map(source => {
-      /** @type {import("geojson").Feature} */
-      const feature = {
+      const feature: Feature<null, RawEliLayer> = {
         type: 'Feature',
         properties: { ...source, ...source.extent },
         geometry: null,
@@ -30,7 +28,7 @@ if (fs.existsSync('./data/manual_imagery.json')) {
   );
 }
 
-let imagery = [];
+let imagery: Layer[] = [];
 
 const discard = [
   /^osmbe$/,                              // 'OpenStreetMap (Belgian Style)'
@@ -79,6 +77,61 @@ const supportedWMSProjections = [
   'CRS:84'
 ];
 
+export interface RawEliLayer {
+  id: string;
+  name: string;
+  type: string;
+  url: string;
+  category: string;
+  available_projections: string[];
+  start_date?: string;
+  end_date?: string;
+  min_zoom?: number;
+  max_zoom?: number;
+  bbox?: {
+    min_lat: number;
+    max_lat: number;
+    min_lon: number;
+    max_lon: number;
+  };
+  attribution?: {
+    url?: string;
+    text?: string;
+  };
+  best?: boolean;
+  default?: boolean;
+  description?: string;
+  encrypted?: boolean;
+  icon?: string;
+  overlay?: boolean;
+  tileSize?: 512;
+}
+
+/** this is the result after iD's transformation */
+export interface Layer {
+  id: string;
+  name: string;
+  type: string;
+  template: string;
+  category: string;
+  tileSize?: 512;
+  projection?: string;
+  startDate?: string;
+  endDate?: string;
+  zoomExtent?: [min: number, max: number];
+  overzoom?: boolean;
+  terms_url?: string;
+  terms_text?: string;
+  terms_html?: string;
+  polygon?: Position[][];
+  best?: boolean;
+  default?: boolean;
+  description?: string;
+  encrypted?: boolean;
+  icon?: string;
+  overlay?: boolean;
+}
+
 sources.features.forEach(feature => {
   const source = feature.properties;
 
@@ -86,7 +139,7 @@ sources.features.forEach(feature => {
   if (source.type !== 'tms' && source.type !== 'wms' && source.type !== 'bing') return;
   if (discard.some(regex => regex.test(source.id))) return;
 
-  let im = {
+  let im: Layer = {
     id: source.id,
     name: source.name,
     type: source.type,
@@ -119,7 +172,7 @@ sources.features.forEach(feature => {
     endDate = new Date(source.end_date);
     isValid = !isNaN(endDate.getTime());
     if (isValid) {
-      im.endDate = endDate;
+      im.endDate = endDate.toISOString();
     }
   }
 
@@ -127,7 +180,7 @@ sources.features.forEach(feature => {
     startDate = new Date(source.start_date);
     isValid = !isNaN(startDate.getTime());
     if (isValid) {
-      im.startDate = startDate;
+      im.startDate = startDate.toISOString();
     }
   }
 
@@ -145,7 +198,7 @@ sources.features.forEach(feature => {
     } else if (feature.geometry.type === 'MultiPolygon') {
       im.polygon = feature.geometry.coordinates.map(ring => ring[0]);
     }
-  } else if (feature.bbox) {
+  } else if (extent.bbox) {
     im.polygon = [[
       [extent.bbox.min_lon, extent.bbox.min_lat],
       [extent.bbox.min_lon, extent.bbox.max_lat],
@@ -167,9 +220,9 @@ sources.features.forEach(feature => {
     im.terms_text = attribution.text;
   }
 
-  ['best', 'default', 'description', 'encrypted', 'icon', 'overlay', 'tileSize'].forEach(prop => {
+  (['best', 'default', 'description', 'encrypted', 'icon', 'overlay', 'tileSize'] as const).forEach(prop => {
     if (source[prop]) {
-      im[prop] = source[prop];
+      im[prop] = source[prop] as any;
     }
   });
 
