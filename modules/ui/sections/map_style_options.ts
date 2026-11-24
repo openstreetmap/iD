@@ -4,7 +4,7 @@ import { t } from '../../core/localizer';
 import { uiTooltip } from '../tooltip';
 import { uiSection } from '../section';
 
-export type MapStyle = 'wireframe' | 'area_fill' | 'highlight_edits';
+export type MapStyle = 'wireframe' | 'area_fill' | 'highlight_edits' | 'indoor_focus';
 
 export function uiSectionMapStyleOptions(context: iD.Context) {
 
@@ -30,9 +30,7 @@ export function uiSectionMapStyleOptions(context: iD.Context) {
             .append('ul')
             .attr('class', 'layer-list layer-visual-diff-list')
             .merge(container2)
-            .call(drawListItems, ['highlight_edits'], 'checkbox', 'visual_diff', toggleHighlightEdited, () =>
-                context.surface().classed('highlight-edited')
-            );
+            .call(drawListItems, ['highlight_edits', 'indoor_focus'], 'checkbox', 'visual_diff', toggleVisualOption, isActiveVisualOption);
     }
 
     function drawListItems(
@@ -93,9 +91,18 @@ export function uiSectionMapStyleOptions(context: iD.Context) {
         return context.map().activeAreaFill() === d;
     }
 
-    function toggleHighlightEdited(d3_event: Event) {
+    function isActiveVisualOption(d: string) {
+        if (d === 'indoor_focus') return Boolean(context.map().indoorFocus());
+        return context.surface().classed('highlight-edited');
+    }
+
+    function toggleVisualOption(d3_event: Event, d: string) {
         d3_event.preventDefault();
-        context.map().toggleHighlightEdited();
+        if (d === 'indoor_focus') {
+            context.map().toggleIndoorFocus();
+        } else {
+            context.map().toggleHighlightEdited();
+        }
     }
 
     function setFill(ignored: Event, d: string) {
@@ -103,7 +110,7 @@ export function uiSectionMapStyleOptions(context: iD.Context) {
     }
 
     context.map()
-        .on('changeHighlighting.ui_style, changeAreaFill.ui_style', section.reRender);
+        .on('changeHighlighting.ui_style, changeAreaFill.ui_style, changeIndoorFocus.ui_style', section.reRender);
 
     return section;
 }
