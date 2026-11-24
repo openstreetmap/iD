@@ -21,7 +21,7 @@ import type { coreContext } from './context';
 import type { LocalizedTextRenderer } from './localizer';
 
 export interface Action<T = never> {
-    (graph: coreGraph, t?: number | null, extraData?: T): coreGraph
+    (graph: coreGraph, t?: number | null, extraData?: T): coreGraph;
     id?: string;
     disabled?(graph: coreGraph): string | false | undefined;
     transitionable?: boolean;

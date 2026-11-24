@@ -6,6 +6,7 @@ import { services } from '../services';
 import type { Projection } from '../geo/raw_mercator';
 import type { KartaviewImage, KartaviewSequence } from '../services/kartaview';
 import type { coreContext } from '../core';
+import type { DrawImages } from './images';
 
 
 export function svgKartaviewImages(projection: Projection, context: coreContext, dispatch: Dispatch<object>) {
@@ -247,7 +248,7 @@ export function svgKartaviewImages(projection: Projection, context: coreContext,
     }
 
 
-    function drawImages(this: object, selection: d3.Selection<SVGGElement>) {
+    const drawImages: DrawImages = function(selection: d3.Selection<SVGGElement>) {
         var enabled = svgKartaviewImages.enabled,
             service = getService();
 
@@ -279,14 +280,13 @@ export function svgKartaviewImages(projection: Projection, context: coreContext,
                 update();
                 service.loadImages(projection);
             } else {
-                dispatch.call('photoDatesChanged', this, 'kartaview', []);
+                dispatch.call('photoDatesChanged', drawImages, 'kartaview', []);
                 editOff();
             }
         } else {
-            dispatch.call('photoDatesChanged', this, 'kartaview', []);
+            dispatch.call('photoDatesChanged', drawImages, 'kartaview', []);
         }
-    }
-
+    };
 
     drawImages.enabled = function(_: boolean) {
         if (!arguments.length) return svgKartaviewImages.enabled;
@@ -299,9 +299,8 @@ export function svgKartaviewImages(projection: Projection, context: coreContext,
             context.photos().on('change.kartaview_images', null);
         }
         dispatch.call('change');
-        return this;
-    };
-
+        return drawImages;
+    } as GetSet<DrawImages, boolean>;
 
     drawImages.supported = function() {
         return !!getService();

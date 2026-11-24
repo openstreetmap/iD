@@ -6,6 +6,7 @@ import { services } from '../services';
 import type { Projection } from '../geo/raw_mercator';
 import type { MlyImage, MlySequence } from '../services/mapillary';
 import type { coreContext } from '../core';
+import type { DrawImages } from './images';
 
 
 export function svgMapillaryImages(projection: Projection, context: coreContext, dispatch: Dispatch<object>) {
@@ -267,7 +268,7 @@ export function svgMapillaryImages(projection: Projection, context: coreContext,
     }
 
 
-    function drawImages(this: any, selection: d3.Selection<SVGGElement>) {
+    const drawImages: DrawImages = function(selection: d3.Selection<SVGGElement>) {
         const enabled = svgMapillaryImages.enabled;
         const service = getService();
 
@@ -299,14 +300,13 @@ export function svgMapillaryImages(projection: Projection, context: coreContext,
                 update();
                 service.loadImages(projection);
             } else {
-                dispatch.call('photoDatesChanged', this, 'mapillary', []);
+                dispatch.call('photoDatesChanged', drawImages, 'mapillary', []);
                 editOff();
             }
         } else {
-            dispatch.call('photoDatesChanged', this, 'mapillary', []);
+            dispatch.call('photoDatesChanged', drawImages, 'mapillary', []);
         }
-    }
-
+    };
 
     drawImages.enabled = function(_: boolean) {
         if (!arguments.length) return svgMapillaryImages.enabled;
@@ -319,9 +319,8 @@ export function svgMapillaryImages(projection: Projection, context: coreContext,
             context.photos().on('change.mapillary_images', null);
         }
         dispatch.call('change');
-        return this;
-    };
-
+        return drawImages;
+    } as GetSet<DrawImages, boolean>;
 
     drawImages.supported = function() {
         return !!getService();

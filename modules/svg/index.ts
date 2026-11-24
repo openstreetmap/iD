@@ -29,3 +29,9 @@ export { svgTurns } from './turns.js';
 export { svgVertices } from './vertices.js';
 export { svgMapilioImages } from './mapilio_images.js';
 export { svgPanoramaxImages } from './panoramax_images.js';
+
+
+export interface Drawable {
+    (selection: d3.Selection<SVGGElement>): void;
+    enabled: GetSet<this, boolean>;
+}

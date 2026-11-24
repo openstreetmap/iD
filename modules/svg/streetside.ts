@@ -6,6 +6,7 @@ import { services } from '../services';
 import type { Projection } from '../geo/raw_mercator';
 import type { coreContext } from '../core';
 import type { Bubble, BubbleSequence } from '../services/streetside';
+import type { DrawImages } from './images';
 
 
 export function svgStreetside(projection: Projection, context: coreContext, dispatch: Dispatch<object>) {
@@ -325,7 +326,7 @@ export function svgStreetside(projection: Projection, context: coreContext, disp
      * drawImages is the method that is returned (and that runs) every time 'svgStreetside()' is called.
      * 'svgStreetside()' is called from index.js
      */
-    function drawImages(this: any, selection: d3.Selection<SVGGElement>) {
+    const drawImages: DrawImages = function(selection: d3.Selection<SVGGElement>) {
         var enabled = svgStreetside.enabled;
         var service = getService();
 
@@ -357,18 +358,14 @@ export function svgStreetside(projection: Projection, context: coreContext, disp
                 update();
                 service.loadBubbles(projection);
             } else {
-                dispatch.call('photoDatesChanged', this, 'streetside', []);
+                dispatch.call('photoDatesChanged', drawImages, 'streetside', []);
                 editOff();
             }
         } else {
-            dispatch.call('photoDatesChanged', this, 'streetside', []);
+            dispatch.call('photoDatesChanged', drawImages, 'streetside', []);
         }
-    }
+    };
 
-
-    /**
-     * drawImages.enabled().
-     */
     drawImages.enabled = function(_: boolean) {
         if (!arguments.length) return svgStreetside.enabled;
         svgStreetside.enabled = _;
@@ -380,12 +377,9 @@ export function svgStreetside(projection: Projection, context: coreContext, disp
             context.photos().on('change.streetside', null);
         }
         dispatch.call('change');
-        return this;
-    };
+        return drawImages;
+    } as GetSet<DrawImages, boolean>;
 
-    /**
-     * drawImages.supported().
-     */
     drawImages.supported = function() {
         return !!getService();
     };
@@ -394,8 +388,8 @@ export function svgStreetside(projection: Projection, context: coreContext, disp
       return zoom >= minZoom;
     };
 
-    init();
 
+    init();
     return drawImages;
 }
 svgStreetside.enabled = false;
