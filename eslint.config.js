@@ -155,7 +155,7 @@ export default tseslint.config(
       'no-unused-expressions': 'error',
       'no-unused-vars': 'error',
       'vitest/expect-expect': ['error', {
-        assertFunctionNames: ['expect', 'doMatch', 'dontMatch', 'verifySingleCrossingIssue']
+        assertFunctionNames: ['expect', 'doMatch', 'dontMatch', 'verifySingleCrossingIssue', 'verifySingleOverlapIssue']
       }],
       'vitest/no-commented-out-tests': 'off',
       'vitest/no-disabled-tests': 'off',
