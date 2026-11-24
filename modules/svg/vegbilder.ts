@@ -125,7 +125,7 @@ export function svgVegbilder(projection: Projection, context: coreContext, dispa
   function transform(d: VegbilderImage, selected: VegbilderImage) {
     let t = svgPointTransform(projection)(d);
     let rot = d.ca!;
-    if (d === selected) {
+    if (selected && d.key === selected.key) {
       rot += _viewerYaw;
     }
     if (rot) {
@@ -151,6 +151,14 @@ export function svgVegbilder(projection: Projection, context: coreContext, dispa
 
     layer.selectAll<SVGGElement, VegbilderImage>('.viewfield-group.currentView')
       .attr('transform', (d) => transform(d, d));
+  }
+
+  function dedupeByKey(images: VegbilderImage[]) {
+    const seen = new Map<string, VegbilderImage>();
+    for (const img of images) {
+      if (!seen.has(img.key)) seen.set(img.key, img);
+    }
+    return [...seen.values()];
   }
 
   function filterImages(images: VegbilderImage[], skipDateFilter?: boolean) {
@@ -233,7 +241,7 @@ export function svgVegbilder(projection: Projection, context: coreContext, dispa
         ...filterImages(images, true).map(p => p.captured_at),
         ...filterSequences(sequences, true).map(s => s.images[0].captured_at)]);
 
-      images = filterImages(images);
+      images = dedupeByKey(filterImages(images));
       sequences = filterSequences(sequences);
     }
 
@@ -275,8 +283,8 @@ export function svgVegbilder(projection: Projection, context: coreContext, dispa
     const markers = groups
       .merge(groupsEnter)
       .sort((a, b) => {
-        return (a === selected) ? 1
-          : (b === selected) ? -1
+        return (selected && a.key === selected.key) ? 1
+          : (selected && b.key === selected.key) ? -1
             : b.loc[1] - a.loc[1];
       })
       .attr('transform', (d) => transform(d, selected))
