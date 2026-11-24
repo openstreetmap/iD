@@ -228,13 +228,6 @@ export function behaviorDrawWay(context, wayID, mode, startGraph) {
     }
 
 
-    function resetToStartGraph() {
-        while (context.graph() !== startGraph) {
-            context.pop();
-        }
-    }
-
-
     var drawWay = function(surface) {
         _drawNode = undefined;
         _didResolveTempEdit = false;
@@ -306,9 +299,8 @@ export function behaviorDrawWay(context, wayID, mode, startGraph) {
             // This can happen if the user changes modes,
             // clicks geolocate button, a hashchange event occurs, etc.
 
-            context.pauseChangeDispatch();
-            resetToStartGraph();
-            context.resumeChangeDispatch();
+            // remove the temporary draw node
+            context.pop(1);
         }
 
         _drawNode = undefined;
@@ -534,7 +526,7 @@ export function behaviorDrawWay(context, wayID, mode, startGraph) {
         }
 
         context.pauseChangeDispatch();
-        // remove the temporary edit
+        // remove the temporary draw node
         context.pop(1);
         _didResolveTempEdit = true;
         context.resumeChangeDispatch();
@@ -557,7 +549,10 @@ export function behaviorDrawWay(context, wayID, mode, startGraph) {
     // Cancel the draw operation, delete everything, and return to browse mode.
     drawWay.cancel = function() {
         context.pauseChangeDispatch();
-        resetToStartGraph();
+        // remove the temporary draw node
+        context.pop(1);
+        _didResolveTempEdit = true;
+        context.perform(() => startGraph, t(`operations.delete.annotation.${_wayGeometry}`));
         context.enter(modeBrowse(context));
         context.resumeChangeDispatch();
 
