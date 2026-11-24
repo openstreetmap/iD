@@ -223,6 +223,11 @@ export function uiFieldLocalized(field, context) {
         localizedInputs.selectAll('button, input')
             .classed('disabled', !!isLocked)
             .attr('readonly', isLocked || null);
+
+        localizedInputs.selectAll('.localized-value')
+            .each(function(d) {
+                lockValueInput(d3_select(this), d.lang);
+            });
         selection.selectAll('.combobox-caret').classed('nope', !!isLocked);
 
 
@@ -275,6 +280,21 @@ export function uiFieldLocalized(field, context) {
     }
 
 
+    // a language is valid if the resulting tag can be read back by calcMultilingual
+    function isValidLang(lang) {
+        return !!lang && LANGUAGE_SUFFIX_REGEX.test(key(lang));
+    }
+
+
+    // the value can only be edited once a valid language is entered - #13019
+    function lockValueInput(valueInput, lang) {
+        var isLocked = field.locked() || !isValidLang(lang);
+        valueInput
+            .classed('disabled', isLocked)
+            .attr('readonly', isLocked || null);
+    }
+
+
     function changeLang(d3_event, d) {
         var tags = {};
 
@@ -288,13 +308,19 @@ export function uiFieldLocalized(field, context) {
         });
         if (language) lang = language.code;
 
+        var valueInput = d3_select(this.parentNode).selectAll('.localized-value');
+        lockValueInput(valueInput, lang);
+
+        // don't save a tag which this field can't read back - #13019
+        if (lang && !isValidLang(lang)) return;
+
         if (d.lang && d.lang !== lang) {
             tags[key(d.lang)] = undefined;
         }
 
         var newKey = lang && context.cleanTagKey(key(lang));
 
-        var value = utilGetSetValue(d3_select(this.parentNode).selectAll('.localized-value'));
+        var value = utilGetSetValue(valueInput);
 
         if (newKey && value) {
             tags[newKey] = value;
@@ -476,6 +502,9 @@ export function uiFieldLocalized(field, context) {
             })
             .classed('mixed', function(d) {
                 return Array.isArray(d.value);
+            })
+            .each(function(d) {
+                lockValueInput(d3_select(this), d.lang);
             });
     }
 
