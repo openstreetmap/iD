@@ -2,7 +2,7 @@ import { t } from '../../core/localizer';
 import { uiPane } from '../pane';
 
 import { uiSectionDataLayers } from '../sections/data_layers';
-import { uiSectionMapFeatures } from '../sections/map_features';
+import { uiSectionMapFeatureFilters } from '../sections/map_feature_filters';
 import { uiSectionMapStyleOptions } from '../sections/map_style_options';
 import { uiSectionPhotoOverlays } from '../sections/photo_overlays';
 
@@ -17,7 +17,7 @@ export function uiPaneMapData(context) {
             uiSectionDataLayers(context),
             uiSectionPhotoOverlays(context),
             uiSectionMapStyleOptions(context),
-            uiSectionMapFeatures(context)
+            uiSectionMapFeatureFilters(context)
         ]);
 
     return mapDataPane;
