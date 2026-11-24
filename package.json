@@ -144,7 +144,7 @@
     "> 0.3%, last 6 major versions, Firefox ESR, not dead, maintained node versions"
   ],
   "allowScripts": {
-    "esbuild@0.28.2": true,
+    "esbuild": true,
     "core-js": false
   }
 }
