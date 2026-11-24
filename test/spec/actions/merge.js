@@ -37,6 +37,47 @@ describe('iD.actionMerge', function () {
         expect(graph.entity('r').members).toEqual([{id: 'w', role: 'r', type: 'way'}]);
     });
 
+    it('merges point with multipolygon area', function () {
+        var graph = new iD.coreGraph([
+                new iD.osmNode({id: 'a', tags: {a: 'a'}}),
+                new iD.osmWay({id: 'w'}),
+                new iD.osmRelation({id: 'r', tags: {type: 'multipolygon'}, members: [
+                    {id: 'w', role: 'outer', type: 'way'}
+                ]})
+            ]),
+            action = iD.actionMerge(['a', 'r']);
+
+        expect(action.disabled(graph)).toBeFalsy();
+
+        graph = action(graph);
+
+        expect(graph.hasEntity('a')).toBeUndefined();
+        expect(graph.entity('r').tags).toEqual({a: 'a', type: 'multipolygon'});
+    });
+
+    // #7983
+    it('does not create self-referencing relation', function () {
+        var graph = new iD.coreGraph([
+                new iD.osmNode({id: 'a', tags: {a: 'a'}}),
+                new iD.osmWay({id: 'w'}),
+                new iD.osmRelation({id: 'r', tags: {type: 'multipolygon'}, members: [
+                    {id: 'w', role: 'outer', type: 'way'},
+                    {id: 'a', role: '', type: 'node'}
+                ]})
+            ]),
+            action = iD.actionMerge(['a', 'r']);
+
+        expect(action.disabled(graph)).toBeFalsy();
+
+        graph = action(graph);
+
+        expect(graph.hasEntity('a')).toBeUndefined();
+        expect(graph.entity('r').tags).toEqual({a: 'a', type: 'multipolygon'});
+        expect(graph.entity('r').members).toEqual([
+            {id: 'w', role: 'outer', type: 'way'}
+        ]);
+    });
+
     it('preserves existing point id when possible', function () {
         var graph = new iD.coreGraph([
                 new iD.osmNode({id: 'n1', loc: [1, 0], tags: {n1: 'n1'}}),
@@ -147,5 +188,25 @@ describe('iD.actionMerge', function () {
         expect(graph.entity('w').nodes).toEqual(['n2', 'n3', 'n1', 'n4']);
         expect(graph.entity('n3').loc[0]).toEqual(0);
         expect(graph.entity('n3').loc[1]).toEqual(2);
+    });
+
+    it('preserves node when merging with multipolygon relation', function () {
+        var graph = new iD.coreGraph([
+                new iD.osmNode({id: 'n0', loc: [0, 0], tags: {n: 'n'}}),
+                new iD.osmNode({id: 'n1', loc: [1, 1], tags: {}}),
+                new iD.osmNode({id: 'n2', loc: [1, 2], tags: {}}),
+                new iD.osmNode({id: 'n3', loc: [2, 1], tags: {}}),
+                new iD.osmNode({id: 'n4', loc: [2, 2], tags: {}}),
+                new iD.osmWay({id: 'w', nodes: ['n1', 'n2', 'n3', 'n4', 'n1'], tags: {w: 'w'}}),
+                new iD.osmRelation({id: 'r', members: [{ type: 'way', id: 'w', role: 'outer' }], tags: {type: 'multipolygon'}})
+            ]),
+            action = iD.actionMerge(['n0', 'r']);
+
+        graph = action(graph);
+        expect(graph.hasEntity('n0')).toBeTruthy();
+        expect(graph.entity('r').tags).toEqual({n: 'n', type: 'multipolygon'});
+        expect(graph.entity('w').nodes).toContain('n0');
+        expect(graph.entity('n0').loc[0]).not.toEqual(0);
+        expect(graph.entity('n0').loc[1]).not.toEqual(0);
     });
 });

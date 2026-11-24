@@ -53,6 +53,7 @@ describe('iD.serviceOsm', function () {
 
     afterEach(function() {
         connection.throttledReloadApiStatus?.cancel();
+        vi.useRealTimers();
         fetchMock.reset();
         serverXHR.restore();
     });
@@ -188,6 +189,8 @@ describe('iD.serviceOsm', function () {
                 headers: { 'Content-Type': 'text/plain' }
             });
 
+            // loadTile schedules a retry on failure - keep it from firing in later tests
+            vi.useFakeTimers({ toFake: ['setTimeout'] });
             logout();
             connection.on('change', spy);
             const promise = promisify(connection.loadTile).call(connection, { id: '0', extent: { toParam: () => '', bbox: () => ({}) } });
@@ -204,6 +207,8 @@ describe('iD.serviceOsm', function () {
                 headers: { 'Content-Type': 'text/plain' }
             });
 
+            // loadTile schedules a retry on failure - keep it from firing in later tests
+            vi.useFakeTimers({ toFake: ['setTimeout'] });
             logout();
             connection.on('change', spy);
             const promise = promisify(connection.loadTile).call(connection, { id: '0', extent: { toParam: () => '', bbox: () => ({}) } });

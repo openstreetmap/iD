@@ -12,6 +12,7 @@ import { modeBrowse } from '../../modes/browse';
 import { uiCmd } from '../cmd';
 import { uiSection } from '../section';
 import { uiSettingsCustomData } from '../settings/custom_data';
+import { utilIsDrawing } from '../../util';
 
 export function uiSectionDataLayers(context) {
 
@@ -51,7 +52,7 @@ export function uiSectionDataLayers(context) {
     function setLayer(which, enabled) {
         // Don't allow layer changes while drawing - #6584
         var mode = context.mode();
-        if (mode && /^draw/.test(mode.id)) return;
+        if (mode && utilIsDrawing(mode.id)) return;
 
         var layer = layers.layer(which);
         if (layer) {

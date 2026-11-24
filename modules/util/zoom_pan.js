@@ -5,8 +5,7 @@ import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { interpolateZoom } from 'd3-interpolate';
 import { select as d3_select } from 'd3-selection';
 import { interrupt as d3_interrupt } from 'd3-transition';
-import { zoomIdentity as d3_zoomIdentity } from 'd3-zoom';
-import { Transform } from '../../node_modules/d3-zoom/src/transform.js';
+import { zoomIdentity as d3_zoomIdentity, ZoomTransform as Transform } from 'd3-zoom';
 
 import { utilFastMouse, utilFunctor } from './util';
 import { utilRebind } from './rebind';

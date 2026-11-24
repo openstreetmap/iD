@@ -142,7 +142,7 @@ export function uiFieldCombo(field, context) {
     function tagValue(dval) {
         dval = clean(dval || '');
 
-        var found = getOptions(true).find(function(o) {
+        var found = getOptions().find(function(o) {
             return o.key && clean(o.value).toLowerCase() === dval.toLowerCase();
         });
         if (found) return found.key;
@@ -196,8 +196,10 @@ export function uiFieldCombo(field, context) {
       }
 
       const labelId = getLabelId(field, tval);
-      if (field.hasTextForStringId(labelId)) {
-        return field.t(labelId, { default: tval });
+      if (!field.options || field.options.includes(tval)) {
+        if (field.hasTextForStringId(labelId)) {
+          return field.t(labelId, { default: tval });
+        }
       }
 
       if (field.type === 'typeCombo' && tval.toLowerCase() === 'yes') {
@@ -227,8 +229,10 @@ export function uiFieldCombo(field, context) {
       }
 
       const labelId = getLabelId(field, tval);
-      if (field.hasTextForStringId(labelId)) {
-        return field.t.append(labelId, { default: tval });
+      if (!field.options || field.options.includes(tval)) {
+        if (field.hasTextForStringId(labelId)) {
+          return field.t.append(labelId, { default: tval });
+        }
       }
 
       if (field.type === 'typeCombo' && tval.toLowerCase() === 'yes') {
@@ -271,12 +275,13 @@ export function uiFieldCombo(field, context) {
     }
 
     /** Preset description for this option value. @param {string} value @returns {string|undefined} */
-    function presetDescription(value) {
+    function getFieldValueDescription(value) {
+        if (field.options && !field.options.includes(value)) return;
         return field.hasTextForStringId(`options.${value}.description`)
             ? field.t(`options.${value}.description`) : undefined;
     }
 
-    function getOptions(allOptions) {
+    function getOptions() {
         const localeCode = localizer.localeCode();
         // Get dropdown list for language: key via localizer instead of taginfo
         if (field.key === 'language:') {
@@ -305,7 +310,7 @@ export function uiFieldCombo(field, context) {
             key: v,
             value: field.t(labelId, { default: v }),
             title: formatTag(field.key, v, true),
-            description: presetDescription(v),
+            description: getFieldValueDescription(v),
             display: addComboboxIcons(field.t.append(labelId, { default: v }), v),
             klass: field.hasTextForStringId(labelId) ? '' : 'raw-option'
           });
@@ -336,21 +341,13 @@ export function uiFieldCombo(field, context) {
           return options;
         }
 
-        if (!(field.options || field.options)) return [];
-
-        let options;
-        if (allOptions !== true) {
-            options = field.options || field.options;
-        } else {
-            options = [].concat(field.options, field.options).filter(Boolean);
-        }
-        const result = options.map(function(v) {
+        const result = (field.options || []).map(function(v) {
             const labelId = getLabelId(field, v);
             return {
                 key: v,
                 value: field.t(labelId, { default: v }),
                 title: formatTag(field.key, v, _isMulti),
-                description: presetDescription(v),
+                description: getFieldValueDescription(v),
                 display: addComboboxIcons(field.t.append(labelId, { default: v }), v),
                 klass: field.hasTextForStringId(labelId) ? '' : 'raw-option'
             };
@@ -471,7 +468,7 @@ export function uiFieldCombo(field, context) {
                 }
 
                 // Only here is data for `taginfoDesc` present. We render it as `title`, when no `presetDesc` is given.
-                const presetDesc = presetDescription(v);
+                const presetDesc = getFieldValueDescription(v);
                 let taginfoDesc = d.title && d.title !== label ? d.title : undefined;
                 // For multiCombo, Taginfo often returns the key (e.g. recycling:glass_bottles) as title; don't use as description.
                 if (_isMulti && taginfoDesc === field.key + v) taginfoDesc = undefined;
@@ -788,7 +785,7 @@ export function uiFieldCombo(field, context) {
           }
         };
 
-        if (field.icons) {
+        if (field.icons && (!field.options || field.options.includes(value))) {
             container.selectAll('.tag-value-icon').remove();
             if (field.icons[value]) {
                 container.selectAll('.tag-value-icon')
@@ -806,10 +803,14 @@ export function uiFieldCombo(field, context) {
 
         var isMixed = Array.isArray(tags[field.key]);
         var showsValue = value => !isMixed && value && !(field.type === 'typeCombo' && value === 'yes');
-        var isRawValue = value => showsValue(value)
-            && !field.hasTextForStringId(`options.${value}`)
-            && !field.hasTextForStringId(`options.${value}.title`)
-            && !(osmIsoCountryKeys.has(field.key) && value in buildCountry());
+        var isRawValue = value => {
+            if (!showsValue(value)) return false; // e.g. mixed multiselection, typecombo default
+            if (field.options && !field.options.includes(value)) return true; // invalid option
+            // otherwise: return true for an option for which we have a translation string
+            return field.hasTextForStringId(`options.${value}`)
+                && field.hasTextForStringId(`options.${value}.title`)
+                && (osmIsoCountryKeys.has(field.key) && value in buildCountry());
+        };
         var isKnownValue = value => showsValue(value) && !isRawValue(value);
         var isReadOnly = !_allowCustomValues;
 
@@ -929,6 +930,7 @@ export function uiFieldCombo(field, context) {
                     if (_isMulti) k = k.replace(field.key, '');
                     // Ignore the raw-value class for key language:
                     if (field.key === 'language:' && localizer.languageName(k) !== k) return false;
+                    if (field.options && !field.options.includes(k)) return true;
                     return !field.hasTextForStringId('options.' + k);
                 })
                 .classed('draggable', allowDragAndDrop)
@@ -993,6 +995,7 @@ export function uiFieldCombo(field, context) {
                 .attr('href', '#')
                 .on('click', removeMultikey)
                 .attr('class', 'remove')
+                .attr('title', t('icons.remove'))
                 .text('×');
 
             updateIcon('');

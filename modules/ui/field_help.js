@@ -149,6 +149,7 @@ export function uiFieldHelp(context, fieldName) {
         button.enter()
             .append('button')
             .attr('class', 'field-help-button')
+            .attr('title', t('help.title'))
             .call(svgIcon('#iD-icon-help'))
             .merge(button)
             .on('click', function (d3_event) {

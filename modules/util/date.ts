@@ -41,8 +41,8 @@ export function localeDateString(date: Date | string) {
     return d.toLocaleDateString(localizer.localeCode(), options);
 }
 
-export function localeTimestamp(date: Date) {
-    const options: Intl.DateTimeFormatOptions = {
+export function localeTimestamp(date: Date, options?: Intl.DateTimeFormatOptions) {
+    options = options || {
         day: '2-digit',
         month: '2-digit',
         year: 'numeric',
