@@ -1,5 +1,6 @@
 /**
  * @typedef {'vertices' | 'midpoints' | 'points' | 'turns'} PointsGroup
+ * @typedef {'covered' | 'areas' | 'lines' | 'points' | 'auxiliary' | 'labels'} OsmLayer
  */
 
 export function svgOsm(projection, context, dispatch) {
