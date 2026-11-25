@@ -2,6 +2,7 @@ import { select as d3_select } from 'd3-selection';
 
 import { t } from '../core/localizer';
 import { svgIcon } from '../svg/icon';
+import { getSet } from '../util/class';
 
 
 export function uiNoteHeader() {
@@ -69,11 +70,7 @@ export function uiNoteHeader() {
     }
 
 
-    noteHeader.note = function(val) {
-        if (!arguments.length) return _note;
-        _note = val;
-        return noteHeader;
-    };
+    noteHeader.note = getSet(noteHeader, () => _note, _ => _note = _);
 
 
     return noteHeader;

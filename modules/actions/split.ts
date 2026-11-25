@@ -6,6 +6,7 @@ import { osmSummableTags, osmWayOnlyTags } from '../osm/tags';
 import type { NodeId, RelationId, WayId } from '../osm';
 import type { coreGraph } from '../core';
 import type { Action } from '../core/history';
+import { getSet } from '../util/class';
 
 type HistoryStrategy = 'longest' | 'first';
 
@@ -542,11 +543,7 @@ export function actionSplit(nodeIds: NodeId[], newWayIds?: WayId[]): ActionSplit
     action.limitWays = limitWays;
 
 
-    action.keepHistoryOn = function(val) {
-        if (!arguments.length) return _keepHistoryOn;
-        _keepHistoryOn = val!;
-        return action;
-    };
+    action.keepHistoryOn = getSet(action, () => _keepHistoryOn, _ => _keepHistoryOn = _);
 
 
     return action;

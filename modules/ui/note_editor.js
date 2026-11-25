@@ -15,6 +15,7 @@ import {
     utilRebind
 } from '../util';
 import { osmNote } from '../osm';
+import { getSet } from '../util/class';
 
 
 export function uiNoteEditor(context) {
@@ -393,17 +394,9 @@ export function uiNoteEditor(context) {
     }
 
 
-    noteEditor.note = function(val) {
-        if (!arguments.length) return _note;
-        _note = val;
-        return noteEditor;
-    };
+    noteEditor.note = getSet(noteEditor, () => _note, _ => _note = _);
 
-    noteEditor.newNote = function(val) {
-        if (!arguments.length) return _newNote;
-        _newNote = val;
-        return noteEditor;
-    };
+    noteEditor.newNote = getSet(noteEditor, () => _newNote, _ => _newNote = _);
 
 
     return utilRebind(noteEditor, dispatch, 'on');

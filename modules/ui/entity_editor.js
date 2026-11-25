@@ -17,6 +17,7 @@ import { uiSectionRawMemberEditor } from './sections/raw_member_editor';
 import { uiSectionRawMembershipEditor } from './sections/raw_membership_editor';
 import { uiSectionRawTagEditor } from './sections/raw_tag_editor';
 import { uiSectionSelectionList } from './sections/selection_list';
+import { getSet } from '../util/class';
 
 export function uiEntityEditor(context) {
     var dispatch = d3_dispatch('choose');
@@ -268,18 +269,9 @@ export function uiEntityEditor(context) {
     }
 
 
-    entityEditor.modified = function(val) {
-        if (!arguments.length) return _modified;
-        _modified = val;
-        return entityEditor;
-    };
+    entityEditor.modified = getSet(entityEditor, () => _modified, _ => _modified = _);
 
-
-    entityEditor.state = function(val) {
-        if (!arguments.length) return _state;
-        _state = val;
-        return entityEditor;
-    };
+    entityEditor.state = getSet(entityEditor, () => _state, _ => _state = _);
 
 
     entityEditor.entityIDs = function(val) {
@@ -301,11 +293,7 @@ export function uiEntityEditor(context) {
     };
 
 
-    entityEditor.newFeature = function(val) {
-        if (!arguments.length) return _newFeature;
-        _newFeature = val;
-        return entityEditor;
-    };
+    entityEditor.newFeature = getSet(entityEditor, () => _newFeature, _ => _newFeature = _);
 
 
     function loadActivePresets(isForNewSelection) {

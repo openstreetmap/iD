@@ -2,6 +2,7 @@ import { t } from '../core/localizer';
 import { OsmAbstractEntity, osmNote, osmRelation, osmWay } from '../osm';
 import { svgIcon } from '../svg/icon';
 import { getRelativeDate } from '../util/date';
+import { getSet } from '../util/class';
 
 
 export function uiViewOnOSM(context) {
@@ -51,11 +52,7 @@ export function uiViewOnOSM(context) {
     }
 
 
-    viewOnOSM.what = function(_) {
-        if (!arguments.length) return _what;
-        _what = _;
-        return viewOnOSM;
-    };
+    viewOnOSM.what = getSet(viewOnOSM, () => _what, _ => _what = _);
 
     return viewOnOSM;
 }

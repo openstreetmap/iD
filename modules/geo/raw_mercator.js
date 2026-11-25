@@ -6,6 +6,7 @@ import {
 import {
     zoomIdentity as d3_zoomIdentity
 } from 'd3-zoom';
+import { getSet } from '../util/class';
 
 /**
  * @import { Vec2 } from './vector';
@@ -62,12 +63,7 @@ export function geoRawMercator() {
     };
 
 
-    /** @type {GetSet<typeof projection, ClipExtent>} */
-    projection.clipExtent = function(_) {
-        if (!arguments.length) return clipExtent;
-        clipExtent = _;
-        return projection;
-    };
+    projection.clipExtent = getSet(projection, () => clipExtent, _ => clipExtent = _);
 
 
     /** @type {GetSet<typeof projection, ZoomTransform>} */

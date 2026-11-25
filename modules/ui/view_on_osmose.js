@@ -2,6 +2,7 @@ import { t } from '../core/localizer';
 import { services } from '../services';
 import { svgIcon } from '../svg/icon';
 import { QAItem } from '../osm';
+import { getSet } from '../util/class';
 
 export function uiViewOnOsmose() {
   let _qaItem;
@@ -33,11 +34,7 @@ export function uiViewOnOsmose() {
         .call(t.append('inspector.view_on_osmose'));
   }
 
-  viewOnOsmose.what = function(val) {
-    if (!arguments.length) return _qaItem;
-    _qaItem = val;
-    return viewOnOsmose;
-  };
+  viewOnOsmose.what = getSet(viewOnOsmose, () => _qaItem, _ => _qaItem = _);
 
   return viewOnOsmose;
 }

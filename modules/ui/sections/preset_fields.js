@@ -8,6 +8,7 @@ import { geoExtent } from '../../geo/extent';
 import { uiField } from '../field';
 import { uiFormFields } from '../form_fields';
 import { uiSection } from '../section';
+import { getSet } from '../../util/class';
 
 export function uiSectionPresetFields(context) {
 
@@ -133,11 +134,7 @@ export function uiSectionPresetFields(context) {
         return section;
     };
 
-    section.state = function(val) {
-        if (!arguments.length) return _state;
-        _state = val;
-        return section;
-    };
+    section.state = getSet(section, () => _state, _ => _state = _);
 
     section.tags = function(val) {
         if (!arguments.length) return _tags;

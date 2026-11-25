@@ -8,6 +8,7 @@ import { geoChooseEdge, geoSphericalDistance, geoPolygonContainsPolygon, geoPoin
 import { uiCombobox } from '../combobox';
 import { utilArrayUniqBy, utilGetSetValue, utilNoAuto, utilRebind, utilTotalExtent, utilTriggerEvent } from '../../util';
 import { t } from '../../core/localizer';
+import { getSet } from '../../util/class';
 
 /** @typedef {{
     countryCodes: string[];
@@ -479,11 +480,7 @@ export function uiFieldAddress(field, context) {
     }
 
 
-    address.entityIDs = function(val) {
-        if (!arguments.length) return _entityIDs;
-        _entityIDs = val;
-        return address;
-    };
+    address.entityIDs = getSet(address, () => _entityIDs, _ => _entityIDs = _);
 
 
     address.tags = function(tags) {

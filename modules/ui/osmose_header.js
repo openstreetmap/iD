@@ -1,5 +1,6 @@
 import { services } from '../services';
 import { t } from '../core/localizer';
+import { getSet } from '../util/class';
 
 
 export function uiOsmoseHeader() {
@@ -59,11 +60,7 @@ export function uiOsmoseHeader() {
         .text(issueTitle);
   }
 
-  osmoseHeader.issue = function(val) {
-    if (!arguments.length) return _qaItem;
-    _qaItem = val;
-    return osmoseHeader;
-  };
+  osmoseHeader.issue = getSet(osmoseHeader, () => _qaItem, _ => _qaItem = _);
 
   return osmoseHeader;
 }

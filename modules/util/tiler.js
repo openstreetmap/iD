@@ -2,6 +2,7 @@ import { range as d3_range } from 'd3-array';
 import { clamp } from 'es-toolkit/compat';
 
 import { geoExtent, geoScaleToZoom } from '../geo';
+import { getSet } from './class';
 
 /** @typedef {{ id: string; xyz: import('../geo/vector').Vec3; extent: geoExtent }} Tile */
 
@@ -135,41 +136,15 @@ export function utilTiler() {
     };
 
 
-    /** @type {GetSet<typeof tiler, number>} */
-    tiler.tileSize = function(val) {
-        if (!arguments.length) return _tileSize;
-        _tileSize = val;
-        return tiler;
-    };
+    tiler.tileSize = getSet(tiler, () => _tileSize, _ => _tileSize = _);
 
+    tiler.zoomExtent = getSet(tiler, () => _zoomExtent, _ => _zoomExtent = _);
 
-    /** @type {GetSet<typeof tiler, Vec2>} */
-    tiler.zoomExtent = function(val) {
-        if (!arguments.length) return _zoomExtent;
-        _zoomExtent = val;
-        return tiler;
-    };
+    tiler.size = getSet(tiler, () => _size, _ => _size = _);
 
+    tiler.scale = getSet(tiler, () => _scale, _ => _scale = _);
 
-    tiler.size = function(val) {
-        if (!arguments.length) return _size;
-        _size = val;
-        return tiler;
-    };
-
-
-    tiler.scale = function(val) {
-        if (!arguments.length) return _scale;
-        _scale = val;
-        return tiler;
-    };
-
-
-    tiler.translate = function(val) {
-        if (!arguments.length) return _translate;
-        _translate = val;
-        return tiler;
-    };
+    tiler.translate = getSet(tiler, () => _translate, _ => _translate = _);
 
 
     // number to extend the rows/columns beyond those covering the viewport
@@ -181,12 +156,7 @@ export function utilTiler() {
     };
 
 
-    /** @type {GetSet<typeof tiler, boolean>} */
-    tiler.skipNullIsland = function(val) {
-        if (!arguments.length) return _skipNullIsland;
-        _skipNullIsland = val;
-        return tiler;
-    };
+    tiler.skipNullIsland = getSet(tiler, () => _skipNullIsland, _ => _skipNullIsland = _);
 
 
     return tiler;

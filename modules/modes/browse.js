@@ -9,6 +9,7 @@ import { modeDragNode } from './drag_node';
 import { modeDragNote } from './drag_note';
 
 import { operationPaste } from '../operations/paste';
+import { getSet } from '../util/class';
 
 export function modeBrowse(context) {
     /** @type {import('../core/context').Mode} */
@@ -24,11 +25,7 @@ export function modeBrowse(context) {
     var _behaviors = [];
 
 
-    mode.selectBehavior = function(val) {
-        if (!arguments.length) return _selectBehavior;
-        _selectBehavior = val;
-        return mode;
-    };
+    mode.selectBehavior = getSet(mode, () => _selectBehavior, _ => _selectBehavior = _);
 
 
     mode.enter = function() {
@@ -68,11 +65,7 @@ export function modeBrowse(context) {
     };
 
 
-    mode.sidebar = function(_) {
-        if (!arguments.length) return sidebar;
-        sidebar = _;
-        return mode;
-    };
+    mode.sidebar = getSet(mode, () => sidebar, _ => sidebar = _);
 
 
     mode.operations = function() {

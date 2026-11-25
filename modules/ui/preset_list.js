@@ -11,6 +11,7 @@ import { geoExtent } from '../geo/extent';
 import { uiPresetIcon } from './preset_icon';
 import { uiTagReference } from './tag_reference';
 import { utilKeybinding, utilNoAuto, utilRebind } from '../util';
+import { getSet } from '../util/class';
 
 
 export function uiPresetList(context) {
@@ -469,11 +470,7 @@ export function uiPresetList(context) {
         });
     }
 
-    presetList.autofocus = function(val) {
-        if (!arguments.length) return _autofocus;
-        _autofocus = val;
-        return presetList;
-    };
+    presetList.autofocus = getSet(presetList, () => _autofocus, _ => _autofocus = _);
 
     presetList.entityIDs = function(val) {
         if (!arguments.length) return _entityIDs;
@@ -499,11 +496,7 @@ export function uiPresetList(context) {
         return presetList;
     };
 
-    presetList.presets = function(val) {
-        if (!arguments.length) return _currentPresets;
-        _currentPresets = val;
-        return presetList;
-    };
+    presetList.presets = getSet(presetList, () => _currentPresets, _ => _currentPresets = _);
 
     function entityGeometries() {
 

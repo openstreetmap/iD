@@ -26,6 +26,7 @@ import { modeBrowse } from './browse';
 import { modeSelect } from './select';
 import { osmJoinWays, osmNode } from '../osm';
 import { utilArrayIntersection, utilKeybinding } from '../util';
+import { getSet } from '../util/class';
 
 
 
@@ -510,11 +511,7 @@ export function modeDragNode(context) {
     };
 
 
-    mode.restoreSelectedIDs = function(_) {
-        if (!arguments.length) return _restoreSelectedIDs;
-        _restoreSelectedIDs = _;
-        return mode;
-    };
+    mode.restoreSelectedIDs = getSet(mode, () => _restoreSelectedIDs, _ => _restoreSelectedIDs = _);
 
 
     mode.behavior = drag;

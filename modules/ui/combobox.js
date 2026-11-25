@@ -1,6 +1,7 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { select as d3_select } from 'd3-selection';
 import { utilEditDistance, utilGetSetValue, utilRebind, utilTriggerEvent } from '../util';
+import { getSet } from '../util/class';
 
 
 // This code assumes that the combobox values will not have duplicate entries.
@@ -492,47 +493,19 @@ export function uiCombobox(context, klass) {
     };
 
 
-    combobox.canAutocomplete = function(val) {
-        if (!arguments.length) return _canAutocomplete;
-        _canAutocomplete = val;
-        return combobox;
-    };
+    combobox.canAutocomplete = getSet(combobox, () => _canAutocomplete, _ => _canAutocomplete = _);
 
-    combobox.caseSensitive = function(val) {
-        if (!arguments.length) return _caseSensitive;
-        _caseSensitive = val;
-        return combobox;
-    };
+    combobox.caseSensitive = getSet(combobox, () => _caseSensitive, _ => _caseSensitive = _);
 
-    combobox.data = function(val) {
-        if (!arguments.length) return _data;
-        _data = val;
-        return combobox;
-    };
+    combobox.data = getSet(combobox, () => _data, _ => _data = _);
 
-    combobox.fetcher = function(val) {
-        if (!arguments.length) return _fetcher;
-        _fetcher = val;
-        return combobox;
-    };
+    combobox.fetcher = getSet(combobox, () => _fetcher, _ => _fetcher = _);
 
-    combobox.minItems = function(val) {
-        if (!arguments.length) return _minItems;
-        _minItems = val;
-        return combobox;
-    };
+    combobox.minItems = getSet(combobox, () => _minItems, _ => _minItems = _);
 
-    combobox.itemsMouseEnter = function(val) {
-        if (!arguments.length) return _mouseEnterHandler;
-        _mouseEnterHandler = val;
-        return combobox;
-    };
+    combobox.itemsMouseEnter = getSet(combobox, () => _mouseEnterHandler, _ => _mouseEnterHandler = _);
 
-    combobox.itemsMouseLeave = function(val) {
-        if (!arguments.length) return _mouseLeaveHandler;
-        _mouseLeaveHandler = val;
-        return combobox;
-    };
+    combobox.itemsMouseLeave = getSet(combobox, () => _mouseLeaveHandler, _ => _mouseLeaveHandler = _);
 
     return utilRebind(combobox, dispatch, 'on');
 }

@@ -2,6 +2,7 @@ import type { coreGraph } from '../core';
 import type { Action } from '../core/history';
 import { type NodeId, type RelationId, type WayId } from '../osm';
 import { osmNode } from '../osm/node';
+import { getSet } from '../util/class';
 
 export interface ActionDisconnect extends Action {
     limitWays: GetSet<this, WayId[] | undefined>;
@@ -122,11 +123,7 @@ export function actionDisconnect(nodeId: NodeId, newNodeId?: NodeId): ActionDisc
     };
 
 
-    action.limitWays = function(val) {
-        if (!arguments.length) return wayIds;
-        wayIds = val!;
-        return action;
-    } as GetSet<ActionDisconnect, WayId[] | undefined>;
+    action.limitWays = getSet(action, () => wayIds, _ => wayIds = _);
 
 
     return action;

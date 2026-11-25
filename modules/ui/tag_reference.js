@@ -5,6 +5,7 @@ import {
 import { t } from '../core/localizer';
 import { services } from '../services';
 import { svgIcon } from '../svg/icon';
+import { getSet } from '../util/class';
 
 
 // Pass `what` object of the form:
@@ -201,11 +202,7 @@ export function uiTagReference(what) {
     };
 
 
-    tagReference.showing = function(val) {
-        if (!arguments.length) return _showing;
-        _showing = val;
-        return tagReference;
-    };
+    tagReference.showing = getSet(tagReference, () => _showing, _ => _showing = _);
 
 
     return tagReference;

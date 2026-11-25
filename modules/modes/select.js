@@ -27,6 +27,7 @@ import {
     utilEntitySelector, utilKeybinding, utilTotalExtent, utilGetAllNodes,
     utilArrayUniq
 } from '../util';
+import { getSet } from '../util/class';
 
 
 export function modeSelect(context, selectedIDs) {
@@ -161,11 +162,7 @@ export function modeSelect(context, selectedIDs) {
     }
 
 
-    mode.selectedIDs = function(val) {
-        if (!arguments.length) return selectedIDs;
-        selectedIDs = val;
-        return mode;
-    };
+    mode.selectedIDs = getSet(mode, () => selectedIDs, _ => selectedIDs = _);
 
 
     mode.zoomToSelected = function() {
@@ -173,25 +170,11 @@ export function modeSelect(context, selectedIDs) {
     };
 
 
-    mode.newFeature = function(val) {
-        if (!arguments.length) return _newFeature;
-        _newFeature = val;
-        return mode;
-    };
+    mode.newFeature = getSet(mode, () => _newFeature, _ => _newFeature = _);
 
+    mode.selectBehavior = getSet(mode, () => _selectBehavior, _ => _selectBehavior = _);
 
-    mode.selectBehavior = function(val) {
-        if (!arguments.length) return _selectBehavior;
-        _selectBehavior = val;
-        return mode;
-    };
-
-
-    mode.follow = function(val) {
-        if (!arguments.length) return _follow;
-        _follow = val;
-        return mode;
-    };
+    mode.follow = getSet(mode, () => _follow, _ => _follow = _);
 
     function loadOperations() {
         _operations.forEach(function(operation) {

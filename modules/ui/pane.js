@@ -5,6 +5,7 @@ import {
 import { svgIcon } from '../svg/icon';
 import { t, localizer } from '../core/localizer';
 import { uiTooltip } from './tooltip';
+import { getSet } from '../util/class';
 
 
 export function uiPane(id, context) {
@@ -23,35 +24,15 @@ export function uiPane(id, context) {
         id: id
     };
 
-    pane.label = function(val) {
-        if (!arguments.length) return _label;
-        _label = val;
-        return pane;
-    };
+    pane.label = getSet(pane, () => _label, _ => _label = _);
 
-    pane.key = function(val) {
-        if (!arguments.length) return _key;
-        _key = val;
-        return pane;
-    };
+    pane.key = getSet(pane, () => _key, _ => _key = _);
 
-    pane.description = function(val) {
-        if (!arguments.length) return _description;
-        _description = val;
-        return pane;
-    };
+    pane.description = getSet(pane, () => _description, _ => _description = _);
 
-    pane.iconName = function(val) {
-        if (!arguments.length) return _iconName;
-        _iconName = val;
-        return pane;
-    };
+    pane.iconName = getSet(pane, () => _iconName, _ => _iconName = _);
 
-    pane.sections = function(val) {
-        if (!arguments.length) return _sections;
-        _sections = val;
-        return pane;
-    };
+    pane.sections = getSet(pane, () => _sections, _ => _sections = _);
 
     pane.selection = function() {
         return _paneSelection;

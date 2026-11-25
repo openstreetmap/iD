@@ -6,6 +6,7 @@ import { utilSafeClassName, utilStripDiacritics } from '../util/util';
 import { locationManager } from '../core/location_manager';
 import type { presetField } from './field';
 import type { Vec2 } from '../geo/vector';
+import { getSet } from '../util/class';
 
 export interface presetPreset extends Omit<Preset,
   | 'fields'
@@ -233,11 +234,7 @@ export function presetPreset(
   };
 
 
-  _this.addable = function(val) {
-    if (!arguments.length) return _addable;
-    _addable = val;
-    return _this;
-  } as presetPreset['addable'];
+  _this.addable = getSet(_this, () => _addable, _ => _addable = _);
 
 
   _this.reference = () => {

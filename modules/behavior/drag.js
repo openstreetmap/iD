@@ -9,6 +9,7 @@ import { geoVecLength } from '../geo';
 import { osmNote } from '../osm';
 import { utilRebind } from '../util/rebind';
 import { utilFastMouse, utilPrefixCSSProperty, utilPrefixDOMProperty } from '../util';
+import { getSet } from '../util/class';
 
 
 /*
@@ -165,18 +166,9 @@ export function behaviorDrag() {
     };
 
 
-    behavior.selector = function(_) {
-        if (!arguments.length) return _selector;
-        _selector = _;
-        return behavior;
-    };
+    behavior.selector = getSet(behavior, () => _selector, _ => _selector = _);
 
-
-    behavior.origin = function(_) {
-        if (!arguments.length) return _origin;
-        _origin = _;
-        return behavior;
-    };
+    behavior.origin = getSet(behavior, () => _origin, _ => _origin = _);
 
 
     behavior.cancel = function() {
@@ -187,25 +179,11 @@ export function behaviorDrag() {
     };
 
 
-    behavior.targetNode = function(_) {
-        if (!arguments.length) return _targetNode;
-        _targetNode = _;
-        return behavior;
-    };
+    behavior.targetNode = getSet(behavior, () => _targetNode, _ => _targetNode = _);
 
+    behavior.targetEntity = getSet(behavior, () => _targetEntity, _ => _targetEntity = _);
 
-    behavior.targetEntity = function(_) {
-        if (!arguments.length) return _targetEntity;
-        _targetEntity = _;
-        return behavior;
-    };
-
-
-    behavior.surface = function(_) {
-        if (!arguments.length) return _surface;
-        _surface = _;
-        return behavior;
-    };
+    behavior.surface = getSet(behavior, () => _surface, _ => _surface = _);
 
 
     return utilRebind(behavior, dispatch, 'on');

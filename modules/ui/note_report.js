@@ -2,6 +2,7 @@ import { t } from '../core/localizer';
 import { osmNote } from '../osm';
 import { services } from '../services';
 import { svgIcon } from '../svg/icon';
+import { getSet } from '../util/class';
 
 
 export function uiNoteReport() {
@@ -34,11 +35,7 @@ export function uiNoteReport() {
     }
 
 
-    noteReport.note = function(val) {
-        if (!arguments.length) return _note;
-        _note = val;
-        return noteReport;
-    };
+    noteReport.note = getSet(noteReport, () => _note, _ => _note = _);
 
     return noteReport;
 }

@@ -13,6 +13,7 @@ import {
     utilRebind,
     utilWrap
 } from '../util';
+import { getSet } from '../util/class';
 
 
 export function uiConflicts(context) {
@@ -320,18 +321,9 @@ export function uiConflicts(context) {
     //         choice(id, keepTheirs, forceRemote)
     //     ]
     // }
-    conflicts.conflictList = function(_) {
-        if (!arguments.length) return _conflictList;
-        _conflictList = _;
-        return conflicts;
-    };
+    conflicts.conflictList = getSet(conflicts, () => _conflictList, _ => _conflictList = _);
 
-
-    conflicts.origChanges = function(_) {
-        if (!arguments.length) return _origChanges;
-        _origChanges = _;
-        return conflicts;
-    };
+    conflicts.origChanges = getSet(conflicts, () => _origChanges, _ => _origChanges = _);
 
 
     conflicts.shownEntityIds = function() {

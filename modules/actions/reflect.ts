@@ -5,6 +5,7 @@ import { geoGetSmallestSurroundingRectangle, geoVecInterp, geoVecLength } from '
 import type { Projection } from '../geo/raw_mercator';
 import { utilGetAllNodes } from '../util';
 import type { EntityId } from '../osm';
+import { getSet } from '../util/class';
 
 export interface ActionReflect extends Action {
     useLongAxis: GetSet<this, boolean>;
@@ -44,11 +45,7 @@ export function actionReflect(reflectIds: EntityId[], projection: Projection) {
     };
 
 
-    action.useLongAxis = function(val) {
-        if (!arguments.length) return _useLongAxis;
-        _useLongAxis = val;
-        return action;
-    } as GetSet<ActionReflect, boolean>;
+    action.useLongAxis = getSet(action, () => _useLongAxis, _ => _useLongAxis = _);
 
 
     function getReflectAxis(graph: coreGraph) {

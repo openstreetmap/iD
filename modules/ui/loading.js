@@ -1,5 +1,6 @@
 import { select as d3_select } from 'd3-selection';
 import { uiModal } from './modal';
+import { getSet } from '../util/class';
 
 
 export function uiLoading(context) {
@@ -38,19 +39,9 @@ export function uiLoading(context) {
   };
 
 
-  loading.message = function(val) {
-    if (!arguments.length) return _message;
-    _message = val;
-    return loading;
-  };
+  loading.message = getSet(loading, () => _message, _ => _message = _);
 
-
-  /** @type {GetSet<typeof loading, boolean>} */
-  loading.blocking = function(val) {
-    if (!arguments.length) return _blocking;
-    _blocking = val;
-    return loading;
-  };
+  loading.blocking = getSet(loading, () => _blocking, _ => _blocking = _);
 
 
   loading.close = () => {

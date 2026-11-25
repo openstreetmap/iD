@@ -8,6 +8,7 @@ import { t } from '../core/localizer';
 import { services } from '../services';
 import { utilDisplayName, utilHighlightEntities } from '../util';
 import { utilSanitizeHTML } from '../util/sanitize';
+import { getSet } from '../util/class';
 
 
 export function uiOsmoseDetails(context) {
@@ -204,11 +205,7 @@ export function uiOsmoseDetails(context) {
   }
 
 
-  osmoseDetails.issue = function(val) {
-    if (!arguments.length) return _qaItem;
-    _qaItem = val;
-    return osmoseDetails;
-  };
+  osmoseDetails.issue = getSet(osmoseDetails, () => _qaItem, _ => _qaItem = _);
 
 
   return osmoseDetails;

@@ -7,6 +7,7 @@ import { utilQsString, utilStringQs } from '../util';
 import { utilAesDecrypt } from '../util/aes';
 import { IntervalTasksQueue } from '../util/IntervalTasksQueue';
 import { localeDateString } from '../util/date';
+import { getSet } from '../util/class';
 
 var isRetina = window.devicePixelRatio && window.devicePixelRatio >= 2;
 
@@ -45,11 +46,7 @@ export function rendererBackgroundSource(data) {
     source.zoomExtent = data.zoomExtent || [0, 22];
     source.overzoom = data.overzoom !== false;
 
-    source.offset = function(val) {
-        if (!arguments.length) return _offset;
-        _offset = val;
-        return source;
-    };
+    source.offset = getSet(source, () => _offset, _ => _offset = _);
 
 
     source.nudge = function(val, zoomlevel) {
