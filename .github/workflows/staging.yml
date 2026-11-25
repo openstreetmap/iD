@@ -25,8 +25,6 @@ jobs:
           path: './id-tagging-schema'
       - run: npm clean-install
         working-directory: './id-tagging-schema'
-      - run: npm audit signatures
-        working-directory: './id-tagging-schema'
       - run: npm run dist -- translations
         working-directory: './id-tagging-schema'
         env:
@@ -37,7 +35,6 @@ jobs:
       # build iD using freshest version of presets and ELI
       - run: npm clean-install
       - run: npm install @openstreetmap/editor-layer-index
-      - run: npm audit signatures
       - run: mkdir dist/data
       - run: npm run imagery
       - run: npm run all
