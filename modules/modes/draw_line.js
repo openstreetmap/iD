@@ -34,7 +34,7 @@ export function modeDrawLine(context, wayID, startGraph, button, affix, continui
     };
 
     mode.activeID = function() {
-        return (behavior && behavior.activeID()) || [];
+        return behavior?.activeID();
     };
 
     return mode;
