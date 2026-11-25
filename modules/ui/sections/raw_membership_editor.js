@@ -270,10 +270,13 @@ export function uiSectionRawMembershipEditor(context) {
 
     function downloadMembers(d3_event, d) {
         d3_event.preventDefault();
-        const button = d3_select(this);
 
         // display the loading indicator
-        button.classed('loading', true);
+        d3_select(this)
+          .classed('loading', true)
+          .select('svg')
+          .insert('use', 'use')
+          .attr('href', '#iD-loader');
         context.loadEntity(d.relation.id, function() {
             section.reRender();
         });

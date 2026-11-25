@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-50 -50 100 100">
+  <g stroke="inherit" stroke-linecap="round" stroke-width="10">
+    <path id="l" d="M0-35v15"/>
+    <use href="#l" transform="rotate(45)"/>
+    <use href="#l" transform="rotate(90)"/>
+    <use href="#l" transform="rotate(135)"/>
+    <use href="#l" transform="rotate(180)"/>
+    <use href="#l" transform="rotate(180)" stroke="currentColor" opacity=".1"/>
+    <use href="#l" transform="rotate(225)"/>
+    <use href="#l" transform="rotate(225)" stroke="currentColor" opacity=".4"/>
+    <use href="#l" transform="rotate(270)"/>
+    <use href="#l" transform="rotate(270)" stroke="currentColor" opacity=".7"/>
+    <use href="#l" transform="rotate(315)" stroke="currentColor"/>
+    <animateTransform attributeName="transform" calcMode="discrete" dur=".8s" keyTimes="0;0.125;0.25;0.375;0.5;0.625;0.75;0.875" repeatCount="indefinite" type="rotate" values="0;45;90;135;180;225;270;315"/>
+  </g>
+</svg>
