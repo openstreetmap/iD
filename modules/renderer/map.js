@@ -17,6 +17,7 @@ import { utilGetDimensions } from '../util/dimensions';
 import { utilRebind } from '../util/rebind';
 import { utilZoomPan } from '../util/zoom_pan';
 import { utilDoubleUp } from '../util/double_up';
+import { getSet } from '../util/class';
 
 // constants
 var TILESIZE = 256;
@@ -728,18 +729,9 @@ export function rendererMap(context) {
     };
 
 
-    map.dblclickZoomEnable = function(val) {
-        if (!arguments.length) return _dblClickZoomEnabled;
-        _dblClickZoomEnabled = val;
-        return map;
-    };
+    map.dblclickZoomEnable = getSet(map, () => _dblClickZoomEnabled, _ => _dblClickZoomEnabled = _);
 
-
-    map.redrawEnable = function(val) {
-        if (!arguments.length) return _redrawEnabled;
-        _redrawEnabled = val;
-        return map;
-    };
+    map.redrawEnable = getSet(map, () => _redrawEnabled, _ => _redrawEnabled = _);
 
 
     map.isTransformed = function() {
@@ -1081,11 +1073,7 @@ export function rendererMap(context) {
     };
 
 
-    map.minzoom = function(val) {
-        if (!arguments.length) return _minzoom;
-        _minzoom = val;
-        return map;
-    };
+    map.minzoom = getSet(map, () => _minzoom, _ => _minzoom = _);
 
 
     map.toggleHighlightEdited = function() {

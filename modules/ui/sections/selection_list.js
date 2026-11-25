@@ -7,6 +7,7 @@ import { svgIcon } from '../../svg/icon';
 import { uiSection } from '../section';
 import { t } from '../../core/localizer';
 import { utilDisplayName, utilHighlightEntities } from '../../util';
+import { getSet } from '../../util/class';
 
 export function uiSectionSelectionList(context) {
 
@@ -28,11 +29,7 @@ export function uiSectionSelectionList(context) {
             }
         });
 
-    section.entityIDs = function(val) {
-        if (!arguments.length) return _selectedIDs;
-        _selectedIDs = val;
-        return section;
-    };
+    section.entityIDs = getSet(section, () => _selectedIDs, _ => _selectedIDs = _);
 
     function selectEntity(d3_event, entity) {
         context.enter(modeSelect(context, [entity.id]));

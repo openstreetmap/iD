@@ -16,6 +16,7 @@ import { modeSelect } from '../modes/select';
 import { osmNode } from '../osm/node';
 import { utilRebind } from '../util/rebind';
 import { utilKeybinding } from '../util';
+import { getSet } from '../util/class';
 
 export function behaviorDrawWay(context, wayID, mode, startGraph) {
     const keybinding = utilKeybinding('drawWay');
@@ -572,11 +573,7 @@ export function behaviorDrawWay(context, wayID, mode, startGraph) {
     };
 
 
-    drawWay.nodeIndex = function(val) {
-        if (!arguments.length) return _nodeIndex;
-        _nodeIndex = val;
-        return drawWay;
-    };
+    drawWay.nodeIndex = getSet(drawWay, () => _nodeIndex, _ => _nodeIndex = _);
 
 
     drawWay.activeID = function() {

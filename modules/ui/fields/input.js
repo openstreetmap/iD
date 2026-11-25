@@ -14,6 +14,7 @@ import { isColorValid } from '../../osm/tags';
 import { uiLengthIndicator } from '..';
 import { uiTooltip } from '../tooltip';
 import { utilIsValidURL } from '../../util/util';
+import { getSet } from '../../util/class';
 
 export {
     uiFieldText as uiFieldColour,
@@ -508,11 +509,7 @@ export function uiFieldText(field, context) {
     }
 
 
-    i.entityIDs = function(val) {
-        if (!arguments.length) return _entityIDs;
-        _entityIDs = val;
-        return i;
-    };
+    i.entityIDs = getSet(i, () => _entityIDs, _ => _entityIDs = _);
 
     i.tags = function(tags) {
         _tags = tags;

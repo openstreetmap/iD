@@ -16,6 +16,7 @@ import { deprecatedTagValuesByKey } from '../../osm/deprecated';
 import { osmIsoCountryKeys } from '../../osm/tags';
 import { formatTag } from './tag_title';
 import { utilSplitAtSemicolon as splitAtSemicolon } from '../../util/util';
+import { getSet } from '../../util/class';
 
 export {
     uiFieldCombo as uiFieldManyCombo,
@@ -1179,11 +1180,7 @@ export function uiFieldCombo(field, context) {
     };
 
 
-    combo.entityIDs = function(val) {
-        if (!arguments.length) return _entityIDs;
-        _entityIDs = val;
-        return combo;
-    };
+    combo.entityIDs = getSet(combo, () => _entityIDs, _ => _entityIDs = _);
 
 
     function combinedEntityExtent() {

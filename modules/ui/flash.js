@@ -1,4 +1,5 @@
 import { timeout as d3_timeout } from 'd3-timer';
+import { getSet } from '../util/class';
 
 export function uiFlash(context) {
     var _flashTimer;
@@ -81,11 +82,7 @@ export function uiFlash(context) {
     }
 
 
-    flash.duration = function(_) {
-        if (!arguments.length) return _duration;
-        _duration = _;
-        return flash;
-    };
+    flash.duration = getSet(flash, () => _duration, _ => _duration = _);
 
     flash.label = function(_) {
         if (!arguments.length) return _label;
@@ -97,17 +94,9 @@ export function uiFlash(context) {
         return flash;
     };
 
-    flash.iconName = function(_) {
-        if (!arguments.length) return _iconName;
-        _iconName = _;
-        return flash;
-    };
+    flash.iconName = getSet(flash, () => _iconName, _ => _iconName = _);
 
-    flash.iconClass = function(_) {
-        if (!arguments.length) return _iconClass;
-        _iconClass = _;
-        return flash;
-    };
+    flash.iconClass = getSet(flash, () => _iconClass, _ => _iconClass = _);
 
     return flash;
 }

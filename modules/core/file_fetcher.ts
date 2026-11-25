@@ -27,7 +27,7 @@ import type { WmfSite } from '../ui/fields/wikipedia.js';
 import type { EntityId } from '../osm/id_manager.js';
 import type { OsmEntity } from '../osm/abstract-entity.js';
 import packageJSON from '../../package.json';
-import { getSet } from '../util/class.js';
+import { getSet } from '../util/class';
 
 
 

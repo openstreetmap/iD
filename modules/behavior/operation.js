@@ -1,4 +1,5 @@
 import { t } from '../core';
+import { getSet } from '../util/class';
 
 /* Creates a keybinding behavior for an operation */
 export function behaviorOperation(context) {
@@ -74,11 +75,7 @@ export function behaviorOperation(context) {
     };
 
 
-    behavior.which = function (_) {
-        if (!arguments.length) return _operation;
-        _operation = _;
-        return behavior;
-    };
+    behavior.which = getSet(behavior, () => _operation, _ => _operation = _);
 
 
     return behavior;

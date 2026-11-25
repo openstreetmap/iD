@@ -15,6 +15,7 @@ import { modeDragNote } from './drag_note';
 import { services } from '../services';
 import { uiNoteEditor } from '../ui/note_editor';
 import { utilKeybinding } from '../util';
+import { getSet } from '../util/class';
 
 
 export function modeSelectNote(context, selectedNoteID) {
@@ -92,11 +93,7 @@ export function modeSelectNote(context, selectedNoteID) {
     };
 
 
-    mode.newFeature = function(val) {
-        if (!arguments.length) return _newFeature;
-        _newFeature = val;
-        return mode;
-    };
+    mode.newFeature = getSet(mode, () => _newFeature, _ => _newFeature = _);
 
 
     mode.enter = function() {

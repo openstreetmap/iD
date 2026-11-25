@@ -3,6 +3,7 @@ import { t } from '../core/localizer';
 
 import { geoScaleToZoom, geoVecLength } from '../geo';
 import { utilPrefixCSSProperty, utilTiler } from '../util';
+import { getSet } from '../util/class';
 
 
 export function rendererTileLayer(context) {
@@ -262,11 +263,7 @@ export function rendererTileLayer(context) {
     }
 
 
-    background.projection = function(val) {
-        if (!arguments.length) return _projection;
-        _projection = val;
-        return background;
-    };
+    background.projection = getSet(background, () => _projection, _ => _projection = _);
 
 
     background.dimensions = function(val) {
@@ -286,11 +283,7 @@ export function rendererTileLayer(context) {
     };
 
 
-    background.underzoom = function(amount) {
-        if (!arguments.length) return _underzoom;
-        _underzoom = amount;
-        return background;
-    };
+    background.underzoom = getSet(background, () => _underzoom, _ => _underzoom = _);
 
 
     return background;

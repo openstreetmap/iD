@@ -4,6 +4,7 @@ import {
 
 import { uiDisclosure } from './disclosure';
 import { utilFunctor } from '../util';
+import { getSet } from '../util/class';
 
 // A unit of controls or info to be used in a layout, such as within a pane.
 // Can be labeled and collapsible.
@@ -49,23 +50,11 @@ export function uiSection(id, context) {
         return section;
     };
 
-    section.content = function(val) {
-        if (!arguments.length) return _content;
-        _content = val;
-        return section;
-    };
+    section.content = getSet(section, () => _content, _ => _content = _);
 
-    section.disclosureContent = function(val) {
-        if (!arguments.length) return _disclosureContent;
-        _disclosureContent = val;
-        return section;
-    };
+    section.disclosureContent = getSet(section, () => _disclosureContent, _ => _disclosureContent = _);
 
-    section.disclosureExpanded = function(val) {
-        if (!arguments.length) return _disclosureExpanded;
-        _disclosureExpanded = val;
-        return section;
-    };
+    section.disclosureExpanded = getSet(section, () => _disclosureExpanded, _ => _disclosureExpanded = _);
 
     // may be called multiple times
     section.render = function(selection) {

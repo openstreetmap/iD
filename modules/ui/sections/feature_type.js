@@ -9,6 +9,7 @@ import { utilRebind } from '../../util';
 import { uiPresetIcon } from '../preset_icon';
 import { uiSection } from '../section';
 import { uiTagReference } from '../tag_reference';
+import { getSet } from '../../util/class';
 
 
 export function uiSectionFeatureType(context) {
@@ -113,11 +114,7 @@ export function uiSectionFeatureType(context) {
             .each(function(d) { d(d3_select(this)); });
     }
 
-    section.entityIDs = function(val) {
-        if (!arguments.length) return _entityIDs;
-        _entityIDs = val;
-        return section;
-    };
+    section.entityIDs = getSet(section, () => _entityIDs, _ => _entityIDs = _);
 
     section.presets = function(val) {
         if (!arguments.length) return _presets;

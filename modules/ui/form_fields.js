@@ -3,6 +3,7 @@ import { select as d3_select } from 'd3-selection';
 import { t } from '../core/localizer';
 import { uiCombobox } from './combobox';
 import { utilGetSetValue, utilNoAuto } from '../util';
+import { getSet } from '../util/class';
 
 
 export function uiFormFields(context) {
@@ -132,17 +133,9 @@ export function uiFormFields(context) {
         return formFields;
     };
 
-    formFields.state = function(val) {
-        if (!arguments.length) return _state;
-        _state = val;
-        return formFields;
-    };
+    formFields.state = getSet(formFields, () => _state, _ => _state = _);
 
-    formFields.klass = function(val) {
-        if (!arguments.length) return _klass;
-        _klass = val;
-        return formFields;
-    };
+    formFields.klass = getSet(formFields, () => _klass, _ => _klass = _);
 
 
     return formFields;

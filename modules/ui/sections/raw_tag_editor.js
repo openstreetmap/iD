@@ -14,6 +14,7 @@ import { utilGetSetValue, utilNoAuto, utilRebind, utilTagDiff } from '../../util
 import { allowUpperCaseTagValues } from '../../osm/tags';
 import { fileFetcher } from '../../core';
 import { utilDecodeLineBreaks, utilEncodeLineBreaks } from '../../util/util';
+import { getSet } from '../../util/class';
 
 
 export function uiSectionRawTagEditor(id, context) {
@@ -630,11 +631,7 @@ export function uiSectionRawTagEditor(id, context) {
     };
 
 
-    section.tags = function(val) {
-        if (!arguments.length) return _tags;
-        _tags = val;
-        return section;
-    };
+    section.tags = getSet(section, () => _tags, _ => _tags = _);
 
 
     section.entityIDs = function(val) {
@@ -648,11 +645,7 @@ export function uiSectionRawTagEditor(id, context) {
 
 
     // pass an array of regular expressions to test against the tag key
-    section.readOnlyTags = function(val) {
-        if (!arguments.length) return _readOnlyTags;
-        _readOnlyTags = val;
-        return section;
-    };
+    section.readOnlyTags = getSet(section, () => _readOnlyTags, _ => _readOnlyTags = _);
 
 
     return utilRebind(section, dispatch, 'on');

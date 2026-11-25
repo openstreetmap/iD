@@ -18,6 +18,7 @@ import { uiCombobox } from '../combobox';
 import { uiSection } from '../section';
 import { utilDisplayName, utilDisplayType, utilHighlightEntities, utilNoAuto, utilUniqueDomId } from '../../util';
 import { prefs } from '../../core';
+import { getSet } from '../../util/class';
 
 
 export function uiSectionRawMemberEditor(context) {
@@ -437,11 +438,7 @@ export function uiSectionRawMemberEditor(context) {
         }
     }
 
-    section.entityIDs = function(val) {
-        if (!arguments.length) return _entityIDs;
-        _entityIDs = val;
-        return section;
-    };
+    section.entityIDs = getSet(section, () => _entityIDs, _ => _entityIDs = _);
 
 
     return section;

@@ -10,6 +10,7 @@ import { uiOsmoseHeader } from './osmose_header';
 import { uiViewOnOsmose } from './view_on_osmose';
 
 import { utilRebind } from '../util';
+import { getSet } from '../util/class';
 
 export function uiOsmoseEditor(context) {
   const dispatch = d3_dispatch('change');
@@ -141,11 +142,7 @@ export function uiOsmoseEditor(context) {
   }
 
   // NOTE: Don't change method name until UI v3 is merged
-  osmoseEditor.error = function(val) {
-    if (!arguments.length) return _qaItem;
-    _qaItem = val;
-    return osmoseEditor;
-  };
+  osmoseEditor.error = getSet(osmoseEditor, () => _qaItem, _ => _qaItem = _);
 
   return utilRebind(osmoseEditor, dispatch, 'on');
 }

@@ -20,6 +20,7 @@ import { utilKeybinding, utilRebind, utilStringQs, utilCleanOsmString } from '..
 import { ApiError } from '../util/error';
 import type { coreGraph } from '.';
 import type { Vec2 } from '../geo/vector';
+import { getSet } from '../util/class';
 
 type Theme = 'light' | 'dark';
 
@@ -218,18 +219,10 @@ export function coreContext(this: object): coreContext {
 
   // If true, iD will update the title based on what the user is doing
   let _setsDocumentTitle = true;
-  context.setsDocumentTitle = function(val) {
-    if (!arguments.length) return _setsDocumentTitle;
-    _setsDocumentTitle = val;
-    return context;
-  } as coreContext['setsDocumentTitle'];
+  context.setsDocumentTitle = getSet(context, () => _setsDocumentTitle, _ => _setsDocumentTitle = _);
   // The part of the title that is always the same
   let _documentTitleBase = document.title;
-  context.documentTitleBase = function(val) {
-    if (!arguments.length) return _documentTitleBase;
-    _documentTitleBase = val;
-    return context;
-  } as coreContext['documentTitleBase'];
+  context.documentTitleBase = getSet(context, () => _documentTitleBase, _ => _documentTitleBase = _);
 
 
   /** User interface and keybinding */
@@ -408,11 +401,7 @@ export function coreContext(this: object): coreContext {
 
   /* History */
   let _inIntro = false;
-  context.inIntro = function(val) {
-    if (!arguments.length) return _inIntro;
-    _inIntro = val;
-    return context;
-  } as coreContext['inIntro'];
+  context.inIntro = getSet(context, () => _inIntro, _ => _inIntro = _);
 
   // Immediately save the user's history to localstorage, if possible
   // This is called sometimes, but also on the `window.onbeforeunload` handler
@@ -486,19 +475,11 @@ export function coreContext(this: object): coreContext {
   context.activeID = () => _mode && _mode.activeID && _mode.activeID();
 
   let _selectedNoteID: NoteId | null;
-  context.selectedNoteID = function(noteID) {
-    if (!arguments.length) return _selectedNoteID;
-    _selectedNoteID = noteID;
-    return context;
-  } as coreContext['selectedNoteID'];
+  context.selectedNoteID = getSet(context, () => _selectedNoteID, _ => _selectedNoteID = _);
 
   // NOTE: Don't change the name of this until UI v3 is merged
   let _selectedErrorID: string | null;
-  context.selectedErrorID = function(errorID) {
-    if (!arguments.length) return _selectedErrorID;
-    _selectedErrorID = errorID;
-    return context;
-  } as coreContext['selectedErrorID'];
+  context.selectedErrorID = getSet(context, () => _selectedErrorID, _ => _selectedErrorID = _);
 
 
   /* Behaviors */
@@ -519,11 +500,7 @@ export function coreContext(this: object): coreContext {
   } as coreContext['copyIDs'];
 
   let _copyLonLat: Vec2 | null;
-  context.copyLonLat = function(val) {
-    if (!arguments.length) return _copyLonLat;
-    _copyLonLat = val;
-    return context;
-  } as coreContext['copyLonLat'];
+  context.copyLonLat = getSet(context, () => _copyLonLat, _ => _copyLonLat = _);
 
 
   /* Background */
@@ -606,11 +583,7 @@ export function coreContext(this: object): coreContext {
   } as coreContext['theme'];
 
   let _embed: boolean;
-  context.embed = function(val) {
-    if (!arguments.length) return _embed;
-    _embed = val;
-    return context;
-  } as coreContext['embed'];
+  context.embed = getSet(context, () => _embed, _ => _embed = _);
 
 
   /* Assets */

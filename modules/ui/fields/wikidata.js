@@ -7,6 +7,7 @@ import { svgIcon } from '../../svg/icon';
 import { utilGetSetValue, utilNoAuto, utilRebind } from '../../util';
 import { uiCombobox } from '../combobox';
 import { t } from '../../core/localizer';
+import { getSet } from '../../util/class';
 
 
 export function uiFieldWikidata(field, context) {
@@ -384,11 +385,7 @@ export function uiFieldWikidata(field, context) {
     }
 
 
-    wiki.entityIDs = function(val) {
-        if (!arguments.length) return _entityIDs;
-        _entityIDs = val;
-        return wiki;
-    };
+    wiki.entityIDs = getSet(wiki, () => _entityIDs, _ => _entityIDs = _);
 
 
     wiki.focus = function() {

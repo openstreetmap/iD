@@ -6,6 +6,7 @@ import { svgIcon } from '../svg/icon';
 import { services } from '../services';
 import { localeDateString } from '../util/date';
 import { utilSanitizeHTML } from '../util/sanitize';
+import { getSet } from '../util/class';
 
 
 export function uiNoteComments() {
@@ -110,11 +111,7 @@ export function uiNoteComments() {
     }
 
 
-    noteComments.note = function(val) {
-        if (!arguments.length) return _note;
-        _note = val;
-        return noteComments;
-    };
+    noteComments.note = getSet(noteComments, () => _note, _ => _note = _);
 
 
     return noteComments;

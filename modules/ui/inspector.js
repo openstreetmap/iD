@@ -4,6 +4,7 @@ import { select as d3_select } from 'd3-selection';
 import { uiEntityEditor } from './entity_editor';
 import { uiPresetList } from './preset_list';
 import { uiViewOnOSM } from './view_on_osm';
+import { getSet } from '../util/class';
 
 
 export function uiInspector(context) {
@@ -178,18 +179,9 @@ export function uiInspector(context) {
     };
 
 
-    inspector.entityIDs = function(val) {
-        if (!arguments.length) return _entityIDs;
-        _entityIDs = val;
-        return inspector;
-    };
+    inspector.entityIDs = getSet(inspector, () => _entityIDs, _ => _entityIDs = _);
 
-
-    inspector.newFeature = function(val) {
-        if (!arguments.length) return _newFeature;
-        _newFeature = val;
-        return inspector;
-    };
+    inspector.newFeature = getSet(inspector, () => _newFeature, _ => _newFeature = _);
 
 
     return inspector;

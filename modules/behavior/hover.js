@@ -7,6 +7,7 @@ import {
 import { presetManager } from '../presets';
 import { OsmAbstractEntity, osmNote, QAItem } from '../osm';
 import { utilKeybinding, utilRebind } from '../util';
+import { getSet } from '../util/class';
 
 /*
    The hover behavior adds the `.hover` class on pointerover to all elements to which
@@ -213,17 +214,9 @@ export function behaviorHover(context) {
     };
 
 
-    behavior.altDisables = function(val) {
-        if (!arguments.length) return _altDisables;
-        _altDisables = val;
-        return behavior;
-    };
+    behavior.altDisables = getSet(behavior, () => _altDisables, _ => _altDisables = _);
 
-    behavior.ignoreVertex = function(val) {
-        if (!arguments.length) return _ignoreVertex;
-        _ignoreVertex = val;
-        return behavior;
-    };
+    behavior.ignoreVertex = getSet(behavior, () => _ignoreVertex, _ => _ignoreVertex = _);
 
     behavior.initialNodeID = function(nodeId) {
         _initialNodeID = nodeId;

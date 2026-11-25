@@ -7,6 +7,7 @@ import {
     utilCleanOsmString
 } from '../util';
 import { uiPopover } from './popover';
+import { getSet } from '../util/class';
 
 
 export function uiLengthIndicator(maxChars) {
@@ -58,11 +59,7 @@ export function uiLengthIndicator(maxChars) {
         }
     };
 
-    lengthIndicator.silent = function(val) {
-        if (!arguments.length) return _silent;
-        _silent = val;
-        return lengthIndicator;
-    };
+    lengthIndicator.silent = getSet(lengthIndicator, () => _silent, _ => _silent = _);
 
     return lengthIndicator;
 }

@@ -4,6 +4,7 @@ import {
 
 import { t } from '../core/localizer';
 import { modeBrowse } from '../modes/browse';
+import { getSet } from '../util/class';
 
 
 export function uiSourceSwitch(context) {
@@ -48,11 +49,7 @@ export function uiSourceSwitch(context) {
     };
 
 
-    sourceSwitch.keys = function(_) {
-        if (!arguments.length) return keys;
-        keys = _;
-        return sourceSwitch;
-    };
+    sourceSwitch.keys = getSet(sourceSwitch, () => keys, _ => keys = _);
 
 
     return sourceSwitch;

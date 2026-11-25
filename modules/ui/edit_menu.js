@@ -8,6 +8,7 @@ import { utilRebind } from '../util/rebind';
 import { utilHighlightEntities } from '../util/util';
 import { utilGetDimensions } from '../util/dimensions';
 import { svgIcon } from '../svg/icon';
+import { getSet } from '../util/class';
 
 
 export function uiEditMenu(context) {
@@ -328,17 +329,9 @@ export function uiEditMenu(context) {
         return editMenu;
     };
 
-    editMenu.triggerType = function(val) {
-        if (!arguments.length) return _triggerType;
-        _triggerType = val;
-        return editMenu;
-    };
+    editMenu.triggerType = getSet(editMenu, () => _triggerType, _ => _triggerType = _);
 
-    editMenu.operations = function(val) {
-        if (!arguments.length) return _operations;
-        _operations = val;
-        return editMenu;
-    };
+    editMenu.operations = getSet(editMenu, () => _operations, _ => _operations = _);
 
     return utilRebind(editMenu, dispatch, 'on');
 }

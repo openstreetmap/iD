@@ -18,6 +18,7 @@ import { localeTimestamp } from '../util/date.js';
 import type { coreContext } from '../core/context.js';
 import type { Vec2 } from '../geo/vector.js';
 import type { osmChangeset } from '../osm/changeset.js';
+import { getSet } from '../util/class';
 
 
 type Resource = {
@@ -429,18 +430,9 @@ export function uiSuccess(context: coreContext) {
     }
 
 
-    success.changeset = function(val: osmChangeset) {
-        if (!arguments.length) return _changeset;
-        _changeset = val;
-        return success;
-    };
+    success.changeset = getSet(success, () => _changeset, _ => _changeset = _);
 
-
-    success.location = function(val: string) {
-        if (!arguments.length) return _location;
-        _location = val;
-        return success;
-    };
+    success.location = getSet(success, () => _location, _ => _location = _);
 
 
     return utilRebind(success, dispatch, 'on');

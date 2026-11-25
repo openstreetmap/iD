@@ -11,6 +11,7 @@ import { uiFields } from './fields';
 import { LANGUAGE_SUFFIX_REGEX } from './fields/localized';
 import { uiTagReference } from './tag_reference';
 import { utilRebind, utilUniqueDomId } from '../util';
+import { getSet } from '../util/class';
 
 
 export function uiField(context, presetField, entityIDs, options) {
@@ -289,11 +290,7 @@ export function uiField(context, presetField, entityIDs, options) {
     };
 
 
-    field.state = function(val) {
-        if (!arguments.length) return _state;
-        _state = val;
-        return field;
-    };
+    field.state = getSet(field, () => _state, _ => _state = _);
 
 
     field.tags = function(val) {
@@ -312,11 +309,7 @@ export function uiField(context, presetField, entityIDs, options) {
     };
 
 
-    field.locked = function(val) {
-        if (!arguments.length) return _locked;
-        _locked = val;
-        return field;
-    };
+    field.locked = getSet(field, () => _locked, _ => _locked = _);
 
 
     field.show = function() {
