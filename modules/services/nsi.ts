@@ -46,12 +46,14 @@ interface KVN {
     k: string;
     v: string;
     n: string;
+    projection: TagProjection;
 }
 
 const WHICH = <const>['primary', 'alternate'];
 type Which = (typeof WHICH)[number];
 
 type KVs = Record<Which, Set<string>>;
+type TagProjection = 'all' | 'identity';
 
 // DATA
 
@@ -251,6 +253,7 @@ function loadNsiData() {
 function gatherKVs(tags: Tags) {
   let primary = new Set<string>();
   let alternate = new Set<string>();
+  const projections = new Map<string, TagProjection>();
 
   Object.keys(tags).forEach(osmkey => {
     const osmvalue = tags[osmkey];
@@ -276,9 +279,10 @@ function gatherKVs(tags: Tags) {
   const preset = presetManager.matchTags(tags, 'area')!;
   if (buildingPreset[preset.id]) {
     alternate.add('building/yes');
+    projections.set('building/yes', 'identity');
   }
 
-  return { primary: primary, alternate: alternate };
+  return { primary: primary, alternate: alternate, projections: projections };
 }
 
 
@@ -445,8 +449,8 @@ function gatherNames(tags: Tags): KVs {
 // Returns
 //   `Array`: tuple objects ordered by priority
 //
-function gatherTuples(tryKVs: KVs, tryNames: KVs) {
-  let tuples: KVN[] = [];
+function gatherTuples(tryKVs: ReturnType<typeof gatherKVs>, tryNames: KVs) {
+  const tuples: KVN[] = [];
   WHICH.forEach(whichName => {
     // test names longest to shortest
     const arr = Array.from(tryNames[whichName]).sort((a, b) => b.length - a.length);
@@ -456,12 +460,46 @@ function gatherTuples(tryKVs: KVs, tryNames: KVs) {
           const parts = kv.split('/', 2);
           const k = parts[0];
           const v = parts[1];
-          tuples.push({ k: k, v: v, n: n });
+
+          tuples.push({
+            k: k,
+            v: v,
+            n: n,
+            projection: tryKVs.projections.get(kv) ?? 'all'
+          });
         });
       });
     });
   });
   return tuples;
+}
+
+// `getSuggestedTags()`
+// Get tags from an NSI item based on the tag projection to apply.
+//
+// Arguments
+//   `item`: NSI item containing suggested tags
+//   `projection`: `TagProjection` controlling which tags to apply
+// Returns
+//   `Object`: tags selected from the NSI item
+//
+function getSuggestedTags(item: NsiItem, projection: TagProjection): Tags {
+  if (projection === 'all') return item.tags;
+
+  const tree = _nsi.trees[item.tkv.split('/', 1)[0] as NsiTree];
+
+  const identityTags = new Set([
+    ...(tree.sourceTags || []),
+    item.mainTag,
+    item.mainTag.replace(/:wikidata$/, ':wikipedia'),
+    item.mainTag.replace(/:wikidata$/, '')
+  ]);
+
+  return Object.fromEntries(
+    Object.entries(item.tags).filter(([key]) =>
+      key !== 'building' && identityTags.has(key)
+    )
+  );
 }
 
 
@@ -603,7 +641,7 @@ function _upgradeTags(tags: Tags, loc: Vec2) {
     }
 
     // Do the tag upgrade
-    Object.assign(newTags, item.tags, keepTags);
+    Object.assign(newTags, getSuggestedTags(item, tuple.projection), keepTags);
 
     // Swap `route` back to `route_master` - name-suggestion-index#5184
     if (isRouteMaster) {

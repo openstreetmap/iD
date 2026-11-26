@@ -19,7 +19,24 @@ describe('iD.serviceNsi', function () {
                             tags: { brand: 'Examplestan', 'brand:wikidata': 'Q99999999999999', name: 'Examplestan', shop: 'supermarket' }
                         }
                     ]
-                }
+                },
+                'operators/power/transformer': {
+                    properties: { path: 'operators/power/transformer' },
+                    items: [
+                        {
+                            mainTag: '',
+                            tkv: '',
+                            id: 'sydneytrains-17e0e3',
+                            displayName: 'Sydney Trains',
+                            locationSet: { include: ['Q2'] },
+                            tags: {
+                                operator: 'Sydney Trains',
+                                'operator:wikidata': 'Q7660181',
+                                power: 'transformer'
+                            }
+                        }
+                    ]
+                },
             }
         };
         iD.fileFetcher.cache().nsi_features = { type: 'FeatureCollection', features: [] };
@@ -34,7 +51,15 @@ describe('iD.serviceNsi', function () {
                     nameTags: { primary: '', alternate: '' },
                     mainTag: 'brand:wikidata'
                 },
-                operators: undefined as never,
+                operators: {
+                    emoji: '💼',
+                    mainTag: 'operator:wikidata',
+                    sourceTags: ['operator'],
+                    nameTags: {
+                        primary: '^(name|name:[\\w-]+|operator|operator:[\\w-]+)$',
+                        alternate: '^(brand|brand:[\\w-]+|brand:short:[\\w-]+|operator:short:[\\w-]+|\\w+_name|\\w+_name:[\\w-]+)$'
+                    }
+                },
                 transit: undefined as never,
                 flags: undefined as never,
             }
@@ -43,10 +68,18 @@ describe('iD.serviceNsi', function () {
           genericWords: []
         };
         iD.fileFetcher.cache().preset_presets = {
+            'building/office': {
+                name: 'Office',
+                geometry: ['area'],
+                tags: {
+                    building: 'office'
+                }
+            }
         };
     });
 
     beforeEach(async () => {
+        await iD.presetManager.ensureLoaded(true);
         await iD.coreContext().assetPath('../dist/').init(true);
     });
 
@@ -73,6 +106,23 @@ describe('iD.serviceNsi', function () {
             expect(result?.newTags).toEqual({
                 shop: 'supermarket', name: 'Examplestan', brand: 'Examplestan', 'brand:wikidata': 'Q99999999999999'
             });
+        });
+
+        it('does not suggest unrelated feature tags for the Sydney Trains HQ office building', () => {
+            const originalTags = {
+                building: 'office',
+                wikidata: 'Q7660181',
+                name: 'Sydney Trains HQ'
+            };
+            const result = iD.services.nsi.upgradeTags(originalTags, nullIslandLocation);
+            expect(result).not.toBeNull();
+            expect(result?.newTags).toEqual({
+                building: 'office',
+                name: 'Sydney Trains HQ',
+                operator: 'Sydney Trains',
+                'operator:wikidata': 'Q7660181'
+            });
+            expect(result?.newTags).not.toHaveProperty('power');
         });
     });
 });
