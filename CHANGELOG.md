@@ -64,6 +64,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 * Improve wording for "connect the features (manually)" fix for routing-islands validator, and show tooltip with further instructions ([#8402])
 * Show all `mutually_exclusive_tags` validation warnings when there are multiple present on a single object ([#13016], thanks [@matkoniecz])
 * Show "reset ignored issues" button also if only a part of the visible issues have been ignored ([#7978])
+* Warn about multipolygons whose only member is a closed way, with a fix converting them to a basic area ([#12643])
 #### :bug: Bugfixes
 * Preserve universal fields when changing presets ([#13105], thanks [@Hirdyansh-bh])
 * Fix crash when using the osmose integration ([#13043], [#13074], thanks [@k-yle])
@@ -123,6 +124,7 @@ _Breaking developer changes, which may affect downstream projects or sites that 
 [#12000]: https://github.com/openstreetmap/iD/pull/12000
 [#12340]: https://github.com/openstreetmap/iD/pull/12340
 [#12540]: https://github.com/openstreetmap/iD/issues/12540
+[#12643]: https://github.com/openstreetmap/iD/issues/12643
 [#12678]: https://github.com/openstreetmap/iD/pull/12678
 [#12679]: https://github.com/openstreetmap/iD/pull/12679
 [#12704]: https://github.com/openstreetmap/iD/pull/12704
