@@ -2,7 +2,6 @@ import { t } from '../core/localizer';
 import { modeDrawLine } from '../modes/draw_line';
 import { behaviorOperation } from '../behavior/operation';
 import { utilArrayGroupBy } from '../util';
-import { actionChangeTags } from '../actions';
 
 
 export function operationContinue(context, selectedIDs) {
@@ -17,8 +16,7 @@ export function operationContinue(context, selectedIDs) {
 
     function candidateWays() {
         return _vertex ? context.graph().parentWays(_vertex).filter(function(parent) {
-            const geom = parent.geometry(context.graph());
-            return (geom === 'line' || geom === 'area') &&
+            return parent.geometry(context.graph()) === 'line' &&
                 !parent.isClosed() &&
                 parent.affix(_vertex.id) &&
                 (_geometries.line.length === 0 || _geometries.line[0] === parent);
@@ -30,23 +28,6 @@ export function operationContinue(context, selectedIDs) {
 
     var operation = function() {
         var candidate = _candidates[0];
-
-        // remove fixme=continue or noexit=yes from the vertex.
-        const tagsToRemove = new Set();
-        if (_vertex.tags.fixme === 'continue') tagsToRemove.add('fixme');
-        if (_vertex.tags.noexit === 'yes') tagsToRemove.add('noexit');
-
-        if (tagsToRemove.size) {
-            context.perform((graph) => {
-                const newTags = { ..._vertex.tags };
-                for (const key of tagsToRemove) {
-                    delete newTags[key];
-                }
-
-                return actionChangeTags(_vertex.id, newTags)(graph);
-            }, operation.annotation());
-        }
-
         context.enter(
             modeDrawLine(context, candidate.id, context.graph(), 'line', candidate.affix(_vertex.id), true)
         );

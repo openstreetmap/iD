@@ -4,29 +4,18 @@ import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { json as d3_json } from 'd3-fetch';
 
 import { marked } from 'marked';
-import { PbfReader } from 'pbf';
-import { VectorTile } from '@mapbox/vector-tile';
 
 import { fileFetcher } from '../core/file_fetcher';
 import { localizer } from '../core/localizer';
 import { geoExtent, geoVecAdd } from '../geo';
 import { QAItem } from '../osm';
 import { utilRebind, utilTiler, utilQsString } from '../util';
-import { ApiError } from '../util/error';
 
 const tiler = utilTiler();
 const dispatch = d3_dispatch('loaded');
 const _tileZoom = 14;
 const _osmoseUrlRoot = 'https://osmose.openstreetmap.fr/api/0.3';
 let _osmoseData = { icons: {}, items: [] };
-
-/** @typedef {{
-    osmose: {
-        icons: {
-            [id: string]: string;
-        }
-    };
-}} QAData */
 
 // This gets reassigned if reset
 let _cache;
@@ -134,26 +123,18 @@ export default {
       if (_cache.loadedTile[tile.id] || _cache.inflightTile[tile.id]) return;
 
       let [ x, y, z ] = tile.xyz;
-      let url = `${_osmoseUrlRoot}/issues/${z}/${x}/${y}.mvt?` + utilQsString(params);
+      let url = `${_osmoseUrlRoot}/issues/${z}/${x}/${y}.geojson?` + utilQsString(params);
 
       let controller = new AbortController();
       _cache.inflightTile[tile.id] = controller;
 
-      fetch(url, { signal: controller.signal })
-        .then(data => data.arrayBuffer())
+      d3_json(url, { signal: controller.signal })
         .then(data => {
           delete _cache.inflightTile[tile.id];
           _cache.loadedTile[tile.id] = true;
 
-          var vectorTile = new VectorTile(new PbfReader(data));
-          data = vectorTile.layers.issues;
-          const features = [];
-          for (let i = 0; i < data.length; i++) {
-            features.push(data.feature(i).toGeoJSON(x, y, z));
-          }
-
-          if (features.length > 0) {
-            features.forEach(issue => {
+          if (data.features) {
+            data.features.forEach(issue => {
               const { item, class: cl, uuid: id } = issue.properties;
               /* Osmose issues are uniquely identified by a unique
                 `item` and `class` combination (both integer values) */
@@ -236,7 +217,9 @@ export default {
 
         // If null default value is reached, data wasn't as expected (or was empty)
         if (!cl) {
-          console.error(`Osmose strings request (${itemType}) had unexpected data`);
+          /* eslint-disable no-console */
+          console.log(`Osmose strings request (${itemType}) had unexpected data`);
+          /* eslint-enable no-console */
           return;
         }
 
@@ -273,7 +256,7 @@ export default {
 
   getStrings(itemType, locale=localizer.localeCode()) {
     // No need to fallback to English, Osmose API handles this for us
-    return _cache.strings[locale]?.[itemType] || {};
+    return (locale in _cache.strings) ? _cache.strings[locale][itemType] : {};
   },
 
   getColor(itemType) {
@@ -282,7 +265,7 @@ export default {
 
   postUpdate(issue, callback) {
     if (_cache.inflightPost[issue.id]) {
-      return callback(new ApiError('Issue update already inflight', -2), issue);
+      return callback({ message: 'Issue update already inflight', status: -2 }, issue);
     }
 
     // UI sets the status to either 'done' or 'false'
@@ -308,7 +291,7 @@ export default {
       .then(after)
       .catch(err => {
         delete _cache.inflightPost[issue.id];
-        if (callback) callback(err);
+        if (callback) callback(err.message);
       });
   },
 

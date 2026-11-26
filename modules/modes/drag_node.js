@@ -140,12 +140,12 @@ export function modeDragNode(context) {
                     .iconName('#iD-icon-no')
                     .label(t.append('modes.drag_node.connected_to_hidden'))();
             }
-            return cancel();
+            return drag.cancel();
         }
 
         if (_wasMidpoint) {
             var midpoint = entity;
-            entity = new osmNode();
+            entity = osmNode();
             context.perform(actionAddMidpoint(midpoint, entity));
             entity = context.entity(entity.id);   // get post-action entity
 
@@ -279,7 +279,7 @@ export function modeDragNode(context) {
 
         // if snapping to way - add midpoint there and consider that the target..
         if (edge) {
-            var midpoint = new osmNode();
+            var midpoint = osmNode();
             var action = actionAddMidpoint({
                 loc: edge.loc,
                 edge: [target.nodes[edge.index - 1], target.nodes[edge.index]]
@@ -301,6 +301,7 @@ export function modeDragNode(context) {
 
         for (i = 0; i < parents.length; i++) {
             var parent = parents[i];
+            var nodes = [];
             var activeIndex = null;    // which multipolygon ring contains node being dragged
 
             // test any parent multipolygons for valid geometry
@@ -312,7 +313,7 @@ export function modeDragNode(context) {
 
                 // find active ring and test it for self intersections
                 for (k = 0; k < rings.length; k++) {
-                    const nodes = rings[k].nodes;
+                    nodes = rings[k].nodes;
                     if (nodes.find(function(n) { return n.id === entity.id; })) {
                         activeIndex = k;
                         if (geoHasSelfIntersections(nodes, entity.id)) {
@@ -326,10 +327,6 @@ export function modeDragNode(context) {
                 for (k = 0; k < rings.length; k++) {
                     if (k === activeIndex) continue;
 
-                    // if the node being dragged belongs to both rings,
-                    // then don't test for intersections (see #9777)
-                    if (rings[k].nodes.some(n => n.id === entity.id)) continue;
-
                     // make sure active ring doesn't cross passive rings
                     if (geoHasLineIntersections(rings[activeIndex].nodes, rings[k].nodes, entity.id)) {
                         return 'multipolygonRing';
@@ -341,7 +338,7 @@ export function modeDragNode(context) {
             // If we still haven't tested this node's parent way for self-intersections.
             // (because it's not a member of a multipolygon), test it now.
             if (activeIndex === null) {
-                const nodes = parent.nodes.map(function(nodeID) { return graph.entity(nodeID); });
+                nodes = parent.nodes.map(function(nodeID) { return graph.entity(nodeID); });
                 if (nodes.length && geoHasSelfIntersections(nodes, entity.id)) {
                     return parent.geometry(graph);
                 }

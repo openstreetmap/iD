@@ -4,13 +4,13 @@ import { prefs } from './preferences';
 import { coreDifference } from './difference';
 import { geoExtent } from '../geo/extent';
 import { modeSelect } from '../modes/select';
-import { utilArrayChunk, utilArrayDifference, utilArrayGroupBy, utilArrayIntersection, utilArrayUnion, utilEntityAndDeepMemberIDs, utilRebind } from '../util';
+import { utilArrayChunk, utilArrayGroupBy, utilEntityAndDeepMemberIDs, utilRebind } from '../util';
 import * as Validations from '../validations/index';
 
 
 export function coreValidator(context) {
   let dispatch = d3_dispatch('validated', 'focusedIssue');
-  const validator = {};
+  let validator = utilRebind({}, dispatch, 'on');
 
   let _rules = {};
   let _disabledRules = {};
@@ -42,13 +42,12 @@ export function coreValidator(context) {
 
   const _errorOverrides = parseHashParam(context.initialHashParams.validationError);
   const _warningOverrides = parseHashParam(context.initialHashParams.validationWarning);
-  const _suggestionOverrides = parseHashParam(context.initialHashParams.validationSuggestion);
   const _disableOverrides = parseHashParam(context.initialHashParams.validationDisable);
 
   // `parseHashParam()`   (private)
   // Checks hash parameters for severity overrides
   // Arguments
-  //   `param` - a url hash parameter (`validationError`, `validationWarning`, `validationSuggestion`, or `validationDisable`)
+  //   `param` - a url hash parameter (`validationError`, `validationWarning`, or `validationDisable`)
   // Returns
   //   Array of Objects like { type: RegExp, subtype: RegExp }
   //
@@ -273,9 +272,13 @@ export function coreValidator(context) {
     // because that is the graph that the calling code will be using.
     const graph = context.graph();
     let selectID;
+    let focusCenter;
 
     // Try to focus the map at the center of the issue..
-    let issueExtent = issue.extent(graph);
+    const issueExtent = issue.extent(graph);
+    if (issueExtent) {
+      focusCenter = issueExtent.center();
+    }
 
     // Try to select the first entity in the issue..
     if (issue.entityIds && issue.entityIds.length) {
@@ -295,13 +298,15 @@ export function coreValidator(context) {
         }
 
         if (nodeID) {
-          issueExtent = graph.entity(nodeID).extent(graph);
+          focusCenter = graph.entity(nodeID).loc;
         }
       }
     }
 
-    // Adjust the view
-    context.map().zoomToEase(issueExtent);
+    if (focusCenter) {  // Adjust the view
+      const setZoom = Math.max(context.map().zoom(), 19);
+      context.map().unobscuredCenterZoomEase(focusCenter, setZoom);
+    }
 
     if (selectID) {  // Enter select mode
       window.setTimeout(() => {
@@ -313,7 +318,7 @@ export function coreValidator(context) {
 
 
   // `getIssuesBySeverity()`
-  // Gets the issues then groups them by error/warning/suggestion
+  // Gets the issues then groups them by error/warning
   // (This just calls getIssues, then puts issues in groups)
   //
   // Arguments
@@ -322,15 +327,13 @@ export function coreValidator(context) {
   //   Object result like:
   //   {
   //     error:    Array of errors,
-  //     warning:  Array of warnings,
-  //     suggestion:  Array of suggestions,
+  //     warning:  Array of warnings
   //   }
   //
   validator.getIssuesBySeverity = (options) => {
     let groups = utilArrayGroupBy(validator.getIssues(options), 'severity');
     groups.error = groups.error || [];
     groups.warning = groups.warning || [];
-    groups.suggestion = groups.suggestion || [];
     return groups;
   };
 
@@ -492,40 +495,13 @@ export function coreValidator(context) {
     _headCache.graph = currGraph;  // take snapshot
     _completeDiff = context.history().difference().complete();
     const incrementalDiff = coreDifference(prevGraph, currGraph);
-    const diff = Object.keys(incrementalDiff.complete());
-    const entityIDs = _headCache.withAllRelatedEntities(diff);  // expand set
+    let entityIDs = Object.keys(incrementalDiff.complete());
+    entityIDs = _headCache.withAllRelatedEntities(entityIDs);  // expand set
 
     if (!entityIDs.size) {
       dispatch.call('validated');
       return Promise.resolve();
     }
-
-    // revalidate also connected (or previously connected) entities to the current way
-    // https://github.com/openstreetmap/iD/issues/8758
-    const addConnectedWays = graph => diff
-      .filter(entityID => graph.hasEntity(entityID))
-      .map(entityID    => graph.entity(entityID))
-      .flatMap(entity  => graph.childNodes(entity))
-      .flatMap(vertex  => graph.parentWays(vertex))
-      .forEach(way => entityIDs.add(way.id));
-    addConnectedWays(currGraph);
-    addConnectedWays(prevGraph);
-
-    // revalidate entities with changed relation memberships
-    // https://github.com/openstreetmap/iD/issues/10786
-    Object.values({...incrementalDiff.created(), ...incrementalDiff.deleted()})
-      .filter(e => e.type === 'relation')
-      .flatMap(r => r.members)
-      .forEach(m => entityIDs.add(m.id));
-    Object.values(incrementalDiff.modified())
-      .filter(e => e.type === 'relation')
-      .map(r => ({ baseEntity: prevGraph.entity(r.id), headEntity: r }))
-      .forEach(({ baseEntity, headEntity }) => {
-        const bm = baseEntity.members.map(m => m.id);
-        const hm = headEntity.members.map(m => m.id);
-        const symDiff = utilArrayDifference(utilArrayUnion(bm, hm), utilArrayIntersection(bm, hm));
-        symDiff.forEach(id => entityIDs.add(id));
-      });
 
     _headPromise = validateEntitiesAsync(entityIDs, _headCache)
       .then(() => updateResolvedIssues(entityIDs))
@@ -608,7 +584,7 @@ export function coreValidator(context) {
     function runValidation(key) {
       const fn = _rules[key];
       if (typeof fn !== 'function') {
-        console.error('no such validation rule = ' + key);
+        console.error('no such validation rule = ' + key);  // eslint-disable-line no-console
         return;
       }
 
@@ -636,12 +612,6 @@ export function coreValidator(context) {
         for (i = 0; i < _warningOverrides.length; i++) {
           if (_warningOverrides[i].type.test(type) && _warningOverrides[i].subtype.test(subtype)) {
             issue.severity = 'warning';
-            return true;
-          }
-        }
-        for (i = 0; i < _suggestionOverrides.length; i++) {
-          if (_suggestionOverrides[i].type.test(type) && _suggestionOverrides[i].subtype.test(subtype)) {
-            issue.severity = 'suggestion';
             return true;
           }
         }
@@ -803,7 +773,7 @@ export function coreValidator(context) {
   }
 
 
-  return utilRebind(validator, dispatch, 'on');
+  return validator;
 }
 
 

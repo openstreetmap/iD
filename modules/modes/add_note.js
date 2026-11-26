@@ -4,7 +4,6 @@ import { modeBrowse } from './browse';
 import { modeSelectNote } from './select_note';
 import { osmNote } from '../osm';
 import { services } from '../services';
-import { utilIsDrawing } from '../util/util';
 
 
 export function modeAddNote(context) {
@@ -25,7 +24,7 @@ export function modeAddNote(context) {
         var osm = services.osm;
         if (!osm) return;
 
-        var note = new osmNote({ loc: loc, status: 'open', comments: [] });
+        var note = osmNote({ loc: loc, status: 'open', comments: [] });
         osm.replaceNote(note);
 
         // force a reraw (there is no history change that would otherwise do this)
@@ -41,7 +40,6 @@ export function modeAddNote(context) {
         context.enter(modeBrowse(context));
     }
 
-    mode.disabled = () => utilIsDrawing(context.mode().id);
 
     mode.enter = function() {
         context.install(behavior);

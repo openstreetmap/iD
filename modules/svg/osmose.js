@@ -1,4 +1,4 @@
-import { throttle } from 'es-toolkit';
+import _throttle from 'lodash-es/throttle';
 import { select as d3_select } from 'd3-selection';
 
 import { modeBrowse } from '../modes/browse';
@@ -9,7 +9,7 @@ let _layerEnabled = false;
 let _qaService;
 
 export function svgOsmose(projection, context, dispatch) {
-  const throttledRedraw = throttle(() => dispatch.call('change'), 1000);
+  const throttledRedraw = _throttle(() => dispatch.call('change'), 1000);
   const minZoom = 12;
 
   let touchLayer = d3_select(null);
@@ -214,7 +214,7 @@ export function svgOsmose(projection, context, dispatch) {
       getService().loadStrings()
         .then(layerOn)
         .catch(err => {
-          console.error(err);
+          console.log(err); // eslint-disable-line no-console
         });
     } else {
       layerOff();

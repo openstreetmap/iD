@@ -1,12 +1,10 @@
-import { select as d3_select } from 'd3-selection';
-
 describe('iD.behaviorHover', function() {
     var _container;
     var _context;
     var _graph;
 
     beforeEach(function() {
-        _container = d3_select('body').append('div');
+        _container = d3.select('body').append('div');
         _context = {
             hover: function() {},
             mode: function() { return { id: 'browse' }; },
@@ -23,20 +21,20 @@ describe('iD.behaviorHover', function() {
         it('removes the .hover class from all elements', function () {
             _container.append('span').attr('class', 'hover');
             _container.call(iD.behaviorHover(_context).off);
-            expect(_container.select('span').classed('hover')).toBe(false);
+            expect(_container.select('span').classed('hover')).to.be.false;
         });
         it('removes the .hover-disabled class from the surface element', function () {
             _container.attr('class', 'hover-disabled');
             _container.call(iD.behaviorHover(_context).off);
-            expect(_container.classed('hover-disabled')).toBe(false);
+            expect(_container.classed('hover-disabled')).to.be.false;
         });
     });
 
     describe('mouseover and mouseout', function () {
         it('adds the .hover class to all elements to which the same datum is bound', function () {
-            var a = new iD.osmNode({id: 'a'});
-            var b = new iD.osmNode({id: 'b'});
-            _graph = new iD.coreGraph([a, b]);
+            var a = iD.osmNode({id: 'a'});
+            var b = iD.osmNode({id: 'b'});
+            _graph = iD.coreGraph([a, b]);
 
             _container.selectAll('span')
                 .data([a, b, a, b])
@@ -45,17 +43,17 @@ describe('iD.behaviorHover', function() {
             _container.call(iD.behaviorHover(_context));
             iD.utilTriggerEvent(_container.select('.a'), 'mouseover');
 
-            expect(_container.selectAll('.a.hover').size()).toEqual(2);
-            expect(_container.selectAll('.b.hover').size()).toEqual(0);
+            expect(_container.selectAll('.a.hover').size()).to.eql(2);
+            expect(_container.selectAll('.b.hover').size()).to.eql(0);
 
             iD.utilTriggerEvent(_container.select('.a'), 'mouseout');
-            expect(_container.selectAll('.hover').size()).toEqual(0);
+            expect(_container.selectAll('.hover').size()).to.eql(0);
         });
 
         it('adds the .hover class to all members of a relation', function() {
-            var a = new iD.osmRelation({id: 'a', members: [{id: 'b'}]});
-            var b = new iD.osmNode({id: 'b'});
-            _graph = new iD.coreGraph([a, b]);
+            var a = iD.osmRelation({id: 'a', members: [{id: 'b'}]});
+            var b = iD.osmNode({id: 'b'});
+            _graph = iD.coreGraph([a, b]);
 
             _container.selectAll('span')
                 .data([a, b])
@@ -64,11 +62,11 @@ describe('iD.behaviorHover', function() {
             _container.call(iD.behaviorHover(_context));
             iD.utilTriggerEvent(_container.selectAll('.a'), 'mouseover');
 
-            expect(_container.selectAll('.a.hover').size()).toEqual(1);
-            expect(_container.selectAll('.b.hover').size()).toEqual(1);
+            expect(_container.selectAll('.a.hover').size()).to.eql(1);
+            expect(_container.selectAll('.b.hover').size()).to.eql(1);
 
             iD.utilTriggerEvent(_container.selectAll('.a'), 'mouseout');
-            expect(_container.selectAll('.hover').size()).toEqual(0);
+            expect(_container.selectAll('.hover').size()).to.eql(0);
         });
     });
 
@@ -77,18 +75,18 @@ describe('iD.behaviorHover', function() {
             _container.append('span').attr('class', 'hover');
             _container.call(iD.behaviorHover(_context).altDisables(true));
 
-            window.dispatchEvent(new KeyboardEvent('keydown', { keyCode: 18 }));
-            expect(_container.selectAll('.hover').size()).toEqual(0);
-            expect(_container.selectAll('.hover-suppressed').size()).toEqual(1);
-            window.dispatchEvent(new KeyboardEvent('keyup', { keyCode: 18 }));
+            happen.keydown(window, { keyCode: 18 });
+            expect(_container.selectAll('.hover').size()).to.eql(0);
+            expect(_container.selectAll('.hover-suppressed').size()).to.eql(1);
+            happen.keyup(window, { keyCode: 18 });
         });
 
         it('adds the .hover-disabled class to the surface', function () {
             _container.call(iD.behaviorHover(_context).altDisables(true));
 
-            window.dispatchEvent(new KeyboardEvent('keydown', { keyCode: 18 }));
-            expect(_container.classed('hover-disabled')).toBe(true);
-            window.dispatchEvent(new KeyboardEvent('keyup', { keyCode: 18 }));
+            happen.keydown(window, { keyCode: 18 });
+            expect(_container.classed('hover-disabled')).to.be.true;
+            happen.keyup(window, { keyCode: 18 });
         });
     });
 
@@ -97,18 +95,18 @@ describe('iD.behaviorHover', function() {
             _container.append('span').attr('class', 'hover-suppressed');
             _container.call(iD.behaviorHover(_context).altDisables(true));
 
-            window.dispatchEvent(new KeyboardEvent('keydown', { keyCode: 18 }));
-            window.dispatchEvent(new KeyboardEvent('keyup', { keyCode: 18 }));
-            expect(_container.selectAll('.hover').size()).toEqual(1);
-            expect(_container.selectAll('.hover-suppressed').size()).toEqual(0);
+            happen.keydown(window, { keyCode: 18 });
+            happen.keyup(window, { keyCode: 18 });
+            expect(_container.selectAll('.hover').size()).to.eql(1);
+            expect(_container.selectAll('.hover-suppressed').size()).to.eql(0);
         });
 
         it('removes the .hover-disabled class from the surface', function () {
             _container.call(iD.behaviorHover(_context).altDisables(true));
 
-            window.dispatchEvent(new KeyboardEvent('keydown', { keyCode: 18 }));
-            window.dispatchEvent(new KeyboardEvent('keyup', { keyCode: 18 }));
-            expect(_container.classed('hover-disabled')).toBe(false);
+            happen.keydown(window, { keyCode: 18 });
+            happen.keyup(window, { keyCode: 18 });
+            expect(_container.classed('hover-disabled')).to.be.false;
         });
     });
 });

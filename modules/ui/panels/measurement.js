@@ -9,13 +9,12 @@ import { geoExtent, geoSphericalDistance } from '../../geo';
 import { services } from '../../services';
 import { utilGetAllNodes } from '../../util';
 
-export function radiansToMeters(r) {
-    // using WGS84 authalic radius (6371007.1809 m)
-    return r * 6371007.1809;
-}
-
 export function uiPanelMeasurement(context) {
 
+    function radiansToMeters(r) {
+        // using WGS84 authalic radius (6371007.1809 m)
+        return r * 6371007.1809;
+    }
 
     function steradiansToSqmeters(r) {
         // http://gis.stackexchange.com/a/124857/40446
@@ -51,8 +50,9 @@ export function uiPanelMeasurement(context) {
         var totalNodeCount, length = 0, area = 0, distance;
 
         if (selectedNoteID && osm) {       // selected 1 note
+
             var note = osm.getNote(selectedNoteID);
-            heading = t.append('note.note', { suffix: ' ' + selectedNoteID });
+            heading = t.html('note.note') + ' ' + selectedNoteID;
             location = note.loc;
             geometry = 'note';
 
@@ -65,7 +65,7 @@ export function uiPanelMeasurement(context) {
             });
 
             heading = selected.length === 1 ? selected[0].id :
-                t.append('info_panels.selected', { n: selected.length });
+                t.html('info_panels.selected', { n: selected.length });
 
             if (selected.length) {
                 var extent = geoExtent();
@@ -113,18 +113,13 @@ export function uiPanelMeasurement(context) {
             }
         }
 
-        selection.text('');
+        selection.html('');
 
-        if (heading && typeof heading === 'function') {
+        if (heading) {
             selection
                 .append('h4')
                 .attr('class', 'measurement-heading')
-                .call(heading);
-        } else {
-            selection
-                .append('h4')
-                .attr('class', 'measurement-heading')
-                .text(heading);
+                .html(heading);
         }
 
         var list = selection
@@ -136,8 +131,8 @@ export function uiPanelMeasurement(context) {
                 .append('li')
                 .call(t.append('info_panels.measurement.geometry', { suffix: ':' }))
                 .append('span')
-                .call(
-                    closed ? t.append('info_panels.measurement.closed_' + geometry) : t.append('geometry.' + geometry)
+                .html(
+                    closed ? t.html('info_panels.measurement.closed_' + geometry) : t.html('geometry.' + geometry)
                 );
         }
 

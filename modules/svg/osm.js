@@ -4,13 +4,13 @@ export function svgOsm(projection, context, dispatch) {
 
     function drawOsm(selection) {
         selection.selectAll('.layer-osm')
-            .data(['covered', 'areas', 'lines', 'points', 'auxiliary', 'labels'])
+            .data(['covered', 'areas', 'lines', 'points', 'labels'])
             .enter()
             .append('g')
             .attr('class', function(d) { return 'layer-osm ' + d; });
 
         selection.selectAll('.layer-osm.points').selectAll('.points-group')
-            .data(['vertices', 'midpoints', 'points', 'turns'])
+            .data(['points', 'midpoints', 'vertices', 'turns'])
             .enter()
             .append('g')
             .attr('class', function(d) { return 'points-group ' + d; });

@@ -1,17 +1,15 @@
-import { debounce, sortBy } from 'es-toolkit';
+import _debounce from 'lodash-es/debounce';
 import {
     select as d3_select
 } from 'd3-selection';
 
+//import { actionNoop } from '../actions/noop';
 import { geoSphericalDistance } from '../../geo';
 import { svgIcon } from '../../svg/icon';
 import { prefs } from '../../core/preferences';
 import { t } from '../../core/localizer';
 import { utilHighlightEntities } from '../../util';
 import { uiSection } from '../section';
-import { validationIssue } from '../../core/validation';
-import { renderIgnoredIssuesReset } from './validation_status';
-
 
 export function uiSectionValidationIssues(id, severity, context) {
 
@@ -21,7 +19,7 @@ export function uiSectionValidationIssues(id, severity, context) {
         .label(function() {
             if (!_issues) return '';
             var issueCountText = _issues.length > 1000 ? '1000+' : String(_issues.length);
-            return t.append('inspector.title_count', { title: t.append('issues.' + severity + 's.list_title'), count: issueCountText });
+            return t.append('inspector.title_count', { title: t('issues.' + severity + 's.list_title'), count: issueCountText });
         })
         .disclosureContent(renderDisclosureContent)
         .shouldDisplay(function() {
@@ -41,29 +39,24 @@ export function uiSectionValidationIssues(id, severity, context) {
     }
 
     function renderDisclosureContent(selection) {
-        // sort by the same order the rules are listed in the section below:
-        // first by the issue's rule type (alphabetically by localized title),
-        // then issue's internal subtype, and only then by distance from map center
-        // finally: cut off at a maximum 1000 entries
-        const center = context.map().center();
-        const graph = context.graph();
-        const rules = sortBy(context.validator().getRuleKeys(), [
-            rule => t(`issues.${rule}.title`)
-        ]);
-        const withDistance = _issues.map(issue => {
-            const extent = issue.extent(graph);
-            return {
-                issue,
-                dist: extent ? geoSphericalDistance(center, extent.center()) : 0
-            };
-        });
-        const issues = sortBy(withDistance, [
-            ({ issue }) => rules.indexOf(issue.type),
-            row => row.issue.subtype,
-            'dist'
-        ]).slice(0, 1000).map(({ issue }) => issue);
 
-        renderIgnoredIssuesReset(context, selection);
+        var center = context.map().center();
+        var graph = context.graph();
+
+        // sort issues by distance away from the center of the map
+        var issues = _issues.map(function withDistance(issue) {
+                var extent = issue.extent(graph);
+                var dist = extent ? geoSphericalDistance(center, extent.center()) : 0;
+                return Object.assign(issue, { dist: dist });
+            })
+            .sort(function byDistance(a, b) {
+                return a.dist - b.dist;
+            });
+
+        // cut off at 1000
+        issues = issues.slice(0, 1000);
+
+        //renderIgnoredIssuesReset(_warningsSelection);
 
         selection
             .call(drawIssuesList, issues);
@@ -112,13 +105,40 @@ export function uiSectionValidationIssues(id, severity, context) {
             .append('span')
             .attr('class', 'issue-icon')
             .each(function(d) {
+                var iconName = '#iD-icon-' + (d.severity === 'warning' ? 'alert' : 'error');
                 d3_select(this)
-                    .call(svgIcon(validationIssue.ICONS[d.severity]));
+                    .call(svgIcon(iconName));
             });
 
         textEnter
             .append('span')
             .attr('class', 'issue-message');
+
+        /*
+        labelsEnter
+            .append('span')
+            .attr('class', 'issue-autofix')
+            .each(function(d) {
+                if (!d.autoFix) return;
+
+                d3_select(this)
+                    .append('button')
+                    .attr('title', t('issues.fix_one.title'))
+                    .datum(d.autoFix)  // set button datum to the autofix
+                    .attr('class', 'autofix action')
+                    .on('click', function(d3_event, d) {
+                        d3_event.preventDefault();
+                        d3_event.stopPropagation();
+
+                        var issuesEntityIDs = d.issue.entityIds;
+                        utilHighlightEntities(issuesEntityIDs.concat(d.entityIds), false, context);
+
+                        context.perform.apply(context, d.autoArgs);
+                        context.validator().validate();
+                    })
+                    .call(svgIcon('#iD-icon-wrench'));
+            });
+        */
 
         // Update
         items = items
@@ -130,6 +150,62 @@ export function uiSectionValidationIssues(id, severity, context) {
             .each(function(d) {
                 return d.message(context)(d3_select(this));
             });
+
+        /*
+        // autofix
+        var canAutoFix = issues.filter(function(issue) { return issue.autoFix; });
+
+        var autoFixAll = selection.selectAll('.autofix-all')
+            .data(canAutoFix.length ? [0] : []);
+
+        // exit
+        autoFixAll.exit()
+            .remove();
+
+        // enter
+        var autoFixAllEnter = autoFixAll.enter()
+            .insert('div', '.issues-list')
+            .attr('class', 'autofix-all');
+
+        var linkEnter = autoFixAllEnter
+            .append('a')
+            .attr('class', 'autofix-all-link')
+            .attr('href', '#');
+
+        linkEnter
+            .append('span')
+            .attr('class', 'autofix-all-link-text')
+            .call(t.append('issues.fix_all.title'));
+
+        linkEnter
+            .append('span')
+            .attr('class', 'autofix-all-link-icon')
+            .call(svgIcon('#iD-icon-wrench'));
+
+        if (severity === 'warning') {
+            renderIgnoredIssuesReset(selection);
+        }
+
+        // update
+        autoFixAll = autoFixAll
+            .merge(autoFixAllEnter);
+
+        autoFixAll.selectAll('.autofix-all-link')
+            .on('click', function() {
+                context.pauseChangeDispatch();
+                context.perform(actionNoop());
+                canAutoFix.forEach(function(issue) {
+                    var args = issue.autoFix.autoArgs.slice();  // copy
+                    if (typeof args[args.length - 1] !== 'function') {
+                        args.pop();
+                    }
+                    args.push(t('issues.fix_all.annotation'));
+                    context.replace.apply(context, args);
+                });
+                context.resumeChangeDispatch();
+                context.validator().validate();
+            });
+        */
     }
 
     context.validator().on('validated.uiSectionValidationIssues' + id, function() {
@@ -140,7 +216,7 @@ export function uiSectionValidationIssues(id, severity, context) {
     });
 
     context.map().on('move.uiSectionValidationIssues' + id,
-        debounce(function() {
+        _debounce(function() {
             window.requestIdleCallback(function() {
                 if (getOptions().where === 'visible') {
                     // must refetch issues if they are viewport-dependent

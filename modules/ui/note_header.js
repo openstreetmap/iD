@@ -1,5 +1,3 @@
-import { select as d3_select } from 'd3-selection';
-
 import { t } from '../core/localizer';
 import { svgIcon } from '../svg/icon';
 
@@ -51,20 +49,10 @@ export function uiNoteHeader() {
         headerEnter
             .append('div')
             .attr('class', 'note-header-label')
-            .each(function(d) {
-                const selection = d3_select(this);
-                selection.text('');
-                if (_note.isNew()) {
-                    selection.call(t.append('note.new'));
-                } else {
-                    selection.call(t.append('note.note'));
-                    selection
-                        .append('span')
-                        .text(` ${d.id} `);
-                    if (d.status === 'closed') {
-                        selection.call(t.append('note.closed'));
-                    }
-                }
+            .html(function(d) {
+                if (_note.isNew()) { return t.html('note.new'); }
+                return t.html('note.note') + ' ' + d.id + ' ' +
+                    (d.status === 'closed' ? t.html('note.closed') : '');
             });
     }
 

@@ -5,7 +5,6 @@ import { modeSave } from '../../modes';
 import { svgIcon } from '../../svg';
 import { uiCmd } from '../cmd';
 import { uiTooltip } from '../tooltip';
-import { utilIsDrawing } from '../../util';
 
 
 export function uiToolSave(context) {
@@ -26,18 +25,13 @@ export function uiToolSave(context) {
         return mode && mode.id === 'save';
     }
 
-    function isDrawing() {
-        const mode = context.mode();
-        return mode && utilIsDrawing(mode.id);
-    }
-
     function isDisabled() {
-        return _numChanges === 0 || isSaving() || isDrawing();
+        return _numChanges === 0 || isSaving();
     }
 
     function save(d3_event) {
         d3_event.preventDefault();
-        if (!context.inIntro() && !isSaving() && !isDrawing() && history.hasChanges()) {
+        if (!context.inIntro() && !isSaving() && history.hasChanges()) {
             context.enter(modeSave(context));
         }
     }
@@ -48,10 +42,10 @@ export function uiToolSave(context) {
             return null;
         } else if (numChanges <= 50) {
             step = numChanges / 50;
-            return d3_interpolateRgb('#fff0', '#ff08')(step);  // transparent -> yellow
+            return d3_interpolateRgb('#fff', '#ff8')(step);  // white -> yellow
         } else {
             step = Math.min((numChanges - 50) / 50, 1.0);
-            return d3_interpolateRgb('#ff08', '#f008')(step);  // yellow -> red
+            return d3_interpolateRgb('#ff8', '#f88')(step);  // yellow -> red
         }
     }
 
@@ -70,7 +64,7 @@ export function uiToolSave(context) {
         if (button) {
             button
                 .classed('disabled', isDisabled())
-                .style('--accent-color', bgColor(_numChanges));
+                .style('background', bgColor(_numChanges));
 
             button.select('span.count')
                 .text(_numChanges);

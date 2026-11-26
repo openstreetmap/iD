@@ -1,4 +1,6 @@
-import { select as d3_select } from 'd3-selection';
+import {
+    select as d3_select
+} from 'd3-selection';
 
 import { prefs } from '../../core/preferences';
 import { t } from '../../core/localizer';
@@ -17,6 +19,7 @@ export function uiSectionValidationRules(context) {
         .label(() => t.append('issues.rules.title'));
 
     var _ruleKeys = context.validator().getRuleKeys()
+        .filter(function(key) { return key !== 'maprules'; })
         .sort(function(key1, key2) {
             // alphabetize by localized title
             return t('issues.' + key1 + '.title') < t('issues.' + key2 + '.title') ? -1 : 1;
@@ -100,14 +103,12 @@ export function uiSectionValidationRules(context) {
 
         label
             .append('span')
-            .each(function(d) {
+            .html(function(d) {
                 var params = {};
                 if (d === 'unsquare_way') {
-                    params.val = selection => selection
-                        .append('span')
-                        .classed('square-degrees', true);
+                    params.val = { html: '<span class="square-degrees"></span>' };
                 }
-                d3_select(this).call(t.append('issues.' + d + '.title', params));
+                return t.html('issues.' + d + '.title', params);
             });
 
         // Update

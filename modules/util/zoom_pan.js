@@ -5,7 +5,8 @@ import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { interpolateZoom } from 'd3-interpolate';
 import { select as d3_select } from 'd3-selection';
 import { interrupt as d3_interrupt } from 'd3-transition';
-import { zoomIdentity as d3_zoomIdentity, ZoomTransform as Transform } from 'd3-zoom';
+import { zoomIdentity as d3_zoomIdentity } from 'd3-zoom';
+import { Transform } from '../../node_modules/d3-zoom/src/transform.js';
 
 import { utilFastMouse, utilFunctor } from './util';
 import { utilRebind } from './rebind';
@@ -334,15 +335,15 @@ export function utilZoomPan() {
   }
 
   zoom.wheelDelta = function(_) {
-    return arguments.length ? (wheelDelta = typeof _ === 'function' ? _ : utilFunctor(+_), zoom) : wheelDelta;
+    return arguments.length ? (wheelDelta = utilFunctor(+_), zoom) : wheelDelta;
   };
 
   zoom.filter = function(_) {
-    return arguments.length ? (filter = typeof _ === 'function' ? _ : utilFunctor(!!_), zoom) : filter;
+    return arguments.length ? (filter = utilFunctor(!!_), zoom) : filter;
   };
 
   zoom.extent = function(_) {
-    return arguments.length ? (extent = typeof _ === 'function' ? _ : utilFunctor([[+_[0][0], +_[0][1]], [+_[1][0], +_[1][1]]]), zoom) : extent;
+    return arguments.length ? (extent = utilFunctor([[+_[0][0], +_[0][1]], [+_[1][0], +_[1][1]]]), zoom) : extent;
   };
 
   zoom.scaleExtent = function(_) {

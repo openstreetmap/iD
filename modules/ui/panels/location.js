@@ -1,4 +1,4 @@
-import { debounce } from 'es-toolkit';
+import _debounce from 'lodash-es/debounce';
 
 import { decimalCoordinatePair, dmsCoordinatePair } from '../../util/units';
 import { t } from '../../core/localizer';
@@ -10,7 +10,7 @@ export function uiPanelLocation(context) {
 
 
     function redraw(selection) {
-        selection.text('');
+        selection.html('');
 
         var list = selection
             .append('ul');
@@ -37,7 +37,7 @@ export function uiPanelLocation(context) {
     }
 
 
-    var debouncedGetLocation = debounce(getLocation, 250);
+    var debouncedGetLocation = _debounce(getLocation, 250);
     function getLocation(selection, coord) {
         if (!services.geocoder) {
             currLocation = t('info_panels.location.unknown_location');

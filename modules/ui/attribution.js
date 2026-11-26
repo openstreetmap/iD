@@ -1,4 +1,4 @@
-import { throttle } from 'es-toolkit';
+import _throttle from 'lodash-es/throttle';
 import { select as d3_select } from 'd3-selection';
 import { t } from '../core/localizer';
 
@@ -29,6 +29,11 @@ export function uiAttribution(context) {
       .each((d, i, nodes) => {
         let attribution = d3_select(nodes[i]);
 
+        if (d.terms_html) {
+          attribution.html(d.terms_html);
+          return;
+        }
+
         if (d.terms_url) {
           attribution = attribution
             .append('a')
@@ -38,10 +43,10 @@ export function uiAttribution(context) {
 
         const sourceID = d.id.replace(/\./g, '<TX_DOT>');
         const terms_text = t(`imagery.${sourceID}.attribution.text`,
-          { default: d.terms_text || (d.terms_url && d.name()) }
+          { default: d.terms_text || d.id || d.name() }
         );
 
-        if (d.icon) {
+        if (d.icon && !d.overlay) {
           attribution
             .append('img')
             .attr('class', 'source-image')
@@ -94,7 +99,7 @@ export function uiAttribution(context) {
       .on('change.attribution', update);
 
     context.map()
-      .on('move.attribution', throttle(update, 400, { edges: ['trailing'] }));
+      .on('move.attribution', _throttle(update, 400, { leading: false }));
 
     update();
   };

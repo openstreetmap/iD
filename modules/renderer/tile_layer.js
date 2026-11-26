@@ -16,9 +16,30 @@ export function rendererTileLayer(context) {
     var _zoom;
     var _source;
     var _underzoom = 0;
+    var _epsilon = 0;
+
+    // Workaround to remove visible grid around tile borders on Chrome with dynamic epsilon for specific browser zoom levels
+    // Should be removed when https://issues.chromium.org/issues/40084005 is resolved
+    // See https://github.com/openstreetmap/iD/pull/10594
+    if (window.chrome) {
+        updateEpsilon();
+        window.addEventListener('resize', updateEpsilon);
+    }
+    function updateEpsilon() {
+        const pageZoom = Math.round(window.devicePixelRatio * 100);
+        if (pageZoom % 25 === 0) {
+            _epsilon = 0; // uses mix-blend-mode: plus-lighter
+        } else if (pageZoom === 90) {
+            _epsilon = 0.005;
+        } else if (pageZoom === 110) {
+            _epsilon = 0.002;
+        } else {
+            _epsilon = 0.003;
+        }
+    }
 
     function tileSizeAtZoom(d, z) {
-        return (d.tileSize * Math.pow(2, z - d[2])) / d.tileSize;
+        return ((d.tileSize * Math.pow(2, z - d[2])) / d.tileSize) + _epsilon;
     }
 
 
@@ -187,11 +208,13 @@ export function rendererTileLayer(context) {
             .style(transformProp, imageTransform)
             .classed('tile-removing', true)
             .classed('tile-center', false)
-            .on('transitionend', function() {
-                const tile = d3_select(this);
-                if (tile.classed('tile-removing')) {
-                    tile.remove();
-                }
+            .each(function() {
+                var tile = d3_select(this);
+                window.setTimeout(function() {
+                    if (tile.classed('tile-removing')) {
+                        tile.remove();
+                    }
+                }, 250);
             });
 
         image.enter()
@@ -208,8 +231,7 @@ export function rendererTileLayer(context) {
             .style(transformProp, imageTransform)
             .classed('tile-debug', showDebug)
             .classed('tile-removing', false)
-            .classed('tile-center', function(d) { return d === nearCenter; })
-            .sort((a, b) => a[2] - b[2]);
+            .classed('tile-center', function(d) { return d === nearCenter; });
 
 
 

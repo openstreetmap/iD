@@ -6,8 +6,6 @@ import { utilArrayIdentical } from '../../util/array';
 import { t } from '../../core/localizer';
 import { utilHighlightEntities } from '../../util';
 import { uiSection } from '../section';
-import { validationIssue } from '../../core/validation';
-import { uiTooltip } from '../tooltip';
 
 
 export function uiSectionEntityIssues(context) {
@@ -26,7 +24,7 @@ export function uiSectionEntityIssues(context) {
             return _issues.length > 0;
         })
         .label(function() {
-            return t.append('inspector.title_count', { title: t.append('issues.list_title'), count: _issues.length });
+            return t.append('inspector.title_count', { title: t('issues.list_title'), count: _issues.length });
         })
         .disclosureContent(renderDisclosureContent);
 
@@ -94,18 +92,21 @@ export function uiSectionEntityIssues(context) {
             .append('button')
             .attr('class', 'issue-text')
             .on('click', function(d3_event, d) {
+
                 makeActiveIssue(d.id); // expand only the clicked item
 
-                const extent = d.extent(context.graph());
+                var extent = d.extent(context.graph());
                 if (extent) {
-                    context.map().zoomToEase(extent);
+                    var setZoom = Math.max(context.map().zoom(), 19);
+                    context.map().unobscuredCenterZoomEase(extent.center(), setZoom);
                 }
             });
 
         textEnter
             .each(function(d) {
+                var iconName = '#iD-icon-' + (d.severity === 'warning' ? 'alert' : 'error');
                 d3_select(this)
-                    .call(svgIcon(validationIssue.ICONS[d.severity], 'issue-icon'));
+                    .call(svgIcon(iconName, 'issue-icon'));
             });
 
         textEnter
@@ -257,13 +258,6 @@ export function uiSectionEntityIssues(context) {
                     return d.disabledReason;
                 }
                 return null;
-            })
-            .each(function(d) {
-                if (d.tooltip) {
-                    d3_select(this).call(
-                        uiTooltip().title(() => d.tooltip)
-                    );
-                }
             });
     }
 

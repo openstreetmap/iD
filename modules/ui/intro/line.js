@@ -5,7 +5,7 @@ import {
 } from 'd3-selection';
 
 import { presetManager } from '../../presets';
-import { localizer, t } from '../../core/localizer';
+import { t } from '../../core/localizer';
 import { geoSphericalDistance } from '../../geo';
 import { modeBrowse } from '../../modes/browse';
 import { modeSelect } from '../../modes/select';
@@ -355,7 +355,7 @@ export function uiIntroLine(context, reveal) {
 
         timeout(function() {
             reveal('.main-map .surface', helpHtml('intro.lines.did_name_road'), {
-                buttonText: localizer.t_html('intro.ok'),
+                buttonText: t.html('intro.ok'),
                 buttonCallback: function() { continueTo(updateLine); }
             });
         }, 500);
@@ -382,14 +382,14 @@ export function uiIntroLine(context, reveal) {
             var advance = function() { continueTo(addNode); };
 
             reveal(box, helpHtml('intro.lines.update_line'),
-                { buttonText: localizer.t_html('intro.ok'), buttonCallback: advance }
+                { buttonText: t.html('intro.ok'), buttonCallback: advance }
             );
 
             context.map().on('move.intro drawn.intro', function() {
                 var padding = 250 * Math.pow(2, context.map().zoom() - 19);
                 var box = pad(woodRoadDragMidpoint, padding, context);
                 reveal(box, helpHtml('intro.lines.update_line'),
-                    { duration: 0, buttonText: localizer.t_html('intro.ok'), buttonCallback: advance }
+                    { duration: 0, buttonText: t.html('intro.ok'), buttonCallback: advance }
                 );
             });
         }, msec + 100);
@@ -568,7 +568,7 @@ export function uiIntroLine(context, reveal) {
         };
 
         reveal(box, helpHtml('intro.lines.continue_drag_midpoint'),
-            { buttonText: localizer.t_html('intro.ok'), buttonCallback: advance }
+            { buttonText: t.html('intro.ok'), buttonCallback: advance }
         );
 
         context.map().on('move.intro drawn.intro', function() {
@@ -579,7 +579,7 @@ export function uiIntroLine(context, reveal) {
             var box = pad(woodRoadDragEndpoint, padding, context);
             box.height += 400;
             reveal(box, helpHtml('intro.lines.continue_drag_midpoint'),
-                { duration: 0, buttonText: localizer.t_html('intro.ok'), buttonCallback: advance }
+                { duration: 0, buttonText: t.html('intro.ok'), buttonCallback: advance }
             );
         });
 
@@ -612,7 +612,7 @@ export function uiIntroLine(context, reveal) {
             var advance = function() { continueTo(rightClickIntersection); };
 
             reveal(box, helpHtml('intro.lines.delete_lines', { street: t('intro.graph.name.12th-avenue') }),
-                { buttonText: localizer.t_html('intro.ok'), buttonCallback: advance }
+                { buttonText: t.html('intro.ok'), buttonCallback: advance }
             );
 
             context.map().on('move.intro drawn.intro', function() {
@@ -621,7 +621,7 @@ export function uiIntroLine(context, reveal) {
                 box.top -= 200;
                 box.height += 400;
                 reveal(box, helpHtml('intro.lines.delete_lines', { street: t('intro.graph.name.12th-avenue') }),
-                    { duration: 0, buttonText: localizer.t_html('intro.ok'), buttonCallback: advance }
+                    { duration: 0, buttonText: t.html('intro.ok'), buttonCallback: advance }
                 );
             });
 
@@ -752,14 +752,14 @@ export function uiIntroLine(context, reveal) {
         var padding = 60 * Math.pow(2, context.map().zoom() - 18);
         var box = pad(eleventhAvenueEnd, padding, context);
         reveal(box, helpHtml('intro.lines.retry_split'),
-            { buttonText: localizer.t_html('intro.ok'), buttonCallback: advance }
+            { buttonText: t.html('intro.ok'), buttonCallback: advance }
         );
 
         context.map().on('move.intro drawn.intro', function() {
             var padding = 60 * Math.pow(2, context.map().zoom() - 18);
             var box = pad(eleventhAvenueEnd, padding, context);
             reveal(box, helpHtml('intro.lines.retry_split'),
-                { duration: 0, buttonText: localizer.t_html('intro.ok'), buttonCallback: advance }
+                { duration: 0, buttonText: t.html('intro.ok'), buttonCallback: advance }
             );
         });
 
@@ -1000,6 +1000,9 @@ export function uiIntroLine(context, reveal) {
         );
 
         context.map().on('move.intro drawn.intro', function() {
+            if (selectMenuItem(context, 'delete').empty()) {
+                return continueTo(multiRightClick);
+            }
             reveal('.edit-menu',
                 helpHtml('intro.lines.multi_delete'),
                 { duration: 0, padding: 50 }
@@ -1035,7 +1038,7 @@ export function uiIntroLine(context, reveal) {
         var padding = 200 * Math.pow(2, context.map().zoom() - 18);
         var box = pad(twelfthAvenue, padding, context);
         reveal(box, helpHtml('intro.lines.retry_delete'), {
-            buttonText: localizer.t_html('intro.ok'),
+            buttonText: t.html('intro.ok'),
             buttonCallback: function() { continueTo(multiSelect); }
         });
 
@@ -1050,7 +1053,7 @@ export function uiIntroLine(context, reveal) {
         reveal('.ideditor',
             helpHtml('intro.lines.play', { next: t('intro.buildings.title') }), {
                 tooltipBox: '.intro-nav-wrap .chapter-building',
-                buttonText: localizer.t_html('intro.ok'),
+                buttonText: t.html('intro.ok'),
                 buttonCallback: function() { reveal('.ideditor'); }
             }
         );
@@ -1064,7 +1067,7 @@ export function uiIntroLine(context, reveal) {
 
     chapter.exit = function() {
         timeouts.forEach(window.clearTimeout);
-        d3_select(window).on('pointerdown.intro mousedown.intro', null);
+        d3_select(window).on('pointerdown.intro mousedown.intro', null, true);
         context.on('enter.intro exit.intro', null);
         context.map().on('move.intro drawn.intro', null);
         context.history().on('change.intro', null);

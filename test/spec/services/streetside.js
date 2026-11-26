@@ -1,16 +1,12 @@
-import { fn } from '@vitest/spy';
-import fetchMock from 'fetch-mock';
-import { setTimeout } from 'node:timers/promises';
-
 describe('iD.serviceStreetside', function() {
     var dimensions = [64, 64];
     var context, streetside;
 
-    beforeEach(() => {
+    before(function() {
         iD.services.streetside = iD.serviceStreetside;
     });
 
-    afterEach(() => {
+    after(function() {
         delete iD.services.streetside;
     });
 
@@ -38,7 +34,7 @@ describe('iD.serviceStreetside', function() {
 
             streetside.init();
             var cache2 = streetside.cache();
-            expect(cache).toEqual(cache2);
+            expect(cache).to.equal(cache2);
         });
     });
 
@@ -46,12 +42,12 @@ describe('iD.serviceStreetside', function() {
         it('resets cache', function() {
             streetside.cache().foo = 'bar';
             streetside.reset();
-            expect(streetside.cache()).not.toHaveProperty('foo');
+            expect(streetside.cache()).to.not.have.property('foo');
         });
     });
 
     describe('#loadBubbles', function() {
-        it('fires loadedImages when bubbles are loaded', async () => {
+        it('fires loadedImages when bubbles are loaded', function(done) {
             // adjust projection so that only one tile is fetched
             // (JSONP hack will return the same data for every fetch)
             context.projection
@@ -59,7 +55,7 @@ describe('iD.serviceStreetside', function() {
                 .translate([-1863988.9381333336, 762.8270222954452])  // 10.002,0.002
                 .clipExtent([[0,0], dimensions]);
 
-            const spy = fn();
+            var spy = sinon.spy();
             streetside.on('loadedImages', spy);
 
             var mockData = {
@@ -75,17 +71,19 @@ describe('iD.serviceStreetside', function() {
 
             streetside.loadBubbles(context.projection, 0);  // 0 = don't fetch margin tiles
 
-            await setTimeout(200);
-            expect(spy).toHaveBeenCalledOnce();
+            window.setTimeout(function() {
+                expect(spy).to.have.been.calledOnce;
+                done();
+            }, 200);
         });
 
-        it('does not load bubbles around null island', async () => {
+        it('does not load bubbles around null island', function(done) {
             context.projection
                 .scale(iD.geoZoomToScale(18))
                 .translate([0, 0])
                 .clipExtent([[0,0], dimensions]);
 
-            const spy = fn();
+            var spy = sinon.spy();
             streetside.on('loadedImages', spy);
 
             var mockData = {
@@ -101,8 +99,10 @@ describe('iD.serviceStreetside', function() {
 
             streetside.loadBubbles(context.projection, 0);  // 0 = don't fetch margin tiles
 
-            await setTimeout(200);
-            expect(spy).not.toHaveBeenCalled();
+            window.setTimeout(function() {
+                expect(spy).to.have.been.not.called;
+                done();
+            }, 200);
         });
     });
 
@@ -118,7 +118,7 @@ describe('iD.serviceStreetside', function() {
             streetside.cache().bubbles.rtree.load(features);
             var res = streetside.bubbles(context.projection);
 
-            expect(res).toEqual([
+            expect(res).to.deep.eql([
                 { key: 1, loc: [10, 0], ca: 90, pr: undefined, ne: 2, pano: true, sequenceKey: 1 },
                 { key: 2, loc: [10, 0], ca: 90, pr: 1, ne: 3, pano: true, sequenceKey: 1 }
             ]);
@@ -136,7 +136,7 @@ describe('iD.serviceStreetside', function() {
 
             streetside.cache().bubbles.rtree.load(features);
             var res = streetside.bubbles(context.projection);
-            expect(res.length).toBeLessThanOrEqual(5);
+            expect(res).to.have.length.of.at.most(5);
         });
     });
 
@@ -164,7 +164,7 @@ describe('iD.serviceStreetside', function() {
             streetside.cache().sequences[1] = seq;
 
             var res = streetside.sequences(context.projection);
-            expect(res).toEqual([seq.geojson]);
+            expect(res).to.deep.eql([seq.geojson]);
         });
     });
 

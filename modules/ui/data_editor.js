@@ -1,7 +1,7 @@
 import { t } from '../core/localizer';
 import { modeBrowse } from '../modes/browse';
 import { svgIcon } from '../svg/icon';
-import { stringifyProperties } from '../util/object';
+
 import { uiDataHeader } from './data_header';
 import { uiSectionRawTagEditor } from './sections/raw_tag_editor';
 
@@ -10,7 +10,7 @@ export function uiDataEditor(context) {
     var dataHeader = uiDataHeader();
     var rawTagEditor = uiSectionRawTagEditor('custom-data-tag-editor', context)
         .expandedByDefault(true)
-        .readOnlyTags([/.*/]);
+        .readOnlyTags([/./]);
     var _datum;
 
 
@@ -51,7 +51,7 @@ export function uiDataEditor(context) {
         // enter/update
         editor.enter()
             .append('div')
-            .attr('class', 'data-editor')
+            .attr('class', 'modal-section data-editor')
             .merge(editor)
             .call(dataHeader.datum(_datum));
 
@@ -64,10 +64,7 @@ export function uiDataEditor(context) {
             .attr('class', 'raw-tag-editor data-editor')
             .merge(rte)
             .call(rawTagEditor
-                // truncate long values: e.g. GPX tracks parsed by togeojson include
-                // per-coordinate arrays with thousands of entries, which would
-                // otherwise freeze the UI when rendered
-                .tags(stringifyProperties(_datum?.properties || {}, context.maxCharsForTagValue()))
+                .tags((_datum && _datum.properties) || {})
                 .state('hover')
                 .render
             )

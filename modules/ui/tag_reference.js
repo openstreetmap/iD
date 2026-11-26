@@ -38,7 +38,7 @@ export function uiTagReference(what) {
 
 
     function gotDocs(err, docs) {
-        _body.text('');
+        _body.html('');
 
         if (!docs || !docs.title) {
             _body
@@ -53,7 +53,7 @@ export function uiTagReference(what) {
             _body
                 .append('img')
                 .attr('class', 'tag-reference-wiki-image')
-                .attr('alt', docs.title)
+                .attr('alt', docs.description)
                 .attr('src', docs.imageURL)
                 .on('load', function() { done(); })
                 .on('error', function() { d3_select(this).remove(); done(); });
@@ -69,7 +69,7 @@ export function uiTagReference(what) {
             tagReferenceDescription = tagReferenceDescription
                 .attr('class', 'localized-text')
                 .attr('lang', docs.descriptionLocaleCode || 'und')
-                .call(docs.description);
+                .text(docs.description);
         } else {
             tagReferenceDescription = tagReferenceDescription
                 .call(t.append('inspector.no_documentation_key'));

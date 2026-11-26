@@ -2,17 +2,13 @@ import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { select as d3_select } from 'd3-selection';
 import { zoom as d3_zoom, zoomIdentity as d3_zoomIdentity } from 'd3-zoom';
 
-import { deepEqual } from 'fast-equals';
-import { PbfReader } from 'pbf';
+import Protobuf from 'pbf';
 import RBush from 'rbush';
 import { VectorTile } from '@mapbox/vector-tile';
 
-import { utilRebind, utilTiler, utilSetTransform } from '../util';
-import { geoExtent } from '../geo';
-import { services } from './';
-import { searchLimited } from '../util/partition';
-import { localeDateString } from '../util/date';
-import { patchHash } from '../behavior';
+import { utilRebind, utilTiler, utilQsString, utilStringQs, utilSetTransform } from '../util';
+import {geoExtent, geoScaleToZoom} from '../geo';
+import {localizer} from '../core/localizer';
 
 const apiUrl = 'https://end.mapilio.com';
 const imageBaseUrl = 'https://cdn.mapilio.com/im';
@@ -30,9 +26,7 @@ const imgZoom = d3_zoom()
 const pannellumViewerCSS = 'pannellum/pannellum.css';
 const pannellumViewerJS = 'pannellum/pannellum.js';
 const resolution = 1080;
-const hdResolution = 2080;
 
-let _useHd = false;
 let _activeImage;
 let _cache;
 let _loadViewerPromise;
@@ -46,6 +40,32 @@ let _sceneOptions = {
     hfov: 60,
 };
 let _currScene = 0;
+
+
+// Partition viewport into higher zoom tiles
+function partitionViewport(projection) {
+    const z = geoScaleToZoom(projection.scale());
+    const z2 = (Math.ceil(z * 2) / 2) + 2.5;   // round to next 0.5 and add 2.5
+    const tiler = utilTiler().zoomExtent([z2, z2]);
+
+    return tiler.getTiles(projection)
+        .map(function(tile) { return tile.extent; });
+}
+
+
+// Return no more than `limit` results per partition.
+function searchLimited(limit, projection, rtree) {
+    limit = limit || 5;
+
+    return partitionViewport(projection)
+        .reduce(function(result, extent) {
+            const found = rtree.search(extent.bbox())
+                .slice(0, limit)
+                .map(function(d) { return d.data; });
+
+            return (found.length ? result.concat(found) : result);
+        }, []);
+}
 
 // Load all data for the specified type from Mapilio vector tiles
 function loadTiles(which, url, maxZoom, projection) {
@@ -95,7 +115,7 @@ function loadTile(which, url, tile) {
             if (e.message === 'No Data') {
                 cache.loaded[tileId] = true;
             } else {
-                console.error(e);
+                console.error(e); // eslint-disable-line no-console
             }
         });
 }
@@ -103,26 +123,31 @@ function loadTile(which, url, tile) {
 
 // Load the data from the vector tile into cache
 function loadTileDataToCache(data, tile) {
-    const vectorTile = new VectorTile(new PbfReader(data));
-    if (Object.hasOwnProperty.call(vectorTile.layers, pointLayer)) {
-        const features = [];
-        const cache = _cache.images;
-        const layer = vectorTile.layers[pointLayer];
+    const vectorTile = new VectorTile(new Protobuf(data));
+    let features,
+        cache,
+        layer,
+        i,
+        feature,
+        loc,
+        d;
+    if (vectorTile.layers.hasOwnProperty(pointLayer)) {
+        features = [];
+        cache = _cache.images;
+        layer = vectorTile.layers[pointLayer];
 
-        for (let i = 0; i < layer.length; i++) {
-            const feature = layer.feature(i).toGeoJSON(tile.xyz[0], tile.xyz[1], tile.xyz[2]);
-            const loc = feature.geometry.coordinates;
+        for (i = 0; i < layer.length; i++) {
+            feature = layer.feature(i).toGeoJSON(tile.xyz[0], tile.xyz[1], tile.xyz[2]);
+            loc = feature.geometry.coordinates;
 
             let resolutionArr = feature.properties.resolution.split('x');
             let sourceWidth = Math.max(resolutionArr[0], resolutionArr[1]);
             let sourceHeight = Math.min(resolutionArr[0] ,resolutionArr[1]);
             let isPano = sourceWidth % sourceHeight === 0;
 
-            const d = {
-                service: 'photo',
+            d = {
                 loc: loc,
                 capture_time: feature.properties.capture_time,
-                created_by_id: feature.properties.created_by_id,
                 id: feature.properties.id,
                 sequence_id: feature.properties.sequence_uuid,
                 heading: feature.properties.heading,
@@ -139,23 +164,14 @@ function loadTileDataToCache(data, tile) {
         }
     }
 
-    if (Object.hasOwnProperty.call(vectorTile.layers, lineLayer)) {
-        const cache = _cache.sequences;
-        const layer = vectorTile.layers[lineLayer];
+    if (vectorTile.layers.hasOwnProperty(lineLayer)) {
+        cache = _cache.sequences;
+        layer = vectorTile.layers[lineLayer];
 
-        for (let i = 0; i < layer.length; i++) {
-            const feature = layer.feature(i).toGeoJSON(tile.xyz[0], tile.xyz[1], tile.xyz[2]);
+        for (i = 0; i < layer.length; i++) {
+            feature = layer.feature(i).toGeoJSON(tile.xyz[0], tile.xyz[1], tile.xyz[2]);
             if (cache.lineString[feature.properties.sequence_uuid]) {
-                const cacheEntry = cache.lineString[feature.properties.sequence_uuid];
-                if (cacheEntry.some(f => {
-                    // for some reason, mapilio sometimes returns a large amount of duplicate
-                    // sequence lines, causing very poor performance. this de-duplicates them,
-                    // see https://github.com/openstreetmap/iD/issues/10532
-                    const cachedCoords = f.geometry.coordinates;
-                    const featureCoords = feature.geometry.coordinates;
-                    return deepEqual(cachedCoords, featureCoords);
-                })) continue;
-                cacheEntry.push(feature);
+                cache.lineString[feature.properties.sequence_uuid].push(feature);
             } else {
                 cache.lineString[feature.properties.sequence_uuid] = [feature];
             }
@@ -176,22 +192,8 @@ function getImageData(imageId, sequenceId) {
         .then(function (data) {
             let index = data.data.findIndex((feature) => feature.id === imageId);
             const {filename, uploaded_hash} = data.data[index];
-            const targetResolution = _useHd ? hdResolution : resolution;
-            _sceneOptions.panorama = imageBaseUrl + '/' + uploaded_hash + '/' + filename + '/' + targetResolution;
+            _sceneOptions.panorama = imageBaseUrl + '/' + uploaded_hash + '/' + filename + '/' + resolution;
         });
-}
-
-function getUserData(userId) {
-  return fetch(apiUrl + `/api/search-user?options[parameters][id]=${userId}`, {method: 'GET'})
-    .then(function (response) {
-      if (!response.ok) {
-        throw new Error(response.status + ' ' + response.statusText);
-      }
-      return response.json();
-    })
-    .then(function (data) {
-      return data.data[0].username;
-    });
 }
 
 
@@ -216,6 +218,8 @@ export default {
             sequences: { rtree: new RBush(), lineString: {} },
             requests: { loaded: {}, inflight: {} }
         };
+
+        _activeImage = null;
     },
 
     // Get visible images
@@ -299,6 +303,18 @@ export default {
         return this;
     },
 
+    updateUrlImage: function(imageKey) {
+        if (!window.mocha) {
+            var hash = utilStringQs(window.location.hash);
+            if (imageKey) {
+                hash.photo = 'mapilio/' + imageKey;
+            } else {
+                delete hash.photo;
+            }
+            window.location.replace('#' + utilQsString(hash, true));
+        }
+    },
+
     initViewer: function () {
         if (!window.pannellum) return;
         if (_pannellumViewer) return;
@@ -322,7 +338,7 @@ export default {
 
         this.setActiveImage(d);
 
-        patchHash({ photo: 'mapilio/' + d.id });
+        this.updateUrlImage(d.id);
 
         let viewer = context.container().select('.photoviewer');
         if (!viewer.empty()) viewer.datum(d);
@@ -332,70 +348,25 @@ export default {
         if (!d) return this;
 
         let wrap = context.container().select('.photoviewer .mapilio-wrapper');
-        let attribution = wrap.selectAll('.photo-attribution').text('\u00A0');
+        let attribution = wrap.selectAll('.photo-attribution').text('');
 
-        let _username = '';
-
-        getUserData(d.created_by_id).then((username) => {
-          if (username) {
-            _username = username;
-          }
-
-        }).finally(() => {
+        if (d.capture_time) {
+            attribution
+                .append('span')
+                .attr('class', 'captured_at')
+                .text(localeDateString(d.capture_time));
 
             attribution
-             .append('input')
-             .attr('type','checkbox')
-             .property('checked', _useHd)
-             .on('click',(e) => {
-                e.stopPropagation();
-                _useHd = e.target.checked;
-                let parts = _sceneOptions.panorama.split('/');
+                .append('span')
+                .text('|');
+        }
 
-                if (_useHd){
-                    parts[parts.length - 1] = hdResolution;
-                    _sceneOptions.panorama= parts.join('/');
-                    loadTheImage();
-                } else {
-                    parts[parts.length - 1] = resolution;
-                    _sceneOptions.panorama=parts.join('/');
-                    loadTheImage();
-                }
-             });
-
-            attribution
-             .append('span')
-             .text('High Resolution');
-
-            attribution
-             .append('span')
-             .text('|');
-
-            attribution
-              .append('span')
-              .attr('class', 'captured_by')
-              .text('@' + _username);
-
-            attribution
-              .append('span')
-              .text('|');
-
-          if (d.capture_time) {
-            attribution
-              .append('span')
-              .attr('class', 'captured_at')
-              .text(localeDateString(d.capture_time));
-            attribution
-              .append('span')
-              .text('|');
-          }
-          attribution
+        attribution
             .append('a')
             .attr('class', 'image-link')
             .attr('target', '_blank')
             .attr('href', `https://mapilio.com/app?lat=${d.loc[1]}&lng=${d.loc[0]}&zoom=17&pId=${d.id}`)
             .text('mapilio.com');
-        });
 
         wrap
             .transition()
@@ -414,7 +385,8 @@ export default {
             .classed('hide', !_cache.images.forImageId.hasOwnProperty(+id + 1));
 
 
-        function loadTheImage(){
+        getImageData(d.id,d.sequence_id).then(function () {
+
             if (d.isPano) {
                 if (!_pannellumViewer) {
                     that.initViewer();
@@ -437,9 +409,15 @@ export default {
                 // make non-panoramic photo viewer
                 that.initOnlyPhoto(context);
             }
-        }
+        });
 
-        getImageData(d.id,d.sequence_id).then(loadTheImage);
+        function localeDateString(s) {
+            if (!s) return null;
+            var options = { day: 'numeric', month: 'short', year: 'numeric' };
+            var d = new Date(s);
+            if (isNaN(d.getTime())) return null;
+            return d.toLocaleDateString(localizer.localeCode(), options);
+        }
 
         return this;
     },
@@ -595,17 +573,17 @@ export default {
     },
 
     showViewer:function (context) {
-        const wrap = context.container().select('.photoviewer');
-        const isHidden = wrap.selectAll('.photo-wrapper.mapilio-wrapper.hide').size();
+        let wrap = context.container().select('.photoviewer')
+            .classed('hide', false);
+
+        let isHidden = wrap.selectAll('.photo-wrapper.mapilio-wrapper.hide').size();
 
         if (isHidden) {
-            for (const service of Object.values(services)) {
-                if (service === this) continue;
-                if (typeof service.hideViewer === 'function') {
-                    service.hideViewer(context);
-                }
-            }
-            wrap.classed('hide', false)
+            wrap
+                .selectAll('.photo-wrapper:not(.mapilio-wrapper)')
+                .classed('hide', true);
+
+            wrap
                 .selectAll('.photo-wrapper.mapilio-wrapper')
                 .classed('hide', false);
         }
@@ -620,7 +598,7 @@ export default {
         let viewer = context.container().select('.photoviewer');
         if (!viewer.empty()) viewer.datum(null);
 
-        patchHash({ photo: null });
+        this.updateUrlImage(null);
 
         viewer
             .classed('hide', true)
@@ -631,6 +609,7 @@ export default {
             .classed('currentView', false);
 
         this.setActiveImage();
+
         return this.setStyles(context, null);
     },
 

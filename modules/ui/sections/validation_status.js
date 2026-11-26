@@ -1,4 +1,4 @@
-import { debounce } from 'es-toolkit';
+import _debounce from 'lodash-es/debounce';
 
 import { svgIcon } from '../../svg/icon';
 import { prefs } from '../../core/preferences';
@@ -48,8 +48,42 @@ export function uiSectionValidationStatus(context) {
             .append('span')
             .attr('class', 'details');
 
-        renderIgnoredIssuesReset(context, selection);
+        renderIgnoredIssuesReset(selection);
         setNoIssuesText(selection);
+    }
+
+    function renderIgnoredIssuesReset(selection) {
+
+        var ignoredIssues = context.validator()
+            .getIssues({ what: 'all', where: 'all', includeDisabledRules: true, includeIgnored: 'only' });
+
+        var resetIgnored = selection.selectAll('.reset-ignored')
+            .data(ignoredIssues.length ? [0] : []);
+
+        // exit
+        resetIgnored.exit()
+            .remove();
+
+        // enter
+        var resetIgnoredEnter = resetIgnored.enter()
+            .append('div')
+            .attr('class', 'reset-ignored section-footer');
+
+        resetIgnoredEnter
+            .append('a')
+            .attr('href', '#');
+
+        // update
+        resetIgnored = resetIgnored
+            .merge(resetIgnoredEnter);
+
+        resetIgnored.select('a')
+            .html(t.html('inspector.title_count', { title: { html: t.html('issues.reset_ignored') }, count: ignoredIssues.length }));
+
+        resetIgnored.on('click', function(d3_event) {
+            d3_event.preventDefault();
+            context.validator().resetIgnoredIssues();
+        });
     }
 
     function setNoIssuesText(selection) {
@@ -62,7 +96,7 @@ export function uiSectionValidationStatus(context) {
                 var hiddenIssues = context.validator().getIssues(hiddenOpts);
                 if (hiddenIssues.length) {
                     selection.select('.box .details')
-                        .text('')
+                        .html('')
                         .call(t.append(
                             'issues.no_issues.hidden_issues.' + type,
                             { count: hiddenIssues.length.toString() }
@@ -71,7 +105,7 @@ export function uiSectionValidationStatus(context) {
                 }
             }
             selection.select('.box .details')
-                .text('')
+                .html('')
                 .call(t.append('issues.no_issues.hidden_issues.none'));
         }
 
@@ -127,7 +161,7 @@ export function uiSectionValidationStatus(context) {
         }
 
         selection.select('.box .message')
-            .text('')
+            .html('')
             .call(t.append('issues.no_issues.message.' + messageType));
 
     }
@@ -137,45 +171,10 @@ export function uiSectionValidationStatus(context) {
     });
 
     context.map().on('move.uiSectionValidationStatus',
-        debounce(function() {
+        _debounce(function() {
             window.requestIdleCallback(section.reRender);
         }, 1000)
     );
 
     return section;
-}
-
-
-export function renderIgnoredIssuesReset(context, selection) {
-
-    var ignoredIssues = context.validator()
-        .getIssues({ what: 'all', where: 'all', includeDisabledRules: true, includeIgnored: 'only' });
-
-    var resetIgnored = selection.selectAll('.reset-ignored')
-        .data(ignoredIssues.length ? [0] : []);
-
-    // exit
-    resetIgnored.exit()
-        .remove();
-
-    // enter
-    var resetIgnoredEnter = resetIgnored.enter()
-        .append('div')
-        .attr('class', 'reset-ignored section-footer');
-
-    resetIgnoredEnter
-        .append('a')
-        .attr('href', '#');
-
-    // update
-    resetIgnored = resetIgnored
-        .merge(resetIgnoredEnter);
-
-    resetIgnored.select('a')
-        .call(t.addOrUpdate('inspector.title_count', { title: t.append('issues.reset_ignored'), count: ignoredIssues.length }));
-
-    resetIgnored.on('click', function(d3_event) {
-        d3_event.preventDefault();
-        context.validator().resetIgnoredIssues();
-    });
 }

@@ -1,10 +1,16 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
-import { select as d3_select } from 'd3-selection';
+import {
+    select as d3_select
+} from 'd3-selection';
 
 import { t } from '../core/localizer';
 import { services } from '../services';
 import { modeBrowse } from '../modes/browse';
 import { svgIcon } from '../svg/icon';
+
+// import { uiField } from './field';
+// import { uiFormFields } from './form_fields';
+
 import { uiNoteComments } from './note_comments';
 import { uiNoteHeader } from './note_header';
 import { uiNoteReport } from './note_report';
@@ -14,7 +20,6 @@ import {
     utilNoAuto,
     utilRebind
 } from '../util';
-import { osmNote } from '../osm';
 
 
 export function uiNoteEditor(context) {
@@ -22,8 +27,11 @@ export function uiNoteEditor(context) {
     var noteComments = uiNoteComments(context);
     var noteHeader = uiNoteHeader();
 
+    // var formFields = uiFormFields(context);
+
     var _note;
     var _newNote;
+    // var _fieldsArr;
 
 
     function noteEditor(selection) {
@@ -92,7 +100,7 @@ export function uiNoteEditor(context) {
     function noteSaveSection(selection) {
         var isSelected = (_note && _note.id === context.selectedNoteID());
         var noteSave = selection.selectAll('.note-save')
-            .data((isSelected ? [_note].filter(d => d.status !== 'hidden') : []), d => d.status + d.id);
+            .data((isSelected ? [_note] : []), function(d) { return d.status + d.id; });
 
         // exit
         noteSave.exit()
@@ -102,6 +110,40 @@ export function uiNoteEditor(context) {
         var noteSaveEnter = noteSave.enter()
             .append('div')
             .attr('class', 'note-save save-section cf');
+
+        // // if new note, show categories to pick from
+        // if (_note.isNew()) {
+        //     var presets = presetManager;
+
+        //     // NOTE: this key isn't a age and therefore there is no documentation (yet)
+        //     _fieldsArr = [
+        //         uiField(context, presets.field('category'), null, { show: true, revert: false }),
+        //     ];
+
+        //     _fieldsArr.forEach(function(field) {
+        //         field
+        //             .on('change', changeCategory);
+        //     });
+
+        //     noteSaveEnter
+        //         .append('div')
+        //         .attr('class', 'note-category')
+        //         .call(formFields.fieldsArr(_fieldsArr));
+        // }
+
+        // function changeCategory() {
+        //     // NOTE: perhaps there is a better way to get value
+        //     var val = context.container().select('input[name=\'category\']:checked').property('__data__') || undefined;
+
+        //     // store the unsaved category with the note itself
+        //     _note = _note.update({ newCategory: val });
+        //     var osm = services.osm;
+        //     if (osm) {
+        //         osm.replaceNote(_note);  // update note cache
+        //     }
+        //     noteSave
+        //         .call(noteSaveButtons);
+        // }
 
         noteSaveEnter
             .append('h4')
@@ -163,7 +205,7 @@ export function uiNoteEditor(context) {
                     clickSave(_note);
                 } else  {
                     noteSave.selectAll('.comment-button').node().focus();
-                    postCommentAndStatus(_note);
+                    clickComment(_note);
                 }
             }, 10);
         }
@@ -254,24 +296,24 @@ export function uiNoteEditor(context) {
         osm.userDetails(function(err, user) {
             if (err) return;
 
-            const userLink = selection => {
-                if (user.image_url) {
-                    selection
-                        .append('img')
-                        .attr('src', user.image_url)
-                        .attr('class', 'icon pre-text user-icon');
-                }
+            var userLink = d3_select(document.createElement('div'));
 
-                selection
-                    .append('a')
-                    .attr('class', 'user-info')
-                    .text(user.display_name)
-                    .attr('href', osm.userURL(user.display_name))
-                    .attr('target', '_blank');
-            };
+            if (user.image_url) {
+                userLink
+                    .append('img')
+                    .attr('src', user.image_url)
+                    .attr('class', 'icon pre-text user-icon');
+            }
+
+            userLink
+                .append('a')
+                .attr('class', 'user-info')
+                .text(user.display_name)
+                .attr('href', osm.userURL(user.display_name))
+                .attr('target', '_blank');
 
             prose
-                .call(t.addOrUpdate('note.upload_explanation_with_user', { user: userLink }));
+                .html(t.html('note.upload_explanation_with_user', { user: { html: userLink.html() } }));
         });
     }
 
@@ -282,7 +324,7 @@ export function uiNoteEditor(context) {
 
         var isSelected = (_note && _note.id === context.selectedNoteID());
         var buttonSection = selection.selectAll('.buttons')
-            .data((isSelected ? [_note] : []), d => d.status + d.id);
+            .data((isSelected ? [_note] : []), function(d) { return d.status + d.id; });
 
         // exit
         buttonSection.exit()
@@ -334,14 +376,11 @@ export function uiNoteEditor(context) {
                 var andComment = (d.newComment ? '_comment' : '');
                 t.addOrUpdate('note.' + action + andComment)(d3_select(this));
             })
-            .on('click.status', function(d3_event, note) {
-                const setStatus = (note.status === 'open' ? 'closed' : 'open');
-                postCommentAndStatus.bind(this)(d3_event, note, setStatus);
-            });
+            .on('click.status', clickStatus);
 
         buttonSection.select('.comment-button')   // select and propagate data
             .attr('disabled', isSaveDisabled)
-            .on('click.comment', postCommentAndStatus);
+            .on('click.comment', clickComment);
 
 
         function isSaveDisabled(d) {
@@ -358,36 +397,38 @@ export function uiNoteEditor(context) {
             osm.removeNote(d);
         }
         context.enter(modeBrowse(context));
-        dispatch.call('change', d);
+        dispatch.call('change');
     }
 
 
-    function clickSave(d3_event, note) {
+    function clickSave(d3_event, d) {
         this.blur();    // avoid keeping focus on the button - #4641
         var osm = services.osm;
         if (osm) {
-            osm.postNoteCreate(note, (err, d) => dispatch.call('change', d));
+            osm.postNoteCreate(d, function(err, note) {
+                dispatch.call('change', note);
+            });
         }
     }
 
 
-    function postCommentAndStatus(d3_event, note, newStatus) {
+    function clickStatus(d3_event, d) {
         this.blur();    // avoid keeping focus on the button - #4641
         var osm = services.osm;
         if (osm) {
-            osm.postNoteUpdate(note, newStatus || note.status, function(err, d) {
-                if (!err) {
-                    dispatch.call('change', d);
-                } else if (err.status === 409) {
-                    // note was probably closed in the meantime: reload it - #8464
-                    osm.loadEntityNote(note.id, (err, d) => {
-                        dispatch.call('change', new osmNote({ ...d.data[0], newComment: note.newComment }));
-                    });
-                } else if (err.status === 410) {
-                    // note was deleted/hidden by a moderator
-                    osm.removeNote(note);
-                    dispatch.call('change', new osmNote({ id: note.id, status: 'hidden', comments: [...note.comments, { action: 'hidden' }] }));
-                }
+            var setStatus = (d.status === 'open' ? 'closed' : 'open');
+            osm.postNoteUpdate(d, setStatus, function(err, note) {
+                dispatch.call('change', note);
+            });
+        }
+    }
+
+    function clickComment(d3_event, d) {
+        this.blur();    // avoid keeping focus on the button - #4641
+        var osm = services.osm;
+        if (osm) {
+            osm.postNoteUpdate(d, d.status, function(err, note) {
+                dispatch.call('change', note);
             });
         }
     }

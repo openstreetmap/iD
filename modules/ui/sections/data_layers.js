@@ -1,4 +1,4 @@
-import { debounce } from 'es-toolkit';
+import _debounce from 'lodash-es/debounce';
 import {
     select as d3_select
 } from 'd3-selection';
@@ -12,7 +12,6 @@ import { modeBrowse } from '../../modes/browse';
 import { uiCmd } from '../cmd';
 import { uiSection } from '../section';
 import { uiSettingsCustomData } from '../settings/custom_data';
-import { utilIsDrawing } from '../../util';
 
 export function uiSectionDataLayers(context) {
 
@@ -52,7 +51,7 @@ export function uiSectionDataLayers(context) {
     function setLayer(which, enabled) {
         // Don't allow layer changes while drawing - #6584
         var mode = context.mode();
-        if (mode && utilIsDrawing(mode.id)) return;
+        if (mode && /^draw/.test(mode.id)) return;
 
         var layer = layers.layer(which);
         if (layer) {
@@ -117,9 +116,7 @@ export function uiSectionDataLayers(context) {
 
         labelEnter
             .append('span')
-            .each(function(d) {
-                d3_select(this).call(t.append('map_data.layers.' + d.id + '.title'));
-            });
+            .html(function(d) { return t.html('map_data.layers.' + d.id + '.title'); });
 
 
         // Update
@@ -131,7 +128,7 @@ export function uiSectionDataLayers(context) {
     }
 
     function drawQAItems(selection) {
-        var qaKeys = ['osmose'];
+        var qaKeys = ['keepRight', 'osmose'];
         var qaLayers = layers.all().filter(function(obj) { return qaKeys.indexOf(obj.id) !== -1; });
 
         var ul = selection
@@ -447,7 +444,7 @@ export function uiSectionDataLayers(context) {
 
     context.map()
         .on('move.uiSectionDataLayers',
-            debounce(function() {
+            _debounce(function() {
                 // Detroit layers may have moved in or out of view
                 window.requestIdleCallback(section.reRender);
             }, 1000)

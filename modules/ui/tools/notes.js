@@ -1,4 +1,4 @@
-import { debounce } from 'es-toolkit';
+import _debounce from 'lodash-es/debounce';
 
 import { select as d3_select } from 'd3-selection';
 
@@ -10,7 +10,6 @@ import {
 import { t } from '../../core/localizer';
 import { svgIcon } from '../../svg';
 import { uiTooltip } from '../tooltip';
-import { utilIsDrawing } from '../../util';
 
 export function uiToolNotes(context) {
 
@@ -35,11 +34,8 @@ export function uiToolNotes(context) {
         return context.map().notesEditable() && mode && mode.id !== 'save';
     }
 
-    context.keybinding().on(mode.key, function(d3_event) {
+    context.keybinding().on(mode.key, function() {
         if (!enabled()) return;
-        if (mode.disabled?.()) return;
-
-        d3_event.preventDefault();
 
         if (mode.id === context.mode().id) {
             context.enter(modeBrowse(context));
@@ -50,7 +46,7 @@ export function uiToolNotes(context) {
 
     tool.render = function(selection) {
 
-        var debouncedUpdate = debounce(update, 500, { edges: ['leading', 'trailing'] });
+        var debouncedUpdate = _debounce(update, 500, { leading: true, trailing: true });
 
         context.map()
             .on('move.notes', debouncedUpdate)
@@ -82,7 +78,7 @@ export function uiToolNotes(context) {
 
                     // When drawing, ignore accidental clicks on mode buttons - #4042
                     var currMode = context.mode().id;
-                    if (utilIsDrawing(currMode)) return;
+                    if (/^draw/.test(currMode)) return;
 
                     if (d.id === currMode) {
                         context.enter(modeBrowse(context));
@@ -109,7 +105,7 @@ export function uiToolNotes(context) {
             }
 
             // update
-            buttons
+            buttons = buttons
                 .merge(buttonsEnter)
                 .classed('disabled', function() { return !enabled(); })
                 .attr('aria-disabled', function() { return !enabled(); })

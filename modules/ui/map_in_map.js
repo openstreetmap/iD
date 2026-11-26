@@ -43,8 +43,7 @@ export function uiMapInMap(context) {
 
         function zoomStarted() {
             if (_skipEvents) return;
-            _tCurr = projection.transform();
-            _tStart = _tCurr;
+            _tStart = _tCurr = projection.transform();
             _gesture = null;
         }
 
@@ -206,7 +205,7 @@ export function uiMapInMap(context) {
             overlays.exit()
                 .remove();
 
-            overlays.enter()
+            overlays = overlays.enter()
                 .append('div')
                 .merge(overlays)
                 .each(function(layer) { d3_select(this).call(layer); });
@@ -219,7 +218,7 @@ export function uiMapInMap(context) {
             dataLayers.exit()
                 .remove();
 
-            dataLayers.enter()
+            dataLayers = dataLayers.enter()
                 .append('svg')
                 .attr('class', 'map-in-map-data')
                 .merge(dataLayers)

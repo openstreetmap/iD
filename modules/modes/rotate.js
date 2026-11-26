@@ -29,7 +29,6 @@ export function modeRotate(context, entityIDs) {
 
     var _tolerancePx = 4; // see also behaviorDrag, behaviorSelect, modeMove
 
-    /** @type {import('../core/context').Mode} */
     var mode = {
         id: 'rotate',
         button: 'browse'
@@ -176,8 +175,8 @@ export function modeRotate(context, entityIDs) {
             .on(_pointerPrefix + 'down.modeRotate', null);
 
         d3_select(window)
-            .on(_pointerPrefix + 'move.modeRotate', null)
-            .on(_pointerPrefix + 'up.modeRotate', null);
+            .on(_pointerPrefix + 'move.modeRotate', null, true)
+            .on(_pointerPrefix + 'up.modeRotate', null, true);
 
         context.history()
             .on('undone.modeRotate', null);

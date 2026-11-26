@@ -1,6 +1,5 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { select as d3_select } from 'd3-selection';
-import { isEmpty } from 'es-toolkit/compat';
 
 import { services } from '../../services';
 import { svgIcon } from '../../svg/icon';
@@ -8,12 +7,12 @@ import { uiCombobox } from '../combobox';
 import { uiSection } from '../section';
 import { uiTagReference } from '../tag_reference';
 import { prefs } from '../../core/preferences';
-import { t } from '../../core/localizer';
+import { localizer, t } from '../../core/localizer';
 import { utilArrayDifference, utilArrayIdentical } from '../../util/array';
 import { utilGetSetValue, utilNoAuto, utilRebind, utilTagDiff } from '../../util';
+import { uiTooltip } from '..';
 import { allowUpperCaseTagValues } from '../../osm/tags';
 import { fileFetcher } from '../../core';
-import { utilDecodeLineBreaks, utilEncodeLineBreaks } from '../../util/util';
 
 
 export function uiSectionRawTagEditor(id, context) {
@@ -22,7 +21,7 @@ export function uiSectionRawTagEditor(id, context) {
         .classes('raw-tag-editor')
         .label(function() {
             var count = Object.keys(_tags).filter(function(d) { return d; }).length;
-            return t.append('inspector.title_count', { title: t.append('inspector.tags'), count: count });
+            return t.append('inspector.title_count', { title: t('inspector.tags'), count: count });
         })
         .expandedByDefault(false)
         .disclosureContent(renderDisclosureContent);
@@ -43,6 +42,7 @@ export function uiSectionRawTagEditor(id, context) {
     var _readOnlyTags = [];
     // the keys in the order we want them to display
     var _orderedKeys = [];
+    var _showBlank = false;
     var _pendingChange = null;
     var _state;
     var _presets;
@@ -76,8 +76,11 @@ export function uiSectionRawTagEditor(id, context) {
             return { index: i, key: key, value: _tags[key] };
         });
 
-        // append blank row last
-        rowData.push({ index: rowData.length, key: '', value: '' });
+        // append blank row last, if necessary
+        if (!rowData.length || _showBlank) {
+            _showBlank = false;
+            rowData.push({ index: rowData.length, key: '', value: '' });
+        }
 
 
         // View Options
@@ -116,7 +119,7 @@ export function uiSectionRawTagEditor(id, context) {
                     .classed('hide', (d.id !== 'text'))
                     .each(setTextareaHeight);
 
-                wrap.selectAll('.tag-list')
+                wrap.selectAll('.tag-list, .add-row')
                     .classed('hide', (d.id !== 'list'));
             })
             .each(function(d) {
@@ -136,7 +139,6 @@ export function uiSectionRawTagEditor(id, context) {
             .call(utilNoAuto)
             .attr('placeholder', t('inspector.key_value'))
             .attr('spellcheck', 'false')
-            .attr('dir', 'ltr')
             .merge(textarea);
 
         textarea
@@ -158,9 +160,35 @@ export function uiSectionRawTagEditor(id, context) {
             .merge(list);
 
 
+        // Container for the Add button
+        var addRowEnter = wrap.selectAll('.add-row')
+            .data([0])
+            .enter()
+            .append('div')
+            .attr('class', 'add-row' + (_tagView !== 'list' ? ' hide' : ''));
+
+        addRowEnter
+            .append('button')
+            .attr('class', 'add-tag')
+            .attr('aria-label', t('inspector.add_to_tag'))
+            .call(svgIcon('#iD-icon-plus', 'light'))
+            .call(uiTooltip()
+                .title(() => t.append('inspector.add_to_tag'))
+                .placement(localizer.textDirection() === 'ltr' ? 'right' : 'left'))
+            .on('click', addTag);
+
+        addRowEnter
+            .append('div')
+            .attr('class', 'space-value');   // preserve space
+
+        addRowEnter
+            .append('div')
+            .attr('class', 'space-buttons');  // preserve space
+
+
         // Tag list items
         var items = list.selectAll('.tag-row')
-            .data(rowData, d => d.key);
+            .data(rowData, function(d) { return d.key; });
 
         items.exit()
             .each(unbind)
@@ -183,16 +211,6 @@ export function uiSectionRawTagEditor(id, context) {
             .property('type', 'text')
             .attr('class', 'key')
             .call(utilNoAuto)
-            .on('keydown', function(d3_event) {
-                    if ((d3_event.key === '=' || d3_event.keyCode === 13 /* Enter */) && this.selectionEnd === this.value.length) {
-                        d3_event.preventDefault();
-                        const row = d3_select(this.parentNode.parentNode);
-                        const value = row.select('input.value').node();
-                        if (value) {
-                            value.focus();
-                        }
-                    }
-                })
             .on('focus', interacted)
             .on('blur', keyChange)
             .on('change', keyChange);
@@ -202,26 +220,15 @@ export function uiSectionRawTagEditor(id, context) {
             .attr('class', 'value-wrap')
             .append('input')
             .property('type', 'text')
-            .attr('dir', 'auto')
             .attr('class', 'value')
             .call(utilNoAuto)
-            .on('keydown', function(d3_event) {
-                    if (d3_event.keyCode === 13 /* Enter */ && this.selectionEnd === this.value.length) {
-                        d3_event.preventDefault();
-                        const nextRow = d3_select(this.parentNode.parentNode.parentNode.nextSibling);
-                        const nextKey = nextRow.select('input.key').node();
-                        if (nextKey) {
-                            nextKey.focus();
-                        }
-                    }
-                })
             .on('focus', interacted)
             .on('blur', valueChange)
-            .on('change', valueChange);
+            .on('change', valueChange)
+            .on('keydown.push-more', pushMore);
 
         innerWrap
             .append('button')
-            .attr('tabindex', -1)
             .attr('class', 'form-field-button remove')
             .attr('title', t('icons.remove'))
             .call(svgIcon('#iD-operation-delete'));
@@ -233,7 +240,6 @@ export function uiSectionRawTagEditor(id, context) {
             .sort(function(a, b) { return a.index - b.index; });
 
         items
-            .classed('add-tag', d => d.key === '')
             .each(function(d) {
                 var row = d3_select(this);
                 var key = row.select('input.key');      // propagate bound data
@@ -254,11 +260,7 @@ export function uiSectionRawTagEditor(id, context) {
                 }
 
                 row.select('.inner-wrap')      // propagate bound data
-                    .call(reference.button)
-                    .select('.tag-reference-button')
-                    .attr('tabindex', -1)
-                    .classed('disabled', d => d.key === '')
-                    .attr('disabled', d => d.key === '' ? 'disabled' : null);
+                    .call(reference.button);
 
                 row.call(reference.body);
 
@@ -267,16 +269,10 @@ export function uiSectionRawTagEditor(id, context) {
 
         items.selectAll('input.key')
             .attr('title', function(d) { return d.key; })
-            .attr('placeholder', function(d) {
-                return d.key === '' ? t('inspector.add_tag') : null;
-            })
+            .call(utilGetSetValue, function(d) { return d.key; })
             .attr('readonly', function(d) {
                 return isReadOnly(d) || null;
-            })
-            .call(utilGetSetValue,
-                d => d.key,
-                (_, newKey) => _pendingChange === null || isEmpty(_pendingChange) || _pendingChange[newKey] // if there are pending changes: skip untouched tags
-            );
+            });
 
         items.selectAll('input.value')
             .attr('title', function(d) {
@@ -286,21 +282,16 @@ export function uiSectionRawTagEditor(id, context) {
                 return Array.isArray(d.value);
             })
             .attr('placeholder', function(d) {
-                return Array.isArray(d.value) ? t('inspector.multiple_values') : null;
+                return typeof d.value === 'string' ? null : t('inspector.multiple_values');
+            })
+            .call(utilGetSetValue, function(d) {
+                return typeof d.value === 'string' ? d.value : '';
             })
             .attr('readonly', function(d) {
                 return isReadOnly(d) || null;
-            })
-            .call(utilGetSetValue, d => {
-                if (_pendingChange !== null && !isEmpty(_pendingChange) && !_pendingChange[d.key]) {
-                    // if there are pending changes: skip untouched tags
-                    return null;
-                }
-                return utilEncodeLineBreaks(Array.isArray(d.value) ? '' : d.value);
             });
 
         items.selectAll('button.remove')
-            .classed('disabled', d => d.key === '')
             .on(('PointerEvent' in window ? 'pointer' : 'mouse') + 'down', // 'click' fires too late - #5878
                 (d3_event, d) => {
                     if (d3_event.button !== 0) return;
@@ -331,7 +322,7 @@ export function uiSectionRawTagEditor(id, context) {
 
     function stringify(s) {
         const stringified = JSON.stringify(s).slice(1, -1);   // without leading/trailing "
-        if (stringified !== s || s.includes('=')) {
+        if (stringified !== s) {
             return `"${stringified}"`;
         } else {
             return s;
@@ -356,7 +347,7 @@ export function uiSectionRawTagEditor(id, context) {
             .filter(function(row) { return row.key && row.key.trim() !== ''; })
             .map(function(row) {
                 var rawVal = row.value;
-                if (Array.isArray(rawVal)) rawVal = '*';
+                if (typeof rawVal !== 'string') rawVal = '*';
                 var val = rawVal ? stringify(rawVal) : '';
                 return stringify(row.key) + '=' + val;
             })
@@ -369,10 +360,6 @@ export function uiSectionRawTagEditor(id, context) {
     }
 
     function textChanged() {
-        // the window lost focus (e.g. switching browser tabs), but the textarea is still focused:
-        // don't apply the text yet, as it would discard incomplete lines - #11446
-        if (document.activeElement === this) return;
-
         var newText = this.value.trim();
         var newTags = {};
         newText.split('\n').forEach(function(row) {
@@ -392,7 +379,7 @@ export function uiSectionRawTagEditor(id, context) {
             if (isReadOnly({ key: change.key })) return;
 
             // skip unchanged multiselection placeholders
-            if (change.newVal === '*' && Array.isArray(change.oldVal)) return;
+            if (change.newVal === '*' && typeof change.oldVal !== 'string') return;
 
             if (change.type === '-') {
                 _pendingChange[change.key] = undefined;
@@ -401,7 +388,7 @@ export function uiSectionRawTagEditor(id, context) {
             }
         });
 
-        if (isEmpty(_pendingChange)) {
+        if (Object.keys(_pendingChange).length === 0) {
             _pendingChange = null;
             section.reRender();
             return;
@@ -410,11 +397,21 @@ export function uiSectionRawTagEditor(id, context) {
         scheduleChange();
     }
 
+    function pushMore(d3_event) {
+        // if pressing Tab on the last value field with content, add a blank row
+        if (d3_event.keyCode === 9 && !d3_event.shiftKey &&
+            section.selection().selectAll('.tag-list li:last-child input.value').node() === this &&
+            utilGetSetValue(d3_select(this))) {
+            addTag();
+        }
+    }
+
     function bindTypeahead(key, value) {
         if (isReadOnly(key.datum())) return;
 
         if (Array.isArray(value.datum().value)) {
             value.call(uiCombobox(context, 'tag-value')
+                .minItems(1)
                 .fetcher(function(value, callback) {
                     var keyString = utilGetSetValue(key);
                     if (!_tags[keyString]) return;
@@ -429,7 +426,7 @@ export function uiSectionRawTagEditor(id, context) {
                             };
                         }
                         return {
-                            value: utilEncodeLineBreaks(tagValue),
+                            value: tagValue,
                             title: tagValue
                         };
                     });
@@ -451,7 +448,7 @@ export function uiSectionRawTagEditor(id, context) {
                         const filtered = data
                             .filter(d => _tags[d.value] === undefined) // already used tag
                             .filter(d => !(d.value in _discardTags)) // do not suggest discardable tags (see #9817)
-                            .filter(d => !/_\d$/.test(d.value)) // tag like name_1 (see #9422)
+                            .filter(d => !/_\d$/.test(d)) // tag like name_1 (see #9422)
                             .filter(d => d.value.toLowerCase().includes(value.toLowerCase())); // tag does not match user input
                         callback(sort(value, filtered));
                     }
@@ -500,8 +497,7 @@ export function uiSectionRawTagEditor(id, context) {
     }
 
     function keyChange(d3_event, d) {
-        const input = d3_select(this);
-        if (input.attr('readonly')) return;
+        if (d3_select(this).attr('readonly')) return;
 
         var kOld = d.key;
 
@@ -514,10 +510,6 @@ export function uiSectionRawTagEditor(id, context) {
         if (isReadOnly({ key: kNew })) {
             this.value = kOld;
             return;
-        }
-
-        if (kNew !== this.value) {
-            utilGetSetValue(input, kNew);
         }
 
         if (kNew &&
@@ -549,9 +541,9 @@ export function uiSectionRawTagEditor(id, context) {
             // a new tag was added
             let row = this.parentNode.parentNode;
             let inputVal = d3_select(row).selectAll('input.value');
-            let vNew = context.cleanTagValue(utilDecodeLineBreaks(utilGetSetValue(inputVal)));
+            let vNew = context.cleanTagValue(utilGetSetValue(inputVal));
             _pendingChange[kNew] = vNew;
-            utilGetSetValue(inputVal, utilEncodeLineBreaks(vNew));
+            utilGetSetValue(inputVal, vNew);
         }
 
         // update the ordered key index so this row doesn't change position
@@ -568,41 +560,55 @@ export function uiSectionRawTagEditor(id, context) {
         if (isReadOnly(d)) return;
 
         // exit if this is a multiselection and no value was entered
-        if (Array.isArray(d.value) && !this.value) return;
+        if (typeof d.value !== 'string' && !this.value) return;
 
         // exit if we are currently about to delete this row anyway - #6366
         if (_pendingChange && _pendingChange.hasOwnProperty(d.key) && _pendingChange[d.key] === undefined) return;
 
         _pendingChange = _pendingChange || {};
 
-        const vNew = context.cleanTagValue(utilDecodeLineBreaks(this.value));
-        if (utilEncodeLineBreaks(vNew) !== this.value) {
-            utilGetSetValue(d3_select(this), utilEncodeLineBreaks(vNew));
-        }
-
-        _pendingChange[d.key] = vNew;
+        _pendingChange[d.key] = context.cleanTagValue(this.value);
         scheduleChange();
     }
 
     function removeTag(d3_event, d) {
         if (isReadOnly(d)) return;
 
-        // remove the key from the ordered key index
-        _orderedKeys = _orderedKeys.filter(function(key) { return key !== d.key; });
+        if (d.key === '') {    // removing the blank row
+            _showBlank = false;
+            section.reRender();
 
-        _pendingChange  = _pendingChange || {};
-        _pendingChange[d.key] = undefined;
-        scheduleChange();
+        } else {
+            // remove the key from the ordered key index
+            _orderedKeys = _orderedKeys.filter(function(key) { return key !== d.key; });
+
+            _pendingChange  = _pendingChange || {};
+            _pendingChange[d.key] = undefined;
+            scheduleChange();
+        }
+    }
+
+    function addTag() {
+        // Delay render in case this click is blurring an edited combo.
+        // Without the setTimeout, the `content` render would wipe out the pending tag change.
+        window.setTimeout(function() {
+            _showBlank = true;
+            section.reRender();
+            section.selection().selectAll('.tag-list li:last-child input.key').node().focus();
+        }, 20);
     }
 
     function scheduleChange() {
-        if (!_pendingChange) return;
+        // Cache IDs in case the editor is reloaded before the change event is called. - #6028
+        var entityIDs = _entityIDs;
 
-        for (const key in _pendingChange) {
-            _tags[key] = _pendingChange[key];
-        }
-        dispatch.call('change', this, _entityIDs, _pendingChange);
-        _pendingChange = null;
+        // Delay change in case this change is blurring an edited combo. - #5878
+        window.setTimeout(function() {
+            if (!_pendingChange) return;
+
+            dispatch.call('change', this, entityIDs, _pendingChange);
+            _pendingChange = null;
+        }, 10);
     }
 
 

@@ -1,13 +1,12 @@
-// https://github.com/openstreetmap/iD/issues/772
-import { get, set, del } from 'idb-keyval';
 
-/** @type {Storage} */
+// https://github.com/openstreetmap/iD/issues/772
+// http://mathiasbynens.be/notes/localstorage-pattern#comment-9
 let _storage;
 try { _storage = localStorage; } catch {}  // eslint-disable-line no-empty
 _storage = _storage || (() => {
   let s = {};
   return {
-    getItem: (k) => k in s ? s[k] : null,
+    getItem: (k) => s[k],
     setItem: (k, v) => s[k] = v,
     removeItem: (k) => delete s[k]
   };
@@ -20,15 +19,8 @@ const _listeners = {};
 // within and between iD sessions on the same site.
 //
 /**
- * @overload getter
  * @param {string} k
- * @param {undefined} [v]
- * @returns {string | null} the value
- */
-/**
- * @overload setter
- * @param {string} k
- * @param {string | number | boolean | null} v
+ * @param {string?} [v]
  * @returns {boolean} true if the action succeeded
  */
 function corePreferences(k, v) {
@@ -36,32 +28,24 @@ function corePreferences(k, v) {
     if (v === undefined) return _storage.getItem(k);
     else if (v === null) _storage.removeItem(k);
     else _storage.setItem(k, v);
-
     if (_listeners[k]) {
       _listeners[k].forEach(handler => handler(v));
     }
-
     return true;
   } catch {
-
+    /* eslint-disable no-console */
     if (typeof console !== 'undefined') {
       console.error('localStorage quota exceeded');
     }
-
+    /* eslint-enable no-console */
     return false;
   }
 }
 
-// adds an event listener which is triggered whenever a preference changes
+// adds an event listener which is triggered whenever
 corePreferences.onChange = function(k, handler) {
   _listeners[k] = _listeners[k] || [];
   _listeners[k].push(handler);
 };
 
 export { corePreferences as prefs };
-
-export const asyncPrefs = {
-  get,
-  set,
-  del
-};

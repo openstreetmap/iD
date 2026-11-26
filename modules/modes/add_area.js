@@ -5,7 +5,6 @@ import { actionAddVertex } from '../actions/add_vertex';
 import { behaviorAddWay } from '../behavior/add_way';
 import { modeDrawArea } from './draw_area';
 import { osmNode, osmWay } from '../osm';
-import { utilIsDrawing } from '../util/util';
 
 
 export function modeAddArea(context, mode) {
@@ -31,8 +30,8 @@ export function modeAddArea(context, mode) {
 
     function start(loc) {
         var startGraph = context.graph();
-        var node = new osmNode({ loc: loc });
-        var way = new osmWay({ tags: defaultTags(loc) });
+        var node = osmNode({ loc: loc });
+        var way = osmWay({ tags: defaultTags(loc) });
 
         context.perform(
             actionAddEntity(node),
@@ -47,8 +46,8 @@ export function modeAddArea(context, mode) {
 
     function startFromWay(loc, edge) {
         var startGraph = context.graph();
-        var node = new osmNode({ loc: loc });
-        var way = new osmWay({ tags: defaultTags(loc) });
+        var node = osmNode({ loc: loc });
+        var way = osmWay({ tags: defaultTags(loc) });
 
         context.perform(
             actionAddEntity(node),
@@ -64,7 +63,7 @@ export function modeAddArea(context, mode) {
 
     function startFromNode(node) {
         var startGraph = context.graph();
-        var way = new osmWay({ tags: defaultTags(node.loc) });
+        var way = osmWay({ tags: defaultTags(node.loc) });
 
         context.perform(
             actionAddEntity(way),
@@ -75,7 +74,6 @@ export function modeAddArea(context, mode) {
         context.enter(modeDrawArea(context, way.id, startGraph, mode.button));
     }
 
-    mode.disabled = () => utilIsDrawing(context.mode().id);
 
     mode.enter = function() {
         context.install(behavior);

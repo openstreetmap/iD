@@ -1,7 +1,7 @@
 import { dispatch as d3_dispatch } from 'd3-dispatch';
-import { isArray, isNumber } from 'es-toolkit/compat';
+import { isArray, isNumber } from 'lodash-es';
 
-import { localizer, t } from '../../core/localizer';
+import { t } from '../../core/localizer';
 import { uiConfirm } from '../confirm';
 import { utilRebind } from '../../util';
 import { uiTooltip } from '../tooltip';
@@ -105,7 +105,7 @@ export function uiSettingsLocalPhotos(context) {
             .call(svgIcon('#iD-icon-alert'))
             .call(uiTooltip()
                 .title(() => t.append('local_photos.no_geolocation.tooltip'))
-                .placement(localizer.textDirection() === 'rtl' ? 'right' : 'left')
+                .placement('left')
             );
         selectionEnter
             .append('button')
