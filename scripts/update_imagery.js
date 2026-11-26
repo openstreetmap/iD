@@ -1,12 +1,9 @@
-import fs from 'node:fs';
-import { createRequire } from 'node:module';
-import prettyStringify from 'json-stringify-pretty-compact';
-
-const require = createRequire(import.meta.url);
+const fs = require('fs');
+const prettyStringify = require('json-stringify-pretty-compact');
 
 /** @type {import("geojson").FeatureCollection} */
 const sources = JSON.parse(
-  fs.readFileSync(require.resolve('@openstreetmap/editor-layer-index/imagery.geojson'), 'utf8')
+  fs.readFileSync(require.resolve('editor-layer-index/imagery.geojson'), 'utf8')
 );
 
 if (fs.existsSync('./data/manual_imagery.json')) {
@@ -32,6 +29,10 @@ if (fs.existsSync('./data/manual_imagery.json')) {
 
 let imagery = [];
 
+// ignore imagery more than 20 years old..
+let cutoffDate = new Date();
+cutoffDate.setFullYear(cutoffDate.getFullYear() - 20);
+
 const discard = [
   /^osmbe$/,                              // 'OpenStreetMap (Belgian Style)'
   /^osmfr(-(basque|breton|occitan))?$/,   // 'OpenStreetMap (French, Basque, Breton, Occitan Style)'
@@ -54,6 +55,7 @@ const discard = [
   /^openinframap-(petroleum|power|telecoms)$/,
   /^openpt_map$/,
   /^openrailwaymap$/,
+  /^openseamap$/,
   /^opensnowmap-overlay$/,
 
   /^US-TIGER-Roads-201\d/,
@@ -74,8 +76,7 @@ const supportedWMSProjections = [
   'EPSG:102100',
   'EPSG:3785',
   // WGS 84 (Equirectangular)
-  'EPSG:4326',
-  'CRS:84'
+  'EPSG:4326'
 ];
 
 sources.features.forEach(feature => {
@@ -118,6 +119,7 @@ sources.features.forEach(feature => {
     endDate = new Date(source.end_date);
     isValid = !isNaN(endDate.getTime());
     if (isValid) {
+      if (endDate <= cutoffDate) return;  // too old
       im.endDate = endDate;
     }
   }
@@ -164,6 +166,9 @@ sources.features.forEach(feature => {
   }
   if (attribution.text) {
     im.terms_text = attribution.text;
+  }
+  if (attribution.html) {
+    im.terms_html = attribution.html;
   }
 
   ['best', 'default', 'description', 'encrypted', 'icon', 'overlay', 'tileSize'].forEach(prop => {

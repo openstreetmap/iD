@@ -1,49 +1,30 @@
-import { deepEqual } from 'fast-equals';
-import { clamp } from 'es-toolkit/compat';
-import { select as d3_select } from 'd3';
-
+import deepEqual from 'fast-deep-equal';
 import { geoScaleToZoom } from '../geo';
-import { osmIdManager } from '../osm';
+import { osmEntity } from '../osm';
 import { svgPointTransform } from './helpers';
 import { svgTagClasses } from './tag_classes';
 import { presetManager } from '../presets';
-import { getRadiiInPixels } from '../core';
-import { textWidth, isAddressPoint } from './labels';
 
 export function svgPoints(projection, context) {
-    var _currSelected = new Set();
-    var _prevSelected = new Set();
 
     function markerPath(selection, klass) {
         selection
             .attr('class', klass)
-            .attr('transform', d => isAddressPoint(d.tags)
-                ? `translate(-${addressShieldWidth(d, selection)/2}, -8)`
-                : 'translate(-8, -23)')
-            .attr('d', d => {
-                if (!isAddressPoint(d.tags)) {
-                    return 'M 17,8 C 17,13 11,21 8.5,23.5 C 6,21 0,13 0,8 C 0,4 4,-0.5 8.5,-0.5 C 13,-0.5 17,4 17,8 z';
-                }
-                const w = addressShieldWidth(d, selection);
-                return `M ${w-3.5} 0 a 3.5 3.5 0 0 0 3.5 3.5 l 0 9 a 3.5 3.5 0 0 0 -3.5 3.5 l -${w-7} 0 a 3.5 3.5 0 0 0 -3.5 -3.5 l 0 -9 a 3.5 3.5 0 0 0 3.5 -3.5 z`;
-            });
+            .attr('transform', 'translate(-8, -23)')
+            .attr('d', 'M 17,8 C 17,13 11,21 8.5,23.5 C 6,21 0,13 0,8 C 0,4 4,-0.5 8.5,-0.5 C 13,-0.5 17,4 17,8 z');
     }
 
     function sortY(a, b) {
         return b.loc[1] - a.loc[1];
     }
 
-    function addressShieldWidth(d, selection) {
-        const width = textWidth(d.tags['addr:housenumber'] || d.tags['addr:housename'] || '', 10, selection.node().parentElement);
-        return clamp(width, 10, 34) + 8;
-    };
 
     // Avoid exit/enter if we're just moving stuff around.
     // The node will get a new version but we only need to run the update selection.
     function fastEntityKey(d) {
-        const mode = context.mode();
-        const isMoving = mode && /^(add|draw|drag|move|rotate)/.test(mode.id);
-        return isMoving ? d.id : osmIdManager.key(d);
+        var mode = context.mode();
+        var isMoving = mode && /^(add|draw|drag|move|rotate)/.test(mode.id);
+        return isMoving ? d.id : osmEntity.key(d);
     }
 
 
@@ -61,16 +42,15 @@ export function svgPoints(projection, context) {
                 id: node.id,
                 properties: {
                     target: true,
-                    entity: node,
-                    isAddr: isAddressPoint(node.tags)
+                    entity: node
                 },
                 geometry: node.asGeoJSON()
             });
         });
 
         var targets = selection.selectAll('.point.target')
-            .filter(d => filter(d.properties.entity))
-            .data(data, d => fastEntityKey(d.properties.entity));
+            .filter(function(d) { return filter(d.properties.entity); })
+            .data(data, function key(d) { return d.id; });
 
         // exit
         targets.exit()
@@ -79,18 +59,17 @@ export function svgPoints(projection, context) {
         // enter/update
         targets.enter()
             .append('rect')
-            .attr('x', d => d.properties.isAddr ? -addressShieldWidth(d.properties.entity, selection) / 2 : -10)
-            .attr('y', d => d.properties.isAddr ? -8 : -26)
-            .attr('width', d => d.properties.isAddr ? addressShieldWidth(d.properties.entity, selection) : 20)
-            .attr('height', d => d.properties.isAddr ? 16 : 30)
-            .attr('class', function(d) { return 'node point target ' + fillClass + d.id; })
+            .attr('x', -10)
+            .attr('y', -26)
+            .attr('width', 20)
+            .attr('height', 30)
             .merge(targets)
+            .attr('class', function(d) { return 'node point target ' + fillClass + d.id; })
             .attr('transform', getTransform);
     }
 
 
     function drawPoints(selection, graph, entities, filter) {
-        const selected = context.selectedIDs();
         var wireframe = context.surface().classed('fill-wireframe');
         var zoom = geoScaleToZoom(projection.scale());
         var base = context.history().base();
@@ -126,16 +105,13 @@ export function svgPoints(projection, context) {
             .append('path')
             .call(markerPath, 'shadow');
 
-        enter.each(function(d) {
-            if (isAddressPoint(d.tags)) return;
-            d3_select(this)
+        enter
             .append('ellipse')
             .attr('cx', 0.5)
             .attr('cy', 1)
             .attr('rx', 6.5)
             .attr('ry', 3)
             .attr('class', 'stroke');
-        });
 
         enter
             .append('path')
@@ -162,20 +138,6 @@ export function svgPoints(projection, context) {
             })
             .call(svgTagClasses());
 
-        // Highlighted vertices with a radius/diameter get a circle
-        const circles = groups
-            .selectAll('.radius')
-            .data((d) => selected.includes(d.id) ? getRadiiInPixels(d, projection) : []);
-
-        circles.exit()
-            .remove();
-
-        circles.enter()
-            .insert('circle', '.shadow')
-            .attr('class', 'radius')
-            .merge(circles)
-            .attr('r', d => d);
-
         groups.select('.shadow');   // propagate bound data
         groups.select('.stroke');   // propagate bound data
         groups.select('.icon')      // propagate bound data
@@ -190,19 +152,6 @@ export function svgPoints(projection, context) {
         touchLayer
             .call(drawTargets, graph, points, filter);
     }
-
-    // partial redraw - only update the selected items..
-    drawPoints.drawSelected = (selection, graph) => {
-        _prevSelected = _currSelected;
-        _currSelected = new Set(context.selectedIDs());
-
-        const ids = new Set([..._prevSelected, ..._currSelected]);
-        const selectedEntities = [...ids]
-            .map(id => graph.hasEntity(id))
-            .filter(Boolean);
-
-        drawPoints(selection, graph, selectedEntities, d => ids.has(d.id));
-    };
 
 
     return drawPoints;

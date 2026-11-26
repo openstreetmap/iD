@@ -1,7 +1,7 @@
 describe('iD.actionNoop', function () {
     it('does nothing', function () {
-        var graph = new iD.coreGraph(),
+        var graph = iD.coreGraph(),
             action = iD.actionNoop(graph);
-        expect(action(graph)).toEqual(graph);
+        expect(action(graph)).to.equal(graph);
     });
 });

@@ -4,16 +4,11 @@ import * as countryCoder from '@rapideditor/country-coder';
 
 import { presetManager } from '../../presets';
 import { fileFetcher } from '../../core/file_fetcher';
-import { geoChooseEdge, geoSphericalDistance, geoPolygonContainsPolygon, geoPointInPolygon } from '../../geo';
+import { geoExtent, geoChooseEdge, geoSphericalDistance } from '../../geo';
 import { uiCombobox } from '../combobox';
 import { utilArrayUniqBy, utilGetSetValue, utilNoAuto, utilRebind, utilTotalExtent, utilTriggerEvent } from '../../util';
 import { t } from '../../core/localizer';
 
-/** @typedef {{
-    countryCodes: string[];
-    format: string[][];
-    widths?: Record<string, number>;
-}[]} AddressFormatsJSON */
 
 export function uiFieldAddress(field, context) {
     var dispatch = d3_dispatch('change');
@@ -23,7 +18,7 @@ export function uiFieldAddress(field, context) {
 
     var _entityIDs = [];
     var _tags;
-    var _countryCodes = []; // sometimes we want to check multiple address hints (e.g. HK vs CN, and CK vs NZ)
+    var _countryCode;
     var _addressFormats = [{
         format: [
             ['housenumber', 'street'],
@@ -44,7 +39,7 @@ export function uiFieldAddress(field, context) {
     function getNear(isAddressable, type, searchRadius, resultProp) {
         var extent = combinedEntityExtent();
         var l = extent.center();
-        var box = extent.padByMeters(searchRadius);
+        var box = geoExtent(l).padByMeters(searchRadius);
 
         var features = context.history().intersects(box)
             .filter(isAddressable)
@@ -82,35 +77,6 @@ export function uiFieldAddress(field, context) {
         return utilArrayUniqBy(features, 'value');
     }
 
-    function getEnclosing(isAddressable, type, resultProp) {
-        var extent = combinedEntityExtent();
-
-        var features = context.history().intersects(extent)
-            .filter(isAddressable)
-            .map(d => {
-                if (d.geometry(context.graph()) !== 'area') {
-                    return false;
-                }
-
-                const geom = d.asGeoJSON(context.graph()).coordinates[0];
-                if (!geoPolygonContainsPolygon(geom, extent.polygon())) {
-                    return false;
-                }
-
-                const value = resultProp && d.tags[resultProp] ? d.tags[resultProp] : d.tags.name;
-                return {
-                    title: value,
-                    value,
-                    dist: 0,
-                    geom,
-                    type,
-                    klass: `address-${type}`
-                };
-            }).filter(Boolean);
-
-        return utilArrayUniqBy(features, 'value');
-    }
-
     function getNearStreets() {
         function isAddressable(d) {
             return d.tags.highway && d.tags.name && d.type === 'way';
@@ -136,7 +102,7 @@ export function uiFieldAddress(field, context) {
             if (d.tags.name) {
                 if (d.tags.boundary === 'administrative' && d.tags.admin_level === '8') return true;
                 if (d.tags.border_type === 'city') return true;
-                if (d.tags.place === 'city' || d.tags.place === 'town' || d.tags.place === 'village' || d.tags.place === 'hamlet') return true;
+                if (d.tags.place === 'city' || d.tags.place === 'town' || d.tags.place === 'village') return true;
             }
 
             if (d.tags[`${field.key}:city`]) return true;
@@ -148,10 +114,9 @@ export function uiFieldAddress(field, context) {
     }
 
     function getNearPostcodes() {
-        const postcodes = []
+        return [... new Set([]
             .concat(getNearValues('postcode'))
-            .concat(getNear(d => d.tags.postal_code, 'postcode', 200, 'postal_code'));
-        return utilArrayUniqBy(postcodes, item => item.value);
+            .concat(getNear(d => d.tags.postal_code, 'postcode', 200, 'postal_code')))];
     }
 
     function getNearValues(key) {
@@ -164,81 +129,30 @@ export function uiFieldAddress(field, context) {
         return getNear(hasTag, key, 200, tagKey);
     }
 
-    function getEnclosingValues(key) {
-        const tagKey = `${field.key}:${key}`;
 
-        // 1. areas encompassing the feature that have the address tag
-        function hasTag(d) {
-            return _entityIDs.indexOf(d.id) === -1 && d.tags[tagKey];
-        }
-        const enclosingAddresses = getEnclosing(hasTag, key, tagKey);
+    function updateForCountryCode() {
 
-        // 2. also include addresses from points which are encompassed by
-        // the same building area as the current feature
-        function isBuilding(d) {
-            return _entityIDs.indexOf(d.id) === -1 && d.tags.building && d.tags.building !== 'no';
-        }
-        const enclosingBuildings = getEnclosing(isBuilding, 'building', 'building').map(d => d.geom);
-        function isInNearbyBuilding(d) {
-            return hasTag(d) &&
-                d.type === 'node' &&
-                enclosingBuildings.some(geom =>
-                    geoPointInPolygon(d.loc, geom) ||
-                    geom.indexOf(d.loc) !== -1
-                );
-        }
-        const nearPointAddresses = getNear(isInNearbyBuilding, key, 100, tagKey);
+        if (!_countryCode) return;
 
-        return utilArrayUniqBy([
-            ...enclosingAddresses,
-            ...nearPointAddresses
-        ], 'value').sort((a, b) => a.value > b.value ? 1 : -1);
-    }
-
-
-    function updateForCountryCodes() {
-
-        if (!(_countryCodes?.length)) return;
-
-        // find the country with a usable format
-        let addressFormat;
-        for (const currentCountryCode of _countryCodes) {
-            addressFormat = _addressFormats.find(format => (format.countryCodes?.includes(currentCountryCode)));
-            if (addressFormat) {
+        var addressFormat;
+        for (var i = 0; i < _addressFormats.length; i++) {
+            var format = _addressFormats[i];
+            if (!format.countryCodes) {
+                addressFormat = format;   // choose the default format, keep going
+            } else if (format.countryCodes.indexOf(_countryCode) !== -1) {
+                addressFormat = format;   // choose the country format, stop here
                 break;
             }
         }
-        // fallback in case there is no found format, using the default one (has no countries)
-        addressFormat ||= _addressFormats.find((item) => !item.countryCodes);
 
-        const maybeDropdowns = new Set([
-            'housenumber',
-            'housename'
-        ]);
-        const dropdowns = new Set([
-            'block_number',
-            'city',
-            'country',
-            'county',
-            'district',
-            'floor',
-            'hamlet',
-            'neighbourhood',
-            'place',
-            'postcode',
-            'province',
-            'quarter',
-            'state',
-            'street',
-            'street+place',
-            'subdistrict',
-            'suburb',
-            'town',
-            ...maybeDropdowns
-        ]);
+        var dropdowns = addressFormat.dropdowns || [
+            'city', 'county', 'country', 'district', 'hamlet',
+            'neighbourhood', 'place', 'postcode', 'province',
+            'quarter', 'state', 'street', 'street+place', 'subdistrict', 'suburb'
+        ];
 
         var widths = addressFormat.widths || {
-            housenumber: 1/5, unit: 1/5, floor: 1/5, street: 1/2, place: 1/2,
+            housenumber: 1/5, unit: 1/5, street: 1/2, place: 1/2,
             city: 2/3, state: 1/4, postcode: 1/3
         };
 
@@ -273,18 +187,15 @@ export function uiFieldAddress(field, context) {
             .enter()
             .append('input')
             .property('type', 'text')
-            .attr('id', d => d.id === 'housenumber' ? field.domId : null)
+            .call(updatePlaceholder)
             .attr('class', function (d) { return 'addr-' + d.id; })
             .call(utilNoAuto)
             .each(addDropdown)
-            .call(updatePlaceholder)
             .style('width', function (d) { return d.width * 100 + '%'; });
 
 
         function addDropdown(d) {
-            if (!dropdowns.has(d.id)) {
-                return false;  // not a dropdown
-            }
+            if (dropdowns.indexOf(d.id) === -1) return;  // not a dropdown
 
             var nearValues;
             switch (d.id) {
@@ -307,25 +218,13 @@ export function uiFieldAddress(field, context) {
                 case 'postcode':
                     nearValues = getNearPostcodes;
                 break;
-                case 'housenumber':
-                case 'housename':
-                    nearValues = getEnclosingValues;
-                break;
                 default:
                     nearValues = getNearValues;
             }
 
-            if (maybeDropdowns.has(d.id)) {
-                const candidates = nearValues(d.id);
-                // only add dropdown if there are possible values for the
-                // corresponding tag: e.g. only show ▼ caret for
-                // housenumber/housename if the feature is actually
-                // encompassed by another feature with such an address
-                if (candidates.length === 0) return false;
-            }
-
             d3_select(this)
                 .call(uiCombobox(context, `address-${d.isAutoStreetPlace ? 'street-place' : d.id}`)
+                    .minItems(1)
                     .caseSensitive(true)
                     .fetcher(function(typedValue, callback) {
                         typedValue = typedValue.toLowerCase();
@@ -343,9 +242,11 @@ export function uiFieldAddress(field, context) {
         }
 
         _wrap.selectAll('input')
-            .on('input', change(true))
             .on('blur', change())
             .on('change', change());
+
+        _wrap.selectAll('input:not(.combobox-input)')
+            .on('input', change(true));
 
         if (_tags) updateTags(_tags);
     }
@@ -365,24 +266,17 @@ export function uiFieldAddress(field, context) {
         var extent = combinedEntityExtent();
 
         if (extent) {
-            var countryCodes;
+            var countryCode;
             if (context.inIntro()) {
                 // localize the address format for the walkthrough
-                countryCodes = [t('intro.graph.countrycode')];
+                countryCode = t('intro.graph.countrycode');
             } else {
                 var center = extent.center();
-                // we try to find the territory-level address format
-                // if we dn't have that, we fall back to (sovereign) country-level address format
-                countryCodes = [
-                    countryCoder.iso1A2Code(center, { level: 'territory' }),
-                    countryCoder.iso1A2Code(center),
-                ];
+                countryCode = countryCoder.iso1A2Code(center);
             }
-            // country codes can be null/undefined (e.g. unclaimed ocean); we don't want that.
-            countryCodes = countryCodes.filter((item) => !!item);
-            if (countryCodes?.length) {
-                _countryCodes = countryCodes.map((x) => x.toLowerCase());
-                updateForCountryCodes();
+            if (countryCode) {
+                _countryCode = countryCode.toLowerCase();
+                updateForCountryCode();
             }
         }
     }
@@ -435,9 +329,8 @@ export function uiFieldAddress(field, context) {
 
 
     function getLocalPlaceholder(key) {
-        if (_countryCodes) {
-            var firstCountryCode = _countryCodes[0];
-            var localkey = key + '!' + firstCountryCode;
+        if (_countryCode) {
+            var localkey = key + '!' + _countryCode;
             var tkey = addrField.hasTextForStringId('placeholders.' + localkey) ? localkey : key;
             return addrField.t('placeholders.' + tkey);
         }

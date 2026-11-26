@@ -26,7 +26,6 @@ export function modeMove(context, entityIDs, baseGraph) {
 
     var _tolerancePx = 4; // see also behaviorDrag, behaviorSelect, modeRotate
 
-    /** @type {import('../core/context').Mode} */
     var mode = {
         id: 'move',
         button: 'browse'
@@ -48,7 +47,7 @@ export function modeMove(context, entityIDs, baseGraph) {
 
     var _prevGraph;
     var _cache;
-    var _origMouseCoords;
+    var _origin;
     var _nudgeInterval;
 
     // use pointer events on supported platforms; fallback to mouse events
@@ -58,22 +57,18 @@ export function modeMove(context, entityIDs, baseGraph) {
     function doMove(nudge) {
         nudge = nudge || [0, 0];
 
-        let fn;
+        var fn;
         if (_prevGraph !== context.graph()) {
             _cache = {};
-            _origMouseCoords = context.map().mouseCoordinates();
+            _origin = context.map().mouseCoordinates();
             fn = context.perform;
         } else {
-            fn = action => {
-                context.pop();
-                context.perform(action);
-            };
+            fn = context.overwrite;
         }
 
-        const currMouseCoords = context.map().mouseCoordinates();
-        const currMouse = context.projection(currMouseCoords);
-        const origMouse = context.projection(_origMouseCoords);
-        const delta = geoVecSubtract(geoVecSubtract(currMouse, origMouse), nudge);
+        var currMouse = context.map().mouse();
+        var origMouse = context.projection(_origin);
+        var delta = geoVecSubtract(geoVecSubtract(currMouse, origMouse), nudge);
 
         fn(actionMove(entityIDs, delta, context.projection, _cache));
         _prevGraph = context.graph();
@@ -134,7 +129,7 @@ export function modeMove(context, entityIDs, baseGraph) {
 
 
     mode.enter = function() {
-        _origMouseCoords = context.map().mouseCoordinates();
+        _origin = context.map().mouseCoordinates();
         _prevGraph = null;
         _cache = {};
 
@@ -186,8 +181,8 @@ export function modeMove(context, entityIDs, baseGraph) {
             .on(_pointerPrefix + 'down.modeMove', null);
 
         d3_select(window)
-            .on(_pointerPrefix + 'move.modeMove', null)
-            .on(_pointerPrefix + 'up.modeMove', null);
+            .on(_pointerPrefix + 'move.modeMove', null, true)
+            .on(_pointerPrefix + 'up.modeMove', null, true);
 
         context.history()
             .on('undone.modeMove', null);
@@ -202,12 +197,6 @@ export function modeMove(context, entityIDs, baseGraph) {
     mode.selectedIDs = function() {
         if (!arguments.length) return entityIDs;
         // no assign
-        return mode;
-    };
-
-
-    mode.annotation = function(_annotation) {
-        annotation = _annotation;
         return mode;
     };
 

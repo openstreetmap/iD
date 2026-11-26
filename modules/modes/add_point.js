@@ -6,7 +6,6 @@ import { osmNode } from '../osm/node';
 import { actionAddEntity } from '../actions/add_entity';
 import { actionChangeTags } from '../actions/change_tags';
 import { actionAddMidpoint } from '../actions/add_midpoint';
-import { utilIsDrawing } from '../util/util';
 
 
 export function modeAddPoint(context, mode) {
@@ -28,7 +27,7 @@ export function modeAddPoint(context, mode) {
 
 
     function add(loc) {
-        var node = new osmNode({ loc: loc, tags: defaultTags(loc) });
+        var node = osmNode({ loc: loc, tags: defaultTags(loc) });
 
         context.perform(
             actionAddEntity(node),
@@ -40,7 +39,7 @@ export function modeAddPoint(context, mode) {
 
 
     function addWay(loc, edge) {
-        var node = new osmNode({ tags: defaultTags(loc) });
+        var node = osmNode({ tags: defaultTags(loc) });
 
         context.perform(
             actionAddMidpoint({loc: loc, edge: edge}, node),
@@ -82,7 +81,6 @@ export function modeAddPoint(context, mode) {
         context.enter(modeBrowse(context));
     }
 
-    mode.disabled = () => utilIsDrawing(context.mode().id);
 
     mode.enter = function() {
         context.install(behavior);

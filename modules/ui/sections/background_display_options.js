@@ -1,7 +1,6 @@
 import {
     select as d3_select
 } from 'd3-selection';
-import { clamp } from 'es-toolkit/compat';
 
 import { prefs } from '../../core/preferences';
 import { t, localizer } from '../../core/localizer';
@@ -28,12 +27,8 @@ export function uiSectionBackgroundDisplayOptions(context) {
         sharpness: 1
     };
 
-    var _invert = false;
-
-    function updateInvert(val) {
-        _invert = val;
-        context.background().invert(val);
-        section.reRender();
+    function clamp(x, min, max) {
+        return Math.max(min, Math.min(x, max));
     }
 
     function updateValue(d, val) {
@@ -65,9 +60,7 @@ export function uiSectionBackgroundDisplayOptions(context) {
             .attr('class', function(d) { return 'display-control display-control-' + d; });
 
         slidersEnter
-            .each(function(d) {
-                d3_select(this).call(t.append('background.' + d));
-            })
+            .html(function(d) { return t.html('background.' + d); })
             .append('span')
             .attr('class', function(d) { return 'display-option-value display-option-value-' + d; });
 
@@ -81,7 +74,7 @@ export function uiSectionBackgroundDisplayOptions(context) {
             .attr('type', 'range')
             .attr('min', _minVal)
             .attr('max', _maxVal)
-            .attr('step', '0.01')
+            .attr('step', '0.05')
             .on('input', function(d3_event, d) {
                 var val = d3_select(this).property('value');
                 if (!val && d3_event && d3_event.target) {
@@ -100,22 +93,6 @@ export function uiSectionBackgroundDisplayOptions(context) {
             })
             .call(svgIcon('#iD-icon-' + (localizer.textDirection() === 'rtl' ? 'redo' : 'undo')));
 
-        // invert checkbox
-        var invertEnter = containerEnter
-            .append('label')
-            .attr('class', 'display-control-invert');
-
-        invertEnter
-            .append('input')
-            .attr('class', 'display-option-invert')
-            .attr('type', 'checkbox')
-            .on('change', function() {
-                updateInvert(this.checked);
-            });
-
-        invertEnter
-            .call(t.append('background.invert'));
-
         // reset all button
         containerEnter
             .append('a')
@@ -128,7 +105,6 @@ export function uiSectionBackgroundDisplayOptions(context) {
                 for (var i = 0; i < _sliders.length; i++) {
                     updateValue(_sliders[i], 1);
                 }
-                updateInvert(false);
             });
 
         // update
@@ -143,9 +119,6 @@ export function uiSectionBackgroundDisplayOptions(context) {
 
         container.selectAll('.display-option-reset')
             .classed('disabled', function(d) { return _options[d] === 1; });
-
-        container.selectAll('.display-option-invert')
-            .property('checked', _invert);
 
         // first time only, set brightness if needed
         if (containerEnter.size() && _options.brightness !== 1) {

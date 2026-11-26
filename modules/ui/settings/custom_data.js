@@ -68,7 +68,6 @@ export function uiSettingsCustomData(context) {
 
         textSection
             .append('textarea')
-            .attr('dir', 'auto')
             .attr('class', 'field-url')
             .attr('placeholder', t('settings.custom_data.url.placeholder'))
             .call(utilNoAuto)

@@ -1,4 +1,4 @@
-import { deepEqual } from 'fast-equals';
+import deepEqual from 'fast-deep-equal';
 import { range as d3_range } from 'd3-array';
 
 import {
@@ -6,22 +6,24 @@ import {
 } from './helpers';
 import { svgTagClasses } from './tag_classes';
 
-import { osmIdManager } from '../osm';
+import { osmEntity } from '../osm';
 import { utilArrayFlatten, utilArrayGroupBy } from '../util';
-import { utilIsDrawing } from '../util/util';
+import { utilDetect } from '../util/detect';
 
 /** @param {{ [key: string ]: string }} tags */
 function onewayArrowColour(tags) {
     // the return value must be defined in ./defs.js
     if (tags.highway === 'construction' && tags.bridge) return 'white';
-    if (tags.highway === 'pedestrian') return 'gray';
-    if (tags.railway && !tags.highway) return 'gray';
-    if (tags.aeroway === 'runway') return 'white';
+    if (tags.highway === 'pedestrian' && tags.bridge) return 'pink';
+    if (tags.railway) return 'black'; // TODO: use a better colour
+    if (tags.aeroway === 'runway') return 'pink';
 
     return 'black';
 }
 
 export function svgLines(projection, context) {
+    var detected = utilDetect();
+
     var highway_stack = {
         motorway: 0,
         motorway_link: 1,
@@ -128,19 +130,19 @@ export function svgLines(projection, context) {
         function drawLineGroup(selection, klass, isSelected) {
             // Note: Don't add `.selected` class in draw modes
             var mode = context.mode();
-            var isDrawing = mode && utilIsDrawing(mode.id);
+            var isDrawing = mode && /^draw/.test(mode.id);
             var selectedClass = (!isDrawing && isSelected) ? 'selected ' : '';
 
             var lines = selection
                 .selectAll('path')
                 .filter(filter)
-                .data(getPathData(isSelected), osmIdManager.key);
+                .data(getPathData(isSelected), osmEntity.key);
 
             lines.exit()
                 .remove();
 
             // Optimization: Call expensive TagClasses only on enter selection. This
-            // works because osmIdManager.key is defined to include the entity v attribute.
+            // works because osmEntity.key is defined to include the entity v attribute.
             lines.enter()
                 .append('path')
                 .attr('class', function(d) {
@@ -225,12 +227,16 @@ export function svgLines(projection, context) {
             markers.exit()
                 .remove();
 
-            markers.enter()
+            markers = markers.enter()
                 .append('path')
                 .attr('class', pathclass)
                 .merge(markers)
                 .attr('marker-mid', marker)
                 .attr('d', function(d) { return d.d; });
+
+            if (detected.ie) {
+                markers.each(function() { this.parentNode.insertBefore(this, this); });
+            }
         }
 
 
@@ -258,15 +264,28 @@ export function svgLines(projection, context) {
             var v = pathdata[k];
             var onewayArr = v.filter(function(d) { return d.isOneWay(); });
             var onewaySegments = svgMarkerSegments(
-                projection, graph, 36,
-                entity => entity.isOneWayBackwards(),
-                entity => entity.isBiDirectional(),
+                projection, graph, 35,
+                function shouldReverse(entity) {
+                    return (
+                        entity.tags.oneway === '-1'
+                        || entity.tags.conveying === 'backward'
+                    );
+                },
+                function bothDirections(entity) {
+                    return (
+                        entity.tags.oneway === 'alternating'
+                        || entity.tags.oneway === 'reversible'
+                        || entity.tags.conveying === 'reversible'
+                    );
+                }
             );
             onewaydata[k] = utilArrayFlatten(onewayArr.map(onewaySegments));
 
             var sidedArr = v.filter(function(d) { return d.isSided(); });
             var sidedSegments = svgMarkerSegments(
-                projection, graph, 30
+                projection, graph, 30,
+                function shouldReverse() { return false; },
+                function bothDirections() { return false; }
             );
             sideddata[k] = utilArrayFlatten(sidedArr.map(sidedSegments));
         });

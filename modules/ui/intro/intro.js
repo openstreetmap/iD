@@ -1,14 +1,14 @@
-import { localizer } from '../../core/localizer';
+import { t, localizer } from '../../core/localizer';
 import { localize } from './helper';
 
 import { prefs } from '../../core/preferences';
 import { fileFetcher } from '../../core/file_fetcher';
 import { coreGraph } from '../../core/graph';
 import { modeBrowse } from '../../modes/browse';
-import { createEntity } from '../../osm/create-entity';
+import { osmEntity } from '../../osm/entity';
 import { svgIcon } from '../../svg/icon';
 import { uiCurtain } from '../curtain';
-import { utilArrayDifference, utilArrayUniq, utilStringQs } from '../../util';
+import { utilArrayDifference, utilArrayUniq } from '../../util';
 
 import { uiIntroWelcome } from './welcome';
 import { uiIntroNavigation } from './navigation';
@@ -17,7 +17,6 @@ import { uiIntroArea } from './area';
 import { uiIntroLine } from './line';
 import { uiIntroBuilding } from './building';
 import { uiIntroStartEditing } from './start_editing';
-import { patchHash } from '../../behavior';
 
 
 const chapterUi = {
@@ -42,7 +41,7 @@ const chapterFlow = [
 
 
 export function uiIntro(context) {
-  const INTRO_IMAGERY = 'Bing';
+  const INTRO_IMAGERY = 'EsriWorldImageryClarity';
   let _introGraph = {};
   let _currChapter;
 
@@ -53,7 +52,7 @@ export function uiIntro(context) {
         // create entities for intro graph and localize names
         for (let id in dataIntroGraph) {
           if (!_introGraph[id]) {
-            _introGraph[id] = createEntity(localize(dataIntroGraph[id]));
+            _introGraph[id] = osmEntity(localize(dataIntroGraph[id]));
           }
         }
         selection.call(startIntro);
@@ -68,7 +67,7 @@ export function uiIntro(context) {
     // Save current map state
     let osm = context.connection();
     let history = context.history().toJSON();
-    let hash = utilStringQs(window.location.hash);
+    let hash = window.location.hash;
     let center = context.map().center();
     let zoom = context.map().zoom();
     let background = context.background().baseLayerSource();
@@ -88,7 +87,7 @@ export function uiIntro(context) {
     // Load semi-real data used in intro
     if (osm) { osm.toggle(false).reset(); }
     context.history().reset();
-    context.history().merge(Object.values(new coreGraph().load(_introGraph).entities));
+    context.history().merge(Object.values(coreGraph().load(_introGraph).entities));
     context.history().checkpoint('initial');
 
     // Setup imagery
@@ -164,10 +163,7 @@ export function uiIntro(context) {
       overlays.forEach(d => context.background().toggleOverlayLayer(d));
       if (history) { context.history().fromJSON(history, false); }
       context.map().centerZoom(center, zoom);
-      patchHash(oldHash => ({
-        ...Object.fromEntries(Object.keys(oldHash).map(k => [k, null])),
-        ...hash
-      }));
+      window.location.replace(hash);
       context.inIntro(false);
     });
 
@@ -195,7 +191,7 @@ export function uiIntro(context) {
 
     buttons
       .append('span')
-      .html(d => localizer.t_html(d.title));
+      .html(d => t.html(d.title));
 
     buttons
       .append('span')

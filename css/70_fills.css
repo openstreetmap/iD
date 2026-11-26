@@ -40,8 +40,7 @@
     stroke-width: 60px;
     pointer-events: none;
 }
-.fill-partial path.area.fill.tag-building_part,
-.fill-partial path.area.fill.tag-cemetery-sector {
+.fill-partial path.area.fill.tag-building_part {
     stroke-width: 40px;
 }
 .fill-partial path.area.fill.tag-indoor {
@@ -56,11 +55,4 @@
 .ideditor.mode-select-error .fill-partial path.area.fill,
 .ideditor.mode-select-note .fill-partial path.area.fill {
     pointer-events: visibleStroke;
-}
-.ideditor.mode-browse .fill-full path.area.fill,
-.ideditor.mode-select .fill-full path.area.fill,
-.ideditor.mode-select-data .fill-full path.area.fill,
-.ideditor.mode-select-error .fill-full path.area.fill,
-.ideditor.mode-select-note .fill-full path.area.fill {
-    pointer-events: visibleFill;
 }

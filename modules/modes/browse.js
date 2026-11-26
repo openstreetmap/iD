@@ -11,7 +11,6 @@ import { modeDragNote } from './drag_note';
 import { operationPaste } from '../operations/paste';
 
 export function modeBrowse(context) {
-    /** @type {import('../core/context').Mode} */
     var mode = {
         button: 'browse',
         id: 'browse',

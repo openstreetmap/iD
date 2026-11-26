@@ -1,4 +1,4 @@
-import { throttle } from 'es-toolkit';
+import _throttle from 'lodash-es/throttle';
 
 import { t } from '../core/localizer';
 import { svgIcon } from '../svg/icon';
@@ -12,7 +12,7 @@ export function uiStatus(context) {
         if (!osm) return;
 
         function update(err, apiStatus) {
-            selection.text('');
+            selection.html('');
 
             if (err) {
                 if (apiStatus === 'connectionSwitched') {
@@ -21,27 +21,23 @@ export function uiStatus(context) {
                     return;
 
                 } else if (apiStatus === 'rateLimited') {
-                    if (!osm.authenticated()) {
-                        selection
-                            .call(t.append('osm_api_status.message.rateLimit'))
-                            .append('a')
-                            .attr('href', '#')
-                            .attr('class', 'api-status-login')
-                            .attr('target', '_blank')
-                            .call(svgIcon('#iD-icon-out-link', 'inline'))
-                            .append('span')
-                            .call(t.append('login'))
-                            .on('click.login', function(d3_event) {
-                                d3_event.preventDefault();
-                                osm.authenticate();
-                            });
-                    } else {
-                        selection.call(t.append('osm_api_status.message.rateLimited'));
-                    }
+                    selection
+                        .call(t.append('osm_api_status.message.rateLimit'))
+                        .append('a')
+                        .attr('href', '#')
+                        .attr('class', 'api-status-login')
+                        .attr('target', '_blank')
+                        .call(svgIcon('#iD-icon-out-link', 'inline'))
+                        .append('span')
+                        .call(t.append('login'))
+                        .on('click.login', function(d3_event) {
+                            d3_event.preventDefault();
+                            osm.authenticate();
+                        });
                 } else {
 
                     // don't allow retrying too rapidly
-                    var throttledRetry = throttle(function() {
+                    var throttledRetry = _throttle(function() {
                         // try loading the visible tiles
                         context.loadTiles(context.projection);
                         // manually reload the status too in case all visible tiles were already loaded

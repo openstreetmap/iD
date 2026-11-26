@@ -3,11 +3,11 @@ describe('iD.serviceMapillary', function() {
     var context, mapillary;
 
 
-    beforeEach(() => {
+    before(function() {
         iD.services.mapillary = iD.serviceMapillary;
     });
 
-    afterEach(() => {
+    after(function() {
         delete iD.services.mapillary;
     });
 
@@ -36,18 +36,19 @@ describe('iD.serviceMapillary', function() {
 
             mapillary.init();
             var cache2 = mapillary.cache();
-            expect(cache).toEqual(cache2);
+            expect(cache).to.equal(cache2);
         });
     });
 
 
     describe('#reset', function() {
-        it('resets cache', function() {
+        it('resets cache and image', function() {
             mapillary.cache().foo = 'bar';
-            mapillary.selectImage({ key: 'baz', loc: [10,0] });
+            mapillary.selectImage(context, { key: 'baz', loc: [10,0] });
 
             mapillary.reset();
-            expect(mapillary.cache()).not.toHaveProperty('foo');
+            expect(mapillary.cache()).to.not.have.property('foo');
+            expect(mapillary.getActiveImage()).to.be.null;
         });
     });
 
@@ -63,7 +64,7 @@ describe('iD.serviceMapillary', function() {
             mapillary.cache().images.rtree.load(features);
             var res = mapillary.images(context.projection);
 
-            expect(res).toEqual([
+            expect(res).to.deep.eql([
                 { key: '0', loc: [10,0], ca: 90 },
                 { key: '1', loc: [10,0], ca: 90 }
             ]);
@@ -81,7 +82,7 @@ describe('iD.serviceMapillary', function() {
 
             mapillary.cache().images.rtree.load(features);
             var res = mapillary.images(context.projection);
-            expect(res.length).toBeLessThanOrEqual(5);
+            expect(res).to.have.length.of.at.most(5);
         });
     });
 
@@ -97,7 +98,7 @@ describe('iD.serviceMapillary', function() {
             mapillary.cache().signs.rtree.load(features);
             var res = mapillary.signs(context.projection);
 
-            expect(res).toEqual([
+            expect(res).to.deep.eql([
                 { key: '0', loc: [10,0] },
                 { key: '1', loc: [10,0] }
             ]);
@@ -115,7 +116,7 @@ describe('iD.serviceMapillary', function() {
 
             mapillary.cache().signs.rtree.load(features);
             var res = mapillary.signs(context.projection);
-            expect(res.length).toBeLessThanOrEqual(5);
+            expect(res).to.have.length.of.at.most(5);
         });
     });
 
@@ -131,7 +132,7 @@ describe('iD.serviceMapillary', function() {
             mapillary.cache().points.rtree.load(features);
             var res = mapillary.mapFeatures(context.projection);
 
-            expect(res).toEqual([
+            expect(res).to.deep.eql([
                 { key: '0', loc: [10,0] },
                 { key: '1', loc: [10,0] }
             ]);
@@ -153,7 +154,7 @@ describe('iD.serviceMapillary', function() {
 
             mapillary.cache().points.rtree.load(features);
             var res = mapillary.mapFeatures(context.projection);
-            expect(res.length).toBeLessThanOrEqual(5);
+            expect(res).to.have.length.of.at.most(5);
         });
     });
 
@@ -187,16 +188,16 @@ describe('iD.serviceMapillary', function() {
             mapillary.cache().sequences.lineString['-'] = [gj];
 
             var res = mapillary.sequences(context.projection);
-            expect(res).toEqual([gj]);
+            expect(res).to.deep.eql([gj]);
         });
     });
 
 
     describe('#setActiveImage', function() {
         it('gets and sets the selected image', function() {
-            const photo = { id: 'baz', originalLngLat: {lng: 10, lat: 0}};
-            mapillary.setActiveImage(photo);
-            expect(mapillary.getActiveImage().id).toEqual(photo.id);
+            var node = { id: 'baz', originalLngLat: {lng: 10, lat: 0}};
+            mapillary.setActiveImage(node);
+            expect(mapillary.getActiveImage().id).to.eql(node.id);
         });
     });
 
@@ -206,7 +207,7 @@ describe('iD.serviceMapillary', function() {
             context.photos().setDateFilter('fromDate', '2020-01-01');
             context.photos().setDateFilter('toDate', '2021-01-01');
             var filter = mapillary.filterViewer(context);
-            expect(filter.length).toBe(3);
+            expect(filter.length).to.be.equal(3);
         });
     });
 });

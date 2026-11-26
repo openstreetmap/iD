@@ -1,4 +1,4 @@
-import { throttle } from 'es-toolkit';
+import _throttle from 'lodash-es/throttle';
 
 import { select as d3_select } from 'd3-selection';
 import { services } from '../services';
@@ -6,13 +6,14 @@ import {svgPath, svgPointTransform} from './helpers';
 
 
 export function svgPanoramaxImages(projection, context, dispatch) {
-    const throttledRedraw = throttle(function () { dispatch.call('change'); }, 1000);
+    const throttledRedraw = _throttle(function () { dispatch.call('change'); }, 1000);
     const imageMinZoom = 15;
     const lineMinZoom = 10;
     const viewFieldZoomLevel = 18;
     let layer = d3_select(null);
     let _panoramax;
     let _viewerYaw = 0;
+    let _selectedSequence;
     let _activeUsernameFilter;
     let _activeIds;
 
@@ -21,6 +22,7 @@ export function svgPanoramaxImages(projection, context, dispatch) {
         svgPanoramaxImages.enabled = false;
         svgPanoramaxImages.initialized = true;
     }
+
 
     function getService() {
         if (services.panoramax && !_panoramax) {
@@ -36,13 +38,7 @@ export function svgPanoramaxImages(projection, context, dispatch) {
         return _panoramax;
     }
 
-    /**
-     * Filters the images given the filters on the right panel
-     * @param {*} images
-     * @param {Boolean} skipDateFilter if true, the set date filters will be ignored
-     * @returns array of filtered images
-     */
-    async function filterImages(images, skipDateFilter = false) {
+    async function filterImages(images) {
         const showsPano = context.photos().showsPanoramic();
         const showsFlat = context.photos().showsFlat();
         const fromDate = context.photos().fromDate();
@@ -57,12 +53,12 @@ export function svgPanoramaxImages(projection, context, dispatch) {
                 return showsFlat;
             });
         }
-        if (fromDate && !skipDateFilter) {
+        if (fromDate) {
             images = images.filter(function(image) {
                 return new Date(image.capture_time).getTime() >= new Date(fromDate).getTime();
             });
         }
-        if (toDate && !skipDateFilter) {
+        if (toDate) {
             images = images.filter(function(image) {
                 return new Date(image.capture_time).getTime() <= new Date(toDate).getTime();
             });
@@ -87,13 +83,7 @@ export function svgPanoramaxImages(projection, context, dispatch) {
         return images;
     }
 
-    /**
-     * Filters the sequences given the filters on the right panel
-     * @param {*} sequences
-     * @param {Boolean} skipDateFilter if true, the set date filters will be ignored
-     * @returns array of filtered sequences
-     */
-    async function filterSequences(sequences, skipDateFilter = false) {
+    async function filterSequences(sequences) {
         const showsPano = context.photos().showsPanoramic();
         const showsFlat = context.photos().showsFlat();
         const fromDate = context.photos().fromDate();
@@ -108,12 +98,12 @@ export function svgPanoramaxImages(projection, context, dispatch) {
                     return showsFlat;
             });
         }
-        if (fromDate && !skipDateFilter) {
+        if (fromDate) {
             sequences = sequences.filter(function(sequence) {
                 return new Date(sequence.properties.date).getTime() >= new Date(fromDate).getTime().toString();
             });
         }
-        if (toDate && !skipDateFilter) {
+        if (toDate) {
             sequences = sequences.filter(function(sequence) {
                 return new Date(sequence.properties.date).getTime() <= new Date(toDate).getTime().toString();
             });
@@ -138,9 +128,6 @@ export function svgPanoramaxImages(projection, context, dispatch) {
         return sequences;
     }
 
-    /**
-     * Shows the selected layer
-     */
     function showLayer() {
         const service = getService();
         if (!service) return;
@@ -155,9 +142,7 @@ export function svgPanoramaxImages(projection, context, dispatch) {
             .on('end', function () { dispatch.call('change'); });
     }
 
-    /**
-     * Hides the selected layer
-     */
+
     function hideLayer() {
         throttledRedraw.cancel();
 
@@ -168,11 +153,6 @@ export function svgPanoramaxImages(projection, context, dispatch) {
             .on('end', editOff);
     }
 
-    /**
-     * Updates the viewfinder for the selected image bubble based on the frame's yaw
-     * @param {*} d Current Active image Data
-     * @param {*} selectedImageId  The selected bubble image ID
-     */
     function transform(d, selectedImageId) {
         let t = svgPointTransform(projection)(d);
         let rot = d.heading;
@@ -185,22 +165,26 @@ export function svgPanoramaxImages(projection, context, dispatch) {
         return t;
     }
 
+
     function editOn() {
         layer.style('display', 'block');
     }
+
 
     function editOff() {
         layer.selectAll('.viewfield-group').remove();
         layer.style('display', 'none');
     }
 
-    /**
-     * Updates the current selected image
-     * @param {*} image The selected image bubble data
-     */
     function click(d3_event, image) {
         const service = getService();
         if (!service) return;
+
+        if (image.sequence_id !== _selectedSequence) {
+            _viewerYaw = 0;  // reset
+        }
+
+        _selectedSequence = image.sequence_id;
 
         service
             .ensureViewerLoaded(context)
@@ -218,14 +202,12 @@ export function svgPanoramaxImages(projection, context, dispatch) {
         if (service) service.setStyles(context, image);
     }
 
+
     function mouseout() {
         const service = getService();
         if (service) service.setStyles(context, null);
     }
 
-    /**
-     * Updates the current view, rearranging lines and bubbles.
-     */
     async function update() {
         const zoom = ~~context.map().zoom();
         const showViewfields = (zoom >= viewFieldZoomLevel);
@@ -233,12 +215,9 @@ export function svgPanoramaxImages(projection, context, dispatch) {
         const service = getService();
         let sequences = (service ? service.sequences(projection, zoom) : []);
         let images = (service && zoom >= imageMinZoom ? service.images(projection) : []);
-        dispatch.call('photoDatesChanged', this, 'panoramax', [
-            ...(await filterImages(images, true)).map(p => p.capture_time),
-            ...(await filterSequences(sequences, true)).map(s => s.properties.date)]);
 
         images = await filterImages(images);
-        sequences = await filterSequences(sequences);
+        sequences = await filterSequences(sequences, service);
 
         let traces = layer.selectAll('.sequences').selectAll('.sequence')
             .data(sequences, function(d) { return d.properties.id; });
@@ -338,10 +317,6 @@ export function svgPanoramaxImages(projection, context, dispatch) {
     }
 
 
-    /**
-     * Draws bubbles and lines on the current view
-     * @param {*} selection Current HTML Selection
-     */
     function drawImages(selection) {
 
         const enabled = svgPanoramaxImages.enabled;
@@ -382,19 +357,13 @@ export function svgPanoramaxImages(projection, context, dispatch) {
                     service.loadLines(projection, zoom);
                 } else {
                     editOff();
-                    dispatch.call('photoDatesChanged', this, 'panoramax', []);
                 }
             } else {
                 editOff();
             }
-        } else {
-            dispatch.call('photoDatesChanged', this, 'panoramax', []);
         }
     }
 
-    /**
-     * @returns if layer is active
-     */
     drawImages.enabled = function(_) {
         if (!arguments.length) return svgPanoramaxImages.enabled;
         svgPanoramaxImages.enabled = _;
@@ -414,9 +383,6 @@ export function svgPanoramaxImages(projection, context, dispatch) {
         return !!getService();
     };
 
-    /**
-     * @returns if layer is drawn
-     */
     drawImages.rendered = function(zoom) {
       return zoom >= lineMinZoom;
     };

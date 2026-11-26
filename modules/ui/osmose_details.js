@@ -7,7 +7,6 @@ import { modeSelect } from '../modes/select';
 import { t } from '../core/localizer';
 import { services } from '../services';
 import { utilDisplayName, utilHighlightEntities } from '../util';
-import { utilSanitizeHTML } from '../util/sanitize';
 
 
 export function uiOsmoseDetails(context) {
@@ -50,7 +49,7 @@ export function uiOsmoseDetails(context) {
       div
         .append('p')
           .attr('class', 'qa-details-description-text')
-          .html(d => utilSanitizeHTML(issueString(d, 'detail')))
+          .html(d => issueString(d, 'detail'))
         .selectAll('a')
           .attr('rel', 'noopener')
           .attr('target', '_blank');
@@ -77,7 +76,7 @@ export function uiOsmoseDetails(context) {
 
       div
         .append('p')
-          .html(d => utilSanitizeHTML(issueString(d, 'fix')))
+          .html(d => issueString(d, 'fix'))
         .selectAll('a')
           .attr('rel', 'noopener')
           .attr('target', '_blank');
@@ -95,7 +94,7 @@ export function uiOsmoseDetails(context) {
 
       div
         .append('p')
-          .html(d => utilSanitizeHTML(issueString(d, 'trap')))
+          .html(d => issueString(d, 'trap'))
         .selectAll('a')
           .attr('rel', 'noopener')
           .attr('target', '_blank');
@@ -122,7 +121,7 @@ export function uiOsmoseDetails(context) {
 
           detailsDiv
             .append('p')
-              .html(utilSanitizeHTML(d.detail))
+              .html(d => d.detail)
             .selectAll('a')
               .attr('rel', 'noopener')
               .attr('target', '_blank');
@@ -199,7 +198,7 @@ export function uiOsmoseDetails(context) {
         context.map().pan([0,0]);  // trigger a redraw
       })
       .catch(err => {
-        console.error(err);
+        console.log(err); // eslint-disable-line no-console
       });
   }
 

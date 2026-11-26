@@ -19,18 +19,16 @@ if you're looking for something to do.
 * Test a prerelease version of iD:
   * Stable mirror of `release` branch: https://ideditor-release.netlify.app
   * Development mirror of `develop` branch + latest translations: https://ideditor.netlify.app
-* Expect regular update releases of iD about every month.
 
-Come on in, the water's lovely. More help?
+Come on in, the water's lovely. More help? Ping `Martin Raifer`/`tyr_asd` or `bhousel` on:
 * [OpenStreetMap US Slack](https://slack.openstreetmap.us/) (`#id` channel)
 * [OpenStreetMap Discord](https://discord.com/invite/openstreetmap) (`#id-and-rapid` channel)
-* [OpenStreetMap community forum](https://community.openstreetmap.org/)
+* [OpenStreetMap IRC](https://wiki.openstreetmap.org/wiki/IRC) (`irc.oftc.net`, in `#osm-dev`)
+* [OpenStreetMap `dev` mailing list](https://wiki.openstreetmap.org/wiki/Mailing_lists)
 
 ## Installation
 
 Follow the steps in the [how to get started guide](https://github.com/openstreetmap/iD/wiki/How-to-get-started#build-and-test-instructions) on how to install, build and run iD locally.
-
-iD is also published as an [npm package](https://www.npmjs.com/package/@openstreetmap/id).
 
 ## License
 
@@ -45,7 +43,7 @@ iD also bundles portions of the following open source software.
 * [Font Awesome (CC-BY 4.0)](https://fontawesome.com/license)
 * [Maki (CC0 1.0)](https://github.com/mapbox/maki)
 * [Temaki (CC0 1.0)](https://github.com/ideditor/temaki)
-* [Röntgen icon set (CC-BY 4.0)](https://github.com/enzet/Roentgen)
+* [Röntgen icon set (CC-BY 4.0)](https://github.com/enzet/map-machine#r%C3%B6ntgen-icon-set)
 * [Mapillary JS (MIT)](https://github.com/mapillary/mapillary-js)
 * [iD Tagging Schema (ISC)](https://github.com/openstreetmap/id-tagging-schema)
 * [name-suggestion-index (BSD-3-Clause)](https://github.com/osmlab/name-suggestion-index)

@@ -100,7 +100,7 @@ export function uiPanelHistory(context) {
         osm = context.connection();
         var selected, note, entity;
         if (selectedNoteID && osm) {       // selected 1 note
-            selected = [ t.append('note.note', { suffix: ' ' + selectedNoteID }) ];
+            selected = [ t.html('note.note') + ' ' + selectedNoteID ];
             note = osm.getNote(selectedNoteID);
         } else {                           // selected 1..n entities
             selected = context.selectedIDs()
@@ -112,20 +112,18 @@ export function uiPanelHistory(context) {
 
         var singular = selected.length === 1 ? selected[0] : null;
 
-        selection.text('');
-
-        const heading = selection
-            .append('h4')
-            .attr('class', 'history-heading');
+        selection.html('');
 
         if (singular) {
-            if (typeof singular === 'function') {
-                heading.call(singular);
-            } else {
-                heading.text(singular);
-            }
+            selection
+                .append('h4')
+                .attr('class', 'history-heading')
+                .html(singular);
         } else {
-            heading.call(t.append('info_panels.selected', { n: selected.length }));
+            selection
+                .append('h4')
+                .attr('class', 'history-heading')
+                .call(t.append('info_panels.selected', { n: selected.length }));
         }
 
         if (!singular) return;

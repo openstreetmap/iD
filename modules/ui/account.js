@@ -12,15 +12,7 @@ export function uiAccount(context) {
     if (!osm.authenticated()) {  // logged out
       render(selection, null);
     } else {
-      osm.userDetails((err, user) => {
-        if (err && err.status === 401) {
-          // 401 Unauthorized
-          // cannot load own user data: there must be something wrong (e.g. API token was revoked)
-          // -> log out to allow user to reauthenticate
-          osm.logout();
-        }
-        render(selection, user);
-      });
+      osm.userDetails((err, user) => render(selection, user));
     }
   }
 
@@ -31,7 +23,7 @@ export function uiAccount(context) {
 
     if (user) {
       userInfo
-        .text('')
+        .html('')
         .classed('hide', false);
 
       let userLink = userInfo
@@ -72,7 +64,7 @@ export function uiAccount(context) {
 
     } else {    // no user
       userInfo
-        .text('')
+        .html('')
         .classed('hide', true);
 
       // show "Log In"

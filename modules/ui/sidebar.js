@@ -1,4 +1,4 @@
-import { throttle } from 'es-toolkit';
+import _throttle from 'lodash-es/throttle';
 
 import { interpolateNumber as d3_interpolateNumber } from 'd3-interpolate';
 import {
@@ -7,11 +7,12 @@ import {
 
 import { utilArrayIdentical } from '../util/array';
 import { utilFastMouse } from '../util';
-import { OsmAbstractEntity, osmNote, QAItem } from '../osm';
+import { osmEntity, osmNote, QAItem } from '../osm';
 import { services } from '../services';
 import { uiDataEditor } from './data_editor';
 import { uiFeatureList } from './feature_list';
 import { uiInspector } from './inspector';
+import { uiKeepRightEditor } from './keepRight_editor';
 import { uiOsmoseEditor } from './osmose_editor';
 import { uiNoteEditor } from './note_editor';
 import { localizer } from '../core/localizer';
@@ -21,6 +22,7 @@ export function uiSidebar(context) {
     var inspector = uiInspector(context);
     var dataEditor = uiDataEditor(context);
     var noteEditor = uiNoteEditor(context);
+    var keepRightEditor = uiKeepRightEditor(context);
     var osmoseEditor = uiOsmoseEditor(context);
     var _current;
     var _wasData = false;
@@ -48,9 +50,6 @@ export function uiSidebar(context) {
             .append('div')
             .attr('class', 'sidebar-resizer')
             .on(_pointerPrefix + 'down.sidebar-resizer', pointerdown);
-
-        const throttledInspectorRedraw = throttle(() => inspectorWrap.call(inspector, { redrawEntityEditor: true }), 200);
-        d3_select(window).on('resize.sidebar', throttledInspectorRedraw);
 
         var downPointerId, lastClientX, containerLocGetter;
 
@@ -128,8 +127,6 @@ export function uiSidebar(context) {
                 } else {
                     context.ui().onResize([-dx * scaleX, 0]);
                 }
-
-                throttledInspectorRedraw();
             }
         }
 
@@ -144,8 +141,6 @@ export function uiSidebar(context) {
                 .on('touchmove.sidebar-resizer', null)
                 .on(_pointerPrefix + 'move.sidebar-resizer', null)
                 .on(_pointerPrefix + 'up.sidebar-resizer pointercancel.sidebar-resizer', null);
-
-            inspectorWrap.call(inspector, { redrawEntityEditor: true });
         }
 
         var featureListWrap = selection
@@ -174,7 +169,7 @@ export function uiSidebar(context) {
             }
         };
 
-        sidebar.hoverModeSelect = throttle(hoverModeSelect, 200);
+        sidebar.hoverModeSelect = _throttle(hoverModeSelect, 200);
 
         function hover(targets) {
             var datum = targets && targets.length && targets[0];
@@ -210,9 +205,11 @@ export function uiSidebar(context) {
                     datum = errService.getError(datum.id);
                 }
 
-                // Currently only one possible service
+                // Currently only three possible services
                 var errEditor;
-                if (datum.service === 'osmose') {
+                if (datum.service === 'keepRight') {
+                    errEditor = keepRightEditor;
+                } else {
                     errEditor = osmoseEditor;
                 }
 
@@ -225,7 +222,7 @@ export function uiSidebar(context) {
                 selection.selectAll('.sidebar-component')
                     .classed('inspector-hover', true);
 
-            } else if (!_current && (datum instanceof OsmAbstractEntity)) {
+            } else if (!_current && (datum instanceof osmEntity)) {
                 featureListWrap
                     .classed('inspector-hidden', true);
 
@@ -261,7 +258,7 @@ export function uiSidebar(context) {
             }
         }
 
-        sidebar.hover = throttle(hover, 200);
+        sidebar.hover = _throttle(hover, 200);
 
 
         sidebar.intersects = function(extent) {
@@ -369,15 +366,14 @@ export function uiSidebar(context) {
             // switch from % to px
             selection.style('width', sidebarWidth + 'px');
 
-            var startMargin, endMargin;
+            var startMargin, endMargin, lastMargin;
             if (isCollapsing) {
-                startMargin = 0;
+                startMargin = lastMargin = 0;
                 endMargin = -sidebarWidth;
             } else {
-                startMargin = -sidebarWidth;
+                startMargin = lastMargin = -sidebarWidth;
                 endMargin = 0;
             }
-            let lastMargin = startMargin;
 
             if (!isCollapsing) {
                 // unhide the sidebar's content before it transitions onscreen
@@ -410,8 +406,6 @@ export function uiSidebar(context) {
                             .style('width', widthPct + '%');
                     }
                 });
-
-            inspectorWrap.call(inspector, { redrawEntityEditor: true });
         };
 
         // toggle the sidebar collapse when double-clicking the resizer

@@ -18,15 +18,16 @@ import { utilKeybinding } from '../util';
 
 
 export function modeSelectNote(context, selectedNoteID) {
-    var mode = {};
-    mode.id = 'select-note';
-    mode.button = 'browse';
+    var mode = {
+        id: 'select-note',
+        button: 'browse'
+    };
 
     var _keybinding = utilKeybinding('select-note');
     var _noteEditor = uiNoteEditor(context)
         .on('change', function() {
             context.map().pan([0,0]);  // trigger a redraw
-            var note = this || checkSelectedID();
+            var note = checkSelectedID();
             if (!note) return;
             context.ui().sidebar
                 .show(_noteEditor.note(note));

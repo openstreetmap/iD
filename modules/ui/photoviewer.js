@@ -1,13 +1,12 @@
 import {
     select as d3_select
 } from 'd3-selection';
-import { clamp } from 'es-toolkit/compat';
 
-import { localizer, t } from '../core/localizer';
+import { t } from '../core/localizer';
 import { dispatch as d3_dispatch } from 'd3-dispatch';
 import { svgIcon } from '../svg/icon';
 import { utilGetDimensions } from '../util/dimensions';
-import { utilRebind } from '../util';
+import { utilRebind, utilStringQs } from '../util';
 import { services } from '../services';
 import { uiTooltip } from './tooltip';
 import { actionChangeTags } from '../actions';
@@ -19,19 +18,18 @@ export function uiPhotoviewer(context) {
 
     var _pointerPrefix = 'PointerEvent' in window ? 'pointer' : 'mouse';
 
-    const addPhotoIdButton = new Set(['mapillary', 'panoramax']);
-
     function photoviewer(selection) {
         selection
             .append('button')
             .attr('class', 'thumb-hide')
             .attr('title', t('icons.close'))
             .on('click', function () {
-                for (const service of Object.values(services)) {
-                    if (typeof service.hideViewer === 'function') {
-                        service.hideViewer(context);
-                    }
-                }
+                if (services.streetside) { services.streetside.hideViewer(context); }
+                if (services.mapillary) { services.mapillary.hideViewer(context); }
+                if (services.kartaview) { services.kartaview.hideViewer(context); }
+                if (services.mapilio) { services.mapilio.hideViewer(context); }
+                if (services.panoramax) { services.panoramax.hideViewer(context); }
+                if (services.vegbilder) { services.vegbilder.hideViewer(context); }
             })
             .append('div')
             .call(svgIcon('#iD-icon-close'));
@@ -69,98 +67,93 @@ export function uiPhotoviewer(context) {
 
         // update sett_photo_from_viewer button on selection change and when tags change
         context.features().on('change.setPhotoFromViewer', function() {
-            setPhotoTagButton();
+            setPhotoFromViewerButton();
         });
         context.history().on('change.setPhotoFromViewer', function() {
-            setPhotoTagButton();
+            setPhotoFromViewerButton();
         });
 
 
-        function setPhotoTagButton() {
-            const service = getServiceId();
-            const isActiveForService = addPhotoIdButton.has(service) &&
-                services[service].isViewerOpen() &&
-                layerEnabled(service) &&
-                context.mode().id === 'select';
+        function setPhotoFromViewerButton() {
+            if (services.mapillary.isViewerOpen()) {
+                if (context.mode().id !== 'select' || !(layerStatus('mapillary') && getServiceId() === 'mapillary')) {
+                    buttonRemove();
+                } else {
+                    if (selection.select('.set-photo-from-viewer').empty()) {
+                        const button = buttonCreate();
+                        button.on('click', function (e) {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            setMapillaryPhotoId();
+                            buttonDisable('already_set');
+                        });
+                    }
+                    buttonShowHide();
+                }
 
-            renderAddPhotoIdButton(service, isActiveForService);
+                function setMapillaryPhotoId() {
+                    const service = services.mapillary;
+                    const image = service.getActiveImage();
 
-            function layerEnabled(which) {
+                    const action = graph =>
+                        context.selectedIDs().reduce((graph, entityID) => {
+                            const tags = graph.entity(entityID).tags;
+                            const action = actionChangeTags(entityID, {...tags, mapillary: image.id});
+                            return action(graph);
+                        }, graph);
+
+                    const annotation = t('operations.change_tags.annotation');
+                    context.perform(action, annotation);
+                }
+            }
+
+            function layerStatus(which) {
                 const layers = context.layers();
                 const layer = layers.layer(which);
                 return layer.enabled();
             }
 
             function getServiceId() {
-                for (const serviceId in services) {
-                    const service = services[serviceId];
-                    if (typeof service.isViewerOpen === 'function') {
-                        if (service.isViewerOpen()) {
-                            return serviceId;
-                        }
-                    }
+                const hash = utilStringQs(window.location.hash);
+                let serviceId;
+                if (hash.photo) {
+                    let result = hash.photo.split('/');
+                    serviceId = result[0];
                 }
-                return false;
+                return serviceId;
             }
 
-            function renderAddPhotoIdButton(service, shouldDisplay) {
-                const button = selection.selectAll('.set-photo-from-viewer')
-                    .data(shouldDisplay ? [0] : []);
-
-                button.exit()
-                    .remove();
-
+            function buttonCreate() {
+                const button = selection.selectAll('.set-photo-from-viewer').data([0]);
                 const buttonEnter = button.enter()
                     .append('button')
                     .attr('class', 'set-photo-from-viewer')
-                    .call(svgIcon('#fas-eye-dropper'))
+                    .call(svgIcon('#iD-icon-plus'))
                     .call(uiTooltip()
                         .title(() => t.append('inspector.set_photo_from_viewer.enable'))
-                        .placement(localizer.textDirection() === 'rtl' ? 'left' : 'right')
+                        .placement('right')
                     );
 
-                buttonEnter
-                    .select('.tooltip')
+                buttonEnter.select('.tooltip')
                     .classed('dark', true)
                     .style('width', '300px');
 
-                buttonEnter
-                    .merge(button)
-                    .on('click', function (e) {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        const activeServiceId = getServiceId();
-                        const image = services[activeServiceId].getActiveImage();
+                return buttonEnter;
+            }
 
-                        const action = graph =>
-                            context.selectedIDs().reduce((graph, entityID) => {
-                                const tags = graph.entity(entityID).tags;
-                                const action = actionChangeTags(entityID, {...tags, [activeServiceId]: image.id});
-                                return action(graph);
-                            }, graph);
+            function buttonRemove() {
+                const button = selection.selectAll('.set-photo-from-viewer').data([0]);
+                button.remove();
+            }
 
-                        const annotation = t('operations.change_tags.annotation');
-                        context.perform(action, annotation);
-                        buttonDisable('already_set');
-                    });
-
-                if (service === 'panoramax') {
-                    const panoramaxControls = selection.select('.panoramax-wrapper .pnlm-zoom-controls.pnlm-controls');
-
-                    panoramaxControls
-                        .style('margin-top', shouldDisplay ? '36px' : '6px');
-                }
-
-                if (!shouldDisplay) return;
-
-                const activeImage = services[service].getActiveImage();
+            function buttonShowHide() {
+                const activeImage = services.mapillary.getActiveImage();
 
                 const graph = context.graph();
                 const entities = context.selectedIDs()
-                    .map(id => graph.hasEntity(id))
-                    .filter(Boolean);
+                    .map(id => graph.entity(id));
 
-                if (entities.map(entity => entity.tags[service])
+                if (entities.map(entity => entity.tags.mapillary)
                     .every(value => value === activeImage?.id)) {
                     buttonDisable('already_set');
                 } else if (activeImage && entities
@@ -181,12 +174,12 @@ export function uiPhotoviewer(context) {
                 if (disabled) {
                     button.call(uiTooltip()
                         .title(() => t.append(`inspector.set_photo_from_viewer.disable.${reason}`))
-                        .placement(localizer.textDirection() === 'rtl' ? 'left' : 'right')
+                        .placement('right')
                     );
                 } else {
                     button.call(uiTooltip()
                         .title(() => t.append('inspector.set_photo_from_viewer.enable'))
-                        .placement(localizer.textDirection() === 'rtl' ? 'left' : 'right')
+                        .placement('right')
                     );
                 }
 
@@ -214,13 +207,12 @@ export function uiPhotoviewer(context) {
                 d3_event.preventDefault();
                 d3_event.stopPropagation();
 
-                const isRTL = localizer.textDirection() === 'rtl';
                 var mapSize = context.map().dimensions();
 
                 if (resizeOnX) {
                     var mapWidth = mapSize[0];
-                    const viewerMargin = parseInt(d3_select('.photoviewer').style(isRTL ? 'margin-right' : 'margin-left'), 10);
-                    const newWidth = clamp((startWidth + (d3_event.clientX - startX) * (isRTL ? -1 : 1)), minWidth, mapWidth - viewerMargin * 2);
+                    const viewerMargin = parseInt(d3_select('.photoviewer').style('margin-left'), 10);
+                    var newWidth = clamp((startWidth + d3_event.clientX - startX), minWidth, mapWidth - viewerMargin * 2);
                     target.style('width', newWidth + 'px');
                 }
 
@@ -234,6 +226,10 @@ export function uiPhotoviewer(context) {
                 }
 
                 dispatch.call(eventName, target, subtractPadding(utilGetDimensions(target, true), target));
+            }
+
+            function clamp(num, min, max) {
+                return Math.max(min, Math.min(num, max));
             }
 
             function stopResize(d3_event) {
@@ -291,26 +287,15 @@ export function uiPhotoviewer(context) {
                 .style('height', setPhotoDimensions[1] + 'px');
 
             dispatch.call('resize', photoviewer, subtractPadding(setPhotoDimensions, photoviewer));
-        } else {
-            dispatch.call('resize', photoviewer, subtractPadding(photoDimensions, photoviewer));
         }
     };
 
-    /**
-     * @param {import('../geo/vector').Vec2} dimensions
-     * @returns {import('../geo/vector').Vec2}
-     */
     function subtractPadding(dimensions, selection) {
         return [
             dimensions[0] - parseFloat(selection.style('padding-left')) - parseFloat(selection.style('padding-right')),
             dimensions[1] - parseFloat(selection.style('padding-top')) - parseFloat(selection.style('padding-bottom'))
         ];
     }
-
-    photoviewer.viewerSize = function() {
-        const photoviewer = context.container().select('.photoviewer');
-        return subtractPadding(utilGetDimensions(photoviewer, true), photoviewer);
-    };
 
     return utilRebind(photoviewer, dispatch, 'on');
 }

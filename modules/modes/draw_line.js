@@ -3,9 +3,10 @@ import { behaviorDrawWay } from '../behavior/draw_way';
 
 
 export function modeDrawLine(context, wayID, startGraph, button, affix, continuing) {
-    var mode = {};
-    mode.button = button;
-    mode.id = 'draw-line';
+    var mode = {
+        button: button,
+        id: 'draw-line'
+    };
 
     var behavior = behaviorDrawWay(context, wayID, mode, startGraph)
         .on('rejectedSelfIntersection.modeDrawLine', function() {

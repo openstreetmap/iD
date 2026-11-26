@@ -1,4 +1,6 @@
-import { select as d3_select } from 'd3-selection';
+import {
+    select as d3_select
+} from 'd3-selection';
 
 import { presetManager } from '../../presets';
 import { t, localizer } from '../../core/localizer';
@@ -9,8 +11,8 @@ import { actionChangeMember } from '../../actions/change_member';
 import { actionDeleteMembers } from '../../actions/delete_members';
 
 import { modeSelect } from '../../modes/select';
-import { osmIdManager, osmRelation } from '../../osm';
-import { getRelationColor, isColorValid } from '../../osm/tags';
+import { osmEntity, osmRelation } from '../../osm';
+import { isColourValid } from '../../osm/tags';
 import { services } from '../../services';
 import { svgIcon } from '../../svg/icon';
 import { uiCombobox } from '../combobox';
@@ -18,8 +20,6 @@ import { uiSection } from '../section';
 import { uiTooltip } from '../tooltip';
 import { utilArrayGroupBy, utilArrayIntersection } from '../../util/array';
 import { utilDisplayName, utilNoAuto, utilHighlightEntities, utilUniqueDomId } from '../../util';
-import { prefs } from '../../core';
-import { idMatch } from '../feature_list';
 
 
 export function uiSectionRawMembershipEditor(context) {
@@ -32,12 +32,13 @@ export function uiSectionRawMembershipEditor(context) {
             var parents = getSharedParentRelations();
             var gt = parents.length > _maxMemberships ? '>' : '';
             var count = gt + parents.slice(0, _maxMemberships).length;
-            return t.append('inspector.title_count', { title: t.append('inspector.relations'), count: count });
+            return t.append('inspector.title_count', { title: t('inspector.relations'), count: count });
         })
         .disclosureContent(renderDisclosureContent);
 
     var taginfo = services.taginfo;
     var nearbyCombo = uiCombobox(context, 'parent-relation')
+        .minItems(1)
         .fetcher(fetchNearbyRelations)
         .itemsMouseEnter(function(d3_event, d) {
             if (d.relation) utilHighlightEntities([d.relation.id], true, context);
@@ -49,8 +50,6 @@ export function uiSectionRawMembershipEditor(context) {
     var _entityIDs = [];
     var _showBlank;
     var _maxMemberships = 1000;
-    /** @type {Set<string>} relations that were added after this panel was opened */
-    const recentlyAdded = new Set();
 
     function getSharedParentRelations() {
         var parents = [];
@@ -68,37 +67,6 @@ export function uiSectionRawMembershipEditor(context) {
         return parents;
     }
 
-    function getConnectedRelations() {
-        const graph = context.graph();
-        const connectedRelationIDs = new Set();
-
-        _entityIDs.forEach((entityID) => {
-            const entity = graph.hasEntity(entityID);
-            if (!entity) return;
-
-            const connectedWays = new Set();
-
-            if (entity.type === 'node') {
-                graph.parentWays(entity)
-                    .forEach(way => connectedWays.add(way));
-            } else if (entity.type === 'way') {
-                entity.nodes.forEach(nodeID => {
-                    const node = graph.hasEntity(nodeID);
-                    if (!node) return;
-                    graph.parentWays(node)
-                        .filter(way => !_entityIDs.includes(way.id))
-                        .forEach(way => connectedWays.add(way));
-                });
-            }
-
-            connectedWays.forEach(way => {
-                graph.parentRelations(way)
-                    .forEach(relation => connectedRelationIDs.add(relation.id));
-            });
-        });
-        return connectedRelationIDs;
-    }
-
     function getMemberships() {
 
         var memberships = [];
@@ -112,7 +80,7 @@ export function uiSectionRawMembershipEditor(context) {
             membership = {
                 relation: relation,
                 members: [],
-                hash: osmIdManager.key(relation)
+                hash: osmEntity.key(relation)
             };
             for (index = 0; index < relation.members.length; index++) {
                 member = relation.members[index];
@@ -129,7 +97,7 @@ export function uiSectionRawMembershipEditor(context) {
                         membership = {
                             relation: relation,
                             members: [],
-                            hash: osmIdManager.key(relation)
+                            hash: osmEntity.key(relation)
                         };
                     }
                 }
@@ -146,37 +114,7 @@ export function uiSectionRawMembershipEditor(context) {
             membership.role = roles.length === 1 ? roles[0] : roles;
         });
 
-        const existingRelations = memberships
-            .filter(membership => !recentlyAdded.has(membership.relation.id))
-            .map(membership => ({
-                ...membership,
-                // We only sort relations that were not added just now.
-                // Sorting uses the same label as shown in the UI.
-                // If the label is not unique, the relation ID ensures
-                // that the sort order is still stable.
-                _sortKey: [
-                    baseDisplayValue(membership.relation),
-                    membership.relation.id,
-                ].join('-'),
-            }))
-            .sort((a, b) => {
-                return a._sortKey.localeCompare(
-                    b._sortKey,
-                    localizer.localeCodes(),
-                    { numeric: true },
-                );
-            });
-
-
-        const newlyAddedRelations = memberships
-            .filter(membership => recentlyAdded.has(membership.relation.id));
-
-        return [
-            // the sorted relations come first
-            ...existingRelations,
-            // then the ones that were just added from this panel
-            ...newlyAddedRelations,
-        ];
+        return memberships;
     }
 
     function selectRelation(d3_event, d) {
@@ -246,7 +184,6 @@ export function uiSectionRawMembershipEditor(context) {
         }
 
         if (d.relation) {
-            recentlyAdded.add(d.relation.id);
             context.perform(
                 actionAddMembers(d.relation.id, _entityIDs, role),
                 t('operations.add_member.annotation', {
@@ -256,7 +193,7 @@ export function uiSectionRawMembershipEditor(context) {
             context.validator().validate();
 
         } else {
-            var relation = new osmRelation();
+            var relation = osmRelation();
             context.perform(
                 actionAddEntity(relation),
                 actionAddMembers(relation.id, _entityIDs, role),
@@ -314,6 +251,14 @@ export function uiSectionRawMembershipEditor(context) {
 
         var graph = context.graph();
 
+        function baseDisplayValue(entity) {
+            var matched = presetManager.match(entity, graph);
+            var presetName = (matched && matched.name()) || t('inspector.relation');
+            var entityName = utilDisplayName(entity) || '';
+
+            return presetName + ' ' + entityName;
+        }
+
         function baseDisplayLabel(entity) {
             var matched = presetManager.match(entity, graph);
             var presetName = (matched && matched.name()) || t('inspector.relation');
@@ -325,16 +270,13 @@ export function uiSectionRawMembershipEditor(context) {
                     .text(presetName + ' ');
                 selection
                     .append('span')
-                    .classed('has-colour', entity.tags.colour && isColorValid(entity.tags.colour))
+                    .classed('has-colour', entity.tags.colour && isColourValid(entity.tags.colour))
                     .style('border-color', entity.tags.colour)
                     .text(entityName);
             };
         }
 
-
-        // A location search takes priority over an ID search
-        const idMatchResult = q && idMatch(q);
-        var explicitRelation = context.hasEntity(`r${idMatchResult?.id || q}`);
+        var explicitRelation = q && context.hasEntity(q.toLowerCase());
         if (explicitRelation && explicitRelation.type === 'relation' && explicitRelation.id !== entityID) {
             // loaded relation is specified explicitly, only show that
 
@@ -358,25 +300,19 @@ export function uiSectionRawMembershipEditor(context) {
                 });
             });
 
-            const connectedRelationIDs = getConnectedRelations();
-
-            result.sort(function (a, b) {
-                const isRelationAConnectedToSelection = connectedRelationIDs.has(a.relation.id);
-                const isRelationBConnectedToSelection = connectedRelationIDs.has(b.relation.id);
-
-                // if exactly one of the relations is connected to the selected entity,
-                // prioritize the connected relation over the unconnected one
-                if (isRelationAConnectedToSelection && !isRelationBConnectedToSelection) return -1;
-                if (!isRelationAConnectedToSelection && isRelationBConnectedToSelection) return 1;
-
+            result.sort(function(a, b) {
                 return osmRelation.creationOrder(a.relation, b.relation);
             });
 
             // Dedupe identical names by appending relation id - see #2891
-            Object.values(utilArrayGroupBy(result, 'value'))
-                .filter(v => v.length > 1)
-                .flat()
-                .forEach(obj => obj.value += ' ' + obj.relation.id);
+            var dupeGroups = Object.values(utilArrayGroupBy(result, 'value'))
+                .filter(function(v) { return v.length > 1; });
+
+            dupeGroups.forEach(function(group) {
+                group.forEach(function(obj) {
+                    obj.value += ' ' + obj.relation.id;
+                });
+            });
         }
 
         result.forEach(function(obj) {
@@ -385,15 +321,6 @@ export function uiSectionRawMembershipEditor(context) {
 
         result.unshift(newRelation);
         callback(result);
-    }
-
-    function baseDisplayValue(entity) {
-        const graph = context.graph();
-        var matched = presetManager.match(entity, graph);
-        var presetName = (matched && matched.name()) || t('inspector.relation');
-        var entityName = utilDisplayName(entity) || '';
-
-        return presetName + ' ' + entityName;
     }
 
     function renderDisclosureContent(selection) {
@@ -448,52 +375,21 @@ export function uiSectionRawMembershipEditor(context) {
         labelLink
             .append('span')
             .attr('class', 'member-entity-type')
-            .text(d => {
-                let matched = presetManager.match(d.relation, context.graph());
-                while (matched?.suggestion) {
-                    // if is NSI preset: look for a parent preset
-                    matched = matched.getParentPreset();
-                }
-                return (matched && matched.name()) || t('inspector.relation');
+            .text(function(d) {
+                var matched = presetManager.match(d.relation, context.graph());
+                return (matched && matched.name()) || t.html('inspector.relation');
             });
-
-        const showThirdPartyIcons = prefs('preferences.privacy.thirdpartyicons') || 'true';
-        labelLink.each(function(d) {
-            if (!showThirdPartyIcons) return;
-            const matched = presetManager.match(d.relation, context.graph());
-            if (matched.suggestion) {
-                // if matching an NSI preset: append icon
-                const img = d3_select(this)
-                    .append('img');
-                img
-                    .classed('member-entity-icon', true)
-                    .on('load', () => img.classed('hide', false))
-                    .on('error', () => img.classed('hide', true))
-                    .attr('src', matched.imageURL);
-            }
-        });
-
-        labelLink.each(function(d) {
-            const relColors = getRelationColor(d.relation.tags, '#555');
-            const hasRef = d.relation.tags.ref;
-            if (relColors.isValid || hasRef) {
-                const refs = (d.relation.tags.ref || '').split(';');
-                for (const ref of refs) {
-                    d3_select(this)
-                        .append('span')
-                        .classed('member-entity-ref-color', true)
-                        .style('border-color', relColors.color)
-                        .style('background-color', relColors.color)
-                        .style('color', relColors.textColor)
-                        .text(ref);
-                }
-            }
-        });
 
         labelLink
             .append('span')
             .attr('class', 'member-entity-name')
-            .text(d => utilDisplayName(d.relation, { hideRef: true }));
+            .classed('has-colour', d => d.relation.tags.colour && isColourValid(d.relation.tags.colour))
+            .style('border-color', d => d.relation.tags.colour)
+            .html(function(d) {
+                const matched = presetManager.match(d.relation, context.graph());
+                // hide the network from the name if there is NSI match
+                return utilDisplayName(d.relation, matched.suggestion);
+            });
 
         labelEnter
             .append('button')
@@ -522,23 +418,6 @@ export function uiSectionRawMembershipEditor(context) {
                 const graph = context.graph();
                 return d.relation.members.every(m => graph.hasEntity(m.id));
             });
-
-        const dupeLabels = new WeakSet(Object.values(
-            utilArrayGroupBy(items.selectAll('.label-text').nodes(), 'textContent'))
-            .filter(v => v.length > 1)
-            .flat());
-
-        items.select('.label-text').each(function() {
-            const label = d3_select(this);
-            const entityName = label.select('.member-entity-name');
-            if (dupeLabels.has(this)) {
-                // Dedupe identical names in hover text by appending relation id - see #2891, #10184
-                label.attr('title', d => `${entityName.text()} ${d.relation.id}`);
-            } else {
-                // set full label also as hover text: useful if a (long) label is cut off with an … ellipsis
-                label.attr('title', () => entityName.text());
-            }
-        });
 
         var wrapEnter = itemsEnter
             .append('div')
@@ -742,12 +621,8 @@ export function uiSectionRawMembershipEditor(context) {
 
     section.entityIDs = function(val) {
         if (!arguments.length) return _entityIDs;
-        const didChange = _entityIDs.join(',') !== val.join(',');
         _entityIDs = val;
         _showBlank = false;
-        if (didChange) {
-            recentlyAdded.clear(); // reset when the selected feature changes
-        }
         return section;
     };
 

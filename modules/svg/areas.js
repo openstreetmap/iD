@@ -1,7 +1,7 @@
-import { deepEqual } from 'fast-equals';
+import deepEqual from 'fast-deep-equal';
 import { bisector as d3_bisector } from 'd3-array';
 
-import { osmIdManager } from '../osm';
+import { osmEntity } from '../osm';
 import { svgPath, svgSegmentWay } from './helpers';
 import { svgTagClasses } from './tag_classes';
 import { svgTagPattern } from './tag_pattern';
@@ -118,7 +118,7 @@ export function svgAreas(projection, context) {
 
         var clipPaths = context.surface().selectAll('defs').selectAll('.clipPath-osm')
            .filter(filter)
-           .data(data.clip, osmIdManager.key);
+           .data(data.clip, osmEntity.key);
 
         clipPaths.exit()
            .remove();
@@ -152,7 +152,7 @@ export function svgAreas(projection, context) {
         var paths = areagroup
             .selectAll('path')
             .filter(filter)
-            .data(function(layer) { return data[layer]; }, osmIdManager.key);
+            .data(function(layer) { return data[layer]; }, osmEntity.key);
 
         paths.exit()
             .remove();
@@ -167,7 +167,7 @@ export function svgAreas(projection, context) {
             }
         }
 
-        paths.enter()
+        paths = paths.enter()
             .insert('path', sortedByArea)
             .merge(paths)
             .each(function(entity) {
@@ -176,8 +176,7 @@ export function svgAreas(projection, context) {
 
                 if (layer === 'fill') {
                     this.setAttribute('clip-path', 'url(#ideditor-' + entity.id + '-clippath)');
-                    this.style.fill = getPatternStyle(entity.tags);
-                    this.style.stroke = this.style.fill;
+                    this.style.fill = this.style.stroke = getPatternStyle(entity.tags);
                 }
             })
             .classed('added', function(d) {

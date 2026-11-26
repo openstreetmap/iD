@@ -1,4 +1,4 @@
-import { debounce } from 'es-toolkit';
+import _debounce from 'lodash-es/debounce';
 import { descending as d3_descending, ascending as d3_ascending } from 'd3-array';
 import {
     select as d3_select
@@ -40,16 +40,11 @@ export function uiSectionOverlayList(context) {
             return context.background().showsLayer(d);
         }
 
-        function disabled(d) {
-            return d.isLocatorOverlay() && context.background().isLocatorOverlayDisabled();
-        }
-
         selection.selectAll('li')
             .classed('active', active)
             .call(setTooltips)
             .selectAll('input')
-            .property('checked', active)
-            .property('disabled', disabled);
+            .property('checked', active);
     }
 
 
@@ -110,22 +105,16 @@ export function uiSectionOverlayList(context) {
         _overlayList = container.enter()
             .append('ul')
             .attr('class', 'layer-list layer-overlay-list')
+            .attr('dir', 'auto')
             .merge(container);
 
         _overlayList
             .call(drawListItems, 'checkbox', chooseOverlay, function(d) { return !d.isHidden() && d.overlay; });
     }
 
-    context.background()
-        .on('change.overlay_list', () => {
-            // if the overlays change due to a keyboard shortcut or
-            // automatic update, then rerender.
-            _overlayList.call(updateLayerSelections);
-        });
-
     context.map()
         .on('move.overlay_list',
-            debounce(function() {
+            _debounce(function() {
                 // layers in-view may have changed due to map move
                 window.requestIdleCallback(section.reRender);
             }, 1000)

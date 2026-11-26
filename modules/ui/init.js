@@ -47,7 +47,6 @@ import { uiPaneHelp } from './panes/help';
 import { uiPaneIssues } from './panes/issues';
 import { uiPaneMapData } from './panes/map_data';
 import { uiPanePreferences } from './panes/preferences';
-import { utilIsDrawing } from '../util';
 
 export function uiInit(context) {
     var _initCounter = 0;
@@ -355,6 +354,7 @@ export function uiInit(context) {
         ui.onResize();
         map.redrawEnable(true);
 
+        ui.hash = behaviorHash(context);
         ui.hash();
         if (!ui.hash.hadLocation) {
             map.centerZoom([0, 0], 2);
@@ -376,10 +376,7 @@ export function uiInit(context) {
 
         var panPixels = 80;
         context.keybinding()
-            .on([t('sidebar.key'), '`', '²', '@'], (d3_event) => {
-                d3_event.preventDefault();
-                ui.sidebar.toggle();
-            })   // #5663, #6864 - common QWERTY, AZERTY
+            .on([t('sidebar.key'), '`', '²', '@'], ui.sidebar.toggle)   // #5663, #6864 - common QWERTY, AZERTY
             .on('←', pan([panPixels, 0]))
             .on('↑', pan([0, panPixels]))
             .on('→', pan([-panPixels, 0]))
@@ -412,7 +409,7 @@ export function uiInit(context) {
 
                 // Don't allow layer changes while drawing - #6584
                 var mode = context.mode();
-                if (mode && utilIsDrawing(mode.id)) return;
+                if (mode && /^draw/.test(mode.id)) return;
 
                 var layer = context.layers().layer('osm');
                 if (layer) {
@@ -451,7 +448,7 @@ export function uiInit(context) {
         }
 
         var osm = context.connection();
-        var auth = uiLoading(context).message(t.addOrUpdate('loading_auth')).blocking(true);
+        var auth = uiLoading(context).message(t.html('loading_auth')).blocking(true);
 
         if (osm && auth) {
             osm
@@ -500,7 +497,7 @@ export function uiInit(context) {
             .then(() => {
                 if (!context.container().empty()) render(context.container());
             })
-            .catch(err => console.error(err));
+            .catch(err => console.error(err));  // eslint-disable-line
     };
 
 
@@ -530,8 +527,6 @@ export function uiInit(context) {
 
     ui.shortcuts = uiShortcuts(context);
 
-    ui.hash = behaviorHash(context);
-
     ui.onResize = function(withPan) {
         var map = context.map();
 
@@ -554,11 +549,12 @@ export function uiInit(context) {
         ui.checkOverflow('.top-toolbar');
         ui.checkOverflow('.map-footer-bar');
 
-        const event = new Event('resizeWindow', {
-            bubbles: true,
-            cancelable: true
-        });
-        document.dispatchEvent(event);
+        // Use outdated code so it works on Explorer
+        var resizeWindowEvent = document.createEvent('Event');
+
+        resizeWindowEvent.initEvent('resizeWindow', true, true);
+
+        document.dispatchEvent(resizeWindowEvent);
     };
 
 
@@ -654,8 +650,11 @@ export function uiInit(context) {
         // disable menu if in wide selection, for example
         if (!context.map().editableDataEnabled()) return;
 
-        // focus the surface or else clicking off the menu may not trigger modeBrowse
-        context.surface().node().focus();
+        var surfaceNode = context.surface().node();
+        if (surfaceNode.focus) {   // FF doesn't support it
+            // focus the surface or else clicking off the menu may not trigger modeBrowse
+            surfaceNode.focus();
+        }
 
         operations.forEach(function(operation) {
             if (operation.point) operation.point(anchorPoint);
@@ -672,8 +671,6 @@ export function uiInit(context) {
     };
 
     ui.closeEditMenu = function() {
-        // try to regularly close the edit menu
-        _editMenu.close();
         // remove any existing menu no matter how it was added
         if (overMap !== undefined) {
             overMap.select('.edit-menu').remove();
@@ -686,7 +683,7 @@ export function uiInit(context) {
     context.uploader()
         .on('saveStarted.ui', function() {
             _saveLoading = uiLoading(context)
-                .message(t.addOrUpdate('save.uploading'))
+                .message(t.html('save.uploading'))
                 .blocking(true);
             context.container().call(_saveLoading);  // block input during upload
         })

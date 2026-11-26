@@ -1,7 +1,6 @@
 import { t } from '../core/localizer';
-import { OsmAbstractEntity, osmNote, osmRelation, osmWay } from '../osm';
+import { osmEntity, osmNote } from '../osm';
 import { svgIcon } from '../svg/icon';
-import { getRelativeDate } from '../util/date';
 
 
 export function uiViewOnOSM(context) {
@@ -10,8 +9,8 @@ export function uiViewOnOSM(context) {
 
     function viewOnOSM(selection) {
         var url;
-        if (_what instanceof OsmAbstractEntity) {
-            url = context.connection().historyURL(_what);
+        if (_what instanceof osmEntity) {
+            url = context.connection().entityURL(_what);
         } else if (_what instanceof osmNote) {
             url = context.connection().noteURL(_what);
         }
@@ -32,22 +31,9 @@ export function uiViewOnOSM(context) {
             .attr('href', url)
             .call(svgIcon('#iD-icon-out-link', 'inline'));
 
-
-        if (_what && !(_what instanceof osmNote)) {
-            // node/way/relation
-            const { user, timestamp } = uiViewOnOSM.findLastModifiedChild(context.history().base(), _what);
-
-            linkEnter
-                .call(t.append('inspector.last_touched', {
-                    timeago: getRelativeDate(new Date(timestamp)),
-                    user
-                }))
-                .attr('title', t('inspector.view_on_osm'));
-        } else {
-            linkEnter
-                .append('span')
-                .call(t.append('inspector.view_on_osm'));
-        }
+        linkEnter
+            .append('span')
+            .call(t.append('inspector.view_on_osm'));
     }
 
 
@@ -59,33 +45,3 @@ export function uiViewOnOSM(context) {
 
     return viewOnOSM;
 }
-
-
-/**
- * @param {iD.Graph} graph
- * @param {iD.OsmEntity} feature
- */
-uiViewOnOSM.findLastModifiedChild = (graph, feature) => {
-    let latest = feature;
-
-    /** @param {iD.OsmEntity} obj */
-    function recurseChilds(obj) {
-        if (obj.timestamp > latest.timestamp) {
-            latest = obj;
-        }
-        if (obj instanceof osmWay) {
-            obj.nodes
-                .map(id => graph.hasEntity(id))
-                .filter(Boolean)
-                .forEach(recurseChilds);
-        } else if (obj instanceof osmRelation) {
-            obj.members
-                .map(m => graph.hasEntity(m.id))
-                .filter(e => e instanceof osmWay || e instanceof osmRelation)
-                .forEach(recurseChilds);
-        }
-    }
-
-    recurseChilds(feature);
-    return latest;
-};

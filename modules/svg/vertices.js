@@ -1,11 +1,10 @@
-import { deepEqual } from 'fast-equals';
+import deepEqual from 'fast-deep-equal';
 import { select as d3_select } from 'd3-selection';
 
 import { presetManager } from '../presets';
 import { geoScaleToZoom } from '../geo';
-import { osmIdManager } from '../osm';
+import { osmEntity } from '../osm';
 import { svgPassiveVertex, svgPointTransform } from './helpers';
-import { getRadiiInPixels } from '../core';
 import { svgTagClasses } from './tag_classes';
 
 export function svgVertices(projection, context) {
@@ -34,7 +33,7 @@ export function svgVertices(projection, context) {
     function fastEntityKey(d) {
         var mode = context.mode();
         var isMoving = mode && /^(add|draw|drag|move|rotate)/.test(mode.id);
-        return isMoving ? d.id : osmIdManager.key(d);
+        return isMoving ? d.id : osmEntity.key(d);
     }
 
 
@@ -63,9 +62,13 @@ export function svgVertices(projection, context) {
         }
 
 
-        // memoize directions results
+        // memoize directions results, return false for empty arrays (for use in filter)
         function getDirections(entity) {
-            return directions[entity.id] ||= entity.directions(graph, projection);
+            if (entity.id in directions) return directions[entity.id];
+
+            var angles = entity.directions(graph, projection);
+            directions[entity.id] = angles.length ? angles : false;
+            return angles;
         }
 
 
@@ -162,25 +165,11 @@ export function svgVertices(projection, context) {
                 return picon ? '#' + picon : '';
             });
 
-        // Highlighted vertices with a radius/diameter get a circle
-        const circles = groups
-            .selectAll('.radius')
-            .data((d) => context.selectedIDs().includes(d.id) ? getRadiiInPixels(d, projection) : []);
-
-        circles.exit()
-            .remove();
-
-        circles.enter()
-            .insert('circle', '.shadow')
-            .attr('class', 'radius')
-            .merge(circles)
-            .attr('r', d => d);
-
 
         // Vertices with directions get viewfields
         var dgroups = groups
             .selectAll('.viewfieldgroup')
-            .data(function data(d) { return zoom >= 18 && getDirections(d).length ? [d] : []; }, fastEntityKey);
+            .data(function data(d) { return zoom >= 18 && getDirections(d) ? [d] : []; }, fastEntityKey);
 
         // exit
         dgroups.exit()
@@ -193,7 +182,7 @@ export function svgVertices(projection, context) {
             .merge(dgroups);
 
         var viewfields = dgroups.selectAll('.viewfield')
-            .data(getDirections);
+            .data(getDirections, function key(d) { return osmEntity.key(d); });
 
         // exit
         viewfields.exit()
@@ -205,45 +194,16 @@ export function svgVertices(projection, context) {
             .attr('class', 'viewfield')
             .attr('d', 'M0,0H0')
             .merge(viewfields)
-            .attr('marker-start', d => 'url(#ideditor-viewfield-marker' + (d.type === 'side' ? '-side' : '') + (wireframe ? '-wireframe' : '') + ')')
-            .attr('transform', d => `rotate(${d.angle})`);
+            .attr('marker-start', 'url(#ideditor-viewfield-marker' + (wireframe ? '-wireframe' : '') + ')')
+            .attr('transform', function(d) { return 'rotate(' + d + ')'; });
     }
 
-
-    // Node ids of every selected way, so we can keep their vertices on top when stacked.
-    function selectedWayNodeIDs(graph) {
-        var ids = {};
-        context.selectedIDs().forEach(function(id) {
-            var entity = graph.hasEntity(id);
-            if (entity && entity.type === 'way') {
-                entity.nodes.forEach(function(nodeID) { ids[nodeID] = true; });
-            }
-        });
-        return ids;
-    }
-
-    // Sort so the selected way's vertex is last (drawn on top), so it receives the pointer
-    // when targets stack at the same location. Z-order only matters where circles overlap.
-    // A vertex of a selected way ranks above a merely co-selected node, which ranks above the
-    // rest - this keeps the right endpoint grabbable after e.g. disconnecting it. #11314
-    function sortTouchByLocSelected(items, wayNodeIDs) {
-        function rank(item) {
-            var id = item.properties.entity.id;
-            if (id in wayNodeIDs) return 2;
-            if (id in _currSelected) return 1;
-            return 0;
-        }
-        items.sort(function(a, b) {
-            return rank(a) - rank(b);
-        });
-    }
 
     function drawTargets(selection, graph, entities, filter) {
         var targetClass = context.getDebug('target') ? 'pink ' : 'nocolor ';
         var nopeClass = context.getDebug('target') ? 'red ' : 'nocolor ';
         var getTransform = svgPointTransform(projection).geojson;
         var activeID = context.activeID();
-        var wayNodeIDs = selectedWayNodeIDs(graph);
         var data = { targets: [], nopes: [] };
 
         entities.forEach(function(node) {
@@ -274,10 +234,6 @@ export function svgVertices(projection, context) {
             }
         });
 
-        // At stacked locations, put the selected way's vertex last so it ends up on top. #11314
-        sortTouchByLocSelected(data.targets, wayNodeIDs);
-        sortTouchByLocSelected(data.nopes, wayNodeIDs);
-
         // Targets allow hover and vertex snapping
         var targets = selection.selectAll('.vertex.target-allowed')
             .filter(function(d) { return filter(d.properties.entity); })
@@ -295,7 +251,6 @@ export function svgVertices(projection, context) {
                   || radiuses.shadow[3];
             })
             .merge(targets)
-            .order()  // keep DOM order in sync with the sorted data (selected vertex on top) #11314
             .attr('class', function(d) {
                 return 'node vertex target target-allowed '
                 + targetClass + d.id;
@@ -317,7 +272,6 @@ export function svgVertices(projection, context) {
             .append('circle')
             .attr('r', function(d) { return (_radii[d.properties.entity.id] || radiuses.shadow[3]); })
             .merge(nopes)
-            .order()  // keep DOM order in sync with the sorted data (selected vertex on top) #11314
             .attr('class', function(d) { return 'node vertex target target-nope ' + nopeClass + d.id; })
             .attr('transform', getTransform);
     }
@@ -501,11 +455,6 @@ export function svgVertices(projection, context) {
         // note that drawVertices will add `_currSelected` automatically if needed..
         var filter = function(d) { return d.id in _prevSelected; };
         drawVertices(selection, graph, Object.values(_prevSelected), filter, extent, false);
-    };
-
-
-    drawVertices.clearSelected = (selection) => {
-        selection.selectAll('.radius').remove();
     };
 
 

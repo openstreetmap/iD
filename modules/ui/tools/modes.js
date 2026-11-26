@@ -1,4 +1,4 @@
-import { debounce } from 'es-toolkit';
+import _debounce from 'lodash-es/debounce';
 
 import { select as d3_select } from 'd3-selection';
 
@@ -13,7 +13,6 @@ import { presetManager } from '../../presets';
 import { t } from '../../core/localizer';
 import { svgIcon } from '../../svg';
 import { uiTooltip } from '../tooltip';
-import { utilIsDrawing } from '../../util';
 
 export function uiToolDrawModes(context) {
 
@@ -59,11 +58,8 @@ export function uiToolDrawModes(context) {
     }
 
     modes.forEach(function(mode) {
-        context.keybinding().on(mode.key, function(d3_event) {
+        context.keybinding().on(mode.key, function() {
             if (!enabled(mode)) return;
-            if (mode.disabled?.()) return;
-
-            d3_event.preventDefault();
 
             if (mode.id === context.mode().id) {
                 context.enter(modeBrowse(context));
@@ -80,7 +76,7 @@ export function uiToolDrawModes(context) {
             .attr('class', 'joined')
             .style('display', 'flex');
 
-        var debouncedUpdate = debounce(update, 500, { edges: ['leading', 'trailing'] });
+        var debouncedUpdate = _debounce(update, 500, { leading: true, trailing: true });
 
         context.map()
             .on('move.modes', debouncedUpdate)
@@ -110,7 +106,7 @@ export function uiToolDrawModes(context) {
 
                     // When drawing, ignore accidental clicks on mode buttons - #4042
                     var currMode = context.mode().id;
-                    if (utilIsDrawing(currMode)) return;
+                    if (/^draw/.test(currMode)) return;
 
                     if (d.id === currMode) {
                         context.enter(modeBrowse(context));
@@ -143,7 +139,7 @@ export function uiToolDrawModes(context) {
             }
 
             // update
-            buttons
+            buttons = buttons
                 .merge(buttonsEnter)
                 .attr('aria-disabled', function(d) { return !enabled(d); })
                 .classed('disabled', function(d) { return !enabled(d); })

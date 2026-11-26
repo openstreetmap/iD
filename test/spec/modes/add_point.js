@@ -1,10 +1,8 @@
-import { select as d3_select } from 'd3-selection';
-
 describe.skip('iD.modeAddPoint', function() {
     var context;
 
     beforeEach(function() {
-        var container = d3_select(document.createElement('div'));
+        var container = d3.select(document.createElement('div'));
         context = iD.coreContext().assetPath('../dist/').container(container).init();
         context.loadTiles = function () {};
 
@@ -18,27 +16,27 @@ describe.skip('iD.modeAddPoint', function() {
 
     describe('clicking the map', function () {
         it('adds a point', function() {
-            context.surface().node().dispatchEvent(new MouseEvent('mousedown'));
-            window.dispatchEvent(new MouseEvent('mouseup'));
-            expect(context.history().changes().created).toHaveLength(1);
+            happen.mousedown(context.surface().node(), {});
+            happen.mouseup(window, {});
+            expect(context.history().changes().created).to.have.length(1);
             context.mode().exit();
-            d3_select('window').on('click.draw-block', null);
+            d3.select('window').on('click.draw-block', null);
         });
 
         it('selects an existing point rather than adding a new one', function() {
-            context.surface().node().dispatchEvent(new MouseEvent('mousedown'));
-            window.dispatchEvent(new MouseEvent('mouseup'));
+            happen.mousedown(context.surface().node(), {});
+            happen.mouseup(window, {});
             expect(context.mode().id).to.equal('select');
-            expect(context.mode().selectedIDs()).toEqual([context.history().changes().created[0].id]);
+            expect(context.mode().selectedIDs()).to.eql([context.history().changes().created[0].id]);
             context.mode().exit();
         });
     });
 
     // describe('pressing ⎋', function() {
     //     it.skip('exits to browse mode', function(done) {
-    //         document.dispatchEvent(new KeyboardEvent('keydown', { keyCode: 27 }));
+    //         happen.keydown(document, {keyCode: 27});
     //         window.setTimeout(function() {
-    //             expect(context.mode().id).toEqual('browse');
+    //             expect(context.mode().id).to.equal('browse');
     //             done();
     //         }, 200);
     //     });

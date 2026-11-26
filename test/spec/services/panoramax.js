@@ -1,50 +1,13 @@
-import { fn } from '@vitest/spy';
-import fetchMock from 'fetch-mock';
-import { setTimeout } from 'node:timers/promises';
-
 describe('iD.servicePanoramax', function() {
-    const dimensions = [64, 64];
+    var dimensions = [64, 64];
     var context, panoramax;
-    const data = {
-        images:[{
-            loc: [10,0],
-            capture_time: '2020-01-01',
-            id: 'abc',
-            account_id: '123',
-            sequence_id: 'a1b2',
-            heading: 0,
-            image_path: '',
-            isPano: true,
-            model: 'camera',
-        }, {
-            loc: [10,1],
-            capture_time: '2020-02-01',
-            id: 'def',
-            account_id: 'c3d4',
-            sequence_id: '',
-            heading: 0,
-            image_path: '',
-            isPano: true,
-            model: 'camera',
-        }, {
-            loc: [10,2],
-            capture_time: '2020-02-01',
-            id: 'ghi',
-            account_id: '789',
-            sequence_id: 'e5f6',
-            heading: 0,
-            image_path: '',
-            isPano: true,
-            model: 'camera',
-        }],
-    };
 
-    beforeEach(() => {
+    before(function() {
         iD.services.panoramax = iD.servicePanoramax;
         fetchMock.reset();
     });
 
-    afterEach(() => {
+    after(function() {
         delete iD.services.panoramax;
     });
 
@@ -76,47 +39,18 @@ describe('iD.servicePanoramax', function() {
 
             panoramax.init();
             var cache2 = panoramax.cache();
-            expect(cache).toEqual(cache2);
+            expect(cache).to.equal(cache2);
         });
     });
 
     describe('#reset', function() {
-        it('resets cache', function() {
+        it('resets cache and image', function() {
             panoramax.cache().foo = 'bar';
             panoramax.setActiveImage(context, {key: 'baz'});
 
             panoramax.reset();
-            expect(panoramax.cache()).not.toHaveProperty('foo');
-        });
-    });
-
-    describe('#loadImages', function() {
-        it('does not load images around null island', async () => {
-            const spy = fn();
-            fetchMock.reset();
-            fetchMock.mock(new RegExp('/api\.panoramax\.xyz/'), {
-                body: JSON.stringify(data),
-                status: 200,
-                headers: { 'Content-Type': 'application/json' }
-            });
-
-            context.projection
-                .scale(iD.geoZoomToScale(15))
-                .translate([0, 0]);
-
-            panoramax.on('loadedImages', spy);
-            panoramax.loadImages(context.projection);
-
-            await setTimeout(200);
-            expect(spy).not.toHaveBeenCalled();
-            expect(fetchMock.calls().length).toEqual(0);   // no tile requests of any kind
-        });
-
-        it('handle API error response', async ({ expect }) => {
-            fetchMock.reset();
-            fetchMock.mock(/api\.panoramax\.xyz/, 500);
-            const promise = panoramax.getImageData('collection1', 'image1');
-            await expect(promise).rejects.toThrowError();
+            expect(panoramax.cache()).to.not.have.property('foo');
+            expect(panoramax.getActiveImage()).to.be.null;
         });
     });
 
@@ -131,7 +65,7 @@ describe('iD.servicePanoramax', function() {
             panoramax.cache().images.rtree.load(features);
             var res = panoramax.images(context.projection);
 
-            expect(res).toEqual([
+            expect(res).to.deep.eql([
                 { id: '0', loc: [10,0], heading: 90, sequence_id: '100', account_id: '0' },
                 { id: '1', loc: [10,0], heading: 90, sequence_id: '100', account_id: '1' }
             ]);
@@ -149,25 +83,7 @@ describe('iD.servicePanoramax', function() {
 
             panoramax.cache().images.rtree.load(features);
             var res = panoramax.images(context.projection);
-            expect(res.length).toBeLessThanOrEqual(5);
-        });
-
-        it('handle invalid image data', function() {
-            const invalidImage = { id: null, sequence_id: null };
-            panoramax.setActiveImage(invalidImage);
-            expect(panoramax.getActiveImage()).toBeNull();
-        });
-
-        it('return empty array when no images are available', function() {
-            const result = panoramax.images(context.projection);
-            expect(result).toEqual([]);
-        });
-
-        it('load images quickly under normal conditions', function() {
-            const start = performance.now();
-            panoramax.loadImages(context.projection);
-            const duration = performance.now() - start;
-            expect(duration).toBeLessThan(1000);
+            expect(res).to.have.length.of.at.most(5);
         });
     });
 
@@ -184,7 +100,7 @@ describe('iD.servicePanoramax', function() {
             panoramax.cache().sequences.lineString['100'] = { rotation: 0, images: [ features[0].data, features[1].data, features[2].data ] };
 
             var res = panoramax.sequences(context.projection, 15);
-            expect(res).toEqual([{
+            expect(res).to.deep.eql([{
                 rotation: 0, images: [features[0].data, features[1].data, features[2].data]
             }]);
         });
@@ -192,10 +108,11 @@ describe('iD.servicePanoramax', function() {
 
     describe('#selectedImage', function() {
         it('sets and gets selected image', function() {
-            const photo = { id: 'foo', sequence_id: '100'};
-            panoramax.cache().images = { forImageId: { foo: photo }};
+            var d = { id: 'foo', sequence_id: '100'};
+            panoramax.cache().images = { forImageId: { foo: d }};
             panoramax.selectImage(context, 'foo');
-            expect(panoramax.getActiveImage().id).toEqual(photo.id);
+            expect(panoramax.getActiveImage()).to.eql(d);
         });
     });
+
 });

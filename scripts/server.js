@@ -1,39 +1,16 @@
-import http from 'node:http';
-import { glob } from 'node:fs/promises';
-import { styleText } from 'node:util';
-import { watch } from 'chokidar';
-import serve from 'serve-handler';
-import { buildCSS } from './build_css.js';
+/* eslint-disable no-console */
+const chalk = require('chalk');
+const gaze = require('gaze');
+const StaticServer = require('static-server');
 
-const port = 8080;
+const buildCSS = require('./build_css.js');
 
-watch(
-  await Array.fromAsync(glob('css/**/*.css')), {
-  ignoreInitial: false
-}).on('all', () => {
-  buildCSS();
+
+gaze(['css/**/*.css'], (err, watcher) => {
+  watcher.on('all', () => buildCSS());
 });
 
-const server = http.createServer((request, response) => {
-  return serve(request, response, {
-    cleanUrls: false,
-    rewrites: [{
-      source: '/',
-      destination: '/index.html'
-    }],
-    symlinks: true,
-    headers: [{
-      source: '**',
-      headers: [{
-        key : 'Cache-Control',
-        value : 'no-cache'
-      }]
-    }]
-  });
-});
-
-server.listen(port, () => {
-  /* eslint-disable no-console */
-  console.log(styleText('yellow', `Listening on port ${port}`));
-  console.log(styleText('yellow', `Open http://127.0.0.1:${port}/`));
+const server = new StaticServer({ rootPath: process.cwd(), port: 8080, followSymlink: true });
+server.start(() => {
+  console.log(chalk.yellow(`Listening on ${server.port}`));
 });

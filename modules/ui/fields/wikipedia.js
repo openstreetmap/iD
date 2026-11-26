@@ -9,7 +9,6 @@ import { svgIcon } from '../../svg/icon';
 import { uiCombobox } from '../combobox';
 import { utilGetSetValue, utilNoAuto, utilRebind } from '../../util';
 
-/** @typedef {[enName: string, nativeName: string, code: string]} WmfSite */
 
 export function uiFieldWikipedia(field, context) {
   const scheme = 'https://';
@@ -58,8 +57,8 @@ export function uiFieldWikipedia(field, context) {
         }
       }
       const searchfn = value.length > 7 ? wikipedia.search : wikipedia.suggestions;
-      searchfn(language()[2], value, (error, data) => {
-        callback(error ? [] : data.map(d => ({ value: d })) );
+      searchfn(language()[2], value, (query, data) => {
+        callback( data.map(d => ({ value: d })) );
       });
     });
 
@@ -114,7 +113,6 @@ export function uiFieldWikipedia(field, context) {
     _titleInput = _titleInput.enter()
       .append('input')
       .attr('type', 'text')
-      .attr('dir', 'auto')
       .attr('class', 'wiki-title')
       .attr('id', field.domId)
       .call(utilNoAuto)
@@ -248,7 +246,7 @@ export function uiFieldWikipedia(field, context) {
       if (!actions.length) return;
 
       // Coalesce the update of wikidata tag into the previous tag change
-      context.replace(
+      context.overwrite(
         function actionUpdateWikidataTags(graph) {
           actions.forEach(function(action) {
             graph = action(graph);
