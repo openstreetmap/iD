@@ -79,6 +79,7 @@ describe('iD.serviceNsi', function () {
     });
 
     beforeEach(async () => {
+        await iD.presetManager.ensureLoaded(true);
         await iD.coreContext().assetPath('../dist/').init(true);
     });
 

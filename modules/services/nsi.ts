@@ -46,13 +46,14 @@ interface KVN {
     k: string;
     v: string;
     n: string;
-    genericBuildingFallback: boolean;
+    projection: TagProjection;
 }
 
 const WHICH = <const>['primary', 'alternate'];
 type Which = (typeof WHICH)[number];
 
-type KVs = Record<Which, Set<string>> & { genericBuildingFallback?: boolean };
+type KVs = Record<Which, Set<string>>;
+type TagProjection = 'all' | 'identity';
 
 // DATA
 
@@ -252,6 +253,7 @@ function loadNsiData() {
 function gatherKVs(tags: Tags) {
   let primary = new Set<string>();
   let alternate = new Set<string>();
+  const projections = new Map<string, TagProjection>();
 
   Object.keys(tags).forEach(osmkey => {
     const osmvalue = tags[osmkey];
@@ -275,13 +277,12 @@ function gatherKVs(tags: Tags) {
   // For example, a way with `building=yes` + `name=Westfield` may be a Westfield department store.
   // But a way with `building=yes` + `name=Westfield` + `public_transport=station` is a train station for a town named "Westfield"
   const preset = presetManager.matchTags(tags, 'area')!;
-  let genericBuildingFallback = false;
   if (buildingPreset[preset.id]) {
     alternate.add('building/yes');
-    genericBuildingFallback = true;
+    projections.set('building/yes', 'identity');
   }
 
-  return { primary: primary, alternate: alternate, genericBuildingFallback: genericBuildingFallback };
+  return { primary: primary, alternate: alternate, projections: projections };
 }
 
 
@@ -448,8 +449,8 @@ function gatherNames(tags: Tags): KVs {
 // Returns
 //   `Array`: tuple objects ordered by priority
 //
-function gatherTuples(tryKVs: KVs, tryNames: KVs) {
-  let tuples: KVN[] = [];
+function gatherTuples(tryKVs: ReturnType<typeof gatherKVs>, tryNames: KVs) {
+  const tuples: KVN[] = [];
   WHICH.forEach(whichName => {
     // test names longest to shortest
     const arr = Array.from(tryNames[whichName]).sort((a, b) => b.length - a.length);
@@ -459,12 +460,46 @@ function gatherTuples(tryKVs: KVs, tryNames: KVs) {
           const parts = kv.split('/', 2);
           const k = parts[0];
           const v = parts[1];
-          tuples.push({ k: k, v: v, n: n, genericBuildingFallback: tryKVs.genericBuildingFallback === true && kv === 'building/yes' });
+
+          tuples.push({
+            k: k,
+            v: v,
+            n: n,
+            projection: tryKVs.projections.get(kv) ?? 'all'
+          });
         });
       });
     });
   });
   return tuples;
+}
+
+// `getSuggestedTags()`
+// Get tags from an NSI item based on the tag projection to apply.
+//
+// Arguments
+//   `item`: NSI item containing suggested tags
+//   `projection`: `TagProjection` controlling which tags to apply
+// Returns
+//   `Object`: tags selected from the NSI item
+//
+function getSuggestedTags(item: NsiItem, projection: TagProjection): Tags {
+  if (projection === 'all') return item.tags;
+
+  const tree = _nsi.trees[item.tkv.split('/', 1)[0] as NsiTree];
+
+  const identityTags = new Set([
+    ...(tree.sourceTags || []),
+    item.mainTag,
+    item.mainTag.replace(/:wikidata$/, ':wikipedia'),
+    item.mainTag.replace(/:wikidata$/, '')
+  ]);
+
+  return Object.fromEntries(
+    Object.entries(item.tags).filter(([key]) =>
+      key !== 'building' && identityTags.has(key)
+    )
+  );
 }
 
 
@@ -606,16 +641,7 @@ function _upgradeTags(tags: Tags, loc: Vec2) {
     }
 
     // Do the tag upgrade
-    const suggestedTags = tuple.genericBuildingFallback
-      ? Object.fromEntries(
-          Object.entries(item.tags).filter(([key]) =>
-            key === item.mainTag ||
-            key === item.mainTag.replace('wikidata', 'wikipedia') ||
-            key === item.mainTag.replace(':wikidata', '')
-          )
-        )
-      : item.tags;
-    Object.assign(newTags, suggestedTags, keepTags);
+    Object.assign(newTags, getSuggestedTags(item, tuple.projection), keepTags);
 
     // Swap `route` back to `route_master` - name-suggestion-index#5184
     if (isRouteMaster) {
