@@ -1707,6 +1707,11 @@ en:
       reference: "Sensitive data like personal phone numbers should not be tagged."
       contact:
         message: '{feature} might be tagged with private contact information'
+    simple_multipolygon:
+      title: Multipolygons With a Single Closed Way
+      message: "{feature} is a multipolygon with a single closed way"
+      tip: "Find multipolygons that could be basic areas"
+      reference: "A multipolygon whose only member is a closed way can be that way, tagged as an area."
     suspicious_name:
       title: Suspicious Names
       tip: "Find features with generic or suspicious names"
@@ -1799,6 +1804,9 @@ en:
       convert_to_area:
         title: Convert this to an area
         annotation: Converted a line to an area.
+      convert_to_basic_area:
+        title: Convert to a basic area
+        annotation: Converted a single-way multipolygon to a basic area.
       delete_feature:
         title: Delete this feature
       extract_point:

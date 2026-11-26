@@ -1,4 +1,4 @@
-import { actionDeleteRelation } from './delete_relation';
+import { actionCollapseSimpleMultipolygon } from './collapse_simple_multipolygon';
 import { actionDeleteWay } from './delete_way';
 import { osmIsInterestingTag, osmSummableTags } from '../osm/tags';
 import { osmJoinWays } from '../osm/multipolygon';
@@ -81,44 +81,7 @@ export function actionJoin(ids: WayId[]): ActionJoin {
 
         // Finds if the join created a single-member multipolygon,
         // and if so turns it into a basic area instead
-        function checkForSimpleMultipolygon() {
-            if (!survivor.isClosed()) return;
-
-            const multipolygons = graph.parentMultipolygons(survivor).filter(multipolygon => {
-                // find multipolygons where the survivor is the only member
-                return multipolygon.members.length === 1;
-            });
-
-            // skip if this is the single member of multiple multipolygons
-            if (multipolygons.length !== 1) return;
-
-            const multipolygon = multipolygons[0];
-
-            for (const key in survivor.tags) {
-                if (multipolygon.tags[key] &&
-                    // don't collapse if tags cannot be cleanly merged
-                    multipolygon.tags[key] !== survivor.tags[key]) return;
-            }
-
-            survivor = survivor.mergeTags(multipolygon.tags);
-            graph = graph.replace(survivor);
-            for (const relation of graph.parentRelations(multipolygon)) {
-                // transfer membership of collapsed single-member multipolygon
-                // onto resulting basic area, #9064
-                graph = graph.replace(relation.replaceMember(multipolygon, survivor));
-            }
-            graph = actionDeleteRelation(multipolygon.id, true /* allow untagged members */)(graph);
-
-            const tags = { ...survivor.tags };
-            if (survivor.geometry(graph) !== 'area') {
-                // ensure the feature persists as an area
-                tags.area = 'yes';
-            }
-            delete tags.type; // remove type=multipolygon
-            survivor = survivor.update({ tags: tags });
-            graph = graph.replace(survivor);
-        }
-        checkForSimpleMultipolygon();
+        graph = actionCollapseSimpleMultipolygon(survivor.id)(graph);
 
         return graph;
     };
