@@ -57,7 +57,8 @@ export type KartaviewSequence = LineString & {
     };
 };
 
-var apibase = 'https://kartaview.org';
+var apibase = 'https://api.kartaview.org';
+var webbase = 'https://kartaview.org';
 var maxResults = 1000;
 var tileZoom = 14;
 var tiler = utilTiler().zoomExtent([tileZoom, tileZoom]).skipNullIsland(true);
@@ -489,7 +490,7 @@ export default new class Kartaview implements IStreetSide {
             imageWrap
                 .append('img')
                 .attr('class', 'kartaview-image')
-                .attr('src', (apibase + '/' + d.imagePath).replace(/^https:\/\/kartaview\.org\/storage(\d+)\//, 'https://storage$1.openstreetcam.org/'))
+                .attr('src', (webbase + '/' + d.imagePath).replace(/^https:\/\/kartaview\.org\/storage(\d+)\//, 'https://storage$1.openstreetcam.org/'))
                 .style('transform', 'rotate(' + r + 'deg)');
 
             if (d.captured_by) {
@@ -497,7 +498,7 @@ export default new class Kartaview implements IStreetSide {
                     .append('a')
                     .attr('class', 'captured_by')
                     .attr('target', '_blank')
-                    .attr('href', 'https://kartaview.org/user/' + encodeURIComponent(d.captured_by))
+                    .attr('href', webbase + '/user/' + encodeURIComponent(d.captured_by))
                     .text('@' + d.captured_by);
 
                 attribution
@@ -520,7 +521,7 @@ export default new class Kartaview implements IStreetSide {
                 .append('a')
                 .attr('class', 'image-link')
                 .attr('target', '_blank')
-                .attr('href', 'https://kartaview.org/details/' + d.sequence_id + '/' + d.sequence_index)
+                .attr('href', webbase + '/details/' + d.sequence_id + '/' + d.sequence_index)
                 .text('kartaview.org');
         }
 
