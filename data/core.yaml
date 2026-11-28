@@ -1269,7 +1269,7 @@ en:
       title: Help
       welcome: "Welcome to the iD editor for [OpenStreetMap](https://www.openstreetmap.org/). With this editor you can update OpenStreetMap right from your web browser."
       open_data_h: "Open Data"
-      open_data: "Edits that you make on this map will be visible to everyone who uses OpenStreetMap. Your edits can be based on personal knowledge, on-the-ground surveying, or imagery collected from aerial or street level photos. Copying from commercial sources, like Google Maps, [is strictly forbidden](https://www.openstreetmap.org/copyright)."
+      open_data: "Edits that you make on this map will be visible to everyone who uses OpenStreetMap. Your edits can be based on personal knowledge, on-the-ground surveying, or imagery collected from aerial or street-level photos. Copying from commercial sources, like Google Maps, [is strictly forbidden](https://www.openstreetmap.org/copyright)."
       before_start_h: "Before you start"
       before_start: "You should be familiar with OpenStreetMap and this editor before you start editing. iD contains a walkthrough to teach you the basics of editing OpenStreetMap. Press the \"{start_the_walkthrough}\" button on this screen to start the tutorial—it takes only about 15 minutes."
       open_source_h: "Open Source"
@@ -1436,10 +1436,10 @@ en:
       offset: "Imagery is sometimes offset slightly from accurate map data. If you see a lot of roads or buildings shifted from the background imagery, it may be the imagery that's incorrect, so don't move them all to match the background. Instead, you can adjust the background so that it matches the existing data by expanding the \"{imagery_offset}\" section at the bottom of the Background Settings pane."
       offset_change: "Press the small triangle buttons to adjust the imagery offset in small steps, or hold the {leftclick} left mouse button and drag within the gray square to slide the imagery into alignment."
     streetlevel:
-      title: Street Level Photos
-      intro: "Street level photos are useful for mapping traffic signs, businesses, and other details that you can't see from satellite and aerial images. The iD editor supports street level photos from a variety of different providers, such as [Panoramax](https://panoramax.fr), [Mapillary](https://www.mapillary.com), or [KartaView](https://kartaview.org)."
-      using_h: "Using Street Level Photos"
-      using: "To use street level photos for mapping, open the {data_icon} **{map_data}** panel on the side of the map to enable or disable the available photo overlays."
+      title: street-level Photos
+      intro: "Street-level photos are useful for mapping traffic signs, businesses, and other details that you can't see from satellite and aerial images. The iD editor supports street-level photos from a variety of different providers, such as [Panoramax](https://panoramax.fr), [Mapillary](https://www.mapillary.com), or [KartaView](https://kartaview.org)."
+      using_h: "Using street-level Photos"
+      using: "To use street-level photos for mapping, open the {data_icon} **{map_data}** panel on the side of the map to enable or disable the available photo overlays."
       photos: "When enabled, the photo overlay displays a line along the sequence of photos. At higher zoom levels, a circle marks at each photo location, and at even higher zoom levels, a cone indicates the direction the camera was facing when the photo was taken."
       viewer: "When you select one of the photo locations, a photo viewer appears in the bottom corner of the map. The photo viewer contains controls to step forward and backward in the image sequence. It also shows the username of the person who captured the image, the date it was captured, and a link to view the image on the original site."
     gps:
@@ -2231,7 +2231,7 @@ en:
         title: "With way selected"
         child: "Select child nodes"
       enable:
-        streetlevel: "Toggle active street level photo layers"
+        streetlevel: "Toggle active street-level photo layers"
     editing:
       title: "Editing"
       drawing:
